@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
   },
-  icons: { icon: "/favicon.ico" },
+  // 网站图标由同目录的 src/app/icon.png 自动提供（哆啦A梦头像）
 };
 
 // 在页面渲染前同步设置主题，避免深色模式闪白
