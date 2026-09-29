@@ -6,7 +6,8 @@ export const site = {
   // 一句话简介，用于首页和 SEO 描述
   description: "DuRuoxian 的个人博客，记录学习与技术折腾。",
   // 部署后的正式网址（决定 RSS / sitemap / 分享链接）
-  url: "https://www.duruoxian.cn",
+  // 现在用 Cloudflare Pages 免费域名；以后绑定自己的域名时改这里即可
+  url: "https://duruoxian-blog.pages.dev",
   // 建站年份，用于页脚版权
   since: 2026,
 
