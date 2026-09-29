@@ -38,17 +38,29 @@ function buildWeeks(days: ContributionDay[]): (ContributionDay | null)[][] {
   return weeks;
 }
 
-// 每月第一次出现时，在该列上方标注月份
+// 每月第一次出现时，在该列上方标注月份。
+// 若与上一个标签的列距太近（例如数据从某月中旬开始，首月只有几天），
+// 就跳过这个标签，避免两个月名挤在一起（GitHub 同样处理）。
+const MIN_LABEL_GAP = 3;
+
 function buildMonthLabels(weeks: (ContributionDay | null)[][]): string[] {
-  let last = -1;
-  return weeks.map((week) => {
+  const labels = new Array<string>(weeks.length).fill("");
+  let lastMonth = -1;
+  let lastLabelIndex = -MIN_LABEL_GAP;
+
+  weeks.forEach((week, i) => {
     const first = week.find((d): d is ContributionDay => d !== null);
-    if (!first) return "";
+    if (!first) return;
     const month = parseDate(first.date).getMonth();
-    if (month === last) return "";
-    last = month;
-    return MONTHS[month];
+    if (month === lastMonth) return;
+    lastMonth = month;
+    if (i - lastLabelIndex >= MIN_LABEL_GAP) {
+      labels[i] = MONTHS[month];
+      lastLabelIndex = i;
+    }
   });
+
+  return labels;
 }
 
 function GitHubIcon() {
