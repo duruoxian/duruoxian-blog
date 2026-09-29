@@ -76,12 +76,36 @@ export function getPostBySlug(slug: string): Post | null {
   };
 }
 
+// 生产构建时把解析结果缓存起来：一次构建会多次调用 getAllPosts，
+// 每次都读盘 + 解析 YAML 很浪费。开发模式不缓存，保证改文章即时生效。
+const CACHE_ENABLED = process.env.NODE_ENV === "production";
+let cachedPosts: Post[] | null = null;
+
 /** 全部已发布文章，按日期倒序 */
 export function getAllPosts(): Post[] {
-  return getPostSlugs()
+  if (CACHE_ENABLED && cachedPosts) return cachedPosts;
+
+  const posts = getPostSlugs()
     .map((slug) => getPostBySlug(slug))
     .filter((p): p is Post => p !== null && !p.draft)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  if (CACHE_ENABLED) cachedPosts = posts;
+  return posts;
+}
+
+/** 把 Markdown 粗略转成纯文本，用于搜索索引与摘要 */
+export function stripMarkdown(md: string): string {
+  return md
+    .replace(/```[\s\S]*?```/g, " ") // 代码块
+    .replace(/`[^`]*`/g, " ") // 行内代码
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // 图片
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1") // 链接保留文字
+    .replace(/^#{1,6}\s+/gm, "") // 标题符号
+    .replace(/^\s*>\s?/gm, "") // 引用
+    .replace(/[*_~|-]{1,}/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function getPostsByTag(tag: string): Post[] {

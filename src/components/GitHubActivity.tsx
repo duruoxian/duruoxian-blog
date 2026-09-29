@@ -1,13 +1,5 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
-
-type Day = { date: string; count: number; level: number };
-type ApiResponse = {
-  total?: Record<string, number>;
-  contributions?: Day[];
-};
+import type { ContributionDay, Contributions } from "@/lib/github";
 
 // 0~4 级的配色（浅色 / 深色），仿 GitHub 绿色系
 const LEVEL_CLASS = [
@@ -26,10 +18,10 @@ function parseDate(value: string): Date {
 }
 
 // 把按天排列的数据切成「周」的列，第一列用 null 补齐到周日开头
-function buildWeeks(days: Day[]): (Day | null)[][] {
+function buildWeeks(days: ContributionDay[]): (ContributionDay | null)[][] {
   if (days.length === 0) return [];
-  const weeks: (Day | null)[][] = [];
-  let week: (Day | null)[] = [];
+  const weeks: (ContributionDay | null)[][] = [];
+  let week: (ContributionDay | null)[] = [];
   const firstDow = parseDate(days[0].date).getDay();
   for (let i = 0; i < firstDow; i++) week.push(null);
   for (const day of days) {
@@ -47,10 +39,10 @@ function buildWeeks(days: Day[]): (Day | null)[][] {
 }
 
 // 每月第一次出现时，在该列上方标注月份
-function buildMonthLabels(weeks: (Day | null)[][]): string[] {
+function buildMonthLabels(weeks: (ContributionDay | null)[][]): string[] {
   let last = -1;
   return weeks.map((week) => {
-    const first = week.find((d): d is Day => d !== null);
+    const first = week.find((d): d is ContributionDay => d !== null);
     if (!first) return "";
     const month = parseDate(first.date).getMonth();
     if (month === last) return "";
@@ -67,33 +59,9 @@ function GitHubIcon() {
   );
 }
 
-export function GitHubActivity() {
-  const [data, setData] = useState<ApiResponse | null>(null);
-  const [status, setStatus] = useState<"loading" | "ok" | "error">("loading");
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch(`https://github-contributions-api.jogruber.de/v4/${site.author.githubUser}?y=last`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json() as Promise<ApiResponse>;
-      })
-      .then((json) => {
-        if (cancelled) return;
-        setData(json);
-        setStatus("ok");
-      })
-      .catch(() => {
-        if (!cancelled) setStatus("error");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const weeks = buildWeeks(data?.contributions ?? []);
+export function GitHubActivity({ data }: { data: Contributions | null }) {
+  const weeks = buildWeeks(data?.days ?? []);
   const labels = buildMonthLabels(weeks);
-  const total = data?.total?.lastYear ?? 0;
 
   return (
     <section className="rounded-xl border border-zinc-200 bg-[var(--card)] p-5 dark:border-zinc-800">
@@ -102,13 +70,9 @@ export function GitHubActivity() {
         GitHub 活跃度
       </h2>
 
-      {status === "loading" && (
-        <div className="mt-4 h-[110px] animate-pulse rounded-lg bg-zinc-100 dark:bg-zinc-800" />
-      )}
-
-      {status === "error" && (
+      {!data ? (
         <p className="mt-4 text-sm text-zinc-500">
-          暂时无法加载 GitHub 活跃度，可直接
+          暂时无法获取 GitHub 活跃度，可直接
           <a
             href={site.author.github}
             target="_blank"
@@ -119,9 +83,7 @@ export function GitHubActivity() {
           </a>
           。
         </p>
-      )}
-
-      {status === "ok" && (
+      ) : (
         <>
           <div className="mt-4 overflow-x-auto pb-1">
             <div className="inline-flex flex-col gap-1">
@@ -154,7 +116,7 @@ export function GitHubActivity() {
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-500">
-            <span>过去一年共 {total} 次贡献</span>
+            <span>过去一年共 {data.totalLastYear} 次贡献</span>
             <span className="flex items-center gap-1.5">
               <span>少</span>
               {LEVEL_CLASS.map((cls, i) => (

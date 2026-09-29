@@ -7,6 +7,7 @@ import { formatDate } from "@/lib/format";
 import { Toc } from "@/components/Toc";
 import { TagBadge } from "@/components/TagBadge";
 import { SeriesNav } from "@/components/SeriesNav";
+import { CodeCopy } from "@/components/CodeCopy";
 import { site } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -19,15 +20,23 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "文章未找到" };
+  const url = `${site.url}/posts/${post.slug}`;
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `/posts/${post.slug}` },
     openGraph: {
       type: "article",
       title: post.title,
       description: post.description,
-      url: `${site.url}/posts/${post.slug}`,
+      url,
       publishedTime: post.date,
+      images: post.cover ? [post.cover] : undefined,
+    },
+    twitter: {
+      card: post.cover ? "summary_large_image" : "summary",
+      title: post.title,
+      description: post.description,
       images: post.cover ? [post.cover] : undefined,
     },
   };
@@ -45,8 +54,25 @@ export default async function PostPage({ params }: Params) {
   const prev = i > 0 ? all[i - 1] : null; // 更新的文章
   const next = i >= 0 && i < all.length - 1 ? all[i + 1] : null; // 更旧的文章
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    url: `${site.url}/posts/${post.slug}`,
+    author: { "@type": "Person", name: site.author.name, url: site.author.github },
+    keywords: post.tags.join(", "),
+    image: post.cover ? `${site.url}${post.cover}` : undefined,
+  };
+
   return (
     <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_220px]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="min-w-0">
         <header className="mb-8">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-zinc-500 dark:text-zinc-400">
@@ -67,10 +93,20 @@ export default async function PostPage({ params }: Params) {
           )}
         </header>
 
+        {toc.length > 0 && (
+          <details className="mb-8 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800 xl:hidden">
+            <summary className="cursor-pointer text-sm font-medium">目录</summary>
+            <div className="mt-3">
+              <Toc items={toc} />
+            </div>
+          </details>
+        )}
+
         <div
           className="article-content prose prose-zinc max-w-none dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: html }}
         />
+        <CodeCopy />
 
         {post.tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">

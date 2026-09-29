@@ -47,9 +47,41 @@ body {
   scrollbar-width: none;
 }
 
+/* ============ 主题图标显隐（跟随系统 / 亮 / 暗）============ */
+.theme-icon {
+  display: none;
+}
+html[data-theme="light"] .theme-icon-light {
+  display: block;
+}
+html[data-theme="dark"] .theme-icon-dark {
+  display: block;
+}
+html:not([data-theme]) .theme-icon-system {
+  display: block;
+}
+
 /* ============ 文章正文 ============ */
 .article-content {
   overflow-wrap: break-word;
+  font-size: 1rem;
+  line-height: 1.9; /* 中文正文行高稍大更耐读 */
+}
+.article-content :where(h2) {
+  margin-top: 2.2em;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.article-content :where(h3, h4) {
+  margin-top: 1.7em;
+  text-wrap: balance;
+}
+.article-content :where(p, li) {
+  letter-spacing: 0.012em;
+}
+.article-content :where(a) {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
 .article-content .heading-anchor {
   color: inherit;
@@ -93,6 +125,42 @@ body {
   background: transparent;
   padding: 0;
   font-size: inherit;
+}
+/* 代码块复制按钮（由 CodeCopy 客户端组件注入） */
+.code-block {
+  position: relative;
+}
+.code-block .code-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
+  font-size: 12px;
+  line-height: 1;
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  color: #6b7280;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+.code-block:hover .code-copy,
+.code-block .code-copy:focus-visible {
+  opacity: 1;
+}
+.dark .code-block .code-copy {
+  color: #9ca3af;
+}
+.code-block .code-copy:hover {
+  color: #111827;
+}
+.dark .code-block .code-copy:hover {
+  color: #e5e7eb;
+}
+.code-block .code-copy.copied {
+  color: #16a34a;
 }
 /* 图片、引用、表格 */
 .article-content img {

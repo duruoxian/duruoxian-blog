@@ -1,0 +1,110 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import Fuse from "fuse.js";
+import { formatDateShort } from "@/lib/format";
+
+type Doc = {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  date: string;
+  excerpt: string;
+};
+
+export function SearchClient() {
+  const [docs, setDocs] = useState<Doc[]>([]);
+  const [query, setQuery] = useState("");
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/search-index.json")
+      .then((res) => res.json() as Promise<Doc[]>)
+      .then((data) => {
+        if (cancelled) return;
+        setDocs(data);
+        setLoaded(true);
+      })
+      .catch(() => {
+        if (!cancelled) setLoaded(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(docs, {
+        keys: [
+          { name: "title", weight: 2 },
+          { name: "tags", weight: 1.5 },
+          { name: "description", weight: 1 },
+          { name: "excerpt", weight: 0.5 },
+        ],
+        threshold: 0.35,
+        ignoreLocation: true,
+      }),
+    [docs]
+  );
+
+  const results = useMemo(() => {
+    const q = query.trim();
+    if (!q) return docs.slice(0, 10);
+    return fuse.search(q).map((r) => r.item);
+  }, [query, docs, fuse]);
+
+  return (
+    <div>
+      <div className="relative">
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="搜索文章标题、标签、内容…"
+          autoFocus
+          className="w-full rounded-xl border border-zinc-200 bg-[var(--card)] px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-400 dark:border-zinc-800 dark:focus:border-zinc-600"
+        />
+      </div>
+
+      <p className="mt-3 text-xs text-zinc-400">
+        {loaded ? `共 ${docs.length} 篇文章` : "正在加载索引…"}
+        {query.trim() && loaded ? ` · 找到 ${results.length} 条` : ""}
+      </p>
+
+      <ul className="mt-4 space-y-2">
+        {results.map((doc) => (
+          <li key={doc.slug}>
+            <Link
+              href={`/posts/${doc.slug}`}
+              className="group block rounded-xl border border-zinc-200 bg-[var(--card)] p-4 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+            >
+              <div className="flex items-baseline gap-3">
+                <time className="shrink-0 font-mono text-xs text-zinc-400" dateTime={doc.date}>
+                  {formatDateShort(doc.date)}
+                </time>
+                <h3 className="font-medium group-hover:underline">{doc.title}</h3>
+              </div>
+              {(doc.description || doc.excerpt) && (
+                <p className="mt-1 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  {doc.description || doc.excerpt}
+                </p>
+              )}
+              {doc.tags.length > 0 && (
+                <p className="mt-2 text-xs text-zinc-400"># {doc.tags.join("  # ")}</p>
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      {loaded && query.trim() && results.length === 0 && (
+        <p className="mt-6 text-center text-sm text-zinc-500">没有找到匹配的文章。</p>
+      )}
+    </div>
+  );
+}

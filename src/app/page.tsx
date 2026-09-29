@@ -1,16 +1,34 @@
 import Link from "next/link";
 import { getAllPosts, getAllTags } from "@/lib/posts";
+import { getContributions } from "@/lib/github";
+import { site } from "@/lib/site";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PostCard } from "@/components/PostCard";
 import { TagBadge } from "@/components/TagBadge";
 import { GitHubActivity } from "@/components/GitHubActivity";
 
-export default function Home() {
+// 站点结构化数据，帮助搜索引擎理解这是谁的博客
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.title,
+  url: site.url,
+  description: site.description,
+  author: { "@type": "Person", name: site.author.name, url: site.author.github },
+};
+
+export default async function Home() {
   const latest = getAllPosts().slice(0, 5);
   const tags = getAllTags().slice(0, 24);
+  const contributions = await getContributions(site.author.githubUser);
 
   return (
     <div className="space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="lg:sticky lg:top-20 lg:self-start">
           <ProfileCard />
@@ -51,7 +69,7 @@ export default function Home() {
         </div>
       </div>
 
-      <GitHubActivity />
+      <GitHubActivity data={contributions} />
     </div>
   );
 }
