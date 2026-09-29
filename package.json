@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview": "npx --yes serve out",
+    "deploy": "next build && npx --yes wrangler@latest pages deploy out --project-name=duruoxian-blog --branch=main"
   },
   "dependencies": {
     "github-slugger": "^2.0.0",
