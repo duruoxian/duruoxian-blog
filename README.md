@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DuRuoxian 的博客
 
-## Getting Started
+我的个人博客源码 —— 记录技术笔记、项目与生活随笔。
 
-First, run the development server:
+**在线地址：<https://duruoxian-blog.pages.dev>**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 技术栈
+
+- **Next.js 16**（App Router）+ **React 19** + **TypeScript**
+- **Tailwind CSS v4** + `@tailwindcss/typography`
+- **Markdown** 文章（`gray-matter` + `remark` / `rehype` 管线，`highlight.js` 代码高亮）
+- 静态导出（`output: "export"`），部署在 **Cloudflare Pages**
+- 推送到 `main` 由 **GitHub Actions** 自动构建并发布
+
+## 功能
+
+- 首页资料卡 + 最新文章 + 标签云 + GitHub 活跃度热力图（构建时抓取）
+- 文章：目录（滚动高亮）、代码块一键复制、上/下篇、系列导航
+- 分类 / 标签 / 系列 / 归档 / 资源 / 关于
+- 站内搜索（`fuse.js`）
+- 主题三态（跟随系统 / 亮 / 暗）、移动端适配
+- SEO：结构化数据（JSON-LD）、`sitemap.xml`、`rss.xml`、`robots.txt`
+- 安全响应头（`public/_headers`）
+
+## 目录结构
+
+```
+content/posts/       文章（Markdown，文件名即网址）
+public/images/posts/ 文章配图（按 slug 分目录）
+src/app/             页面与路由
+src/components/      组件
+src/lib/             站点配置与内容处理
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 本地开发
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev      # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 写一篇新文章
 
-## Learn More
+在 `content/posts/` 新建 `<slug>.md`：
 
-To learn more about Next.js, take a look at the following resources:
+```markdown
+---
+title: "文章标题"
+date: 2026-10-02
+description: "一句话摘要"
+category: "技术"
+tags: ["标签1", "标签2"]
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+正文……
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 构建与部署
 
-## Deploy on Vercel
+```bash
+npm run lint     # 代码检查
+npm run build    # 静态导出到 out/
+npm run deploy   # 构建并部署到 Cloudflare Pages（手动备用）
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+平时发布只需：
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+git push         # GitHub Actions 自动构建并上线
+```
+
+## License
+
+内容版权归作者所有；代码可参考学习。

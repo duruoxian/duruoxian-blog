@@ -1,10 +1,10 @@
 ---
-title: 把旅行照片变成水彩明信片：我写了一个 AI 技能
-date: 2026-10-02T00:00:00.000Z
-description: 一个开源 skill，把旅行照片批量转成 zine 风格的水彩卡片。双模式、人像锁定、批量流程、白色水印修复，已在 17 张真实照片上完整跑通。
-tags: [AI, 开源, 工作流, 水彩, 摄影]
-category: 开源项目
-cover: /images/photo-to-zine-watercolor/lijiang-lake-postcard.jpg
+title: "把旅行照片变成水彩明信片：我写了一个 AI 技能"
+date: 2026-10-02
+description: "一个开源 skill，把旅行照片批量转成 zine 风格的水彩卡片。双模式、人像锁定、批量流程、白色水印修复，已在 17 张真实照片上完整跑通。"
+category: "项目"
+tags: ["开源", "AI", "摄影", "水彩"]
+cover: "/images/posts/photo-to-zine-watercolor/lijiang-lake-postcard.jpg"
 ---
 
 ## 起因
@@ -17,11 +17,11 @@ cover: /images/photo-to-zine-watercolor/lijiang-lake-postcard.jpg
 
 ## 先看成品
 
-![丽江蓝月谷 · 明信片模式](/images/photo-to-zine-watercolor/lijiang-lake-postcard.jpg)
+![丽江蓝月谷 · 明信片模式](/images/posts/photo-to-zine-watercolor/lijiang-lake-postcard.jpg)
 
-![缙云山古寺 · 纯水彩模式](/images/photo-to-zine-watercolor/jinyun-temple-page.jpg)
+![缙云山古寺 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-temple-page.jpg)
 
-![缙云山夜径 · 纯水彩模式](/images/photo-to-zine-watercolor/jinyun-night-road-page.jpg)
+![缙云山夜径 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-night-road-page.jpg)
 
 竖版 2:3，暖白纸底，水彩主景带自然晕边，左下角打字机字体的日期和地名。做成一套挂在一起，比相册里的原图耐看。
 
