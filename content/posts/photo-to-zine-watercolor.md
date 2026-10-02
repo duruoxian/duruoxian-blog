@@ -63,3 +63,5 @@ cover: "/images/posts/photo-to-zine-watercolor/lijiang-lake-postcard.jpg"
 这个 skill 的规范越写越像一份"质检手册"，这可能才是 AI 时代的真相：**生成早就不是瓶颈，验收才是。** 模型负责把画画出来，人负责告诉它什么叫"对"。
 
 仓库地址再放一次：[photo-to-zine-watercolor](https://github.com/duruoxian/photo-to-zine-watercolor)，欢迎拿去改成你自己的版本。
+
+顺带一提：不一定非要编程助手——把 SKILL.md 里的规范直接发给豆包，再上传照片，它也能照着做出这套水彩卡片。
