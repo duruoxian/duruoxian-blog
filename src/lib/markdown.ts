@@ -7,6 +7,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import GithubSlugger from "github-slugger";
+import { site } from "@/lib/site";
 
 export type TocItem = { id: string; text: string; depth: number };
 
@@ -19,11 +20,36 @@ function nodeText(node: MdNode): string {
   return "";
 }
 
+// 极简的 hast 节点类型（rehype 的 HTML AST）
+type HastNode = {
+  type?: string;
+  tagName?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+};
+
+// 站外链接统一「新窗口打开 + 防劫持 + ↗ 标记」；本站链接与锚点不受影响。
+function rehypeExternalLinks() {
+  const walk = (node: HastNode) => {
+    if (node.children) node.children.forEach(walk);
+    if (node.tagName !== "a") return;
+    const href = String(node.properties?.href ?? "");
+    if (!/^https?:\/\//i.test(href) || href.startsWith(site.url)) return;
+    const props = (node.properties ??= {});
+    props.target = "_blank";
+    props.rel = "noopener noreferrer";
+    const className = Array.isArray(props.className) ? props.className : [];
+    props.className = [...className, "external-link"];
+  };
+  return (tree: HastNode) => walk(tree);
+}
+
 /**
  * Markdown -> HTML，并顺带生成目录(TOC)。
  * - remark-gfm：支持表格、任务列表、删除线等 GitHub 扩展语法
  * - rehype-slug / rehype-autolink-headings：给标题加 id 和锚点链接
  * - rehype-highlight：代码高亮（highlight.js）
+ * - rehypeExternalLinks：站外链接新窗口打开并加 ↗ 标记
  */
 export async function renderMarkdown(
   markdown: string
@@ -33,6 +59,7 @@ export async function renderMarkdown(
       .use(remarkParse)
       .use(remarkGfm)
       .use(remarkRehype)
+      .use(rehypeExternalLinks)
       .use(rehypeSlug)
       .use(rehypeAutolinkHeadings, {
         behavior: "wrap",

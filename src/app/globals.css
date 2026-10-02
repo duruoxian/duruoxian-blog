@@ -61,6 +61,30 @@ html:not([data-theme]) .theme-icon-system {
   display: block;
 }
 
+/* ============ 阅读进度条（文章页顶部）============ */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 50;
+  pointer-events: none;
+}
+.reading-progress > div {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ============ 站外链接 ↗ 标记（由 markdown.ts 的 rehypeExternalLinks 加类）============ */
+.article-content a.external-link::after {
+  content: " ↗";
+  font-size: 0.85em;
+  opacity: 0.65;
+}
+
 /* ============ 文章正文 ============ */
 .article-content {
   overflow-wrap: break-word;

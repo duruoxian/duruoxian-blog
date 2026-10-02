@@ -8,12 +8,30 @@ import { Toc } from "@/components/Toc";
 import { TagBadge } from "@/components/TagBadge";
 import { SeriesNav } from "@/components/SeriesNav";
 import { CodeCopy } from "@/components/CodeCopy";
+import { ReadingProgress } from "@/components/ReadingProgress";
+import { ShareLink } from "@/components/ShareLink";
+import { PostList } from "@/components/PostList";
 import { site } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
+}
+
+/** 相关文章：共享标签数 ×2 + 同分类 ×1 打分，取前几篇 */
+function getRelatedPosts(currentSlug: string, tags: string[], category: string, limit = 3) {
+  return getAllPosts()
+    .filter((p) => p.slug !== currentSlug)
+    .map((p) => ({
+      post: p,
+      score:
+        p.tags.filter((t) => tags.includes(t)).length * 2 + (p.category === category ? 1 : 0),
+    }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || (a.post.date < b.post.date ? 1 : -1))
+    .slice(0, limit)
+    .map((x) => x.post);
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -53,6 +71,7 @@ export default async function PostPage({ params }: Params) {
   const i = all.findIndex((p) => p.slug === post.slug);
   const prev = i > 0 ? all[i - 1] : null; // 更新的文章
   const next = i >= 0 && i < all.length - 1 ? all[i + 1] : null; // 更旧的文章
+  const related = getRelatedPosts(post.slug, post.tags, post.category);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,6 +88,7 @@ export default async function PostPage({ params }: Params) {
 
   return (
     <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_220px]">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -117,6 +137,17 @@ export default async function PostPage({ params }: Params) {
         )}
 
         {post.series && <SeriesNav series={post.series} currentSlug={post.slug} />}
+
+        <div className="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+          <ShareLink title={post.title} />
+        </div>
+
+        {related.length > 0 && (
+          <section className="mt-8">
+            <h2 className="mb-3 text-sm font-semibold text-zinc-500 dark:text-zinc-400">相关文章</h2>
+            <PostList posts={related} />
+          </section>
+        )}
 
         <nav className="mt-8 grid gap-3 border-t border-zinc-200 pt-6 text-sm sm:grid-cols-2 dark:border-zinc-800">
           <div>

@@ -43,3 +43,6 @@ next-env.d.ts
 # AI agent docs (generated locally, not part of the project)
 AGENTS.md
 CLAUDE.md
+
+# local drafts (never published)
+drafts/
