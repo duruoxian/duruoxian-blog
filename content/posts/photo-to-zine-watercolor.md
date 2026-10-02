@@ -21,6 +21,10 @@ cover: "/images/posts/photo-to-zine-watercolor/lijiang-lake-postcard.jpg"
 
 ![缙云山古寺 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-temple-page.jpg)
 
+![缙云山寺园 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-temple-garden.jpg)
+
+![缙云山石佛 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-buddha-stairs.jpg)
+
 ![缙云山夜径 · 纯水彩模式](/images/posts/photo-to-zine-watercolor/jinyun-night-road-page.jpg)
 
 竖版 2:3，暖白纸底，水彩主景带自然晕边，左下角打字机字体的日期和地名。做成一套挂在一起，比相册里的原图耐看。
