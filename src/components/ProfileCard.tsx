@@ -4,15 +4,15 @@ export function ProfileCard() {
   const a = site.author;
 
   return (
-    <div className="rounded-xl border border-zinc-200 bg-[var(--card)] p-6 dark:border-zinc-800">
+    <div className="gradient-border rounded-xl p-6 shadow-lg shadow-indigo-500/5 backdrop-blur-xl">
       <div className="flex flex-col items-center text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={a.avatar}
           alt={a.name}
-          className="h-24 w-24 rounded-full border border-zinc-200 object-cover dark:border-zinc-700"
+          className="h-24 w-24 rounded-full object-cover ring-2 ring-indigo-500/30"
         />
-        <h1 className="mt-4 text-xl font-bold">{a.name}</h1>
+        <h1 className="gradient-text mt-4 text-xl font-bold">{a.name}</h1>
         <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{a.bio}</p>
       </div>
 

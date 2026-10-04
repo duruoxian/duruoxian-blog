@@ -5,7 +5,7 @@ import { TagBadge } from "./TagBadge";
 
 export function PostCard({ post, compact = false }: { post: Post; compact?: boolean }) {
   return (
-    <article className="group rounded-xl border border-zinc-200 bg-[var(--card)] p-5 transition-shadow hover:shadow-md dark:border-zinc-800">
+    <article className="card-glow group rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800">
       {!compact && post.cover && (
         <Link href={`/posts/${post.slug}`} className="mb-4 block overflow-hidden rounded-lg">
           {/* eslint-disable-next-line @next/next/no-img-element */}

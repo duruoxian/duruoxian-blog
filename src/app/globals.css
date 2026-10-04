@@ -14,15 +14,17 @@
 
 :root {
   --page: #f7f7f8;
-  --card: #ffffff;
+  --card: rgba(255, 255, 255, 0.66);
   --border: #e6e6e9;
+  --glass-fill: rgba(255, 255, 255, 0.66);
   color-scheme: light;
 }
 
 .dark {
   --page: #0b0b0d;
-  --card: #161618;
+  --card: rgba(22, 22, 24, 0.66);
   --border: #2a2a2e;
+  --glass-fill: rgba(22, 22, 24, 0.66);
   color-scheme: dark;
 }
 
@@ -36,6 +38,109 @@ body {
   background-color: var(--page);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ============ 极光背景（两层光斑缓慢漂移）============ */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+body::before {
+  top: -18%;
+  left: -12%;
+  width: 55vw;
+  height: 55vw;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.3),
+    rgba(6, 182, 212, 0.16) 45%,
+    transparent 70%
+  );
+  animation: aurora-a 38s ease-in-out infinite alternate;
+}
+body::after {
+  top: 28%;
+  right: -16%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.26),
+    rgba(236, 72, 153, 0.14) 45%,
+    transparent 70%
+  );
+  animation: aurora-b 46s ease-in-out infinite alternate;
+}
+.dark body::before {
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.38),
+    rgba(6, 182, 212, 0.2) 45%,
+    transparent 70%
+  );
+}
+.dark body::after {
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.32),
+    rgba(236, 72, 153, 0.16) 45%,
+    transparent 70%
+  );
+}
+@keyframes aurora-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(7vw, 5vh) scale(1.1);
+  }
+}
+@keyframes aurora-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-6vw, -4vh) scale(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
+/* ============ 炫酷通用件 ============ */
+/* 渐变文字：标题/站名 */
+.gradient-text {
+  background: linear-gradient(120deg, #6366f1, #06b6d4 45%, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* 渐变描边玻璃卡：资料卡等主视觉 */
+.gradient-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--glass-fill), var(--glass-fill)) padding-box,
+    linear-gradient(135deg, rgba(99, 102, 241, 0.65), rgba(6, 182, 212, 0.55) 50%, rgba(168, 85, 247, 0.65)) border-box;
+}
+/* 卡片 hover：浮起 + 极光色光晕 + 描边变色 */
+.card-glow {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-glow:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 12px 40px -12px rgba(99, 102, 241, 0.35);
+}
+.dark .card-glow:hover {
+  border-color: rgba(129, 140, 248, 0.5);
+  box-shadow: 0 12px 44px -10px rgba(99, 102, 241, 0.45);
 }
 
 /* 隐藏滚动条但保留滚动能力（目录侧栏用） */

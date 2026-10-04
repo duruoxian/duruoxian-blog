@@ -16,9 +16,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-200/70 bg-[var(--page)]/80 backdrop-blur-md dark:border-zinc-800/70">
+    <header className="sticky top-0 z-40 border-b border-zinc-200/70 bg-[var(--page)]/60 backdrop-blur-xl dark:border-zinc-800/70">
       <div className="mx-auto flex w-full max-w-5xl items-center gap-3 px-4 py-3">
-        <Link href="/" className="shrink-0 text-base font-bold tracking-tight">
+        <Link href="/" className="gradient-text shrink-0 text-base font-bold tracking-tight">
           {site.author.name}
         </Link>
 
@@ -31,7 +31,7 @@ export function Header() {
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
               className={`whitespace-nowrap rounded-lg px-2.5 py-1.5 transition-colors ${
                 isActive(pathname, item.href)
-                  ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                  ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white dark:from-indigo-500 dark:to-violet-500"
                   : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
               }`}
             >
@@ -101,7 +101,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className={`block rounded-lg px-3 py-2 transition-colors ${
                     isActive(pathname, item.href)
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                      ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white dark:from-indigo-500 dark:to-violet-500"
                       : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
                   }`}
                 >

@@ -19,7 +19,7 @@ export function BackToTop() {
       aria-label="返回顶部"
       title="返回顶部"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-zinc-500 shadow-md transition-all duration-200 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 ${
+      className={`fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-zinc-500 shadow-md backdrop-blur-lg transition-all duration-200 hover:border-indigo-500/50 hover:text-indigo-500 dark:text-zinc-400 dark:hover:text-indigo-300 ${
         visible ? "opacity-100" : "pointer-events-none translate-y-2 opacity-0"
       }`}
     >
