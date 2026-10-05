@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 第三方压缩产物，不检查
+    "public/admin/sveltia-cms.js",
   ]),
 ]);
 

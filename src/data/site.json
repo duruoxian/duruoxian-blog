@@ -1,0 +1,16 @@
+{
+  "title": "DuRuoxian 的博客",
+  "description": "DuRuoxian 的个人博客，记录学习与技术折腾。",
+  "since": 2026,
+  "author": {
+    "name": "DuRuoxian",
+    "avatar": "/avatar.jpg",
+    "bio": "重庆师范大学软件工程在读。",
+    "email": "drx00112233@qq.com",
+    "school": "重庆师范大学",
+    "major": "软件工程",
+    "location": "中国重庆",
+    "github": "https://github.com/duruoxian",
+    "githubUser": "duruoxian"
+  }
+}

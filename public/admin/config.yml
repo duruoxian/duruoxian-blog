@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Sveltia CMS 配置（中文后台：https://duruoxian-blog.pages.dev/admin/）
+# 登录方式：GitHub 访问令牌（PAT），在登录页点「使用令牌登录」即可，无需 OAuth 应用。
+
+backend:
+  name: github
+  repo: duruoxian/duruoxian-blog
+  branch: main
+
+# 后台里「查看网站」链接
+site_url: https://duruoxian-blog.pages.dev
+
+# 图片上传位置：上传的图片进入 public/images/posts/，网站里用 /images/posts/... 引用
+media_folder: public/images/posts
+public_folder: /images/posts
+
+collections:
+  # ── 文章 ──────────────────────────────────────────────
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: content/posts
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    extension: md
+    format: frontmatter
+    summary: "{{title}} · {{category}}"
+    fields:
+      - label: 文件名（网址）
+        name: slug
+        widget: string
+        hint: 用英文或拼音，如 my-new-post；发布后网址是 /posts/my-new-post，创建后不要改
+        pattern: ["^[a-z0-9][a-z0-9-]*$", "只能用小写字母、数字和短横线"]
+      - { label: 标题, name: title, widget: string }
+      - { label: 日期, name: date, widget: datetime, type: date, format: "YYYY-MM-DD" }
+      - { label: 摘要, name: description, widget: text, required: false, hint: 一句话简介，显示在文章列表和搜索结果里 }
+      - label: 分类
+        name: category
+        widget: select
+        options: [技术, 生活, 项目, 工具]
+        default: 技术
+        hint: 想加新分类的话告诉我
+      - { label: 标签, name: tags, widget: list, required: false, default: [], hint: 随便写新标签，保存后自动生成标签页 }
+      - { label: 系列, name: series, widget: string, required: false, hint: 可选，属于某个系列教程时填 }
+      - { label: 封面图, name: cover, widget: image, required: false }
+      - { label: 草稿, name: draft, widget: boolean, default: false, required: false, hint: 打开后文章不会出现在网站上，写完再关掉 }
+      - { label: 正文, name: body, widget: markdown }
+
+  # ── 站点信息（对应 src/data/site.json，改完全站生效）──────
+  - name: settings
+    label: 站点信息
+    files:
+      - name: site
+        label: 个人信息
+        file: src/data/site.json
+        fields:
+          - { label: 站点标题, name: title, widget: string }
+          - { label: 站点简介, name: description, widget: text }
+          - { label: 建站年份, name: since, widget: number, value_type: int }
+          - { label: 昵称, name: author.name, widget: string }
+          - { label: 一句话介绍, name: author.bio, widget: string }
+          - { label: 邮箱, name: author.email, widget: string }
+          - { label: 学校, name: author.school, widget: string }
+          - { label: 专业, name: author.major, widget: string }
+          - { label: 所在地, name: author.location, widget: string }
+          - { label: GitHub 主页, name: author.github, widget: string }
+          - { label: GitHub 用户名, name: author.githubUser, widget: string, hint: 首页热力图用，别改错 }
+          - { label: 头像地址, name: author.avatar, widget: string, required: false, hint: 保持 /avatar.jpg 不动；换头像直接替换 public/avatar.jpg 文件 }
