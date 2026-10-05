@@ -3,7 +3,7 @@
 // 博客后台主界面：登录 → 文章列表 → 编辑器 / 站点信息。
 // 视觉完全复用前端样式（顶栏/底栏/极光由根布局提供），数据操作走 GitHub API。
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PostEditor } from "./PostEditor";
 import { SettingsEditor } from "./SettingsEditor";
@@ -13,6 +13,7 @@ import {
   clearToken,
   deleteFile,
   getToken,
+  GithubError,
   isAuthError,
   listDir,
   getFile,
@@ -39,6 +40,28 @@ function newPost(): PostMeta {
   };
 }
 
+// 文章列表的本地缓存：打开后台先用缓存秒开，再后台同步 GitHub 最新数据
+const CACHE_KEY = "admin:cache:posts";
+
+function readPostsCache(): Entry[] | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Entry[];
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function writePostsCache(entries: Entry[]) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(entries));
+  } catch {
+    // 本地存储异常不影响主流程
+  }
+}
+
 export function AdminApp() {
   const [ready, setReady] = useState(false);
   const [authed, setAuthed] = useState(false);
@@ -48,6 +71,15 @@ export function AdminApp() {
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+  const entriesRef = useRef<Entry[] | null>(null);
+
+  // 统一入口：更新列表的同时写本地缓存，下次打开直接秒开
+  const applyEntries = useCallback((next: Entry[]) => {
+    entriesRef.current = next;
+    setEntries(next);
+    writePostsCache(next);
+  }, []);
 
   const handleErr = useCallback((err: unknown) => {
     if (isAuthError(err)) {
@@ -63,20 +95,27 @@ export function AdminApp() {
     try {
       const files = await listDir("content/posts");
       const mdFiles = files.filter((f) => f.type === "file" && /\.(mdx?)$/.test(f.name));
+      // 按 sha 对比：内容没变的文件直接沿用本地解析结果，只拉有变化的——
+      // 仓库没更新时整次同步只有 1 个请求（列目录），打开速度不再受逐篇拉取拖累
+      const prev = new Map<string, Entry>(
+        (entriesRef.current ?? []).map((e) => [`${e.meta.slug}.md`, e]),
+      );
       const loaded = await Promise.all(
         mdFiles.map(async (f) => {
+          const unchanged = prev.get(f.name);
+          if (unchanged && unchanged.sha === f.sha) return unchanged;
           const { content, sha } = await getFile(f.path);
           return { meta: parsePost(content, f.name.replace(/\.mdx?$/, "")), sha };
         }),
       );
       loaded.sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
-      setEntries(loaded);
+      applyEntries(loaded);
     } catch (err) {
       handleErr(err);
     }
-  }, [handleErr]);
+  }, [applyEntries, handleErr]);
 
-  // 首次挂载：继承旧后台令牌 → 恢复登录态 → 拉取文章列表。
+  // 首次挂载：继承旧后台令牌 → 恢复登录态 → 用缓存秒开 → 后台按 sha 同步。
   // 先 await 让出同步栈，避免在 effect 内同步 setState（react-hooks/set-state-in-effect）。
   useEffect(() => {
     void (async () => {
@@ -85,16 +124,24 @@ export function AdminApp() {
       const token = getToken();
       setAuthed(Boolean(token));
       setReady(true);
-      if (token) await loadPosts();
+      if (!token) return;
+      // 上次打开时存过列表就用它立即渲染（0 网络），后台再同步 GitHub
+      const cached = readPostsCache();
+      if (cached && cached.length > 0) {
+        applyEntries(cached);
+        setSyncing(true);
+      }
+      await loadPosts();
+      setSyncing(false);
     })();
-  }, [loadPosts]);
+  }, [applyEntries, loadPosts]);
 
   async function savePost(meta: PostMeta, sha?: string) {
     setBusy(true);
     setError(null);
     try {
       const exists = Boolean(sha);
-      await putFile(
+      const newSha = await putFile(
         `content/posts/${meta.slug}.md`,
         serializePost(meta),
         `${exists ? "后台更新文章" : "后台新建文章"}：${meta.title}`,
@@ -102,10 +149,18 @@ export function AdminApp() {
       );
       setNotice(exists ? "文章已更新，约 2 分钟后上线" : "文章已发布，约 2 分钟后上线");
       setEditorDirty(false);
-      await loadPosts();
+      // 保存接口直接返回新 sha，就地更新列表，不再整单重新拉取
+      const others = (entriesRef.current ?? []).filter((e) => e.meta.slug !== meta.slug);
+      applyEntries(
+        [...others, { meta, sha: newSha }].sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1)),
+      );
       setView({ kind: "list" });
     } catch (err) {
-      handleErr(err);
+      if (err instanceof GithubError && err.status === 409) {
+        setError("这篇文章在 GitHub 上刚有更新，请返回列表刷新后再保存。");
+      } else {
+        handleErr(err);
+      }
     } finally {
       setBusy(false);
     }
@@ -122,7 +177,7 @@ export function AdminApp() {
         `后台删除文章：${entry.meta.title}`,
       );
       setNotice("文章已删除，约 2 分钟后生效");
-      await loadPosts();
+      applyEntries((entriesRef.current ?? []).filter((e) => e.meta.slug !== entry.meta.slug));
     } catch (err) {
       handleErr(err);
     } finally {
@@ -151,7 +206,7 @@ export function AdminApp() {
       )}
 
       {view.kind === "list" && (
-        <>
+        <div className="view-in">
           <div className="mb-6 flex items-center justify-between">
             <h1 className="text-2xl font-bold">后台管理</h1>
             <div className="flex gap-2">
@@ -174,7 +229,22 @@ export function AdminApp() {
             </div>
           </div>
 
-          {entries === null && <p className="py-16 text-center text-sm text-zinc-400">加载中…</p>}
+          {entries === null && (
+            <div aria-busy="true" className="space-y-3">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-4 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 dark:border-zinc-800"
+                >
+                  <div className="h-12 w-12 shrink-0 animate-pulse rounded-lg bg-zinc-200 dark:bg-zinc-800" />
+                  <div className="min-w-0 flex-1 space-y-2">
+                    <div className="h-4 w-2/3 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+                    <div className="h-3 w-1/3 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
 
           {entries !== null && entries.length === 0 && (
             <p className="rounded-xl border border-dashed border-zinc-300 p-10 text-center text-sm text-zinc-500 dark:border-zinc-700">
@@ -188,6 +258,7 @@ export function AdminApp() {
                 共 {entries.length} 篇
                 {entries.some((e) => e.meta.draft) &&
                   ` · 草稿 ${entries.filter((e) => e.meta.draft).length} 篇`}
+                {syncing && " · 正在同步最新…"}
               </p>
               <div className="space-y-3">
                 {entries.map((entry) => (
@@ -238,11 +309,11 @@ export function AdminApp() {
               </div>
             </>
           )}
-        </>
+        </div>
       )}
 
       {view.kind === "edit" && (
-        <>
+        <div className="view-in">
           <button
             type="button"
             className="mb-5 text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-200"
@@ -264,11 +335,11 @@ export function AdminApp() {
               onDirtyChange={setEditorDirty}
             />
           </div>
-        </>
+        </div>
       )}
 
       {view.kind === "settings" && (
-        <>
+        <div className="view-in">
           <button
             type="button"
             className="mb-5 text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-200"
@@ -285,7 +356,7 @@ export function AdminApp() {
               }}
             />
           </div>
-        </>
+        </div>
       )}
 
       <p className="mt-10 text-center text-xs text-zinc-400">

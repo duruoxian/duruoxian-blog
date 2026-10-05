@@ -166,6 +166,26 @@ html:not([data-theme]) .theme-icon-system {
   display: block;
 }
 
+/* ============ 后台视图切换过渡 ============ */
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.view-in {
+  animation: view-in 0.25s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .view-in {
+    animation: none;
+  }
+}
+
 /* ============ 阅读进度条（文章页顶部）============ */
 .reading-progress {
   position: fixed;

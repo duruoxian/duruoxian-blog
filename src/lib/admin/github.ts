@@ -87,8 +87,8 @@ export async function putFile(
   content: string,
   message: string,
   sha?: string,
-): Promise<void> {
-  await api(`/contents/${path}`, {
+): Promise<string> {
+  const json = await api<{ content?: { sha?: string } }>(`/contents/${path}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -98,6 +98,8 @@ export async function putFile(
       ...(sha ? { sha } : {}),
     }),
   });
+  // 返回提交后的新 sha，调用方可就地更新列表，不必重新拉取
+  return json.content?.sha ?? "";
 }
 
 /** 二进制文件（图片）上传：分块转二进制字符串再 base64，避免栈溢出 */
