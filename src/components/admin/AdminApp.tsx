@@ -8,6 +8,7 @@ import Link from "next/link";
 import { PostEditor } from "./PostEditor";
 import { SettingsEditor } from "./SettingsEditor";
 import { cardClass, ghostBtn, inputClass, primaryBtn } from "./ui";
+import { site } from "@/lib/site";
 import {
   clearToken,
   deleteFile,
@@ -43,6 +44,7 @@ export function AdminApp() {
   const [authed, setAuthed] = useState(false);
   const [entries, setEntries] = useState<Entry[] | null>(null);
   const [view, setView] = useState<View>({ kind: "list" });
+  const [editorDirty, setEditorDirty] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -99,6 +101,7 @@ export function AdminApp() {
         sha,
       );
       setNotice(exists ? "文章已更新，约 2 分钟后上线" : "文章已发布，约 2 分钟后上线");
+      setEditorDirty(false);
       await loadPosts();
       setView({ kind: "list" });
     } catch (err) {
@@ -180,13 +183,28 @@ export function AdminApp() {
           )}
 
           {entries !== null && entries.length > 0 && (
-            <div className="space-y-3">
-              {entries.map((entry) => (
-                <div
-                  key={entry.meta.slug}
-                  className="card-glow flex items-center gap-4 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl dark:border-zinc-800"
-                >
-                  <div className="min-w-0 flex-1">
+            <>
+              <p className="mb-3 text-xs text-zinc-400">
+                共 {entries.length} 篇
+                {entries.some((e) => e.meta.draft) &&
+                  ` · 草稿 ${entries.filter((e) => e.meta.draft).length} 篇`}
+              </p>
+              <div className="space-y-3">
+                {entries.map((entry) => (
+                  <div
+                    key={entry.meta.slug}
+                    className="card-glow flex items-center gap-4 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl dark:border-zinc-800"
+                  >
+                    {entry.meta.cover && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={entry.meta.cover}
+                        alt=""
+                        loading="lazy"
+                        className="h-12 w-12 shrink-0 rounded-lg object-cover"
+                      />
+                    )}
+                    <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <h2 className="truncate font-medium">{entry.meta.title}</h2>
                       {entry.meta.draft && (
@@ -217,7 +235,8 @@ export function AdminApp() {
                   </button>
                 </div>
               ))}
-            </div>
+              </div>
+            </>
           )}
         </>
       )}
@@ -227,7 +246,11 @@ export function AdminApp() {
           <button
             type="button"
             className="mb-5 text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-200"
-            onClick={() => setView({ kind: "list" })}
+            onClick={() => {
+              if (editorDirty && !window.confirm("有未保存的修改，确定放弃？")) return;
+              setEditorDirty(false);
+              setView({ kind: "list" });
+            }}
           >
             ← 返回列表
           </button>
@@ -238,6 +261,7 @@ export function AdminApp() {
               saving={busy}
               onSave={(meta) => savePost(meta, view.isNew ? undefined : view.entry.sha)}
               onCancel={() => setView({ kind: "list" })}
+              onDirtyChange={setEditorDirty}
             />
           </div>
         </>
@@ -297,7 +321,13 @@ function LoginCard({ onLogin }: { onLogin: () => void }) {
 
   return (
     <div className="gradient-border mx-auto max-w-sm rounded-xl p-8 text-center shadow-lg shadow-indigo-500/5 backdrop-blur-xl">
-      <h1 className="gradient-text text-xl font-bold">博客后台</h1>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={site.author.avatar}
+        alt=""
+        className="mx-auto h-16 w-16 rounded-full object-cover ring-2 ring-indigo-500/30"
+      />
+      <h1 className="gradient-text mt-4 text-xl font-bold">{site.author.name} 的后台</h1>
       <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
         请输入 GitHub 令牌登录（只需一次，之后自动保持登录）
       </p>

@@ -3,7 +3,7 @@
 // 文章编辑器：字段与 front-matter 一一对应，正文支持 Markdown 源码和预览切换。
 // 保存动作由父组件执行，这里只收集和展示。
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
 import { putBinaryFile } from "@/lib/admin/github";
 import type { PostMeta } from "@/lib/admin/content";
@@ -17,14 +17,17 @@ export function PostEditor({
   saving,
   onSave,
   onCancel,
+  onDirtyChange,
 }: {
   initial: PostMeta;
   isNew: boolean;
   saving: boolean;
   onSave: (meta: PostMeta) => void;
   onCancel: () => void;
+  onDirtyChange?: (dirty: boolean) => void;
 }) {
   const [meta, setMeta] = useState<PostMeta>(initial);
+  const [dirty, setDirty] = useState(false);
   const [preview, setPreview] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -37,7 +40,40 @@ export function PostEditor({
 
   function patch(part: Partial<PostMeta>) {
     setMeta((m) => ({ ...m, ...part }));
+    setDirty(true);
   }
+
+  function handleCancel() {
+    if (dirty && !window.confirm("有未保存的修改，确定放弃？")) return;
+    onCancel();
+  }
+
+  // 有未保存内容时，关闭/刷新页面前提醒
+  useEffect(() => {
+    if (!dirty) return;
+    function warn(e: BeforeUnloadEvent) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+
+  // Ctrl/Cmd+S 直接保存（写文章的肌肉记忆）
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        if (!saving && !slugError) onSave(meta);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [meta, saving, slugError, onSave]);
+
+  useEffect(() => {
+    onDirtyChange?.(dirty);
+  }, [dirty, onDirtyChange]);
 
   async function upload(file: File, target: "cover" | "body") {
     setUploading(true);
@@ -216,7 +252,7 @@ export function PostEditor({
           草稿（不显示在网站上）
         </label>
         <div className="ml-auto flex gap-2">
-          <button type="button" className={ghostBtn} onClick={onCancel} disabled={saving}>
+          <button type="button" className={ghostBtn} onClick={handleCancel} disabled={saving}>
             取消
           </button>
           <button
@@ -224,8 +260,9 @@ export function PostEditor({
             className={primaryBtn}
             disabled={saving || Boolean(slugError) || uploading}
             onClick={() => onSave(meta)}
+            title="快捷键 Ctrl+S"
           >
-            {saving ? "保存中…" : "保存并发布"}
+            {saving ? "保存中…" : meta.draft ? "保存草稿" : "保存并发布"}
           </button>
         </div>
       </div>
