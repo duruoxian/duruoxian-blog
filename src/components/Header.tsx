@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -15,6 +15,46 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  // 液态滑动药丸：一枚高亮背景在导航项之间滑动，而不是各自出现
+  const navRef = useRef<HTMLElement | null>(null);
+  const itemRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const [pill, setPill] = useState({ left: 0, width: 0, visible: false });
+  const [pillReady, setPillReady] = useState(false);
+
+  const activeHref = site.nav.find((item) => isActive(pathname, item.href))?.href;
+
+  const measure = useCallback(() => {
+    const nav = navRef.current;
+    const el = activeHref ? itemRefs.current.get(activeHref) : undefined;
+    if (!nav || !el) {
+      setPill((p) => ({ ...p, visible: false }));
+      return;
+    }
+    const navRect = nav.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
+    setPill({ left: rect.left - navRect.left, width: rect.width, visible: true });
+  }, [activeHref]);
+
+  useEffect(() => {
+    measure();
+    // 首次量完再开启过渡，避免打开页面时药丸从 0 位置飞过来
+    const raf = requestAnimationFrame(() => setPillReady(true));
+    // 字体加载完成后字宽会变，再量一次
+    document.fonts?.ready.then(measure).catch(() => {});
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+    };
+  }, [measure]);
+
+  function setItemRef(href: string) {
+    return (el: HTMLAnchorElement | null) => {
+      if (el) itemRefs.current.set(href, el);
+      else itemRefs.current.delete(href);
+    };
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-200/70 bg-[var(--page)]/60 backdrop-blur-xl dark:border-zinc-800/70">
       <div className="mx-auto flex w-full max-w-5xl items-center gap-3 px-4 py-3">
@@ -22,22 +62,33 @@ export function Header() {
           {site.author.name}
         </Link>
 
-        {/* 桌面端导航 */}
-        <nav className="hidden flex-1 items-center gap-1 text-sm sm:flex">
-          {site.nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(pathname, item.href) ? "page" : undefined}
-              className={`whitespace-nowrap rounded-lg px-2.5 py-1.5 transition-colors ${
-                isActive(pathname, item.href)
-                  ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white dark:from-indigo-500 dark:to-violet-500"
-                  : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        {/* 桌面端导航：液态滑动药丸 */}
+        <nav ref={navRef} className="relative hidden flex-1 items-center gap-1 text-sm sm:flex">
+          <span
+            aria-hidden
+            className={`nav-pill absolute top-1/2 -translate-y-1/2 h-[calc(100%-8px)] rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-500 dark:to-violet-500 ${
+              pill.visible ? "opacity-100" : "opacity-0"
+            } ${pillReady ? "" : "no-anim"}`}
+            style={{ left: pill.left, width: pill.width }}
+          />
+          {site.nav.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                ref={setItemRef(item.href)}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`relative z-10 whitespace-nowrap rounded-lg px-2.5 py-1.5 transition-colors ${
+                  active
+                    ? "text-white"
+                    : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:ml-0">

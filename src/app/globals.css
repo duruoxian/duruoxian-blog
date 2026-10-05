@@ -166,6 +166,22 @@ html:not([data-theme]) .theme-icon-system {
   display: block;
 }
 
+/* ============ 顶部导航液态滑动药丸 ============ */
+.nav-pill {
+  transition:
+    left 0.38s cubic-bezier(0.3, 1.25, 0.4, 1),
+    width 0.38s cubic-bezier(0.3, 1.25, 0.4, 1),
+    opacity 0.2s ease;
+}
+.nav-pill.no-anim {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill {
+    transition: opacity 0.2s ease;
+  }
+}
+
 /* ============ 后台视图切换过渡 ============ */
 @keyframes view-in {
   from {
