@@ -59,12 +59,16 @@ collections:
           - { label: 站点标题, name: title, widget: string }
           - { label: 站点简介, name: description, widget: text }
           - { label: 建站年份, name: since, widget: number, value_type: int }
-          - { label: 昵称, name: author.name, widget: string }
-          - { label: 一句话介绍, name: author.bio, widget: string }
-          - { label: 邮箱, name: author.email, widget: string }
-          - { label: 学校, name: author.school, widget: string }
-          - { label: 专业, name: author.major, widget: string }
-          - { label: 所在地, name: author.location, widget: string }
-          - { label: GitHub 主页, name: author.github, widget: string }
-          - { label: GitHub 用户名, name: author.githubUser, widget: string, hint: 首页热力图用，别改错 }
-          - { label: 头像地址, name: author.avatar, widget: string, required: false, hint: 保持 /avatar.jpg 不动；换头像直接替换 public/avatar.jpg 文件 }
+          - label: 个人信息
+            name: author
+            widget: object
+            fields:
+              - { label: 昵称, name: name, widget: string }
+              - { label: 一句话介绍, name: bio, widget: string }
+              - { label: 邮箱, name: email, widget: string }
+              - { label: 学校, name: school, widget: string }
+              - { label: 专业, name: major, widget: string }
+              - { label: 所在地, name: location, widget: string }
+              - { label: GitHub 主页, name: github, widget: string }
+              - { label: GitHub 用户名, name: githubUser, widget: string, hint: 首页热力图用，别改错 }
+              - { label: 头像地址, name: avatar, widget: string, required: false, hint: 保持 /avatar.jpg 不动；换头像直接替换 public/avatar.jpg 文件 }
