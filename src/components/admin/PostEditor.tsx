@@ -1,6 +1,6 @@
 "use client";
 
-// 文章编辑器：字段与 front-matter 一一对应，正文支持 Markdown 源码和预览切换。
+// 文章编辑器：文档式大标题 + 元信息行 + 带工具栏的 Markdown 编辑区。
 // 保存动作由父组件执行，这里只收集和展示。
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -34,7 +34,7 @@ export function PostEditor({
   const bodyRef = useRef<HTMLTextAreaElement>(null);
 
   const slugError =
-    isNew && !/^[a-z0-9][a-z0-9-]*$/.test(meta.slug) ? "文件名只能用小写字母、数字和短横线" : null;
+    isNew && !/^[a-z0-9][a-z0-9-]*$/.test(meta.slug) ? "只能用小写字母、数字和短横线" : null;
 
   const html = useMemo(() => (preview ? String(marked.parse(meta.body)) : ""), [preview, meta.body]);
 
@@ -100,66 +100,71 @@ export function PostEditor({
   }
 
   return (
-    <div className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label className={labelClass}>文件名（网址，创建后不可改）</label>
-          <input
-            className={`${inputClass} font-mono`}
-            value={meta.slug}
-            disabled={!isNew}
-            onChange={(e) => patch({ slug: e.target.value })}
-            placeholder="my-new-post"
-          />
-          {slugError && <p className="mt-1 text-xs text-red-500">{slugError}</p>}
-        </div>
-        <div>
-          <label className={labelClass}>日期</label>
-          <input
-            type="date"
-            className={inputClass}
-            value={meta.date.slice(0, 10)}
-            onChange={(e) => patch({ date: e.target.value })}
-          />
-        </div>
-      </div>
+    <div className="space-y-6">
+      {/* 文档式大标题 */}
+      <input
+        className="w-full border-0 bg-transparent px-0 text-2xl font-bold leading-snug outline-none placeholder:text-zinc-300 dark:placeholder:text-zinc-600"
+        value={meta.title}
+        onChange={(e) => patch({ title: e.target.value })}
+        placeholder="文章标题…"
+      />
 
-      <div>
-        <label className={labelClass}>标题</label>
+      {/* 元信息行：日期 · 分类 · 网址 */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400">
         <input
-          className={inputClass}
-          value={meta.title}
-          onChange={(e) => patch({ title: e.target.value })}
+          type="date"
+          className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1 text-sm outline-none transition-colors focus:border-indigo-500/60"
+          value={meta.date.slice(0, 10)}
+          onChange={(e) => patch({ date: e.target.value })}
         />
+        <div className="flex flex-wrap gap-1" role="group" aria-label="分类">
+          {CATEGORIES.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => patch({ category: c })}
+              className={`rounded-full px-3 py-1 text-xs transition-colors ${
+                meta.category === c
+                  ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white"
+                  : "border border-[var(--border)] text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100"
+              }`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+        {isNew ? (
+          <input
+            className={`w-44 rounded-md border bg-transparent px-2 py-1 font-mono text-xs outline-none transition-colors placeholder:text-zinc-400 focus:border-indigo-500/60 ${
+              slugError ? "border-red-500/60" : "border-[var(--border)]"
+            }`}
+            value={meta.slug}
+            onChange={(e) => patch({ slug: e.target.value })}
+            placeholder="文件名-slug"
+            aria-label="文件名（网址）"
+          />
+        ) : (
+          <span className="font-mono text-xs">/{meta.slug}</span>
+        )}
       </div>
+      {slugError && <p className="text-xs text-red-500">{slugError}</p>}
 
-      <div>
-        <label className={labelClass}>摘要（显示在列表和搜索里）</label>
+      <hr className="border-[var(--border)]" />
+
+      <label className="block">
+        <span className={labelClass}>摘要（显示在列表和搜索结果里）</span>
         <textarea
           className={`${inputClass} resize-y`}
           rows={2}
           value={meta.description}
           onChange={(e) => patch({ description: e.target.value })}
+          placeholder="一句话介绍这篇文章"
         />
-      </div>
+      </label>
 
-      <div className="grid gap-5 sm:grid-cols-3">
-        <div>
-          <label className={labelClass}>分类</label>
-          <select
-            className={inputClass}
-            value={meta.category}
-            onChange={(e) => patch({ category: e.target.value })}
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className={labelClass}>标签（用逗号分隔）</label>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <label className="block">
+          <span className={labelClass}>标签（用逗号分隔，可随便加新的）</span>
           <input
             className={inputClass}
             value={meta.tags.join(", ")}
@@ -168,45 +173,55 @@ export function PostEditor({
             }
             placeholder="Python, 工具"
           />
-        </div>
-        <div>
-          <label className={labelClass}>系列（可选）</label>
+        </label>
+        <label className="block">
+          <span className={labelClass}>系列（可选）</span>
           <input
             className={inputClass}
             value={meta.series ?? ""}
             onChange={(e) => patch({ series: e.target.value || undefined })}
           />
-        </div>
+        </label>
       </div>
 
+      {/* 封面：缩略预览 + 地址 + 上传 */}
       <div>
-        <label className={labelClass}>封面图</label>
-        <div className="flex gap-2">
-          <input
-            className={inputClass}
-            value={meta.cover ?? ""}
-            placeholder="/images/posts/xxx.jpg"
-            onChange={(e) => patch({ cover: e.target.value || undefined })}
-          />
-          <label className={`${ghostBtn} shrink-0 cursor-pointer`}>
-            {uploading ? "上传中…" : "上传"}
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => e.target.files?.[0] && upload(e.target.files[0], "cover")}
+        <span className={labelClass}>封面图</span>
+        <div className="flex items-start gap-3">
+          {meta.cover && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={meta.cover}
+              alt="封面预览"
+              className="h-20 w-20 shrink-0 rounded-lg object-cover ring-1 ring-[var(--border)]"
             />
-          </label>
+          )}
+          <div className="flex flex-1 gap-2">
+            <input
+              className={`${inputClass} font-mono text-xs`}
+              value={meta.cover ?? ""}
+              placeholder="/images/posts/xxx.jpg"
+              onChange={(e) => patch({ cover: e.target.value || undefined })}
+            />
+            <label className={`${ghostBtn} shrink-0 cursor-pointer text-xs`}>
+              {uploading ? "上传中…" : "上传图片"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => e.target.files?.[0] && upload(e.target.files[0], "cover")}
+              />
+            </label>
+          </div>
         </div>
       </div>
 
-      <div>
-        <div className="mb-1.5 flex items-center justify-between">
-          <label className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
-            正文（Markdown）
-          </label>
-          <div className="flex items-center gap-2">
-            <label className={`${ghostBtn} cursor-pointer text-xs`}>
+      {/* 正文：带工具栏的编辑器容器 */}
+      <div className="overflow-hidden rounded-xl border border-[var(--border)]">
+        <div className="flex items-center justify-between border-b border-[var(--border)] bg-zinc-50/70 px-3 py-2 dark:bg-zinc-800/40">
+          <span className="text-xs font-medium text-zinc-400">正文 · Markdown</span>
+          <div className="flex items-center gap-1">
+            <label className="cursor-pointer rounded-md px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/60 dark:text-zinc-400 dark:hover:bg-zinc-700/60">
               {uploading ? "上传中…" : "插入图片"}
               <input
                 type="file"
@@ -217,38 +232,43 @@ export function PostEditor({
             </label>
             <button
               type="button"
-              className={`${ghostBtn} text-xs`}
+              className="rounded-md px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/60 dark:text-zinc-400 dark:hover:bg-zinc-700/60"
               onClick={() => setPreview((v) => !v)}
             >
-              {preview ? "编辑" : "预览"}
+              {preview ? "返回编辑" : "预览"}
             </button>
           </div>
         </div>
         {preview ? (
           <div
-            className="article-content prose prose-zinc max-w-none min-h-80 rounded-lg border border-[var(--border)] p-4 dark:prose-invert"
+            className="article-content prose prose-zinc max-w-none min-h-80 p-5 dark:prose-invert"
             // 内容是用户自己写的 Markdown，只在自己浏览器里预览
             dangerouslySetInnerHTML={{ __html: html }}
           />
         ) : (
           <textarea
             ref={bodyRef}
-            className={`${inputClass} resize-y font-mono leading-relaxed`}
-            rows={16}
+            className="block min-h-80 w-full resize-y border-0 bg-transparent p-4 font-mono text-sm leading-relaxed outline-none"
             value={meta.body}
             onChange={(e) => patch({ body: e.target.value })}
+            placeholder="用 Markdown 写正文…"
           />
         )}
       </div>
 
-      <div className="flex items-center gap-3">
-        <label className="flex cursor-pointer items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300">
-          <input
-            type="checkbox"
-            checked={meta.draft}
-            onChange={(e) => patch({ draft: e.target.checked })}
-            className="h-4 w-4 accent-indigo-600"
-          />
+      {/* 底部：草稿开关 + 操作 */}
+      <div className="flex flex-wrap items-center gap-3 border-t border-[var(--border)] pt-4">
+        <label className="inline-flex cursor-pointer items-center gap-2.5 text-sm text-zinc-600 dark:text-zinc-300">
+          <span className="relative inline-flex">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              checked={meta.draft}
+              onChange={(e) => patch({ draft: e.target.checked })}
+            />
+            <span className="block h-6 w-11 rounded-full bg-zinc-300 transition-colors peer-checked:bg-indigo-600 dark:bg-zinc-700" />
+            <span className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform peer-checked:translate-x-5" />
+          </span>
           草稿（不显示在网站上）
         </label>
         <div className="ml-auto flex gap-2">

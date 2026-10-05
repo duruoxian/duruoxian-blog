@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PostEditor } from "./PostEditor";
 import { SettingsEditor } from "./SettingsEditor";
-import { cardClass, ghostBtn, inputClass, primaryBtn } from "./ui";
+import { ghostBtn, inputClass, panelClass, primaryBtn } from "./ui";
 import { site } from "@/lib/site";
 import {
   clearToken,
@@ -325,7 +325,7 @@ export function AdminApp() {
           >
             ← 返回列表
           </button>
-          <div className={cardClass}>
+          <div className={panelClass}>
             <PostEditor
               initial={view.entry.meta}
               isNew={view.isNew}
@@ -347,7 +347,7 @@ export function AdminApp() {
           >
             ← 返回列表
           </button>
-          <div className={cardClass}>
+          <div className={panelClass}>
             <h2 className="mb-5 text-lg font-semibold">站点信息</h2>
             <SettingsEditor
               onDone={(message) => {
