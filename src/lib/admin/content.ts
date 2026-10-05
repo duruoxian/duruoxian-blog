@@ -21,6 +21,16 @@ export type PostMeta = {
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 const KNOWN_KEYS = ["title", "date", "description", "category", "tags", "series", "cover", "draft"];
 
+/** 拆出 front-matter：有的返回 { data, body }，没有的返回 null（导入本地 .md 时用） */
+export function splitFrontMatter(raw: string): {
+  data: Record<string, unknown>;
+  body: string;
+} | null {
+  const match = FRONT_MATTER.exec(raw);
+  if (!match) return null;
+  return { data: (yamlLoad(match[1]) as Record<string, unknown>) ?? {}, body: match[2] };
+}
+
 function toDateString(value: unknown): string {
   if (value instanceof Date) {
     const y = value.getFullYear();

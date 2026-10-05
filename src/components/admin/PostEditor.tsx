@@ -6,10 +6,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
 import { putBinaryFile } from "@/lib/admin/github";
-import type { PostMeta } from "@/lib/admin/content";
+import { parsePost, splitFrontMatter, type PostMeta } from "@/lib/admin/content";
 import { ghostBtn, inputClass, labelClass, primaryBtn } from "./ui";
 
 const CATEGORIES = ["技术", "生活", "项目", "工具"];
+const MD_EXT = /\.(md|markdown|txt)$/i;
 
 export function PostEditor({
   initial,
@@ -99,6 +100,51 @@ export function PostEditor({
     }
   }
 
+  // 从本地 .md 导入：带 front-matter 的连元信息一起填，没有的取首个一级标题当标题
+  function importMd(file: File) {
+    void file.text().then((text) => {
+      if (meta.body && !window.confirm("导入会覆盖当前正文，确定？")) return;
+      const base = file.name.replace(MD_EXT, "");
+      const fm = splitFrontMatter(text);
+
+      if (fm) {
+        const imported = parsePost(text, base);
+        if (isNew) {
+          patch({
+            title: imported.title,
+            date: imported.date || meta.date,
+            description: imported.description,
+            category: CATEGORIES.includes(imported.category) ? imported.category : meta.category,
+            tags: imported.tags,
+            series: imported.series,
+            body: imported.body,
+          });
+        } else {
+          patch({ body: imported.body });
+        }
+      } else {
+        // 无 front-matter：第一个一级标题当文章标题，其余作为正文
+        let body = text.trim();
+        let title = meta.title;
+        const h1 = /^#\s+(.+)\s*$/.exec(body.split("\n", 1)[0] ?? "");
+        if (isNew && !title && h1) {
+          title = h1[1].trim();
+          body = body.slice(h1[0].length).trim();
+        }
+        patch(isNew ? { body, title } : { body });
+      }
+
+      // 用文件名生成网址建议（仅当还没填）
+      if (isNew && !meta.slug) {
+        const slug = base
+          .toLowerCase()
+          .replace(/[^a-z0-9-]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+        if (slug) patch({ slug });
+      }
+    });
+  }
+
   return (
     <div className="space-y-6">
       {/* 文档式大标题 */}
@@ -118,7 +164,10 @@ export function PostEditor({
           onChange={(e) => patch({ date: e.target.value })}
         />
         <div className="flex flex-wrap gap-1" role="group" aria-label="分类">
-          {CATEGORIES.map((c) => (
+          {(CATEGORIES.includes(meta.category) || !meta.category
+            ? CATEGORIES
+            : [...CATEGORIES, meta.category]
+          ).map((c) => (
             <button
               key={c}
               type="button"
@@ -221,6 +270,15 @@ export function PostEditor({
         <div className="flex items-center justify-between border-b border-[var(--border)] bg-zinc-50/70 px-3 py-2 dark:bg-zinc-800/40">
           <span className="text-xs font-medium text-zinc-400">正文 · Markdown</span>
           <div className="flex items-center gap-1">
+            <label className="cursor-pointer rounded-md px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/60 dark:text-zinc-400 dark:hover:bg-zinc-700/60">
+              导入 .md
+              <input
+                type="file"
+                accept=".md,.markdown,.txt"
+                className="hidden"
+                onChange={(e) => e.target.files?.[0] && importMd(e.target.files[0])}
+              />
+            </label>
             <label className="cursor-pointer rounded-md px-2 py-1 text-xs text-zinc-500 transition-colors hover:bg-zinc-200/60 dark:text-zinc-400 dark:hover:bg-zinc-700/60">
               {uploading ? "上传中…" : "插入图片"}
               <input
