@@ -4,6 +4,8 @@
 
 **在线地址：<https://duruoxian-blog.pages.dev>**
 
+📖 **使用与维护手册**：[docs/使用与维护手册.md](docs/使用与维护手册.md)
+
 ## 技术栈
 
 - **Next.js 16**（App Router）+ **React 19** + **TypeScript**
