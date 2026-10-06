@@ -83,4 +83,4 @@ sysmonitor &                  # 立即运行，无需重启
 
 这个项目的乐趣在于「**用最少的依赖做一件完整的事**」：没有框架，每一字节内存、每一个窗口属性都是自己显式管理的。如果你也想写一个，从读 `/proc` 和 `XCreateSimpleWindow` 开始就行，剩下的都是体力活。
 
-源码整理后会放到 GitHub，届时补链接。
+源码：[github.com/duruoxian/SysMonitor](https://github.com/duruoxian/SysMonitor)（MIT）
