@@ -82,7 +82,7 @@ export function SearchClient() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="搜索文章标题、标签、内容…"
           autoFocus
-          className="w-full rounded-xl border border-zinc-200 bg-[var(--card)] px-4 py-3 pl-11 pr-16 text-sm outline-none transition-colors focus:border-indigo-400/70 dark:border-zinc-800 dark:focus:border-indigo-400/60"
+          className="w-full rounded-xl border border-zinc-200 bg-[var(--card)] px-4 py-3 pl-11 pr-16 text-sm outline-none transition-colors focus:border-[var(--accent-1)]/70 dark:border-zinc-800"
         />
         <kbd className="pointer-events-none absolute right-3.5 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400 sm:flex dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-500">
           Ctrl K

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
 import { ThemeToggle } from "./ThemeToggle";
+import { BgPicker } from "./BgPicker";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -66,7 +67,7 @@ export function Header() {
         <nav ref={navRef} className="relative hidden flex-1 items-center gap-1 text-sm sm:flex">
           <span
             aria-hidden
-            className={`nav-pill absolute top-1/2 -translate-y-1/2 h-[calc(100%-8px)] rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-500 dark:to-violet-500 ${
+            className={`nav-pill accent-fill absolute top-1/2 -translate-y-1/2 h-[calc(100%-8px)] rounded-full ${
               pill.visible ? "opacity-100" : "opacity-0"
             } ${pillReady ? "" : "no-anim"}`}
             style={{ left: pill.left, width: pill.width }}
@@ -114,6 +115,8 @@ export function Header() {
             </svg>
           </Link>
 
+          <BgPicker />
+
           <ThemeToggle />
 
           {/* 移动端菜单按钮 */}
@@ -152,7 +155,7 @@ export function Header() {
                   onClick={() => setOpen(false)}
                   className={`block rounded-lg px-3 py-2 transition-colors ${
                     isActive(pathname, item.href)
-                      ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white dark:from-indigo-500 dark:to-violet-500"
+                      ? "accent-fill text-white"
                       : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
                   }`}
                 >

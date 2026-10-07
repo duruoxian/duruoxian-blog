@@ -123,7 +123,7 @@ export default async function PostPage({ params }: Params) {
           <img
             src={post.cover}
             alt={post.title}
-            className="mb-8 w-full rounded-xl border border-zinc-200 object-cover shadow-lg shadow-indigo-500/5 dark:border-zinc-800"
+            className="mb-8 w-full rounded-xl border border-zinc-200 object-cover shadow-lg shadow-[var(--accent-1)]/5 dark:border-zinc-800"
           />
         )}
 

@@ -45,12 +45,12 @@ export default function PostsPage() {
                     <time className="shrink-0 font-mono text-xs text-zinc-400" dateTime={post.date}>
                       {formatDateShort(post.date)}
                     </time>
-                    <span className="min-w-0 truncate font-medium transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-300">
+                    <span className="min-w-0 truncate font-medium transition-colors group-hover:text-[var(--accent-1)]">
                       {post.title}
                     </span>
                     <span className="ml-auto flex shrink-0 items-center gap-2 text-xs text-zinc-400">
                       <span className="hidden sm:inline">{post.readingTime} 分钟</span>
-                      <span className="rounded-full border border-zinc-200 px-2 py-0.5 transition-colors group-hover:border-indigo-400/60 group-hover:text-indigo-500 dark:border-zinc-700 dark:group-hover:border-indigo-400/60 dark:group-hover:text-indigo-300">
+                      <span className="rounded-full border border-zinc-200 px-2 py-0.5 transition-colors group-hover:border-[var(--accent-1)]/60 group-hover:text-[var(--accent-1)] dark:border-zinc-700">
                         {post.category}
                       </span>
                       <svg

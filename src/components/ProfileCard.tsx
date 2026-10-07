@@ -12,13 +12,13 @@ export function ProfileCard() {
   ];
 
   return (
-    <div className="gradient-border rounded-xl p-6 shadow-lg shadow-indigo-500/5 backdrop-blur-xl">
+    <div className="gradient-border rounded-xl p-6 shadow-lg shadow-[var(--accent-1)]/5 backdrop-blur-xl">
       <div className="flex flex-col items-center text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={a.avatar}
           alt={a.name}
-          className="h-24 w-24 rounded-full object-cover ring-2 ring-indigo-500/30"
+          className="h-24 w-24 rounded-full object-cover ring-2 ring-[var(--accent-1)]/30"
         />
         <h1 className="gradient-text mt-4 text-xl font-bold">{a.name}</h1>
         <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{a.bio}</p>
@@ -52,7 +52,7 @@ export function ProfileCard() {
         <div className="flex gap-2">
           <dt className="w-14 shrink-0 text-zinc-400">邮箱</dt>
           <dd className="truncate">
-            <a href={`mailto:${a.email}`} className="text-blue-600 hover:underline dark:text-blue-400">
+            <a href={`mailto:${a.email}`} className="text-[var(--accent-1)] hover:underline">
               {a.email}
             </a>
           </dd>

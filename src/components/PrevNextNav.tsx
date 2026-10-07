@@ -52,7 +52,7 @@ function NavCard({
           </svg>
         )}
       </span>
-      <span className="line-clamp-2 text-sm font-medium leading-snug text-zinc-800 transition-colors group-hover:text-indigo-600 dark:text-zinc-200 dark:group-hover:text-indigo-300">
+      <span className="line-clamp-2 text-sm font-medium leading-snug text-zinc-800 transition-colors group-hover:text-[var(--accent-1)] dark:text-zinc-200">
         {post.title}
       </span>
     </Link>

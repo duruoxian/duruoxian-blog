@@ -17,7 +17,7 @@ export function SeriesNav({ series, currentSlug }: { series: string; currentSlug
         </h2>
         <Link
           href={`/series#${encodeURIComponent(series)}`}
-          className="text-xs text-blue-600 hover:underline dark:text-blue-400"
+          className="text-xs text-[var(--accent-1)] hover:underline"
         >
           查看全部
         </Link>

@@ -42,7 +42,8 @@ export const metadata: Metadata = {
 
 // 在页面渲染前同步设置主题，避免深色模式闪白。
 // 三态：localStorage 里没有值 = 跟随系统；有 'light'/'dark' 则用固定值。
-const themeScript = `(function(){try{var e=document.documentElement;var mq=window.matchMedia('(prefers-color-scheme: dark)');var s=localStorage.getItem('theme');if(s){e.dataset.theme=s;}e.classList.toggle('dark',s?s==='dark':mq.matches);mq.addEventListener('change',function(){if(!localStorage.getItem('theme')){e.classList.toggle('dark',mq.matches);}});}catch(_){}})();`;
+// 背景主题：localStorage 'bg'（aurora/sakura/ocean/forest/dusk/pure），挂到 <html data-bg>。
+const themeScript = `(function(){try{var e=document.documentElement;var mq=window.matchMedia('(prefers-color-scheme: dark)');var s=localStorage.getItem('theme');if(s){e.dataset.theme=s;}e.classList.toggle('dark',s?s==='dark':mq.matches);mq.addEventListener('change',function(){if(!localStorage.getItem('theme')){e.classList.toggle('dark',mq.matches);}});var b=localStorage.getItem('bg');if(b){e.dataset.bg=b;}}catch(_){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

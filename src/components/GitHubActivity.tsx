@@ -89,7 +89,7 @@ export function GitHubActivity({ data }: { data: Contributions | null }) {
             href={site.author.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline dark:text-blue-400"
+            className="text-[var(--accent-1)] hover:underline"
           >
             前往 GitHub 查看
           </a>
@@ -142,7 +142,7 @@ export function GitHubActivity({ data }: { data: Contributions | null }) {
             href={site.author.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-block text-sm text-blue-600 hover:underline dark:text-blue-400"
+            className="mt-3 inline-block text-sm text-[var(--accent-1)] hover:underline"
           >
             在 GitHub 上查看 ↗
           </a>

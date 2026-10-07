@@ -38,7 +38,7 @@ export default async function Home() {
           <section>
             <div className="mb-4 flex items-end justify-between">
               <h2 className="text-lg font-bold">最新文章</h2>
-              <Link href="/posts" className="text-sm text-blue-600 hover:underline dark:text-blue-400">
+              <Link href="/posts" className="text-sm text-[var(--accent-1)] hover:underline">
                 全部文章 →
               </Link>
             </div>

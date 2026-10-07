@@ -11,7 +11,7 @@ export function AuthorCard() {
         src={a.avatar}
         alt={a.name}
         loading="lazy"
-        className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-indigo-500/25"
+        className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-[var(--accent-1)]/25"
       />
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold">
@@ -26,7 +26,7 @@ export function AuthorCard() {
           href={a.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs transition-colors hover:border-indigo-500/50 hover:text-indigo-600 dark:border-zinc-700 dark:hover:border-indigo-400/50 dark:hover:text-indigo-300"
+          className="rounded-lg border border-zinc-200 px-3 py-1.5 text-xs transition-colors hover:border-[var(--accent-1)]/50 hover:text-[var(--accent-1)] dark:border-zinc-700"
         >
           GitHub
         </a>

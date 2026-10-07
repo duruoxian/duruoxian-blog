@@ -12,20 +12,97 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
+/* ============ 背景主题（顶栏调色盘可切换，存 localStorage.bg，挂在 <html data-bg>）============ */
+/* 每套主题定义：三个强调色 --accent-1/2/3（渐变文字/描边/导航药丸/链接）+ 两块背景光斑 --blob-a/b */
 :root {
   --page: #f7f7f8;
   --card: rgba(255, 255, 255, 0.66);
   --border: #e6e6e9;
   --glass-fill: rgba(255, 255, 255, 0.66);
   color-scheme: light;
-}
 
+  /* 默认主题：极光 */
+  --accent-1: #6366f1;
+  --accent-2: #06b6d4;
+  --accent-3: #a855f7;
+  --blob-a: radial-gradient(circle, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.16) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(168, 85, 247, 0.26), rgba(236, 72, 153, 0.14) 45%, transparent 70%);
+}
 .dark {
   --page: #0b0b0d;
   --card: rgba(22, 22, 24, 0.66);
   --border: #2a2a2e;
   --glass-fill: rgba(22, 22, 24, 0.66);
   color-scheme: dark;
+
+  --blob-a: radial-gradient(circle, rgba(99, 102, 241, 0.38), rgba(6, 182, 212, 0.2) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(168, 85, 247, 0.32), rgba(236, 72, 153, 0.16) 45%, transparent 70%);
+}
+
+/* 樱粉 */
+html[data-bg="sakura"] {
+  --accent-1: #ec4899;
+  --accent-2: #f472b6;
+  --accent-3: #a855f7;
+  --blob-a: radial-gradient(circle, rgba(236, 72, 153, 0.2), rgba(251, 113, 133, 0.11) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(192, 132, 252, 0.18), rgba(244, 114, 182, 0.1) 45%, transparent 70%);
+}
+html.dark[data-bg="sakura"] {
+  --blob-a: radial-gradient(circle, rgba(236, 72, 153, 0.28), rgba(251, 113, 133, 0.15) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(192, 132, 252, 0.24), rgba(244, 114, 182, 0.13) 45%, transparent 70%);
+}
+
+/* 深海 */
+html[data-bg="ocean"] {
+  --accent-1: #0ea5e9;
+  --accent-2: #22d3ee;
+  --accent-3: #2563eb;
+  --blob-a: radial-gradient(circle, rgba(14, 165, 233, 0.24), rgba(34, 211, 238, 0.13) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(37, 99, 235, 0.18), rgba(45, 212, 191, 0.11) 45%, transparent 70%);
+}
+html.dark[data-bg="ocean"] {
+  --blob-a: radial-gradient(circle, rgba(14, 165, 233, 0.32), rgba(34, 211, 238, 0.18) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(37, 99, 235, 0.28), rgba(45, 212, 191, 0.15) 45%, transparent 70%);
+}
+
+/* 森野 */
+html[data-bg="forest"] {
+  --accent-1: #10b981;
+  --accent-2: #84cc16;
+  --accent-3: #14b8a6;
+  --blob-a: radial-gradient(circle, rgba(16, 185, 129, 0.2), rgba(132, 204, 22, 0.1) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(20, 184, 166, 0.17), rgba(74, 222, 128, 0.09) 45%, transparent 70%);
+}
+html.dark[data-bg="forest"] {
+  --blob-a: radial-gradient(circle, rgba(16, 185, 129, 0.28), rgba(132, 204, 22, 0.14) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(20, 184, 166, 0.24), rgba(74, 222, 128, 0.12) 45%, transparent 70%);
+}
+
+/* 暮橙 */
+html[data-bg="dusk"] {
+  --accent-1: #f97316;
+  --accent-2: #f43f5e;
+  --accent-3: #eab308;
+  --blob-a: radial-gradient(circle, rgba(249, 115, 22, 0.2), rgba(244, 63, 94, 0.11) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(234, 179, 8, 0.16), rgba(251, 146, 60, 0.1) 45%, transparent 70%);
+}
+html.dark[data-bg="dusk"] {
+  --blob-a: radial-gradient(circle, rgba(249, 115, 22, 0.28), rgba(244, 63, 94, 0.15) 45%, transparent 70%);
+  --blob-b: radial-gradient(circle, rgba(234, 179, 8, 0.22), rgba(251, 146, 60, 0.13) 45%, transparent 70%);
+}
+
+/* 素净：无光斑、石墨色强调 */
+html[data-bg="pure"] {
+  --accent-1: #52525b;
+  --accent-2: #71717a;
+  --accent-3: #3f3f46;
+  --blob-a: none;
+  --blob-b: none;
+}
+html.dark[data-bg="pure"] {
+  --accent-1: #a1a1aa;
+  --accent-2: #d4d4d8;
+  --accent-3: #71717a;
 }
 
 html {
@@ -68,7 +145,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ============ 极光背景（两层光斑缓慢漂移）============ */
+/* ============ 背景光斑（两层缓慢漂移，颜色由当前背景主题的 --blob-a/b 决定）============ */
 body::before,
 body::after {
   content: "";
@@ -82,12 +159,7 @@ body::before {
   left: -12%;
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.3),
-    rgba(6, 182, 212, 0.16) 45%,
-    transparent 70%
-  );
+  background: var(--blob-a);
   animation: aurora-a 38s ease-in-out infinite alternate;
 }
 body::after {
@@ -95,29 +167,8 @@ body::after {
   right: -16%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(
-    circle,
-    rgba(168, 85, 247, 0.26),
-    rgba(236, 72, 153, 0.14) 45%,
-    transparent 70%
-  );
+  background: var(--blob-b);
   animation: aurora-b 46s ease-in-out infinite alternate;
-}
-.dark body::before {
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.38),
-    rgba(6, 182, 212, 0.2) 45%,
-    transparent 70%
-  );
-}
-.dark body::after {
-  background: radial-gradient(
-    circle,
-    rgba(168, 85, 247, 0.32),
-    rgba(236, 72, 153, 0.16) 45%,
-    transparent 70%
-  );
 }
 @keyframes aurora-a {
   from {
@@ -142,33 +193,37 @@ body::after {
   }
 }
 
-/* ============ 炫酷通用件 ============ */
+/* ============ 炫酷通用件（颜色跟随当前背景主题的强调色）============ */
 /* 渐变文字：标题/站名 */
 .gradient-text {
-  background: linear-gradient(120deg, #6366f1, #06b6d4 45%, #a855f7);
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2) 45%, var(--accent-3));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+/* 纯色强调填充：导航药丸 / 移动端菜单选中项 */
+.accent-fill {
+  background-image: linear-gradient(135deg, var(--accent-1), var(--accent-3));
 }
 /* 渐变描边玻璃卡：资料卡等主视觉 */
 .gradient-border {
   border: 1px solid transparent;
   background:
     linear-gradient(var(--glass-fill), var(--glass-fill)) padding-box,
-    linear-gradient(135deg, rgba(99, 102, 241, 0.65), rgba(6, 182, 212, 0.55) 50%, rgba(168, 85, 247, 0.65)) border-box;
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 65%, transparent), color-mix(in srgb, var(--accent-2) 55%, transparent) 50%, color-mix(in srgb, var(--accent-3) 65%, transparent)) border-box;
 }
-/* 卡片 hover：浮起 + 极光色光晕 + 描边变色 */
+/* 卡片 hover：浮起 + 主题色光晕 + 描边变色 */
 .card-glow {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .card-glow:hover {
   transform: translateY(-3px);
-  border-color: rgba(99, 102, 241, 0.45);
-  box-shadow: 0 12px 40px -12px rgba(99, 102, 241, 0.35);
+  border-color: color-mix(in srgb, var(--accent-1) 45%, transparent);
+  box-shadow: 0 12px 40px -12px color-mix(in srgb, var(--accent-1) 35%, transparent);
 }
 .dark .card-glow:hover {
-  border-color: rgba(129, 140, 248, 0.5);
-  box-shadow: 0 12px 44px -10px rgba(99, 102, 241, 0.45);
+  border-color: color-mix(in srgb, var(--accent-1) 50%, transparent);
+  box-shadow: 0 12px 44px -10px color-mix(in srgb, var(--accent-1) 45%, transparent);
 }
 
 /* 隐藏滚动条但保留滚动能力（目录侧栏用） */
@@ -242,7 +297,7 @@ html:not([data-theme]) .theme-icon-system {
 }
 .reading-progress > div {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
   transform: scaleX(0);
   transform-origin: left;
 }
