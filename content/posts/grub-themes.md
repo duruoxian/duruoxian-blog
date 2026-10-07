@@ -49,15 +49,40 @@ cover: "/images/posts/grub-themes/panda.jpg"
 
 还有一个藏得最深的坑：GRUB 2.12 重写了主题解析器，`left = 50% - 630` 这种老教程里随处可见的百分比算术写法会让整个主题**静默失效**（连报错都一闪而过）。我是用 QEMU + OVMF 在本机模拟真实 GRUB 启动才抓到这条报错的，最后全部改成了纯像素坐标，七套主题逐一套真机渲染验证过。
 
-## 安装
+## 安装与使用
+
+**环境要求**：GRUB 2.06+（已在 Manjaro / GRUB 2.14 验证）、UEFI + gfxterm 启动。主题按 2560×1440 设计，安装脚本会设置 `GRUB_GFXMODE=2560x1440,1920x1080,auto`，不支持 1440p 的机器会自动降到 1080p。
+
+**一键安装**：
 
 ```bash
 git clone https://github.com/duruoxian/grub-themes.git
 cd grub-themes
 sudo ./install.sh            # 交互式选择主题
-sudo ./install.sh panda      # 或直接指定
+sudo ./install.sh blockterm  # 或直接指定主题名
 ```
 
-脚本会备份 `/etc/default/grub`、把主题复制到 `/boot/grub/themes/`、设置 `GRUB_THEME` 并重新生成 `grub.cfg`，重启即可生效。已在 Manjaro（GRUB 2.14，EFI）上验证。
+脚本会自动：备份 `/etc/default/grub` → 复制主题到 `/boot/grub/themes/` → 设置 `GRUB_THEME` / `gfxterm` / `GRUB_GFXMODE` → 重新生成 `grub.cfg`。重启即可生效。
+
+**切换主题**：再跑一次 `sudo ./install.sh <另一个主题名>` 就行。
+
+**恢复安装前的配置**（脚本每次运行都会备份到 `/etc/default/grub.bak-时间戳`）：
+
+```bash
+sudo cp /etc/default/grub.bak-时间戳 /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+**彻底卸载某个主题**：
+
+```bash
+sudo rm -rf /boot/grub/themes/主题名
+sudo sed -i '/^GRUB_THEME=/d' /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+**手动安装**（不想用脚本的话）：把主题目录复制到 `/boot/grub/themes/`，在 `/etc/default/grub` 里加上 `GRUB_THEME="/boot/grub/themes/主题名/theme.txt"`、`GRUB_TERMINAL_OUTPUT=gfxterm` 和 `GRUB_GFXMODE=2560x1440,1920x1080,auto`，然后 `sudo grub-mkconfig -o /boot/grub/grub.cfg`。
+
+**自定义**：每套主题的背景都由仓库里的 `gen.py`（Pillow）生成，配色、标题、菜单位置都集中在 `THEMES` 配置里，改完 `python3 gen.py 主题名` 重新生成、复制回 `/boot/grub/themes/` 即可。
 
 仓库地址：**[github.com/duruoxian/grub-themes](https://github.com/duruoxian/grub-themes)**（MIT 协议），欢迎 star 和提 issue。

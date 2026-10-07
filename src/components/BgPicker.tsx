@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import {
   applyCustomBg,
-  fileToScaledDataUrl,
+  fileToScaledBlob,
   idbDel,
-  idbGet,
   idbSet,
+  loadStoredCustomBg,
 } from "@/lib/customBg";
 import { applyBgTheme, type ThemeId } from "@/lib/bgTheme";
 
@@ -72,10 +72,19 @@ export function BgPicker() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const fileRef = useRef<HTMLInputElement | null>(null);
-  // 用户自定义背景图（dataURL 缩略预览，原图在 IndexedDB）
+  // 用户自定义背景图（objectURL 预览，Blob 原图在 IndexedDB）
   const [customPreview, setCustomPreview] = useState<string | null>(null);
+  const customBlobRef = useRef<Blob | null>(null);
+  const previewUrlRef = useRef<string | null>(null);
   // 图片处理失败提示（如 HEIC 等浏览器解不开的格式）
   const [error, setError] = useState<string | null>(null);
+
+  function setPreviewFromBlob(blob: Blob) {
+    if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+    previewUrlRef.current = URL.createObjectURL(blob);
+    customBlobRef.current = blob;
+    setCustomPreview(previewUrlRef.current);
+  }
   // 当前主题只在弹层（客户端交互后才渲染）里显示，无 SSR 水合风险
   const [current, setCurrent] = useState<ThemeId>(() => {
     if (typeof window === "undefined") return "aurora";
@@ -88,14 +97,23 @@ export function BgPicker() {
     }
   });
 
-  // 挂载后恢复自定义背景：刷新页面后若 bg=custom，把图重新挂到 CSS 变量
+  // 挂载后恢复自定义背景：刷新页面后若 bg=custom，把图重新挂到 CSS 变量。
+  // 存储为空或图是坏的（如旧版存入的 HEIC）：自动清理并回退默认主题，
+  // 避免停留在「选了 custom 却没有图」的静默失效状态。
   useEffect(() => {
     let cancelled = false;
-    idbGet("customBg")
-      .then((saved) => {
-        if (cancelled || !saved) return;
-        setCustomPreview(saved);
-        if (localStorage.getItem("bg") === "custom") applyCustomBg(saved);
+    loadStoredCustomBg()
+      .then((blob) => {
+        if (cancelled) return;
+        if (!blob) {
+          if (localStorage.getItem("bg") === "custom") {
+            applyBgTheme("aurora");
+            setCurrent("aurora");
+          }
+          return;
+        }
+        setPreviewFromBlob(blob);
+        if (localStorage.getItem("bg") === "custom") applyCustomBg(blob);
       })
       .catch(() => {});
     return () => {
@@ -132,11 +150,12 @@ export function BgPicker() {
 
   // 点击「自定义」格子：已有图片直接应用，否则打开选图
   function useCustom() {
-    if (!customPreview) {
+    const blob = customBlobRef.current;
+    if (!blob) {
       openFile();
       return;
     }
-    applyCustomBg(customPreview);
+    applyCustomBg(blob);
     applyBgTheme("custom");
     setCurrent("custom");
     setOpen(false);
@@ -147,22 +166,31 @@ export function BgPicker() {
     e.target.value = ""; // 允许重复选择同一张
     if (!file) return;
     try {
-      const dataUrl = await fileToScaledDataUrl(file);
-      await idbSet("customBg", dataUrl);
-      applyCustomBg(dataUrl);
+      const blob = await fileToScaledBlob(file);
+      await idbSet("customBg", blob);
+      applyCustomBg(blob);
       applyBgTheme("custom");
       setCurrent("custom");
-      setCustomPreview(dataUrl);
+      setPreviewFromBlob(blob);
       setError(null);
       setOpen(false);
-    } catch {
-      setError("这张图片处理失败，请换一张 JPG/PNG 试试");
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message === "FORMAT_UNSUPPORTED"
+          ? "这种图片格式（常见于 iPhone 原图 HEIC）浏览器打不开，请截图或转成 JPG/PNG 再选"
+          : "图片处理失败，请换一张 JPG/PNG 试试"
+      );
     }
   }
 
   async function removeCustom() {
     await idbDel("customBg").catch(() => {});
     applyCustomBg(null);
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+    customBlobRef.current = null;
     setCustomPreview(null);
     if (current === "custom") {
       applyBgTheme("aurora");
