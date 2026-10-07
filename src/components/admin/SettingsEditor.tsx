@@ -18,8 +18,17 @@ export function SettingsEditor({ onDone }: { onDone: (message: string) => void }
   useEffect(() => {
     getFile(FILE_PATH)
       .then(({ content, sha: fileSha }) => {
+        const loaded = JSON.parse(content) as Record<string, unknown>;
+        // 兼容旧配置：字段缺失时补齐空结构，避免编辑器报错
+        loaded.comments ??= {
+          giscusRepo: "",
+          giscusRepoId: "",
+          giscusCategory: "",
+          giscusCategoryId: "",
+        };
+        loaded.analytics ??= { cloudflareToken: "" };
         setSha(fileSha);
-        setData(JSON.parse(content) as Record<string, unknown>);
+        setData(loaded);
       })
       .catch((err: unknown) =>
         setError(err instanceof Error ? err.message : "读取站点信息失败"),
@@ -61,6 +70,8 @@ export function SettingsEditor({ onDone }: { onDone: (message: string) => void }
   if (!data) return <p className="py-10 text-center text-sm text-zinc-400">读取中…</p>;
 
   const author = data.author as Record<string, unknown>;
+  const comments = data.comments as Record<string, unknown>;
+  const analytics = data.analytics as Record<string, unknown>;
 
   return (
     <div className="space-y-7">
@@ -188,6 +199,94 @@ export function SettingsEditor({ onDone }: { onDone: (message: string) => void }
           换头像不在这里：把新图片替换仓库里的 <code>public/avatar.jpg</code>（或让我来换），
           左侧预览会随之更新。
         </p>
+      </section>
+
+      <hr className="border-[var(--border)]" />
+
+      {/* ── 评论（Giscus）── */}
+      <section>
+        <h3 className={sectionTitleClass}>
+          <span className={sectionBarClass} />
+          评论（Giscus · 基于 GitHub Discussions）
+        </h3>
+        <p className="mb-4 text-xs leading-relaxed text-zinc-400">
+          四项都填好保存后，每篇文章底部会出现评论区；留空则不显示。获取方式：
+          确认仓库为 Public 并在仓库 Settings 勾选 Discussions → 打开{" "}
+          <a
+            href="https://giscus.app/zh-CN"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-500 hover:underline"
+          >
+            giscus.app/zh-CN
+          </a>{" "}
+          → 填仓库名并按提示安装 giscus App → 分类选 Announcements →
+          把页面生成的 <code>data-repo / data-repo-id / data-category / data-category-id</code>{" "}
+          四个值依次抄到下面。
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block">
+            <span className={labelClass}>仓库（owner/repo）</span>
+            <input
+              className={inputClass}
+              placeholder="duruoxian/duruoxian-blog"
+              value={String(comments.giscusRepo ?? "")}
+              onChange={(e) => patch(["comments", "giscusRepo"], e.target.value)}
+            />
+          </label>
+          <label className="block">
+            <span className={labelClass}>仓库 ID（data-repo-id）</span>
+            <input
+              className={inputClass}
+              placeholder="R_kgDOxxxx"
+              value={String(comments.giscusRepoId ?? "")}
+              onChange={(e) => patch(["comments", "giscusRepoId"], e.target.value)}
+            />
+          </label>
+          <label className="block">
+            <span className={labelClass}>分类名（data-category）</span>
+            <input
+              className={inputClass}
+              placeholder="Announcements"
+              value={String(comments.giscusCategory ?? "")}
+              onChange={(e) => patch(["comments", "giscusCategory"], e.target.value)}
+            />
+          </label>
+          <label className="block">
+            <span className={labelClass}>分类 ID（data-category-id）</span>
+            <input
+              className={inputClass}
+              placeholder="DIC_kwDOxxxx"
+              value={String(comments.giscusCategoryId ?? "")}
+              onChange={(e) => patch(["comments", "giscusCategoryId"], e.target.value)}
+            />
+          </label>
+        </div>
+      </section>
+
+      <hr className="border-[var(--border)]" />
+
+      {/* ── 访问统计 ── */}
+      <section>
+        <h3 className={sectionTitleClass}>
+          <span className={sectionBarClass} />
+          访问统计（Cloudflare Web Analytics）
+        </h3>
+        <p className="mb-4 text-xs leading-relaxed text-zinc-400">
+          免费、匿名、无 Cookie。两种开启方式任选其一：
+          ① 最简单——Cloudflare 控制台 → Workers 和 Pages → 本项目 → 设置里开启 Web
+          Analytics，无需填任何东西；② 想手动管理：控制台左侧「分析和日志 → Web Analytics」
+          添加站点，把脚本里 <code>token</code> 引号的值粘到下面。
+        </p>
+        <label className="block">
+          <span className={labelClass}>Beacon Token（不填 = 关闭统计）</span>
+          <input
+            className={inputClass}
+            placeholder="粘贴 token，例如 1a2b3c4d5678ef90"
+            value={String(analytics.cloudflareToken ?? "")}
+            onChange={(e) => patch(["analytics", "cloudflareToken"], e.target.value)}
+          />
+        </label>
       </section>
 
       <div className="flex justify-end border-t border-[var(--border)] pt-4">
