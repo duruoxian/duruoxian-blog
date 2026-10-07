@@ -198,15 +198,16 @@ html.dark[data-bg="spotlight"] body::before {
 }
 
 /* 自定义图片背景：图片由 BgPicker 写入 --bg-custom（IndexedDB 本地持久化），
-   上面叠一层页面色柔光遮罩保证正文可读 */
+   上面叠一层页面色柔光遮罩保证正文可读。
+   用固定定位的 body::before 铺图，而不是 background-attachment: fixed——
+   后者在 iOS Safari / 部分安卓上不受支持，cover 会按整个文档高度缩放，
+   照片被放大到只露出一小条。固定定位图层在所有平台行为一致。 */
 html[data-bg="custom"] {
   --accent-1: #6366f1;
   --accent-2: #06b6d4;
   --accent-3: #a855f7;
   --blob-a: none;
   --blob-b: none;
-  --bg-pattern: linear-gradient(var(--bg-veil), var(--bg-veil)), var(--bg-custom);
-  --bg-size: cover;
   /* 背景是照片时卡片加实一点，抵消变薄的遮罩，保证文字可读 */
   --card: rgba(255, 255, 255, 0.82);
   --glass-fill: rgba(255, 255, 255, 0.82);
@@ -215,8 +216,19 @@ html.dark[data-bg="custom"] {
   --card: rgba(22, 22, 24, 0.82);
   --glass-fill: rgba(22, 22, 24, 0.82);
 }
-html[data-bg="custom"] body {
-  background-attachment: fixed;
+html[data-bg="custom"] body::before {
+  inset: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background:
+    linear-gradient(var(--bg-veil), var(--bg-veil)),
+    var(--bg-custom) center / cover no-repeat;
+  animation: none;
+}
+html[data-bg="custom"] body::after {
+  background: none;
+  animation: none;
 }
 
 /* 素净：无光斑、石墨色强调 */
