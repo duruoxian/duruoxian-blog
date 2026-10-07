@@ -1,25 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import {
+  applyCustomBg,
+  fileToScaledDataUrl,
+  idbDel,
+  idbGet,
+  idbSet,
+} from "@/lib/customBg";
+import { applyBgTheme, type ThemeId } from "@/lib/bgTheme";
 
 // 背景主题选择器：顶栏调色盘按钮 + 弹出色板。
 // 选择写入 localStorage.bg 并挂到 <html data-bg>，CSS 变量随之切换
 // （背景光斑/纹理 + 全站强调色一起变）。默认 aurora。
 // swatch：色板圆点的预览背景（缺省用主题三色渐变）。
-type ThemeId =
-  | "aurora"
-  | "sakura"
-  | "ocean"
-  | "forest"
-  | "dusk"
-  | "grid"
-  | "dots"
-  | "stars"
-  | "mist"
-  | "stripes"
-  | "spotlight"
-  | "pure";
-
+// 「自定义」不在 THEMES 里：它是用户本地图片（IndexedDB），单独渲染。
 type ThemeDef = { id: ThemeId; label: string; colors: [string, string, string]; swatch?: string };
 
 const THEMES: ThemeDef[] = [
@@ -73,35 +68,38 @@ function swatchBg(t: ThemeDef): string {
   return t.swatch ?? `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]} 55%, ${t.colors[2]})`;
 }
 
-
-// DOM 与 localStorage 写入放在组件外，方便 React 编译器静态检查
-function applyBgTheme(id: ThemeId) {
-  try {
-    localStorage.setItem("bg", id);
-  } catch {
-    /* 忽略隐私模式异常 */
-  }
-  const root = document.documentElement;
-  if (id === "aurora") {
-    delete root.dataset.bg; // aurora 是 CSS 默认值，无需属性
-  } else {
-    root.dataset.bg = id;
-  }
-}
-
 export function BgPicker() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
+  // 用户自定义背景图（dataURL 缩略预览，原图在 IndexedDB）
+  const [customPreview, setCustomPreview] = useState<string | null>(null);
   // 当前主题只在弹层（客户端交互后才渲染）里显示，无 SSR 水合风险
   const [current, setCurrent] = useState<ThemeId>(() => {
     if (typeof window === "undefined") return "aurora";
     try {
       const saved = localStorage.getItem("bg") as ThemeId | null;
-      return saved && THEMES.some((t) => t.id === saved) ? saved : "aurora";
+      if (!saved) return "aurora";
+      return saved === "custom" || THEMES.some((t) => t.id === saved) ? saved : "aurora";
     } catch {
       return "aurora";
     }
   });
+
+  // 挂载后恢复自定义背景：刷新页面后若 bg=custom，把图重新挂到 CSS 变量
+  useEffect(() => {
+    let cancelled = false;
+    idbGet("customBg")
+      .then((saved) => {
+        if (cancelled || !saved) return;
+        setCustomPreview(saved);
+        if (localStorage.getItem("bg") === "custom") applyCustomBg(saved);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // 点击外部 / Esc 关闭
   useEffect(() => {
@@ -124,6 +122,49 @@ export function BgPicker() {
     setCurrent(id);
     applyBgTheme(id);
     setOpen(false);
+  }
+
+  function openFile() {
+    fileRef.current?.click();
+  }
+
+  // 点击「自定义」格子：已有图片直接应用，否则打开选图
+  function useCustom() {
+    if (!customPreview) {
+      openFile();
+      return;
+    }
+    applyCustomBg(customPreview);
+    applyBgTheme("custom");
+    setCurrent("custom");
+    setOpen(false);
+  }
+
+  async function onFile(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // 允许重复选择同一张
+    if (!file) return;
+    try {
+      const dataUrl = await fileToScaledDataUrl(file);
+      await idbSet("customBg", dataUrl);
+      applyCustomBg(dataUrl);
+      applyBgTheme("custom");
+      setCurrent("custom");
+      setCustomPreview(dataUrl);
+      setOpen(false);
+    } catch {
+      /* 图片无法解码，忽略 */
+    }
+  }
+
+  async function removeCustom() {
+    await idbDel("customBg").catch(() => {});
+    applyCustomBg(null);
+    setCustomPreview(null);
+    if (current === "custom") {
+      applyBgTheme("aurora");
+      setCurrent("aurora");
+    }
   }
 
   return (
@@ -186,9 +227,79 @@ export function BgPicker() {
                 </span>
               </button>
             ))}
+
+            {/* 自定义图片背景（本地 IndexedDB，不上传） */}
+            <button
+              key="custom"
+              type="button"
+              onClick={useCustom}
+              title={customPreview ? "使用自定义图片背景" : "上传图片作为背景"}
+              aria-label="自定义背景图片"
+              aria-pressed={current === "custom"}
+              className={`flex flex-col items-center gap-1 rounded-lg px-1 py-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 ${
+                current === "custom" ? "bg-zinc-100 dark:bg-zinc-800" : ""
+              }`}
+            >
+              <span
+                className={`relative flex h-6 w-6 items-center justify-center overflow-hidden rounded-full shadow-sm ring-offset-1 transition-shadow ${
+                  current === "custom"
+                    ? "ring-2 ring-zinc-400 dark:ring-zinc-500"
+                    : "border border-dashed border-zinc-300 dark:border-zinc-600"
+                }`}
+              >
+                {customPreview ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={customPreview} alt="" className="h-full w-full object-cover" />
+                ) : (
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    aria-hidden
+                    className="text-zinc-400"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                )}
+              </span>
+              <span className="text-[10px] leading-none text-zinc-500 dark:text-zinc-400">
+                自定义
+              </span>
+            </button>
           </div>
+
+          {customPreview && (
+            <div className="mt-1 flex items-center justify-between border-t border-zinc-100 px-2 pt-1.5 dark:border-zinc-800">
+              <button
+                type="button"
+                onClick={openFile}
+                className="text-[11px] text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              >
+                更换图片
+              </button>
+              <button
+                type="button"
+                onClick={removeCustom}
+                className="text-[11px] text-zinc-400 transition-colors hover:text-rose-500"
+              >
+                移除图片
+              </button>
+            </div>
+          )}
         </div>
       )}
+
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={onFile}
+      />
     </div>
   );
 }

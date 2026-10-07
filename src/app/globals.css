@@ -30,6 +30,8 @@
   /* 图案层背景（坐标纸/波点/星空等平铺纹理），默认无 */
   --bg-pattern: none;
   --bg-size: auto;
+  /* 自定义图片背景的柔光遮罩（保证正文可读） */
+  --bg-veil: rgba(247, 247, 248, 0.85);
 }
 .dark {
   --page: #0b0b0d;
@@ -37,6 +39,7 @@
   --border: #2a2a2e;
   --glass-fill: rgba(22, 22, 24, 0.66);
   color-scheme: dark;
+  --bg-veil: rgba(11, 11, 13, 0.85);
 
   --blob-a: radial-gradient(circle, rgba(99, 102, 241, 0.38), rgba(6, 182, 212, 0.2) 45%, transparent 70%);
   --blob-b: radial-gradient(circle, rgba(168, 85, 247, 0.32), rgba(236, 72, 153, 0.16) 45%, transparent 70%);
@@ -192,6 +195,21 @@ html[data-bg="spotlight"] body::before {
 }
 html.dark[data-bg="spotlight"] body::before {
   background: radial-gradient(circle, rgba(249, 115, 22, 0.2), rgba(251, 191, 36, 0.08) 45%, transparent 70%);
+}
+
+/* 自定义图片背景：图片由 BgPicker 写入 --bg-custom（IndexedDB 本地持久化），
+   上面叠一层页面色柔光遮罩保证正文可读 */
+html[data-bg="custom"] {
+  --accent-1: #6366f1;
+  --accent-2: #06b6d4;
+  --accent-3: #a855f7;
+  --blob-a: none;
+  --blob-b: none;
+  --bg-pattern: linear-gradient(var(--bg-veil), var(--bg-veil)), var(--bg-custom);
+  --bg-size: cover;
+}
+html[data-bg="custom"] body {
+  background-attachment: fixed;
 }
 
 /* 素净：无光斑、石墨色强调 */
