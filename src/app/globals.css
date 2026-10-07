@@ -34,6 +34,34 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* 文字选中色：跟随极光主色 */
+::selection {
+  background: rgba(99, 102, 241, 0.25);
+}
+.dark ::selection {
+  background: rgba(129, 140, 248, 0.35);
+}
+
+/* 细滚动条：极光风圆角，悬停加深 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 139, 148, 0.35) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgba(139, 139, 148, 0.35);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 139, 148, 0.55);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 body {
   background-color: var(--page);
   min-height: 100vh;

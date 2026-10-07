@@ -17,6 +17,7 @@ export type Post = {
   draft: boolean;
   content: string; // 正文 Markdown（不含 front-matter）
   readingTime: number; // 预计阅读分钟数
+  wordCount: number; // 正文字数（中文按字、英文按词）
 };
 
 /** 把 YAML 里可能被解析成 Date 的日期统一成 ISO 字符串 */
@@ -42,6 +43,13 @@ function estimateReadingTime(content: string): number {
   const words = (content.replace(/[\u4e00-\u9fff]/g, " ").match(/[A-Za-z0-9]+/g) ?? []).length;
   const minutes = cjk / 400 + words / 200;
   return Math.max(1, Math.round(minutes));
+}
+
+/** 中英混排的字数：中文字逐个计，英文数字按词计 */
+function countWords(content: string): number {
+  const cjk = (content.match(/[\u4e00-\u9fff]/g) ?? []).length;
+  const words = (content.replace(/[\u4e00-\u9fff]/g, " ").match(/[A-Za-z0-9]+/g) ?? []).length;
+  return cjk + words;
 }
 
 export function getPostSlugs(): string[] {
@@ -73,6 +81,7 @@ export function getPostBySlug(slug: string): Post | null {
     draft: Boolean(data.draft),
     content,
     readingTime: estimateReadingTime(content),
+    wordCount: countWords(content),
   };
 }
 

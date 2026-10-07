@@ -1,7 +1,15 @@
 import { site } from "@/lib/site";
+import { getAllPosts, getAllTags } from "@/lib/posts";
 
 export function ProfileCard() {
   const a = site.author;
+  const posts = getAllPosts();
+  const totalWords = posts.reduce((n, p) => n + p.wordCount, 0);
+  const stats = [
+    { label: "文章", value: String(posts.length) },
+    { label: "总字数", value: totalWords >= 10000 ? `${(totalWords / 10000).toFixed(1)}w` : String(totalWords) },
+    { label: "标签", value: String(getAllTags().length) },
+  ];
 
   return (
     <div className="gradient-border rounded-xl p-6 shadow-lg shadow-indigo-500/5 backdrop-blur-xl">
@@ -15,6 +23,18 @@ export function ProfileCard() {
         <h1 className="gradient-text mt-4 text-xl font-bold">{a.name}</h1>
         <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{a.bio}</p>
       </div>
+
+      {/* 写作统计 */}
+      <dl className="mt-5 grid grid-cols-3 divide-x divide-zinc-100 rounded-lg border border-zinc-100 py-3 text-center dark:divide-zinc-800 dark:border-zinc-800">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <dd className="text-base font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
+              {s.value}
+            </dd>
+            <dt className="mt-0.5 text-xs text-zinc-400">{s.label}</dt>
+          </div>
+        ))}
+      </dl>
 
       <dl className="mt-5 space-y-2 border-t border-zinc-100 pt-5 text-sm dark:border-zinc-800">
         <div className="flex gap-2">

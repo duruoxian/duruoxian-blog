@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
 import { BackToTop } from "@/components/BackToTop";
+import { SearchHotkey } from "@/components/SearchHotkey";
 import { site } from "@/lib/site";
 
 export const viewport: Viewport = {
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <BackToTop />
+        <SearchHotkey />
         <Analytics />
       </body>
     </html>

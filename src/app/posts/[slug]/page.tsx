@@ -11,6 +11,9 @@ import { CodeCopy } from "@/components/CodeCopy";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { ShareLink } from "@/components/ShareLink";
 import { PostList } from "@/components/PostList";
+import { PrevNextNav } from "@/components/PrevNextNav";
+import { AuthorCard } from "@/components/AuthorCard";
+import { ImageZoom } from "@/components/ImageZoom";
 import { site } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -106,12 +109,23 @@ export default async function PostPage({ params }: Params) {
             </Link>
             <span aria-hidden>·</span>
             <span>{post.readingTime} 分钟</span>
+            <span aria-hidden>·</span>
+            <span>约 {post.wordCount.toLocaleString("zh-CN")} 字</span>
           </div>
           <h1 className="mt-2 text-3xl font-bold leading-tight">{post.title}</h1>
           {post.description && (
             <p className="mt-3 text-zinc-600 dark:text-zinc-400">{post.description}</p>
           )}
         </header>
+
+        {post.cover && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={post.cover}
+            alt={post.title}
+            className="mb-8 w-full rounded-xl border border-zinc-200 object-cover shadow-lg shadow-indigo-500/5 dark:border-zinc-800"
+          />
+        )}
 
         {toc.length > 0 && (
           <details className="mb-8 rounded-xl border border-zinc-200 p-4 dark:border-zinc-800 xl:hidden">
@@ -127,6 +141,7 @@ export default async function PostPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <CodeCopy />
+        <ImageZoom />
 
         {post.tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
@@ -142,6 +157,8 @@ export default async function PostPage({ params }: Params) {
           <ShareLink title={post.title} />
         </div>
 
+        <AuthorCard />
+
         {related.length > 0 && (
           <section className="mt-8">
             <h2 className="mb-3 text-sm font-semibold text-zinc-500 dark:text-zinc-400">相关文章</h2>
@@ -149,22 +166,9 @@ export default async function PostPage({ params }: Params) {
           </section>
         )}
 
-        <nav className="mt-8 grid gap-3 border-t border-zinc-200 pt-6 text-sm sm:grid-cols-2 dark:border-zinc-800">
-          <div>
-            {prev && (
-              <Link href={`/posts/${prev.slug}`} className="text-blue-600 hover:underline dark:text-blue-400">
-                ← 上一篇：{prev.title}
-              </Link>
-            )}
-          </div>
-          <div className="sm:text-right">
-            {next && (
-              <Link href={`/posts/${next.slug}`} className="text-blue-600 hover:underline dark:text-blue-400">
-                下一篇：{next.title} →
-              </Link>
-            )}
-          </div>
-        </nav>
+        <div className="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+          <PrevNextNav prev={prev} next={next} />
+        </div>
       </article>
 
       <aside className="hidden xl:block">

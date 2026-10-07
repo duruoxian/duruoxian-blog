@@ -61,14 +61,32 @@ export function SearchClient() {
   return (
     <div>
       <div className="relative">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+          className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="搜索文章标题、标签、内容…"
           autoFocus
-          className="w-full rounded-xl border border-zinc-200 bg-[var(--card)] px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-400 dark:border-zinc-800 dark:focus:border-zinc-600"
+          className="w-full rounded-xl border border-zinc-200 bg-[var(--card)] px-4 py-3 pl-11 pr-16 text-sm outline-none transition-colors focus:border-indigo-400/70 dark:border-zinc-800 dark:focus:border-indigo-400/60"
         />
+        <kbd className="pointer-events-none absolute right-3.5 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400 sm:flex dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-500">
+          Ctrl K
+        </kbd>
       </div>
 
       <p className="mt-3 text-xs text-zinc-400">
@@ -81,7 +99,7 @@ export function SearchClient() {
           <li key={doc.slug}>
             <Link
               href={`/posts/${doc.slug}`}
-              className="group block rounded-xl border border-zinc-200 bg-[var(--card)] p-4 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+              className="card-glow group block rounded-xl border border-zinc-200 bg-[var(--card)] p-4 dark:border-zinc-800"
             >
               <div className="flex items-baseline gap-3">
                 <time className="shrink-0 font-mono text-xs text-zinc-400" dateTime={doc.date}>

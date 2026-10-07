@@ -14,9 +14,11 @@ export default function PostsPage() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <header className="mb-8">
+      <header className="mb-10">
         <h1 className="text-2xl font-bold">全部文章</h1>
-        <p className="mt-1 text-sm text-zinc-500">共 {total} 篇</p>
+        <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
+          共 {total} 篇 · 记录学习与折腾的每一步
+        </p>
       </header>
 
       {groups.length === 0 && (
@@ -28,19 +30,44 @@ export default function PostsPage() {
       <div className="space-y-10">
         {groups.map((group) => (
           <section key={group.year}>
-            <h2 className="mb-3 text-sm font-semibold text-zinc-400">{group.year}</h2>
+            <h2 className="mb-3 flex items-center gap-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
+              <span className="font-mono text-base">{group.year}</span>
+              <span className="h-px flex-1 bg-gradient-to-r from-zinc-200 to-transparent dark:from-zinc-700" />
+              <span className="text-xs font-normal">{group.posts.length} 篇</span>
+            </h2>
             <ul className="space-y-1">
               {group.posts.map((post) => (
                 <li key={post.slug}>
                   <Link
                     href={`/posts/${post.slug}`}
-                    className="group flex items-baseline gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
+                    className="group flex items-baseline gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60"
                   >
                     <time className="shrink-0 font-mono text-xs text-zinc-400" dateTime={post.date}>
                       {formatDateShort(post.date)}
                     </time>
-                    <span className="font-medium group-hover:underline">{post.title}</span>
-                    <span className="ml-auto shrink-0 text-xs text-zinc-400">{post.category}</span>
+                    <span className="min-w-0 truncate font-medium transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-300">
+                      {post.title}
+                    </span>
+                    <span className="ml-auto flex shrink-0 items-center gap-2 text-xs text-zinc-400">
+                      <span className="hidden sm:inline">{post.readingTime} 分钟</span>
+                      <span className="rounded-full border border-zinc-200 px-2 py-0.5 transition-colors group-hover:border-indigo-400/60 group-hover:text-indigo-500 dark:border-zinc-700 dark:group-hover:border-indigo-400/60 dark:group-hover:text-indigo-300">
+                        {post.category}
+                      </span>
+                      <svg
+                        width="13"
+                        height="13"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                        className="-translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </Link>
                 </li>
               ))}
