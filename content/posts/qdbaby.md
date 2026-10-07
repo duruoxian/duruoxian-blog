@@ -4,7 +4,7 @@ date: 2026-10-06
 description: "仿「今日水印相机」的纯前端单文件 H5：给照片加时间、日期、星期、天气、地点水印，原图分辨率导出，定位自动填地址，微信里点开链接就能用。"
 category: "项目"
 tags: ["开源", "前端", "Canvas"]
-cover: "/images/posts/qdbaby/cover.jpg"
+cover: "/images/posts/qdbaby/cover.webp"
 ---
 
 需要一张带「时间 + 地点」的打卡照片时，大多数人会去装一个水印相机 App。但这类需求其实很轻：水印格式固定、全在本机就能完成，为什么要为此装个 App 呢？
@@ -14,7 +14,7 @@ cover: "/images/posts/qdbaby/cover.jpg"
 > 在线体验：<https://qdbaby.pages.dev>
 > 源码：<https://github.com/duruoxian/qdbaby>
 
-![横屏照片上的水印效果](/images/posts/qdbaby/demo-land.jpg)
+![横屏照片上的水印效果](/images/posts/qdbaby/demo-land.webp)
 
 ## 它能做什么
 

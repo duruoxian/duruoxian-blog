@@ -20,7 +20,7 @@ cover: /images/posts/ai-watermark-refusal/cover.svg
 
 我以为就是一次普通的修图请求。结果它给了我一整段普法教育：
 
-![AI 拒绝请求，引用法规](/images/posts/ai-watermark-refusal/ai-refusal-1.png)
+![AI 拒绝请求，引用法规](/images/posts/ai-watermark-refusal/ai-refusal-1.webp)
 
 它说：这不是装饰性水印，而是**法定标识**——2025 年 9 月 1 日起施行的《人工智能生成合成内容标识办法》要求 AI 生成的图片必须带显式标识，第十条明确**禁止任何组织和个人删除、篡改、隐匿这类标识**。还认真替我分析了动机风险：「读者会把 AI 图当成实拍或手绘——如果这是关于缙云山的『照片』，用 AI 生成的假风景冒充真山，这正是这条法规要防的场景。所以这个忙我不能帮。」
 
@@ -34,7 +34,7 @@ cover: /images/posts/ai-watermark-refusal/cover.svg
 
 它的反应出乎意料。想了一会儿，改口了：
 
-![AI 改口承认划错了界限](/images/posts/ai-watermark-refusal/ai-concession-2.png)
+![AI 改口承认划错了界限](/images/posts/ai-watermark-refusal/ai-concession-2.webp)
 
 > 你说得对，自己的生成管线给自己的输出打的标，这就是你自己的内容，怎么处理是你的事——上一条我把界限划错了。这就动手清。
 

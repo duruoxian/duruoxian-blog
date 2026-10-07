@@ -4,7 +4,7 @@ date: 2026-09-27
 description: "一个 Windows 托盘小工具：监视你写的 txt，保存后用 AI 自动重排成排版美观的 Markdown，绿色便携、开箱即用。"
 category: "项目"
 tags: ["开源", "Python", "工具"]
-cover: "/images/posts/txt2md/cover.jpg"
+cover: "/images/posts/txt2md/cover.webp"
 ---
 
 写笔记时最顺手的状态，往往是打开一个空白的 `.txt` 直接敲。但 `.txt` 没有标题层级、没有列表、没有代码块，攒久了就成了一团乱麻。Markdown 好看，可手动排版又嫌麻烦。

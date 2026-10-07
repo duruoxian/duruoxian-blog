@@ -14,6 +14,7 @@ import { PostList } from "@/components/PostList";
 import { PrevNextNav } from "@/components/PrevNextNav";
 import { AuthorCard } from "@/components/AuthorCard";
 import { ImageZoom } from "@/components/ImageZoom";
+import { Giscus } from "@/components/Giscus";
 import { site } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -169,6 +170,8 @@ export default async function PostPage({ params }: Params) {
         <div className="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
           <PrevNextNav prev={prev} next={next} />
         </div>
+
+        <Giscus />
       </article>
 
       <aside className="hidden xl:block">

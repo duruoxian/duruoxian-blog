@@ -12,5 +12,14 @@
     "location": "中国重庆",
     "github": "https://github.com/duruoxian",
     "githubUser": "duruoxian"
+  },
+  "comments": {
+    "giscusRepo": "",
+    "giscusRepoId": "",
+    "giscusCategory": "",
+    "giscusCategoryId": ""
+  },
+  "analytics": {
+    "cloudflareToken": ""
   }
 }

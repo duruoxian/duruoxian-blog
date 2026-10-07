@@ -10,11 +10,11 @@ category: 技术
 
 tags: ["SVG", "CSS", "动画", "前端"]
 
-cover: /images/posts/pelican-bicycle-svg/riding.png
+cover: /images/posts/pelican-bicycle-svg/riding.webp
 
 ---
 
-![鹈鹕骑行动画截图](/images/posts/pelican-bicycle-svg/riding.png)
+![鹈鹕骑行动画截图](/images/posts/pelican-bicycle-svg/riding.webp)
 
 **[点这里看会动的版本 →](/pelican-bicycle.html)**（页面就是动图本体，约 18KB，无任何图片素材）
 

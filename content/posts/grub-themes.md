@@ -4,7 +4,7 @@ date: 2026-10-06
 description: "从赛博朋克到卡通熊猫：用 Pillow 一笔一笔程序化画出 7 套 2560×1440 的 GRUB2 开机主题，附一键安装脚本和生成器。"
 category: "项目"
 tags: ["Linux", "GRUB", "Manjaro", "美化", "开源"]
-cover: "/images/posts/grub-themes/panda.jpg"
+cover: "/images/posts/grub-themes/panda.webp"
 ---
 
 开机页面大概是每台电脑最容易被忽视的界面——每天都要看一眼，却常年顶着黑底白字。这阵子我给 grub-themes 项目画了 7 套 GRUB2 开机主题，全部按 2560×1440 原生分辨率设计，背景、字体、菜单面板都是程序化绘制加手工调校出来的。
@@ -13,31 +13,31 @@ cover: "/images/posts/grub-themes/panda.jpg"
 
 **neongrid · 赛博朋克**：霓虹城市天际线，青色透视网格地平线，品红×青双色辉光。
 
-![neongrid](/images/posts/grub-themes/neongrid.jpg)
+![neongrid](/images/posts/grub-themes/neongrid.webp)
 
 **retrowave · 复古合成波**：1984 年的落日带扫描线，山脉剪影加粉色网格。
 
-![retrowave](/images/posts/grub-themes/retrowave.jpg)
+![retrowave](/images/posts/grub-themes/retrowave.webp)
 
 **matrix · 黑客帝国**：满屏绿色代码雨，每列有随机的亮度衰减和"数字头"。
 
-![matrix](/images/posts/grub-themes/matrix.jpg)
+![matrix](/images/posts/grub-themes/matrix.webp)
 
 **nebula · 深空星野**：星云、星野和十字星芒，安静但不单调。
 
-![nebula](/images/posts/grub-themes/nebula.jpg)
+![nebula](/images/posts/grub-themes/nebula.webp)
 
 **panda · 卡通熊猫**：Q 版三头身小熊猫坐在山坡上，配竹丛、爪印小路和蝴蝶，标题是彩色圆胖字。
 
-![panda](/images/posts/grub-themes/panda.jpg)
+![panda](/images/posts/grub-themes/panda.webp)
 
 **clean · 极简**：薰衣草紫到蜜桃橙的柔焦极光渐变，发丝分割线加珊瑚橙点缀。
 
-![clean](/images/posts/grub-themes/clean.jpg)
+![clean](/images/posts/grub-themes/clean.webp)
 
 **blockterm · 终端方块**：灵感来自 opencode 的 logo——纯黑底、方块像素字双色 wordmark、细灰边框方角面板，等宽字体终端风。
 
-![blockterm](/images/posts/grub-themes/blockterm.jpg)
+![blockterm](/images/posts/grub-themes/blockterm.webp)
 
 ## 几个实现细节
 

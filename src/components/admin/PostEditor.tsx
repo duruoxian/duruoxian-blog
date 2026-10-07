@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
 import { putBinaryFile } from "@/lib/admin/github";
+import { fileToUploadBlob } from "@/lib/imageConvert";
 import { parsePost, splitFrontMatter, type PostMeta } from "@/lib/admin/content";
 import { ghostBtn, inputClass, labelClass, primaryBtn } from "./ui";
 
@@ -80,8 +81,11 @@ export function PostEditor({
     setUploading(true);
     setUploadError(null);
     try {
-      const bytes = new Uint8Array(await file.arrayBuffer());
-      const name = `${Date.now()}-${file.name.replace(/[^\w.-]/g, "-")}`;
+      // 前端先压到 1920px 并转 WebP（GIF/SVG 保持原样），上传更快、站点更轻
+      const { blob, ext } = await fileToUploadBlob(file);
+      const bytes = new Uint8Array(await blob.arrayBuffer());
+      const base = file.name.replace(/\.[^.]+$/, "").replace(/[^\w.-]/g, "-");
+      const name = `${Date.now()}-${base}${ext}`;
       const path = `public/images/posts/${name}`;
       await putBinaryFile(path, bytes, `后台上传图片：${name}`);
       const url = `/images/posts/${name}`;
@@ -90,7 +94,7 @@ export function PostEditor({
       } else {
         const el = bodyRef.current;
         const at = el?.selectionStart ?? meta.body.length;
-        const snippet = `![${file.name.replace(/\.[^.]+$/, "")}](${url})`;
+        const snippet = `![${base}](${url})`;
         patch({ body: meta.body.slice(0, at) + snippet + meta.body.slice(at) });
       }
     } catch (err) {
@@ -249,7 +253,7 @@ export function PostEditor({
             <input
               className={`${inputClass} font-mono text-xs`}
               value={meta.cover ?? ""}
-              placeholder="/images/posts/xxx.jpg"
+              placeholder="/images/posts/xxx.webp"
               onChange={(e) => patch({ cover: e.target.value || undefined })}
             />
             <label className={`${ghostBtn} shrink-0 cursor-pointer text-xs`}>

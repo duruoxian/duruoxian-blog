@@ -30,11 +30,13 @@ export const metadata: Metadata = {
     siteName: site.title,
     title: site.title,
     description: site.description,
+    images: [{ url: "/og-card.png", width: 1200, height: 630, alt: site.title }],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
+    images: ["/og-card.png"],
   },
   alternates: { canonical: "/" },
   // 网站图标由同目录的 src/app/icon.png / favicon.ico 自动提供（哆啦A梦头像）
