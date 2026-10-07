@@ -112,13 +112,7 @@ export function Footer() {
           <p>
             © {site.since}–{year} {site.author.name} · 保留所有权利
           </p>
-          <p className="flex items-center gap-1.5">
-            用
-            <span className="text-rose-500" aria-hidden>
-              ♥
-            </span>
-            与 Next.js 构建 · 托管于 Cloudflare Pages
-          </p>
+          <p>由 Next.js 构建 · 托管于 Cloudflare Pages</p>
         </div>
       </div>
     </footer>

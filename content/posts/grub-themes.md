@@ -1,15 +1,15 @@
 ---
-title: "给 GRUB 换新衣：手绘 7 套开机主题"
+title: "给 GRUB 换新衣：手绘 6 套开机主题"
 date: 2026-10-06
-description: "从赛博朋克到水墨江南：用 Pillow 一笔一笔程序化画出 7 套 2560×1440 的 GRUB2 开机主题，附一键安装脚本和生成器。"
+description: "从赛博朋克到卡通熊猫：用 Pillow 一笔一笔程序化画出 6 套 2560×1440 的 GRUB2 开机主题，附一键安装脚本和生成器。"
 category: "项目"
 tags: ["Linux", "GRUB", "Manjaro", "美化", "开源"]
-cover: "/images/posts/grub-themes/inkwash.jpg"
+cover: "/images/posts/grub-themes/panda.jpg"
 ---
 
-开机页面大概是每台电脑最容易被忽视的界面——每天都要看一眼，却常年顶着黑底白字。这阵子我给 grub-themes 项目画了 7 套 GRUB2 开机主题，全部按 2560×1440 原生分辨率设计，背景、字体、菜单面板都是程序化绘制加手工调校出来的。
+开机页面大概是每台电脑最容易被忽视的界面——每天都要看一眼，却常年顶着黑底白字。这阵子我给 grub-themes 项目画了 6 套 GRUB2 开机主题，全部按 2560×1440 原生分辨率设计，背景、字体、菜单面板都是程序化绘制加手工调校出来的。
 
-## 七套主题
+## 六套主题
 
 **neongrid · 赛博朋克**：霓虹城市天际线，青色透视网格地平线，品红×青双色辉光。
 
@@ -31,10 +31,6 @@ cover: "/images/posts/grub-themes/inkwash.jpg"
 
 ![panda](/images/posts/grub-themes/panda.jpg)
 
-**inkwash · 墨韵古风**：个人最喜欢的一套。宣纸纤维质感，水墨山峰在山脚晕入云雾，江上还有一叶渔舟；标题用的是系统里的方正柳楷，配朱砂印章和竖排落款"山水之间任逍遥"。
-
-![inkwash](/images/posts/grub-themes/inkwash.jpg)
-
 **clean · 极简**：薰衣草紫到蜜桃橙的柔焦极光渐变，发丝分割线加珊瑚橙点缀。
 
 ![clean](/images/posts/grub-themes/clean.jpg)
@@ -47,13 +43,15 @@ cover: "/images/posts/grub-themes/inkwash.jpg"
 
 **预览即所得。** 每个主题目录里的 `preview.png` 是用和 `theme.txt` 完全相同的几何参数渲染出来的，不用重启就能确认效果——上面这些截图就是预览图本身。
 
+还有一个藏得最深的坑：GRUB 2.12 重写了主题解析器，`left = 50% - 630` 这种老教程里随处可见的百分比算术写法会让整个主题**静默失效**（连报错都一闪而过）。我是用 QEMU + OVMF 在本机模拟真实 GRUB 启动才抓到这条报错的，最后全部改成了纯像素坐标，六套主题逐一套真机渲染验证过。
+
 ## 安装
 
 ```bash
 git clone https://github.com/duruoxian/grub-themes.git
 cd grub-themes
 sudo ./install.sh            # 交互式选择主题
-sudo ./install.sh inkwash    # 或直接指定
+sudo ./install.sh panda      # 或直接指定
 ```
 
 脚本会备份 `/etc/default/grub`、把主题复制到 `/boot/grub/themes/`、设置 `GRUB_THEME` 并重新生成 `grub.cfg`，重启即可生效。已在 Manjaro（GRUB 2.14，EFI）上验证。
