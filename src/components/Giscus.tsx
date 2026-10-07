@@ -1,8 +1,19 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/lib/site";
+
+// giscus 的 iframe 只在 ready 之后才收得到主题消息。
+// 组件挂载时 iframe 往往还没加载完，直接在 effect 里 postMessage 会丢失，
+// 所以这里「发一次 + 收到 giscus 消息后再补发」，保证暗色下不会残留亮色面板。
+type GiscusTheme = "light" | "dark";
+
+function postTheme(theme: GiscusTheme) {
+  document
+    .querySelector<HTMLIFrameElement>("iframe.giscus-frame")
+    ?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
+}
 
 // Giscus 评论（基于 GitHub Discussions，免费无广告）。
 // 四个配置都填了才会渲染；没配置时整个区块不出现。
@@ -12,9 +23,10 @@ export function Giscus() {
   const configured = Boolean(
     g?.giscusRepo && g?.giscusRepoId && g?.giscusCategory && g?.giscusCategoryId
   );
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<GiscusTheme>("light");
+  const themeRef = useRef<GiscusTheme>("light");
 
-  // 跟随站点亮暗主题：观察 <html> 的 class，同步给 giscus iframe
+  // 跟随站点亮暗主题：观察 <html> 的 class 变化
   useEffect(() => {
     if (!configured) return;
     const root = document.documentElement;
@@ -25,11 +37,23 @@ export function Giscus() {
     return () => ob.disconnect();
   }, [configured]);
 
+  // 主题变化时同步给 iframe，并记录当前值
   useEffect(() => {
-    document
-      .querySelector<HTMLIFrameElement>("iframe.giscus-frame")
-      ?.contentWindow?.postMessage({ giscus: { setConfig: { theme } } }, "https://giscus.app");
-  }, [theme]);
+    if (!configured) return;
+    themeRef.current = theme;
+    postTheme(theme);
+  }, [configured, theme]);
+
+  // giscus 加载完成后会主动 postMessage，此时补发一次主题（修复首屏丢失）
+  useEffect(() => {
+    if (!configured) return;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== "https://giscus.app") return;
+      postTheme(themeRef.current);
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [configured]);
 
   if (!configured) return null;
 
