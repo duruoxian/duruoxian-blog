@@ -1,0 +1,40 @@
+name: temp-get-discussion-ids
+
+# 临时工作流：用 Actions 自带的仓库令牌查询 Discussions 分类 ID，
+# 结果写入 discussion-ids.json 并推到 temp-ids 分支。用完即删。
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/temp-get-discussion-ids.yml"
+
+permissions:
+  contents: write
+  discussions: read
+
+jobs:
+  get-ids:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Query repo id and discussion categories
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -s -X POST https://api.github.com/graphql \
+            -H "Authorization: bearer $GH_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"query { repository(owner: \"duruoxian\", name: \"duruoxian-blog\") { id discussionCategories(first: 20) { nodes { id name } } } }"}' \
+            -o discussion-ids.json
+          echo "----- result -----"
+          cat discussion-ids.json
+
+      - name: Commit result to temp-ids branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add discussion-ids.json
+          git commit -m "temp: discussion category ids" || true
+          git push origin HEAD:refs/heads/temp-ids --force || true
