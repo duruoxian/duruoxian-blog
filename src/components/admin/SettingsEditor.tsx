@@ -273,10 +273,11 @@ export function SettingsEditor({ onDone }: { onDone: (message: string) => void }
           访问统计（Cloudflare Web Analytics）
         </h3>
         <p className="mb-4 text-xs leading-relaxed text-zinc-400">
-          免费、匿名、无 Cookie。两种开启方式任选其一：
-          ① 最简单——Cloudflare 控制台 → Workers 和 Pages → 本项目 → 设置里开启 Web
-          Analytics，无需填任何东西；② 想手动管理：控制台左侧「分析和日志 → Web Analytics」
-          添加站点，把脚本里 <code>token</code> 引号的值粘到下面。
+          免费、匿名、无 Cookie。推荐做法：Cloudflare 控制台 → Workers 和 Pages →
+          `duruoxian-blog` 项目 →「Metrics / 指标」标签页 → Web Analytics 点 Enable
+          （注意在 Metrics 里，不是 Settings；启用后 Cloudflare 会在下次部署时自动注入统计脚本，
+          无需填任何东西）。也可手动：控制台「分析和日志 → Web Analytics」添加站点，
+          把脚本里 <code>token</code> 引号的值粘到下面。
         </p>
         <label className="block">
           <span className={labelClass}>Beacon Token（不填 = 关闭统计）</span>
