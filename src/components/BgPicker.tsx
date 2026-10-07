@@ -4,17 +4,75 @@ import { useEffect, useRef, useState } from "react";
 
 // 背景主题选择器：顶栏调色盘按钮 + 弹出色板。
 // 选择写入 localStorage.bg 并挂到 <html data-bg>，CSS 变量随之切换
-// （背景光斑 + 全站强调色一起变）。默认 aurora。
-const THEMES = [
+// （背景光斑/纹理 + 全站强调色一起变）。默认 aurora。
+// swatch：色板圆点的预览背景（缺省用主题三色渐变）。
+type ThemeId =
+  | "aurora"
+  | "sakura"
+  | "ocean"
+  | "forest"
+  | "dusk"
+  | "grid"
+  | "dots"
+  | "stars"
+  | "mist"
+  | "stripes"
+  | "spotlight"
+  | "pure";
+
+type ThemeDef = { id: ThemeId; label: string; colors: [string, string, string]; swatch?: string };
+
+const THEMES: ThemeDef[] = [
   { id: "aurora", label: "极光", colors: ["#6366f1", "#06b6d4", "#a855f7"] },
   { id: "sakura", label: "樱粉", colors: ["#ec4899", "#f472b6", "#a855f7"] },
   { id: "ocean", label: "深海", colors: ["#0ea5e9", "#22d3ee", "#2563eb"] },
   { id: "forest", label: "森野", colors: ["#10b981", "#84cc16", "#14b8a6"] },
   { id: "dusk", label: "暮橙", colors: ["#f97316", "#f43f5e", "#eab308"] },
-  { id: "pure", label: "素净", colors: ["#fafafa", "#a1a1aa", "#52525b"] },
-] as const;
+  {
+    id: "grid",
+    label: "方格",
+    colors: ["#4f46e5", "#0ea5e9", "#4338ca"],
+    swatch:
+      "repeating-linear-gradient(0deg,#a1a1aa 0 1px,transparent 1px 5px),repeating-linear-gradient(90deg,#a1a1aa 0 1px,transparent 1px 5px) #fafafa",
+  },
+  {
+    id: "dots",
+    label: "波点",
+    colors: ["#ec4899", "#38bdf8", "#a78bfa"],
+    swatch: "radial-gradient(#a1a1aa 1px,transparent 1.2px) 0 0/5px 5px #fafafa",
+  },
+  {
+    id: "stars",
+    label: "星夜",
+    colors: ["#8b5cf6", "#c084fc", "#6366f1"],
+    swatch:
+      "radial-gradient(#fff 0.8px,transparent 1px) 0 0/7px 7px,radial-gradient(#fff9 0.8px,transparent 1px) 3px 3px/9px 9px,linear-gradient(135deg,#4c1d95,#1e1b4b)",
+  },
+  {
+    id: "mist",
+    label: "晨雾",
+    colors: ["#57534e", "#a8a29e", "#44403c"],
+    swatch: "linear-gradient(135deg,#e7e5e4,#d6d3d1 55%,#a8a29e)",
+  },
+  {
+    id: "stripes",
+    label: "斜纹",
+    colors: ["#dc2626", "#f87171", "#b91c1c"],
+    swatch: "repeating-linear-gradient(45deg,#f87171 0 1.5px,transparent 1.5px 5px) #fef2f2",
+  },
+  {
+    id: "spotlight",
+    label: "暖阳",
+    colors: ["#f59e0b", "#fb923c", "#f97316"],
+    swatch: "radial-gradient(circle at 50% 18%,#fde68a,#f97316 70%,#9a3412)",
+  },
+  { id: "pure", label: "素净", colors: ["#fafafa", "#a1a1aa", "#52525b"], swatch: "linear-gradient(135deg,#fff 40%,#a1a1aa)" },
+] satisfies ThemeDef[];
 
-type ThemeId = (typeof THEMES)[number]["id"];
+function swatchBg(t: ThemeDef): string {
+  return t.swatch ?? `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]} 55%, ${t.colors[2]})`;
+}
+
 
 // DOM 与 localStorage 写入放在组件外，方便 React 编译器静态检查
 function applyBgTheme(id: ThemeId) {
@@ -121,12 +179,7 @@ export function BgPicker() {
                   className={`h-6 w-6 rounded-full shadow-sm ring-offset-1 transition-shadow ${
                     current === t.id ? "ring-2 ring-zinc-400 dark:ring-zinc-500" : ""
                   }`}
-                  style={{
-                    background:
-                      t.id === "pure"
-                        ? "linear-gradient(135deg, #fff 40%, #a1a1aa)"
-                        : `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]} 55%, ${t.colors[2]})`,
-                  }}
+                  style={{ background: swatchBg(t) }}
                 />
                 <span className="text-[10px] leading-none text-zinc-500 dark:text-zinc-400">
                   {t.label}
