@@ -44,6 +44,19 @@ function rehypeExternalLinks() {
   return (tree: HastNode) => walk(tree);
 }
 
+// 正文图片懒加载：文章通常配多图，全部立即加载会拖慢首屏。
+// loading=lazy 让浏览器只加载视口附近的图；decoding=async 避免解码阻塞主线程。
+function rehypeLazyImages() {
+  const walk = (node: HastNode) => {
+    if (node.children) node.children.forEach(walk);
+    if (node.tagName !== "img") return;
+    const props = (node.properties ??= {});
+    if (!props.loading) props.loading = "lazy";
+    if (!props.decoding) props.decoding = "async";
+  };
+  return (tree: HastNode) => walk(tree);
+}
+
 /**
  * Markdown -> HTML，并顺带生成目录(TOC)。
  * - remark-gfm：支持表格、任务列表、删除线等 GitHub 扩展语法
@@ -60,6 +73,7 @@ export async function renderMarkdown(
       .use(remarkGfm)
       .use(remarkRehype)
       .use(rehypeExternalLinks)
+      .use(rehypeLazyImages)
       .use(rehypeSlug)
       .use(rehypeAutolinkHeadings, {
         behavior: "wrap",
