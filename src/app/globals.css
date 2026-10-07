@@ -30,8 +30,8 @@
   /* 图案层背景（坐标纸/波点/星空等平铺纹理），默认无 */
   --bg-pattern: none;
   --bg-size: auto;
-  /* 自定义图片背景的柔光遮罩（保证正文可读） */
-  --bg-veil: rgba(247, 247, 248, 0.85);
+  /* 自定义图片背景的柔光遮罩（薄一些让照片看得见，配合下方加实的卡片保证可读） */
+  --bg-veil: rgba(247, 247, 248, 0.68);
 }
 .dark {
   --page: #0b0b0d;
@@ -39,7 +39,7 @@
   --border: #2a2a2e;
   --glass-fill: rgba(22, 22, 24, 0.66);
   color-scheme: dark;
-  --bg-veil: rgba(11, 11, 13, 0.85);
+  --bg-veil: rgba(11, 11, 13, 0.75);
 
   --blob-a: radial-gradient(circle, rgba(99, 102, 241, 0.38), rgba(6, 182, 212, 0.2) 45%, transparent 70%);
   --blob-b: radial-gradient(circle, rgba(168, 85, 247, 0.32), rgba(236, 72, 153, 0.16) 45%, transparent 70%);
@@ -207,6 +207,13 @@ html[data-bg="custom"] {
   --blob-b: none;
   --bg-pattern: linear-gradient(var(--bg-veil), var(--bg-veil)), var(--bg-custom);
   --bg-size: cover;
+  /* 背景是照片时卡片加实一点，抵消变薄的遮罩，保证文字可读 */
+  --card: rgba(255, 255, 255, 0.82);
+  --glass-fill: rgba(255, 255, 255, 0.82);
+}
+html.dark[data-bg="custom"] {
+  --card: rgba(22, 22, 24, 0.82);
+  --glass-fill: rgba(22, 22, 24, 0.82);
 }
 html[data-bg="custom"] body {
   background-attachment: fixed;

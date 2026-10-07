@@ -74,6 +74,8 @@ export function BgPicker() {
   const fileRef = useRef<HTMLInputElement | null>(null);
   // 用户自定义背景图（dataURL 缩略预览，原图在 IndexedDB）
   const [customPreview, setCustomPreview] = useState<string | null>(null);
+  // 图片处理失败提示（如 HEIC 等浏览器解不开的格式）
+  const [error, setError] = useState<string | null>(null);
   // 当前主题只在弹层（客户端交互后才渲染）里显示，无 SSR 水合风险
   const [current, setCurrent] = useState<ThemeId>(() => {
     if (typeof window === "undefined") return "aurora";
@@ -151,9 +153,10 @@ export function BgPicker() {
       applyBgTheme("custom");
       setCurrent("custom");
       setCustomPreview(dataUrl);
+      setError(null);
       setOpen(false);
     } catch {
-      /* 图片无法解码，忽略 */
+      setError("这张图片处理失败，请换一张 JPG/PNG 试试");
     }
   }
 
@@ -271,6 +274,10 @@ export function BgPicker() {
               </span>
             </button>
           </div>
+
+          {error && (
+            <p className="mt-1 px-2 text-[11px] leading-relaxed text-rose-500">{error}</p>
+          )}
 
           {customPreview && (
             <div className="mt-1 flex items-center justify-between border-t border-zinc-100 px-2 pt-1.5 dark:border-zinc-800">
