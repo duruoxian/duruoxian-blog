@@ -1,0 +1,22 @@
+# 统一换行符：仓库里一律存 LF，Windows / Linux 检出都一致，
+# 避免两边交叉提交时整文件 diff 抖动。
+* text=auto eol=lf
+
+# 二进制文件禁止做换行符转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.icns binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp4 binary
+*.zip binary
+
+# Windows 批处理保持 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
