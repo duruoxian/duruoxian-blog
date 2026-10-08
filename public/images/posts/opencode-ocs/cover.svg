@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="500" fill="url(#g)"/>
+  <circle cx="1080" cy="80" r="180" fill="#ffffff" opacity="0.07"/>
+  <circle cx="120" cy="430" r="230" fill="#ffffff" opacity="0.06"/>
+  <circle cx="1010" cy="400" r="70" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <circle cx="180" cy="90" r="34" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.3"/>
+  <text x="600" y="215" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="64" fill="#ffffff" text-anchor="middle" dominant-baseline="central" font-weight="700">opencode 会话选择器</text>
+  <text x="600" y="300" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="26" fill="#ffffff" opacity="0.75" text-anchor="middle" dominant-baseline="central">ZCode 风格 · 按项目分组 · 全文搜索 · 对话视图</text>
+  <text x="600" y="360" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="22" fill="#93c5fd" opacity="0.9" text-anchor="middle" dominant-baseline="central">单文件 Python · fzf · MIT 开源</text>
+</svg>
