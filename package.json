@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "ensure": "node scripts/ensure-deps.mjs",
+    "predev": "node scripts/ensure-deps.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/ensure-deps.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "preview": "npx --yes serve out",
+    "predeploy": "node scripts/ensure-deps.mjs",
     "deploy": "next build && npx --yes wrangler@latest pages deploy out --project-name=duruoxian-blog --branch=main"
   },
   "dependencies": {
