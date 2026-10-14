@@ -1,14 +1,15 @@
 ---
 title: "我给 opencode 写了个 ZCode 风格的会话选择器：ocs"
 date: 2026-10-08
-description: "单文件 Python + fzf，按项目分组、能搜聊天内容、还有可折叠的对话视图；顺手解决了终端里「鼠标想点列表又想拖选文字」的经典矛盾——不用按 Shift。已在 GitHub 开源，现已支持 Windows。"
+description: "单文件 Python + fzf，按项目分组、能搜聊天内容、还有可折叠的对话视图；顺手解决了终端里「鼠标想点列表又想拖选文字」的经典矛盾——不用按 Shift。已在 GitHub 开源（Windows 版敬请期待）。"
 category: "项目"
-tags: ["opencode", "Python", "fzf", "终端", "Windows", "开源"]
+tags: ["opencode", "Python", "fzf", "终端", "开源"]
+series: "ocs"
 cover: "/images/posts/opencode-ocs/cover.svg"
 ---
 
 > 项目地址：https://github.com/duruoxian/ocs （MIT，单文件 Python，零依赖）
-> **2026-10 更新**：已支持 Windows（PowerShell 5.1 / 7）。见文末「把 ocs 搬到了 Windows」。
+> **Windows 版敬请期待**——目标是一个 `ocs.ps1` 启动器 + 同一个 Python 内核。详见文末。
 
 ## 缘起：历史会话太难找了
 
@@ -70,7 +71,7 @@ MOUSE_ON  = "\033[?1000h\033[?1002h\033[?1006h"  # 鼠标归程序
 
 这些交互都跟鼠标有关，靠肉眼在山寨环境里点是不靠谱的。所以我在 **Xvfb**（无头 X 服务器）里跑真的 Konsole + 真的鼠标事件（`xdotool`），截图比对、读剪贴板验证：拖动是否产生选区、右键菜单里的「复制」是否可用、剪贴板内容是否正确、点击是否选中了目标行……全流程自动化。凡是“应该能用”的功能，都是在这种环境里点过一遍才敢说它行。
 
-## 安装与使用
+## 下载与安装
 
 ```bash
 git clone https://github.com/duruoxian/ocs.git
@@ -78,7 +79,30 @@ cd ocs && ./install.sh     # 装到 ~/.local/bin/ocs
 ocs                        # 打开会话列表
 ```
 
+`install.sh` 只做一件事：把单文件脚本 `ocs` 复制到 `~/.local/bin/ocs`（并提示你把该目录加进 `PATH`）。不想用脚本的话，手动一条命令也一样：
+
+```bash
+install -m 755 ocs ~/.local/bin/ocs
+```
+
 依赖只有 Python 3 和 [fzf](https://github.com/junegunn/fzf)；数据来自你已经用过的 opencode。
+
+## 如何删除（卸载）
+
+ocs 是单文件、零安装痕迹的，卸载就是删掉那一个文件：
+
+```bash
+rm -f ~/.local/bin/ocs
+```
+
+如果顺手把 `~/.local/bin` 从 `PATH` 里加过，想撤掉就去改一下 shell 配置（`.bashrc` / `.zshrc` / `config.fish`）里对应的那行。
+另外 ocs 运行时会往 `/tmp` 写几个状态文件（`ocs-mouse-*`、`ocs-ui-*`），重启后系统会自动清掉，想立刻清也可以：
+
+```bash
+rm -f /tmp/ocs-mouse-* /tmp/ocs-ui-*
+```
+
+**ocs 从不改动 opencode 的数据**（只读连接），唯一的例外是你主动重命名时的一次 `UPDATE session`。所以卸载后你的会话历史分毫不少。
 
 日常就记住三件事：
 
@@ -86,69 +110,10 @@ ocs                        # 打开会话列表
 2. 按 `→` 进对话视图，点问题看 AI 回答，`←` 回来；
 3. 要复制文字：右键一下（或按 `F8`），拖选、右键复制，再 `F8` 切回。
 
-## 把 ocs 搬到了 Windows
+## Windows 版敬请期待
 
-一开始 ocs 是纯 Linux 的：读 `/dev/tty`、用 `termios` 查终端背景色、剪贴板走 `wl-copy`/`xclip`、临时状态文件丢在 `/tmp`，续会话时用 `os.execvp` 把进程替换掉。这些在 Windows 上要么不存在，要么行为完全不同。补 Windows 分支的过程里，踩到几个挺典型的坑，记一下。
+目前 ocs 是纯 Linux 的：读 `/dev/tty`、用 `termios` 查终端背景色、剪贴板走 `wl-copy`/`xclip`、临时状态文件丢在 `/tmp`，续会话时用 `os.execvp` 把进程替换掉。这些在 Windows 上要么不存在，要么行为完全不同。
 
-### 1. fzf 在 Windows 下用 cmd 当子 shell，引号规则不一样
-
-fzf 的 `--preview` / `--bind=execute(...)` 是把命令字符串交给一个子 shell 去跑的。Linux 上是 `sh`，Windows 上默认是 `cmd.exe`。问题在于**两者的引号规则不同**：`sh` 里单引号 `'...'` 是强引用，`cmd` 里单引号只是普通字符、根本不是引号。
-
-我最初把预览写成 `--show '{{2}}'`，在 Linux 上好好的，到 Windows 上那个单引号被原样传给了 Python，于是程序拿着带引号的会话 ID 去查库，自然查不到。正确做法是——**fzf 的占位符不要自己加引号**，直接写 `{2}`，fzf 会按目标 shell 的规则替你转义好（含空格、`&`、`^`、`%`、`(` 这些它都处理了）。
-
-```python
-# 之前（Linux OK，Windows 坏）：q() 按 sh 规则加单引号
-f"--preview={script} --show {q('{{2}}')}"
-# 现在：交给 fzf 自己转义
-f"--preview={script} --show {{2}}"
-```
-
-顺带还发现一个隐蔽的：Python 的 `subprocess.run(..., text=True)` 在 Windows 上会用**本地编码**（这里是 GBK）去编码喂给 fzf 的 stdin，而列表里有 `✅` 之类的字符，直接 `UnicodeEncodeError`。得显式 `encoding="utf-8"`。
-
-### 2. 状态文件不能用 PID 命名
-
-ocs 的「对话视图」是把当前视图（列表 / 消息列表、展开了哪几条）写进一个临时状态文件，让 fzf 每次 `reload` 时重新调用自己、读到同一份状态。Linux 上这个文件按 tty 命名。
-
-我一开始在 Windows 上偷懒用了 `os.getpid()`——结果每次 fzf 回调都是**新的进程**，PID 不同，状态永远对不上，按 `→` 根本进不了对话视图。后来改成拿**控制台窗口句柄**（`GetConsoleWindow`）做 key：同一个终端里所有 ocs 子进程共享同一个控制台，于是拿到了稳定的标识。
-
-```python
-import ctypes
-hwnd = ctypes.windll.kernel32.GetConsoleWindow()
-return "win-%x" % hwnd
-```
-
-### 3. 剪贴板：`clip` 吃的是 UTF-16
-
-Linux 那边是 `wl-copy` / `xclip`，Windows 换成了系统自带的 `clip`。这里有个坑：`clip` 读 stdin 时按 **UTF-16LE** 解码，不是 UTF-8。所以得 `text.encode("utf-16le")` 喂进去，否则中文会变乱码。
-
-### 4. 启动器要过 PowerShell 的编码关
-
-Windows 上的入口是一个薄薄的 `ocs.ps1`：切 UTF-8、找 Python、把参数转发给真正的 `ocs`。这里又撞上一个经典问题——**Windows PowerShell 5.1 读 `.ps1` 时，如果没有 BOM 就按系统 ANSI（GBK）解码**，脚本里的中文注释直接变乱码，进而把语法搞崩（报「字符串缺少终止符」之类）。
-
-解决办法很土但有效：**给 `.ps1` 存成带 BOM 的 UTF-8**。这样 5.1 和 PowerShell 7 都能正确读。
-
-另外，裸命令 `ocs` 也没法直接解析——`.ps1` 不在 `PATHEXT` 里。所以安装脚本会额外放一个 `ocs.cmd` 垫片，里面优先用 `pwsh`（7）、没有就退回 `powershell`（5.1），并带上 `-ExecutionPolicy Bypass`，绕开执行策略。
-
-### 5. 其余的小适配
-
-- 查终端背景色（给 Logo 用）依赖 `termios` + `ioctl`，Windows 直接跳过，用 opencode 深色主题的兜底底色。
-- 量终端宽度靠 `/dev/tty` 的 `TIOCGWINSZ`，Windows 退回 `shutil.get_terminal_size()`。
-- 续会话的 `os.execvp` 换成 `subprocess.run`（Windows 没有进程替换）。
-
-好在**数据层完全不用改**：两个平台的 opencode 都把库放在 `~/.local/share/opencode/opencode.db`，只读连过去一模一样。所以核心那套「按项目分组、搜内容、折叠对话」的逻辑是共用的，Windows 只是把外面那层壳换掉。
-
-### Windows 上怎么装
-
-```powershell
-git clone https://github.com/duruoxian/ocs.git
-cd ocs
-./install.ps1     # 装 ocs / ocs.ps1 / ocs.cmd 到 ~/.local/bin，并加进 PATH
-# 新开一个 PowerShell 窗口
-ocs
-```
-
-依赖：Python 3.8+（`winget install Python.Python.3.12`）、fzf（`winget install junegunn.fzf`）、以及已经用过的 opencode。
-
-Windows 下有一点体验差异：**复制文字不需要 `F8`/右键切换鼠标归属了**——直接用鼠标拖动选中、右键「复制」就行（Windows 终端本身就支持）；`ctrl-y` 复制会话 ID 依然可用。其余功能（对话视图、重命名、删除、分叉、`--last`/`--show`/`--delete`/`-l`）全部一致。
+Windows 版的目标是：一个薄薄的 `ocs.ps1` 启动器（切 UTF-8、找 Python、转发参数）+ 同一个 Python 内核，让两套系统共用核心逻辑。移植的细节、踩过的坑，以及它是怎么跑起来的——**下一篇见**。
 
 项目在 https://github.com/duruoxian/ocs ，MIT 协议，欢迎来提 issue 或者点个 star ⭐
