@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="500" fill="url(#g)"/>
+  <circle cx="1080" cy="95" r="200" fill="#ffffff" opacity="0.07"/>
+  <circle cx="120" cy="430" r="240" fill="#ffffff" opacity="0.06"/>
+  <circle cx="150" cy="100" r="36" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.3"/>
+  <circle cx="1040" cy="400" r="70" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <g fill="none" stroke="#93c5fd" stroke-width="3" opacity="0.5">
+    <path d="M980 210 h70 M985 235 h50 M980 260 h70"/>
+  </g>
+  <text x="600" y="196" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="58" fill="#ffffff" text-anchor="middle" dominant-baseline="central" font-weight="700">DeepSeek 网页版 → OpenAI API</text>
+  <text x="600" y="278" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="26" fill="#ffffff" opacity="0.78" text-anchor="middle" dominant-baseline="central">deepseek2api-fixed 部署全记录</text>
+  <text x="600" y="344" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="22" fill="#a5f3fc" opacity="0.9" text-anchor="middle" dominant-baseline="central">顺带修掉三个反代 bug：思考混流 · 工具调用 · 文件解析</text>
+</svg>
