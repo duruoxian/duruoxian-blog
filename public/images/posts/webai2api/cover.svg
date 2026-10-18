@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1020"/>
+      <stop offset="0.55" stop-color="#12224a"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4f9dff"/>
+      <stop offset="1" stop-color="#0a7cff"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+
+  <rect width="1200" height="500" fill="url(#bg)"/>
+  <circle cx="1080" cy="60" r="220" fill="#7dd3fc" opacity="0.10" filter="url(#blur)"/>
+  <circle cx="110" cy="450" r="240" fill="#a78bfa" opacity="0.10" filter="url(#blur)"/>
+
+  <g opacity="0.28" stroke="#93c5fd" stroke-width="2" fill="none">
+    <rect x="900" y="150" width="220" height="64" rx="16"/>
+    <rect x="940" y="238" width="220" height="64" rx="16"/>
+    <rect x="880" y="326" width="220" height="64" rx="16"/>
+    <path d="M1010 214 v24 M1050 302 v24"/>
+  </g>
+
+  <g transform="translate(96,150)">
+    <rect width="96" height="96" rx="24" fill="url(#mark)"/>
+    <rect x="0.75" y="0.75" width="94.5" height="94.5" rx="23.25" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
+    <path d="M26 62 L48 34 L70 62" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="216" y="196" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="62" font-weight="700" fill="#ffffff">webai2api</text>
+  <text x="218" y="242" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="23" fill="#c7d7f5">把 DeepSeek / 智谱网页版，变成你自己的 OpenAI API</text>
+
+  <g font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="19">
+    <rect x="96" y="300" width="150" height="46" rx="23" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="171" y="329" fill="#e6efff" text-anchor="middle">多账号池</text>
+
+    <rect x="262" y="300" width="170" height="46" rx="23" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="347" y="329" fill="#e6efff" text-anchor="middle">按 Key 隔离</text>
+
+    <rect x="448" y="300" width="170" height="46" rx="23" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="533" y="329" fill="#e6efff" text-anchor="middle">模型白名单</text>
+
+    <rect x="634" y="300" width="170" height="46" rx="23" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="719" y="329" fill="#e6efff" text-anchor="middle">用量统计</text>
+
+    <rect x="820" y="300" width="190" height="46" rx="23" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <text x="915" y="329" fill="#e6efff" text-anchor="middle">亮 / 暗双主题</text>
+  </g>
+
+  <text x="96" y="404" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="20" fill="#93c5fd" opacity="0.9">Windows 免安装 · 内置 WebView2 登录 · OpenAI 兼容 · MIT</text>
+  <text x="1104" y="440" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" font-size="18" fill="#ffffff" opacity="0.5" text-anchor="end">github.com/duruoxian/webai2api</text>
+</svg>
