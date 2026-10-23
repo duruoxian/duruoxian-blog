@@ -1,7 +1,7 @@
 ---
 title: "webai2api 续篇：四个平台、一台机器一个授权码——从个人玩具到能卖的客户端"
 date: 2026-10-23
-description: "从 v0.1.7 到 v0.1.19 的完整演进：接入 Kimi 与通义千问、把思考档位对齐真实产品、会话级防封、每账号出口分流，以及一套离线授权体系（Ed25519 签名 + 机器码绑定 + 防篡改）是怎么设计和被攻击验证的。"
+description: "从 v0.1.7 到 v0.1.20 的完整演进：Kimi 走网页版 Connect 协议、通义千问用隐藏浏览器中继绕开阿里风控，把思考档位对齐真实产品、会话级防封、每账号出口分流，以及一套离线授权体系（Ed25519 签名 + 机器码绑定 + 防篡改）是怎么设计和被攻击验证的。"
 category: 项目
 tags: ["AI", "Python", "Windows", "FastAPI", "opencode", "逆向", "安全"]
 cover: "/images/posts/webai2api/cover.svg"
@@ -9,7 +9,7 @@ cover: "/images/posts/webai2api/cover.svg"
 
 > 项目地址：https://github.com/duruoxian/webai2api
 > 下载：https://github.com/duruoxian/webai2api/releases/latest
-> 当前版本：v0.1.19 ｜ Windows ｜ MIT
+> 当前版本：v0.1.20 ｜ Windows ｜ MIT
 >
 > 上一篇（v0.1.7）讲的是「怎么把网页版变成 API」。这一篇讲之后发生的事：
 > 怎么从「自己用」变成「能分发给别人用」，以及为此踩过的坑。
@@ -34,6 +34,55 @@ cover: "/images/posts/webai2api/cover.svg"
 
 客户版和你自己的开发版**共享同一套代码**，只是多了一层授权门禁：
 没授权 → 所有 `/v1` 请求直接 403。
+
+## v0.1.20：把 Kimi 和千问真正打通
+
+v0.1.18 时这两家只是「接进去了」，实际发消息要么返回空、要么被风控拦。这一版才把它们跑到能日常用，两家踩的是完全不同的坑。
+
+### Kimi：网页版不是 REST，是 Connect 协议
+
+一开始对着 `/api/chat` 试了半天，它返回的是一个**新建会话对象**，不是回答。翻前端 bundle 才看清：网页版用的是 `@connectrpc/connect`，真正的聊天端点是：
+
+```
+POST /apiv2/kimi.gateway.chat.v1.ChatService/Chat
+Content-Type: application/connect+json
+```
+
+请求体是 **5 字节帧头 + JSON**，响应也是流式帧（每帧 5 字节头 + 一个 JSON 事件）：
+
+```json
+{"op":"append","mask":"block.text.content","block":{"text":{"content":"..."}}}
+{"op":"append","mask":"block.think.content","block":{"think":{"content":"..."}}}
+```
+
+还有个必须记的细节：**模型和 scenario 必须配对**。
+
+| 对外模型 | 内部 id | scenario |
+|---|---|---|
+| `kimi-k3` | `k3-agent` | `SCENARIO_OK_COMPUTER` |
+| `kimi-k2.8` | `k28-agent-preview` | `SCENARIO_OK_COMPUTER` |
+| `kimi-k2.6` | `k2d6-chat` | `SCENARIO_CHAT` |
+
+我最开始把 k3 也配成 `SCENARIO_CHAT`，服务端一律回 `invalid_argument`，我还以为是账号没买套餐——其实是参数配错了。这算这轮最大的一个误判，写代码时最怕把「我调错了」当成「对方不让用」。
+
+### 千问：纯 HTTP 一定被风控，只能在页面里发请求
+
+千问的接口本身很简单（`POST /api/v2/chat/completions`），但从 Python 发，阿里风控直接给你一个滑块惩罚页（`FAIL_SYS_USER_VALIDATE`）。原因是要 `bx-ua`、`bx-umidtoken` 这些由浏览器 JS 现算的头。
+
+最后的方案是**每个账号挂一个隐藏的 WebView2 中继**：
+
+```
+主程序 ──本地 HTTP──> 中继进程 ──> 隐藏浏览器加载 chat.qwen.ai
+                                    └─ 页面内 fetch，baxia SDK 自动补头
+```
+
+- 用登录时那份浏览器 profile，cookie 天然有效
+- `fetch` 的流通过 pywebview 桥回传，再转成 OpenAI 的 SSE
+- 首次调用要拉起浏览器，冷启动约 10~15 秒；之后常驻复用
+- 千问 token 只有 15 分钟，且服务端**没有** `/auths/refresh`（实测 404），
+  所以过期时是中继「整页重载」让网页自己换票；换不到（cookie 也过期）才弹窗让人重登
+
+这个方案不优雅，但它是唯一稳定的。纯 HTTP 那套我试过各种补头，都过不去。
 
 ## 第一件难事：思考档位不是「开关」，是分档
 
@@ -299,8 +348,9 @@ v2: [版本][码ID 4B][天数 2B][签发日 2B][类型 1B][机器摘要 8B]     
 - **登录窗口里的旧账号**：除了缓存，还有一个来源是微信/QQ 客户端本身记住的账号，
   那个不在浏览器 profile 里，清缓存清不掉。
 
-## 更新记录（v0.1.8 → v0.1.19）
+## 更新记录（v0.1.8 → v0.1.20）
 
+- **v0.1.20**：Kimi 改走网页版 Connect 协议（k3 / k2.8 / k2.6 全部可用，含思考与联网）；千问改为「每账号隐藏浏览器中继」绕过阿里风控；修复千问健康检查解包错误与删除会话接口 bug；四家平台全部放开；
 - **v0.1.19**：授权码绑定机器指纹（v2 格式）；客户版显示可复制机器码；登录窗口显示出口；网络诊断更准确；
 - **v0.1.18**：接入 Kimi / 通义千问；思考档位按真实产品分档；修复智谱打包版导入错误；
 - **v0.1.17**：授权记录升 v3（pepper / 地板 / 防降级）；edition 判定加固；登录残留清理；
@@ -315,6 +365,8 @@ v2: [版本][码ID 4B][天数 2B][签发日 2B][类型 1B][机器摘要 8B]     
 - **v0.1.8**：会话复用与连接保持。
 
 ## 现在能做什么
+
+四家平台（DeepSeek / 智谱清言 / Kimi / 通义千问）都能当普通 OpenAI 模型用：同一个 `/v1`、同一个 Key，流式、非流式、多轮、思考内容都通。千问首次调用会慢十几秒（要拉起隐藏浏览器），之后正常。
 
 开发版（自己用）：
 
