@@ -55,7 +55,27 @@ export default function ResourcesPage() {
     <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-2xl font-bold">资源</h1>
 
-      <h2 className="mb-3 text-lg font-semibold">工具站收藏</h2>
+      <h2 className="mb-3 text-lg font-semibold">站内工具</h2>
+      <div className="mb-8 space-y-3">
+        {tools.map((r) => (
+          <a
+            key={r.href}
+            href={r.href}
+            className="block rounded-xl border border-blue-200 bg-blue-50/60 p-5 transition-colors hover:border-blue-400 dark:border-blue-900 dark:bg-blue-950/40 dark:hover:border-blue-700"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-medium">{r.title}</h2>
+              <span className="shrink-0 rounded-full border border-blue-300 px-2.5 py-0.5 text-xs text-blue-600 dark:border-blue-800 dark:text-blue-400">
+                {r.tag}
+              </span>
+            </div>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{r.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      
+<h2 className="mb-3 text-lg font-semibold">工具站收藏</h2>
       <div className="mb-8 grid gap-3 sm:grid-cols-2">
         {linkItems.map((l) => {
           let host = l.url;
@@ -85,25 +105,6 @@ export default function ResourcesPage() {
             </a>
           );
         })}
-      </div>
-
-      <h2 className="mb-3 text-lg font-semibold">站内工具</h2>
-      <div className="mb-8 space-y-3">
-        {tools.map((r) => (
-          <a
-            key={r.href}
-            href={r.href}
-            className="block rounded-xl border border-blue-200 bg-blue-50/60 p-5 transition-colors hover:border-blue-400 dark:border-blue-900 dark:bg-blue-950/40 dark:hover:border-blue-700"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-medium">{r.title}</h2>
-              <span className="shrink-0 rounded-full border border-blue-300 px-2.5 py-0.5 text-xs text-blue-600 dark:border-blue-800 dark:text-blue-400">
-                {r.tag}
-              </span>
-            </div>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{r.desc}</p>
-          </a>
-        ))}
       </div>
 
       <h2 className="mb-3 text-lg font-semibold">外部资源</h2>
