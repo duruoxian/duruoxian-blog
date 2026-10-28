@@ -11,7 +11,7 @@ cover: "/images/posts/webai2api/cover.svg"
 > 下载：https://github.com/duruoxian/webai2api/releases/latest
 > 当前版本：v0.1.7 ｜ Windows 免安装（解压即用）｜ MIT
 
-![webai2api 总览](/images/posts/webai2api/overview-light.png)
+![webai2api 总览](/images/posts/webai2api/overview-light.webp)
 
 ## 这是个什么东西
 
@@ -67,31 +67,31 @@ http://127.0.0.1:8800/v1
 
 亮色主题的总览页，能看到请求数、Token、成功率、可用账号，以及按模型/按 Key 的用量：
 
-![总览（亮色）](/images/posts/webai2api/overview-light.png)
+![总览（亮色）](/images/posts/webai2api/overview-light.webp)
 
 暗色主题：
 
-![总览（暗色）](/images/posts/webai2api/overview-dark.png)
+![总览（暗色）](/images/posts/webai2api/overview-dark.webp)
 
 账号页里每个账号独立登录、独立凭证：
 
-![账号管理](/images/posts/webai2api/accounts.png)
+![账号管理](/images/posts/webai2api/accounts.webp)
 
 API Key 页，每个 Key 会显示绑定的账号数与模型数：
 
-![API Key 列表](/images/posts/webai2api/keys.png)
+![API Key 列表](/images/posts/webai2api/keys.webp)
 
 编辑 Key 时可以勾选可用账号和模型。勾了 DeepSeek 账号，模型列表就只会出现 DeepSeek 的模型；勾了智谱账号，才出现 GLM：
 
-![编辑 Key 的账号与模型范围](/images/posts/webai2api/key-scope.png)
+![编辑 Key 的账号与模型范围](/images/posts/webai2api/key-scope.webp)
 
 用量页支持按模型 / 按 Key 查看，最近请求可以按 Key 或账号筛选：
 
-![用量统计](/images/posts/webai2api/usage.png)
+![用量统计](/images/posts/webai2api/usage.webp)
 
 设置页内置了给 opencode 等客户端的填写说明，每一项都能一键复制：
 
-![在其他客户端中接入](/images/posts/webai2api/settings-guide.png)
+![在其他客户端中接入](/images/posts/webai2api/settings-guide.webp)
 
 ## 快速上手
 
