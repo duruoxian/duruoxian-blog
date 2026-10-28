@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>公式速查 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学公式速查表（冲刺期每天过一遍）</h1>
+<blockquote>
+<p>新学到公式随手补充；对应章节见括号。本表只收"必须秒出"的公式。</p>
+</blockquote>
+<h2>高数</h2>
+<h3>极限与连续（01章）</h3>
+<ul>
+<li>等价无穷小族（x→0）：sinx~x、tanx~x、arcsinx~x、arctanx~x、1-cosx~x²/2、eˣ-1~x、ln(1+x)~x、(1+x)^α-1~αx、aˣ-1~xlna</li>
+<li>lim(1+1/x)ˣ=e；1^∞型：e^(lim v·(u-1))</li>
+</ul>
+<h3>导数（02-03章）</h3>
+<ul>
+<li>参数二阶：d²y/dx²=[d(dy/dx)/dt]/(dx/dt)</li>
+<li>麦克劳林常用：eˣ=1+x+x²/2+o(x²)；sinx=x-x³/6+o(x³)；cosx=1-x²/2+x⁴/24+o(x⁴)；ln(1+x)=x-x²/2+x³/3+o(x³)；(1+x)^α=1+αx+α(α-1)x²/2+o(x²)</li>
+</ul>
+<h3>积分（04章）</h3>
+<ul>
+<li>∫tanx dx=-ln|cosx|+C；∫cotx dx=ln|sinx|+C；∫secx dx=ln|secx+tanx|+C；∫dx/(a²+x²)=(1/a)arctan(x/a)+C；∫dx/√(a²-x²)=arcsin(x/a)+C</li>
+<li>变限求导：d/dx∫_a^{φ(x)}f(t)dt=f(φ(x))φ'(x)</li>
+<li>p-积分：∫₁^∞x⁻ᵖ收敛(p&gt;1)；∫₀¹x⁻ᵖ收敛(p&lt;1)</li>
+</ul>
+<h3>多元（05-06章）</h3>
+<ul>
+<li>极值判别 AC-B²（A=f_xx）</li>
+<li>极坐标面积元 r dr dθ；球坐标 dV=r²sinφ dr dφ dθ</li>
+</ul>
+<h3>微分方程（07章）</h3>
+<ul>
+<li>y'+P y=Q：y=e^(-∫P)[∫Q e^(∫P)dx+C]</li>
+<li>特征根三种情形通解；特解修正因子 k（λ非根/单根/重根 → 0/1/2）</li>
+</ul>
+<h3>级数【仅数一】（08章）</h3>
+<ul>
+<li>几何级数 a/(1-q)（|q|&lt;1）；Σ1/n²=π²/6</li>
+<li>收敛域端点单独判；逐项求导积分后端点要重判</li>
+</ul>
+<h2>线代</h2>
+<ul>
+<li>|kA|=kⁿ|A|；AA<em>=|A|E；A⁻¹=A</em>/|A|；|A*|=|A|^(n-1)</li>
+<li>秩1矩阵 A=αβᵀ：Aⁿ=(βᵀα)^(n-1)A</li>
+<li>Σλᵢ=tr(A)；Πλᵢ=|A|；f(A)特征值=f(λ)</li>
+<li>Ax=0基础解系个数 n-r(A)；Ax=b通解=特解+齐次通</li>
+<li>实对称必可正交对角化；不同特征值特征向量正交</li>
+<li>正定 ⇔ 顺序主子式全正 ⇔ 特征值全正 ⇔ 正惯性指数n</li>
+</ul>
+<h2>概率【仅数一】</h2>
+<ul>
+<li>全概率/贝叶斯公式；E(XY)=E(X)E(Y) ⇔ 不相关（独立⇒不相关）</li>
+<li>D(X)=E(X²)-E²(X)；Var(X±Y)=DX+DY±2Cov</li>
+<li>常见分布均值方差表：B(n,p)→np,npq；P(λ)→λ,λ；U(a,b)→(a+b)/2,(b-a)²/12；E(λ)→1/λ,1/λ²</li>
+<li>(n-1)S²/σ²~χ²(n-1)；√n(X̄-μ)/S~t(n-1)</li>
+</ul></div></body></html>

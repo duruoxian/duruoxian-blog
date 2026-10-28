@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408大题专练_操作系统 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 大题专练 · 操作系统（30题·PV操作+计算题）</h1>
+<blockquote>
+<p>2026-10-29 生成。OS 大题约 23 分：一道 PV 操作大题（约 7-10 分）+ 计算/分析题。本册 30 题：PV 经典六型给<strong>完整信号量设计与伪代码</strong>，计算题给<strong>逐步演算过程</strong>。
+难度：★基础 ★★中等 ★★★难点。与《操作系统_知识点与难点》《408选择题题库_操作系统》配套；题号 OSD+序号。</p>
+</blockquote>
+<h2>一、PV 操作大题（OSD1–OSD6）</h2>
+<p><strong>OSD1.</strong>★★ 有一组生产者与一组消费者共享 n 个缓冲区（每个缓冲区放一件产品），写出完整的同步与互斥方案。</p>
+<blockquote>
+<p>信号量：mutex=1（缓冲区互斥）、empty=n（空缓冲数）、full=0（满缓冲数）。
+<code>c
+生产者i:                    消费者j:
+while(true){                while(true){
+    生产一件产品;                P(full);
+    P(empty);                   P(mutex);
+    P(mutex);                   从缓冲区取一件;
+    放入缓冲区;                 V(mutex);
+    V(mutex);                   V(empty);
+    V(full);                    消费;
+}                           }</code>
+<strong>评分点</strong>：①P(empty) 必须在 P(mutex) <strong>之前</strong>（先同步后互斥）——反序会在缓冲区满时死锁（握着锁等空位，消费者进不来取货）；②V 操作次序无所谓。</p>
+</blockquote>
+<p><strong>OSD2.</strong>★★★ 读者-写者问题：允许多读者同时读，写者与任何人互斥；要求<strong>写者优先</strong>（有写者等待时，新读者不得插入）。给出完整方案。</p>
+<blockquote>
+<p><code>c
+int count = 0;                  // 正在读的读者数
+semaphore mutex = 1;            // 保护count
+semaphore rw = 1;               // 读写互斥
+semaphore w = 1;                // 写者优先闸门
+写者:                           读者:
+while(true){                    while(true){
+    P(w);                           P(w);
+    P(rw);                          P(mutex);
+    写;                             if(count==0) P(rw); //第一个读者锁住写
+    V(rw);                          count++;
+    V(w);                           V(mutex);
+}                                   V(w);
+                                    读;
+                                    P(mutex);
+                                    count--;
+                                    if(count==0) V(rw); //最后一个解锁
+                                    V(mutex);
+                                }</code>
+<strong>评分点</strong>：count 两个临界点（第一读者 P(rw)、末读者 V(rw)）；w 信号量使"写者到达后，其后读者在 P(w) 处排队"，实现写优先；代价是读者可能饿死（公平版需排队号）。</p>
+</blockquote>
+<p><strong>OSD3.</strong>★★ 理发师问题：理发师 1 人，等候室 n 个座位。无顾客时理发师睡觉；顾客无座位则离开。写出方案。</p>
+<blockquote>
+<p><code>c
+semaphore customers = 0;        // 等候的顾客数
+semaphore barber = 0;           // 理发师就绪信号
+semaphore mutex = 1;
+int waiting = 0;                // 座位占用数
+理发师:                         顾客i:
+while(true){                    P(mutex);
+    P(customers);                   if(waiting &lt; n){
+    P(mutex);                           waiting++;
+    waiting--;                          V(customers);
+    V(barber);                          V(mutex);
+    V(mutex);                           P(barber);   // 等理发师
+    理发;                               理发;
+}                                   }
+                                    else { V(mutex); 离开; }</code>
+<strong>评分点</strong>：waiting 的增减都须在 mutex 内；理发师 P(customers) 为 0 时睡觉（阻塞在信号量上）。</p>
+</blockquote>
+<p><strong>OSD4.</strong>★★★ 独木桥问题：桥上允许<strong>同一方向</strong>的行人连续通过，反方向须等桥上无人。写出方案。</p>
+<blockquote>
+<p><code>c
+int countA = 0, countB = 0;
+semaphore bridge = 1;           // 桥的使用权
+semaphore mutexA = 1, mutexB = 1;
+方向A行人:                      方向B行人:
+P(mutexA);                      P(mutexB);
+if(countA == 0) P(bridge);      if(countB == 0) P(bridge);
+countA++;                       countB++;
+V(mutexA);                      V(mutexB);
+过桥;                           过桥;
+P(mutexA);                      P(mutexB);
+countA--;                       countB--;
+if(countA == 0) V(bridge);      if(countB == 0) V(bridge);
+V(mutexA);                      V(mutexB);</code>
+<strong>评分点</strong>：同向"第一个上桥者抢桥、最后一个下桥者还桥"；两方向对称。该方案同向者可无限通过 ⇒ 对方可能饿死（公平版可加轮换信号量，写出即加分）。</p>
+</blockquote>
+<p><strong>OSD5.</strong>★★ 父亲放苹果、母亲放橘子，儿子只吃橘子、女儿只吃苹果；盘子容量为 1。写出方案。</p>
+<blockquote>
+<p><code>c
+semaphore plate = 1;            // 盘子空位
+semaphore apple = 0, orange = 0;
+父亲:                母亲:               女儿:              儿子:
+while(true){         while(true){        while(true){       while(true){
+    削苹果;              剥橘子;             P(apple);          P(orange);
+    P(plate);            P(plate);           取苹果;            取橘子;
+    放苹果;              放橘子;             V(plate);          V(plate);
+    V(apple);            V(orange);          吃;                吃;
+}                    }                   }                  }</code>
+<strong>评分点</strong>：plate 初值 1 实现互斥放取；两个"产品信号"apple/orange 分别唤醒对应消费者。容量为 2 的变体：plate=2 且放取动作另加盘互斥。</p>
+</blockquote>
+<p><strong>OSD6.</strong>★★ 银行提供 1 个服务窗口、n 个等候座。顾客取号入座等候，叫号服务。用信号量描述"最多 n 人等候，其余离开"。</p>
+<blockquote>
+<p><code>c
+semaphore seat = n;             // 空座数
+semaphore mutex = 1, cust = 0, teller = 0;
+顾客:                           柜员:
+P(seat);        // 无座则阻塞？  while(true){
+（要求"离开"则先 P(mutex)        P(cust);
+  检查 seat==0 即走，同OSD3）      P(seat);      // 释放一个座位名额
+V(cust);                          服务一位顾客;
+叫号等待服务;                     V(teller);
+P(teller);                    }
+被服务;
+V(seat);</code>
+<strong>评分点</strong>：seat 同时承担"限流 n"与"座位互斥"；柜员侧 V(seat) 放在服务<strong>后</strong>（顾客坐下期间座位被占）。</p>
+</blockquote>
+<h2>二、死锁与调度计算（OSD7–OSD13）</h2>
+<p><strong>OSD7.</strong>★★★ 银行家算法：系统 A/B/C 三类资源，总量 (10,5,7)，当前分配与需求如下。(1) 当前状态安全吗？给出安全序列。(2) 若 P1 请求 (1,0,2)，能否分配？</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>进程</th>
+<th>Allocation(A,B,C)</th>
+<th>Max(A,B,C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0</td>
+<td>0,1,0</td>
+<td>7,5,3</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>2,0,0</td>
+<td>3,2,2</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>3,0,2</td>
+<td>9,0,2</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>2,1,1</td>
+<td>2,2,2</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>0,0,2</td>
+<td>4,3,3</td>
+</tr>
+<tr>
+<td>(1) Available = 总量−已分配 = (3,3,2)。逐个找 Need ≤ Available 者：</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>P1 Need(1,2,2) ✓ → Avail=(5,3,2)；P3 Need(0,1,1) ✓ → (7,4,3)；P4 Need(4,3,1) ✓ → (7,4,5)；P0 Need(7,4,3) ✓ → (7,5,5)；P2 Need(6,0,0) ✓ → (10,5,7)。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>安全序列 P1→P3→P4→P0→P2，状态安全</strong>。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>(2) 试分配：Avail=(2,3,0)，P1 Allocation=(3,0,2)，P1 Need=(0,2,0)。安全性检查：P1 ✓→(5,3,2)；P3 ✓→(7,4,3)；P4 ✓→(7,4,5)；P0 ✓→(7,5,5)；P2 ✓→(10,5,7)。<strong>仍安全 ⇒ 可以分配</strong>。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p><strong>OSD8.</strong>★★ 资源分配图：R1、R2、R3 各 2 个实例。P1 占 R1 的 1 个、请求 R2；P2 占 R2 的 1 个、请求 R3；P3 占 R3 的 1 个、请求 R1。判断是否死锁并说明检测方法。</p>
+<blockquote>
+<p>请求-分配边构成环 P1→R2→P2→R3→P3→R1→P1。R2 的另一实例无人持有也未分配 ⇒ P1 的请求仍无法满足。
+<strong>化简过程</strong>：R2 剩 1 实例分配给 P1 也不够（P1 还差? P1 只要 1 个 R2 → 恰好可满足！）
+修正题面：R2 只有 <strong>1 个</strong>实例（P2 持有）。则 P1 的请求边无实例可分配 → 环上三个进程均无第二条出路 → <strong>图不可化简，P1/P2/P3 死锁</strong>。
+检测方法：反复寻找"请求能被现有空闲实例满足"的进程，假设其可完成并归还资源；若最终仍有进程的请求边无法消去，则它们死锁。</p>
+</blockquote>
+<p><strong>OSD9.</strong>★★ 画出"五状态模型"转换图，并指出：哪些转换不可能直接发生？哪些转换一定由内核（而非进程自身）触发？</p>
+<blockquote>
+<p>五状态：创建→就绪→运行→终止；就绪⇄运行；运行→阻塞；阻塞→就绪。
+<strong>不可能的转换</strong>：阻塞→运行（缺的是事件不是CPU）；就绪→阻塞（还没上CPU谈何等待）。
+一定由内核触发：调度（就绪→运行）、时间片到（运行→就绪）、IO完成（阻塞→就绪，由中断处理程序完成）。</p>
+</blockquote>
+<p><strong>OSD10.</strong>★★ 进程 P1(到达0，需7)、P2(到达2，需4)、P3(到达4，需1)、P4(到达5，需4)。分别用 FCFS、非抢占 SJF、HRRN 求平均周转时间。</p>
+<blockquote>
+<p><strong>FCFS</strong>：完成 7,11,12,16 → 周转 7,9,8,11 → 平均 <strong>8.75</strong>。
+<strong>SJF</strong>：t=0 只有 P1 跑到 7；队列 P2(4),P3(1),P4(4) → 选 P3（8）→ P2/P4 同长，P2 先到（12）→ P4（16）。周转 7,10,4,11 → 平均 <strong>8</strong>。
+<strong>HRRN</strong>：t=7：P2=(5+4)/4=2.25，P3=(3+1)/1=4，P4=(2+4)/4=1.5 → 选 P3；t=8：P2=2.5 &gt; P4=1.75 → P2；再 P4。完成 7,8,12,16 → 周转 7,6,4,11 → 平均 <strong>7</strong>。
+结论：HRRN ≥ SJF ≥ FCFS（此例），响应比兼顾了等待时间。</p>
+</blockquote>
+<p><strong>OSD11.</strong>★★ 上题改用时间片轮转（时间片 2），画出甘特过程并求平均周转时间。</p>
+<blockquote>
+<p>t0-2 P1(余5)；t2-4 P2(余2)；t4-6 P1(余3)【P4 于5到达】；t6-7 P3 完成(7)；t7-9 P2 完成(9)；t9-11 P1(余1)；t11-13 P4(余2)；t13-14 P1 完成(14)；t14-16 P4 完成(16)。
+周转：P1=14，P2=7，P3=3，P4=11 → 平均 <strong>35/4 = 8.75</strong>。
+评分点：新到达进程<strong>排在正在运行者之后</strong>入队（本例 P4 于 t5 到达排在 P1 后）。</p>
+</blockquote>
+<p><strong>OSD12.</strong>★★ 多级反馈队列：Q1（时间片1）、Q2（时间片2）、Q3（FCFS）。P1 需 8、P2 需 5，同时到达。写出调度过程与完成时间。</p>
+<blockquote>
+<p>P1：Q1 跑 1（余7）降 Q2；P2：Q1 跑 1（余4）降 Q2。
+Q2（片2）：P1 跑 2（余5）→ P2 跑 2（余2）→ P1 跑 2（余3）→ P2 跑 2（余0，完成）→ P1 跑 2（余1）→ P1 降 Q3。
+Q3：P1 跑 1 完成。
+P2 完成时间 = 1+1+2+2+2 = <strong>8</strong>；P1 = 1+1+2+2+2+2+1 = <strong>11</strong>。
+特征：短作业在高层队列快速完成，长作业逐层下沉——兼顾响应与吞吐。</p>
+</blockquote>
+<p><strong>OSD13.</strong>★★ 抢占式优先级调度：P1(0,8,优先3)、P2(1,4,优先1)、P3(2,9,优先4)、P4(3,5,优先2)（数小者优先级高）。求各进程完成时间与平均周转。</p>
+<blockquote>
+<p>t0-1 P1(余7)；t1 P2 到（1&lt;3）抢占：t1-5 P2 完成(5)；t5-8 P4（2&lt;3）完成(8)；t8-13 P1 完成(13)；t13-22 P3 完成(22)。
+周转：P1=13，P2=4，P3=20，P4=5 → 平均 <strong>42/4 = 10.5</strong>。
+评分点：抢占发生在"新进程优先级更高"的到达时刻。</p>
+</blockquote>
+<h2>三、内存管理计算（OSD14–OSD21）</h2>
+<p><strong>OSD14.</strong>★★★ 页面走向 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1，3 个页帧。分别用 FIFO、LRU、OPT 统计缺页次数。</p>
+<blockquote>
+<p><strong>FIFO：15 次</strong>（7,0,1,2,3,0,4,0,2,1,0,7 各次缺页计满 15； Belady 队列先入先出）。
+<strong>LRU：12 次</strong>（最近未用先淘汰：如第 9 次访问 2 时淘汰 7——7 比 0/3 更久未用）。
+<strong>OPT：9 次</strong>（淘汰"未来最久不用"：如首次换页时留 0 与 1，淘汰 7）。
+评分点：三列过程表各画一遍；<strong>OPT 是下界</strong>，LRU 贴近 OPT，FIFO 存在 Belady 异常。</p>
+</blockquote>
+<p><strong>OSD15.</strong>★★ 什么是 Belady 异常？构造一个发生该异常的访问序列实例。</p>
+<blockquote>
+<p>采用 FIFO 时，<strong>增加页帧数反而使缺页次数上升</strong>。
+实例：序列 1,2,3,4,1,2,5,1,2,3,4,5 —— 3 帧缺页 <strong>9</strong> 次，4 帧缺页反而 <strong>10</strong> 次。
+原因：FIFO 的淘汰与"是否常用"无关，堆栈性质不成立；LRU/OPT 属栈类算法，无此异常。</p>
+</blockquote>
+<p><strong>OSD16.</strong>★★ 工作集模型如何防止抖动？设窗口 Δ=5，访问串 3,4,5,6,7,3,4,5,6,7，求 t 时刻（窗口覆盖最后5次）的工作集。</p>
+<blockquote>
+<p>工作集 W(t,Δ) = 最近 Δ 次访问中出现的<strong>去重页面集合</strong>。最后 5 次 = 3,4,5,6,7（无重复）⇒ <strong>W = {3,4,5,6,7}，|W|=5</strong>。
+防抖动原则：Σ各进程工作集 ≤ 物理页帧总数，否则<strong>挂起</strong>某进程腾出页帧；每进程分配页帧数 ≥ 其工作集大小。</p>
+</blockquote>
+<p><strong>OSD17.</strong>★★ 空闲分区按地址依次为 100K、500K、200K、300K、600K，作业申请 212K。分别用首次适应、最佳适应、最坏适应说明放入哪个分区及剩余。</p>
+<blockquote>
+<p>首次适应：第一个 ≥212 的是 500K → 放入，剩 <strong>288K</strong>。
+最佳适应：最小的够用者 300K → 放入，剩 <strong>88K</strong>。
+最坏适应：最大者 600K → 放入，剩 <strong>388K</strong>。
+评价：最佳适应留下的小碎片最多（88K 很难再用）；首次适应综合表现常最好；最坏适应保留大块但快速消耗大分区。</p>
+</blockquote>
+<p><strong>OSD18.</strong>★★ 页大小 1KB，某进程页表：页0→帧3，页1→帧8，页2→帧7。逻辑地址 2500 的物理地址是多少？</p>
+<blockquote>
+<p>2500 = 页号 2500/1024 = <strong>2</strong>，页内偏移 = 2500 − 2×1024 = <strong>452</strong>。
+查页表：页2 → 帧7，帧起始 = 7×1024 = 7168。
+<strong>物理地址 = 7168 + 452 = 7620</strong>。</p>
+</blockquote>
+<p><strong>OSD19.</strong>★★ 32 位虚地址、4KB 页、页表项 4B。采用两级页表（页目录 10 位 + 页表 10 位 + 偏移 12 位）。虚地址 0x00403004 的页目录号、页表号、偏移各是多少？</p>
+<blockquote>
+<p>二进制拆分：0000000001 | 0000000011 | 000000000100。
+<strong>页目录号 = 1，页表号 = 3，偏移 = 4</strong>。
+若页目录项 1 指向的页表中第 3 项映射到帧 0x1234：物理地址 = 0x1234×0x1000 + 4 = <strong>0x1234004</strong>。</p>
+</blockquote>
+<p><strong>OSD20.</strong>★★ TLB 查找 20ns，访存 100ns，TLB 命中率 90%。求一次取数的有效访问时间 EAT（TLB 缺失时需再访一次存取页表）。</p>
+<blockquote>
+<p>EAT = 0.9×(20+100) + 0.1×(20+100+100)
+= 0.9×120 + 0.1×220 = 108 + 22 = <strong>130ns</strong>。
+评分点：两种情形都含"TLB 查找 20ns"；缺失情形是页表访问与取数两次访存。</p>
+</blockquote>
+<p><strong>OSD21.</strong>★★ 分段系统：段表 {段0: 基址400, 长200；段1: 基址2300, 长680；段2: 基址90, 长580}。逻辑地址 (0, 130)、(2, 600)、(1, 700) 的结果各是什么？</p>
+<blockquote>
+<p>(0,130)：130 &lt; 200 ✓ → 物理 = 400+130 = <strong>530</strong>。
+(2,600)：600 &gt; 580 ⇒ <strong>越界中断</strong>。
+(1,700)：700 &gt; 680 ⇒ <strong>越界中断</strong>。
+评分点：分段必须先查段长做越界保护——这是与分页（页长固定无须判长）的本质区别。</p>
+</blockquote>
+<h2>四、文件与 I/O 计算（OSD22–OSD30）</h2>
+<p><strong>OSD22.</strong>★★ 磁盘簇大小 4KB，磁盘总容量 100GB。FAT 每表项 4B。求 FAT 表自身需占多少空间？一个 100KB 的文件占多少簇？</p>
+<blockquote>
+<p>簇数 = 100GB / 4KB = 25M（2.5×10⁷）个表项 ⇒ FAT 大小 = 25M × 4B = <strong>100MB</strong>。
+100KB 文件 = 25 簇（恰整除；若 101KB 则需 26 簇，最后一簇浪费近整簇——内部碎片的由来）。</p>
+</blockquote>
+<p><strong>OSD23.</strong>★★★ UNIX 混合索引：块 4KB、地址项 4B。i 结点含 10 个直接地址、1 个一级、1 个二级、1 个三级间接地址。求该结构可表示的最大文件大小。</p>
+<blockquote>
+<p>每块可存地址数 = 4KB/4B = 1024。
+直接：10×4KB = 40KB；
+一级：1024×4KB = 4MB；
+二级：1024²×4KB = 4GB；
+三级：1024³×4KB = 4TB。
+<strong>最大文件 = 40KB + 4MB + 4GB + 4TB</strong>。
+评分点：直接块只有 10 个（不是 12 或 1024）；各级是"层数×1024"的幂。</p>
+</blockquote>
+<p><strong>OSD24.</strong>★★ 位示图字长 32 位，块号从 0 开始编号。块号 1000 对应字号与位号？字号 3、位号 5 对应的块号是多少？</p>
+<blockquote>
+<p>字号 = ⌊1000/32⌋ = <strong>31</strong>，位号 = 1000 mod 32 = <strong>8</strong>。
+字号3位号5 → 块号 = 3×32 + 5 = <strong>101</strong>。
+（若题目声明"块号从 1 开始"，先减 1 再除——读题干口径。）</p>
+</blockquote>
+<p><strong>OSD25.</strong>★★★ 磁道请求到达顺序 98, 183, 37, 122, 14, 124, 65, 67，磁头当前在 53，向磁道号增大方向移动。分别求 FCFS、SSTF、SCAN（到头再回）、C-SCAN 的移动总量。</p>
+<blockquote>
+<p><strong>FCFS</strong>：53→98→183→37→122→14→124→65→67：45+85+146+85+108+110+59+2 = <strong>640</strong>。
+<strong>SSTF</strong>：53→65(12)→67(2)→37(30)→14(23)→98(84)→122(24)→124(2)→183(59) = <strong>236</strong>。
+<strong>SCAN</strong>（电梯，向大扫到 183 再回头）：(183−53) + (183−14) = 130+169 = <strong>299</strong>。
+<strong>C-SCAN</strong>（单向扫，到头直回起点再单向）：(183−53) + (199−0) + (14−0) = 130+199+14 = <strong>343</strong>。
+评分点：SCAN 与 C-SCAN 的"端点是否计距"按题干口径（本例 C-SCAN 从 199 跳回 0 计 199）。</p>
+</blockquote>
+<p><strong>OSD26.</strong>★★ 磁盘转速 6000 转/分，每道 100 扇区，平均寻道 8ms。求读一个扇区的平均存取时间。</p>
+<blockquote>
+<p>转一周 = 60000/6000 = 10ms；平均旋转延迟 = 5ms。
+单扇区传输 = 10ms/100 = 0.1ms。
+<strong>平均存取 = 8 + 5 + 0.1 = 13.1ms</strong>。</p>
+</blockquote>
+<p><strong>OSD27.</strong>★★ 描述 open() 与 read() 系统调用在内核中的主要动作，并说明"为什么打开后重复读不需要再查目录"。</p>
+<blockquote>
+<p>open：路径名逐级查目录 → 找到 FCB（inode）读入内存 → 填入进程打开文件表，返回 fd；共享文件还需引用计数+1。
+read：以 fd 索引打开文件表 → 取 inode 与读写指针 → 按索引/链接策略定位数据块 → 经缓冲读入用户区 → 指针后移。
+不再查目录的原因：<strong>打开文件表缓存了 FCB 与当前读写位置</strong>，fd 是直达句柄——这正是"先 open 后读写"两次调用设计的意义。</p>
+</blockquote>
+<p><strong>OSD28.</strong>★★ 文件 F 的硬链接与符号链接各是什么？删除 F 原文件后两者分别表现如何？</p>
+<blockquote>
+<p><strong>硬链接</strong>：目录项直接指向同一 inode，引用计数 +1。删除原文件：计数减 1，<strong>文件数据仍存在</strong>，其余名字照常访问；计数为 0 且无进程打开时才真正释放。
+<strong>符号链接</strong>：单独的新文件，内容是<strong>路径字符串</strong>。删除原文件后：链接仍在但指向悬空路径，<strong>访问报错</strong>。
+评分点：硬链接不能跨文件系统、不能对目录（防环）；符号链接可以，但有额外路径解析开销。</p>
+</blockquote>
+<p><strong>OSD29.</strong>★★ SPOOLing 技术如何把一台打印机变成"多台"？给出系统组成与数据流向。</p>
+<blockquote>
+<p>组成：输入/输出井（磁盘）、输入/输出缓冲、井管理进程、假脱机打印进程。
+流向：用户进程"打印"= 把输出写入<strong>输出井</strong>并排队 → 立即返回"打印完成"的假象 → 假脱机进程按 FIFO 从井中取出送真实打印机。
+效果：物理打印机独占，逻辑上人人即时可用——<strong>用可共享的磁盘空间模拟独占设备</strong>。</p>
+</blockquote>
+<p><strong>OSD30.</strong>★★ 设备输入一块数据耗时 T=130μs，OS 处理一块耗时 C=100μs，缓冲区拷贝 M=20μs。处理 10 块数据，单缓冲与双缓冲各需多久？</p>
+<blockquote>
+<p>单缓冲：一块处理与下一块输入可重叠，但拷贝须独占缓冲 ⇒ 每块 max(C,T)+M = max(100,130)+20 = 150μs ⇒ 10 块 <strong>1500μs</strong>。
+双缓冲：输入装第二个缓冲与"拷贝+处理"并行 ⇒ 每块 max(C+M, T) = max(120,130) = 130μs ⇒ 10 块 <strong>1300μs</strong>。
+结论：T &gt; C 时双缓冲完全被设备速率拖住（瓶颈在输入）。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：OSD1–OSD30。使用节奏：PV 六型<strong>默写信号量设计与伪代码</strong>（OSD1/OSD2 必须一字不差）；计算题每题手算到结果；银行家（OSD7）与磁盘调度（OSD25）至少各做两遍。错题标回《操作系统_知识点与难点》。</p></div></body></html>

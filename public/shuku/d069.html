@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计组精讲_指令系统与CPU · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机组成原理精讲 · 指令系统与CPU（寻址计算 + 流水线演算）</h1>
+<blockquote>
+<p>计组精讲第3批。指令系统抓<strong>扩展操作码设计与寻址方式EA表</strong>，CPU抓<strong>数据通路与流水线三类冒险</strong>——408大题"流水线时空图"的原理底座。</p>
+</blockquote>
+<hr />
+<h1>第4章 指令系统</h1>
+<h2>一、指令格式精讲</h2>
+<p><strong>I1 指令构成</strong>：操作码（做什么）+地址码（对谁做）。地址码个数：四/三/二/一/零地址。
+<strong>I2 定长操作码 vs 变长（扩展）操作码</strong>：
+- 定长：规整硬件简单（RISC）；
+- <strong>扩展操作码</strong>：短码不给长码<strong>当</strong>前缀（前缀一致性），指令空间指数级利用（CISC）。
+【扩展操作码设计规则（必会）】①短操作码不能与长操作码前缀重合；②各类指令数用<strong>逐层分配</strong>验证：4位码留1个扩展口(1111)→下级可扩 16×16=256 种…</p>
+<p><strong>考题1（扩展操作码·408经典设计题）</strong> 指令字长16位，每个地址码字段4位。设计：三地址指令15条、二地址指令15条、一地址指令15条、零地址指令16条。写出操作码分配方案。
+【解】
+| 类型 | 操作码（16位） | 数量 |
+|---|---|---|
+| 三地址 | 0000~1110（4位） | 15 |
+| 二地址 | 1111 0000~1111 1110（前4位1111+4位） | 15 |
+| 一地址 | 1111 1111 0000~1111 1111 1110（前8位1111 1111） | 15 |
+| 零地址 | 1111 1111 1111 0000~1111 1111 1111 1111 | 16 |
+验证前缀不冲突：短码(如1111)不是任何长码的"完整前缀位置"冲突——每个层次留口1111向下扩展。∎
+（另一常见问法：给出某条指令的操作码，判断它是几地址指令——<strong>看前缀落入哪一层</strong>。）</p>
+<h2>二、寻址方式精讲（EA表+访存次数）</h2>
+<p><strong>A1 指令寻址</strong>：顺序（PC+1"1"=指令长度）、跳跃（转移指令）。
+<strong>A2 数据寻址十种（EA=有效地址）</strong>：
+| 寻址 | 有效地址 | 取操作数访存 | 特点/用途 |
+|---|---|---|---|
+| 立即 | 操作数在指令中 | <strong>0次</strong> | 最快；只作源 |
+| 直接 | EA=A | 1 | 简单；寻址范围受A位限制 |
+| 一次间接 | EA=(A) | <strong>2</strong> | 扩大范围；慢 |
+| 寄存器 | EA=Rᵢ（操作数在寄存器） | 0 | 快、指令短 |
+| 寄存器间接 | EA=(Rᵢ) | 1 | 扩大范围 |
+| <strong>相对</strong> | EA=(PC)+A | 1 | <strong>便于程序浮动</strong>（代码移植） |
+| <strong>基址</strong> | EA=(BR)+A | 1 | <strong>面向操作系统</strong>：程序重定位（BR由OS装、执行中不变、A可变） |
+| <strong>变址</strong> | EA=(IX)+A | 1 | <strong>面向用户</strong>：数组循环（IX可变、A不变） |
+| 堆栈 | EA=(SP) | 1 | 硬堆栈在CPU/软堆栈在内存 |</p>
+<p><strong>考题2（相对寻址·转移目标计算）</strong> 转移指令地址4000H，指令长4B，相对偏移量−100（十进制）。求转移目标地址。
+【解】取指后PC=4000H+4=4004H；目标=PC+偏移=4004H−64H=<strong>3FA0H</strong>。∎
+（关键：<strong>相对寻址以"取出指令后的PC"为基准</strong>——PC已自动加过指令长度。）</p>
+<p><strong>考题3（访存次数计算）</strong> 一条<strong>一地址</strong>取数指令（LOAD），操作数采用<strong>一次间接寻址</strong>。指令执行全程共访存几次？
+【解】取指令1次 + 间址阶段取有效地址1次 + 取操作数1次 = <strong>3次</strong>。∎
+（若为寄存器寻址：只1次（取指）。寻址方式×指令类型→访存次数，408选择题钉子。）</p>
+<p><strong>考题4（基址vs变址·辨析）</strong> 处理数组 a[i] 的循环程序与程序在内存中的重定位，各适合哪种寻址？为什么？
+【答】数组→<strong>变址</strong>（IX内容可变、形式地址A=数组首址不变，面向用户）；重定位→<strong>基址</strong>（基址寄存器由OS装入、执行中不变、形式地址可变，面向系统）。∎
+（口诀：<strong>基址管搬家、变址管循环</strong>。）</p>
+<p><strong>A3 CISC vs RISC（对比表·必背）</strong>：
+| | CISC | RISC |
+|---|---|---|
+| 指令 | 数量多、变长 | 少、<strong>定长</strong> |
+| 寻址 | 丰富 | 少 |
+| 访存指令 | 多数指令可访存 | <strong>只有Load/Store访存</strong> |
+| 控制器 | <strong>微程序</strong> | <strong>组合逻辑（硬布线）</strong> |
+| 寄存器 | 少 | <strong>大量通用寄存器</strong> |
+| 流水线 | 难优化 | 适合流水线 |
+| 目标代码 | 省空间 | 用空间换时间 |</p>
+<hr />
+<h1>第5章 中央处理器</h1>
+<h2>一、CPU结构与寄存器</h2>
+<p><strong>C1 CPU四大功能</strong>：指令控制、操作控制、时间控制、数据加工。
+<strong>C2 寄存器两类</strong>：
+- <strong>用户可见</strong>：通用寄存器、条件码；
+- <strong>用户不可见（控制与状态）</strong>：<strong>MAR、MDR、PC、IR</strong>、微指令寄存器。
+【要点】PC存放<strong>下一条指令地址</strong>、有自动加1功能；IR存当前指令；<strong>MAR/MDR位数=地址线宽/存储字长</strong>。</p>
+<h2>二、数据通路与指令执行</h2>
+<p><strong>D1 数据通路</strong>：数据在功能部件间传送的路径（含控制信号）。单总线（简单慢、冲突多）vs 多总线/专用通路（快，配合流水线）。
+<strong>D2 指令周期四阶段数据流</strong>：
+- <strong>取指</strong>：PC→MAR→M→MDR→IR，PC+1（所有指令相同）；
+- <strong>间址</strong>：（IR地址码）→MAR→M→MDR→IR地址码；
+- <strong>执行</strong>：按操作码分派（算逻→ALU；访存→MAR/MDR；转移→改PC）；
+- <strong>中断</strong>：响应条件（指令周期结束）→关中断→保存断点→服务程序。
+<strong>D3 控制器两种实现</strong>：
+- <strong>硬布线</strong>：组合逻辑直接产生控制信号——<strong>快、RISC用</strong>、改指令难；
+- <strong>微程序</strong>：控制信号编码存于<strong>控制存储器CM</strong>（ROM）——一条机器指令=一段微程序，一条微指令=一组微命令；<strong>水平型微指令</strong>（并行能力强、字长长）vs <strong>垂直型</strong>（像机器指令、需译码）；
+【对比】微程序：规整易扩展、<strong>速度慢</strong>（访CM取微指令）；硬布线：快、难修改。<strong>CM在CPU内部、对程序员透明</strong>（不可见）。</p>
+<h2>三、指令流水线（计算主战场）</h2>
+<p><strong>P1 五段流水线</strong>：<strong>IF取指 → ID译码/取数 → EX执行 → MEM访存 → WB写回</strong>，每段一个时钟周期。
+<strong>三大性能指标</strong>：
+- 总时间 = <strong>(k+n−1)×Δt</strong>（k段、n条指令）；
+- 吞吐率 Tp = n/[(k+n−1)Δt] → 极限 1/Δt；
+- 加速比 S = 串行时间/流水时间 = nkΔt/[(k+n−1)Δt] = nk/(k+n−1) → 极限 k。
+<strong>P2 三类冒险与处理（必背）</strong>：
+| 冒险 | 场景 | 处理 |
+|---|---|---|
+| <strong>结构</strong> | 部件资源冲突（如访存指令与取指争存储器） | 停顿；指令存储器与数据存储器<strong>分开</strong>（哈佛结构）；资源重复 |
+| <strong>数据</strong> | 后条要用前条结果（<strong>RAW读后写</strong>最常见） | <strong>转发/旁路</strong>；停顿（插入气泡）；编译调度 |
+| <strong>控制</strong> | 转移指令改变PC | <strong>分支预测</strong>、延迟槽、尽早生成转移地址 |
+【load-use要点】load后的指令要用load的结果：<strong>即使有转发也需停1拍</strong>（数据MEM段末才可用，下条EX需在其后）。
+<strong>P3 影响因素与高级技术</strong>：超标量（多发射，空间并行）、超流水（更细分段，时间并行）、超长指令字VLIW（编译器打包）。</p>
+<h2>四、本章考题（5题）</h2>
+<p><strong>考题5（五段流水线·基础计算）</strong> 五段各100ns，连续执行12条指令（无冒险）。求总时间、吞吐率、加速比。
+【解】T=(5+12−1)×100=<strong>1600ns</strong>；吞吐率=12/1600ns=<strong>7.5×10⁶ 条/s</strong>；串行=12×500=6000ns → 加速比=6000/1600=<strong>3.75</strong>。∎</p>
+<p><strong>考题6（load-use冒险·时空图）</strong> 五段流水线（同上），第2条指令是load，第3条指令立即用其结果（无转发）。求执行4条指令的总时间与气泡数。
+【解】第3条的EX需要load的数据（MEM段末才可用）→ 第3条在ID后停顿直至load的MEM完成：
+| 拍 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | IF | ID | EX | ME | WB | | | | |
+| 2 | | IF | ID | — | — | EX | ME | WB | |
+| 3 | | | IF | — | ID | — | EX | ME | WB |
+| 4 | | | | IF | — | ID | — | EX | WB? ME |
+——第3条MEM在8、WB在9；第4条EX在8、WB在10？逐拍排（EX后MEM、WB）：
+最终：总时间=<strong>10拍=1000ns</strong>，插入<strong>2个气泡</strong>（无转发时load-use停2拍）。∎
+（若有转发（MEM末→EX首），第3条EX紧随load的MEM，仅停1拍——"转发省1拍"是结论。）</p>
+<p><strong>考题7（分支预测·控制冒险）</strong> 无分支预测时每次转移指令造成几拍损失？动态分支预测的意义？
+【答】转移指令在EX末才知道方向 → 后续已取指令作废，流水线冒空（5段损失约2~3拍）。动态分支预测（BHT记录历史）猜中则<strong>零损失</strong>——现代CPU预测准确率&gt;90%，这就是"预测失败代价大但平均收益大"的权衡。∎</p>
+<p><strong>考题8（微程序概念链）</strong> 按从大到小排序"机器指令/微程序/微指令/微命令"，并说明相邻层的关系。
+【答】机器指令 → 微程序 → 微指令 → 微命令。一条<strong>机器指令</strong>对应一段<strong>微程序</strong>，一段微程序由若干<strong>微指令</strong>组成，一条微指令包含若干<strong>微命令</strong>（微命令=微操作的控制信号）。CM（控制存储器）用ROM实现、在CPU内。∎</p>
+<h2>五、本章必会清单</h2>
+<ol>
+<li>扩展操作码设计（前缀一致性+逐层留口1111）；操作码位数与指令数换算；</li>
+<li>十种寻址EA表+取操作数访存次数；相对寻址基准=取指后的PC；</li>
+<li>基址（系统/重定位）vs变址（用户/数组）；</li>
+<li>CISC/RISC七维对比表；</li>
+<li>PC/IR/MAR/MDR功能与位数；取指数据流默写；</li>
+<li>硬布线vs微程序（速度/灵活性/CM不可见）；水平型vs垂直型微指令；</li>
+<li>流水线三公式（总时间/吞吐率/加速比）与极限；三类冒险处理表；</li>
+<li>load-use：无转发2气泡、有转发1气泡；超标量/超流水/VLIW概念。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第4/4批·收官）：<strong>总线+输入输出系统</strong>——总线三特性与带宽计算（DDR双沿）、仲裁三方式、四I/O控制方式CPU介入对比、中断系统（多重中断屏蔽字设计）、DMA三方式与传输过程。说"继续"交付收官。</p>
+</blockquote></div></body></html>

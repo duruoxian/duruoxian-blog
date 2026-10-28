@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计网精讲_体系结构与物理层 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机网络精讲 · 体系结构与物理层（定义原理深度讲解 + 考题详解）</h1>
+<blockquote>
+<p>计网408共25分，但概念贯穿全书、计算题集中在物理层与链路层。本册定位与《数学一985精讲》一致：<strong>原理讲到"为什么"</strong>（不只背"是什么"），考题全部验算。
+<strong>系列批次</strong>：①体系结构+物理层 ✅本册 ②数据链路层 ③网络层 ④传输层+应用层。
+配套：《计算机网络_知识点与难点》《计算机网络_考题集》《408_易错点与陷阱清单》。</p>
+</blockquote>
+<hr />
+<h1>第1章 计算机网络体系结构</h1>
+<h2>一、概念精讲</h2>
+<p><strong>C1 计算机网络的定义</strong>：互连的、自治的计算机系统的集合。
+【拆解】"互连"=通过通信链路互联互通；"自治"=每台计算机有独立操作系统、可独立工作（主从关系的系统不算网络）。</p>
+<p><strong>C2 组成的三个视角</strong>：
+- <strong>组成</strong>：硬件（主机、路由器、链路、交换机）+ 软件（协议实现、应用）+ 协议（核心）。
+- <strong>工作方式</strong>：边缘部分（端系统，运行程序；通信方式：<strong>C/S 客户服务器</strong>——服务请求方/提供方不对称；<strong>P2P 对等</strong>——不区分请求方提供方）+ 核心部分（路由器+网络，提供<strong>存储转发</strong>与路由选择）。
+- <strong>功能组成</strong>：通信子网（下三层：物理/链路/网络——管"传"）+ 资源子网（上三层：会话/表示/应用——管"用"；传输层居中承上启下）。</p>
+<p><strong>C3 分类</strong>：按范围 WAN/MAN/LAN/PAN；按传输技术 广播式（共享信道）/点对点（存储转发选路）；按拓扑 总线/星/环/网状；按使用者 公用/专用；按交换 电路/报文/分组。</p>
+<p><strong>C4 协议三要素</strong>（选择题钉子）：
+- <strong>语法</strong>：数据与控制信息的<strong>结构或格式</strong>；
+- <strong>语义</strong>：需要发出何种控制信息、完成何种动作、做出何种<strong>应答</strong>；
+- <strong>同步（时序）</strong>：事件实现顺序的详细说明、速度匹配。</p>
+<h2>二、性能指标精讲（计算题主战场）</h2>
+<p><strong>P1 速率与带宽</strong>：带宽=信道能通过的<strong>最高数据率</strong>（b/s）。</p>
+<p><strong>P2 时延四件套（必背+必会算）</strong>：
+总时延 = <strong>发送时延 + 传播时延 + 处理时延 + 排队时延</strong>
+- 发送时延（传输时延）= 分组长度 L ÷ 发送速率 R——<strong>节点把所有比特推上链路所需时间</strong>；
+- 传播时延 = 信道长度 d ÷ 电磁波速率 v（电缆≈2.3×10⁸，光纤≈2×10⁸ m/s）；
+- 处理时延+排队时延：路由器检查首部、查表、排队（一般不计入计算题，题干给才算）。
+【高频辨析】发送时延与<strong>带宽</strong>有关、与<strong>距离无关</strong>；传播时延与<strong>距离</strong>有关、与<strong>带宽无关</strong>。"提高带宽能减少发送时延，不能减少传播时延"——链路长了数据也不会跑得更快。</p>
+<p><strong>P3 时延带宽积</strong> = 传播时延 × 带宽。
+【直觉】它是"管道的容积"——<strong>第一比特刚到达终点时，管道里还飘着多少比特</strong>。停等协议效率、TCP窗口下限的计算都源于它。</p>
+<p><strong>P4 往返时间 RTT</strong>：发送方发出数据到收到对方确认的总时间（含对端处理与回传）。
+【应用】停等协议信道利用率 U = T_D/(T_D+RTT+T_A)。</p>
+<p><strong>P5 利用率与时延的关系</strong>：D = D₀/(1−U)（D₀=空闲时延，U=利用率）。
+【直觉】排队论结论：利用率→100% 时时延→∞——所以"带宽用到90%"已经是噩梦，运营商按70%规划。</p>
+<h2>三、分层结构精讲</h2>
+<p><strong>L1 为什么要分层</strong>（985面试）：
+① 各层<strong>相互独立</strong>：上层只需知道下层通过接口提供什么服务，不必关心如何实现——把复杂问题拆成局部问题；
+② 灵活性好：某层变化（只要接口不变）不影响其他层；
+③ 易于实现维护、促进标准化、每层功能专一。
+【要点】分层也有代价：层次多→功能重复、开销大——OSI失败/TCP-IP成功的根源（OSI先有体系后造实现、协议太复杂、层次划分过细；TCP-IP先有实现后补体系、简单实用）。</p>
+<p><strong>L2 核心概念对（必背辨析）</strong>：
+- <strong>实体</strong>：任何可发送/接收信息的硬件或软件进程；对等实体=不同机器上同一层次。
+- <strong>协议</strong>：控制两个（或多个）<strong>对等实体</strong>进行通信的规则的集合——<strong>水平方向</strong>。
+- <strong>服务</strong>：下层通过<strong>层间接口</strong>向上层提供的功能——<strong>垂直方向</strong>。
+- 服务原语：请求 Request、指示 Indication、响应 Response、证实 Confirmation。
+【金句】"协议是水平的，服务是垂直的"；本层协议的实现要靠<strong>下层提供的服务</strong>，同时为本层之上的实体提供<strong>更高级的服务</strong>。
+【要点】并非上层必须使用下层全部服务；上层只能看见服务<strong>无法看见下层协议</strong>。</p>
+<p><strong>L3 三种交换方式对比（计算见考题1）</strong>：
+- <strong>电路交换</strong>：建立连接→独占通话→释放。实时性强、时延小；线路利用率低、无法差错处理。
+- <strong>报文交换</strong>：整个报文为单位存储转发。无需建立连接、线路利用率高；时延大（整报文逐跳）、要求缓存大。
+- <strong>分组交换</strong>：报文切成分组（含首部）存储转发。<strong>408默认的交换方式</strong>：时延小（流水线）、灵活、可靠（可绕故障）；有首部开销、可能失序丢包需处理。
+【直觉】报文交换像"整车货运"（每站卸整箱）；分组交换像"集装箱分批流水线"（首批到位后每站只等一个小箱）。</p>
+<p><strong>L4 五层模型功能速查（408框架）</strong>：
+| 层 | 任务 | 关键词 | 设备/PDU |
+|---|---|---|---|
+| 应用 | 通过应用进程交互提供 services | 报文 | 网关/应用进程 |
+| 传输 | 端到端可靠/不可靠传输 | 报文段；端到端 | — |
+| 网络 | 分组转发、路由选择；主机到主机 | IP数据报；分组交换 | 路由器 |
+| 数据链路 | 相邻节点无差错传输；成帧/差错/流量/介质访问 | 帧 | 网桥、交换机 |
+| 物理 | 比特流透明传输；定义接口四大特性 | 比特 | 中继器、集线器 |
+【高频对应】通信子网=下三层；端到端=传输层；点到点（相邻节点）=下两层。</p>
+<h2>四、本章考题（4题）</h2>
+<p><strong>题1（三种交换时延·985经典推导）</strong> 报文 x bit，经 k 段链路（每段速率 R，忽略传播与建立时延）。分别求报文交换与分组交换（分组长度 p bit，含首部暂不计）的总时延，并比较。
+【解】
+报文交换：每跳把整个报文发完才转发 → t_报 = k·x/R。
+分组交换：流水线——第一组经过 k 跳需 k·(p/R)，此后每到一个 p/R 到达一组，共 x/p 组：
+t_分组 = (x/p)·(p/R) + (k−1)·(p/R) = x/R + (k−1)p/R。
+数值：x=10⁶ bit，p=10³ bit，k=5，R=10⁸ b/s：报文=0.05s；分组=0.01+0.00004≈<strong>10.04ms</strong>（快5倍）。
+一般性比较：t_报−t_分组 = (k−1)(x−p)/R &gt; 0（只要 p&lt;x）→ <strong>分组交换恒优</strong>（无传播时延时）。
+【985延伸】计入每分组固定首部 h bit 后最优分组长度：t(p)=x·p/[(p−h)R]+(k−1)p/R，d t/dp=0 解得
+<strong>p* = h + √(xh/(k−1))</strong>（导数中 (p−h)−p=−h 的经典结果）。∎</p>
+<p><strong>题2（时延四件套计算）</strong> 在 100Mb/s 链路上发送 100MB 文件，链路长 1000km，信号速率 2×10⁸ m/s。求发送时延与传播时延。
+【解】发送时延=8×10⁸ bit/10⁸ b/s=<strong>8s</strong>；传播时延=10⁶ m/(2×10⁸ m/s)=<strong>5ms</strong>。
+发送时延是传播时延的1600倍——<strong>大文件场景下"加带宽"远比"缩短距离"有效</strong>。∎</p>
+<p><strong>题3（时延带宽积·含义计算）</strong> 卫星链路单向传播时延270ms，带宽2Mb/s。求时延带宽积，并说明含义。
+【解】270×10⁻³×2×10⁶=5.4×10⁵ bit=<strong>540kb</strong>。
+含义：发送方发出第一比特后 270ms 它才到达接收方，这期间发送方已把 <strong>54万比特</strong> 推入信道——"管道"里同时容纳54万比特。这就是卫星链路上停等协议利用率极低的原因（见第2批链路层）。∎</p>
+<p><strong>题4（概念辨析·组合选择）</strong> 判断：①协议是垂直的，服务是水平的；②只要网络层正确交付分组，传输层就不需要差错控制；③OSI七层中会话层负责数据格式转换。
+【答】①错（反了：协议水平、服务垂直）；②错（网络层只提供尽力而为的交付，端到端可靠恰是传输层的职责——层次分工）；③错（数据格式转换是<strong>表示层</strong>：加密压缩、语法表示；会话层管建立/管理/终止会话）。∎</p>
+<hr />
+<h1>第2章 物理层（通信基础）</h1>
+<h2>一、概念精讲</h2>
+<p><strong>C1 通信系统模型</strong>：信源→发送设备→信道→接收设备→信宿（+噪声源）。模拟信号=取值连续；数字信号=取值离散。</p>
+<p><strong>C2 码元与比特的关系（全章计算基础）</strong>：
+- <strong>码元</strong>：携带数据信息的<strong>信号单元</strong>（一个固定时长的信号波形）；码元速率（波特率）B：每秒传输码元数（单位 Baud）。
+- <strong>信息速率（比特率）C 与波特率的关系</strong>：每个码元携带 log₂V bit（V=码元的离散状态数/进制数）→ <strong>C = B·log₂V</strong>。
+【要点】二进制码元（V=2）时比特率=波特率；<strong>多进制时比特率&gt;波特率</strong>——"用更多电平状态让每个码元驮更多比特"。</p>
+<p><strong>C3 信道的极限容量（两把尺子）</strong>：
+- <strong>奈奎斯特准则（无噪声）</strong>：带宽 W(Hz) 的理想低通信道，极限<strong>码元速率</strong> = 2W Baud（超过则码元间串扰不可辨识）→ 极限数据率 <strong>C = 2W·log₂V</strong> (b/s)。
+【直觉】带宽 W 的信道像一个"每秒最多分辨 2W 个脉冲"的低通滤波器——这是采样定理的通信版。
+- <strong>香农定理（有噪声）</strong>：C = W·log₂(1+S/N)。
+【直觉】噪声限制了"每个码元能可靠区分的状态数上限"：S/N 越大每个码元可驮比特越多；带宽 W 是"每秒发多少码元"的天花板（这个天花板归奈氏管）。
+- <strong>联合使用</strong>：实际极限=两者取小。提高数据率的路径：加带宽、提信噪比、增加进制（受香农制约）。</p>
+<p><strong>C4 信噪比分贝换算</strong>：信噪比(dB) = 10·lg(S/N)。30dB → S/N=10³；60dB → 10⁶。<strong>反算时 S/N=10^{dB/10}</strong>。</p>
+<h2>二、编码与调制精讲</h2>
+<p><strong>M1 数字→数字（编码）</strong>：
+- <strong>不归零制 NRZ</strong>：整个码元期间电平不变——简单，但无法自同步（无跳变提供时钟）；
+- <strong>归零制 RZ</strong>：每码元中间回归零电平——自同步但带宽大；
+- <strong>曼彻斯特编码（以太网传统）</strong>：每个码元<strong>中间必有跳变</strong>（既作时钟同步又表数据；前半与后半电平相反），<strong>波特率=2×数据率</strong>（1个比特用2个信号码元表示，编码效率50%）；
+- <strong>差分曼彻斯特</strong>：看码元<strong>开始处</strong>有无跳变定0/1（有跳变=0，无=1，依教材），中间必跳变；
+- <strong>4B/5B</strong>：4比特数据映射成5比特码组（保证跳变），<strong>效率80%</strong>（100BASE-FX等用）。
+<strong>M2 数字→模拟（调制）</strong>：ASK（幅移：用振幅表示0/1）、FSK（频移）、PSK（相移）、<strong>QAM</strong>（幅相联合：QAM-16=振幅相位组合出16种状态→每码元4比特）。
+【计算套路】QAM-x 与波特率结合：数据率=波特率×log₂x。</p>
+<p><strong>M3 采样定理（数一模电衔接）</strong>：对带宽 W 的模拟信号采样，采样频率 ≥ 2W 才能无失真恢复。
+【应用】数字电话：语音4kHz → 采样8kHz → 每样本8bit编码 → <strong>64kb/s</strong>（一路数字电话的标准速率）。</p>
+<h2>三、传输介质与物理层设备</h2>
+<p><strong>E1 导向介质</strong>：双绞线（UTP/STP， cheapest，LAN主流）、同轴电缆（50Ω基带/75Ω宽带）、光纤（<strong>单模</strong>：激光、长距离、贵；<strong>多模</strong>：LED、短距离、色散大）。
+<strong>E2 非导向</strong>：无线电波（全方向、穿透）、微波（直线传播、地面接力/卫星）、红外激光（短距直线）。
+<strong>E3 物理层接口四大特性</strong>：<strong>机械</strong>（接口形状引脚）、<strong>电气</strong>（电压范围）、<strong>功能</strong>（电平电压意义）、<strong>规程</strong>（事件顺序）。
+<strong>E4 中继器与集线器</strong>：
+- 中继器：对衰减信号<strong>再生整形放大</strong>，两端可连相同/不同介质；两端是同一<strong>冲突域</strong>；
+- 集线器（多口中继器）：<strong>星型拓扑逻辑上仍是总线</strong>（共享信道）；半双工；<strong>总带宽被所有端口共享、全体一个冲突域</strong>——对比交换机（第2批详讲：独占带宽、可隔离冲突域）。</p>
+<h2>四、本章考题（6题）</h2>
+<p><strong>题1（奈氏+香农联合·经典985题）</strong> 信道带宽4kHz，采用16种状态的码元。①无噪声时最大数据率？②若信噪比30dB，极限数据率？③能否通过把码元状态数提高到32来提速？
+【解】①奈氏：C=2W·log₂V=2×4000×log₂16=8000×4=<strong>32kb/s</strong>。
+②30dB→S/N=10³；香农：C=W·log₂(1+S/N)=4000×log₂1001≈4000×9.97≈<strong>39.9kb/s</strong>。
+实际取两者小：<strong>32kb/s</strong>（当前码元数受奈氏限制）。
+③提高32种：奈氏给出 8000×5=40kb/s，但已超香农极限39.9kb/s——<strong>不可行</strong>；香农极限下最多 log₂V=39.9k/8000≈4.98 → V≤31.6，即32状态已逼近物理极限。要提速只能加带宽或提信噪比。∎
+（方法论：先分别算两把尺子，<strong>取小者</strong>；"加进制"受香农封顶，"加带宽/信噪比"才解锁更高进制。）</p>
+<p><strong>题2（曼彻斯特波特率）</strong> 采用曼彻斯特编码，数据率10Mb/s，波特率是多少？
+【解】曼彻斯特每比特2个信号周期 → <strong>波特率=20MBaud</strong>（编码效率50%）。
+对比：4B/5B 编码效率80%，同样10Mb/s数据只需12.5MBaud。∎</p>
+<p><strong>题3（QAM进制反推）</strong> 某系统波特率2400Baud，采用QAM调制，数据率9600b/s。求每个码元的状态数。
+【解】每码元比特数=9600/2400=4 → 状态数 V=2⁴=<strong>16（QAM-16）</strong>。∎</p>
+<p><strong>题4（数字电话PCM）</strong> 语音信号带宽4kHz，量化为8bit。数字化后一路电话的数据率？
+【解】采样定理：fs≥2W=8kHz。数据率=8000样本/s×8bit=<strong>64kb/s</strong>。∎
+（这是PCM数字电话的国际标准速率——所有早期数字干线容量都以64kb/s为基本单元。）</p>
+<p><strong>题5（香农定理换算）</strong> 信道带宽3kHz，信噪比30dB。求极限数据率；若带宽提升到6kHz（信噪比不变），极限提升到多少？
+【解】S/N=1000。C₁=3000×log₂1001≈3000×9.97≈<strong>29.9kb/s</strong>。
+C₂=6000×9.97≈<strong>59.8kb/s</strong>——带宽翻倍，极限翻倍（香农对带宽是线性关系；对信噪比是对数关系，这就是"加带宽比加功率划算"的原因）。∎</p>
+<p><strong>题6（概念组合）</strong> 判断：①集线器各端口独占带宽；②光纤按传输光波模式分为单模与多模，单模适合长距离；③曼彻斯特编码的跳变既用于同步又用于表示数据；④物理层接口的"规程特性"指信号电平范围。
+【答】①错（共享带宽、一个冲突域）；②<strong>对</strong>；③<strong>对</strong>；④错（电平范围是<strong>电气特性</strong>；规程特性=事件先后顺序与应答关系）。∎</p>
+<h2>五、本章必会清单</h2>
+<ol>
+<li>时延四件套公式与"发送看带宽、传播看距离"辨析；</li>
+<li>时延带宽积=传播×带宽（管道容积）及在停等/TCP中的意义；</li>
+<li>三种交换方式总时延公式与最优分组长度推导 p*=h+√(xh/(k−1))；</li>
+<li>奈氏（管码元率，2W）与香农（管信息率，W·log₂(1+S/N)）各自边界、dB换算、联合取小；</li>
+<li>曼彻斯特/差分曼彻斯特/4B/5B 的编码效率与波特率换算；</li>
+<li>采样定理→64kb/s数字电话；QAM-x 与数据率反推进制；</li>
+<li>中继器/集线器=一个冲突域、共享带宽（与交换机的对比表留给第2批）。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批：<strong>数据链路层</strong>——组帧三种方法、差错编码（CRC/海明计算）、停止等待与滑动窗口效率推导（含停等/GBN/SR窗口公式与信道利用率计算）、CSMA/CD最小帧长与争用期推导、局域网802.3/802.11、交换机自学习。说"继续"交付。</p>
+</blockquote></div></body></html>

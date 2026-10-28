@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计组精讲_系统概述与数据运算 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机组成原理精讲 · 系统概述与数据的表示和运算（定义剖析 + 考题演算）</h1>
+<blockquote>
+<p>计组精讲第1批（共4批）：①概述+数据表示运算 ✅ ②存储系统 ③指令系统+CPU ④总线+I/O。
+计组的985分差点在<strong>数据的机器级表示</strong>（补码溢出、IEEE754、C语言类型转换）——这部分与C语言编程强关联，是"概念陷阱最密集"的章节。</p>
+</blockquote>
+<hr />
+<h1>第1章 计算机系统概述</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 层次结构</strong>（从上到下）：高级语言机器（编译/解释）→ 汇编语言机器（汇编）→ 操作系统机器 → 机器语言机器 → 微程序机器。
+【要点】<strong>软硬件在逻辑功能上等价</strong>（任何功能可硬件实现也可软件实现——成本/速度/灵活性的权衡）；编译=一次性生成目标程序，解释=逐句翻译执行（解释程序本身是软件）。</p>
+<p><strong>D2 冯·诺依曼结构（必背五条）</strong>：
+① 计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>五大部件组成；
+② <strong>指令和数据以同等地位存储于存储器</strong>，可按地址寻访；
+③ 指令和数据均用<strong>二进制</strong>表示；
+④ 指令由操作码+地址码组成；
+⑤ <strong>存储程序</strong>：指令预先存入存储器，机器自动按地址顺序取指执行——这是冯·诺依曼机最根本的特征。
+【发展辨析】早期冯·诺依曼机以<strong>运算器为中心</strong>（I/O都要经过运算器，瓶颈）→ 现代以<strong>存储器为中心</strong> → 进一步发展出三总线结构。</p>
+<p><strong>D3 计算机工作过程</strong>：取指令（PC→MAR→存储器→MDR→IR，PC自动+1）→ 分析指令（操作码译码）→ 执行指令 → 下一循环。
+【要点】<strong>(PC)→MAR→M(MAR)→MDR→(MDR)→IR</strong> 这条取指通路要能默写；PC自动加"1"是加一条指令的长度。</p>
+<p><strong>D4 性能指标（计算三件套）</strong>：
+- <strong>主频 f</strong>（时钟频率）、<strong>时钟周期</strong>=1/f；
+- <strong>CPI</strong>：执行一条指令所需的平均时钟周期数；
+- <strong>CPU执行时间 = 指令条数 × CPI × 时钟周期 = 指令条数 × CPI ÷ 主频</strong>；
+- <strong>MIPS</strong> = 主频(Hz) ÷ (CPI×10⁶)——每秒百万条指令；FLOPS（浮点运算次数/秒，超算指标）。
+【辨析】主频高≠机器快（CPI不同）；比较机器性能要看<strong>同一程序的总执行时间</strong>（"主频4GHz必快于2GHz"是错误说法——985面试陷阱）。</p>
+<h2>二、本章考题（3题）</h2>
+<p><strong>题1（CPI/MIPS/CPU时间全套）</strong> 某机主频2GHz，某程序含 10⁹ 条指令，平均CPI=2。求CPU执行时间与MIPS。
+【解】CPU时间 = 10⁹×2/(2×10⁹) = <strong>1s</strong>；MIPS = 2×10⁹/(2×10⁶) = <strong>1000 MIPS</strong>。∎
+（变式：若程序中40%指令CPI=1、60%指令CPI=3 → 平均CPI=0.4+1.8=2.2，CPU时间=1.1s——<strong>按指令类型加权</strong>是必考变式。）</p>
+<p><strong>题2（冯·诺依曼辨析）</strong> 判断：①冯·诺依曼机中指令按内容访问存储器；②现代计算机以存储器为中心；③"存储程序"指指令预先存入存储器并由机器自动按地址顺序执行。
+【答】①错（<strong>按地址访问</strong>，内容访问是相联存储器/TLB的事）；②<strong>对</strong>（缓解运算器瓶颈）；③<strong>对</strong>（存储程序=冯·诺依曼最根本特征）。∎</p>
+<p><strong>题3（翻译vs解释）</strong> 高级语言程序转换为机器可执行形式的两种方式？各自特点？
+【答】<strong>编译</strong>：由编译程序一次性翻译为目标程序再执行（执行快、可优化、C/Java前半）；<strong>解释</strong>：解释程序逐句翻译并立即执行（不生成完整目标程序、便于人机交互、效率低，如Python/Shell）。∎</p>
+<hr />
+<h1>第2章 数据的表示和运算</h1>
+<h2>一、数制定点表示精讲</h2>
+<p><strong>N1 原码/反码/补码/移码（n+1位含符号）</strong>：
+| 码制 | 表示范围 | 特点 |
+|---|---|---|
+| 原码 | −(2ⁿ−1) ~ 2ⁿ−1（有±0） | 乘除直观 |
+| 反码 | 同原码（有±0） | 过渡用 |
+| <strong>补码</strong> | <strong>−2ⁿ ~ 2ⁿ−1（无±0，多表示一个最小负数）</strong> | 加减统一、符号位参与运算 |
+| <strong>移码</strong> | 同补码 | 补码符号位取反；<strong>用于浮点阶码（保真值大→移码大，便于比较）</strong> |
+【推导】补码定义 [x]补 = 2^{n+1}+x (mod 2^{n+1})——"模运算"视角：钟表拨快3小时=拨慢9小时。</p>
+<p><strong>N2 移位运算</strong>：
+- <strong>算术左移</strong>：低位补0（补码下相当于×2，<strong>可能溢出</strong>）；<strong>算术右移</strong>：高位补符号位（÷2，符号不变）；
+- <strong>逻辑右移</strong>：高位补0（无符号数用）；
+- <strong>循环移位</strong>：带进位位/不带进位位（大小端存储交换用）。</p>
+<p><strong>N3 补码加减与溢出判断</strong>：
+补码加减：<strong>符号位参加运算，超出模的进位丢弃</strong>。
+溢出判断两法：
+① <strong>单符号位</strong>：符号位进位 ⊕ 最高数值位进位 = 1 → 溢出；
+② <strong>双符号位（变形补码）</strong>：结果双符号位 <strong>01=正溢、10=负溢</strong>、00/11 无溢出。
+【本质】溢出=运算结果超出表示范围（<strong>只有同号相加/异号相减才可能溢出</strong>——异号相加绝不溢出，必考）。</p>
+<p><strong>N4 乘除法（概念级）</strong>：原码一位乘（符号异或+绝对值乘）；<strong>补码一位乘（Booth算法，附加位Yₙ₊₁）</strong>；除法：恢复余数法/加减交替法（不恢复余数）。408考演算频率低，考"移位与加法实现乘除"的思想。</p>
+<h2>三、C语言整数类型与类型转换（985高频陷阱区）</h2>
+<p><strong>C1 符号扩展与截断</strong>：
+- 短→长：<strong>符号扩展</strong>（补码高位补符号位，值不变）；
+- 长→短：<strong>截断</strong>（保留低位，值可能变）；
+- 有符号↔无符号：<strong>位模式不变，解释改变</strong>。</p>
+<p><strong>考题1（类型转换·经典陷阱）</strong> 32位机器上：①<code>int i = −1; unsigned u = i;</code> u=? ②<code>signed char c = 250;</code> c的值？③<code>unsigned char uc = −6;</code> uc的值？
+【解】①−1 补码全1 → 无符号解释 = <strong>4294967295</strong>（2³²−1）。
+②250 = 1111 1010₂ → 符号位1 → 负数：−(00000101+1) = <strong>−6</strong>。
+③−6 补码 1111 1010 → 无符号解释 = <strong>250</strong>。∎
+（口诀：<strong>位模式不变、解释方式变</strong>——②③互为镜像。）</p>
+<h2>四、浮点数精讲（IEEE 754）</h2>
+<p><strong>F1 IEEE 754 单精度（32位）</strong>：1符号+<strong>8阶码（偏置127）</strong>+23尾数（<strong>隐含首位1</strong>）。
+真值 = (−1)^s × 1.M × 2^{E−127}。
+双精度：1+<strong>11（偏置1023）</strong>+52。
+【要点】①尾数隐含"1."——精度实际24位；②<strong>阶码全0</strong>=非规格化数/±0（渐进下溢）；<strong>全1</strong>=±∞（尾数=0）或NaN（尾数≠0）；③移码偏置让阶码无符号比较即可比大小。</p>
+<p><strong>考题2（十进制→IEEE754）</strong> 将 75.25 表示为单精度IEEE 754（十六进制机器码）。
+【解】75.25 = 1001011.01₂ = <strong>1.00101101×2⁶</strong>。
+符号0；阶码=6+127=133=<strong>10000101</strong>；尾数=<strong>0010110100…0</strong>。
+机器码：0 10000101 00101101000000000000000 = <strong>0x42968000</strong>。∎
+（反向也要会：0x42968000 → 阶133−127=6、尾数1.00101101 → +75.25。）</p>
+<p><strong>考题3（浮点加减五步·手算）</strong> 设 x=2¹×0.1101，y=2³×0.1011（尾数6位，规格化、舍0舍1入）。求 x+y。
+【解】①<strong>对阶</strong>（小阶向大阶）：x尾数右移2位 → 2³×0.001101；
+②尾数相加：0.1011+0.001101 = 0.111001；
+③规格化：0.111001 首位为1，已规格化；
+④舍入：尾数6位内精确；
+⑤阶码未溢出。
+结果 = 2³×0.111001 = 0.111001₂×8 = <strong>7.125</strong>（验证 1.625+5.5=7.125 ✓）。∎
+（五步口诀：<strong>对阶—求和—规格化—舍入—判溢出</strong>；对阶必须"小阶向大阶"——右移损失的是小阶的低位精度。）</p>
+<p><strong>考题4（溢出判断·双符号位）</strong> 8位补码运算：①(−100)+(−50)；②(−45)+(−50)。用双符号位判断溢出。
+【解】①[−100]变形补=11 10011100，[−50]=11 0011110。相加=<strong>10 1101010</strong>：双符号位<strong>10 → 负溢出</strong>（实际−150超出−128下限）。
+②11 01010011? [−45]=11 1010011? 8位[−45]=11010011 → 变形 11 1010011? 用8位结果：11010011+11001110=1 10100001 → 丢进位后 10100001，双符号位11 → <strong>无溢出</strong>（结果−95）。∎
+（规律：<strong>同号相加得异号必溢出</strong>；双符号位01=正溢、10=负溢。）</p>
+<h2>五、运算器组织（概念）</h2>
+<p><strong>A1 加法器</strong>：串行进位（行波，慢）→ <strong>超前进位加法器</strong>（进位生成Gi=AiBi、传递Pi=Ai⊕Bi，并行算进位，快）。
+<strong>A2 定点运算器</strong>：ALU+通用寄存器+暂存器+移位器；补码加减直接做，乘除用移位+加法。
+<strong>A3 标志位</strong>：ZF（零）、CF（无符号进位/借位）、OF（有符号溢出）、SF（符号）——<strong>CF看无符号、OF看有符号</strong>（同一运算两个标志独立置位）。</p>
+<p><strong>考题5（标志位辨析）</strong> 8位运算 1111 1111 + 0000 0001 = 0000 0000。CF与OF分别是什么？
+【解】有符号视角：(−1)+1=0 无溢出 → <strong>OF=0</strong>；无符号视角：255+1=256 超出 → <strong>CF=1</strong>。
+<strong>同一运算，CF与OF各自独立置位</strong>——判断哪个标志取决于你把操作数当有符号还是无符号。∎</p>
+<h2>六、本章必会清单</h2>
+<ol>
+<li>冯·诺依曼五条+存储程序；早期以运算器为中心 vs 现代以存储器为中心；</li>
+<li>CPU时间=指令数×CPI×时钟周期；MIPS换算；按指令类型加权CPI；</li>
+<li>四种码制范围表；<strong>补码多表示一个最小负数</strong>；移码用于阶码的原因；</li>
+<li>算术/逻辑移位区别；补码加减溢出判断两法（单符号位异或/双符号位01-10）；</li>
+<li>符号扩展/截断/有符号无符号转换（位模式不变解释变）；</li>
+<li>IEEE754：偏置127/1023、隐含1、阶码全0全1特殊值、十进制↔十六进制双向转换；</li>
+<li>浮点加减五步（对阶小阶向大阶）；CF与OF独立置位。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第2/4批）：<strong>存储系统</strong>——层次结构（缓存-主存-辅存三级）、SRAM/DRAM/Flash原理、主存芯片扩展与译码、<strong>Cache三映射地址划分计算、替换算法、写策略、命中率与平均访存时间</strong>、多体交叉存储器、虚拟存储（页式/段式）。说"继续"交付。</p>
+</blockquote></div></body></html>

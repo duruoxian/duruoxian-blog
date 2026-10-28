@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_多元微积分专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 多元微积分专项（120题带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，数一专属大块头（多元微分学+重积分+曲线曲面积分），配合《高数_知识点与难点》第5–6章使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题把题号标到《数学考题集》同章节旁，三天后重做。
+全部自编或改编经典题型，覆盖：多元极限连续与偏导、全微分与可微性、方向导数与梯度、无条件/条件极值与最值、二重积分（直角/极坐标/对称性/换序）、三重积分（投影/截面/柱/球坐标）、曲线曲面积分与格林/高斯/斯托克斯。</p>
+</blockquote>
+<h2>§1 多元极限、连续与偏导（U1–U25）</h2>
+<p><strong>U1.</strong>★ 求 z=√(1−x²) + √(y²−1) 的定义域。</p>
+<blockquote>
+<p>1−x²≥0 且 y²−1≥0 ⇒ <strong>x∈[−1,1]，|y|≥1</strong>（两块无穷长条区域）。</p>
+</blockquote>
+<p><strong>U2.</strong>★★ 判断 lim(x,y)→(0,0) xy/(x²+y²) 是否存在。</p>
+<blockquote>
+<p>沿 y=kx：kx²/(x²+k²x²) = k/(1+k²)，随 k 变化 ⇒ <strong>不存在</strong>。
+沿不同路径极限不同是"极限不存在"的最快证法。</p>
+</blockquote>
+<p><strong>U3.</strong>★★ 求 lim(x,y)→(0,0) x²y/(x²+y²)。</p>
+<blockquote>
+<p>|x²y|/(x²+y²) ≤ |y|·[x²/(x²+y²)] ≤ |y| → 0 ⇒ <strong>极限 0</strong>。
+分母是二次齐次，分子凑出更高阶——夹逼比极坐标更快。</p>
+</blockquote>
+<p><strong>U4.</strong>★ 判断 lim(x,y)→(0,0) (x+y)/(x−y) 是否存在。</p>
+<blockquote>
+<p>沿 y=0 得 1；沿 x=0 得 −1 ⇒ <strong>不存在</strong>。</p>
+</blockquote>
+<p><strong>U5.</strong>★ 求 lim(x,y)→(0,0) sin(xy)/y。</p>
+<blockquote>
+<p>= x·[sin(xy)/(xy)] → x·1 → <strong>0</strong>（把 y 看成"一元极限里的分母"）。</p>
+</blockquote>
+<p><strong>U6.</strong>★ 求 lim(x,y)→(0,0) √(x²+y²)·sin(1/√(x²+y²))。</p>
+<blockquote>
+<p>有界 × 无穷小 ⇒ <strong>0</strong>。与一元 x·sin(1/x) 同构，r=√(x²+y²) 当成"一元变量"用。</p>
+</blockquote>
+<p><strong>U7.</strong>★ 求 lim(x,y)→(0,0) e^{−1/(x²+y²)}。</p>
+<blockquote>
+<p>令 r²=x²+y²→0⁺：e^{−1/r²} = 1/e^{1/r²} → <strong>0</strong>。</p>
+</blockquote>
+<p><strong>U8.</strong>★★ 默写二元连续的定义，并说明与"沿任何直线极限存在"的关系。</p>
+<blockquote>
+<p>f 在 (P₀) 连续 ⟺ lim(P→P₀) f(P) = f(P₀)。
+沿所有直线极限存在且相等<strong>推不出</strong>二元极限存在（还要沿曲线，如抛物线）——二元极限要求全路径一致。</p>
+</blockquote>
+<p><strong>U9.</strong>★★ f(x,y)=(x²−y²)/(x²+y²)（(x,y)≠(0,0)），f(0,0)=0。求 fx(0,0) 与 fy(0,0)。</p>
+<blockquote>
+<p>f(h,0) ≡ 1 ⇒ fx(0,0)=lim 1/h 不存在；f(0,h) ≡ −1 ⇒ fy(0,0) 不存在。
+<strong>两个偏导都不存在</strong>——尽管沿坐标轴 f 是常数，这函数在原点附近仍然剧烈变化。</p>
+</blockquote>
+<p><strong>U10.</strong>★★★ f(x,y)=√|xy|，f(0,0)=0。讨论在 (0,0) 的连续性、偏导存在性与可微性。</p>
+<blockquote>
+<p>连续：|√|xy|| ≤ √[(x²+y²)/2] → 0 ✓。
+偏导：f(h,0)=0 ⇒ fx(0,0)=fy(0,0)=<strong>0，都存在</strong>。
+可微：需 √|xy|/√(x²+y²) → 0；沿 y=x 得 1/√2 ⇒ <strong>不可微</strong>。
+结论钉死：<strong>偏导存在 + 连续 ⇏ 可微</strong>。</p>
+</blockquote>
+<p><strong>U11.</strong>★ z=e^{xy}，求 zx、zy。</p>
+<blockquote>
+<p><strong>zx = y·e^{xy}；zy = x·e^{xy}</strong>（对谁求导，另一个变量就是系数/因子）。</p>
+</blockquote>
+<p><strong>U12.</strong>★ z=x^y（x&gt;0），求 zx、zy。</p>
+<blockquote>
+<p><strong>zx = y·x^{y−1}；zy = x^y·lnx</strong>。底数变量与指数变量分开对待。</p>
+</blockquote>
+<p><strong>U13.</strong>★★ z=ln(x+√(x²+y²))，求 zx。</p>
+<blockquote>
+<p>zx = [1 + x/√(x²+y²)]/[x+√(x²+y²)] = <strong>1/√(x²+y²)</strong>（分子有理化后奇迹般简洁）。</p>
+</blockquote>
+<p><strong>U14.</strong>★★ z=x²y + e^{xy}，求 zxy。</p>
+<blockquote>
+<p>zx = 2xy + y·e^{xy} ⇒ <strong>zxy = 2x + e^{xy} + xy·e^{xy}</strong>（先对 x 再对 y，中间结果别丢项）。</p>
+</blockquote>
+<p><strong>U15.</strong>★★ 以 z=x^y 为例验证 zxy = zyx。</p>
+<blockquote>
+<p>zxy = x^{y−1} + y·x^{y−1}lnx；zyx = y·x^{y−1}lnx + x^{y−1}。相等 ✓。
+<strong>克莱罗定理</strong>：二阶偏导连续时混合偏导与次序无关。</p>
+</blockquote>
+<p><strong>U16.</strong>★★ z=f(u,v)，u=x²+y，v=xy。求 zx、zy。</p>
+<blockquote>
+<p>链式：<strong>zx = 2x·fu + y·fv；zy = fu + x·fv</strong>（画"树形图"逐枝相乘）。</p>
+</blockquote>
+<p><strong>U17.</strong>★★ z=f(x²−y², e^{xy})，用 f₁、f₂ 记号求 zx、zy。</p>
+<blockquote>
+<p><strong>zx = 2x·f₁ + y·e^{xy}·f₂；zy = −2y·f₁ + x·e^{xy}·f₂</strong>。
+抽象函数链式的标准记法，考题默认你会。</p>
+</blockquote>
+<p><strong>U18.</strong>★★ u=f(x²y, y/x)，求 ux、uy。</p>
+<blockquote>
+<p><strong>ux = 2xy·f₁ − (y/x²)·f₂；uy = x²·f₁ + (1/x)·f₂</strong>。</p>
+</blockquote>
+<p><strong>U19.</strong>★★ 由 e^z = xyz 确定 z=z(x,y)，求 zx。</p>
+<blockquote>
+<p>F = e^z − xyz：Fx = −yz，Fz = e^z − xy。
+zx = −Fx/Fz = <strong>yz/(e^z − xy)</strong>。</p>
+</blockquote>
+<p><strong>U20.</strong>★★ 设 z=z(x,y) 由 x²+y²+z² = 3xyz 确定，求 zx 在点 (1,1,1) 的值。</p>
+<blockquote>
+<p>Fx = 2x−3yz = 2−3 = −1；Fz = 2z−3xy = −1。
+zx = −Fx/Fz = −(−1)/(−1) = <strong>−1</strong>。</p>
+</blockquote>
+<p><strong>U21.</strong>★★ z=z(x,y) 由 x²+y²+z²=1（z&gt;0）确定，求 zxx。</p>
+<blockquote>
+<p>zx = −x/z。zxx = −1/z + (x/z²)·zx = −1/z − x²/z³ = <strong>−(z²+x²)/z³</strong>。</p>
+</blockquote>
+<p><strong>U22.</strong>★★ z=e^{x/y}，求全微分 dz。</p>
+<blockquote>
+<p><strong>dz = e^{x/y}·(dx/y − x·dy/y²)</strong>。全微分=两枝偏导各配自己的增量。</p>
+</blockquote>
+<p><strong>U23.</strong>★★★ f(x,y)=(x²+y²)·sin(1/(x²+y²))（(x,y)≠0），f(0,0)=0。判断在 (0,0) 的可微性。</p>
+<blockquote>
+<p>fx(0,0)=lim x·sin(1/x²)=0，同理 fy(0,0)=0。
+[f−0]/r = r·sin(1/r²) → 0 ⇒ <strong>可微</strong>（尽管偏导函数在原点不连续）。
+可微判定永远回到定义：Δf − (fxΔx+fyΔy) 是 ρ=√(Δx²+Δy²) 的高阶无穷小。</p>
+</blockquote>
+<p><strong>U24.</strong>★★ 用全微分近似计算 (1.02)^{3.01}。</p>
+<blockquote>
+<p>f=x^y，(1,3) 处：f=1，fx=3，fy=x^y·lnx=0。
+Δf ≈ 3(0.02) + 0(0.01) = 0.06 ⇒ <strong>≈ 1.06</strong>。</p>
+</blockquote>
+<p><strong>U25.</strong>★★★ 圆柱半径 r=2 cm（误差 ±0.01），高 h=5 cm（误差 ±0.02），求体积最大绝对误差。</p>
+<blockquote>
+<p>V=πr²h：dV = 2πrh·dr + πr²·dh。
+最坏情形：2π·2·5(0.01) + π·4(0.02) = 0.2π+0.08π = <strong>0.28π ≈ 0.88 cm³</strong>。</p>
+</blockquote>
+<h2>§2 方向导数、梯度与极值（U26–U45）</h2>
+<p><strong>U26.</strong>★ 默写方向导数与梯度的关系。</p>
+<blockquote>
+<p>D_l f = fx·cosα + fy·cosβ = <strong>grad f · e_l</strong>（e_l 是单位方向向量）。
+三元同理加 cosγ 项。前提：f 可微。</p>
+</blockquote>
+<p><strong>U27.</strong>★★ z=x²+y² 在点 (1,2) 处沿方向 l=(1,1) 的方向导数。</p>
+<blockquote>
+<p>grad z = (2x,2y) = (2,4)；e_l = (1,1)/√2。
+D = (2+4)/√2 = <strong>3√2</strong>。</p>
+</blockquote>
+<p><strong>U28.</strong>★★ f=xy+yz+zx 在点 (1,1,2) 处沿 l=(1,2,2) 的方向导数。</p>
+<blockquote>
+<p>grad f = (y+z, x+z, y+x) = (3,3,2)；|l|=3。
+D = (3+6+4)/3 = <strong>13/3</strong>。</p>
+</blockquote>
+<p><strong>U29.</strong>★★ f=ln(x²+y²) 在 (1,1) 处，沿什么方向增长最快？最快速率是多少？</p>
+<blockquote>
+<p>grad f = (2x,2y)/(x²+y²) = (1,1)。
+<strong>沿 (1,1)/√2 方向最快，速率 = |grad f| = √2</strong>。梯度方向=最速上升，这是梯度的定义性事实。</p>
+</blockquote>
+<p><strong>U30.</strong>★ 说明"梯度与等值线（面）垂直"。</p>
+<blockquote>
+<p>等值线 f=c 上取方向 t：df=grad f·dt = 0 ⇒ grad f ⊥ t。
+例：f=x²+y² 的等值线是圆，梯度沿半径向外，处处垂直。<strong>梯度指向 f 增大最陡的方向，等值线是它的"横截面"。</strong></p>
+</blockquote>
+<p><strong>U31.</strong>★★★ 求 z=x³−y³+3x²+3y²−9x 的极值。</p>
+<blockquote>
+<p>zx=3x²+6x−9=3(x+3)(x−1)=0 ⇒ x=1,−3；zy=−3y²+6y=−3y(y−2)=0 ⇒ y=0,2。
+四个驻点：A=zxx=6x+6，B=zxy=0，C=zyy=−6y+6。
+(1,0)：A=12&gt;0，AC=72&gt;0 ⇒ <strong>极小 −5</strong>；(−3,2)：A=−12&lt;0，AC=72&gt;0 ⇒ <strong>极大 31</strong>；
+(1,2) 与 (−3,0)：AC&lt;0 ⇒ 非极值。</p>
+</blockquote>
+<p><strong>U32.</strong>★★ 求 z=x³+8y³−xy 的极值。</p>
+<blockquote>
+<p>zx=3x²−y=0，zy=24y²−x=0 ⇒ x=24y²，3(576y⁴)=y ⇒ y=1/12（y=0 舍，代回 x=0 检验 AC=0 不定，沿 y=x³? 实际 y=0,x=0 时 z=0 且 z=x³+8y³−xy 在附近变号，非极值）。
+驻点 (1/6, 1/12)：A=6x=1，B=−1，C=48y=4 ⇒ AC−B²=3&gt;0，A&gt;0 ⇒ <strong>极小 −1/216</strong>。</p>
+</blockquote>
+<p><strong>U33.</strong>★★ 求 z=e^{2x}(x+y²+2y) 的极值。</p>
+<blockquote>
+<p>zy = 2e^{2x}(y+1)=0 ⇒ y=−1；zx = e^{2x}(2x+2y²+4y+1)=0 ⇒ 2x+2−4+1=0 ⇒ x=1/2。
+A=e^{2x}(4x+4y²+8y+4)=e(2+4−8+4)=2e&gt;0；B=e^{2x}(4y+4)=0；C=2e^{2x}=2e。
+AC−B²=4e²&gt;0 ⇒ <strong>极小 f(1/2,−1) = e(1/2+1−2) = −e/2</strong>。</p>
+</blockquote>
+<p><strong>U34.</strong>★★ 求 z=x⁴+y⁴−x²−y² 的所有极值点。</p>
+<blockquote>
+<p>zx=4x³−2x=2x(2x²−1)=0 ⇒ x=0, ±1/√2（y 同）。
+(0,0)：A=C=−2，AC=4&gt;0，A&lt;0 ⇒ 极大（值 0）。
+(±1/√2, ±1/√2)：A=C=6(½)−2=1&gt;0，AC=1&gt;0 ⇒ <strong>四个极小点，值均为 −1/2</strong>。</p>
+</blockquote>
+<p><strong>U35.</strong>★★★ 求 z=x²y(4−x−y) 在闭区域 D（x 轴、y 轴与直线 x+y=6 围成）上的最大值与最小值。</p>
+<blockquote>
+<p>驻点：zx=xy(8−3x−2y)=0，zy=x²(4−x−2y)=0 ⇒ 内部驻点 (2,1)：z=4。
+边界：x=0 或 y=0 ⇒ z=0；x+y=6 ⇒ z=−2x²(6−x)，在 x=4 取最小 −64。
+比较：<strong>最大 4（内部点 (2,1)），最小 −64（边界点 (4,2)）</strong>。
+闭区域最值=内部驻点+边界逐段讨论，一个都不能漏。</p>
+</blockquote>
+<p><strong>U36.</strong>★★ 用拉格朗日乘数法求 f=xy 在约束 x+y=1 下的最大值。</p>
+<blockquote>
+<p>L=xy+λ(1−x−y)：Ly=x−λ=0，Lx=y−λ=0 ⇒ x=y=1/2。
+<strong>最大值 1/4</strong>（对称约束的最优解常在对称点）。</p>
+</blockquote>
+<p><strong>U37.</strong>★★ 求内接于椭圆 x²/a²+y²/b²=1（第一象限顶点）的矩形最大面积。</p>
+<blockquote>
+<p>S=4xy，约束 g=x²/a²+y²/b²−1=0。
+拉格朗日：y = λ·2x/a²，x = λ·2y/b² ⇒ 相乘得 λ=ab/2 ⇒ x=a/√2，y=b/√2。
+<strong>S_max = 4·(ab/2) = 2ab</strong>。</p>
+</blockquote>
+<p><strong>U38.</strong>★★ 求椭球 x²/a²+y²/b²+z²/c²=1 的内接长方体（各面平行坐标面）最大体积。</p>
+<blockquote>
+<p>V=8xyz，约束 g=x²/a²+y²/b²+z²/c²−1=0。
+由对称性（或拉格朗日解方程组）得 <strong>x=a/√3，y=b/√3，z=c/√3，V_max=8abc/(3√3)</strong>。</p>
+</blockquote>
+<p><strong>U39.</strong>★ 默写拉格朗日乘数法的方程组结构。</p>
+<blockquote>
+<p>求 f 在 φ=0 约束下的极值：令 <strong>L = f + λφ</strong>，解 ∇f = −λ∇φ 与 φ=0 的联立。
+多个约束就配多个 λ；k 个变量 m 个约束 ⇒ 方程组 k+m 个。</p>
+</blockquote>
+<p><strong>U40.</strong>★★ 求 z=xy 在约束 x²+y²=1 上的最大值与最小值。</p>
+<blockquote>
+<p>L=xy+λ(1−x²−y²)：y=2λx，x=2λy ⇒ x=y 或 λ=1/2、x=−y。
+x=y=±1/√2 ⇒ z=1/2；x=−y=±1/√2 ⇒ z=−1/2。
+<strong>最大 1/2，最小 −1/2</strong>。</p>
+</blockquote>
+<p><strong>U41.</strong>★★★ 求 f=x²−y²+2 在闭区域 D: x²+y²/4 ≤ 1 上的最值。</p>
+<blockquote>
+<p>内部：fx=2x=0，fy=−2y=0 ⇒ (0,0)，f=2。
+边界参数化 x=cost，y=2sint：f = 5cos²t−2 ∈ [−2, 3]。
+比较：<strong>最大 3（点 (±1,0)），最小 −2（点 (0,±2)）</strong>。</p>
+</blockquote>
+<p><strong>U42.</strong>★★ 默写二元极值二阶充分条件，并说明 B²&lt;AC 为何能定号。</p>
+<blockquote>
+<p>驻点处 A=fxx，B=fxy，C=fyy：<strong>AC−B²&gt;0 且 A&gt;0 ⇒ 极小；AC−B²&gt;0 且 A&lt;0 ⇒ 极大；AC−B²&lt;0 ⇒ 非极值；=0 失效</strong>。
+原理：泰勒二阶项 Ax²+2Bxy+Cy² 是二次型，判别式决定正定/负定/不定。</p>
+</blockquote>
+<p><strong>U43.</strong>★★ 体积为 4 的长方体，表面积最小时尺寸是多少？</p>
+<blockquote>
+<p>约束 xyz=4，最小化 S=2(xy+yz+zx)。
+由均值不等式（或拉格朗日对称性）：x=y=z=4^{1/3}，<strong>S_min = 6·4^{2/3}</strong>。
+"对称约束+对称目标 ⇒ 对称解"是最快判据，但写过程仍要拉格朗日。</p>
+</blockquote>
+<p><strong>U44.</strong>★★★ f=√(x²+y²) 在原点处方向导数都存在吗？它与可微性矛盾吗？</p>
+<blockquote>
+<p>沿单位方向 (cosα,sinα)：[f(hcosα,hsinα)−0]/h = |h|/h 分 h&gt;0、h&lt;0——单侧方向差商 = 1，<strong>各方向的方向导数都存在且为 1</strong>。
+但 fx(0,0)=lim|h|/h 不存在 ⇒ 偏导不存在 ⇒ <strong>不可微</strong>。
+<strong>方向导数存在 ⇏ 可微</strong>（与 U10 合起来：偏导存在、方向导数存在都不够，必须按定义验证）。</p>
+</blockquote>
+<p><strong>U45.</strong>★★ u=ln(x²+y²+z²)，求在点 (1,2,−2) 处梯度的模。</p>
+<blockquote>
+<p>grad u = 2(x,y,z)/(x²+y²+z²) = 2(1,2,−2)/9。
+<strong>|grad u| = 2·3/9 = 2/3</strong>（也是该点最大方向导数）。</p>
+</blockquote>
+<h2>§3 二重积分（U46–U70）</h2>
+<p><strong>U46.</strong>★ ∫∫_D (1+x+y)dA，D=[0,1]×[0,1]。</p>
+<blockquote>
+<p>∫∫1=1，∫∫x=½，∫∫y=½ ⇒ <strong>2</strong>。常数与单变量积分直接分开算。</p>
+</blockquote>
+<p><strong>U47.</strong>★★ D 由 y=x、y=0、x=1 围成，求 ∫∫_D xy dA。</p>
+<blockquote>
+<p>∫₀¹ dx ∫₀ˣ xy dy = ∫₀¹ x·(x²/2)dx = <strong>1/8</strong>。</p>
+</blockquote>
+<p><strong>U48.</strong>★★ 交换 ∫₀¹dx∫ₓ^{√x} f(x,y)dy 的积分次序。</p>
+<blockquote>
+<p>区域：x ≤ y ≤ √x（0≤x≤1）⇒ 视 y 为主：y² ≤ x ≤ y（0≤y≤1）。
+<strong>∫₀¹dy ∫_{y²}^{y} f(x,y)dx</strong>。画出区域是唯一可靠的办法。</p>
+</blockquote>
+<p><strong>U49.</strong>★★ 计算 ∫₀¹dx ∫ₓ¹ e^{y²}dy。</p>
+<blockquote>
+<p>e^{y²} 对 y 积不出 ⇒ 必换序：= ∫₀¹ e^{y²}dy ∫₀^y dx = ∫₀¹ y·e^{y²}dy = <strong>(e−1)/2</strong>。
+"积不出的函数"是换序题的标志性信号。</p>
+</blockquote>
+<p><strong>U50.</strong>★★ 求 ∫∫_{x²+y²≤a²} e^{−x²−y²} dA。</p>
+<blockquote>
+<p>极坐标：2π∫₀ᵃ r·e^{−r²}dr = <strong>π(1−e^{−a²})</strong>。
+令 a→+∞ 得 ∫∫_{R²}e^{−r²}dA=π——概率论高斯积分的来源。</p>
+</blockquote>
+<p><strong>U51.</strong>★★ 求 ∫∫_{x²+y²≤4} √(4−x²−y²) dA。</p>
+<blockquote>
+<p>被积函数是半径 2 的上半球面高度 ⇒ 体积 = <strong>16π/3</strong>（半球 V=(2/3)π·2³）。</p>
+</blockquote>
+<p><strong>U52.</strong>★★ D: 1≤x²+y²≤4，x≥0，y≥0。求 ∫∫_D arctan(y/x) dA。</p>
+<blockquote>
+<p>极坐标下被积函数=θ：∫₀^{π/2}θdθ · ∫₁²r dr = (π²/8)(3/2) = <strong>3π²/16</strong>。</p>
+</blockquote>
+<p><strong>U53.</strong>★★★ 求 ∫∫_{x²+y²≤9} |x²+y²−4| dA。</p>
+<blockquote>
+<p>按圆环拆：r&lt;2 被积 4−r²，2&lt;r&lt;3 被积 r²−4。
+2π∫₀²(4r−r³)dr = 2π(8−4)=8π；2π∫₂³(r³−4r)dr = 2π(25/4)=25π/2。
+<strong>合计 41π/2</strong>。绝对值必须找零等值线（r=2）分块。</p>
+</blockquote>
+<p><strong>U54.</strong>★ D: x²+y²≤1。求 ∫∫_D (x+y³+1) dA。</p>
+<blockquote>
+<p>x、y³ 都是奇函数且区域对称 ⇒ 归零，<strong>=π</strong>。对称性先行，省一半计算。</p>
+</blockquote>
+<p><strong>U55.</strong>★★ D: x²+y²≤a²。求 ∫∫_D x² dA。</p>
+<blockquote>
+<p>轮换对称：∫∫x² = ∫∫y² = ½∫∫(x²+y²) = ½·2π∫₀ᵃr³dr = <strong>πa⁴/4</strong>。</p>
+</blockquote>
+<p><strong>U56.</strong>★ 求 z=1−x−y 与三坐标面围成的立体体积。</p>
+<blockquote>
+<p>= ∫∫_{三角形} (1−x−y)dA = 三棱锥体积 = <strong>1/6</strong>（∫₀¹∫₀^{1−x}(1−x−y)dydx）。</p>
+</blockquote>
+<p><strong>U57.</strong>★★ 求 ∫∫_{x²+y²≤x} √(x²+y²) dA。</p>
+<blockquote>
+<p>极坐标：r ≤ cosθ，θ∈(−π/2,π/2)。
+∫θ∫₀^{cosθ} r·r dr = (1/3)∫_{−π/2}^{π/2}cos³θdθ = (1/3)(4/3) = <strong>4/9</strong>。</p>
+</blockquote>
+<p><strong>U58.</strong>★★ 求 y²=x 与 x=2−y² 围成区域面积。</p>
+<blockquote>
+<p>交点 y=±1：∫_{−1}^{1}[(2−y²)−y²]dy = ∫(2−2y²) = <strong>8/3</strong>。</p>
+</blockquote>
+<p><strong>U59.</strong>★★ 计算 ∫₀¹dx ∫_{x²}¹ e^{−y²}dy。</p>
+<blockquote>
+<p>e^{−y²} 对 y 积不出 ⇒ 必换序。区域：x²≤y≤1，0≤x≤1 ⇒ 0≤x≤√y：
+I = ∫₀¹ e^{−y²}·√y dy，令 t=√y（dy=2t dt）：= 2∫₀¹ t²e^{−t⁴}dt。
+与 U49 对照：下限是 x（线性）时才能凑出 y·e^{−y²}；下限是 x² 时就只剩"写成定积分形式"这一条路。
+<strong>结论：I = 2∫₀¹ t²e^{−t⁴}dt（无法用初等函数表示，考试写到此即得分）</strong>。</p>
+</blockquote>
+<p><strong>U60.</strong>★★ 求 ∫∫_{|x|+|y|≤1} (|x|+|y|) dA。</p>
+<blockquote>
+<p>四个象限对称，每块：∫₀¹∫₀^{1−x}(x+y)dydx = ∫₀¹[(1−x)(1+x)/2]dx = 2/3·? = 1/3·? 逐块 = 1/3，共 <strong>4/3</strong>。</p>
+</blockquote>
+<p><strong>U61.</strong>★★ 求 ∫∫_{整个平面} e^{−(x²+y²)} dA。</p>
+<blockquote>
+<p>极坐标：2π∫₀^{+∞}re^{−r²}dr = <strong>π</strong>（高斯积分，概率论与热传导的地基）。</p>
+</blockquote>
+<p><strong>U62.</strong>★ (X,Y) 在单位圆盘上均匀分布（密度 1/π）。求 P(X²+Y²≤1/4)。</p>
+<blockquote>
+<p>面积比：π(1/4)/π·? 小圆面积 π/4 ⇒ <strong>1/4</strong>。均匀分布的概率=面积比。</p>
+</blockquote>
+<p><strong>U63.</strong>★★★ 设 f 连续，F(t)=∫∫_{x²+y²≤t²} f(√(x²+y²))dA（t&gt;0）。求 F′(t)。</p>
+<blockquote>
+<p>极坐标：F=2π∫₀ᵗ f(r)r dr ⇒ <strong>F′(t) = 2πt·f(t)</strong>。
+"圆盘上对称被积函数 ⇒ 化为一次积分再求导"，含参二重积分的标准处理。</p>
+</blockquote>
+<p><strong>U64.</strong>★★★ 默写二重积分中值定理，并指出 f=x²+y² 在单位圆盘上的平均值。</p>
+<blockquote>
+<p>f 在有界闭区域 D 连续 ⇒ ∃(ξ,η)∈D：∫∫_D f = f(ξ,η)·S_D。
+平均值 = ∫∫(x²+y²)/π = (π/2)/π = <strong>1/2</strong> ⇒ 存在点使 ξ²+η²=1/2（半径 1/√2 的圆上）。</p>
+</blockquote>
+<p><strong>U65.</strong>★★ 证明 ∫∫_{x²+y²≤1} e^{x²+y²} dA ≤ π(e−1)，并说明等号情形。</p>
+<blockquote>
+<p>极坐标精确计算：2π∫₀¹re^{r²}dr = π(e−1) ⇒ <strong>恰好相等</strong>（此"不等式"实为等式）。
+教训：能用单调性直接算的别硬估。</p>
+</blockquote>
+<p><strong>U66.</strong>★ 说出极坐标曲线 r=2sinθ 是什么图形。</p>
+<blockquote>
+<p>两边乘 r：r²=2rsinθ ⇒ x²+y²=2y ⇒ <strong>圆心 (0,1)、半径 1 的圆</strong>。r=a·sinθ/cosθ 一族都这样翻译。</p>
+</blockquote>
+<p><strong>U67.</strong>★★ 求 ∫∫_D (x+y)dA，D: x²+y² ≤ x+y。</p>
+<blockquote>
+<p>配方：(x−½)²+(y−½)² ≤ ½。平移 u=x−½，v=y−½：
+∫∫(u+v+1)dA = 0+0+π(1/2) = <strong>π/2</strong>。<strong>平移消一次项</strong>是对称性的活用。</p>
+</blockquote>
+<p><strong>U68.</strong>★★ 计算 ∫₀¹dy ∫_{√y}^1 √(x³+1) dx。</p>
+<blockquote>
+<p>区域：√y≤x≤1，0≤y≤1 ⇒ y≤x²。换序：∫₀¹√(x³+1)dx∫₀^{x²}dy = ∫₀¹x²√(x³+1)dx。
+= (1/3)·(2/3)(x³+1)^{3/2}|₀¹ = <strong>(2/9)(2√2−1)</strong>。</p>
+</blockquote>
+<p><strong>U69.</strong>★★ 求由 z=1−x²−y² 与 z=0 围成立体的体积。</p>
+<blockquote>
+<p>V = ∫∫_{r≤1}(1−r²)dA = 2π∫₀¹(r−r³)dr = 2π(1/4) = <strong>π/2</strong>。</p>
+</blockquote>
+<p><strong>U70.</strong>★★ 求 ∫∫_D (x²+y²)dA，D: 1≤x²+y²≤4 且 x≥0，y≥0。</p>
+<blockquote>
+<p>极坐标：∫₀^{π/2}dθ·∫₁²r³dr = (π/2)(15/4) = <strong>15π/8</strong>。</p>
+</blockquote>
+<h2>§4 三重积分（U71–U90）</h2>
+<p><strong>U71.</strong>★ 求 Ω（x≥0,y≥0,z≥0 且 x+y+z≤1）的体积，用三重积分。</p>
+<blockquote>
+<p>投影到 xy 面（三角形 x+y≤1）：V=∫∫ z 上限 1−x−y = ∫∫(1−x−y)dA = <strong>1/6</strong>（四面体）。</p>
+</blockquote>
+<p><strong>U72.</strong>★★ 求 Ω（z=x²+y² 与 z=1 围成）的体积。</p>
+<blockquote>
+<p>投影 r≤1：V=∫∫_{r≤1}(1−r²)dA = 2π∫₀¹(r−r³)dr = <strong>π/2</strong>（旋转抛物面碗）。</p>
+</blockquote>
+<p><strong>U73.</strong>★★ 用"先二后一"求球 x²+y²+z²≤R² 的体积。</p>
+<blockquote>
+<p>高度 z 处截面是半径 √(R²−z²) 的圆：V=∫_{−R}^R π(R²−z²)dz = π(2R³−2R³/3) = <strong>4πR³/3</strong>。
+被积函数只含 z ⇒ 截面法通常完胜。</p>
+</blockquote>
+<p><strong>U74.</strong>★★ 求 ∫∫∫_Ω z dV，Ω 为上半球 r≤1，z≥0。</p>
+<blockquote>
+<p>球坐标：z=r·cosφ，dV=r²sinφ dr dφ dθ。
+∫₀^{2π}dθ ∫₀^{π/2}sinφcosφdφ ∫₀¹r³dr = 2π·(1/2)·(1/4) = <strong>π/4</strong>。</p>
+</blockquote>
+<p><strong>U75.</strong>★ 均匀球体 r≤R 的质心在哪？</p>
+<blockquote>
+<p>对称性：<strong>球心 (0,0,0)</strong>。任何对称区域+对称密度，质心在对称中心，先答这个再算别的。</p>
+</blockquote>
+<p><strong>U76.</strong>★★ 求 ∫∫∫_Ω (x²+y²)dV，Ω：锥 z=√(x²+y²) 与 z=1 围成。</p>
+<blockquote>
+<p>柱坐标：0≤z≤r≤1。∫₀^{2π}∫₀¹∫₀^r r²·r dz dr dθ = 2π∫₀¹r⁴dr = <strong>2π/5</strong>。</p>
+</blockquote>
+<p><strong>U77.</strong>★★ 圆柱 x²+y²≤1，0≤z≤1，密度 ρ=z。求质量与质心的 z 坐标。</p>
+<blockquote>
+<p>M=∫∫∫z dV = 2π·(∫₀¹r dr)(∫₀¹z dz) = 2π·(1/2)(1/2) = <strong>π/2</strong>。
+z̄ = ∫∫∫z²dV / M = (2π·½·⅓)/(π/2) = (π/3)/(π/2) = <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>U78.</strong>★★★ 推导均匀球体（密度 ρ、半径 R）绕直径的转动惯量。</p>
+<blockquote>
+<p>I_z = ρ∫∫∫(x²+y²)dV = ρ·(2/3)∫∫∫r²dV（轮换对称）。
+∫∫∫r²dV = ∫₀^{2π}∫₀^π∫₀^R r⁴sinφ drdφdθ = 2π·2·R⁵/5 = 4πR⁵/5。
+<strong>I = 8πρR⁵/15 = (2/5)MR²</strong>（M=4πρR³/3）。物理必背结论，积分可现场推。</p>
+</blockquote>
+<p><strong>U79.</strong>★★ 用先二后一求 Ω（z=x²+y² 与 z=4 围成）的体积。</p>
+<blockquote>
+<p>高度 z 处截面 r=√z：V=∫₀⁴ πz dz = <strong>8π</strong>。</p>
+</blockquote>
+<p><strong>U80.</strong>★ 求 ∫∫∫_{r≤R} r² dV。</p>
+<blockquote>
+<p>球坐标：2π∫₀^π sinφdφ ∫₀^R r⁴dr = 2π·2·R⁵/5 = <strong>4πR⁵/5</strong>。</p>
+</blockquote>
+<p><strong>U81.</strong>★★ 求 ∫∫∫_{x²+y²+z²≤1} (x+y+z)² dV。</p>
+<blockquote>
+<p>展开：x²+y²+z² + 2(xy+yz+zx)。交叉项由对称性归零。
+∫∫∫r²dV = 4π/5 ⇒ <strong>= 4π/5</strong>。</p>
+</blockquote>
+<p><strong>U82.</strong>★★ Ω: x²+y²≤z，0≤z≤1（倒锥）。求 ∫∫∫_Ω f(z)dV 的截面法表达，并取 f(z)=z 计算。</p>
+<blockquote>
+<p>高度 z 处截面是半径 √z 的圆（x²+y²≤z）：∫∫∫f(z)dV = ∫₀¹ f(z)·πz dz。
+f=z：∫₀¹πz²dz = <strong>π/3</strong>。</p>
+</blockquote>
+<p><strong>U83.</strong>★ 用三重积分求锥 z=√(x²+y²)（z≤1）的体积，验证圆锥公式。</p>
+<blockquote>
+<p>V=∫₀¹πz²dz = <strong>π/3</strong> ✓（与初等几何 (1/3)πR²h 一致）。</p>
+</blockquote>
+<p><strong>U84.</strong>★ 求椭球 x²/a²+y²/b²+z²/c²≤1 的体积。</p>
+<blockquote>
+<p>广义球坐标 x=au,y=bv,z=cw，雅可比 abc：
+V = abc·(4π/3)（单位球体积）。<strong>= 4πabc/3</strong>。</p>
+</blockquote>
+<p><strong>U85.</strong>★★ 求 ∫∫∫_{r≤R} z² dV。</p>
+<blockquote>
+<p>对称：∫z² = ∫x² = ∫y² = ⅓∫r²dV = ⅓·4πR⁵/5 = <strong>4πR⁵/15</strong>。</p>
+</blockquote>
+<p><strong>U86.</strong>★★★ 计算 ∫∫∫_Ω dV/(1+x+y+z)³，Ω: x+y+z≤1，x,y,z≥0。</p>
+<blockquote>
+<p>先二后一：高度 u=x+y+z 处截面是面积 u²/2 的三角形。
+I = ½∫₀¹ u²/(1+u)³du，令 w=1+u：= ½∫₁² (w−1)²/w³ dw = ½∫₁²(1/w − 2/w² + 1/w³)dw。
+= ½[lnw + 2/w − 1/(2w²)]₁² = ½[(ln2+1−1/8)−(0+2−1/2)] = <strong>(1/2)ln2 − 5/16</strong>。
+（即 ½(ln2 − 5/8)。截面面积函数是这类题的钥匙。）</p>
+</blockquote>
+<p><strong>U87.</strong>★★ 求 ∫∫∫_{x²+y²+z²≤4, z≥0} z² dV。</p>
+<blockquote>
+<p>上半球 = 全球值的一半：4πR⁵/15（R=2）= 4π·32/15 = 128π/15 ⇒ <strong>64π/15</strong>。</p>
+</blockquote>
+<p><strong>U88.</strong>★★ 求 ∫∫∫_{r≤1} |z| dV。</p>
+<blockquote>
+<p>= 2×上半球 ∫z dV = 2×(π/4)（U74）= <strong>π/2</strong>。</p>
+</blockquote>
+<p><strong>U89.</strong>★★★ 求 Ω（z=x²+y² 与 z=1 围成）均匀物体的质心 z 坐标。</p>
+<blockquote>
+<p>对称 ⇒ x̄=ȳ=0。∫∫∫z dV = ∫∫<em>{r≤1}∫</em>{r²}^1 z dz·r dr dθ = 2π∫₀¹ r(1−r⁴)/2 dr = π(1/2−1/6) = π/3。
+V=π/2（U72）⇒ <strong>z̄ = (π/3)/(π/2) = 2/3</strong>（比 1/2 靠上——碗形状上重下轻，合理）。</p>
+</blockquote>
+<p><strong>U90.</strong>★★★ 求"冰激凌"（球 x²+y²+z²=2z 内部与锥 z=√(x²+y²) 内部的公共部分）体积。</p>
+<blockquote>
+<p>球坐标：球面 r=2cosφ；锥 φ=π/4。
+V = ∫₀^{2π}dθ∫₀^{π/4}sinφdφ∫₀^{2cosφ}r²dr = (2π/3)∫₀^{π/4}8cos³φ·sinφdφ
+= (16π/3)·[−cos⁴φ/4]₀^{π/4}·(−1) = (16π/3)(1/4)(1−1/4) = <strong>π</strong>。</p>
+</blockquote>
+<h2>§5 曲线曲面积分与三大定理（U91–U120）</h2>
+<p><strong>U91.</strong>★ 求 ∫_L (x+y)ds，L: y=x 从 (0,0) 到 (1,1)。</p>
+<blockquote>
+<p>ds=√2 dx：(x+y)=2x ⇒ ∫₀¹2x·√2dx = <strong>√2</strong>。</p>
+</blockquote>
+<p><strong>U92.</strong>★ 求 ∫_L x ds，L 为上半圆 x²+y²=1（y≥0）。</p>
+<blockquote>
+<p>曲线关于 y 轴对称，x 是奇函数 ⇒ <strong>0</strong>（第一类曲线积分不认方向，只认对称）。</p>
+</blockquote>
+<p><strong>U93.</strong>★★ 求 ∫_L x² ds，L: x²+y²=a²（整圆）。</p>
+<blockquote>
+<p>对称：∫x²ds = ½∫(x²+y²)ds = ½a²·2πa = <strong>πa³</strong>。</p>
+</blockquote>
+<p><strong>U94.</strong>★★ 求螺旋线 x=acost，y=asint，z=bt（0≤t≤2π）上 ∫_L (x²+y²+z²)ds。</p>
+<blockquote>
+<p>ds=√(a²+b²)dt；被积 = a²+b²t²。
+= √(a²+b²)[2πa² + b²·(8π³/3)] = <strong>√(a²+b²)(2πa² + 8π³b²/3)</strong>。</p>
+</blockquote>
+<p><strong>U95.</strong>★★ 求 ∬_S (x+y+z)dS，S 为平面 x+y+z=1 在第一卦限的部分。</p>
+<blockquote>
+<p>在 S 上被积函数恒为 1 ⇒ = S 的面积 = 等边直角三角形放大 √3 倍 = <strong>√3/2</strong>。</p>
+</blockquote>
+<p><strong>U96.</strong>★★ 求 ∬_S z dS，S: z=√(x²+y²)（0≤z≤1 的锥面）。</p>
+<blockquote>
+<p>z=r，dS=√2 r dr dθ：= √2∫₀^{2π}dθ∫₀¹r²dr = <strong>2√2π/3</strong>。</p>
+</blockquote>
+<p><strong>U97.</strong>★★ 求 ∬_S (x²+y²)dS，S: x²+y²+z²=R²。</p>
+<blockquote>
+<p>轮换：= (2/3)∬(x²+y²+z²)dS = (2/3)R²·4πR² = <strong>8πR⁴/3</strong>。</p>
+</blockquote>
+<p><strong>U98.</strong>★ 默写第二类曲线积分的方向性。</p>
+<blockquote>
+<p>∫_L Pdx+Qdy：L 反向则积分<strong>变号</strong>。与第一类（ds 恒正）的本质区别。</p>
+</blockquote>
+<p><strong>U99.</strong>★★ 用格林公式求 ∮_L (x−y)dx + (x+y)dy，L: x²+y²=1 取正向。</p>
+<blockquote>
+<p>∂Q/∂x − ∂P/∂y = 1 − (−1) = 2 ⇒ ∮ = ∬_D 2dA = <strong>2π</strong>。</p>
+</blockquote>
+<p><strong>U100.</strong>★★★ 求 ∫_L (eˣsiny − y)dx + (eˣcosy − 1)dy，L: 上半圆 x²+y²=1 从 (1,0) 到 (−1,0)。</p>
+<blockquote>
+<p>∂Q/∂x − ∂P/∂y = eˣcosy − (eˣcosy − 1) = 1。
+补 x 轴线段（y=0，dx 段被积 P=0）从 (−1,0) 回 (1,0)：闭路 = ∬1·dA = π/2。
+L 方向是顺时针（从 (1,0) 到 (−1,0) 经上半圆）⇒ 闭路取负向：−I + 0 = π/2 ⇒ <strong>I = π/2</strong>。</p>
+</blockquote>
+<p><strong>U101.</strong>★★ 验证 (2xy)dx + x²dy 与路径无关，并求原函数。</p>
+<blockquote>
+<p>∂P/∂y=2x=∂Q/∂x ✓（全平面单连通）。
+u = ∫0^x 0·dx + ∫₀^y x²dy = <strong>x²y + C</strong>（折线法）。</p>
+</blockquote>
+<p><strong>U102.</strong>★★ 求 u 使 du = (x²+2xy−y²)dx + (x²−2xy−y²)dy。</p>
+<blockquote>
+<p>∂P/∂y=2x−2y=∂Q/∂x ✓。
+逐项积分拼凑：<strong>u = x³/3 + x²y − xy² − y³/3 + C</strong>（验证：ux=x²+2xy−y² ✓，uy=x²−2xy−y² ✓）。</p>
+</blockquote>
+<p><strong>U103.</strong>★ 默写两类曲线积分的联系。</p>
+<blockquote>
+<p>∫_L Pdx+Qdy = <strong>∫_L (Pcosα + Qcosβ)ds</strong>，(cosα,cosβ) 是 L 沿指定方向的单位切向量。三元多一项 cosγ。</p>
+</blockquote>
+<p><strong>U104.</strong>★★ 求 ∮_L xdx + ydy，L: x²+y²=1 正向。</p>
+<blockquote>
+<p>P=x，Q=y：∂Q/∂x−∂P/∂y = 0 ⇒ <strong>0</strong>（也是势函数 (x²+y²)/2 沿闭路为零的直接体现）。</p>
+</blockquote>
+<p><strong>U105.</strong>★ 默写第二类曲面积分的记号与方向意义。</p>
+<blockquote>
+<p>∬_Σ Pdydz + Qdzdx + Rdxdy：dydz 等是<strong>有向</strong>面积微元投影，外侧/内侧差正负号。高斯公式要求外侧。</p>
+</blockquote>
+<p><strong>U106.</strong>★★ 用高斯公式求 ∬_Σ x·dydz + y·dzdx + z·dxdy，Σ: 球面 r=R 外侧。</p>
+<blockquote>
+<p>div = 3 ⇒ = 3·(4/3)πR³ = <strong>4πR³</strong>。</p>
+</blockquote>
+<p><strong>U107.</strong>★★ 求 ∬_Σ x·dydz + y·dzdx + z·dxdy，Σ: 立方体 [0,1]³ 表面外侧。</p>
+<blockquote>
+<p>div=3，体积 1 ⇒ <strong>3</strong>。</p>
+</blockquote>
+<p><strong>U108.</strong>★★★ 求 ∬_Σ x·dydz + y·dzdx + z·dxdy，Σ 为锥面 z=√(x²+y²)（0≤z≤1）的下侧（不含底面）。</p>
+<blockquote>
+<p>补底面 z=1（下侧朝 −z）成闭合外侧：div=3，锥体体积 π/3 ⇒ 闭合积分 = π。
+底面（下侧）：R=1，法向 −z ⇒ ∬z·dxdy 取 −∬dxdy = −π。
+锥面部分 = π − (−π) = <strong>2π</strong>。<strong>"补面"是高斯公式的标准用法，方向要配对。</strong></p>
+</blockquote>
+<p><strong>U109.</strong>★★★ 用斯托克斯公式求 ∮_Γ ydx + zdy + xdz，Γ: x²+y²+z²=a² 与 x+y+z=0 的交线（从 z 轴正向看为逆时针）。</p>
+<blockquote>
+<p>rot F = (0−1, 0−1, 0−1) = (−1,−1,−1)（P=y,Q=z,R=x）。
+平面法向 n=(1,1,1)/√3：∮ = ∬(rot F·n)dS = −√3·S_disk = <strong>−√3πa²</strong>（圆盘半径 a）。</p>
+</blockquote>
+<p><strong>U110.</strong>★ 默写旋度公式。</p>
+<blockquote>
+<p><strong>rot F = |i j k; ∂/∂x ∂/∂y ∂/∂z; P Q R|</strong> = (R_y−Q_z, P_z−R_x, Q_x−P_y)。</p>
+</blockquote>
+<p><strong>U111.</strong>★ 求 div(x³, y³, z³)。</p>
+<blockquote>
+<p><strong>3(x²+y²+z²)</strong>。散度=各分量的偏导之和。</p>
+</blockquote>
+<p><strong>U112.</strong>★ F=(y,−x,0)，求 rot F 并解释物理意义。</p>
+<blockquote>
+<p>rot F = (0,0,−2)。<strong>刚体绕 z 轴旋转场</strong>，旋度沿 −z，模 2=2ω（角速度 ω=1）。</p>
+</blockquote>
+<p><strong>U113.</strong>★ 默写两类曲面积分的联系。</p>
+<blockquote>
+<p>∬_Σ R dxdy = <strong>±∬_Σ R·cosγ·dS</strong>（±由曲面侧定，cosγ 是法向量与 z 轴夹角余弦）。P、Q 两项同理。</p>
+</blockquote>
+<p><strong>U114.</strong>★★ 流速场 F=(x,y,z) 通过球面 r=R 外侧的流量。</p>
+<blockquote>
+<p>div=3：流量 = 3·(4/3)πR³ = <strong>4πR³</strong>（球内每点源强 3，物理意义与 U106 相同）。</p>
+</blockquote>
+<p><strong>U115.</strong>★★ 求星形线 x=acos³t，y=asin³t 的全长。</p>
+<blockquote>
+<p>第一象限 ds = 3a·sint·cost·dt（√(x′²+y′²)=3a sint cost）。
+∫₀^{π/2}3a sint cost dt = 3a/2 ⇒ 全长 = 4×3a/2 = <strong>6a</strong>。</p>
+</blockquote>
+<p><strong>U116.</strong>★ 用第一类曲面积分表示圆柱 x²+y²=R²（0≤z≤h）的侧面面积并计算。</p>
+<blockquote>
+<p>∬dS，参数化 dS = R dθdz：= R·2π·h = <strong>2πRh</strong>（初中公式，积分一遍确认参数化能力）。</p>
+</blockquote>
+<p><strong>U117.</strong>★★★ 求 ∬_S (x+y+z)² dS，S: x²+y²+z²=R²。</p>
+<blockquote>
+<p>展开 = x²+y²+z² + 2(xy+yz+zx)。交叉项在球面上由对称性归零。
+<strong>= ∬R²dS = 4πR⁴</strong>。</p>
+</blockquote>
+<p><strong>U118.</strong>★★ 用格林公式的面积公式 A=½∮(xdy−ydx) 推导椭圆面积。</p>
+<blockquote>
+<p>x=acost，y=bsint：xdy−ydx = ab(cos²t+sin²t)dt = ab·dt。
+A = ½∫₀^{2π}ab·dt = <strong>πab</strong>。</p>
+</blockquote>
+<p><strong>U119.</strong>★★★ 求 ∫_L (x²−y)dx − (x+sin²y)dy，L: y=√(2x−x²) 从 (0,0) 到 (1,1)。</p>
+<blockquote>
+<p>∂Q/∂x−∂P/∂y = −1−(−1) = 0 ⇒ 路径无关（单连通域内）。
+原函数 u = x³/3 − xy − y/2 + sin2y/4（−∫sin²y dy = −y/2+sin2y/4）。
+I = u(1,1) − u(0,0) = 1/3 − 1 − 1/2 + sin2/4 = <strong>sin2/4 − 7/6</strong>。
+<strong>先验路径无关再换折线，是第二类曲线积分的最优策略</strong>。</p>
+</blockquote>
+<p><strong>U120.</strong>★★★ 求 ∬_Σ (x²cosα + y²cosβ + z²cosγ)dS，Σ: 球面 x²+y²+z²=a² 外侧。</p>
+<blockquote>
+<p>化为第二类后用高斯：div(x²,y²,z²) = 2(x+y+z)。
+∫∫∫2(x+y+z)dV：球对称下 x、y、z 各自归零 ⇒ <strong>0</strong>。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：U1–U120。使用节奏：①§1–§2 两天（可微性判别按定义、极值先驻点后判别式）→②§3 两天（先画区域再动手；换序题先练 U48–U49/U68）→③§4 一天半（三种坐标按"被积函数+区域"选，选择困难就背 U76/U74 两个模板）→④§5 两天半（格林/高斯/斯托克斯各配一道"补线/补面"题，U100/U108/U109 是必会三件套）。数一大题里曲线曲面积分几乎必出一道，这里 30 题就是主粮。</p></div></body></html>

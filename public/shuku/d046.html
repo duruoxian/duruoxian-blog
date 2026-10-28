@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408_背诵冲刺手册 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 背诵冲刺手册（四科硬核背诵）</h1>
+<blockquote>
+<p>用法：第一轮过后才开始背；每条都是"考试会直接考的数字/公式/结论"，配合《四科考题集》查漏。<strong>打★的是近10年统考反复考过的</strong>。
+结构：01 数据结构｜02 计组｜03 操作系统｜04 计算机网络</p>
+</blockquote>
+<hr />
+<h2>01 数据结构</h2>
+<h3>1.1 时间复杂度总表★</h3>
+<p><strong>线性表/链表操作</strong>：
+| 操作 | 顺序表 | 单链表（带头结点） |
+|---|---|---|
+| 按位查找 | O(1) | O(n) |
+| 按值查找 | O(n) | O(n) |
+| 插入/删除（已定位） | O(n)（移动元素） | O(1)（改指针） |
+| 定位后插入 | — | 找到位置O(n) + 插入O(1) |</p>
+<p><strong>排序算法★（必背表）</strong>：
+| 算法 | 平均 | 最好 | 最坏 | 空间 | 稳定 |
+|---|---|---|---|---|---|
+| 直接插入 | O(n²) | O(n) | O(n²) | O(1) | ✔ |
+| 折半插入 | O(n²) | O(nlog₂n)（比较次数减少，移动仍O(n²)） | O(n²) | O(1) | ✔ |
+| 冒泡 | O(n²) | O(n) | O(n²) | O(1) | ✔ |
+| 简单选择 | O(n²) | O(n²) | O(n²) | O(1) | ✘ |
+| 希尔 | 依赖增量（约O(n^1.3)） | — | O(n²) | O(1) | ✘ |
+| 快速排序 | O(nlog₂n) | O(nlog₂n) | <strong>O(n²)（基本有序时）</strong> | O(log₂n)栈 | ✘ |
+| 堆排序 | O(nlog₂n) | O(nlog₂n) | O(nlog₂n) | O(1) | ✘ |
+| 归并排序 | O(nlog₂n) | O(nlog₂n) | O(nlog₂n) | <strong>O(n)</strong> | ✔ |
+| 基数排序 | O(d(n+r)) | O(d(n+r)) | O(d(n+r)) | O(r) | ✔ |
+- <strong>快排空间最坏O(n)</strong>（递归深度），归并稳定且空间O(n)——两个"反直觉"最常考。
+- 简单选择排序：比较次数固定 n(n-1)/2，与初始序列无关。
+- 堆：n个元素建堆 <strong>O(n)</strong>（自底向上下沉法），插入/删除调整 <strong>O(log₂n)</strong>。</p>
+<h3>1.2 树与二叉树★</h3>
+<ul>
+<li>二叉树性质：n₀ = n₂ + 1；n个结点二叉链表有 <strong>n+1</strong> 个空链域。</li>
+<li>第i层最多 2^{i-1} 个结点；h层满二叉树共 2^h - 1 个。</li>
+<li><strong>完全二叉树高度</strong>：⌈log₂(n+1)⌉ 或 ⌊log₂n⌋+1。</li>
+<li>完全二叉树结点n：叶子数 = ⌈n/2⌉；编号i的子女 2i、2i+1（i≤⌊n/2⌋）。</li>
+<li>二叉排序树：中序遍历得递增序列；成功平均查找长度ASL与树形有关（最好O(log n)，最坏O(n)斜树）。</li>
+<li>平衡二叉树AVL：平衡因子∈{-1,0,1}；n层最少结点数 N(h)=N(h-1)+N(h-2)+1（1,2,4,7,12,20,33…）；含n个结点AVL最大高度 O(log₂n)。</li>
+<li><strong>哈夫曼树</strong>：n个叶子生成<strong>2n-1</strong>个结点的二叉树（无度为1的结点）；哈夫曼编码是<strong>前缀码</strong>，总长=WPL；哈夫曼树不唯一但WPL唯一最小。</li>
+<li>树/森林与二叉树转换：树的先根遍历=对应二叉树先序，后根遍历=对应二叉树<strong>中序</strong>。</li>
+<li><strong>B树（m阶）</strong>：根至少2棵子树；非根非叶至少⌈m/2⌉棵子树、⌈m/2⌉-1个关键字；所有叶子同一层；n个关键字B树高度 ≤ log⌈m/2⌉((n+1)/2)+1。</li>
+<li><strong>B+树</strong>：n个关键字n棵子树（关键字=子树数）；叶子含全部关键字并链表相连；支持顺序查找——与B树的差异是选择题高频。</li>
+</ul>
+<h3>1.3 图</h3>
+<ul>
+<li>存储：邻接矩阵空间O(n²)（适合稠密图）；邻接表O(n+e)（适合稀疏图；无向图每边存两次）。</li>
+<li><strong>遍历复杂度</strong>：DFS/BFS 均为 O(n+e)（邻接表）、O(n²)（邻接矩阵）。</li>
+<li>BFS：求<strong>无权图单源最短路径</strong>；辅助队列。DFS：辅助栈（递归）。</li>
+<li>最小生成树：<strong>Prim O(n²)（与边数无关，稠密图）</strong>；<strong>Kruskal O(elog₂e)（稀疏图）</strong>；MST不唯一（权值互异时唯一），但<strong>总权值唯一最小</strong>。</li>
+<li><strong>Dijkstra O(n²)</strong>：单源最短路径，<strong>不能处理负权边</strong>；Floyd O(n³)：多源，可处理负权边（不允许负权回路）。</li>
+<li>拓扑排序：AOV网；每次选入度0顶点；<strong>拓扑序列不唯一</strong>；有环⇒输出顶点数&lt;n。逆拓扑排序可用DFS。</li>
+<li><strong>关键路径</strong>：AOE网；关键路径=最长路径；关键活动：最早开始=最迟开始（e=l，时间余量0）；<strong>缩短关键活动不一定缩短工期</strong>（关键路径可能转移）；关键路径<strong>可能不止一条</strong>。</li>
+<li>有向图强连通：DFS两次（Kosaraju思想——选择题概念即可）。</li>
+</ul>
+<h3>1.4 查找</h3>
+<ul>
+<li>顺序查找 ASL=(n+1)/2；有序表折半查找 <strong>ASL≈log₂(n+1)-1</strong>，判定树是平衡二叉树形态，比较次数≤⌈log₂(n+1)⌉。</li>
+<li>散列：</li>
+<li>装填因子 α=表中记录数/表长；<strong>ASL与α有关，与表长无关</strong>。</li>
+<li>冲突处理：线性探测（堆积/聚集现象）、平方探测（±1²,±2²…，要求表长为<strong>4k+3的素数</strong>）、双散列、拉链法（同义词链表）。</li>
+<li>"删除"：开放定址法只能做<strong>惰性删除</strong>（标记）。</li>
+<li>KMP★：next[j]定义=模式串前j-1个字符"最长相等前后缀长度+1"（教材版）或前缀表直接用；<strong>nextval</strong>是next的改进（避免相等字符的无谓比较）；主串指针<strong>不回溯</strong>，时间O(n+m)。</li>
+</ul>
+<hr />
+<h2>02 计算机组成原理</h2>
+<h3>2.1 数制与运算★</h3>
+<ul>
+<li>补码范围：n位补码表示 <strong>-2^{n-1} ~ 2^{n-1}-1</strong>（比原码/反码多表示一个最小负数，如8位：-128~127）。</li>
+<li>[-x]补 = [x]补 连同符号位一起取反加1。</li>
+<li>补码加减：溢出判断——<strong>双符号位（变形补码）</strong>：两符号位不同则溢出；单符号位：进位⊕符号进位。</li>
+<li>移码=补码符号位取反（用于阶码，便于比较大小）。</li>
+<li><strong>IEEE 754</strong>（32位float）：1符号+8阶码（偏置127）+23尾数（隐含1）；规格化数真值=(-1)^s×1.M×2^{E-127}；<strong>全0阶码=非规格化数，全1阶码=无穷/NaN</strong>。64位double：11阶码偏置1023，52尾数。</li>
+<li>浮点加减五步：对阶（小阶向大阶）→尾数加减→规格化→舍入（0舍1入/恒置1）→溢出判断（<strong>阶码溢出才是浮点溢出</strong>）。</li>
+<li>海明码：k位校验位，2^k ≥ n+k+1；分组偶校验定位错。</li>
+<li>CRC：模2除法；余数为0则无错。</li>
+</ul>
+<h3>2.2 存储系统★</h3>
+<ul>
+<li>层次：Cache—主存（速度）、主存—辅存（容量）；<strong>时间局部性+空间局部性</strong>是依据。</li>
+<li>DRAM用电容（需刷新、主存），SRAM用触发器（快、贵，Cache）；Flash非易失（SSD/BIOS）。</li>
+<li><strong>主存芯片扩展</strong>：位扩展×字数扩展；访存地址计算：芯片数、片选译码（高频计算题）。</li>
+<li>交叉存储器：<strong>低位交叉（体号在低位）流水存取</strong>——连续访问m个体时间≈T+(m-1)r；高位交叉用于扩容。</li>
+<li><strong>Cache映射</strong>：</li>
+<li>直接映射：主存块号 mod Cache行数；标记=主存块号/行数的高位。</li>
+<li>全相联：任意行，标记最长，命中率高、比较电路多。</li>
+<li>组相联：组间直接、组内全相联；主存块号 mod 组数 = 组号。</li>
+<li>平均访存时间 = 命中时间 + 缺失率×缺失开销；命中率与容量、块大小、映射方式、替换算法有关。</li>
+<li>写策略：全写法（write-through，配合写缓冲）+写分配；回写法（write-back，dirty位）+不写分配。</li>
+<li><strong>虚拟存储</strong>：页式（页表在主存，TLB加速）、段式（二维、利于共享保护）、段页式；虚地址→物理地址：页号查页表→物理页框号+页内偏移；<strong>TLB命中则无需访存查页表</strong>；缺页处理由<strong>操作系统</strong>负责（计组与OS交叉考点）。</li>
+<li>页大小4KB⇒页内偏移12位——地址位数计算的锚点。</li>
+</ul>
+<h3>2.3 指令系统与CPU</h3>
+<ul>
+<li>寻址方式EA计算：立即（指令中）、直接（EA=A）、间接（EA=(A)）、寄存器（R内容）、寄存器间接（(R)）、基址（基址寄存器+A，<strong>面向操作系统/程序重定位</strong>）、变址（IX+A，<strong>面向用户/数组</strong>）、相对（PC+A，<strong>便于程序浮动</strong>）。</li>
+<li>CISC vs RISC：RISC指令<strong>定长</strong>、种类少、格式少、只有Load/Store访存、寄存器多、<strong>组合逻辑控制、流水线、优化编译</strong>。</li>
+<li><strong>指令流水线</strong>：k段流水线执行n条指令总时间=(k+n-1)Δt；吞吐率=n/[(k+n-1)Δt]→极限1/Δt；加速比→k。</li>
+<li>流水线冒险：结构（资源冲突：停顿/资源重复）、数据（<strong>转发/旁路</strong>、停顿、编译调度）、控制（转移指令：<strong>分支预测、延迟槽</strong>）。</li>
+<li>数据通路的硬布线（RISC快）vs 微程序（CISC灵活）：微指令格式（水平型并行能力强/垂直型）；微地址形成。</li>
+<li>中断★：<strong>中断隐指令</strong>（关中断、保存断点、引出服务程序）由硬件完成；中断服务程序开头（保存现场和屏蔽字）由<strong>软件</strong>完成；多重中断需在<strong>开中断</strong>后才能响应新中断。</li>
+<li>DMA★：<strong>外设→DMA请求→CPU让出总线使用权</strong>（周期挪用/交替访存/停止访存）；DMA传送前的预处理和传送后处理<strong>由CPU执行程序完成</strong>，数据传送<strong>由硬件（DMA控制器）完成</strong>。区分两个层面：对<strong>总线使用权</strong>的竞争，DMA请求优先于CPU访存；DMA一批数据传送<strong>结束时，通过中断方式通知CPU</strong>做后处理——"DMA与中断"不是对立关系，常考选择题。</li>
+<li>I/O方式：程序查询（CPU忙等）、中断（每传一个字中断一次）、DMA（数据块直接与主存交换，CPU仅在开始结束介入）。</li>
+</ul>
+<h3>2.4 总线与I/O</h3>
+<ul>
+<li>总线带宽=总线工作频率×总线宽度(B)/8；DDR计数（上升+下降沿）注意题干。</li>
+<li>同步总线（时钟定时，快但强制一致）vs 异步总线（应答方式：不互锁/半互锁/全互锁，灵活慢）。</li>
+<li>磁盘存取时间=寻道时间+旋转延迟（平均半圈）+传输时间；<strong>磁盘阵列RAID</strong>：RAID0条带无冗余、RAID1镜像、RAID3/5奇偶校验（RAID5分布式校验）。</li>
+<li>键盘/打印机属于<strong>中断</strong>典型设备；显卡/磁盘属于<strong>DMA</strong>典型设备。</li>
+</ul>
+<hr />
+<h2>03 操作系统</h2>
+<h3>3.1 概论与进程</h3>
+<ul>
+<li><strong>OS四特征</strong>：并发、共享（互斥共享+同时访问）、虚拟、异步——<strong>并发与共享是互为存在条件的两个最基本特征</strong>。</li>
+<li><strong>进程三状态</strong>：运行→就绪（时间片到）、运行→阻塞（等I/O，<strong>主动</strong>）、阻塞→就绪（事件完成，<strong>被动</strong>）、就绪→运行（调度）；<strong>不存在阻塞→运行、就绪→阻塞</strong>的直接转换。</li>
+<li>PCB常驻内存；进程=PCB+程序段+数据段；线程=调度和分派的基本单位；<strong>引入线程后，进程是资源分配的基本单位，线程是CPU调度的基本单位</strong>★。</li>
+<li>用户级线程（内核不感知）vs 内核级线程；多线程进程中一个线程阻塞（内核级）整个进程不阻塞?——内核级线程独立阻塞；用户级线程一个阻塞整个进程阻塞。</li>
+<li><strong>系统调用</strong>：用户态→核心态的<strong>唯一</strong>入口（访管指令/trap）；外部中断也引起用户态→核心态但不是"系统调用"。</li>
+<li>原子操作/原语：关中断实现；<strong>内核态临界区不能依赖开中断？</strong>——内核程序临界区访问的结构不能被中断打断的场景按教材表述掌握（临界区+锁）。</li>
+</ul>
+<h3>3.2 同步互斥★</h3>
+<ul>
+<li>临界区互斥四原则：空闲让进、忙则等待、有限等待、让权等待。</li>
+<li><strong>P操作（wait）减1后&lt;0阻塞；V操作（signal）加1后≤0唤醒一个</strong>；信号量S&gt;0表示可用资源数，S&lt;0绝对值表示等待进程数。</li>
+<li>生产者-消费者：<strong>互斥P在同步P之后</strong>（先P(full/empty)后P(mutex)），顺序颠倒可能死锁——经典陷阱。</li>
+<li>管程：封装共享数据+操作+同步机制，<strong>每次仅允许一个进程进入</strong>（互斥由编译器保证）。</li>
+<li><strong>死锁四必要条件</strong>：互斥、请求并保持、不可剥夺、循环等待★（破坏任意一个即可预防；银行家算法是<strong>避免</strong>死锁）。</li>
+<li><strong>银行家算法</strong>：请求向量≤Need 且 ≤Available → 试分配→安全性检测（找Need≤Work的进程序列）；存在安全序列⇔系统处于安全状态。</li>
+<li>死锁定理：资源分配图化简不可化简⇒死锁。</li>
+<li>安全状态⇒无死锁；不安全状态<strong>可能</strong>死锁（不是一定）。</li>
+</ul>
+<h3>3.3 内存管理★</h3>
+<ul>
+<li>动态分区分配算法：首次适配（简单快）、最佳适配（碎片最多/微小碎片）、最坏适配（大进程友好）、邻近适配。</li>
+<li><strong>内部碎片</strong>（页式、固定分区）vs <strong>外部碎片</strong>（段式、动态分区）；页式离散分配<strong>无外部碎片</strong>，有内部碎片（最后一页）。</li>
+<li><strong>逻辑地址→物理</strong>：页号=逻辑地址/页长（高位），页内偏移=低位；物理地址=页框号×页长+偏移。</li>
+<li>页表项含：页框号+存取控制位+修改位+访问位等；<strong>二级页表</strong>：页目录→页表→页框；地址位数计算高频。</li>
+<li><strong>虚拟页式置换算法</strong>：OPT（无法实现，作评价基准）、<strong>FIFO（有Belady异常：物理块增多缺页可能不减反增）</strong>、<strong>LRU（堆栈类算法，无Belady）</strong>、<strong>Clock（循环扫描，访问位）</strong>、改进Clock（访问位+修改位，优先淘汰未访问未修改）。</li>
+<li>缺页率与<strong>页面大小、分配帧数、页面走向、置换算法</strong>有关；抖动=频繁缺页（工作集控制）。</li>
+<li>快表TLB：命中则<strong>一次访存</strong>完成；未命中则<strong>两次访存</strong>（查页表+取数）；计算"平均访存时间"按命中率加权。</li>
+<li>段页式：先分段再分页，<strong>三次访存</strong>（无TLB时：段表、页表、数据）。</li>
+</ul>
+<h3>3.4 文件与I/O</h3>
+<ul>
+<li><strong>FAT</strong>：显式链接，FAT表本身在开机后调入内存，查表<strong>不需额外访存磁盘</strong>；隐式链接需要逐块读盘。</li>
+<li><strong>索引结点</strong>：<strong>UNIX混合索引</strong>：直接地址（如12块）+一次间接+二次间接+三次间接；最大文件大小计算（块4KB、地址4B⇒每间接块1024项）——必考计算题模板。</li>
+<li>位示图：字号×位号与盘块号换算（注意从0还是1开始编号——<strong>看清题</strong>）。</li>
+<li>目录：FCB；目录查询；硬链接（引用计数，同inode）vs 软/符号链接（新建文件，存路径，原文件删除后失效）。</li>
+<li>磁盘调度：FCFS、<strong>SSTF（贪心，可能饥饿）</strong>、<strong>SCAN（电梯，单向扫描到端）</strong>、C-SCAN（单向扫到端立刻回起点）、C-LOOK（到最远请求即返回）。</li>
+<li>磁盘格式化容量=面数×磁道数×扇区数×512B；<strong>存取时间=寻道+旋转延迟+传输</strong>。</li>
+<li>I/O软件层次：用户层I/O软件→设备独立性软件→设备驱动程序→中断处理程序→硬件。</li>
+<li><strong>SPOOLing</strong>（假脱机）：用共享设备模拟独占设备（打印机）；需要<strong>磁盘缓冲区+输入/输出井</strong>，是"用空间换独占"。</li>
+<li><strong>缓冲区</strong>：单缓冲每块耗时 max(C,T)+M；双缓冲 max(C+M, T)；循环缓冲；缓冲池（公用）。</li>
+<li>设备分配中的数据结构：DCT、COCT、CHCT、SDT。</li>
+</ul>
+<hr />
+<h2>04 计算机网络</h2>
+<h3>4.1 体系结构</h3>
+<ul>
+<li>五层与设备/PDU：物理层（中继器/集线器，<strong>比特</strong>）、数据链路层（<strong>网桥/交换机</strong>，帧）、网络层（<strong>路由器</strong>，分组/IP数据报）、传输层（报文段）、应用层（报文）。</li>
+<li><strong>协议三要素</strong>：语法、语义、同步（时序）。</li>
+<li>电路交换（建立连接、实时性强、独占线路）vs 报文交换 vs <strong>分组交换（存储转发，利用率高）</strong>；存储转发的时延计算：每跳先收完整分组再发。</li>
+<li>时延=发送（L/R）+传播（d/v）+处理+排队；<strong>发送时延与带宽成反比，与距离无关</strong>。</li>
+<li>往返时间RTT；利用率D=D₀/(1-U)。</li>
+</ul>
+<h3>4.2 物理层与数据链路层★</h3>
+<ul>
+<li>奈奎斯特（无噪声）：极限速率 2W·log₂V；<strong>香农（有噪声）：W·log₂(1+S/N)</strong>——S/N用分贝时 dB=10lg(S/N)。</li>
+<li>曼彻斯特编码（波特率=2×码元率，以太网传统）、差分曼彻斯特；<strong>编码效率50%</strong>。</li>
+<li>尼奎斯特采样定理：f≥2f_max。</li>
+<li><strong>CRC计算</strong>：生成多项式G(x)最高次幂r→信息位后补r个0，模2除，余数即FCS。</li>
+<li><strong>停止-等待</strong>：信道利用率 U=T_D/(T_D+RTT+T_A)；<strong>滑动窗口</strong>：GBN发送窗≤2ⁿ-1（接收窗1）；<strong>SR发送窗+接收窗≤2ⁿ（各≤2^{n-1}）</strong>。</li>
+<li><strong>CSMA/CD以太网</strong>：争用期 2τ（端到端往返）；<strong>最小帧长64B=512bit</strong>（10Mbps：512/10⁷=51.2μs=2τ⇒最大网距约2.5km级——考计算）；截断二进制指数退避（最多16次）。</li>
+<li><strong>CSMA/CA</strong>（802.11无线）：不能"边发边听"→ACK确认+IFS+随机退避+RTS/CTS预约信道（可选）。</li>
+<li><strong>以太网MAC帧</strong>：目的6+源6+类型2+数据46~1500+FCS4；无帧结束符（物理层前导码定界）；<strong>数据字段46~1500B</strong>。</li>
+<li>交换机<strong>自学习</strong>：源MAC学习入表，目的MAC查表转发/查不到泛洪；<strong>独占带宽、全双工、冲突域消除</strong>（每个接口一个冲突域，VLAN隔离广播域）。</li>
+<li>PPP：帧定界（7E）、透明传输（字节填充）、不使用序号确认（不可靠传输、只检错）；NCP协商IP。</li>
+<li>VLAN基于802.1Q（帧中插入4B标签）。</li>
+</ul>
+<h3>4.3 网络层★</h3>
+<ul>
+<li><strong>IPv4分类</strong>：A 0/8（1-126，128网络）、B 10/16（128-191）、C 110/24（192-223）、D组播、E保留；<strong>私有地址</strong>：10/8、172.16/12、192.168/16。</li>
+<li><strong>子网划分模板</strong>：掩码长n⇒块大小2^{32-n}；可用主机数=2^{主机位}-2（全0网络、全1广播）；子网数=2^{借位数}（视题目是否减2）。</li>
+<li><strong>CIDR聚合</strong>：取各网络地址前缀公共部分；"最长前缀匹配"选路由。</li>
+<li><strong>IP数据报</strong>：首部20B固定+可变（≤40B）；TTL防环；分片：<strong>片偏移以8B为单位，MF/DF标志</strong>；分片只在目的主机重组。</li>
+<li><strong>IPv4→IPv6</strong>：128位；IPv6不设校验和、<strong>不允许分片（路由器）</strong>、即插即用、无广播（用任播/组播）。</li>
+<li>ICMP：差错报告（终点不可达、超时、参数问题、改变路由）+询问（回送请求/回答ping、时间戳）；<strong>ICMP封装在IP中</strong>。</li>
+<li><strong>ARP</strong>：IP→MAC，同一网段直接请求，跨网段<strong>请求默认网关</strong>的MAC；ARP请求<strong>广播</strong>、响应<strong>单播</strong>。</li>
+<li><strong>DHCP</strong>：UDP 67/68，DISCOVER<strong>广播</strong>→OFFER→REQUEST→ACK；可重用地址、支持移动。</li>
+<li><strong>NAT</strong>：私网→公网转换（端口复用NAPT）；路由器工作在网络层但<strong>NAT要修改传输层端口</strong>（考试注意其"越层"争议表述）。</li>
+<li>路由协议★：<strong>RIP</strong>（距离向量、跳数≤15、<strong>16=不可达</strong>、UDP 520、"坏消息传得慢"）；<strong>OSPF</strong>（链路状态、Dijkstra、IP直接封装、协议号89、洪泛更新、区域划分）；<strong>BGP</strong>（路径向量、域间、TCP 179、策略路由）。</li>
+<li>内部=IGP（RIP/OSPF），外部=EGP（BGP）。</li>
+<li>路由器功能：分组转发+路由选择；<strong>交换结构、输入/输出端口</strong>；路由表最长前缀匹配。</li>
+<li>组播：D类地址；IGMP管理组成员；组播路由协议PIM等。</li>
+</ul>
+<h3>4.4 传输层★</h3>
+<ul>
+<li>端口：<strong>0~1023熟知</strong>；常用：FTP 21（控制）/20（数据）、SSH 22、TELNET 23、SMTP 25、DNS 53、DHCP 67/68、HTTP 80、POP3 110、SNMP 161、HTTPS 443。</li>
+<li><strong>UDP</strong>：无连接、尽最大努力交付、面向报文（保留边界）、首部8B（源16+目的16+长度16+校验和16）、<strong>支持一对一、一对多、多对一、多对多</strong>；校验和可选（IPv4）。</li>
+<li><strong>TCP</strong>：面向连接、点对点、<strong>可靠、全双工、字节流</strong>；首部20~60B；<strong>序号+确认号</strong>（确认号=期望收到的下一个字节）；URG/ACK/PSH/RST/SYN/FIN。</li>
+<li><strong>三次握手</strong>：SYN=1,seq=x → SYN=1,ACK=1,seq=y,ack=x+1 → ACK=1,seq=x+1,ack=y+1；<strong>不能两次</strong>（防失效连接请求、同步双方初始序号）；SYN洪泛攻击与SYN cookie。</li>
+<li><strong>四次挥手</strong>：FIN→ACK→FIN→ACK；<strong>主动方TIME_WAIT=2MSL</strong>（保证最后ACK到达+让旧报文消逝）；服务器大量TIME_WAIT在主动关闭方。</li>
+<li><strong>可靠传输</strong>：校验、序号、确认（累积确认）、重传（超时：<strong>RTTs=(1-α)RTTs+α·RTT样本</strong>；RTO=RTTs+4·RTTd；快速重传：<strong>3个重复ACK</strong>）。</li>
+<li><strong>流量控制</strong>：接收窗口rwnd通告；<strong>零窗口→持续计时器+零窗口探测报文</strong>。</li>
+<li><strong>拥塞控制四算法</strong>★：慢启动（cwnd从1MSS起<strong>指数</strong>增长到ssthresh）、拥塞避免（线性+1）、<strong>超时→ssthresh=cwnd/2，cwnd=1重新慢启动</strong>、快重传快恢复（<strong>3重复ACK→ssthresh=cwnd/2，cwnd=ssthresh（快恢复），线性增长</strong>）；发送窗口=min(rwnd, cwnd)。</li>
+<li>最大吞吐率计算：窗口/RTT。</li>
+</ul>
+<h3>4.5 应用层</h3>
+<ul>
+<li><strong>DNS</strong>：域名→IP；递归查询（主机→本地）+<strong>迭代查询（本地→根/顶级/权限）</strong>；UDP 53（区域传送用TCP）；高速缓存。</li>
+<li><strong>FTP</strong>：<strong>两条TCP连接</strong>（控制21、数据20，主动模式）；控制连接全程保持。</li>
+<li><strong>SMTP</strong>推（25）+<strong>POP3/IMAP</strong>拉（110/143）；MIME扩展多媒体。</li>
+<li><strong>WWW/HTTP</strong>：HTTP/1.0非持久（每对象一个TCP）；<strong>1.1持久连接</strong>（流水线）；<strong>HTTP本身无状态（Cookie补状态）</strong>；报文=开始行+首部行+实体主体。</li>
+<li>HTTPS=HTTP+<strong>TLS/SSL</strong>（443）；加密+认证+完整性。</li>
+<li>电子邮件地址格式；<strong>发送用SMTP、接收用POP3/IMAP</strong>。</li>
+<li>DHCP原理（见网络层）也属应用层协议（UDP）。</li>
+<li>P2P：无固定服务器；BitTorrent分块下载。</li>
+<li>CDN：内容分发，就近缓存。</li>
+</ul>
+<hr />
+<h2>05 冲刺背诵法</h2>
+<ol>
+<li><strong>数字类</strong>（端口、复杂度、位数、范围）：按本手册表格抄5遍→默写→错的重抄，两轮即可。</li>
+<li><strong>对比类</strong>（B树vs B+树、RIP vs OSPF vs BGP、GBN vs SR、UDP vs TCP）：自制三栏对比卡，只写差异。</li>
+<li><strong>计算模板</strong>（cache/页表/磁盘/子网/滑窗/拥塞窗口）：每类动手算3道，<strong>模板化步骤写在错题本首页</strong>。</li>
+<li>冲刺期每日30分钟过本手册+错题，到12月保持"扫表"状态。</li>
+</ol></div></body></html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_极限与连续专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 极限与连续专项（150题带详解）</h1>
+<blockquote>
+<p>2026-10-28 夜间生成，配合《阶段0清单》两周极限主线与《高数_知识点与难点》第1章使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题把题号标到《数学考题集》同章节旁，三天后重做。
+全部为自编或改编经典题型，覆盖：概念辨析、极限计算（等价无穷小/洛必达/泰勒/幂指）、数列极限（夹逼/单调有界/定积分定义）、间断点分类、无穷小比较、渐近线、零点与介值定理。</p>
+</blockquote>
+<h2>§1 概念辨析与选择填空（L1–L40）</h2>
+<p><strong>L1.</strong>★ 求 lim(x→∞) (3x²+2x+1)/(x²+1)。</p>
+<blockquote>
+<p>同除 x²：(3+2/x+1/x²)/(1+1/x²) → <strong>3</strong>。抓最高次项即可。</p>
+</blockquote>
+<p><strong>L2.</strong>★ 求 lim(x→0) sin3x/x。</p>
+<blockquote>
+<p>sin3x ~ 3x ⇒ <strong>3</strong>。</p>
+</blockquote>
+<p><strong>L3.</strong>★ 求 lim(x→0) (1−cosx)/x²。</p>
+<blockquote>
+<p>1−cosx ~ x²/2 ⇒ <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L4.</strong>★ 求 lim(x→∞) (1+2/x)^x。</p>
+<blockquote>
+<p>第二类重要极限，指数补齐：lim (1+2/x)^x = lim [(1+2/x)^{x/2}]² = <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L5.</strong>★ 求 lim(x→0) ln(1+3x)/x。</p>
+<blockquote>
+<p>ln(1+3x) ~ 3x ⇒ <strong>3</strong>。</p>
+</blockquote>
+<p><strong>L6.</strong>★★ 求 lim(x→0) (eˣ − 1 − x)/x²。</p>
+<blockquote>
+<p>泰勒 eˣ = 1+x+x²/2+o(x²) ⇒ 分子 ~ x²/2 ⇒ <strong>1/2</strong>。（洛必达两次也行）</p>
+</blockquote>
+<p><strong>L7.</strong>★★ x→0 时，x−sinx 是 x³ 的几阶无穷小？</p>
+<blockquote>
+<p>sinx = x − x³/6 + o(x³) ⇒ x−sinx ~ x³/6 ⇒ <strong>3 阶（等价 x³/6）</strong>。背泰勒不要背"减出来"。</p>
+</blockquote>
+<p><strong>L8.</strong>★★ 求 lim(x→0) (aˣ − 1)/x（a&gt;0）。</p>
+<blockquote>
+<p>aˣ − 1 ~ x·ln a ⇒ <strong>ln a</strong>。记法：eˣ 的 ln a=1 特例。</p>
+</blockquote>
+<p><strong>L9.</strong>★ 求 lim(x→∞) x·sin(1/x)。</p>
+<blockquote>
+<p>令 t=1/x→0：sin(1/x) ~ 1/x ⇒ x·sin(1/x) → <strong>1</strong>。注意是"无穷小×有界"，1/x 是无穷小。</p>
+</blockquote>
+<p><strong>L10.</strong>★★ 求 lim(x→0⁺) xˣ。</p>
+<blockquote>
+<p>取对数：x lnx → 0（幂压对数）⇒ 原式 = e⁰ = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L11.</strong>★★ 求 lim(x→0) (tanx − sinx)/x³。</p>
+<blockquote>
+<p>tanx−sinx = tanx(1−cosx) ~ x·(x²/2) ⇒ <strong>1/2</strong>。拆成"乘积因子"才能整体等价。</p>
+</blockquote>
+<p><strong>L12.</strong>★★ 已知 lim(x→0) f(x)/x = 2，问 f(0) 等于多少？</p>
+<blockquote>
+<p><strong>无法确定</strong>——f 在 0 处甚至可能无定义。只有再给"f 在 0 连续"才能得 f(0)=0（由 f(x)~2x→0）。概念陷阱题。</p>
+</blockquote>
+<p><strong>L13.</strong>★ 判断：无穷小与无穷大的乘积一定是无穷小。</p>
+<blockquote>
+<p><strong>错</strong>。x→∞ 时 x（无穷大）×(1/x)（无穷小）=1，是"未定式 ∞·0"，随具体函数可趋任何值或不存在。</p>
+</blockquote>
+<p><strong>L14.</strong>★★★ 求 lim(x→0) [(1+x)^{1/x} − e]/x。</p>
+<blockquote>
+<p>ln(1+x)^{1/x} = ln(1+x)/x = 1 − x/2 + x²/3−…，故 (1+x)^{1/x} = e·e^{−x/2+…} = e(1−x/2+o(x))。
+差 = −ex/2 + o(x) ⇒ 极限 = <strong>−e/2</strong>。</p>
+</blockquote>
+<p><strong>L15.</strong>★★ 求 lim(x→0⁺) x·ln(1+1/x)。</p>
+<blockquote>
+<p>ln(1+1/x) = ln(1+x) − ln x ~ −ln x（x→0⁺）。x·lnx → 0 ⇒ <strong>0</strong>。核心还是"幂压对数"。</p>
+</blockquote>
+<p><strong>L16.</strong>★ 求 lim(x→1) (x−1)/(x²−1)。</p>
+<blockquote>
+<p>因式分解 = 1/(x+1) ⇒ <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L17.</strong>★★ 求 lim(x→∞) (x+sinx)/x，并说明为什么洛必达在此失效。</p>
+<blockquote>
+<p>sinx/x → 0（有界×无穷小）⇒ <strong>1</strong>。洛必达求导得 1+cosx 极限不存在——<strong>导数比不收敛不代表原式不收敛</strong>，洛必达只是充分条件工具。</p>
+</blockquote>
+<p><strong>L18.</strong>★★ 求 lim(x→∞) (x+sinx)/x²。</p>
+<blockquote>
+<p>= 1/x + sinx/x² → 0 + 0 = <strong>0</strong>（有界×无穷小）。</p>
+</blockquote>
+<p><strong>L19.</strong>★ 判断：lim f(x) 存在 ⇔ 左右极限都存在且相等。</p>
+<blockquote>
+<p><strong>对</strong>（自变量趋有限点时）。x→∞ 的情形要另加"+∞ 与 −∞ 两侧"。</p>
+</blockquote>
+<p><strong>L20.</strong>★★ 若 lim(x→x₀) f(x) = A 存在，证明 f 在 x₀ 的某去心邻域内有界。</p>
+<blockquote>
+<p>取 ε=1：存在 δ，0&lt;|x−x₀|&lt;δ 时 |f(x)−A|&lt;1 ⇒ |f(x)| ≤ |A|+1。这是极限的<strong>局部有界性</strong>，答证明题要写"取定 ε"。</p>
+</blockquote>
+<p><strong>L21.</strong>★ 判断：两个无穷大之和仍是无穷大。</p>
+<blockquote>
+<p><strong>错</strong>。x + (−x) = 0（x→∞）。∞−∞ 是未定式。</p>
+</blockquote>
+<p><strong>L22.</strong>★ 判断：有限个无穷小之和仍是无穷小。</p>
+<blockquote>
+<p><strong>对</strong>。可由"两倍无穷小仍无穷小"归纳推广。（无穷多个就不行了。）</p>
+</blockquote>
+<p><strong>L23.</strong>★★ 判断：有界函数与无穷大的乘积一定是无穷大。</p>
+<blockquote>
+<p><strong>错</strong>。反例：x→∞ 时 sinx（有界）×x（无穷大）极限不存在。有界×无穷小才是"无穷小"。</p>
+</blockquote>
+<p><strong>L24.</strong>★ 求 lim(x→0) |x|/x。</p>
+<blockquote>
+<p>右侧 →1，左侧 →−1，不等 ⇒ <strong>不存在</strong>。绝对值是"左右极限"考点常客。</p>
+</blockquote>
+<p><strong>L25.</strong>★★ 求 lim(x→+∞) (√(x²+1) − x)。</p>
+<blockquote>
+<p>有理化 = 1/(√(x²+1)+x) → <strong>0</strong>。（注意 x→−∞ 时 √(x²+1) ~ −x，极限为 +∞——方向不同结果不同。）</p>
+</blockquote>
+<p><strong>L26.</strong>★★★ 求 lim(x→0) (3ˣ + 9ˣ − 2)/x。</p>
+<blockquote>
+<p>3ˣ−1 ~ xln3，9ˣ−1 ~ xln9 ⇒ 分子 ~ x(ln3+ln9) ⇒ <strong>3ln3/2</strong>。</p>
+</blockquote>
+<p><strong>L27.</strong>★★ 求 lim(x→0) (sinx + x²cos(1/x))/x。</p>
+<blockquote>
+<p>= sinx/x + x·cos(1/x) → 1 + 0 = <strong>1</strong>。第二项是"无穷小×有界（振荡）"。</p>
+</blockquote>
+<p><strong>L28.</strong>★ 判断：若 lim(x→∞) f(x) = 0，则 f 在充分大时无界。</p>
+<blockquote>
+<p><strong>错</strong>。极限为 0 恰恰说明充分大时 |f|&lt;ε，是有界的（且趋于 0）。</p>
+</blockquote>
+<p><strong>L29.</strong>★★ 求 lim(n→∞) sin(n!)/√n。</p>
+<blockquote>
+<p>|sin(n!)| ≤ 1（有界），1/√n → 0 ⇒ <strong>0</strong>。夹逼定理一句话收尾。</p>
+</blockquote>
+<p><strong>L30.</strong>★★★ 设 lim(x→x₀) f(x)² = A² &gt; 0（存在），能否断定 lim(x→x₀) f(x) 存在？</p>
+<blockquote>
+<p><strong>能</strong>，且极限为 A 或 −A。理由：A²&gt;0 ⇒ 在某去心邻域 |f(x)| &gt; |A|/2 &gt; 0，f 恒正或恒负（连续函数的保号性/连通性），故 f = f²/f → A²/(±|A|) = ±A 之一。</p>
+</blockquote>
+<p><strong>L31.</strong>★★★ 求 lim(x→0) (e^{tanx} − e^{sinx})/x³。</p>
+<blockquote>
+<p>= e^{sinx}·(e^{tanx−sinx} − 1)/x³ ~ (tanx−sinx)/x³ ~ (x³/2)/x³ = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L32.</strong>★★★ 求 lim(x→0) [(3ˣ+9ˣ)/2]^{1/x}。</p>
+<blockquote>
+<p>取对数：[ln(3ˣ+9ˣ) − ln2]/x。3ˣ = 1+xln3+o(x)，9ˣ = 1+xln9+o(x)，和 = 2+x(ln3+ln9)+o(x)。
+ln(和) = ln2 + x(ln3+ln9)/2 + o(x) ⇒ 对数极限 = (ln3+ln9)/2 = ln(3√3) ⇒ <strong>3√3</strong>。</p>
+</blockquote>
+<p><strong>L33.</strong>★★ 求 lim(x→+∞) ln(x+√(1+x²))/x。</p>
+<blockquote>
+<p>x+√(1+x²) ~ 2x ⇒ 分子 ~ ln2x = lnx+ln2，除以 x → <strong>1</strong>。（这是反双曲函数 asinh 的渐近行为。）</p>
+</blockquote>
+<p><strong>L34.</strong>★★ 数列满足 x₁ 任意，xₙ₊₁ = xₙ/2 + 1，求 lim xₙ。</p>
+<blockquote>
+<p>若收敛于 L：L = L/2+1 ⇒ L = <strong>2</strong>。验证：xₙ₊₁−2 = (xₙ−2)/2，故 |xₙ−2| 以 1/2 的幂衰减→0，收敛成立。</p>
+</blockquote>
+<p><strong>L35.</strong>★★★ 求 lim(x→0) (1/x − cotx)。</p>
+<blockquote>
+<p>= (tanx − x)/(x·tanx) ~ (x³/3)/x² = <strong>0</strong>。通分 + 三次泰勒，一步到位。</p>
+</blockquote>
+<p><strong>L36.</strong>★★★ 求 lim(x→0) (cosx)^{1/x²}。</p>
+<blockquote>
+<p>取对数：lncosx/x² ~ (−x²/2)/x² = −1/2 ⇒ <strong>e^{−1/2}</strong>。（lncosx = −x²/2 − x⁴/12 − …）</p>
+</blockquote>
+<p><strong>L37.</strong>★ 求 lim(x→∞) (x³+2x²)/(x³+5)。</p>
+<blockquote>
+<p>同除 x³ ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L38.</strong>★★★ 求 lim(x→0) [(eˣ+e^{2x}+e^{3x})/3]^{1/x}。</p>
+<blockquote>
+<p>e^{kx} = 1+kx+o(x)，和 = 3+6x+o(x)；ln(和/3) = ln(1+2x+o(x)) ~ 2x ⇒ 对数极限 2 ⇒ <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L39.</strong>★ 判断：若 lim(x→x₀) f(x) = A，则在某去心邻域内 |f(x)−A| &lt; 1。</p>
+<blockquote>
+<p><strong>对</strong>。极限定义取 ε=1 即得（局部有界性的直接推论）。</p>
+</blockquote>
+<p><strong>L40.</strong>★★ 求 lim(x→0) x²sin(1/x)/sinx。</p>
+<blockquote>
+<p>= x·[sin(1/x)]·[x/sinx] → 0·有界·1 = <strong>0</strong>。</p>
+</blockquote>
+<h2>§2 极限计算大题（L41–L85）</h2>
+<p><strong>L41.</strong>★★ 求 lim(x→0) (e^{2x} − e^{−3x})/x。</p>
+<blockquote>
+<p>拆项 = (e^{2x}−1)/x − (e^{−3x}−1)/x → 2 − (−3) = <strong>5</strong>。指数差拆成两个"e^kx−1"是标准起手式。</p>
+</blockquote>
+<p><strong>L42.</strong>★★★ 求 lim(x→0) (x − sinx·cosx)/x³。</p>
+<blockquote>
+<p>sinxcosx = ½sin2x = ½(2x − (2x)³/6 + o(x³)) = x − (2/3)x³ + o(x³)。
+分子 ~ (2/3)x³ ⇒ <strong>2/3</strong>。要点：乘积化二倍角再泰勒，别硬乘两个泰勒展开。</p>
+</blockquote>
+<p><strong>L43.</strong>★★★ 求 lim(x→0) (1/x² − cot²x)。</p>
+<blockquote>
+<p>通分 = (sin²x − x²cos²x)/(x²sin²x)。
+sin²x = x² − x⁴/3 + o(x⁴)，x²cos²x = x²(1−x²+o(x²)) = x² − x⁴ + o(x⁴)。
+分子 = (2/3)x⁴ + o(x⁴)，分母 ~ x⁴ ⇒ <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>L44.</strong>★★ 求 lim(x→+∞) (√(x²+x) − √(x²−x))。</p>
+<blockquote>
+<p>有理化 = 2x/(√(x²+x)+√(x²−x)) = 2x/(x(√(1+1/x)+√(1−1/x))) → 2/2 = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L45.</strong>★★ 求 lim(x→0⁺) x^{sinx}。</p>
+<blockquote>
+<p>取对数 sinx·lnx ~ x·lnx → 0（幂压对数）⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L46.</strong>★★★ 求 lim(x→0) (sinx/x)^{1/x²}。</p>
+<blockquote>
+<p>取对数：ln(sinx/x)/x²。ln(sinx/x) = ln(1 − x²/6 + o(x²)) ~ −x²/6。
+⇒ 对数极限 −1/6 ⇒ <strong>e^{−1/6}</strong>。</p>
+</blockquote>
+<p><strong>L47.</strong>★★★ 求 lim(x→0) [(aˣ+bˣ)/2]^{2/x}（a,b&gt;0）。</p>
+<blockquote>
+<p>取对数 [ln(aˣ+bˣ) − ln2]·(2/x)。aˣ+bˣ = 2 + x ln(ab) + o(x)。
+ln = ln2 + x·ln(ab)/2 + o(x) ⇒ 对数极限 = ln(ab) ⇒ <strong>ab</strong>。</p>
+</blockquote>
+<p><strong>L48.</strong>★★★ 求 lim(x→1⁻) (1−x)^{tan(πx/2)}。</p>
+<blockquote>
+<p>令 t = 1−x → 0⁺：tan(πx/2) = tan(π/2 − πt/2) = cot(πt/2) ~ 2/(πt)。
+对数 = [2/(πt)]·ln t → −∞ ⇒ 极限 = <strong>0</strong>。对数趋 −∞ 的幂指题，答案是 0 不是不存在。</p>
+</blockquote>
+<p><strong>L49.</strong>★★★ 求 lim(x→0) (1+x²)^{1/(1−cosx)}。</p>
+<blockquote>
+<p>取对数 ln(1+x²)/(1−cosx) ~ x²/(x²/2) = 2 ⇒ <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L50.</strong>★★★ 求 lim(x→0) (cos2x + 2x·sinx)^{1/x⁴}。</p>
+<blockquote>
+<p>cos2x = 1 − 2x² + (2/3)x⁴ + o(x⁴)，2xsinx = 2x² − (1/3)x⁴ + o(x⁴)。
+底 = 1 + (1/3)x⁴ + o(x⁴)；对数 = (1/3)x⁴/x⁴ = 1/3 ⇒ <strong>e^{1/3}</strong>。</p>
+</blockquote>
+<p><strong>L51.</strong>★★★ 求 lim(x→1) [x/(x−1) − 1/lnx]。</p>
+<blockquote>
+<p>通分 = (xlnx − x + 1)/((x−1)lnx)。
+泰勒（令 t=x−1）：xlnx = (1+t)ln(1+t) = t + t²/2 + o(t²)，故分子 = t²/2 + o(t²)；分母 = t·t + o(t²)。
+⇒ <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L52.</strong>★★ 求 lim(x→∞) [(x+1)/(x−1)]^x。</p>
+<blockquote>
+<p>底 = 1 + 2/(x−1)；对数 = x·ln(1+2/(x−1)) ~ x·2/(x−1) → 2 ⇒ <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L53.</strong>★★ 求 lim(x→0⁺) (1/x)^{tanx}。</p>
+<blockquote>
+<p>取对数 = −tanx·lnx ~ −x·lnx → 0 ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L54.</strong>★★ 求 lim(x→0) [1/x − 1/(eˣ−1)]。</p>
+<blockquote>
+<p>通分 = (eˣ−1−x)/(x(eˣ−1)) ~ (x²/2)/x² = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L55.</strong>★★ 求 lim(x→+∞) x(arctanx − π/2)。</p>
+<blockquote>
+<p>arctanx − π/2 = −arctan(1/x) ~ −1/x（x&gt;0）⇒ 极限 = <strong>−1</strong>。
+反三角在无穷远的线性近似是常备结论：arctanx ~ π/2 − 1/x。</p>
+</blockquote>
+<p><strong>L56.</strong>★★ 求 lim(x→0) (sinx − tanx)/x³。</p>
+<blockquote>
+<p>= −tanx(1−cosx)/x³ ~ −x·(x²/2)/x³ = <strong>−1/2</strong>（与 L11 差个符号，别背混）。</p>
+</blockquote>
+<p><strong>L57.</strong>★★ 求 lim(x→0) (sinx/x)^{cosx}。</p>
+<blockquote>
+<p>对数 = cosx·ln(sinx/x) ~ 1·(−x²/6) → 0 ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L58.</strong>★★★ 求 lim(x→0) (√(1+x) + √(1−x) − 2)/x²。</p>
+<blockquote>
+<p>√(1+x) = 1 + x/2 − x²/8 + o(x²)；√(1−x) = 1 − x/2 − x²/8 + o(x²)。
+和 − 2 = −x²/4 + o(x²) ⇒ <strong>−1/4</strong>。奇次项自动相消，只剩偶次。</p>
+</blockquote>
+<p><strong>L59.</strong>★★★ 求 lim(x→0) (eˣ + e^{−x} − 2 − x²)/x⁴。</p>
+<blockquote>
+<p>eˣ+e^{−x} = 2 + x² + x⁴/12 + o(x⁴)（双曲余弦展开）⇒ 分子 ~ x⁴/12 ⇒ <strong>1/12</strong>。</p>
+</blockquote>
+<p><strong>L60.</strong>★★ 求 lim(x→+∞) [(eˣ+e^{−x})/(eˣ−e^{−x})]^x。</p>
+<blockquote>
+<p>底 = (1+e^{−2x})/(1−e^{−2x}) = 1 + 2e^{−2x} + o(e^{−2x})。
+对数 = x·2e^{−2x} → 0 ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L61.</strong>★★★ 求 lim(x→0) (cosx − 1 + x²/2)/x⁴。</p>
+<blockquote>
+<p>cosx = 1 − x²/2 + x⁴/24 + o(x⁴) ⇒ 分子 = x⁴/24 + o(x⁴) ⇒ <strong>1/24</strong>。</p>
+</blockquote>
+<p><strong>L62.</strong>★★★ 求 lim(x→0) (eˣ − e^{sinx})/x³。</p>
+<blockquote>
+<p>= e^{sinx}(e^{x−sinx} − 1)/x³ ~ (x−sinx)/x³ = (x³/6)/x³ = <strong>1/6</strong>。
+与 L31（e^{tanx}−e^{sinx}）同族，只换"差"的那个因子。</p>
+</blockquote>
+<p><strong>L63.</strong>★★ 求 lim(x→0) (arcsinx − x)/x³。</p>
+<blockquote>
+<p>arcsinx = x + x³/6 + o(x³) ⇒ 分子 ~ x³/6 ⇒ <strong>1/6</strong>。
+泰勒家族四兄弟：sinx、arcsinx、tanx、arctanx 对 x 的展开全部要默写。</p>
+</blockquote>
+<p><strong>L64.</strong>★★ 求 lim(x→0) (tanx − x)/(x²·sinx)。</p>
+<blockquote>
+<p>分子 ~ x³/3，分母 ~ x³ ⇒ <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>L65.</strong>★★★ 求 lim(x→0) [(2+e^{1/x})/(1+e^{4/x}) + sinx/x]。</p>
+<blockquote>
+<p>x→0⁺：第一项 ~ e^{1/x}/e^{4/x} = e^{−3/x} → 0，加 sinx/x → 1 ⇒ 右极限 1。
+x→0⁻：e^{±1/x} → 0，第一项 = 2/1 = 2，加 1 ⇒ 左极限 3。
+左 3 右 1 ⇒ <strong>极限不存在</strong>（跳跃）。含 e^{1/x} 必分左右，条件反射。</p>
+</blockquote>
+<p><strong>L66.</strong>★★ 求 lim(x→0) [(1+x)/(1−x)]^{1/x}。</p>
+<blockquote>
+<p>对数 = [ln(1+x) − ln(1−x)]/x = [(x−x²/2) − (−x−x²/2)]/x = 2 ⇒ <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L67.</strong>★★ 求 lim(x→0) (1 − cosx·cos2x)/x²。</p>
+<blockquote>
+<p>cosxcos2x = (1−x²/2)(1−2x²) + o(x²) = 1 − (5/2)x² + o(x²) ⇒ <strong>5/2</strong>。
+也可拆：1−cosxcos2x = (1−cosx) + cosx(1−cos2x) ~ x²/2 + 2x² = 5x²/2。</p>
+</blockquote>
+<p><strong>L68.</strong>★★ 求 lim(x→∞) [(x²+1)/(x²−1)]^{x²}。</p>
+<blockquote>
+<p>底 = 1 + 2/(x²−1)；对数 = x²·ln(1+2/(x²−1)) ~ x²·2/(x²−1) → 2 ⇒ <strong>e²</strong>。</p>
+</blockquote>
+<p><strong>L69.</strong>★★ 求 lim(x→+∞) (π/2 − arctanx)·x。</p>
+<blockquote>
+<p>π/2 − arctanx = arctan(1/x) ~ 1/x ⇒ <strong>1</strong>。（L55 的对偶版本。）</p>
+</blockquote>
+<p><strong>L70.</strong>★ 求 lim(x→0) [(1+x²)^{1/3} − 1]/x²。</p>
+<blockquote>
+<p>(1+t)^α − 1 ~ αt，t=x²，α=1/3 ⇒ <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>L71.</strong>★★ 求 lim(x→0) (e^{x²} − cosx)/x²。</p>
+<blockquote>
+<p>拆项 = (e^{x²}−1)/x² + (1−cosx)/x² → 1 + 1/2 = <strong>3/2</strong>。</p>
+</blockquote>
+<p><strong>L72.</strong>★★★ 求 lim(x→0) ln(1+x²)/(1 − √cosx)。</p>
+<blockquote>
+<p>1−√cosx = (1−cosx)/(1+√cosx) ~ (x²/2)/2 = x²/4。
+分子 ~ x² ⇒ <strong>4</strong>。分母处理技巧：先有理化（共轭），别直接对 √ 展开。</p>
+</blockquote>
+<p><strong>L73.</strong>★★ 求 lim(x→0) (eˣ + e^{x/2} − 2)/x。</p>
+<blockquote>
+<p>拆项：(eˣ−1)/x + (e^{x/2}−1)/x → 1 + 1/2 = <strong>3/2</strong>。</p>
+</blockquote>
+<p><strong>L74.</strong>★★ 求 lim(x→0⁺) x^{1/x}。</p>
+<blockquote>
+<p>对数 = lnx/x → −∞（对数压不住幂了，方向反了）⇒ <strong>0</strong>。与 L10（x^x→1）对比记忆。</p>
+</blockquote>
+<p><strong>L75.</strong>★★★ 求 lim(x→0) [(a+x)^x − aˣ]/x²（a&gt;0）。</p>
+<blockquote>
+<p>(a+x)^x = aˣ·e^{x·ln(1+x/a)} = aˣ(1 + x²/a + o(x²))。
+差 = aˣ·x²/a + o(x²) ⇒ 极限 = <strong>1/a</strong>。</p>
+</blockquote>
+<p><strong>L76.</strong>★★ 求 lim(x→0) [(√(1+x)−1)(√(1+2x)−1)]/x²。</p>
+<blockquote>
+<p>√(1+kt)−1 ~ kt/2 ⇒ (x/2)·x / x² = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L77.</strong>★★★ 求 lim(x→0) [(2+x)/(2+3x)]^{1/x}。</p>
+<blockquote>
+<p>对数 = [ln(2+x) − ln(2+3x)]/x = [ln(1+x/2) − ln(1+3x/2)]/x = (x/2 − 3x/2)/x = −1 ⇒ <strong>e^{−1}</strong>。</p>
+</blockquote>
+<p><strong>L78.</strong>★ 求 lim(x→0) (x·sinx)/(1−cosx)。</p>
+<blockquote>
+<p>分子 ~ x²，分母 ~ x²/2 ⇒ <strong>2</strong>。</p>
+</blockquote>
+<p><strong>L79.</strong>★★★ 求 lim(x→0) (1 − cosx·√cos2x)/x²。</p>
+<blockquote>
+<p>cosx·√cos2x = (1 − x²/2)(1 − x²) + o(x²) = 1 − (3/2)x² + o(x²) ⇒ <strong>3/2</strong>。
+√cos2x = (1−2x²)^{1/2} ≈ 1 − x²——先降幂再乘，别让根号逃出泰勒。</p>
+</blockquote>
+<p><strong>L80.</strong>★★ 求 lim(x→+∞) ln(x+1)/ln(x²+1)。</p>
+<blockquote>
+<p>分子 ~ lnx，分母 ~ 2lnx ⇒ <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>L81.</strong>★★ 求 lim(x→0) (tanx − x)/(x − sinx)。</p>
+<blockquote>
+<p>分子 ~ x³/3，分母 ~ x³/6 ⇒ <strong>2</strong>。三次展开的"比值配对"，常考。</p>
+</blockquote>
+<p><strong>L82.</strong>★★ 求 lim(x→∞) [(x+a)/(x−a)]^x（a≠0）。</p>
+<blockquote>
+<p>底 = 1 + 2a/(x−a)；对数 ~ x·2a/(x−a) → 2a ⇒ <strong>e^{2a}</strong>。</p>
+</blockquote>
+<p><strong>L83.</strong>★ 求 lim(x→0) (1+sinx)^{1/x}。</p>
+<blockquote>
+<p>对数 = ln(1+sinx)/x ~ sinx/x → 1 ⇒ <strong>e</strong>。</p>
+</blockquote>
+<p><strong>L84.</strong>★ 求 lim(x→0) (√(1+x²) − 1)/(1−cosx)。</p>
+<blockquote>
+<p>分子 ~ x²/2，分母 ~ x²/2 ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>L85.</strong>★★ 求 lim(x→0) (x − sin2x)/(x + sin2x)。</p>
+<blockquote>
+<p>同除 x：sin2x/x → 2 ⇒ (1−2)/(1+2) = <strong>−1/3</strong>。
+泰勒替换大法：把 sin2x 当 2x 用（其余项更高阶，比值不变形）。</p>
+</blockquote>
+<h2>§3 数列极限（L86–L105）</h2>
+<p><strong>L86.</strong>★★ 求 lim(n→∞) (1+2+…+n)/n²。</p>
+<blockquote>
+<p>Σk = n(n+1)/2 ⇒ 极限 = <strong>1/2</strong>。n 项和先求和公式，不行再夹逼。</p>
+</blockquote>
+<p><strong>L87.</strong>★★ 求 lim(n→∞) Σ(k=1→n) n/(n²+k)。</p>
+<blockquote>
+<p>夹逼：n²/(n²+n) ≤ Σ ≤ n²/(n²+1)，两端 →1 ⇒ <strong>1</strong>。
+一般地 Σ n/(n²+k·n^a)：a=1 时夹逼；写成 (1/n)Σ 1/(1+k/n) 形式则可用定积分定义。</p>
+</blockquote>
+<p><strong>L88.</strong>★★★ 求 lim(n→∞) (1/n)·Σ(k=1→n) √(1+k/n)。</p>
+<blockquote>
+<p>定积分定义：= ∫₀¹ √(1+x)dx = [(2/3)(1+x)^{3/2}]₀¹ = <strong>(2/3)(2√2 − 1)</strong>。
+识别标志：通项可写成 (1/n)f(k/n)。数一重点题型。</p>
+</blockquote>
+<p><strong>L89.</strong>★★ 求 lim(n→∞) Σ(k=1→n) 2/(k(k+1))。</p>
+<blockquote>
+<p>裂项：2/(k(k+1)) = 2(1/k − 1/(k+1))，和 = 2(1 − 1/(n+1)) ⇒ <strong>2</strong>。</p>
+</blockquote>
+<p><strong>L90.</strong>★★★ 求 lim(n→∞) (1/2 + 3/2² + 5/2³ + … + (2n−1)/2ⁿ)。</p>
+<blockquote>
+<p>记 S，错位相减：S − S/2 = 1/2 + 2(1/2²+…+1/2ⁿ) = 1/2 + 2·(1/2)(1−2^{−n+1})。
+极限 = 1/2 + 1 = <strong>3</strong>。（通项是"等差×等比"，条件反射用错位相减。）</p>
+</blockquote>
+<p><strong>L91.</strong>★★ 求 lim(n→∞) (1²+2²+…+n²)/n³。</p>
+<blockquote>
+<p>Σk² = n(n+1)(2n+1)/6 ⇒ 极限 = <strong>1/3</strong>。（或 Stolz 定理一步到位。）</p>
+</blockquote>
+<p><strong>L92.</strong>★★ 证明 lim(n→∞) n!/nⁿ = 0。</p>
+<blockquote>
+<p>0 &lt; n!/nⁿ = (1/n)·(2/n)·…·(n/n) ≤ 1/n·1·…·1 = 1/n → 0。夹逼收工。
+关键观察：n 个因子中前 n−1 个都 ≤ 1，第一个还是 1/n。</p>
+</blockquote>
+<p><strong>L93.</strong>★★★ 证明 lim(n→∞) n^{1/n} = 1。</p>
+<blockquote>
+<p>设 n^{1/n} = 1+aₙ（aₙ&gt;0），则 n = (1+aₙ)ⁿ ≥ C(n,2)aₙ² = n(n−1)aₙ²/2 ⇒ aₙ² ≤ 2/(n−1) → 0。
+故 aₙ → 0，n^{1/n} → <strong>1</strong>。二项式定理抓第二项是标准手法。</p>
+</blockquote>
+<p><strong>L94.</strong>★★ 求 lim(n→∞) a^{1/n}（a&gt;0）。</p>
+<blockquote>
+<p>a&gt;1 时 a^{1/n} ≥ 1 且 a^{1/n} = e^{ln a/n} → e⁰ = <strong>1</strong>；0&lt;a&lt;1 时取倒数同结论。</p>
+</blockquote>
+<p><strong>L95.</strong>★ 求 lim(n→∞) (1+1/n)^{n+5}。</p>
+<blockquote>
+<p>= (1+1/n)ⁿ·(1+1/n)⁵ → e·1 = <strong>e</strong>。指数多项式拆开，常数部分直接算。</p>
+</blockquote>
+<p><strong>L96.</strong>★★ 求 lim(n→∞) (1 + 1/(2n))^{n+1}。</p>
+<blockquote>
+<p>对数 = (n+1)·ln(1+1/(2n)) ~ (n+1)/(2n) → 1/2 ⇒ <strong>√e</strong>。</p>
+</blockquote>
+<p><strong>L97.</strong>★★★ x₁=√2，xₙ₊₁ = √(2+xₙ)，证明收敛并求极限。</p>
+<blockquote>
+<p>单调性：数学归纳证 xₙ₊₁ ≥ xₙ ⇔ 2+xₙ ≥ xₙ² ⇔ (xₙ−2)(xₙ+1) ≤ 0，成立因 xₙ&lt;2。
+有界：0 &lt; xₙ &lt; 2（归纳）。单调有界 ⇒ 收敛于 L：L = √(2+L) ⇒ L²−L−2 = 0 ⇒ L = <strong>2</strong>（舍 −1）。</p>
+</blockquote>
+<p><strong>L98.</strong>★★★ x₁&gt;0，xₙ₊₁ = (xₙ + a/xₙ)/2（a&gt;0），证明收敛并求极限。</p>
+<blockquote>
+<p>先证下界：xₙ₊₁ ≥ √a（均值不等式，n≥2）。
+再证递减：xₙ₊₁ − xₙ = (a − xₙ²)/(2xₙ) ≤ 0（n≥2）。单调减 + 下界 √a ⇒ 收敛。
+极限 L = (L + a/L)/2 ⇒ L² = a ⇒ L = <strong>√a</strong>。这就是 √a 的迭代算法（牛顿法）。</p>
+</blockquote>
+<p><strong>L99.</strong>★★★ x₁=1，xₙ₊₁ = 1 + xₙ/(1+xₙ)，求极限。</p>
+<blockquote>
+<p>归纳证 0&lt;xₙ&lt;2 且 xₙ₊₁−xₙ = (1−xₙ)/(1+xₙ)·xₙ… 直接改证 |xₙ₊₁−L| 衰减更快：
+极限若存在：L = 1 + L/(1+L) ⇒ L² − L − 1 = 0 ⇒ L = (1+√5)/2。
+收敛性：xₙ₊₁ − xₙ₋₁ 型比较或压缩映射（|f′(x)| = 1/(1+x)² &lt; 1 于 [0,2]）⇒ 收敛，极限 = <strong>(1+√5)/2 ≈ 1.618</strong>。</p>
+</blockquote>
+<p><strong>L100.</strong>★★ x₁=0，xₙ₊₁ = xₙ + 1/(n(n+1))，求 lim xₙ。</p>
+<blockquote>
+<p>累加：xₙ = Σ(k=1→n−1) 1/(k(k+1)) = 1 − 1/n ⇒ <strong>1</strong>。递推+裂项的组合拳。</p>
+</blockquote>
+<p><strong>L101.</strong>★★★ 0&lt;a₁&lt;1，aₙ₊₁ = aₙ²/2 + 1/2，证明收敛并求极限。</p>
+<blockquote>
+<p>单调：aₙ₊₁ − aₙ = (1−aₙ)²/2 &gt; 0（递增）。
+有界：1 − aₙ₊₁ = (1−aₙ²)/2 ≥ 0 ⇒ aₙ ≤ 1（归纳）。单调增有上界 ⇒ 收敛。
+L = L²/2 + 1/2 ⇒ (L−1)² = 0 ⇒ <strong>L = 1</strong>。（不动点方程重根——检验单调性时省了舍根的麻烦。）</p>
+</blockquote>
+<p><strong>L102.</strong>★★★ 求 lim(n→∞) cos(π√(n²+n))。</p>
+<blockquote>
+<p>√(n²+n) = n√(1+1/n) = n + 1/2 − 1/(8n) + o(1/n)。
+cos(π(n + 1/2 − 1/(8n))) = cos(πn + π/2 − π/(8n)) = (−1)ⁿ·sin(π/(8n))·(−1)... 逐项：
+cos(πn + θ) = (−1)ⁿcosθ，θ = π/2 − π/(8n) → cosθ = sin(π/(8n)) → 0 ⇒ <strong>0</strong>。</p>
+</blockquote>
+<p><strong>L103.</strong>★★★ 求 lim(n→∞) (π/n)·Σ(k=1→n) sin(kπ/n)。</p>
+<blockquote>
+<p>定积分定义 = ∫₀^π sinx dx = <strong>2</strong>。区间 [0,π] 上的黎曼和，分点 kπ/n。</p>
+</blockquote>
+<p><strong>L104.</strong>★★★ 求 lim(n→∞) Σ(k=1→n) n/(n²+k²)。</p>
+<blockquote>
+<p>= (1/n)Σ 1/(1+(k/n)²) → ∫₀¹ dx/(1+x²) = <strong>π/4</strong>。</p>
+</blockquote>
+<p><strong>L105.</strong>★★★ 求 lim(n→∞) [(n+1)(n+2)…(2n)/nⁿ]^{1/n}。</p>
+<blockquote>
+<p>取对数 = (1/n)Σ(k=1→n) ln(1+k/n) → ∫₀¹ ln(1+x)dx = [（1+x)ln(1+x) − (1+x)]₀¹ = 2ln2 − 1。
+原极限 = e^{2ln2−1} = <strong>4/e</strong>。</p>
+</blockquote>
+<h2>§4 连续性与间断点（L106–L125）</h2>
+<blockquote>
+<p>分类口诀：左右极限<strong>都存在</strong>→第一类（相等=可去，不等=跳跃）；<strong>至少一个不存在</strong>→第二类（无穷/振荡）。先算左右，再下结论。</p>
+</blockquote>
+<p><strong>L106.</strong>★ 讨论 f(x) = (x²−1)/(x−1) 在 x=1 处的间断类型。</p>
+<blockquote>
+<p>lim = lim(x+1) = 2 存在，但 f 在 1 无定义 ⇒ <strong>可去间断点（第一类）</strong>。补充定义 f(1)=2 即连续。</p>
+</blockquote>
+<p><strong>L107.</strong>★★ 讨论 f(x) = e^{1/x} 在 x=0 处。</p>
+<blockquote>
+<p>x→0⁺：e^{1/x} → +∞；x→0⁻：e^{1/x} → 0。右极限不存在 ⇒ <strong>第二类间断点（无穷型）</strong>。</p>
+</blockquote>
+<p><strong>L108.</strong>★★ 讨论 f(x) = sin(1/x) 在 x=0 处。</p>
+<blockquote>
+<p>x→0 时 1/x→∞，函数在 −1 与 1 之间无限振荡，左右极限均不存在 ⇒ <strong>第二类间断点（振荡型）</strong>。</p>
+</blockquote>
+<p><strong>L109.</strong>★★ 讨论 f(x) = (e^{1/x}−1)/(e^{1/x}+1) 在 x=0 处。</p>
+<blockquote>
+<p>右极限（e^{1/x}→∞）→ 1；左极限（e^{1/x}→0）→ −1。都存在但不等 ⇒ <strong>跳跃间断点（第一类）</strong>。</p>
+</blockquote>
+<p><strong>L110.</strong>★★ f(x) = x·sin(1/x)（x≠0），补充 f(0)=0 后在 x=0 是否连续？</p>
+<blockquote>
+<p>|x·sin(1/x)| ≤ |x| → 0，lim f = 0 = f(0) ⇒ <strong>连续</strong>。乘 x 把振荡压成无穷小（与 L108 对比）。</p>
+</blockquote>
+<p><strong>L111.</strong>★★ 讨论 f(x) = arctan(1/x) 在 x=0 处。</p>
+<blockquote>
+<p>右极限 π/2，左极限 −π/2 ⇒ <strong>跳跃间断点（第一类）</strong>。</p>
+</blockquote>
+<p><strong>L112.</strong>★★★ 讨论 f(x) = 1/(1 − e^{x/(1−x)}) 的所有间断点。</p>
+<blockquote>
+<p><strong>x=0</strong>：x/(1−x)→0，e⁰=1，分母 1−1=0 ⇒ f→∞，第二类（无穷）。
+<strong>x=1</strong>：x→1⁻ 时 x/(1−x)→+∞ ⇒ e^→∞ ⇒ f→0；x→1⁺ 时 x/(1−x)→−∞ ⇒ e^→0 ⇒ f→1。左 0 右 1 ⇒ 跳跃。
+结论：x=0 第二类，x=1 第一类跳跃。</p>
+</blockquote>
+<p><strong>L113.</strong>★ 讨论 f(x) = (x³−8)/(x−2) 在 x=2 处。</p>
+<blockquote>
+<p>因式分解 = x²+2x+4 ⇒ 极限 12 存在 ⇒ <strong>可去间断点</strong>。</p>
+</blockquote>
+<p><strong>L114.</strong>★★ 设 f(x) = (x²−a)/(x−1)，x=1 为可去间断点，求 a。</p>
+<blockquote>
+<p>可去 ⇒ 极限存在 ⇒ 分子趋于 0（否则分母→0 分子不→0 得 ∞）⇒ 1−a=0 ⇒ <strong>a=1</strong>。
+极限值 = lim(x+1) = 2。</p>
+</blockquote>
+<p><strong>L115.</strong>★★ 讨论 f(x) = (e^{2x}−1)/(x(x−1)) 的间断点。</p>
+<blockquote>
+<p><strong>x=0</strong>：分子 ~ 2x ⇒ 极限 = 2/(−1) = −2，可去。
+<strong>x=1</strong>：分母→0，分子→e²−1≠0 ⇒ ∞，第二类（无穷）。</p>
+</blockquote>
+<p><strong>L116.</strong>★★★ 讨论 f(x) = e^{1/lnx}（x&gt;0）的间断点。</p>
+<blockquote>
+<p><strong>x=1</strong>：x→1⁻ 时 1/lnx→−∞ ⇒ f→0；x→1⁺ 时 →+∞ ⇒ f→+∞。右极限不存在 ⇒ 第二类。
+<strong>x→0⁺</strong>：lnx→−∞，1/lnx→0 ⇒ f→1。x=0 是定义域端点，若补充定义 f(0)=1 则右连续——按可去处理。
+结论：x=1 第二类（无穷），x=0⁺ 可去。</p>
+</blockquote>
+<p><strong>L117.</strong>★ 讨论 f(x) = (|x|−x)/x 在 x=0 处。</p>
+<blockquote>
+<p>x&gt;0：f=0；x&lt;0：f=(−x−x)/x=−2。跳跃间断点（第一类）。</p>
+</blockquote>
+<p><strong>L118.</strong>★★ 设 f 在 x=0 连续，且 lim(x→0) (f(x)−2x)/x = 4，求 f(0) 并给出 f(x) 在 0 附近的等价形式。</p>
+<blockquote>
+<p>由 (f(x)−2x)/x = f(x)/x − 2 → 4 ⇒ f(x)/x → 6 ⇒ f(x) ~ 6x。
+f 连续 ⇒ f(0) = lim f(x) = lim 6x = <strong>0</strong>。f(x)~6x（x→0）。</p>
+</blockquote>
+<p><strong>L119.</strong>★★ 讨论 f(x) = (eˣ + sinx − 1)/x 在 x=0 处。</p>
+<blockquote>
+<p>eˣ−1 ~ x，sinx ~ x ⇒ 分子 ~ 2x ⇒ 极限 2 存在 ⇒ <strong>可去间断点</strong>。</p>
+</blockquote>
+<p><strong>L120.</strong>★★ 讨论 f(x) = sinx/|sinx| 的间断点。</p>
+<blockquote>
+<p>在 x=kπ：x→kπ⁺/⁻ 时 sinx 变号 ⇒ f 左右极限 ±1 ⇒ 跳跃间断点；其余点连续。
+结论：<strong>x=kπ（k∈Z）全是第一类跳跃</strong>。</p>
+</blockquote>
+<p><strong>L121.</strong>★★ 讨论 f(x) = x/(1+e^{1/x}) 在 x=0 处。</p>
+<blockquote>
+<p>右极限：0/(∞)=0；左极限：0/(1)=0。极限 0 存在但 f 在 0 无定义 ⇒ <strong>可去间断点</strong>。</p>
+</blockquote>
+<p><strong>L122.</strong>★ 判断：初等函数在其定义区间内处处连续。</p>
+<blockquote>
+<p><strong>对</strong>（重要定理）。注意是"定义<strong>区间</strong>"不是"定义域"——孤立点不算区间。</p>
+</blockquote>
+<p><strong>L123.</strong>★★ 讨论 f(x) = (1+x)^{1/x} 在 x=0 处的连续性（x&gt;0）。</p>
+<blockquote>
+<p>lim(x→0⁺) (1+x)^{1/x} = e 存在，但 x=0 无定义 ⇒ 可去。补充 f(0)=e 后右连续。
+这正是"e 的定义式补连续"的经典结构。</p>
+</blockquote>
+<p><strong>L124.</strong>★ 判断：闭区间上连续的函数必有界。</p>
+<blockquote>
+<p><strong>对</strong>（闭区间连续函数的性质：有界性 + 最值定理）。开区间 (0,1) 上 1/x 就无界——条件缺不得。</p>
+</blockquote>
+<p><strong>L125.</strong>★ 设 f、g 在 x₀ 连续，问 f/g 在 x₀ 是否连续？</p>
+<blockquote>
+<p>分母 g(x₀) ≠ 0 时<strong>连续</strong>（商的连续性）；g(x₀)=0 时可能间断（看分子是否也为 0）。分情况作答。</p>
+</blockquote>
+<h2>§5 无穷小比较·渐近线·综合证明（L126–L150）</h2>
+<p><strong>L126.</strong>★★ x→0 时，1−cosx 与 x^a 同阶，求 a，并说明它是否等价于 x^a。</p>
+<blockquote>
+<p>1−cosx ~ x²/2 ⇒ <strong>a=2</strong>；比值极限 1/2 ≠ 1，故<strong>同阶但不等价</strong>。等价要比值=1。</p>
+</blockquote>
+<p><strong>L127.</strong>★★ 求正整数 k 使 lim(x→0) (x − arcsinx)/x^k 为非零常数。</p>
+<blockquote>
+<p>arcsinx = x + x³/6 + o(x³) ⇒ x − arcsinx ~ −x³/6 ⇒ <strong>k=3</strong>（系数 −1/6）。</p>
+</blockquote>
+<p><strong>L128.</strong>★★ x→0 时 tanx−sinx 是 x 的几阶无穷小？</p>
+<blockquote>
+<p>tanx−sinx = tanx(1−cosx) ~ x·(x²/2) = x³/2 ⇒ <strong>3 阶</strong>。</p>
+</blockquote>
+<p><strong>L129.</strong>★★★ x→0 时 eˣ − 1 − x + x²/2 是 x 的几阶无穷小？它是 x⁴ 的同阶或高阶无穷小吗？</p>
+<blockquote>
+<p>泰勒：eˣ = 1 + x + x²/2 + x³/6 + x⁴/24 + o(x⁴) ⇒ eˣ − 1 − x + x²/2 = x³/6 + x⁴/24 + o(x⁴) ~ <strong>x³/6</strong>。
+故它是 <strong>x 的 3 阶无穷小</strong>；而 3 &lt; 4，它是比 x⁴ <strong>更低阶</strong>的无穷小——既非同阶更非高阶。
+教训：判断"是 xⁿ 的同阶/高阶"前，先泰勒展开找到<strong>第一个非零剩余项</strong>的次数，再比较 n。</p>
+</blockquote>
+<p><strong>L130.</strong>★★★ 证明：x→0⁺ 时，1/lnx 是比任何 x^a（a&gt;0）更低阶的无穷小。</p>
+<blockquote>
+<p>对任意 a&gt;0：x^a/(1/lnx) = x^a·lnx → 0（幂压对数）⇒ x^a = o(1/lnx)。
+即 1/lnx → 0 但趋于 0 的速度比任何幂函数都慢——"最慢的无穷小"。</p>
+</blockquote>
+<p><strong>L131.</strong>★★ 求 f(x) = (x²+1)/(x+1) 的全部渐近线。</p>
+<blockquote>
+<p>除法：(x²+1)/(x+1) = x − 1 + 2/(x+1)。
+斜渐近线 y = x−1（x→+∞ 与 x→−∞ 同一条）；垂直渐近线 x = −1。
+无水平渐近线（有斜时 x→∞ 方向不再有水平）。</p>
+</blockquote>
+<p><strong>L132.</strong>★★★ 求 f(x) = x·e^{1/x²} 的全部渐近线。</p>
+<blockquote>
+<p>x→±∞：e^{1/x²} = 1 + 1/x² + o(1/x²)，f = x + 1/x + … ⇒ 斜渐近线 <strong>y = x</strong>。
+x→0：令 t=1/x²→+∞，f = e^t/√t → +∞ ⇒ <strong>垂直渐近线 x=0</strong>（两侧都是）。</p>
+</blockquote>
+<p><strong>L133.</strong>★★★ 求 f(x) = x·ln(1+1/x) 的斜渐近线。</p>
+<blockquote>
+<p>ln(1+1/x) = 1/x − 1/(2x²) + o(1/x²) ⇒ f = 1 − 1/(2x) + o(1/x)。
+f − x = −1/2 + o(1) ⇒ 斜渐近线 <strong>y = x − 1/2</strong>（x→+∞ 与 x→−∞，x&lt;−1 处 ln 有定义）。</p>
+</blockquote>
+<p><strong>L134.</strong>★★ 求 f(x) = (x³+x)/(x²−1) 的全部渐近线。</p>
+<blockquote>
+<p>除法：= x + x/(x²−1) ⇒ 斜渐近线 y = x。
+x²−1=0 处：x→±1 时分母→0 分子→±1≠0 ⇒ <strong>垂直渐近线 x=1 和 x=−1</strong>。</p>
+</blockquote>
+<p><strong>L135.</strong>★★ 求 f(x) = e^{1/x} 的全部渐近线。</p>
+<blockquote>
+<p>x→0⁺：e^{1/x}→+∞ ⇒ 垂直渐近线 <strong>x=0</strong>（仅右侧）。
+x→±∞：f → 1 ⇒ 水平渐近线 <strong>y=1</strong>（两侧）。无斜渐近线（差 f−1 ~ 1/x → 0）。</p>
+</blockquote>
+<p><strong>L136.</strong>★★★ 设 f 在 (−∞,+∞) 连续，lim(x→∞) f(x) = A（两侧均存在），证明 f 有界。</p>
+<blockquote>
+<p>取 X 使 |x|&gt;X 时 |f(x)−A|&lt;1 ⇒ |f| ≤ |A|+1。
+在闭区间 [−X−1, X+1] 上 f 连续 ⇒ 有界（最值定理），设上界 M₁。
+取 M = max(M₁, |A|+1) 即全域有界。<strong>"无穷远收敛 + 闭区间连续"两段拼有界</strong>，是标准套路。</p>
+</blockquote>
+<p><strong>L137.</strong>★★★ f 在 [0,1] 连续，f(0)=f(1)。证明存在 ξ∈[0,1/2] 使 f(ξ) = f(ξ+1/2)。</p>
+<blockquote>
+<p>令 g(x) = f(x+1/2) − f(x)，在 [0,1/2] 连续。
+g(0) + g(1/2) = [f(1/2)−f(0)] + [f(1)−f(1/2)] = f(1) − f(0) = 0。
+若 g(0)=g(1/2)=0 任取即可；否则 g(0) 与 g(1/2) 异号，零点定理得 ξ。<strong>"和为零⇒异号"是介值题的暗门</strong>。</p>
+</blockquote>
+<p><strong>L138.</strong>★★ 证明方程 x³ − 3x + 1 = 0 有三个不同实根。</p>
+<blockquote>
+<p>f(−2)=−1&lt;0，f(0)=1&gt;0，f(1)=−1&lt;0，f(2)=3&gt;0。
+在 [−2,0]、[0,1]、[1,2] 上分别用零点定理得三根；三次方程至多三根（代数基本定理/罗尔推论）⇒ 恰三个。
+符号点选在极值两侧是构造关键。</p>
+</blockquote>
+<p><strong>L139.</strong>★★★ f: [0,1]→[0,1] 连续。证明存在 ξ 使 f(ξ)=ξ（不动点）。</p>
+<blockquote>
+<p>g(x) = f(x) − x 连续。g(0) = f(0) ≥ 0，g(1) = f(1) − 1 ≤ 0。
+若有等号直接取端点；否则异号，零点定理得 ξ∈(0,1)。图景：曲线与对角线必相交。</p>
+</blockquote>
+<p><strong>L140.</strong>★★★ 设 a,b&gt;0。证明方程 x = a·sinx + b 存在唯一正根。</p>
+<blockquote>
+<p>存在：f(x) = x − a·sinx − b，f(0) = −b &lt; 0；取 x₀ 充分大，f(x₀) ≥ x₀ − a − b &gt; 0。零点定理。
+唯一：f′(x) = 1 − a·cosx ≥ 1 − a… 若 a≥1 则不必然正。改进：对任意 x₁&lt;x₂，
+f(x₂)−f(x₁) = (x₂−x₁) − a(sinx₂−sinx₁) ≥ (x₂−x₁) − a·|sinx₂−sinx₁| ≥ (x₂−x₁) − a(x₂−x₁) = (1−a)(x₂−x₁)。
+当 a&lt;1 严格正 ⇒ 严格递增 ⇒ 唯一。（a≥1 时需用 |sinu−sinv|&lt;|u−v| 的严格不等式，a&lt;1 时也严格正——严格版同样成立。）</p>
+</blockquote>
+<p><strong>L141.</strong>★★ 证明方程 eˣ = 1/x 有唯一正根。</p>
+<blockquote>
+<p>g(x) = x·eˣ − 1：g(0) = −1 &lt; 0，g(1) = e−1 &gt; 0 ⇒ 存在。
+g′(x) = eˣ(1+x) &gt; 0（x&gt;0）⇒ 严格递增 ⇒ 唯一。（该根即著名的"欧米伽常数" Ω≈0.567。）</p>
+</blockquote>
+<p><strong>L142.</strong>★★★ 用 lim(x→∞) (x+sinx)/x 说明洛必达法则的局限性。</p>
+<blockquote>
+<p>分子分母同趋于 ∞（∞/∞ 型），但导数比 (1+cosx)/1 极限不存在。
+而原极限 = 1（sinx/x→0）。<strong>洛必达"导数比存在⇒原比存在"，逆命题不成立</strong>；导数比振荡时改用恒等变形/夹逼。</p>
+</blockquote>
+<p><strong>L143.</strong>★★★ 0&lt;x₁&lt;π/2，xₙ₊₁ = sinxₙ，证明 xₙ→0。</p>
+<blockquote>
+<p>0 &lt; xₙ &lt; π/2 时 0 &lt; sinxₙ &lt; xₙ ⇒ 单调递减、有下界 0 ⇒ 收敛于 L。
+取极限：L = sinL，而 |sinL|<L 对 L>0 成立 ⇒ 只能 <strong>L=0</strong>。</p>
+</blockquote>
+<p><strong>L144.</strong>★★ x→0 时 α = 1−cosx，β = x−tanx，比较 α 与 β 的阶。</p>
+<blockquote>
+<p>α ~ x²/2（2 阶），β ~ −x³/2（3 阶）⇒ β = o(α)，α = O(β)不成立。
+阶数大的先"消失"——<strong>β 是比 α 更高阶的无穷小</strong>。</p>
+</blockquote>
+<p><strong>L145.</strong>★★★ 论述：等价无穷小替换为什么在和差中要谨慎？</p>
+<blockquote>
+<p>替换原理：乘除因子可整体替换（因为只改变一个因子）。和差中出现<strong>主部相消</strong>（如 x−sinx）时，被消掉的主部承载了结果——替换会丢掉高阶信息。
+安全做法：①和差先通分/提公因子化成乘积；②直接上泰勒到足够阶。例：x−sinx 若把 sinx 换成 x 得 0，错；泰勒 x−sinx ~ x³/6 才对。</p>
+</blockquote>
+<p><strong>L146.</strong>★★★ 用泰勒公式证明：eˣ ≥ 1+x（x∈R，等号当且仅当 x=0）。</p>
+<blockquote>
+<p>eˣ = 1 + x + e^{ξ}x²/2（ξ 介于 0 与 x 之间，拉格朗日余项）。
+e^{ξ} &gt; 0 ⇒ 当 x≠0 时 eˣ − 1 − x = e^{ξ}x²/2 &gt; 0；x=0 时取等。∎
+泰勒余项法证不等式：余项定符号。</p>
+</blockquote>
+<p><strong>L147.</strong>★★★ 求 lim(x→0) (tanx/x)^{1/x²}。</p>
+<blockquote>
+<p>ln(tanx/x) = ln(1 + (tanx−x)/x) ~ (x³/3)/x = x²/3。
+对数极限 = (x²/3)/x² = 1/3 ⇒ <strong>e^{1/3}</strong>。与 L46（sinx 版，e^{−1/6}）成对记忆。</p>
+</blockquote>
+<p><strong>L148.</strong>★★★ 证明 f(x) = (1+1/x)^x 在 (0,+∞) 单调递增且趋于 e。</p>
+<blockquote>
+<p>摘要证明（完整导数过程见《高数_知识点与难点》第1章）：
+lnf = x·ln(1+1/x)，(lnf)′ = ln(1+1/x) − 1/(x+1) = ∫ₓ^{x+1} dt/x·… 用积分表达 ln(1+1/x) = ∫ₓ^{x+1} dt/t &gt; 1/(x+1)，故 (lnf)′ &gt; 0 ⇒ 递增。
+又 x·ln(1+1/x) = x·(1/x − 1/(2x²) + o(1/x²)) = 1 − 1/(2x) + o(1/x) → 1 ⇒ f → e。
+<strong>递增逼近上界 e</strong>——单调有界定理的函数版经典。</p>
+</blockquote>
+<p><strong>L149.</strong>★★★ 求 lim(x→0) (eˣ − e^{−x} − 2x)/(x − sinx)。</p>
+<blockquote>
+<p>eˣ − e^{−x} = 2(x + x³/6 + o(x³))（奇函数展开只留奇次项），分子 ~ x³/3。
+分母 ~ x³/6 ⇒ <strong>2</strong>。</p>
+</blockquote>
+<p><strong>L150.</strong>★★★ 设 f 在 R 上连续，lim(x→+∞) f(x)=A，lim(x→−∞) f(x)=B（均存在）。证明 f 在 R 上有界。</p>
+<blockquote>
+<p>取 X&gt;0：|x|&gt;X 时 |f(x)| ≤ max(|A|,|B|)+1。
+[−X,X] 上 f 连续 ⇒ 有界（最值定理），上界 M₁。
+M = max(M₁, |A|+1, |B|+1) ⇒ 全域 |f| ≤ M。∎
+与 L136 的区别：两侧极限可以不同，处理完全一样——"两端夹 + 中间闭区间"三段论。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：L1–L150。使用节奏：①第 1 天做 §1（配合宋浩 1.5/1.6 课）→②§2 分 3 天每天 15 题→③§3 两天→④§4 一天→⑤§5 两天；全程错题标注回《数学考题集》对应章节。三天后只重做错题。</p></div></body></html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_微分方程专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 微分方程专项（100题带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，配合《高数_知识点与难点》第7章（常微分方程）使用。数一考纲：一阶方程（可分离/齐次/线性）、可降阶、二阶常系数齐次与非齐次、欧拉方程、简单应用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题标回《数学考题集》同章节旁。
+全部自编或改编经典题型，覆盖：五类一阶方程、三种可降阶型、二阶常系数通解与特解（含共振）、欧拉方程、物理几何应用。</p>
+</blockquote>
+<h2>§1 一阶方程（F1–F30）</h2>
+<p><strong>F1.</strong>★ 解 y′ = x/y（y&gt;0）。</p>
+<blockquote>
+<p>分离变量：y dy = x dx ⇒ <strong>y² = x² + C</strong>。</p>
+</blockquote>
+<p><strong>F2.</strong>★ 解 y′ = y/(1+x)。</p>
+<blockquote>
+<p>dy/y = dx/(1+x) ⇒ ln|y| = ln|1+x| + C₁ ⇒ <strong>y = C(1+x)</strong>。</p>
+</blockquote>
+<p><strong>F3.</strong>★ 解 y′ = y/x。</p>
+<blockquote>
+<p>齐次方程：dy/y = dx/x ⇒ <strong>y = Cx</strong>（过原点的直线族）。</p>
+</blockquote>
+<p><strong>F4.</strong>★★ 解 y′ = y/x + tan(y/x)。</p>
+<blockquote>
+<p>令 u=y/x：x·u′ = tanu ⇒ cotu du = dx/x ⇒ lnsinu = lnx + C。
+<strong>sin(y/x) = Cx</strong>。</p>
+</blockquote>
+<p><strong>F5.</strong>★★ 解 (x+y)dx − x dy = 0。</p>
+<blockquote>
+<p>y′ = 1 + y/x（齐次）：x·u′ = 1 ⇒ u = lnx + C。
+<strong>y = x(C + lnx)</strong>。</p>
+</blockquote>
+<p><strong>F6.</strong>★ 解 y′ + y/x = x。</p>
+<blockquote>
+<p>一阶线性，积分因子 e^{∫dx/x} = x：(xy)′ = x² ⇒ <strong>xy = x³/3 + C</strong>。</p>
+</blockquote>
+<p><strong>F7.</strong>★ 解 y′ − 2y = eˣ。</p>
+<blockquote>
+<p>积分因子 e^{−2x}：(ye^{−2x})′ = e^{−x} ⇒ ye^{−2x} = −e^{−x} + C ⇒ <strong>y = Ce^{2x} − eˣ</strong>。</p>
+</blockquote>
+<p><strong>F8.</strong>★ 解 y′ + y = e^{−x}。</p>
+<blockquote>
+<p>(yeˣ)′ = 1 ⇒ <strong>y = (x+C)e^{−x}</strong>（特解 xe^{−x}，λ=−1 恰为特征根，典型共振）。</p>
+</blockquote>
+<p><strong>F9.</strong>★★ 解 y′ + y·tanx = secx。</p>
+<blockquote>
+<p>积分因子 e^{∫tanx} = secx：(y·secx)′ = sec²x ⇒ y·secx = tanx + C。
+<strong>y = sinx + C·cosx</strong>。</p>
+</blockquote>
+<p><strong>F10.</strong>★★ 解 x·y′ + y = lnx（x&gt;0）。</p>
+<blockquote>
+<p>化标准形 y′ + y/x = lnx/x，积分因子 x：(xy)′ = lnx。
+<strong>xy = x·lnx − x + C</strong>（∫lnx = xlnx − x）。</p>
+</blockquote>
+<p><strong>F11.</strong>★ 默写一阶线性方程的通解结构。</p>
+<blockquote>
+<p>y = e^{−∫P}·[∫Q·e^{∫P}dx + C]。<strong>通解 = 齐次通解 + 非齐次一个特解</strong>，与二阶同构。</p>
+</blockquote>
+<p><strong>F12.</strong>★ 解 y′ = e^{x+y}。</p>
+<blockquote>
+<p>e^{−y}dy = eˣdx ⇒ −e^{−y} = eˣ + C ⇒ <strong>e^{−y} = −eˣ + C</strong>。</p>
+</blockquote>
+<p><strong>F13.</strong>★★ 解 x²y′ + xy = 1。</p>
+<blockquote>
+<p>y′ + y/x = 1/x²：(xy)′ = 1/x² ⇒ xy = −1/x + C ⇒ <strong>y = C/x − 1/x²</strong>。</p>
+</blockquote>
+<p><strong>F14.</strong>★★ 解 (x²−1)y′ + 2xy = cosx。</p>
+<blockquote>
+<p>注意左边正是 [(x²−1)y]′！直接积分：(x²−1)y = sinx + C ⇒ <strong>y = (sinx+C)/(x²−1)</strong>。
+看到"导数乘系数"先观察是否恰为某乘积的导数。</p>
+</blockquote>
+<p><strong>F15.</strong>★★ 解 y′ − y = x·y²（伯努利方程）。</p>
+<blockquote>
+<p>两边除 y²、令 z=1/y：z′ + z = −x。
+z = Ce^{−x} − x + 1 ⇒ <strong>y = 1/(1 − x + Ce^{−x})</strong>。</p>
+</blockquote>
+<p><strong>F16.</strong>★★★ 解 y′ = (x²+y²)/(xy)。</p>
+<blockquote>
+<p>令 u=y/x：x·u′ = (1+u²)/u − u = 1/u ⇒ u du = dx/x。
+u²/2 = lnx + C ⇒ <strong>y² = 2x²·lnx + Cx²</strong>。</p>
+</blockquote>
+<p><strong>F17.</strong>★★ 验证 (3x²+2xy)dx + (x²+2y)dy = 0 是全微分方程并求解。</p>
+<blockquote>
+<p>∂M/∂y = 2x = ∂N/∂x ✓。
+u = x³ + x²y + y² ⇒ <strong>x³ + x²y + y² = C</strong>。</p>
+</blockquote>
+<p><strong>F18.</strong>★ 全微分方程的判定条件？</p>
+<blockquote>
+<p>单连通域上 <strong>∂M/∂y = ∂N/∂x</strong>（恰当方程）；此时存在 u 使 du = Mdx+Ndy。</p>
+</blockquote>
+<p><strong>F19.</strong>★★ 解 y′ + y/x = sinx。</p>
+<blockquote>
+<p>(xy)′ = x·sinx ⇒ xy = sinx − x·cosx + C ⇒ <strong>y = (sinx − x·cosx)/x + C/x</strong>。</p>
+</blockquote>
+<p><strong>F20.</strong>★ 曲线任一点切线斜率等于 2y/x，求曲线族。</p>
+<blockquote>
+<p>y′ = 2y/x ⇒ dy/y = 2dx/x ⇒ <strong>y = Cx²</strong>（抛物线族）。</p>
+</blockquote>
+<p><strong>F21.</strong>★ 解 y′ = y²。</p>
+<blockquote>
+<p>dy/y² = dx ⇒ −1/y = x + C ⇒ <strong>y = −1/(x+C)</strong>。</p>
+</blockquote>
+<p><strong>F22.</strong>★ 解 (1+x)y′ = y。</p>
+<blockquote>
+<p>dy/y = dx/(1+x) ⇒ <strong>y = C(1+x)</strong>。</p>
+</blockquote>
+<p><strong>F23.</strong>★ 解 y′ = (1+y²)/(1+x²)。</p>
+<blockquote>
+<p>dy/(1+y²) = dx/(1+x²) ⇒ arctany = arctanx + C ⇒ <strong>y = tan(arctanx + C)</strong>。</p>
+</blockquote>
+<p><strong>F24.</strong>★ 解 y′ = 2x，y(0)=1。</p>
+<blockquote>
+<p>y = x² + C，代入得 <strong>y = x² + 1</strong>。</p>
+</blockquote>
+<p><strong>F25.</strong>★ 默写一阶线性方程的积分因子。</p>
+<blockquote>
+<p>y′+P(x)y=Q(x) 的积分因子 = <strong>e^{∫P dx}</strong>；两边乘它后左边恰为 [y·e^{∫P}]′。</p>
+</blockquote>
+<p><strong>F26.</strong>★ 解 y′ + 2y = 4x。</p>
+<blockquote>
+<p>特解尝试 y<em>=ax+b：2+(2ax+2b)·? 按待定系数：2a=4 ⇒ a=2；2a+2b=0? 代入：a + 2(ax+b) = 4x ⇒ 2a=4, a+2b=0 ⇒ b=−1。
+</em><em>y = Ce^{−2x} + 2x − 1</em>*。</p>
+</blockquote>
+<p><strong>F27.</strong>★ 解 y′ = −x/y。</p>
+<blockquote>
+<p>y dy = −x dx ⇒ <strong>x² + y² = C</strong>（同心圆族，半径 √C）。</p>
+</blockquote>
+<p><strong>F28.</strong>★★ 解 y′ + y·cosx = e^{−sinx}。</p>
+<blockquote>
+<p>积分因子 e^{sinx}：(ye^{sinx})′ = 1 ⇒ <strong>y = (x+C)e^{−sinx}</strong>。</p>
+</blockquote>
+<p><strong>F29.</strong>★★ 由通解 y = C₁eˣ + C₂e^{2x} 反求微分方程。</p>
+<blockquote>
+<p>特征根 1、2 ⇒ (r−1)(r−2) = r²−3r+2 ⇒ <strong>y″ − 3y′ + 2y = 0</strong>。</p>
+</blockquote>
+<p><strong>F30.</strong>★★ 下列方程中是线性方程的：①y′=x²y ②y′=y²+x ③y′+xy=eˣ ④y·y′=x。
+A. ①③ B. ①② C. ②④ D. ③④</p>
+<blockquote>
+<p><strong>A</strong>。线性=关于 y 与 y′ 都是一次。②含 y²、④含 y·y′，都非线性。</p>
+</blockquote>
+<h2>§2 可降阶的高阶方程（F31–F45）</h2>
+<p><strong>F31.</strong>★ 解 y″ = x。</p>
+<blockquote>
+<p>积分两次：<strong>y = x³/6 + C₁x + C₂</strong>。</p>
+</blockquote>
+<p><strong>F32.</strong>★ 解 y″ = y′（缺 y）。</p>
+<blockquote>
+<p>令 p=y′：p′=p ⇒ p = C₁eˣ ⇒ <strong>y = C₁eˣ + C₂</strong>。</p>
+</blockquote>
+<p><strong>F33.</strong>★★ 解 y″ = (y′)²。</p>
+<blockquote>
+<p>p=y′：dp/dx = p² ⇒ −1/p = x + C₁ ⇒ y′ = −1/(x+C₁)。
+<strong>y = −ln|x+C₁| + C₂</strong>。</p>
+</blockquote>
+<p><strong>F34.</strong>★★ 解 y″ + (y′)² = 1。</p>
+<blockquote>
+<p>缺 x：p·dp/dy = 1−p² ⇒ 令 w=1−p²：dw/dy = −2p·dp/dy = −2w ⇒ w = C₁e^{−2y}。
+p² = 1−C₁e^{−2y}；取 C₁=1 代入分离变量（令 u=e^y）得 u=cosh(x+C₁)。
+<strong>y = ln|cosh(x+C₁)| + C₂</strong>（验证：y′=tanh(x+C₁)，y″=sech²(x+C₁)，相加=1 ✓）。</p>
+</blockquote>
+<p><strong>F35.</strong>★ 解 y‴ = x。</p>
+<blockquote>
+<p>积分三次：<strong>y = x⁴/24 + C₁x²/2 + C₂x + C₃</strong>。</p>
+</blockquote>
+<p><strong>F36.</strong>★ 解 y″ = e^{2x}。</p>
+<blockquote>
+<p><strong>y = e^{2x}/4 + C₁x + C₂</strong>。</p>
+</blockquote>
+<p><strong>F37.</strong>★★ 解 (1+x²)y″ = 2xy′。</p>
+<blockquote>
+<p>p=y′：dp/p = 2x/(1+x²)dx ⇒ p = C₁(1+x²)。
+<strong>y = C₁(x + x³/3) + C₂</strong>。</p>
+</blockquote>
+<p><strong>F38.</strong>★ 缺 y 的方程（y″=f(x,y′)）与缺 x 的方程（y″=f(y,y′)）分别怎么降阶？</p>
+<blockquote>
+<p>缺 y：令 <strong>p=y′</strong>，得 p 关于 x 的一阶方程；缺 x：令 <strong>p=y′ 且 y″=p·dp/dy</strong>，得 p 关于 y 的一阶方程。</p>
+</blockquote>
+<p><strong>F39.</strong>★★ 解 y″ + y′ = x。</p>
+<blockquote>
+<p>对 p=y′：p′+p = x（一阶线性）⇒ p = x − 1 + Ce^{−x}。
+<strong>y = x²/2 − x − Ce^{−x} + C₂</strong>。</p>
+</blockquote>
+<p><strong>F40.</strong>★★ 解 y·y″ = (y′)²。</p>
+<blockquote>
+<p>缺 x：y·p·dp/dy = p² ⇒ dp/p = dy/y ⇒ p = C₁y ⇒ dy/y = C₁dx。
+<strong>y = C₂e^{C₁x}</strong>（指数族）。</p>
+</blockquote>
+<p><strong>F41.</strong>★ 解边值问题 y″=0，y(0)=0，y(1)=1。</p>
+<blockquote>
+<p>y = C₁x+C₂：C₂=0，C₁=1 ⇒ <strong>y=x</strong>。</p>
+</blockquote>
+<p><strong>F42.</strong>★ 解 y″ = −y。</p>
+<blockquote>
+<p><strong>y = C₁cosx + C₂sinx</strong>（特征根 ±i，简谐振动）。</p>
+</blockquote>
+<p><strong>F43.</strong>★★ 解 x·y″ + y′ = 0（x&gt;0）。</p>
+<blockquote>
+<p>观察 (xy′)′ = 0 ⇒ xy′ = C₁ ⇒ <strong>y = C₁lnx + C₂</strong>。</p>
+</blockquote>
+<p><strong>F44.</strong>★★ 解 y″ = y′/x。</p>
+<blockquote>
+<p>(ln p)′ = 1/x ⇒ p = C₁x ⇒ <strong>y = C₁x²/2 + C₂</strong>。</p>
+</blockquote>
+<p><strong>F45.</strong>★★ 求满足 y″=y′，y(0)=0，y′(0)=1 的解。</p>
+<blockquote>
+<p>y = C₁eˣ+C₂：y(0)=0 ⇒ C₂=−C₁；y′(0)=C₁=1。
+<strong>y = eˣ − 1</strong>。</p>
+</blockquote>
+<h2>§3 二阶常系数线性方程（F46–F75）</h2>
+<p><strong>F46.</strong>★ 默写 y″+py′+qy=0 特征根的三种情形与通解。</p>
+<blockquote>
+<p>判别式 Δ=p²−4q：
+两不同实根 r₁≠r₂：<strong>y=C₁e^{r₁x}+C₂e^{r₂x}</strong>；二重根 r：<strong>y=(C₁+C₂x)e^{rx}</strong>；
+共轭复根 α±βi：<strong>y=e^{αx}(C₁cosβx+C₂sinβx)</strong>。</p>
+</blockquote>
+<p><strong>F47.</strong>★ 解 y″ − 5y′ + 6y = 0。</p>
+<blockquote>
+<p>r²−5r+6 = (r−2)(r−3) ⇒ <strong>y = C₁e^{2x} + C₂e^{3x}</strong>。</p>
+</blockquote>
+<p><strong>F48.</strong>★ 解 y″ + 2y′ + y = 0。</p>
+<blockquote>
+<p>(r+1)² = 0 二重根 −1 ⇒ <strong>y = (C₁+C₂x)e^{−x}</strong>。</p>
+</blockquote>
+<p><strong>F49.</strong>★ 解 y″ + y = 0。</p>
+<blockquote>
+<p>r = ±i ⇒ <strong>y = C₁cosx + C₂sinx</strong>。</p>
+</blockquote>
+<p><strong>F50.</strong>★ 解 y″ − 2y′ + 5y = 0。</p>
+<blockquote>
+<p>r = 1±2i ⇒ <strong>y = eˣ(C₁cos2x + C₂sin2x)</strong>。</p>
+</blockquote>
+<p><strong>F51.</strong>★★ 解 y″−4y′=0，y(0)=1，y′(0)=2。</p>
+<blockquote>
+<p>r=0、4 ⇒ y=C₁+C₂e^{4x}；C₁+C₂=1，4C₂=2 ⇒ C₂=1/2，C₁=1/2。
+<strong>y = (1+e^{4x})/2</strong>。</p>
+</blockquote>
+<p><strong>F52.</strong>★★ 解 y″ − y = eˣ。</p>
+<blockquote>
+<p>特征根 ±1，λ=1 是单根 ⇒ 特解形如 a·x·eˣ。代入得 2a=1。
+<strong>y = C₁eˣ + C₂e^{−x} + (x/2)eˣ</strong>。</p>
+</blockquote>
+<p><strong>F53.</strong>★ 解 y″ + y = eˣ。</p>
+<blockquote>
+<p>λ=1 非根：特解 aeˣ，2a=1 ⇒ <strong>y = C₁cosx+C₂sinx + eˣ/2</strong>。</p>
+</blockquote>
+<p><strong>F54.</strong>★★ 解 y″ + y = sinx。</p>
+<blockquote>
+<p>λ=±i 是根 ⇒ 特解 x(a cosx + b sinx)。代入解得 a=−1/2。
+<strong>y = C₁cosx + C₂sinx − (x/2)cosx</strong>。</p>
+</blockquote>
+<p><strong>F55.</strong>★★★ 解 y″ − 3y′ + 2y = x·eˣ。</p>
+<blockquote>
+<p>λ=1 单根 ⇒ 特解 x(ax+b)eˣ。逐项求导代入：
+系数匹配得 a=−1/2，b=−1（利用 (D−1)(D−2) 作用于 x(ax+b)eˣ = −2a·x·eˣ+(2a−b)eˣ）。
+<strong>y = C₁eˣ + C₂e^{2x} − (x²/2 + x)eˣ</strong>。</p>
+</blockquote>
+<p><strong>F56.</strong>★ 叠加原理：右端 f = f₁+f₂ 时特解怎么取？</p>
+<blockquote>
+<p><strong>特解 = f₁ 的一个特解 + f₂ 的一个特解</strong>（分别按各自类型设，互不影响）。</p>
+</blockquote>
+<p><strong>F57.</strong>★★ 解 y″ + 4y = cos2x。</p>
+<blockquote>
+<p>λ=2i 是根 ⇒ 特解 x·(a cos2x + b sin2x)，代入得 a=0，b=1/4。
+<strong>y = C₁cos2x + C₂sin2x + (x/4)sin2x</strong>。</p>
+</blockquote>
+<p><strong>F58.</strong>★★ 解 y″ − 2y′ + y = eˣ。</p>
+<blockquote>
+<p>λ=1 二重根 ⇒ 特解 ax²eˣ，代入得 2a=1 ⇒ a=1/2。
+<strong>y = (C₁+C₂x)eˣ + (x²/2)eˣ</strong>。</p>
+</blockquote>
+<p><strong>F59.</strong>★★ 由通解 y = C₁e^{−x} + C₂e^{2x} 反求方程。</p>
+<blockquote>
+<p>特征根 −1、2 ⇒ (r+1)(r−2) = r²−r−2 ⇒ <strong>y″ − y′ − 2y = 0</strong>。</p>
+</blockquote>
+<p><strong>F60.</strong>★ 通解中出现 cosβx 的条件？</p>
+<blockquote>
+<p>特征方程有<strong>共轭复根</strong> ⟺ 判别式 p²−4q &lt; 0。</p>
+</blockquote>
+<p><strong>F61.</strong>★ 解 y″ + y = x。</p>
+<blockquote>
+<p>特解 y<em>=ax+b：0+(ax+b) = x ⇒ a=1，b=0。
+</em><em>y = C₁cosx + C₂sinx + x</em>*。</p>
+</blockquote>
+<p><strong>F62.</strong>★ 解 y″ − y = x。</p>
+<blockquote>
+<p>特解 ax+b：−(ax+b) = x ⇒ a=−1，b=0。
+<strong>y = C₁eˣ + C₂e^{−x} − x</strong>。</p>
+</blockquote>
+<p><strong>F63.</strong>★★ 解 y″ + y = x·e^{2x}。</p>
+<blockquote>
+<p>λ=2 非根：特解 (ax+b)e^{2x}。代入：y″+y = (5ax + 5b + 4a)e^{2x} = xe^{2x}。
+a=1/5，b=−4/25 ⇒ <strong>y = C₁cosx+C₂sinx + (x/5 − 4/25)e^{2x}</strong>。</p>
+</blockquote>
+<p><strong>F64.</strong>★★ 解 y″ − y = eˣ + 1。</p>
+<blockquote>
+<p>分项：eˣ 的特解 xeˣ/2（F52）；1 的特解 −1（F62 同理：0−c=1）。
+<strong>y = C₁eˣ + C₂e^{−x} + (x/2)eˣ − 1</strong>。</p>
+</blockquote>
+<p><strong>F65.</strong>★ 二阶非齐次线性方程解的结构定理默写。</p>
+<blockquote>
+<p>通解 = <strong>对应齐次通解 + 非齐次任一特解</strong>；两个非齐次解之差是对应齐次的解。</p>
+</blockquote>
+<p><strong>F66.</strong>★★ y₁、y₂ 是 y″+py′+qy=f(x) 的两个解，(y₁+y₂)/2 是什么？</p>
+<blockquote>
+<p>A[(y₁+y₂)/2] = f ⇒ <strong>也是原方程的解</strong>；而 y₁−y₂ 是齐次方程的解。</p>
+</blockquote>
+<p><strong>F67.</strong>★★ 解 y″ − y = sin2x。</p>
+<blockquote>
+<p>特解 a·sin2x + b·cos2x：y″−y = −5a·sin2x − 5b·cos2x = sin2x ⇒ a=−1/5，b=0。
+<strong>y = C₁eˣ + C₂e^{−x} − (1/5)sin2x</strong>。</p>
+</blockquote>
+<p><strong>F68.</strong>★ 解 y″+y=0，y(0)=1，y′(0)=0。</p>
+<blockquote>
+<p>y = C₁cosx+C₂sinx：C₁=1，C₂=0 ⇒ <strong>y = cosx</strong>。</p>
+</blockquote>
+<p><strong>F69.</strong>★ 特解设 form 中"乘 xᵏ"的规则？</p>
+<blockquote>
+<p>e^{λx} 型右端：λ 是特征方程的 <strong>k 重根</strong> ⇒ 特解设为 <strong>xᵏ·Q(x)·e^{λx}</strong>（k=0,1,2）。</p>
+</blockquote>
+<p><strong>F70.</strong>★ 解 y″ + y′ + y = 0。</p>
+<blockquote>
+<p>r = (−1±√3 i)/2 ⇒ <strong>y = e^{−x/2}[C₁cos(√3x/2) + C₂sin(√3x/2)]</strong>。</p>
+</blockquote>
+<p><strong>F71.</strong>★★ y″+2y′+3y=0 的所有解是否随 x→+∞ 趋于 0？</p>
+<blockquote>
+<p>特征根实部 −1 &lt; 0 ⇒ e^{−x} 因子压住三角函数 ⇒ <strong>是，全部解趋 0</strong>（渐近稳定）。</p>
+</blockquote>
+<p><strong>F72.</strong>★★ 解 y‴ + y′ = 0。</p>
+<blockquote>
+<p>特征 r³+r = r(r²+1) ⇒ r=0, ±i。
+<strong>y = C₁ + C₂cosx + C₃sinx</strong>。</p>
+</blockquote>
+<p><strong>F73.</strong>★★ 解 y″ + y′ − 2y = 2x²。</p>
+<blockquote>
+<p>特征根 1、−2；特解 ax²+bx+c。代入：2a + (2ax+b) − 2(ax²+bx+c) = 2x²。
+−2a=2 ⇒ a=−1；2a−2b=0 ⇒ b=−1；2a+b−2c=0 ⇒ c=−3/2。
+<strong>y = C₁eˣ + C₂e^{−2x} − x² − x − 3/2</strong>。</p>
+</blockquote>
+<p><strong>F74.</strong>★★★ 解 y″+4y=8x，y(0)=0，y′(0)=0。</p>
+<blockquote>
+<p>特解 y<em>=2x。通解 y = C₁cos2x + C₂sin2x + 2x。
+y(0)=0 ⇒ C₁=0；y′(0)=2C₂+2=0 ⇒ C₂=−1。
+</em><em>y = −sin2x + 2x</em>*。</p>
+</blockquote>
+<p><strong>F75.</strong>★★★ 已知某二阶常系数齐次方程有解 eˣ·cosx，写出该方程。</p>
+<blockquote>
+<p>复根 1±i ⇒ 特征方程 (r−1)²+4·? = r²−2r+2 ⇒ <strong>y″ − 2y′ + 2y = 0</strong>。</p>
+</blockquote>
+<h2>§4 欧拉方程与变系数（F76–F85）</h2>
+<p><strong>F76.</strong>★ 默写欧拉方程的形式与解法。</p>
+<blockquote>
+<p><strong>x²y″ + axy′ + by = f(x)</strong>。令 x=e^t 化为常系数（记 D=d/dt：x²y″→D(D−1)y，xy′→Dy）。</p>
+</blockquote>
+<p><strong>F77.</strong>★★ 解 x²y″ − 2y = 0。</p>
+<blockquote>
+<p>试 y=x^r：r(r−1)−2 = r²−r−2 = (r−2)(r+1) ⇒ r=2,−1。
+<strong>y = C₁x² + C₂/x</strong>。</p>
+</blockquote>
+<p><strong>F78.</strong>★★ 解 x²y″ + 2xy′ − 2y = 0。</p>
+<blockquote>
+<p>r(r−1)+2r−2 = r²+r−2 = (r−1)(r+2) ⇒ <strong>y = C₁x + C₂/x²</strong>。</p>
+</blockquote>
+<p><strong>F79.</strong>★ 欧拉方程为何总能化成常系数？</p>
+<blockquote>
+<p>系数 xᵏy⁽ᵏ⁾ 在 x=e^t 变换下每项都变成常数系数的 Dy 组合——<strong>欧拉方程是"伪变系数"</strong>。</p>
+</blockquote>
+<p><strong>F80.</strong>★ 解 x²y″ + xy′ − y = 0。</p>
+<blockquote>
+<p>r²−1=0 ⇒ <strong>y = C₁x + C₂/x</strong>。</p>
+</blockquote>
+<p><strong>F81.</strong>★★★ 解 x²y″ − xy′ + y = x（x&gt;0）。</p>
+<blockquote>
+<p>齐次：r²−2r+1=(r−1)² ⇒ y=C₁x+C₂x·lnx。
+化常系数后右端 e^t，特征根 1（二重）⇒ 特解 t²e^t/2。
+<strong>y = C₁x + C₂x·lnx + (x/2)·(lnx)²</strong>。</p>
+</blockquote>
+<p><strong>F82.</strong>★★★ 已知 y₁=x 是 y″ − (2/x)y′ + (2/x²)y = 0 的解，用降阶法求通解。</p>
+<blockquote>
+<p>刘维尔公式：y₂ = y₁·∫e^{−∫P}/y₁² dx = x·∫x²/x² dx = x²。
+<strong>y = C₁x + C₂x²</strong>。</p>
+</blockquote>
+<p><strong>F83.</strong>★ n 阶线性齐次方程通解的结构？</p>
+<blockquote>
+<p><strong>n 个线性无关的解 y₁,…,yₙ 的线性组合</strong>即通解（解空间维数=n）。</p>
+</blockquote>
+<p><strong>F84.</strong>★ 可降阶三种类型分别缺什么？</p>
+<blockquote>
+<p>①y⁽ⁿ⁾=f(x)：直接积分；②缺 y：令 p=y′；③缺 x：令 p=y′，y″=p·dp/dy。</p>
+</blockquote>
+<p><strong>F85.</strong>★ 欧拉方程解的形式猜想：</p>
+<blockquote>
+<p>齐次欧拉方程必有 <strong>y=x^r 型解</strong>（幂函数是它的"e^{λx}"）。</p>
+</blockquote>
+<h2>§5 应用题（F86–F100）</h2>
+<p><strong>F86.</strong>★★ 物体温度 T 满足 dT/dt = −k(T−20)（环境 20℃），T(0)=100。求 T(t)。</p>
+<blockquote>
+<p>令 u=T−20：u′=−ku ⇒ <strong>T = 20 + 80e^{−kt}</strong>（牛顿冷却定律标准形）。</p>
+</blockquote>
+<p><strong>F87.</strong>★★ 放射性衰变 dN/dt = −λN。求半衰期。</p>
+<blockquote>
+<p>N = N₀e^{−λt}；N₀/2 ⇒ t = <strong>ln2/λ</strong>。</p>
+</blockquote>
+<p><strong>F88.</strong>★ 人口按 dP/dt = kP 增长，求倍增时间。</p>
+<blockquote>
+<p>P = P₀e^{kt}；2P₀ ⇒ <strong>t = ln2/k</strong>。</p>
+</blockquote>
+<p><strong>F89.</strong>★ 曲线任一点切线斜率等于该点与原点连线斜率，求曲线族。</p>
+<blockquote>
+<p>y′ = y/x ⇒ <strong>y = Cx</strong>（过原点直线族）。</p>
+</blockquote>
+<p><strong>F90.</strong>★ 曲线过 (1,1) 且满足 y′ = x/y（y&gt;0）。</p>
+<blockquote>
+<p>y² = x² + C；代入 (1,1)：C=0 ⇒ <strong>y = x</strong>（第一象限取正支）。</p>
+</blockquote>
+<p><strong>F91.</strong>★★ RC 电路：R·q′ + q/C = E，q(0)=0。求电荷量。</p>
+<blockquote>
+<p>q′ + q/(RC) = E/(RC)：特解 q<em>=CE，通解 q = CE(1−e^{−t/(RC)})。
+</em><em>q = CE(1−e^{−t/RC})</em>*（充电曲线）。</p>
+</blockquote>
+<p><strong>F92.</strong>★★ 跳伞员 m·v′ = mg − kv（v(0)=0）。求极限速度。</p>
+<blockquote>
+<p>v = (mg/k)(1−e^{−kt/m}) ⇒ <strong>v→mg/k</strong>（收尾速度，e 项消失）。</p>
+</blockquote>
+<p><strong>F93.</strong>★★ 水箱 V 升盐水含盐 S₀，清水以 r 升/分流入、同速流出（均匀混合）。求含盐量。</p>
+<blockquote>
+<p>dS/dt = −r·(S/V) ⇒ <strong>S = S₀e^{−rt/V}</strong>（指数稀释）。</p>
+</blockquote>
+<p><strong>F94.</strong>★★★ Logistic 模型 dP/dt = kP(1−P/M)。写出通解形状。</p>
+<blockquote>
+<p>分离变量部分分式：<strong>P = M/(1+Ce^{−kt})</strong>（S 形曲线，P→M 环境容纳量）。</p>
+</blockquote>
+<p><strong>F95.</strong>★ 满足 y″ = a·√(1+(y′)²) 的曲线叫什么？</p>
+<blockquote>
+<p><strong>悬链线</strong>（链条自重下垂的形状；双曲余弦的变体）。</p>
+</blockquote>
+<p><strong>F96.</strong>★ 解 f′ = f + 1，f(0)=0。</p>
+<blockquote>
+<p>特解 f<em>=−1：f = Ceˣ − 1；f(0)=0 ⇒ C=1 ⇒ </em><em>f = eˣ − 1</em>*。</p>
+</blockquote>
+<p><strong>F97.</strong>★★ 由通解 y = (C₁+C₂x)e^{2x} 反求方程。</p>
+<blockquote>
+<p>特征根 2 二重 ⇒ (r−2)² = r²−4r+4 ⇒ <strong>y″ − 4y′ + 4y = 0</strong>。</p>
+</blockquote>
+<p><strong>F98.</strong>★★★ 解积分方程：∫₀ˣ f(t)dt = x² + f(x)。</p>
+<blockquote>
+<p>求导：f(x) = 2x + f′(x) ⇒ f′ − f = −2x。
+通解 f = 2(x+1) + Ceˣ；原式令 x=0：0 = f(0) ⇒ C=−2。
+<strong>f = 2x + 2 − 2eˣ</strong>。</p>
+</blockquote>
+<p><strong>F99.</strong>★ 弹簧无阻尼振动 y″ + ω²y = 0 的解与周期？</p>
+<blockquote>
+<p>y = A·cos(ωt+φ)，<strong>周期 T = 2π/ω</strong>（简谐振动）。</p>
+</blockquote>
+<p><strong>F100.</strong>★★★ 曲线过原点，且任一点处切线斜率等于"横坐标与纵坐标之和"。求曲线。</p>
+<blockquote>
+<p>y′ = x + y，y(0)=0。通解 y = Ce^{−x} + x − 1；y(0)=0 ⇒ C=1。
+<strong>y = e^{−x} + x − 1</strong>（验证：y′ = 1−e^{−x} = x + y ✓）。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：F1–F100。使用节奏：①§1 两天（五种类型对号入座：分离/齐次/线性为主，伯努利全微分见熟）→②§2 半天（就三招）→③§3 两天（<strong>共振规则是命门</strong>：特征根重数决定乘几个 x）→④§4 半天（欧拉=换元化常系数）→⑤§5 一天（应用题先建模再套型）。错题标回《数学考题集》第7章。</p></div></body></html>

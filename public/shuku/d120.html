@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>AI方向_LLM与Agent应用精讲 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>05_人工智能方向</span></div><div class='main'><h1>AI方向 · LLM与Agent应用精讲（第4/5批）</h1>
+<blockquote>
+<p><strong>你的方向声明</strong>：偏向 LLM 应用与 AI Agent（大模型、智能体、RAG、工具调用），而非传统ML理论。
+<strong>定位</strong>：本册是"方向核心课"——读研做Agent方向、以及复试谈方向时用的主力知识；<strong>复试基础题仍以第2、3批（ML/DL）为主，本册负责"聊方向"环节的深度</strong>。知识截至2026年的主流共识，具体框架版本以入学时生态为准。</p>
+</blockquote>
+<hr />
+<h1>一、LLM 大模型基础（Agent的地基）</h1>
+<h2>1.1 从Transformer到GPT：Decoder-only自回归</h2>
+<ul>
+<li>回顾第3批：Transformer编码器-解码器；<strong>GPT系只用解码器</strong>：因果掩码（只看左边）+<strong>自回归</strong>（预测下一个token，再把预测拼回输入继续）；</li>
+<li><strong>训练目标简单到离谱</strong>：next token prediction（海量文本上预测下一个词）——规模上来后"涌现"出推理、指令遵循、in-context learning；</li>
+<li><strong>Tokenization</strong>：文本切成token（BPE子词），上下文窗口=能处理的token数（ attention是O(n²)，窗口是核心资源）。</li>
+</ul>
+<h2>1.2 三阶段训练管线（必背）</h2>
+<p><strong>预训练（next token，海量无标注）→ SFT监督微调（指令-回答对，学会"听指令"）→ RLHF/对齐（人类偏好排序训练奖励模型+强化学习，学会"说人话、无害"）</strong>。
+后期简化版：DPO（直接偏好优化，绕开RL）——概念级了解。</p>
+<h2>1.3 推理与采样（复试爱问"温度是什么"）</h2>
+<ul>
+<li><strong>温度T</strong>：softmax前logit除以T。<strong>T→0贪心</strong>（确定、保守）；T大→分布平坦（多样、发散）。写代码/事实问答用低T，创意写作用高T；</li>
+<li><strong>top-k / top-p（核采样）</strong>：只在概率前k名/累积p内采样——截断长尾防胡说；</li>
+<li><strong>KV缓存</strong>：自回归生成时缓存已算过的K/V，避免重复计算——推理加速第一招。</li>
+</ul>
+<h2>1.4 关键概念速答</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>幻觉</td>
+<td>模型一本正经编造——来自"预测最像的词"而非"查证事实"；缓解：RAG、要求引用、校验器、低温度</td>
+</tr>
+<tr>
+<td>In-context learning</td>
+<td>不改权重，靠上下文里的示例就学会任务（few-shot）</td>
+</tr>
+<tr>
+<td>CoT思维链</td>
+<td>让模型"一步一步想"再答——推理类任务准确率大涨；衍生：自洽（多次采样投票）</td>
+</tr>
+<tr>
+<td>涌现能力</td>
+<td>规模跨过阈值后突现的新能力（争议存在，但复试可谈）</td>
+</tr>
+<tr>
+<td>上下文 vs 权重</td>
+<td>上下文=短期工作记忆（贵、即失）；权重=长期知识（训练写入）——<strong>这是理解Agent记忆设计的钥匙</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>二、RAG 检索增强生成（Agent的知识外挂）</h1>
+<h2>2.1 为什么需要RAG（三大痛点直击）</h2>
+<p>①知识冻结（训练截止后的事不知道）；②私有数据不在训练集里；③幻觉——让模型<strong>基于检索到的原文回答</strong>并引用，可溯源。</p>
+<h2>2.2 标准RAG管线（能默画=入门）</h2>
+<p><strong>离线索引</strong>：文档加载 → <strong>切分chunking</strong>（按语义/固定token+重叠）→ <strong>Embedding模型</strong>向量化 → 存<strong>向量数据库</strong>（FAISS/Milvus/Chroma等）。
+<strong>在线查询</strong>：问题向量化 → <strong>相似度检索top-k</strong>（余弦相似度）→ （可选）<strong>重排rerank</strong> → 拼进提示词 → LLM生成<strong>带引用的回答</strong>。
+【数学连接】embedding检索=第2批KNN：在高维语义空间找最近邻；余弦相似度=向量夹角（你线代的内积/夹角公式直接用上）。</p>
+<h2>2.3 工程要点（复试区分度所在）</h2>
+<ul>
+<li><strong>chunk大小是第一超参</strong>：太小丢上下文、太大稀释相关性；重叠切分保连贯；</li>
+<li><strong>混合检索</strong>：向量（语义）+BM25（关键词）取长补短；</li>
+<li><strong>查询改写</strong>：把用户口语问题改写成适合检索的形式（Agent里常让LLM自己做）；</li>
+<li><strong>评估</strong>：检索命中率（召回上下文了吗）+回答忠实度（是否忠于检索内容）——引用第2批评估指标思想。</li>
+</ul>
+<h2>2.4 RAG vs 微调（标准对比题）</h2>
+<p><strong>RAG改"知道什么"（知识），微调改"怎么说话"（行为/风格/格式）</strong>；知识频繁更新→RAG；固定输出格式/领域语感→微调；两者常组合。<strong>优先试RAG（便宜、可溯源、即时更新）</strong>。</p>
+<hr />
+<h1>三、AI Agent 智能体（你的主方向）</h1>
+<h2>3.1 定义与"感知-规划-行动"循环</h2>
+<p><strong>Agent = LLM当大脑 + 工具当手脚 + 记忆当笔记本 + 规划当日程表</strong>，在环境里循环：<strong>感知（观察输入/工具结果）→ 思考（推理下一步）→ 行动（调工具）→ 观察（结果回填）→ 循环，直到判定任务完成</strong>。
+与Chatbot的本质区别：<strong>Chatbot一轮回答；Agent多步闭环、能改变外部世界状态（发邮件/写文件/调API）</strong>。</p>
+<h2>3.2 ReAct范式（必会默画，Agent的第一块基石）</h2>
+<p><strong>Re</strong>ason + <strong>Act</strong> 交替：</p>
+<pre><code>Thought: 我需要先查天气
+Action: weather_api(城市=重庆)
+Observation: 晴，32℃
+Thought: 用户问穿什么，结合温度给建议
+Answer: 短袖即可……
+</code></pre>
+<p>【为什么有效】把"想"和"做"显式交错——行动结果反馈进思考，比一次性规划更容错；也是CoT（推理）+工具（行动）的自然结合。
+衍生范式（说得出=加分）：<strong>Reflexion</strong>（失败后自我反思写入记忆再重试）、<strong>Plan-and-Execute</strong>（先全盘规划再逐步执行，省token）、<strong>多智能体</strong>（分工协作/互相审校）。</p>
+<h2>3.3 工具调用 Function Calling（Agent的手）</h2>
+<p><strong>流程四步</strong>：①开发者用<strong>schema（JSON）描述工具</strong>（名称/功能/参数）；②LLM判断需要工具时输出<strong>结构化调用请求</strong>（工具名+参数）；③<strong>运行时（你的代码）真正执行</strong>；④把结果回填给LLM继续。
+【关键认知】<strong>模型只"说"要调什么，不自己执行</strong>——执行权在应用侧（安全边界也在这）。让模型做它擅长的（理解、决策、填参数），让程序做它擅长的（确定性执行）。
+<strong>工具生态标准化</strong>：MCP（Model Context Protocol）等协议把"工具/数据源接入"标准化成即插即用——2025年以来Agent生态的关键基建（复试可谈"工具生态正在协议化"）。</p>
+<h2>3.4 记忆系统（对照人脑三层）</h2>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>实现</th>
+<th>寿命</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>短期记忆</td>
+<td>上下文窗口（对话历史）</td>
+<td>会话内，窗口有限</td>
+</tr>
+<tr>
+<td>长期记忆</td>
+<td>向量库存储历史/笔记，检索召回</td>
+<td>跨会话</td>
+</tr>
+<tr>
+<td>工作记忆/草稿</td>
+<td>让模型外写到文件/记事本（scratchpad）</td>
+<td>任务内</td>
+</tr>
+<tr>
+<td>【工程问题】上下文塞不下→<strong>摘要压缩</strong>；重要事实→<strong>写入长期记忆</strong>；这正是"上下文vs权重"钥匙的应用。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>3.5 Agent的可靠性与评测（研究味道最浓的部分，适合谈"我想做什么"）</h2>
+<ul>
+<li><strong>失败模式</strong>：死循环、幻觉工具参数、过早宣布完成、级联错误；</li>
+<li><strong>对策</strong>：步数上限、每步校验、自我检查（critic）、人审关键步（human-in-the-loop）；</li>
+<li><strong>评测</strong>：端到端任务成功率（SOTA基准思想）+过程审计（工具调用轨迹对不对）——<strong>Agent评测本身就是热门研究方向</strong>（复试谈方向的金句："生成容易验证难，Agent的瓶颈正在从'能不能'转向'稳不稳'"）。</li>
+<li>成本：多步×每步token——缓存、小模型分流（路由）等工程手段。</li>
+</ul>
+<hr />
+<h1>四、微调与部署（够用即可）</h1>
+<ul>
+<li><strong>LoRA（低秩适配）直觉</strong>：冻结原权重 ΔW≈BA（低秩分解），只训练极小参数量——"给大模型插可拔插的外挂"，消费级GPU可微调；QLoRA=量化+LoRA再省一档；</li>
+<li><strong>量化</strong>：FP16→INT8/INT4，显存大降、精度微损（推理部署标配）；</li>
+<li><strong>推理加速</strong>：KV缓存（1.3）、批处理、投机解码（小模型草稿大模型审）——概念级；</li>
+<li>开源生态：HuggingFace（模型/数据集/transformers库）是事实标准门户。</li>
+</ul>
+<hr />
+<h1>五、复试问答精选（LLM/Agent方向18题·考官问-标准答）</h1>
+<ol>
+<li><strong>什么是幻觉，怎么缓解？</strong> ——模型按"词的似然"而非事实生成；缓解：RAG提供依据、要求引用来源、低温度、生成后校验。</li>
+<li><strong>Chatbot和Agent的区别？</strong> ——单轮应答 vs 感知-规划-行动多步闭环并作用于环境。</li>
+<li><strong>画ReAct并解释。</strong> ——Thought→Action→Observation循环（默画3.2图）。</li>
+<li><strong>Function calling谁执行？</strong> ——模型只输出结构化调用意图，应用侧执行后回填——安全与确定性边界。</li>
+<li><strong>温度调0会怎样？</strong> ——近贪心解码，输出稳定但可能重复；适合代码/事实任务。</li>
+<li><strong>RAG为什么比微调适合知识更新？</strong> ——知识在数据库里改了即时生效、可溯源；微调要重训且容易过时。</li>
+<li><strong>RAG检索不准怎么优化？</strong> ——调chunk、混合检索、查询改写、重排、embedding模型换更强的。</li>
+<li><strong>Agent的记忆怎么设计？</strong> ——短期上下文+长期向量库+外写草稿；塞不下则摘要压缩。</li>
+<li><strong>为什么注意力要除√dₖ？</strong> ——（接第3批）防点积方差过大→softmax饱和→梯度消失。</li>
+<li><strong>LoRA为什么省？</strong> ——低秩假设：ΔW≈BA，可训参数降几个数量级，原模型冻结。</li>
+<li><strong>GPT三个训练阶段？</strong> ——预训练（next token）→SFT（指令微调）→RLHF/DPO（对齐人类偏好）。</li>
+<li><strong>CoT为什么有效？</strong> ——把推理外化成显式中间步骤，等于给模型"草稿纸"，复合问题的错误不再一步到位地犯。</li>
+<li><strong>Agent怎么防死循环？</strong> ——步数上限+完成判据校验+反思机制+关键步人工确认。</li>
+<li><strong>多智能体适合什么场景？</strong> ——可并行分解（分头检索）、需对抗校验（生成者+审校者）；代价：token翻倍、错误也可能级联。</li>
+<li><strong>上下文窗口和知识库的关系？</strong> ——窗口是工作内存（贵而有限），知识库(RAG)是外存；工程=把对的上下文在对的时刻搬进窗口。</li>
+<li><strong>为什么Agent评测难？</strong> ——任务成功≠过程正确；轨迹长、环境非确定、成本高；基准易被污染——开放研究问题。</li>
+<li><strong>Transformer为什么取代RNN做LLM？</strong> ——（接第3批题4）全并行训练+任意位置O(1)直连。</li>
+<li><strong>你为什么选Agent方向？</strong>（送分题，准备自己的版本）——参考框架：<em>"生成模型能力已强，瓶颈转到可靠落地：工具使用、记忆、多步规划与评测——Agent是LLM从'会说'到'会做'的关键一层，工程与研究空间都大。"</em>（务必加上自己的经历：算法课项目/本库资料自动化建设的体会）</li>
+</ol>
+<hr />
+<h1>六、研0暑假实战路线（录取后~入学前，8周）</h1>
+<table>
+<thead>
+<tr>
+<th>周</th>
+<th>内容</th>
+<th>产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-2</td>
+<td>Python速查过手（第5批）+ API调用：requests/异步、用主流LLM的API写问答CLI</td>
+<td>命令行问答机器人</td>
+</tr>
+<tr>
+<td>3-4</td>
+<td>Prompt工程（结构化输出JSON、few-shot、CoT）+ <strong>function calling</strong>：手写3个工具（天气/计算器/文件读写）</td>
+<td>能调工具的ReAct Agent（不用框架，纯手写——理解每个环节）</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>RAG：文档切分→embedding→FAISS→检索→带引用回答</td>
+<td>对自己的PDF资料库问答（<strong>就用本考研库94份文档当语料</strong>，一举两得）</td>
+</tr>
+<tr>
+<td>7-8</td>
+<td>上框架（LangGraph等任选其一）重构手写版+加长期记忆；读2-3篇Agent论文（ReAct、Reflexion、Toolformer）</td>
+<td>GitHub项目1个+读书笔记——<strong>这就是研0简历的第一行</strong></td>
+</tr>
+</tbody>
+</table>
+<p>【纪律提醒】以上全部是<strong>2028年录取后</strong>的事。2026.10~2027.12你的全部精力=初试；本册初试前只当睡前科普。</p>
+<hr />
+<h1>七、本批必会清单</h1>
+<ol>
+<li>三阶段训练管线；温度/top-k/top-p；KV缓存；</li>
+<li>幻觉成因与四缓解；上下文vs权重这把钥匙；</li>
+<li>RAG管线默画（索引+查询两条线）；chunk/混合检索/重排；RAG vs微调口诀（知识vs行为）；</li>
+<li>Agent定义与感知-规划-行动循环；Chatbot区别；</li>
+<li><strong>ReAct默画</strong>；Reflexion/Plan-Execute/多智能体能各说一句；</li>
+<li>Function calling四步+“模型只说不做”边界；工具生态协议化（MCP）；</li>
+<li>记忆三层设计与压缩；Agent失败模式与对策；评测难点（送分谈资）；</li>
+<li>LoRA低秩直觉、量化、HuggingFace生态；</li>
+<li>18道问答能脱口而出（尤其1、2、3、5、6、18）。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第5/5批·系列收官）：AI复试问答总集（ML/DL/LLM三合一100题快问快答）+ Python/NumPy速查 + 完整研0路线整合</strong>。说"继续"交付收官。</p>
+</blockquote></div></body></html>

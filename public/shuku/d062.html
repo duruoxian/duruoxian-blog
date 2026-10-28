@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408数据结构精讲_串与树 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 数据结构精讲 · 串（KMP）与树、二叉树（定义推导 + 985考题）</h1>
+<blockquote>
+<p>数据结构精讲第2批（共4批）。本册两大主题：<strong>KMP是数据结构唯一"像数学证明"的算法</strong>（next数组的推导必须吃透）；<strong>树是408选择题第一大户</strong>（性质、遍历、线索、哈夫曼全是小题高频）。</p>
+</blockquote>
+<hr />
+<h1>第4章 串</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 串的基本概念</strong>：串=内容受限（字符）的线性表。空串（长度0）≠空格串（含空格字符）；子串在主串中的<strong>位置=子串首字符的位序（从1起）</strong>。
+<strong>D2 两种存储</strong>：定长顺序存储、堆分配存储、块链存储（每结点存多个字符，<strong>存储密度=串值所占/结点总大小</strong>）。</p>
+<h2>二、KMP 原理推导（全章核心）</h2>
+<p><strong>K1 朴素模式匹配的痛点</strong>：BF算法主串指针回溯，最坏 O(n·m)（主串 aaaa…ab、模式 aaab）。</p>
+<p><strong>K2 next数组的定义（教材口径，1基）</strong>：
+<strong>next[j] = "p₁…p_{j−1}" 的最长相等前后缀长度 + 1</strong>，规定 next[1]=0。
+【含义】sᵢ 与 pⱼ 匹配失败时，<strong>sᵢ 接着与 p_{next[j]} 比较</strong>——利用"已匹配部分的首尾重叠"信息，主串指针 i <strong>永不回溯</strong>。
+【另一口径（0基前缀表）<strong>：next[j]=最长相等前后缀长度（不+1，next[0]=-1或0）。两种口径计算题都要会</strong>现场换算**，先问清定义。</p>
+<p><strong>K3 next的手算方法（三步）</strong>：①取 p₁…p_{j−1}；②枚举所有"真前缀=真后缀"的相等段，取最长长度k；③教材口径 next[j]=k+1。</p>
+<p><strong>K4 nextval（优化）</strong>：若 pⱼ=p_{next[j]}，则失败时跳到 next[j] 处仍会失败（字符相同）→ 递归取 <strong>nextval[j]=nextval[next[j]]</strong>；否则 nextval[j]=next[j]。</p>
+<p><strong>K5 复杂度</strong>：主串指针 i 只增不减（≤n次前移）；模式指针 j 每次失配减少的同时，i 前进过——<strong>j 的总下降量≤总上升量≤m</strong> → 匹配 O(n)，预处理 O(m)，<strong>总 O(n+m)</strong>。</p>
+<h2>三、本章考题（3题）</h2>
+<p><strong>题1（手算 next 与 nextval）</strong> 模式串 p="abaabc"（1基）。求 next 与 nextval。
+【解】逐位求"p₁…p_{j−1} 的最长相等前后缀"：
+j=2："a"→0；j=3："ab"→0；j=4："aba"→"a"（1）；j=5："abaa"→"a"（1）；j=6："abaab"→"ab"（2）。
+教材口径 next（=长度+1）：<strong>0, 1, 1, 2, 2, 3</strong>。
+nextval：j=1:0；j=2：p₂=b≠p₁=a → 1；j=3：p₃=a=p₁ → 取 nextval[1]=0；j=4：p₄=a≠p₂=b → 2；j=5：p₅=b=p₂ → nextval[2]=1；j=6：p₆=c≠p₃=a → 3。
+<strong>nextval：0, 1, 0, 2, 1, 3</strong>。∎</p>
+<p><strong>题2（匹配过程演算）</strong> 主串 S="ababaab"（长7），模式 p="abaabc"。用题1的 next 写出匹配全过程。
+【解】i、j 从1起；失败时 i 不动、j=next[j]（next[j]=0 时 i++、j=1）：
+① S₁a=p₁a✓，S₂b=p₂b✓，S₃a=p₃a✓，S₄b≠p₄a ✗（j=4）→ j=next[4]=2；
+② S₄b=p₂b✓，S₅a=p₃a✓，S₆a≠p₄a ✗（j=4）→ j=2；S₆a≠p₂b ✗（j=2）→ j=1；S₆a=p₁a✓；
+③ S₇b=p₂b✓ → 主串耗尽而模式未比完 → <strong>匹配失败</strong>（"abaabc"不出现在"ababaab"中）。∎
+（演算要领：失败后 i 不动、j=next[j]；next[j]=0 时 i++、j=1。）</p>
+<p><strong>题3（概念·next含义）</strong> 模式串 p="abcabd" 中 next[5]（教材口径）是多少？它保证什么？
+【解】p₁…p₄="abca"：最长相等前后缀="a"（1）→ <strong>next[5]=2</strong>。含义：p₅ 失配时，主串当前字符与 p₂ 继续——因为已匹配的"abca"首尾各有"a"，主串当前字符之前的那段与模式前缀"…a"天然对齐。∎</p>
+<hr />
+<h1>第5章 树与二叉树</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 树的递归定义</strong>：n≥0 个结点的有限集；n=0 为空树；否则有唯一根，其余结点分成 m≥0 个互不相交的有限集 T₁…Tₘ，每个又是一棵树（子树）。
+【要点】递归定义→递归算法（树的几乎所有算法都是递归/栈）；子树<strong>互不相交</strong>（否则成图）。
+<strong>D2 关键术语</strong>：度（结点孩子数）、深度（层数，根为1）、有序树/无序树、森林。
+<strong>D3 二叉树</strong>：每结点至多两棵子树（<strong>左右有序</strong>——即使只有一个孩子也要分左右，与度为2的树的本质区别）；五种基本形态。
+<strong>D4 满二叉树 vs 完全二叉树</strong>：满=每层都满；<strong>完全=与同深度的满二叉树编号1~n一一对应</strong>（只许缺最底层右侧）。
+【辨析】完全二叉树判定：自左向右连续；"只有右孩子没有左孩子"必不是完全二叉树。</p>
+<h2>二、性质与推导（每条给证明）</h2>
+<p><strong>P1 结点数=边数+1；n₀=n₂+1</strong>。
+【推导】边数=n−1=Σi·nᵢ=n₁+2n₂；结点数 n=n₀+n₁+n₂。两式联立：n₀+n₁+n₂=n₁+2n₂+1 → <strong>n₀=n₂+1</strong>。
+【推广】任意树：n₀=1+Σ_{i≥2}(i−1)nᵢ。∎
+<strong>P2 第 i 层至多 2^{i−1} 个结点；h 层满二叉树共 2^h−1 个</strong>（归纳法）。
+<strong>P3 完全二叉树高度</strong>：⌈log₂(n+1)⌉ 或 ⌊log₂n⌋+1。
+【推导】h−1 &lt; log₂(n+1) ≤ h 的夹逼。∎
+<strong>P4 完全二叉树的编号规律</strong>：编号 i 的双亲=⌊i/2⌋，孩子=2i、2i+1；n₀=⌈n/2⌉（编号&gt;⌊n/2⌋ 全是叶子）；i&gt;n/2? 编号 i&gt;⌊n/2⌋ 的结点无孩子。
+<strong>P5 n 个结点的二叉链表有 n+1 个空链域</strong>。
+【推导】共 2n 个指针域，指向实结点的链=n−1（每条边占一个）→ 空=2n−(n−1)=n+1。∎（<strong>线索二叉树就是用这 n+1 个空域存前驱后继</strong>。）</p>
+<h2>三、遍历与还原</h2>
+<p><strong>T1 三种遍历的递归定义与含义</strong>：前/中/后=根的位置；<strong>层序用队列</strong>。
+【规律】前序序列中第一个=根；后序中最后一个=根；中序中根左右分界。
+<strong>T2 二叉树还原（必会操作）</strong>：<strong>前序+中序</strong>、<strong>中序+后序</strong>、<strong>层序+中序</strong> 可唯一还原；<strong>前序+后序不能</strong>（只有一个孩子的结点无法定位左右——反例：前序AB后序BA，B是A的左还是右孩子无法确定）。
+【还原算法】前序首=根→中序分左右→递归（分治）。</p>
+<p><strong>考题1（还原+求序）</strong> 已知前序 ABDECF、中序 DBEAFC。求后序与层序。
+【解】根A；中序左DBE右FC；前序BDE→左子树根B（中序DB→D左E右）；FC→右子树根C（中序FC→F在左）。
+树：A(左B(左D右E)，右C(左F))。
+<strong>后序=DEBFCA</strong>；层序=<strong>ABCDEF</strong>。∎</p>
+<p><strong>考题2（中序+层序还原）</strong> 层序 ABCDEF，中序 DBEAFC——同棵树（层序首=根A，中序分左右，左右子树再按层序取根——左子树层序中 B 在前 → 根B）。∎</p>
+<h2>四、线索二叉树</h2>
+<p><strong>L1 定义</strong>：利用 n+1 个空链域：若 lchild 空→存<strong>前驱</strong>（ltag=1），rchild 空→存<strong>后继</strong>（rtag=1）；tag=0 表示孩子。
+【中序线索的规律】结点 x 的中序后继：<strong>有右孩子→右子树中最左结点；无右孩子→右线索即后继</strong>；前驱对称（无左孩子→左线索；有左孩子→左子树最右）。
+<strong>L2 线索化的目的</strong>：不用栈/递归即可遍历、直接找前驱后继（O(1)找线索直接指的，O(h)找子树端点）。
+<strong>考题3（线索定位）</strong> 中序线索二叉树中，结点 x 有右孩子但无右线索。x 的中序后继是？
+【答】<strong>x 右子树中最左的结点</strong>（一路向左走到 ltag=1 的点）。∎</p>
+<h2>五、树、森林与二叉树的转换</h2>
+<p><strong>C1 转换规则</strong>：树→二叉树：<strong>左孩子、右兄弟</strong>（根无右子树——根无兄弟）。
+<strong>C2 遍历对应（必背）</strong>：
+- 树的<strong>先根遍历</strong> = 对应二叉树的<strong>先序</strong>遍历；
+- 树的<strong>后根遍历</strong> = 对应二叉树的<strong>中序</strong>遍历；
+- 森林：先序遍历森林=对应二叉树先序；中序遍历森林（各树依次后根）=对应二叉树中序。
+<strong>考题4</strong> 树 T 有3个结点：根A、孩子B、C。转成二叉树后 B、C 位置如何？T 的后根序列 BC A 对应二叉树中序？
+【解】B 是 A 的左孩子；C 是 B 的右孩子（右兄弟）。后根序列=BCA=对应二叉树的<strong>中序</strong>（中序：左B子树BC? 中序遍历：左子树(B: 左无右C) → B → C → A = BC A ✓）。∎</p>
+<h2>六、哈夫曼树与哈夫曼编码</h2>
+<p><strong>H1 WPL</strong>：WPL=Σwᵢlᵢ（权×路径长）；哈夫曼树=WPL 最小的二叉树。
+<strong>H2 构造</strong>：每次取<strong>权值最小的两棵</strong>合并为新树（权=和），重复至一棵。
+【性质】①n 个叶子的哈夫曼树共 <strong>2n−1</strong> 个结点（<strong>无度为1的结点</strong>——每次合并都产生度2结点）；②哈夫曼树<strong>不唯一</strong>（左右子树可换、同权次序可换）但 <strong>WPL 唯一</strong>；③哈夫曼编码=左0右1的<strong>前缀码</strong>（任何编码都不是另一编码的前缀→解码无歧义）；④总编码长度=WPL。
+<strong>H3 哈夫曼树与合并果子/文件合并</strong>：n−1 次合并的总代价=WPL——贪心正确性直觉：权大的用短码。</p>
+<h2>七、并查集（数一考纲）</h2>
+<p><strong>U1 结构</strong>：双亲表示法的森林；Find（找根，判集合）、Union（合并：一树根挂另一树根）。
+<strong>U2 优化</strong>：<strong>按秩/大小合并</strong>（小挂大）+<strong>路径压缩</strong>（Find途中把沿途结点直接挂根）→ 单次操作均摊 O(α(n))≈常数。
+<strong>U3 应用</strong>：Kruskal判环、判断连通分量个数、朋友圈问题。</p>
+<h2>八、本章考题（4题）</h2>
+<p><strong>题1（性质应用）</strong> 一棵二叉树有20个叶子结点、10个度为1的结点。求度为2的结点数与总结点数。
+【解】n₀=n₂+1 → n₂=19；总=n₀+n₁+n₂=20+10+19=<strong>49</strong>。∎</p>
+<p><strong>题2（完全二叉树参数计算）</strong> 结点数100的完全二叉树：求高度、叶子数、编号47的结点的双亲与孩子。
+【解】高度=⌈log₂101⌉=<strong>7</strong>；叶子=⌈100/2⌉=<strong>50</strong>（编号51~100）；47的双亲=⌊47/2⌋=<strong>23</strong>；孩子=94、95（都≤100，存在）。∎</p>
+<p><strong>题3（哈夫曼全程）</strong> 以权 {7,5,2,4} 构造哈夫曼树，求 WPL、结点总数，并给出一组哈夫曼编码。
+【解】合并：2+4=6 → 集合{5,6,7}；5+6=11 → {7,11}；7+11=18。
+树：根18（左7，右11(左5，右6(左2，右4))）。
+WPL=7×1+5×2+2×3+4×3=<strong>35</strong>；结点=2×4−1=<strong>7</strong>（无度1结点）。
+编码（左0右1）：7→0，5→10，2→110，4→111。∎</p>
+<p><strong>题4（遍历+线索综合）</strong> 对考题1的树（前序ABDECF）做中序线索化：结点D、E、C 的线索与后继指向？
+【解】中序=DBEAFC。D：左孩子空→左线索指前驱（无前驱=NULL）；右孩子E存在→无右线索。
+E：右孩子空→<strong>右线索指后继B</strong>。
+C：右孩子空→<strong>右线索指后继A</strong>（C 是中序最后一个，其后继按约定可为NULL——以教材约定为准：中序最后一个结点的右线索为空）。∎</p>
+<hr />
+<h2>本章必会清单</h2>
+<ol>
+<li>KMP：next两种口径手算（教材口径=最长相等前后缀+1）、nextval递归取值、O(n+m)摊还论证；</li>
+<li>n₀=n₂+1 的边数推导与推广式；完全二叉树编号规律全套（双亲⌊i/2⌋、孩子2i/2i+1、叶子⌈n/2⌉）；</li>
+<li>前中后层四种遍历的定义与"两种遍历还原二叉树"的可行矩阵（前+中✓ 中+后✓ 层+中✓ 前+后✗）；</li>
+<li>中序线索的"右子树最左"后继规律；</li>
+<li>树/森林与二叉树转换及遍历对应（先根=先序、后根=中序）；</li>
+<li>哈夫曼：2n−1结点、无度1、WPL唯一树不唯一、前缀码无歧义；</li>
+<li>并查集：路径压缩+按秩合并的均摊复杂度。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第3/4批）：<strong>图</strong>——邻接矩阵/邻接表的遍历序列唯一性、Prim/Kruskal（含正确性直觉与适用场景）、Dijkstra逐步演算与负权禁区、Floyd、拓扑排序与逆拓扑、关键路径四大参数完整演算。说"继续"交付。</p>
+</blockquote></div></body></html>

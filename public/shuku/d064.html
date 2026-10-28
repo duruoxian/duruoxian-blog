@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408数据结构精讲_查找与排序 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 数据结构精讲 · 查找与排序（定义推导 + 985演算）· 系列收官</h1>
+<blockquote>
+<p>数据结构精讲第4批（收官）。查找与排序的选择题占408数据结构一半以上：<strong>折半判定树、B树演算、散列ASL、九大排序的趟演算+稳定性+复杂度证明</strong>——本册全部给出可复现的过程。</p>
+</blockquote>
+<hr />
+<h1>第7章 查找</h1>
+<h2>一、顺序查找与折半查找</h2>
+<p><strong>S1 顺序查找</strong>：成功 ASL=(n+1)/2；失败 ASL=n+1（含哨兵后为 n+1? 无哨兵比较n次+1次判越界）。<strong>对存储无要求</strong>（顺序/链式皆可）。</p>
+<p><strong>S2 折半查找</strong>：仅适用于<strong>有序的顺序表</strong>（链表不行——无法O(1)取中点）。
+判定树：mid=⌊(low+high)/2⌋；<strong>n个元素的判定树是平衡二叉树形态</strong>，比较次数≤⌈log₂(n+1)⌉；ASL≈log₂(n+1)−1。</p>
+<p><strong>考题1（折半查找全程演算+ASL）</strong> 有序表 (7,14,18,21,23,29,31,35,38,42,46,49,52)，共13个元素。①查找23的比较序列；②画判定树求成功ASL。
+【解】①low=1,high=13：mid=7→31&gt;23，high=6；mid=(1+6)/2=3→18&lt;23，low=4；mid=(4+6)/2=5→A[5]=23 ✓ <strong>3次比较</strong>（比较了31、18、23）。
+②判定树：根mid=7；左子树[1..6]根mid=3；右子树[8..13]根mid=10；……第4层6个叶子。
+各层结点数：1、2、4、6 → ASL=(1×1+2×2+3×4+4×6)/13=(1+4+12+24)/13=<strong>41/13≈3.15</strong>。
+【修正计算】比较次数按层：第1层1次(1个)、第2层2次(2个)、第3层3次(4个)、第4层4次(6个)：ASL=(1+4+12+24)/13=<strong>41/13≈3.15</strong>。∎</p>
+<p><strong>S3 分块查找</strong>：分块有序（块间有序、块内无序）+索引表。ASL=索引查找+块内查找；<strong>块大小 s=√n 时 ASL 最小=√n+1</strong>（对 (b+1)/2+(s+1)/2 求导，b=n/s）。</p>
+<h2>二、B树与B+树</h2>
+<p><strong>B1 m阶B树定义（5条）</strong>：①每个结点至多 m 棵子树、m−1 个关键字；②根至少2棵子树、1个关键字；③<strong>非根非叶至少 ⌈m/2⌉ 棵子树、⌈m/2⌉−1 个关键字</strong>；④所有叶子（失败结点）同一层；⑤关键字有序。
+<strong>B2 高度</strong>：n个关键字的m阶B树高度 ≤ log_{⌈m/2⌉}((n+1)/2)+1（含叶子层）。
+<strong>B3 插入</strong>：插入到最底层叶子 → 超过 m−1 个关键字 → <strong>从中间 ⌈m/2⌉ 处分裂，中间关键字上移</strong>。
+<strong>B4 删除</strong>：删叶子关键字 → 低于下限 → <strong>够借则借（兄弟转经双亲）</strong>，不够则<strong>与兄弟+双亲关键字合并</strong>；删非叶关键字用前驱/后继替换后转为删叶子。
+<strong>B5 B+树差异（必背四条）</strong>：①n棵子树含n个关键字；②叶子含全部关键字并<strong>链表相连</strong>（支持顺序查找）；③非叶结点只是索引；④m阶B+树根至少1个关键字? ——差异总结：<strong>"查找速度"B+树稳定（都到叶子）、"支持范围查询"</strong>。</p>
+<p><strong>考题2（3阶B树插入演算）</strong> 依次插入 1,2,3,4,5（3阶：每结点至多2关键字、至少1个）。
+【解】插1、2：根[1,2]。插3：溢出[1,2,3] → 中间<strong>2上移</strong>，分裂：根[2]，孩子[1]、[3]。
+插4：进右叶[3,4]。插5：右叶[3,4,5]溢出 → 4上移：根[2,4]，孩子[1]、[3]、[5]。
+<strong>最终：根[2,4]，三叶[1]、[3]、[5]</strong>。∎</p>
+<p><strong>考题3（B树删除演算）</strong> 在上题结果中删除1。
+【解】删1后叶[ ]下溢（3阶至少1个关键字）。兄弟[3]、[5]：右兄弟[3]恰好1个（够借的下限=1，借后自己也下限? 3阶最少1个，借走后[3]变空 → 不够借）→ <strong>合并</strong>：双亲关键字2下移与[ ]、[3]合并 → [2,3]；根变[4]。
+<strong>结果：根[4]，两叶[2,3]、[5]</strong>。∎
+（删除决策链：所在叶够→直删；不够→看兄弟能否借（旋转）；不能→合并，合并可能向上传播。）</p>
+<h2>三、散列（Hash）查找</h2>
+<p><strong>H1 概念</strong>：散列函数 H(key) 建立直接映射；冲突=不同key映射同址；<strong>装填因子 α=表中元素数/表长</strong>——ASL只与α有关，与表长无关。
+<strong>H2 冲突处理</strong>：
+- <strong>开放定址</strong>：线性探测（±1，易"堆积"）、<strong>平方探测</strong>（±1²,±2²…，表长须为4k+3的素数）、双散列；删除只能<strong>惰性删除</strong>（标记DELETED）；
+- <strong>拉链（链地址）</strong>：同义词链表，删除直接摘链。
+<strong>H3 ASL计算模板</strong>：
+- 成功：每个元素"插入时的探测次数"的平均（<strong>按已入表元素算</strong>）；
+- 失败：从每个可能的散列地址出发<strong>探测到空</strong>的次数的平均（<strong>分母=散列函数值域大小</strong>）。</p>
+<p><strong>考题4（拉链法ASL）</strong> H(k)=k mod 5，依次插入 4,9,14,3,8,13。求成功与失败的ASL。
+【解】链表：4%5=4→[4]；9%5=4→链尾[4,9]；14%5=4→[4,9,14]；3%5=3→[3]；8%5=3→[3,8]；13%5=3→[3,8,13]。
+成功：4:1次、9:2、14:3、3:1、8:2、13:3 → ASL=(1+2+3+1+2+3)/6=<strong>2</strong>。
+失败（5个地址，比较到链尾空）：地址0、1、2空→各1次；地址3链长3→4次；地址4链长3→4次。
+ASL失败=(1+1+1+4+4)/5=<strong>11/5</strong>。∎
+（对照：线性探测版的同型计算见《综合题精讲》题6（55/13≈4.23）——拉链无堆积现象，失败ASL显著更优。）</p>
+<p><strong>考题5（平方探测演算）</strong> H(k)=k mod 11，依次插入 22,41,53,46,30,13（平方探测，表长11）。给出最终表与成功ASL。
+【解】22→0；41→8；53→9；46→2；30→8冲突：8+1²=9冲突→8−1²=<strong>7</strong>；13→2冲突：2+1²=3 → 插入3。
+表：0:22，2:46，3:13，7:30，8:41，9:53。
+成功：22:1、41:1、53:1、46:1、30:2（8→7）、13:2（2→3）→ ASL=8/6=<strong>4/3</strong>。∎
+（平方探测避免线性堆积，但"表长=4k+3素数"才能探测全表——概念考点。）</p>
+<h2>四、B树相关概念对比</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>B树</th>
+<th>B+树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>子树与关键字</td>
+<td>n棵子树、n−1个关键字</td>
+<td><strong>n棵子树、n个关键字</strong></td>
+</tr>
+<tr>
+<td>关键字位置</td>
+<td>全树分布</td>
+<td><strong>全在叶子</strong>（非叶只作索引）</td>
+</tr>
+<tr>
+<td>顺序查找</td>
+<td>不支持（要中序遍历）</td>
+<td><strong>叶子链表直接支持</strong></td>
+</tr>
+<tr>
+<td>查找性能</td>
+<td>可能不到叶子（不稳定）</td>
+<td>必到叶子（稳定）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>第8章 排序</h1>
+<h2>一、总览表（九大排序·必背）</h2>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均</th>
+<th>最好</th>
+<th>最坏</th>
+<th>空间</th>
+<th>稳定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入</td>
+<td>O(n²)</td>
+<td>O(n)基本有序</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>折半插入</td>
+<td>O(n²)</td>
+<td>O(nlog₂n)比较</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>希尔</td>
+<td>~O(n^1.3)</td>
+<td>—</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>冒泡</td>
+<td>O(n²)</td>
+<td>O(n)</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>O(nlog₂n)</td>
+<td>O(nlog₂n)</td>
+<td><strong>O(n²)基本有序</strong></td>
+<td>O(log₂n)</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>简单选择</td>
+<td>O(n²)</td>
+<td>O(n²)比较固定</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>O(nlog₂n)</td>
+<td>O(nlog₂n)</td>
+<td>O(nlog₂n)</td>
+<td>O(1)</td>
+<td>✘</td>
+</tr>
+<tr>
+<td>归并</td>
+<td>O(nlog₂n)</td>
+<td>O(nlog₂n)</td>
+<td>O(nlog₂n)</td>
+<td><strong>O(n)</strong></td>
+<td>✔</td>
+</tr>
+<tr>
+<td>基数</td>
+<td>O(d(n+r))</td>
+<td>—</td>
+<td>—</td>
+<td>O(r)</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>【记忆骨架】稳定的四种：<strong>直插、冒泡、归并、基数</strong>（"插冒归基"）；快排最坏=基本有序；简单选择比较次数与初始状态无关。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>二、各排序精讲与演算</h2>
+<p><strong>P1 直接插入</strong>：把第i个元素插入前面有序段。<strong>基本有序时接近O(n)</strong>（内层几乎不移动）——这也是它适合"小规模或基本有序"的原因。</p>
+<p><strong>P2 快速排序（挖坑法全程演算）</strong>：对 (52,49,80,36,14,58,61,23,97,75) 做一趟快排（枢轴52）：
+坑=1（52挖出）。从high找&lt;52：23（位8）→填坑1，坑=8；
+从low找≥52：80（位3）→填坑8，坑=3；
+从high：61、58≥52跳过；14（位5）&lt;52 → 填坑3，坑=5；
+从low：36、52? low扫到坑处重合 → 枢轴52入坑5。
+<strong>一趟结果：(23,49,14,36, 52, 58,61,80,97,75)</strong>——52到达最终位置。∎
+【推导】最优（每次均分）：T(n)=2T(n/2)+O(n)=O(nlog₂n)；最坏（基本有序/枢轴总在最边）：T(n)=T(n−1)+O(n)=O(n²)；空间=递归栈O(log₂n)，最坏O(n)。
+<strong>P3 堆排序演算</strong>：把 (45,78,11,65,33) 建成大根堆并输出前两个最大值。
+建堆（自底向上，i=⌊5/2⌋=2起）：i=2(78)：孩子65,33 → 78最大，不动；i=1(45)：孩子78,11 → 45&lt;78交换 → (78,45,11,65,33)，45落位2的孩子65,33 → 再换65 → <strong>大根堆 (78,65,11,45,33)</strong>。
+排序：78↔33 → 筛33（换65）→ (65,45,11|78)；65↔33 → 筛 → (45,33,11|65,78)。
+<strong>前两大火已输出78、65</strong>。∎
+（建堆自底向上O(n)；每次筛选O(log₂n)；取前k大只需k次输出——TopK题的标准答案。）
+<strong>P4 归并排序演算</strong>：对 (49,38,65,97,76,13,27,49′) 做2路归并：
+第1趟：(38,49)(65,97)(13,76)(27,49′)；第2趟：(38,49,65,97)(13,27,49′,76)；第3趟：完整有序。
+<strong>趟数=⌈log₂8⌉=3</strong>；稳定性：49始终在49′前 → ✔。∎
+<strong>P5 基数排序演算</strong>：对 (278,109,063,930,589,184,505,269,008,083) 做3位LSD基数排序（r=10）：
+按个位分配收集：930,063,083,505,278,008,109,589,269；
+按十位：505,008,109,930,063,269,083,589；
+按百位：008,063,083,109,269,505,589,930 → <strong>有序</strong>。d=3趟，每趟O(n+r)，总O(d(n+r))，空间O(r)。∎
+（LSD低位优先：必须用稳定排序收集——否则前趟成果作废。）</p>
+<p><strong>P6 外部排序</strong>：
+- 败者树：k路归并中O(log₂k)选最小；<strong>置换-选择</strong>生成平均2×内存容量的初始归并段；
+- 归并趟数=⌈log_k r⌉（r个初始段、k路）；<strong>最佳归并树</strong>（哈夫曼思想）安排归并顺序使I/O最少；补虚段：若(r−1)%(k−1)≠0，补 u=(k−1)−(r−1)%(k−1) 个空段。
+【例】9个初始段4路归并：趟数=⌈log₄9⌉=2；(9−1)%3=2≠0 → 补1个虚段。</p>
+<h2>三、排序方法的选择逻辑（985面试）</h2>
+<ul>
+<li>n小（&lt;50）：直接插入或简单选择（插入在基本有序时更优）；</li>
+<li>n大且随机：快排；基本有序：插入/冒泡；要求稳定：归并；</li>
+<li>只求前k大：堆排序（O(n+klog n)）；</li>
+<li>关键字位数少且可分：基数；</li>
+<li>内存装不下：外部排序（置换选择+最佳归并树+败者树多路归并）。</li>
+</ul>
+<h2>四、本章必会清单</h2>
+<ol>
+<li>折半判定树构造与ASL=41/13型计算；只适用有序顺序表的原因；</li>
+<li>B树5条定义、3阶插入分裂/删除合并演算、B+树四差异；</li>
+<li>散列：成功/失败ASL两套口径（分母差异！）、线性/平方/拉链演算、惰性删除；</li>
+<li>快排挖坑法一趟演算与最优/最坏递归式；堆的建堆与筛选演算（TopK）；</li>
+<li>归并趟数⌈log₂n⌉与稳定性追踪；基数排序d(n+r)与LSD稳定性依赖；</li>
+<li>外部排序：败者树/置换选择/最佳归并树/虚段公式；</li>
+<li>九大排序总表+按场景选型（n大小、有序度、稳定性、内外存）。</li>
+</ol>
+<hr />
+<h2>✅ 数据结构精讲系列收官</h2>
+<blockquote>
+<p>四册全部交付：线性结构（21题）、串与树（17题）、图（8题+三图演算）、查找与排序（9题+九排序全表），合计<strong>55道985强度题、31条必会清单</strong>。
+<strong>数据结构完整体系</strong>：本精讲4册（懂原理）→《算法代码题精练》15道（会手写）→《综合题精讲》（大题范式）→《数据结构_考题集》（题量）→《背诵手册+陷阱清单》（冲刺）。
+至此<strong>专业课四大件全部拥有985精讲层</strong>：数据结构4册+计网4册（数学4册、英语体系另计）。资料侧全部就绪——从明天起，执行侧见真章。祝上岸。</p>
+</blockquote></div></body></html>

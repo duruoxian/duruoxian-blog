@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>C语言速查_408版 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>C语言速查 · 408代码题版</h1>
+<blockquote>
+<p>408综合题的算法要用C手写——本速查只覆盖"写算法题够用"的C：指针、结构体、动态内存、链表惯用套路、常见编译坑。半天过完，配合《数据结构_代码题》《算法代码题精练》练习。
+<strong>答题口径</strong>：408代码题允许 C 或 C++（甚至良好伪代码）；王道解析用 C++ 的引用（<code>SqList &amp;L</code>），你考场上用哪种都行，但<strong>全文风格要统一</strong>。</p>
+</blockquote>
+<hr />
+<h2>01 变量、指针基础</h2>
+<pre><code class="language-c">int a = 5;
+int *p = &amp;a;      // p 存 a 的地址；&amp; 取地址，* 解引用
+*p = 10;          // 通过指针改 a → a 变 10
+int b[5] = {1,2,3,4,5};
+int *q = b;       // 数组名即首元素地址；q+1 指向 b[1]（移动4字节）
+*(q+2) 等价于 q[2] 等价于 b[2]     // 三种写法同一回事
+</code></pre>
+<ul>
+<li><strong>指针就是地址变量</strong>。看到 <code>LNode *p</code>，读作"p 是一个指向结点的指针"。</li>
+<li><code>p-&gt;data</code> 等价于 <code>(*p).data</code>——箭头 = 先解引用再取成员（链表题天天用）。</li>
+</ul>
+<h2>02 结构体与 typedef（408 全部代码题的地基）</h2>
+<pre><code class="language-c">/* 顺序表（王道标准写法） */
+#define MaxSize 50
+typedef struct {
+    int data[MaxSize];
+    int length;
+} SqList;
+
+/* 单链表结点（带头结点） */
+typedef struct LNode {
+    int data;
+    struct LNode *next;    /* 结构体内部引用自身必须写全 struct LNode */
+} LNode, *LinkList;        /* LNode=结点；LinkList=头指针类型（等价 LNode*） */
+</code></pre>
+<ul>
+<li>typedef 的意思："给这个类型起个别名"。<code>typedef struct {...} LNode, *LinkList;</code> 之后就能直接写 <code>LNode *p; LinkList L;</code>。</li>
+<li><strong>带头结点</strong>：L-&gt;next 才是第一个数据结点；空表判 <code>L-&gt;next == NULL</code>（不是 L==NULL）。</li>
+<li>双链表/栈/队列/树都是同一套：<strong>结构体包数据+指针，typedef 起名</strong>。</li>
+</ul>
+<pre><code class="language-c">typedef struct BiTNode {
+    int data;
+    struct BiTNode *lchild, *rchild;
+} BiTNode, *BiTree;
+</code></pre>
+<h2>03 动态内存 malloc / free</h2>
+<pre><code class="language-c">LNode *s = (LNode *)malloc(sizeof(LNode));  /* 申请一个结点 */
+s-&gt;data = x; s-&gt;next = NULL;
+free(s);                                    /* 用完释放，防内存泄漏 */
+</code></pre>
+<ul>
+<li><code>malloc(sizeof(类型))</code> 是固定搭配；返回 void*，强转成目标类型。</li>
+<li>判空习惯：<code>if (s == NULL) return 0;</code>（考场上可省略，但写出更稳）。</li>
+<li>删除结点两步：<strong>摘链 + free</strong>——先 <code>pre-&gt;next = p-&gt;next;</code> 再 <code>free(p);</code>（顺序不能反）。</li>
+</ul>
+<h2>04 链表三大惯用套路（背熟=代码题半壁江山）</h2>
+<p><strong>套路一：pre/p 双指针遍历（删除/插入必用）</strong></p>
+<pre><code class="language-c">LNode *pre = L, *p = L-&gt;next;
+while (p != NULL) {
+    if (要删(p)) { pre-&gt;next = p-&gt;next; free(p); p = pre-&gt;next; }
+    else         { pre = p; p = p-&gt;next; }
+}
+</code></pre>
+<p><strong>套路二：头插法（逆序重建）</strong></p>
+<pre><code class="language-c">L-&gt;next = NULL;                    /* 断开成空表 */
+while (工作指针非空) {
+    t = p; p = p-&gt;next;            /* 摘下 t */
+    t-&gt;next = L-&gt;next;             /* t 头插 */
+    L-&gt;next = t;
+}
+</code></pre>
+<p>头插一次=逆置一次——"递增表变递减表""原地逆置"全是它。</p>
+<p><strong>套路三：快慢指针（中点/判环/倒数第k个）</strong></p>
+<pre><code class="language-c">LNode *slow = L, *fast = L;
+while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) { slow = slow-&gt;next; fast = fast-&gt;next-&gt;next; }
+/* fast 到尾时 slow 在中点 */
+</code></pre>
+<h2>05 递归写法模板（树题通用）</h2>
+<pre><code class="language-c">/* 三行模板：空返回 → 叶特殊 → 左右合并 */
+int f(BiTree T) {
+    if (T == NULL) return 0;              /* 1) 递归出口 */
+    if (!T-&gt;lchild &amp;&amp; !T-&gt;rchild) return 1;  /* 2) 叶子特判（按题意） */
+    return f(T-&gt;lchild) + f(T-&gt;rchild);   /* 3) 左右结果合并 */
+}
+</code></pre>
+<ul>
+<li>递归=信任"子调用已经算对"，只管当前结点怎么由左右拼出来。</li>
+<li>终止条件永远先写；忘写=段错误（Stack Overflow）。</li>
+</ul>
+<h2>06 常见编译坑（考场上丢分的暗坑）</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>正确写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>=</code> 与 <code>==</code> 混用</td>
+<td><code>if (p-&gt;data == x)</code>（判断用双等号）</td>
+</tr>
+<tr>
+<td>数组越界</td>
+<td>下标范围 [0, n-1]；循环条件 <code>i &lt; n</code></td>
+</tr>
+<tr>
+<td>free 后继续用</td>
+<td>free(p) 后立即 p = p-&gt;next 是<strong>错的</strong>——先存 nxt</td>
+</tr>
+<tr>
+<td>字符串结尾</td>
+<td>C 串以 '\0' 结尾，长度手动数或 strlen()</td>
+</tr>
+<tr>
+<td>缺头文件</td>
+<td>abs() 需要 stdlib.h；INT_MIN 需要 limits.h（或自设 0x80000000）</td>
+</tr>
+<tr>
+<td>结构体自引用</td>
+<td>内部必须写 <code>struct LNode *next</code>（不能只写 LNode）</td>
+</tr>
+<tr>
+<td>指针未初始化</td>
+<td>局部指针先置 NULL 或指向有效地址</td>
+</tr>
+</tbody>
+</table>
+<h2>07 复杂度速判口诀</h2>
+<ul>
+<li>单层循环 n 次 → <strong>O(n)</strong>；双层嵌套 → <strong>O(n²)</strong>；每次规模减半（折半/二叉）→ <strong>O(log n)</strong>；一层循环里套二分 → <strong>O(n log n)</strong></li>
+<li>递归：<strong>递归深度 × 每层工作量</strong>（树遍历：深度O(n)? 深度O(h)，每层O(1) → O(n) 时间）</li>
+<li>空间：<strong>辅助数组 O(n)；递归栈深度 O(h)；原地两指针 O(1)</strong></li>
+<li>写大题必须附一句："该算法时间复杂度 O(n)，空间复杂度 O(1)。"</li>
+</ul>
+<h2>08 十分钟自测</h2>
+<ol>
+<li><code>p-&gt;next-&gt;next = p;</code> 做了什么？p 指向自身吗？</li>
+<li>带头结点空表的判断条件？</li>
+<li>malloc 之后必须配对什么？删除结点的两步顺序？</li>
+<li>头插法 n 个结点后，链表顺序与插入顺序什么关系？</li>
+<li>递归函数缺终止条件会怎样？</li>
+</ol>
+<blockquote>
+<p>答案：1. 把 p 的后继的后继指向 p（逆置/成环常用，p 自己不动）；2. <code>L-&gt;next == NULL</code>；3. free；先摘链再 free；4. 相反；5. 栈溢出（无限递归）。</p>
+</blockquote></div></body></html>

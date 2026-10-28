@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计网精讲_传输层与应用层 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机网络精讲 · 传输层与应用层（原理推导 + 计算详解）</h1>
+<blockquote>
+<p>传输层是408计网的"压轴大题区"：TCP握手挥手序号账本、拥塞窗口逐轮演化、RTT估计——全部可出计算题。应用层抓协议的"连接方式+端口+交互步骤"。配套《传输层_知识点与难点》《考题集》《易错点清单》。</p>
+</blockquote>
+<hr />
+<h1>第5章 传输层</h1>
+<h2>一、UDP 精讲</h2>
+<p><strong>U1 首部8B</strong>：源端口(2)+目的端口(2)+长度(2)+校验和(2)。
+<strong>U2 特性</strong>：无连接、尽最大努力交付、面向报文（一次交付一个完整报文，不合并不拆分）、无拥塞控制（适合实时应用）、支持一对一/一对多/多对一/多对多、首部开销小。
+<strong>U3 校验和与伪首部</strong>：校验和同时覆盖<strong>伪首部</strong>（源IP、目的IP、全零、协议17、UDP长度）+UDP首部+数据——目的是让接收方验证"分组确实到了正确的主机与端口"。伪首部<strong>只参与计算、不传输</strong>。IPv4中UDP校验和可选，<strong>IPv6中必选</strong>。</p>
+<h2>二、TCP 精讲</h2>
+<p><strong>T1 首部要点</strong>：源/目的端口各2B；<strong>序号seq</strong>（字节流编号）；<strong>确认号ack</strong>（期望收到的下一字节）；标志位 SYN/ACK/FIN/RST/URG/PSH；窗口（接收窗口通告）；校验和（<strong>必须计算，含12B伪首部</strong>）；可选项（MSS等）。
+【要点】SYN=1和FIN=1的报文段<strong>各消耗一个序号</strong>，纯ACK不消耗。</p>
+<p><strong>T2 三次握手（序号账本·必会计算）</strong>：
+① A→B：SYN=1，seq=x（消耗序号x）
+② B→A：SYN=1，ACK=1，seq=y，ack=x+1（消耗序号y）
+③ A→B：ACK=1，seq=x+1，ack=y+1（<strong>不消耗序号</strong>，可携带数据）
+数据传输从 x+1 开始编号。
+【为什么三次不能两次】①防止失效的连接请求突然到达造成资源浪费（B单方面开着等）；②同步双方初始序号需要"我发了x、我收到y"两个方向的确认，两次只够单向。
+<strong>T3 四次挥手（TIME_WAIT=2MSL）</strong>：
+FIN→ACK→FIN→ACK；主动关闭方收到对方FIN后进入<strong>TIME_WAIT，持续2MSL</strong>才关闭。
+【两个原因】①保证最后一个ACK能到达（若丢失，对方重传FIN，自己还能应答）；②让本连接的所有旧报文在网络中消亡，不污染新连接。
+【要点】TIME_WAIT 出现在<strong>主动关闭方</strong>；服务器大量TIME_WAIT=服务器频繁主动关闭。</p>
+<p><strong>T4 可靠传输</strong>：校验（伪首部）、序号、确认（累积确认，ack=期望的下一字节）、超时重传+<strong>快速重传（收到3个重复ACK立即重传）</strong>。
+<strong>RTT加权平均（必会计算）</strong>：
+RTTs=(1−α)·RTTs+α·新RTT样本（α=1/8）；RTTd=(1−β)·RTTd+β|样本−RTTs|（β=1/4，首次RTTd=样本/2）；<strong>RTO=RTTs+4·RTTd</strong>。
+<strong>T5 流量控制</strong>：接收方用首部窗口字段通告 rwnd；<strong>零窗口</strong>→发送方启动<strong>坚持计时器</strong>定期发零窗口探测报文（防死锁——窗口更新通知丢失也能恢复）。
+<strong>T6 拥塞控制四算法（必会计算）</strong>：
+- <strong>慢启动</strong>：cwnd从1起，<strong>每RTT翻倍</strong>（指数），到ssthresh转拥塞避免；
+- <strong>拥塞避免</strong>：每RTT加1个MSS（线性）；
+- <strong>超时</strong>（严重拥塞）：ssthresh=cwnd/2，<strong>cwnd=1</strong>，重新慢启动；
+- <strong>快重传+快恢复</strong>（收到3个重复ACK，轻度拥塞）：ssthresh=cwnd/2，<strong>cwnd=ssthresh</strong>（不回1），线性增长。
+发送窗口=min(rwnd, cwnd)。</p>
+<h2>三、本章考题（6题）</h2>
+<p><strong>题1（握手挥手序号账本）</strong> A与B建立TCP连接：A发出SYN，seq=200；B应答SYN+ACK，seq=500。①B的ack？②握手完成后A发送的第一个数据字节的序号？③A发送300B数据后，B的确认号？④A发FIN关闭（seq=501）后，B确认的ack？
+【解】①ack=200+1=<strong>201</strong>。
+②SYN消耗序号200 → 数据从<strong>201</strong>开始。
+③数据201~500 → 确认号=<strong>501</strong>。
+④FIN消耗序号：FIN占501 → B确认ack=<strong>502</strong>。∎</p>
+<p><strong>题2（拥塞窗口逐轮演化·408标准大题）</strong> 初始ssthresh=8（MSS），cwnd=1，无丢包直到某轮发生超时。写出前13轮的cwnd；超时发生后ssthresh与下一轮cwnd？何时重新进入拥塞避免？
+【解】
+| 轮 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| cwnd | 1 | 2 | 4 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17→超时 |</p>
+<p>慢启动到8（第4轮，=ssthresh转线性）；第13轮cwnd=17时超时：
+ssthresh=⌊17/2⌋=<strong>8</strong>；cwnd=<strong>1</strong>；第14轮起慢启动，到第17轮cwnd=8（=ssthresh）转拥塞避免。∎</p>
+<p><strong>题3（超时vs快重传对比）</strong> 同一时刻cwnd=20、ssthresh=10：①发生超时；②收到3个重复ACK。两种情况下下一轮的cwnd与ssthresh？
+【解】①超时：ssthresh=10，<strong>cwnd=1</strong>（慢启动）。
+②快重传+快恢复：ssthresh=20/2=10，<strong>cwnd=10</strong>（快恢复，线性增长）。
+对比结论：<strong>超时=重度拥塞回起点；3重复ACK=轻度拥塞减半即可</strong>。∎</p>
+<p><strong>题4（RTT估计）</strong> TCP连接的RTT估计初值：第一次样本1.5s。之后样本依次1.0s、2.0s。求每次更新后的RTTs、RTTd与RTO（α=1/8，β=1/4）。
+【解】样本1：RTTs=1.5，RTTd=RTTs/2=0.75，RTO=1.5+3=4.5。
+样本2：RTTs=7/8×1.5+1/8×1.0=1.4375；RTTd=¾×0.75+¼×|1.0−1.4375|=0.5625+0.1094=0.6719；RTO=1.4375+4×0.6719=<strong>4.125s</strong>。
+样本3：RTTs=⅞×1.4375+⅛×2=1.2578+0.25=1.5078；RTTd=¾×0.6719+¼×|2−1.5078|=0.5039+0.1230=0.6269；RTO=1.5078+2.5078=<strong>4.016s</strong>。∎</p>
+<p><strong>题5（TCP效率/窗口计算）</strong> 接收方通告rwnd=4000B，发送方cwnd=3000B，MSS=1000B。当前可发送多少？若已发出未被确认2000B？
+【解】发送窗口=min(rwnd,cwnd)=3000；已占用2000 → 还可发<strong>1000B（=1个MSS）</strong>。∎
+（发送窗口=min(接收窗口,拥塞窗口)——流量控制与拥塞控制的"取小"规则。）</p>
+<p><strong>题6（UDP校验和概念）</strong> 为什么UDP校验和要引入伪首部？伪首部传输吗？
+【解】伪首部含源/目的IP与协议号，使接收方能验证"分组确实送到了正确主机与正确端口"（IP层与传输层联手验证），防止交付错主机。伪首部<strong>只参与校验和计算，不随UDP报文传输</strong>。IPv6中UDP校验和改为必选。∎</p>
+<hr />
+<h1>第6章 应用层</h1>
+<h2>一、域名系统 DNS</h2>
+<p><strong>D1 层次结构</strong>：根→顶级（com/cn/org…）→权限（注册域名）→……主机名从右往左层级递增。<strong>域名≠IP，解析得到IP</strong>。
+<strong>D2 查询方式</strong>：主机→本地域名服务器用<strong>递归</strong>（必须给答案）；本地→根/顶级/权限服务器通常用<strong>迭代</strong>（"我不知道，你去问谁"）。
+<strong>D3 缓存</strong>：各级都有缓存（高速缓存），提高效率但不保证最新。
+【要点】DNS用<strong>UDP 53</strong>（常规查询，快）；区域传送（主从服务器同步）用TCP。</p>
+<h2>二、文件传输 FTP</h2>
+<p><strong>F1 双连接</strong>：<strong>控制连接21（全程保持）</strong>+数据连接20（按需建立，每传一个文件建立一次）。
+<strong>F2 两种模式</strong>：主动（服务器从20端口主动连客户端）；被动（PASV，数据连接也由客户端发起——穿防火墙友好）。
+<strong>F3 控制信息带外传送</strong>："控制信息带外传送(out of band)"是FTP的经典设计——控制与数据分离，传文件时可继续发命令（中止传输ABOR）。</p>
+<h2>三、电子邮件</h2>
+<p><strong>M1 三组件</strong>：用户代理（Outlook/foxmail）+邮件服务器（含报文队列）+协议。
+<strong>M2 协议分工</strong>：<strong>发信=SMTP（推）</strong>：用户代理→源邮件服务器、源服务器→目的服务器都用SMTP；<strong>收信=POP3/IMAP（拉）</strong>：用户代理←目的邮件服务器。
+【高频坑】"用SMTP收邮件"是错的；<strong>SMTP只能推不能拉</strong>。
+<strong>M3 MIME</strong>：扩展SMTP只能传ASCII的限制——增加邮件主体结构定义+非ASCII编码规则（/base64等）。</p>
+<h2>四、万维网 WWW 与 HTTP</h2>
+<p><strong>H1 HTTP特点</strong>：无状态（Cookie补状态，存在<strong>客户端</strong>，Session在服务器）；<strong>HTTP/1.0非持久</strong>（每对象一个TCP连接）；<strong>HTTP/1.1持久连接</strong>（一个TCP传多个对象）+流水线方式；HTTPS=HTTP+TLS（443端口）。
+<strong>H2 代理与缓存</strong>：Web缓存（代理服务器）减轻源站与主干流量；条件GET验证新鲜度。</p>
+<p><strong>考题1（HTTP时延计算·408经典）</strong> 页面含1个HTML文件+5个引用图片，各对象传输时延忽略，RTT=1s。求三种方式的页面获取时间：①非持久连接；②持久连接非流水线；③持久连接流水线。
+【解】①非持久：6个对象×(TCP握手1RTT+HTTP请求响应1RTT)=12RTT=<strong>12s</strong>。
+②持久非流水线：握手1RTT+6个对象各1RTT=7RTT=<strong>7s</strong>。
+③持久流水线：握手1RTT+6个请求一起发、响应一起回1RTT=2RTT=<strong>2s</strong>。∎</p>
+<p><strong>考题2（协议匹配综合）</strong> 填协议：①用户代理把邮件发到源邮件服务器；②源邮件服务器发给目的邮件服务器；③用户代理从服务器收信；④浏览器与服务器交互；⑤主机开机获取IP；⑥域名解析。
+【答】①SMTP；②SMTP；③POP3/IMAP；④HTTP；⑤DHCP；⑥DNS。∎</p>
+<h2>五、其他</h2>
+<p><strong>P1 P2P</strong>：无固定服务器、对等方互为Client/Server；文件分发时间下界优于C/S（人人可做源）。
+<strong>P2 CDN</strong>：内容分发网络——把内容推到离用户最近的边缘缓存；DNS重定向选最近节点。</p>
+<h2>六、本章考题补遗</h2>
+<p><strong>考题3（端口全家福）</strong> 写出端口号：FTP控制/数据、SSH、TELNET、SMTP、DNS、DHCP、HTTP、POP3、HTTPS。
+【答】21/20、22、23、25、53、67/68、80、110、443。（SNMP 161。）</p>
+<p><strong>考题4（DNS解析全过程）</strong> 主机首次解析 www.example.com（本地DNS缓存空），描述查询链路。
+【解】①主机→本地域名服务器：<strong>递归查询</strong>；②本地→根服务器：<strong>迭代</strong>（根说"去问com顶级"）；③本地→顶级（说"去问example.com权限"）；④本地→权限服务器→得到IP；⑤本地缓存并返回主机。DNS用UDP 53。∎</p>
+<hr />
+<h1>计网精讲四册收官总结</h1>
+<table>
+<thead>
+<tr>
+<th>册</th>
+<th>章</th>
+<th>核心计算/证明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>体系结构与物理层</td>
+<td>1-2</td>
+<td>三种交换时延、p*推导、奈氏/香农、曼彻斯特、64kb/s</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>3</td>
+<td>海明/CRC全程、停等/GBN/SR效率、最小帧长、冲突域计数</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>4</td>
+<td>IP分片、VLSM、CIDR聚合、最长前缀、RIP更新、ARP/traceroute</td>
+</tr>
+<tr>
+<td>传输层+应用层</td>
+<td>5-6</td>
+<td>握手挥手账本、拥塞窗口演化、RTT估计/RTO、HTTP时延</td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用路径</strong>：本系列4册（懂原理）→《计算机网络_知识点与难点》《考题集》（第一轮）→《408_易错点与陷阱清单》网络部分（扫雷）→《408全真模拟卷》与《综合题精讲》（实战）。计网25分的计算题全部有模板，概念题全部有出处——刷完这套，25分里拿下20+是合理目标。</p></div></body></html>

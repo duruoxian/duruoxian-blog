@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>AI方向_复试问答总集与Python速查 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>05_人工智能方向</span></div><div class='main'><h1>AI方向 · 复试问答总集（100题）+ Python速查 + 研0路线（第5/5批·系列收官）</h1>
+<blockquote>
+<p>三部分：<strong>Part A 复试快问快答100题</strong>（ML/DL/LLM三合一，每题一句话标准答，详解见前四册对应章节）；<strong>Part B Python/NumPy速查</strong>（你会C，所以全程对照C讲差异）；<strong>Part C 研0路线总图</strong>。
+用法：2028年复试前两周，每天过20题；Python速查在研0第一周过手。</p>
+</blockquote>
+<hr />
+<h1>Part A · 复试快问快答 100 题</h1>
+<h2>A1 数学桥梁（1-10）</h2>
+<ol>
+<li>ML要哪些数学？——线代（矩阵/特征值/正定）、概率（贝叶斯/期望/MLE）、优化（梯度/链式/凸性）。</li>
+<li>反向传播用什么数学？——链式法则的矩阵版。</li>
+<li>PCA用什么？——协方差矩阵特征分解，取最大特征值方向。</li>
+<li>核函数合法性判据？——核矩阵半正定（Mercer）。</li>
+<li>最小二乘的概率解释？——高斯噪声下的MLE。</li>
+<li>交叉熵的出处？——伯努利/多项分布的负对数似然。</li>
+<li>贝叶斯公式在ML的典型应用？——朴素贝叶斯；"后验=证据更新信念"。</li>
+<li>偏差-方差分解？——误差=偏差²+方差+噪声；欠拟合偏差大、过拟合方差大。</li>
+<li>梯度下降为什么沿负梯度？——负梯度是下降最快的方向（方向导数最小）。</li>
+<li>大数定律对ML的意义？——样本均值收敛于期望：经验风险逼近期望风险，训练才有效。</li>
+</ol>
+<h2>A2 机器学习（11-35）</h2>
+<ol start="11">
+<li>监督/无监督/强化区别？——有标签分类回归/无标签聚类降维/奖励驱动交互。</li>
+<li>过拟合定义与五对策？——训练好测试差；增数据、正则化、降复杂度、早停、Dropout。</li>
+<li>欠拟合对策？——加特征、加复杂度、减正则。</li>
+<li>线性回归解析解？——w=(XᵀX)⁻¹Xᵀy（正规方程）。</li>
+<li>XᵀX不可逆怎么办？——去相关特征/L2正则/伪逆。</li>
+<li>逻辑回归是回归吗？——不是，是线性模型+sigmoid的分类器。</li>
+<li>逻辑回归损失？——交叉熵=负对数似然。</li>
+<li>为什么不用MSE训逻辑回归？——非凸且饱和区梯度趋零。</li>
+<li>L1与L2？——L1稀疏选特征（菱形顶点）、L2平滑防过拟合。</li>
+<li>L1为什么稀疏？——菱形约束尖角落在坐标轴上，其他系数被压成0。</li>
+<li>L2的先验解释？——高斯先验；L1是拉普拉斯先验。</li>
+<li>KNN三要点？——惰性无训练、K交叉验证选、特征要归一化。</li>
+<li>K太小/太大？——小→过拟合；大→平滑欠拟合（K=N退化多数类）。</li>
+<li>朴素贝叶斯"朴素"在哪？——条件独立假设（给定类，特征独立）。</li>
+<li>拉普拉斯平滑干嘛？——防零概率，计数加1。</li>
+<li>决策树分裂准则？——信息增益（ID3）/增益率（C4.5）/基尼（CART）。</li>
+<li>信息增益公式？——H(D)−H(D|A)，熵=−Σp log₂p。</li>
+<li>C4.5为什么改进ID3？——治"偏爱取值多的特征"，除以固有值。</li>
+<li>树怎么防过拟合？——预剪枝/后剪枝。</li>
+<li>Bagging与Boosting方向？——并行降方差/串行降偏差。</li>
+<li>随机森林双随机？——样本bootstrap+特征随机（每次分裂抽√p个）。</li>
+<li>GBDT思想？——每轮新树拟合前面模型的残差。</li>
+<li>SVM核心思想？——最大间隔超平面，解只由支持向量决定。</li>
+<li>核技巧解决什么？——低维线性不可分→隐式高维映射，免显式计算。</li>
+<li>SVM vs 逻辑回归？——都线性分类器；SVM间隔最大重支持向量适合小样本，LR输出概率。</li>
+</ol>
+<h2>A3 无监督与评估（36-50）</h2>
+<ol start="36">
+<li>K-means流程？——最近中心分派→均值更新→收敛。</li>
+<li>K-means缺陷？——K要预设、对初值/离群点敏感、只适合凸簇。</li>
+<li>K怎么选？——肘部法/轮廓系数。</li>
+<li>PCA步骤？——去中心化→协方差→特征分解→取前k特征向量投影。</li>
+<li>PCA保留信息怎么算？——前k特征值之和/全部特征值之和。</li>
+<li>混淆矩阵四格？——TP/FP/FN/TN。</li>
+<li>精确率与召回率公式？——TP/(TP+FP)；TP/(TP+FN)。</li>
+<li>癌症筛查看哪个指标？——召回率（漏诊代价大）。</li>
+<li>垃圾邮件看哪个？——精确率（误杀代价大）。</li>
+<li>F1是什么平均？——P与R的调和平均（惩罚短板）。</li>
+<li>AUC含义？——ROC曲线下面积，衡量排序能力；0.5随机、1完美。</li>
+<li>类别不平衡为什么不能看准确率？——全预测多数类也有高准确率（99:1时99%）。</li>
+<li>K折交叉验证？——轮流K−1训练1验证取平均，小数据调参稳。</li>
+<li>数据泄露？——测试信息（如全量归一化统计）混入训练；pipeline必须在折内拟合。</li>
+<li>训练/验证/测试集分工？——训练学参数、验证调超参、测试只看一次。</li>
+</ol>
+<h2>A4 深度学习（51-75）</h2>
+<ol start="51">
+<li>为什么需要激活函数？——否则多层线性=一层；深度=非线性层数。</li>
+<li>sigmoid缺点？——饱和区梯度≈0、非零中心。</li>
+<li>ReLU与死亡神经元？——负区梯度0致死亡；LeakyReLU治。</li>
+<li>softmax用途？——多分类输出层，输出和为1的概率分布。</li>
+<li>反向传播四公式？——δᴸ=∂L/∂a⊙σ′；δˡ=(Wˡ⁺¹)ᵀδˡ⁺¹⊙σ′；∂L/∂W=δ(aˡ⁻¹)ᵀ；∂L/∂b=δ。</li>
+<li>梯度消失原因与对策？——导数连乘&lt;1；ReLU/残差/BN/好初始化。</li>
+<li>梯度爆炸对策？——梯度裁剪、改结构、初始化。</li>
+<li>CNN两大特性？——局部连接+权值共享。</li>
+<li>卷积输出尺寸？——O=⌊(H−K+2P)/S⌋+1。</li>
+<li>卷积参数量？——(K×K×Cᵢₙ+1)×Cₒᵤₜ。</li>
+<li>池化作用？——降尺寸、扩感受野、小平移不变；无参数。</li>
+<li>为什么深网络用小核堆叠？——两个3×3=一个5×5感受野，参数更少且多一次非线性。</li>
+<li>感受野？——顶层一个像素对应底层输入的区域，层层堆叠变大。</li>
+<li>RNN缺陷？——长序列梯度消失，记不住长依赖。</li>
+<li>LSTM三门？——遗忘/输入/输出；细胞状态加法更新=梯度直通。</li>
+<li>LSTM为什么治梯度消失？——Cₜ=f⊙Cₜ₋₁+i⊙C̃ 有恒等式通道，不是连乘。</li>
+<li>GRU与LSTM？——两门简化版，效果相当更快。</li>
+<li>自注意力公式？——softmax(QKᵀ/√dₖ)V。</li>
+<li>Q/K/V直觉？——Q查询找什么、K键有什么、V值给内容；加权V。</li>
+<li>为什么除√dₖ？——防点积方差大→softmax饱和→梯度小。</li>
+<li>多头注意力？——h组QKV并行再拼接，各关注不同模式。</li>
+<li>为什么需要位置编码？——注意力本身无序，打乱输入结果不变。</li>
+<li>Transformer vs RNN？——全并行训练+任意位置O(1)直连；代价O(n²)。</li>
+<li>ResNet为什么能训深？——y=F(x)+x恒等路径保梯度（∂y/∂x=∂F/∂x+1）。</li>
+<li>Dropout原理？——训练随机失活=隐式集成；测试全开并缩放。</li>
+</ol>
+<h2>A5 LLM与Agent（76-95）</h2>
+<ol start="76">
+<li>GPT训练三阶段？——预训练（next token）→SFT（指令）→RLHF/DPO（对齐）。</li>
+<li>温度是什么？——softmax前logit除T；低T确定保守、高T多样发散。</li>
+<li>top-p采样？——只在累积概率p内采样，截断长尾。</li>
+<li>KV缓存？——自回归生成缓存已算的K/V避免重算。</li>
+<li>幻觉成因？——按词的似然生成而非查证事实；缓解：RAG/引用/校验/低温。</li>
+<li>In-context learning？——不动权重，上下文给示例即可会任务。</li>
+<li>CoT为什么有效？——推理外化成草稿纸，复合错误不再一步犯。</li>
+<li>Chatbot vs Agent？——单轮应答 vs 感知-规划-行动多步闭环作用于环境。</li>
+<li>ReAct？——Reason与Act交替：Thought→Action→Observation循环。</li>
+<li>Function calling谁执行？——模型只输出结构化调用意图，应用侧执行后回填。</li>
+<li>工具描述用什么写？——JSON schema（名称/功能/参数）。</li>
+<li>MCP是什么？——工具/数据源接入的标准化协议，Agent生态即插即用。</li>
+<li>Agent记忆三层？——短期上下文/长期向量库/任务内草稿外写。</li>
+<li>上下文塞不下怎么办？——摘要压缩+重要事实写长期记忆。</li>
+<li>RAG两大管线？——离线：切分→embedding→向量库；在线：查询向量→检索top-k→重排→带引用生成。</li>
+<li>chunk为什么是第一超参？——太小丢上下文、太大稀释相关性。</li>
+<li>混合检索？——向量（语义）+BM25（关键词）互补。</li>
+<li>RAG vs 微调？——RAG改知识（即时可溯源）、微调改行为（风格格式）；常组合。</li>
+<li>Agent失败模式与对策？——死循环/幻觉参数/过早完成；步数上限+校验+反思+人审。</li>
+<li>Agent评测为什么难？——成功≠过程对、轨迹长、环境非确定、基准污染——开放问题。</li>
+</ol>
+<h2>A6 开放与个人（96-100）</h2>
+<ol start="96">
+<li>你为什么选AI/Agent方向？——（用第4册18题框架+自己经历，务必提前写稿背熟）。</li>
+<li>读过什么论文/书？——准备2篇（如ReAct、Attention is All You Need）能讲动机-方法-结论。</li>
+<li>本科做过什么项目？——算法实验、数学建模、（本资料库自动化建设）——按STAR讲。</li>
+<li>读研规划？——一年级打基础跟导师方向、二年级找课题发论文、明确想做的子方向（Agent评测/记忆/工具学习）。</li>
+<li>AI的局限怎么看？——可靠性与验证难、成本、长任务规划弱——正因如此是研究机会（展示思考深度而非背观点）。</li>
+</ol>
+<hr />
+<h1>Part B · Python/NumPy 速查（对照C版）</h1>
+<h2>B1 语法核心（C程序员的Python映射表）</h2>
+<table>
+<thead>
+<tr>
+<th>你在C里</th>
+<th>Python里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int a = 5;</code></td>
+<td><code>a = 5</code>（动态类型，无声明）</td>
+</tr>
+<tr>
+<td><code>if (x&gt;0) {...}</code></td>
+<td><code>if x &gt; 0:</code>（<strong>缩进即块，冒号开头</strong>）</td>
+</tr>
+<tr>
+<td><code>for (i=0;i&lt;n;i++)</code></td>
+<td><code>for i in range(n):</code></td>
+</tr>
+<tr>
+<td><code>while (cond)</code></td>
+<td><code>while cond:</code></td>
+</tr>
+<tr>
+<td><code>printf("%d",x)</code></td>
+<td><code>print(x)</code>（f串：<code>print(f"x={x}")</code>）</td>
+</tr>
+<tr>
+<td>数组 <code>int a[10]</code></td>
+<td>列表 <code>a = [0]*10</code>（<strong>可变长、可混类型</strong>）</td>
+</tr>
+<tr>
+<td>结构体</td>
+<td>字典 <code>d = {"name":"drx","age":21}</code> / 类</td>
+</tr>
+<tr>
+<td><code>// 注释</code></td>
+<td><code># 注释</code></td>
+</tr>
+<tr>
+<td><code>&amp;&amp;  \|\|  !</code></td>
+<td><code>and  or  not</code></td>
+</tr>
+<tr>
+<td><code>int div = a/b</code></td>
+<td><code>a // b</code>（整除）、<code>a % b</code>、<code>a / b</code>是真除法！</td>
+</tr>
+</tbody>
+</table>
+<p><strong>必会四件</strong>：</p>
+<pre><code class="language-python"># 列表推导式（Python的灵魂）
+squares = [x*x for x in range(10) if x % 2 == 0]
+
+# 函数（默认参数/关键字参数）
+def greet(name, greeting=&quot;你好&quot;):
+    return f&quot;{greeting}, {name}&quot;
+
+# 类
+class Node:
+    def __init__(self, data):    # 构造器
+        self.data = data          # self = C的this，但必须显式写
+    def show(self):
+        print(self.data)
+
+# 切片（C里要写循环的事）
+a = [1,2,3,4,5]; a[1:4]  # [2,3,4]；a[::-1] 反转；a[-1] 末元素
+</code></pre>
+<p>【坑位提醒】缩进是语法（混用Tab/空格报错）；<code>=</code> 是赋值 <code>==</code> 比较（同C）；<strong>整数除法用 <code>//</code></strong>（<code>/</code> 返回浮点）；可变默认参数陷阱（<code>def f(x, a=[])</code> 的a跨调用共享——用None代替）。</p>
+<h2>B2 NumPy（ML的C语言）</h2>
+<pre><code class="language-python">import numpy as np
+a = np.array([[1,2],[3,4]])        # 2×2矩阵
+b = np.zeros((3,4)); c = np.ones(5); d = np.arange(0,1,0.1)
+
+a.shape; a.T                        # 形状；转置
+a @ b                               # 矩阵乘（等价 np.matmul；* 是逐元素！）
+np.dot(a, b)                        # 内积/矩阵乘
+a.sum(axis=0)                       # 按列求和（axis=1按行）——理解axis=沿哪个维度压扁
+a.max(axis=1); a.mean()
+
+# 广播 broadcasting：形状不同的数组自动对齐运算
+a = np.ones((3,4)); a + np.array([1,2,3,4])   # (3,4)+(4,)→每行加同一向量——ML里加偏置全靠它
+
+x = np.random.randn(100, 10)        # 标准正态样本矩阵（100样本×10特征）
+</code></pre>
+<p>【对照C】NumPy数组≈C数组，但<strong>向量化运算代替循环</strong>：<code>a*a</code> 一行=C里一个for；速度快百倍（底层C实现）。
+【核心三概念】shape、axis、broadcasting——90%的NumPy报错是这三者没对齐。</p>
+<h2>B3 最小PyTorch（研0第一周能看懂训练循环）</h2>
+<pre><code class="language-python">import torch
+x = torch.tensor([[1.],[2.]], requires_grad=True)   # 张量+追踪梯度
+y = (x**2).sum()
+y.backward()                                         # 自动微分（反向传播一行）
+print(x.grad)                                        # dy/dx = 2x → [[2.],[4.]]
+
+# 训练循环模板（所有深度学习框架同构）
+for epoch in range(100):
+    pred = model(x_train)          # 前向
+    loss = loss_fn(pred, y_train)  # 算损失
+    optimizer.zero_grad()          # 清旧梯度
+    loss.backward()                # 反传
+    optimizer.step()               # 更新参数
+</code></pre>
+<p>（这五步=第3册反向传播的代码化身：<code>backward()</code>就在算那四条公式。）</p>
+<hr />
+<h1>Part C · 研0路线总图（录取后→入学前）</h1>
+<pre><code>第1-2周  Python过手（Part B）+ LLM API调用          → 命令行问答机器人
+第3-4周  Prompt工程 + 手写Function calling/ReAct     → 纯手写Agent（不用框架）
+第5-6周  RAG全套（embedding/FAISS/引用）            → 对考研资料库问答（语料现成96份）
+第7-8周  上框架重构 + 长期记忆 + 读论文(ReAct/Reflexion/Toolformer)
+                                                  → GitHub项目=简历第一行
+入学后第1学期：跟导师方向补文献；把项目延伸成实验室课题候选
+</code></pre>
+<p>【三册使用顺序】第2册(ML)打概念底 → 第3册(DL)懂原理 → 第4册(LLM/Agent)+本册Part A练表达；Python随用随查。</p>
+<hr />
+<h1>✅ AI方向系列收官（5册）</h1>
+<table>
+<thead>
+<tr>
+<th>册</th>
+<th>内容</th>
+<th>页</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 路径规划与数学桥梁</td>
+<td>择校情报+九桥映射+桥接题5</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2 机器学习基础精讲</td>
+<td>全家桶+信息增益/K-means/指标演算</td>
+<td>11</td>
+</tr>
+<tr>
+<td>3 深度学习基础精讲</td>
+<td>反传手算/CNN计算/注意力手算</td>
+<td>—</td>
+</tr>
+<tr>
+<td>4 LLM与Agent应用精讲</td>
+<td>ReAct/RAG/Function calling/18问答</td>
+<td>16</td>
+</tr>
+<tr>
+<td>5 复试问答总集+Python速查</td>
+<td>100题快问快答+C→Python映射</td>
+<td>本册</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最终纪律（再念一遍经）</strong>：初试前（现在~2027.12）本系列=0投入；2028年1月起按Part C路线推进。你的Agent梦想，入场券是12月那张408+数一的考卷。</p></div></body></html>

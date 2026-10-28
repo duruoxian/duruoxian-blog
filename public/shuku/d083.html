@@ -1,0 +1,1544 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数据结构_代码题 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>数据结构 · 经典代码题（408·默写级22题）</h1>
+<blockquote>
+<p>用法：每题先自己写→对照→隔3天重默写。复杂度标注是答题得分点。
+算法实验（本科课程）原件在 <code>算法实验/</code> 子目录，可作风格参考。</p>
+</blockquote>
+<h2>链表类</h2>
+<ol>
+<li>单链表逆置（原地）【O(n), O(1)】</li>
+<li>查找中间结点（快慢指针）【O(n)】</li>
+<li>合并两个有序单链表为一个有序表（不建新结点）【O(m+n)】</li>
+<li>删除单链表中所有值为x的结点【O(n)】</li>
+<li>判断链表是否有环（快慢指针）【O(n), O(1)】</li>
+<li>单链表倒数第k个结点（一趟扫描）【O(n)】</li>
+</ol>
+<h2>栈与队列类</h2>
+<ol start="7">
+<li>两个栈模拟一个队列【均摊O(1)】</li>
+<li>循环队列判满判空（牺牲单元法 + tag法两版）</li>
+<li>括号匹配检验【O(n)】</li>
+<li>中缀转后缀表达式【O(n)】</li>
+</ol>
+<h2>二叉树类</h2>
+<ol start="11">
+<li>四种遍历（递归版）+ 中序非递归（栈）+ 层序（队列）</li>
+<li>求二叉树深度【O(n)】</li>
+<li>求叶结点个数【O(n)】</li>
+<li>先序+中序重建二叉树【O(n)】</li>
+<li>判断两棵树是否相同【O(min(m,n))】</li>
+<li>求二叉树宽度（层序计数）【O(n)】</li>
+</ol>
+<h2>查找与排序类</h2>
+<ol start="17">
+<li>折半查找（含失败判定）【O(log n)】</li>
+<li>BST 插入（递归+非递归）【O(log n)~O(n)】</li>
+<li>冒泡/直接插入/简单选择（三大基础排序手写）【O(n²)】</li>
+<li>快速排序 partition + 递归【平均O(n log n)】</li>
+<li>堆调整 sift down + 建堆 + 完整堆排序【O(n log n), O(1)】</li>
+<li>归并排序（2路）【O(n log n), O(n)】</li>
+</ol>
+<h2>代码示范：合并有序链表</h2>
+<pre><code class="language-c">LNode* Merge(LinkList A, LinkList B){       /* A、B带头结点 */
+    LNode *C=(LNode*)malloc(sizeof(LNode)), *r=C; /* C为结果头 */
+    LNode *p=A-&gt;next, *q=B-&gt;next;
+    while(p&amp;&amp;q){
+        if(p-&gt;data&lt;=q-&gt;data){ r-&gt;next=p; r=p; p=p-&gt;next; }
+        else                { r-&gt;next=q; r=q; q=q-&gt;next; }
+    }
+    r-&gt;next = p ? p : q;                    /* 接上剩余段 */
+    return C;
+}
+</code></pre>
+<h2>代码示范：堆调整</h2>
+<pre><code class="language-c">void SiftDown(int a[], int k, int n){       /* 下标1..n，大根堆 */
+    a[0]=a[k];
+    for(int i=2*k; i&lt;=n; i*=2){
+        if(i&lt;n &amp;&amp; a[i]&lt;a[i+1]) i++;          /* 取较大孩子 */
+        if(a[0]&gt;=a[i]) break;
+        a[k]=a[i]; k=i;                       /* 孩子上移 */
+    }
+    a[k]=a[0];
+}
+</code></pre>
+<h2>答题规范（自命题代码题得分点）</h2>
+<ol>
+<li>先写算法思想（1-2行）+ 复杂度，再写代码。</li>
+<li>变量名清晰、边界条件写注释（空表/单结点/末尾）。</li>
+<li>题目允许时给 C 函数即可，不必写 main。</li>
+<li>手工演算题（建堆/快排一趟/哈夫曼）按步骤写中间结果，分步给分。</li>
+</ol>
+<hr />
+<h1>分章代码题大全（C01–C94）</h1>
+<blockquote>
+<p>与上面 22 道默写级配合：默写级是骨架，本部分是全量弹药库（2026-10-28 夜间扩充）。
+约定：顺序表 <code>SqList{int data[MaxSize]; int length;}</code>（下标从 0 起）；
+单链表默认带头结点，<code>LNode{int data; LNode *next;}</code>；
+双链表 <code>DNode{int data; DNode *prior,*next;}</code>；
+二叉树 <code>BiTNode{int data; BiTNode *lchild,*rchild;}</code>。
+每题先自己写再对照；错题隔 3 天重做。每题都标复杂度——这是 408 大题得分点。</p>
+</blockquote>
+<h2>第一章 绪论与算法分析（C01–C06）</h2>
+<p><strong>C01</strong> 分析复杂度：<code>for(i=1;i&lt;=n;i++) for(j=1;j&lt;=i;j++) x++;</code></p>
+<p>思路：内层执行次数随 i 递增，求和 Σi。
+答：执行 n(n+1)/2 次，T(n)=O(n²)。
+易错：答 O(n³)——内层次数不是 n 而是 i，是求和不是乘积。</p>
+<p><strong>C02</strong> 分析复杂度：</p>
+<pre><code class="language-c">int i = 1;
+while (i &lt;= n) i = i * 2;
+</code></pre>
+<p>思路：i 取 1,2,4,…,2^k，共 ⌈log₂n⌉+1 次后超过 n。
+答：O(log₂n)。若外面再套一层 <code>for(k=0;k&lt;n;k++)</code>，整体 O(n log n)。
+易错：把 <code>i=i*2</code> 看成线性增长。</p>
+<p><strong>C03</strong> 分析下面两个循环的复杂度：</p>
+<pre><code class="language-c">for (i = 1; i &lt;= n; i++)
+    for (j = 1; j &lt;= n; j *= 2)   /* 版本A */
+        x++;
+for (i = 1; i &lt;= n; i++)
+    for (j = 1; j &lt;= i; j *= 2)   /* 版本B */
+        x++;
+</code></pre>
+<p>答：版本 A：外层 n 次 × 内层 ⌈log₂n⌉ 次 = O(n log n)。版本 B：Σ⌈log₂i⌉ ≈ log₂(n!) = O(n log n)（Stirling 公式 log(n!)≈n log n）。
+易错：版本 B 直觉答 O(n²)；用累加对数论证。</p>
+<p><strong>C04</strong> 求时间和空间复杂度：</p>
+<pre><code class="language-c">int f(int n) {
+    if (n &lt;= 1) return 1;
+    return f(n - 1) + f(n - 1);
+}
+</code></pre>
+<p>答：递归调用树每层结点翻倍、深度 n，时间 O(2ⁿ)；空间是递归栈最大深度 O(n)。
+易错：①把两个 f(n-1) 当一次调用；②空间复杂度是"栈最大深度"不是"调用总次数"。
+对比：若函数体改为 <code>return f(n/2);</code> 只调一次，则时间 O(log n)。</p>
+<p><strong>C05</strong> 用递归树和主定理两种方法论证 T(n)=2T(n/2)+n=O(n log n)。</p>
+<p>答：递归树：每层合并代价为 n，树高 log₂n，总代价 n·log₂n。主定理：a=2,b=2,n^(log₂2)=n=f(n)，属第二种情况 → T(n)=O(n log n)。
+易错：与 T(n)=2T(n/2)+O(1)（答案 O(n)）、T(n)=T(n/2)+n（答案 O(n)）混淆——记住"每层代价 × 层数"的图景就不会错。</p>
+<p><strong>C06</strong> 求时间和空间复杂度：</p>
+<pre><code class="language-c">int sum(int n) {
+    if (n == 0) return 0;
+    return n + sum(n - 1);
+}
+</code></pre>
+<p>答：时间 O(n)，空间 O(n)（递归栈深度 n）。
+易错：递归的空间不是 O(1)；408 默认编译器不做尾递归优化。</p>
+<h2>第二章 顺序表（C07–C16）</h2>
+<p><strong>C07</strong>【2009统考风格】从顺序表删除最小值元素并由函数返回被删值；若表空返回 0 并置空表；用最后一个元素填补被删位置。</p>
+<p>思路：一趟扫描记最小值下标，用尾元素覆盖，length--。</p>
+<pre><code class="language-c">int DelMin(SqList *L) {
+    if (L-&gt;length == 0) return 0;
+    int k = 0;
+    for (int i = 1; i &lt; L-&gt;length; i++)
+        if (L-&gt;data[i] &lt; L-&gt;data[k]) k = i;
+    int e = L-&gt;data[k];
+    L-&gt;data[k] = L-&gt;data[L-&gt;length - 1];  /* 尾元素补位 */
+    L-&gt;length--;
+    return e;
+}
+</code></pre>
+<p>复杂度：时间 O(n)，空间 O(1)。
+易错：题目要求"尾元素填补"——整体前移保持次序是多做的搬运，丢分点。</p>
+<p><strong>C08</strong> 逆置顺序表（原地）。</p>
+<p>思路：双指针首尾交换，向中间推进。</p>
+<pre><code class="language-c">void Reverse(SqList *L) {
+    for (int i = 0, j = L-&gt;length - 1; i &lt; j; i++, j--) {
+        int t = L-&gt;data[i]; L-&gt;data[i] = L-&gt;data[j]; L-&gt;data[j] = t;
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：循环条件 i&lt;j 写成 i&lt;=j（多交换一次中间元素，无碍但显示边界不清）；循环左移 p 位可用"三次逆置"复用本题（见 C14）。</p>
+<p><strong>C09</strong> 删除顺序表中所有值等于 x 的元素，要求 O(n)、空间 O(1)。</p>
+<p>思路：快慢双下标——k 记"保留区"长度，遍历一遍，不等于 x 的元素前移到 k 位置。</p>
+<pre><code class="language-c">void DelX(SqList *L, int x) {
+    int k = 0;
+    for (int i = 0; i &lt; L-&gt;length; i++)
+        if (L-&gt;data[i] != x)
+            L-&gt;data[k++] = L-&gt;data[i];
+    L-&gt;length = k;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：每删一个就把后面整体前移（O(n²)）——统考大题明确扣分。</p>
+<p><strong>C10</strong> 有序顺序表删除值在 [s,t] 之间（s≤t）的所有元素；s&gt;t 返回错误。</p>
+<p>思路：有序 → 待删段必为连续区间 [i,j)，把 j 之后整体搬到 i。</p>
+<pre><code class="language-c">int DelRange(SqList *L, int s, int t) {
+    if (s &gt; t || L-&gt;length == 0) return 0;
+    int i = 0, j = L-&gt;length;
+    while (i &lt; L-&gt;length &amp;&amp; L-&gt;data[i] &lt; s) i++;   /* 第一个 &gt;=s 的位置 */
+    while (j &gt; i &amp;&amp; L-&gt;data[j-1] &gt; t) j--;         /* 第一个 &lt;=t 的位置+1 */
+    int d = j - i;
+    for (int k = j; k &lt; L-&gt;length; k++)
+        L-&gt;data[k - d] = L-&gt;data[k];
+    L-&gt;length -= d;
+    return 1;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：边界——i 是第一个 ≥s 的下标、j-1 是最后一个 ≤t 的下标，区间左闭右开要写清楚；移动方向必须从前往后（源在右目标在左，安全）。</p>
+<p><strong>C11</strong> 无序顺序表删除值在 (s,t) 之间的所有元素（通用 O(n) 法）。</p>
+<p>思路：同 C09 快慢双下标，保留条件改为 <code>x&lt;=s || x&gt;=t</code>。</p>
+<pre><code class="language-c">int DelRange2(SqList *L, int s, int t) {
+    if (s &gt;= t) return 0;
+    int k = 0;
+    for (int i = 0; i &lt; L-&gt;length; i++)
+        if (L-&gt;data[i] &lt;= s || L-&gt;data[i] &gt;= t)
+            L-&gt;data[k++] = L-&gt;data[i];
+    L-&gt;length = k;
+    return 1;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：无序表不能先二分找边界；区间开闭按题面（此题为开区间）。</p>
+<p><strong>C12</strong> 有序表去重（原地，保留首次出现）。</p>
+<p>思路：同 C09 双下标，只保留与前一个保留值不同的元素。</p>
+<pre><code class="language-c">void Dedup(SqList *L) {
+    if (L-&gt;length &lt;= 1) return;
+    int k = 1;
+    for (int i = 1; i &lt; L-&gt;length; i++)
+        if (L-&gt;data[i] != L-&gt;data[k-1])
+            L-&gt;data[k++] = L-&gt;data[i];
+    L-&gt;length = k;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：比较对象是"最后一个已保留的元素" data[k-1]，不是 data[i-1]（虽然有序时相同，但无序去重版本只能用 k-1 的逻辑）。</p>
+<p><strong>C13</strong> 合并两个有序顺序表 A、B 到 C，C 由函数返回。</p>
+<p>思路：归并双指针，尾部接剩余。</p>
+<pre><code class="language-c">SqList *Merge(SqList *A, SqList *B) {
+    SqList *C = (SqList *)malloc(sizeof(SqList));
+    int i = 0, j = 0, k = 0;
+    while (i &lt; A-&gt;length &amp;&amp; j &lt; B-&gt;length)
+        C-&gt;data[k++] = (A-&gt;data[i] &lt;= B-&gt;data[j]) ? A-&gt;data[i++] : B-&gt;data[j++];
+    while (i &lt; A-&gt;length) C-&gt;data[k++] = A-&gt;data[i++];
+    while (j &lt; B-&gt;length) C-&gt;data[k++] = B-&gt;data[j++];
+    C-&gt;length = k;
+    return C;
+}
+</code></pre>
+<p>复杂度：O(m+n), O(m+n)。易错：两个收尾 while 不能合写成 <code>if...else</code>（剩余段长度未知）；<code>&lt;=</code> 保证稳定性。</p>
+<p><strong>C14</strong> 长度 n 的顺序表循环左移 p 位（0&lt;p&lt;n），要求时间 O(n)、空间 O(1)。</p>
+<p>思路：三次逆置——逆置前 p 个、逆置后 n-p 个、整体逆置。例：abcdefgh 左移 3 → (cba)(hgfed) → cba defgh 再整体 → defghabc。</p>
+<pre><code class="language-c">void Rev(int a[], int l, int r) {          /* 逆置 a[l..r] */
+    for (int i = l, j = r; i &lt; j; i++, j--) {
+        int t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+}
+void LeftShift(int a[], int n, int p) {
+    Rev(a, 0, p - 1);
+    Rev(a, p, n - 1);
+    Rev(a, 0, n - 1);
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：左移 p = 逆置(0,p-1)+逆置(p,n-1)+整体；右移 p 则等价左移 n-p。另一做法：整体逆置后同样两段逆置，顺序不同结果相同（自行验证一遍）。</p>
+<p><strong>C15</strong>【2013统考】找长度 n 的整数序列的主元素（出现次数超过 n/2），无则返回 -1。要求 O(n)、O(1)。</p>
+<p>思路：摩尔投票——cnt 对抗抵消，候选者若有主元素必幸存；第二趟验证。</p>
+<pre><code class="language-c">int Majority(int a[], int n) {
+    int cand = a[0], cnt = 1;
+    for (int i = 1; i &lt; n; i++) {
+        if (a[i] == cand) cnt++;
+        else if (--cnt == 0) { cand = a[i]; cnt = 1; }
+    }
+    cnt = 0;                                /* 第二趟验证，不可省 */
+    for (int i = 0; i &lt; n; i++)
+        if (a[i] == cand) cnt++;
+    return cnt &gt; n / 2 ? cand : -1;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。
+易错：不写第二趟验证——候选只是"可能"，反例 1,2,3,4 会推出错误答案。</p>
+<p><strong>C16</strong>【2011统考】两个等长升序序列 A、B，找合并后中位数，要求 O(log n)。</p>
+<p>思路：二分比较两序列的中位 a、b：a==b 即中位数；a<b 则舍去 A 的小半和 B 的大半（等长舍去）；a>b 对称。</p>
+<pre><code class="language-c">int Median(int a[], int b[], int n) {
+    int l1 = 0, h1 = n - 1, l2 = 0, h2 = n - 1;
+    while (l1 &lt; h1) {
+        int m1 = (l1 + h1) / 2, m2 = (l2 + h2) / 2;
+        if (a[m1] == b[m2]) return a[m1];
+        if (a[m1] &lt; b[m2]) {              /* 舍 A 小半、B 大半 */
+            l1 = ((l1 + h1) % 2 == 0) ? m1 : m1 + 1;  /* 奇数个时含中位 */
+            h2 = m2 - (h1 - l1) % 2 ? m2 : m2 - 1;    /* 见下方说明 */
+        } else {
+            l2 = ((l2 + h2) % 2 == 0) ? m2 : m2 + 1;
+            h1 = m1 - (h1 - l1) % 2 ? m1 : m1 - 1;
+        }
+    }
+    return a[l1] &lt; b[l2] ? a[l1] : b[l2];
+}
+</code></pre>
+<p>说明：长度为奇数时两半保留中位数，长度为偶数时不含。上面写法易错点密集，考场推荐写<strong>等长减半</strong>版本：每轮保证两序列剩余长度相等且相同——偶数长度舍弃时各舍一半、奇数长度舍弃时小的含中位一侧保留 m1，大的保留 m2（教材标准答案写法更简单：奇数长度 l1=m1（含），h2=m2（含））。
+复杂度：O(log n), O(1)。
+易错：①舍去必须"等长"否则中位数错位；②奇偶长度舍去端点处理不同；③循环出口 l1==h1 时取 min(a[l1],b[l2])。<strong>考场建议先写 O(n) 归并法保底，再补 O(log n)</strong>。</p>
+<h2>第三章 链表（C17–C30）</h2>
+<p><strong>C17</strong> 带头结点单链表就地逆置。</p>
+<p>思路：头插法重建——断开头结点，依次摘下首元结点插入头结点后。</p>
+<pre><code class="language-c">void Reverse(LinkList L) {                 /* L 指向头结点 */
+    LNode *p = L-&gt;next, *q;
+    L-&gt;next = NULL;
+    while (p) {
+        q = p-&gt;next;                       /* 先存后继 */
+        p-&gt;next = L-&gt;next;                 /* 头插 */
+        L-&gt;next = p;
+        p = q;
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：先摘后插的次序反了会断链；不带头结点版本要改返回值（函数返回新表头）。</p>
+<p><strong>C18</strong> 删除单链表中所有值为 x 的结点（非递归 + 递归两版）。</p>
+<pre><code class="language-c">void DelX(LinkList L, int x) {             /* 非递归：L 头结点 */
+    LNode *p = L-&gt;next, *pre = L, *q;
+    while (p) {
+        if (p-&gt;data == x) { q = p; pre-&gt;next = p-&gt;next; p = p-&gt;next; free(q); }
+        else { pre = p; p = p-&gt;next; }
+    }
+}
+void DelXRec(LinkList L, int x) {          /* 递归：L 为当前结点 */
+    if (L == NULL) return;
+    if (L-&gt;data == x) {
+        LNode *q = L;
+        L = L-&gt;next;                       /* 注意：需返回新表头时改写法 */
+        free(q);
+        DelXRec(L, x);
+    } else {
+        DelXRec(L-&gt;next, x);
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(1)（递归版 O(n) 栈）。
+易错：递归版删除头结点时表头会变，408 写答案建议用非递归的 pre-p 双指针；free 之前先存 next。</p>
+<p><strong>C19</strong> 找倒数第 k 个结点（k 从 1 起，一趟扫描），找到返回其值，否则返回 0。</p>
+<p>思路：双指针，快指针先走 k 步，然后同步走，快指针到 NULL 时慢指针即倒数第 k。</p>
+<pre><code class="language-c">int KthFromEnd(LinkList L, int k) {
+    LNode *p = L-&gt;next, *q = L-&gt;next;      /* 都从首元出发 */
+    int i = 0;
+    while (p &amp;&amp; i &lt; k) { p = p-&gt;next; i++; }
+    if (i &lt; k) return 0;                   /* 表长不足 k */
+    while (p) { p = p-&gt;next; q = q-&gt;next; }
+    return q-&gt;data;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：先判表长不足 k（此时 p==NULL 但 q 未动，返回 0）；若 k 计数失败仍继续会空指针。</p>
+<p><strong>C20</strong> 找中间结点：偶数个结点时返回中间靠前那个。快慢指针。</p>
+<pre><code class="language-c">LNode *Mid(LinkList L) {
+    LNode *slow = L-&gt;next, *fast = L-&gt;next;
+    while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) {   /* 偶数取前中 */
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    return slow;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：循环条件写成 <code>fast &amp;&amp; fast-&gt;next</code> 会取"中间靠后"；空表/单结点先判（L-&gt;next==NULL 时 fast 为 NULL 会崩）。</p>
+<p><strong>C21</strong>【2015统考】将带头结点的单链表就地逆置为<strong>递减</strong>排列（原链表无序或递增均可处理）。</p>
+<p>思路：摘下结点按"递减有序插入"（或先逆置再降序处理）。若原表递增：头插法逆置即得递减。</p>
+<pre><code class="language-c">void Decend(LinkList L) {                  /* 假设原表元素互异且原为递增 */
+    LNode *p = L-&gt;next, *q;
+    L-&gt;next = NULL;
+    while (p) { q = p-&gt;next; p-&gt;next = L-&gt;next; L-&gt;next = p; p = q; }
+}
+</code></pre>
+<p>若原表<strong>无序</strong>，需有序插入：</p>
+<pre><code class="language-c">void DecendSort(LinkList L) {              /* 通用：降序插入排序 */
+    LNode *p = L-&gt;next, *q;
+    L-&gt;next = NULL;
+    while (p) {
+        q = p-&gt;next;
+        LNode *pre = L;
+        while (pre-&gt;next &amp;&amp; pre-&gt;next-&gt;data &gt; p-&gt;data) pre = pre-&gt;next;
+        p-&gt;next = pre-&gt;next; pre-&gt;next = p;
+        p = q;
+    }
+}
+</code></pre>
+<p>复杂度：有序输入 O(n)；无序 O(n²)，空间 O(1)。
+易错：审题——2015 真题原表递增，头插即可 O(n)；对无序表用头插是错误答案。</p>
+<p><strong>C22</strong> 判断两个单链表是否有公共结点，有则返回第一个公共结点。两链表等长部分从公共点起。</p>
+<p>思路：公共尾段等长 → 长链指针先走"长度差"步，再同步走，首次相等即公共点。</p>
+<pre><code class="language-c">LNode *Common(LNode *A, LNode *B) {        /* 不带头结点版，带头结点时先各进一格 */
+    int la = 0, lb = 0;
+    for (LNode *p = A; p; p = p-&gt;next) la++;
+    for (LNode *p = B; p; p = p-&gt;next) lb++;
+    LNode *p = A, *q = B;
+    while (la &gt; lb) { p = p-&gt;next; la--; }
+    while (lb &gt; la) { q = q-&gt;next; lb--; }
+    while (p &amp;&amp; p != q) { p = p-&gt;next; q = q-&gt;next; }
+    return p;
+}
+</code></pre>
+<p>复杂度：O(m+n), O(1)。易错：公共结点是"同一个结点"（比较指针不是比较值）；先各走差值再同步，不可逐个配对比较（O(mn)）。</p>
+<p><strong>C23</strong> 判断单链表是否有环；有环返回入环结点。</p>
+<p>思路：快慢指针相遇则有环；相遇后一指针回头，与慢指针同速前进，再相遇处即入环点（Floyd 数学结论）。</p>
+<pre><code class="language-c">LNode *Entry(LNode *head) {                /* 不带头结点 */
+    LNode *slow = head, *fast = head;
+    while (fast &amp;&amp; fast-&gt;next) {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+        if (slow == fast) {                /* 相遇：有环 */
+            LNode *p = head;
+            while (p != slow) { p = p-&gt;next; slow = slow-&gt;next; }
+            return p;
+        }
+    }
+    return NULL;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：判环循环条件是 <code>fast &amp;&amp; fast-&gt;next</code>；找入环点不要用"数环长"绕远路，直接第二次相遇结论。</p>
+<p><strong>C24</strong> 将带头结点单链表分解为两个链表：A 保留值为负的结点（保持相对次序），B 保留值为非负的结点。要求不建新结点。</p>
+<p>思路：B 用尾插保持次序，A 直接在原链上串。</p>
+<pre><code class="language-c">void Split(LinkList A, LinkList B) {       /* B 为已初始化的带头结点空表 */
+    LNode *p = A-&gt;next, *pre = A, *tail = B;
+    A-&gt;next = NULL;
+    while (p) {
+        LNode *q = p-&gt;next;
+        if (p-&gt;data &lt; 0) { pre-&gt;next = p; pre = p; }
+        else { tail-&gt;next = p; tail = p; }
+        p = q;
+    }
+    pre-&gt;next = tail-&gt;next = NULL;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：两个链的尾都要置 NULL，否则残留旧链接成环或串链。</p>
+<p><strong>C25</strong> 将单链表按<strong>序号</strong>分解：奇数序号结点留在 A，偶数序号结点链入 B（保持相对次序）。</p>
+<pre><code class="language-c">void SplitByPos(LinkList A, LinkList B) {
+    LNode *p = A-&gt;next, *pre = A, *tail = B;
+    int i = 1;
+    while (p) {
+        LNode *q = p-&gt;next;
+        if (i % 2 == 1) { pre-&gt;next = p; pre = p; }
+        else { tail-&gt;next = p; tail = p; }
+        p = q; i++;
+    }
+    pre-&gt;next = tail-&gt;next = NULL;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：与 C24 区别在判断依据是序号不是值；计数从 1 开始。</p>
+<p><strong>C26</strong> 递增有序单链表去重（保留一个）。</p>
+<pre><code class="language-c">void Dedup(LinkList L) {
+    LNode *p = L-&gt;next;
+    while (p &amp;&amp; p-&gt;next) {
+        if (p-&gt;data == p-&gt;next-&gt;data) {
+            LNode *q = p-&gt;next;
+            p-&gt;next = q-&gt;next;
+            free(q);                       /* 不动 p，可能连续多个相同 */
+        } else p = p-&gt;next;
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：删完一个后 p 不能动（连续三个相同值）；无序版要先排序或用 O(n²) 双重循环。</p>
+<p><strong>C27</strong>【王道风格真题】两个元素递增排列的带头结点单链表 A、B，求交集，存于 A 中（不建新结点，删除非交集结点并释放）。</p>
+<p>思路：双指针归并式扫描：值小的指针后移并摘除释放；相等则保留到 A 尾，双双后移。</p>
+<pre><code class="language-c">void Intersection(LinkList A, LinkList B) {
+    LNode *pa = A-&gt;next, *pb = B-&gt;next, *tail = A;
+    A-&gt;next = NULL;
+    while (pa &amp;&amp; pb) {
+        if (pa-&gt;data &lt; pb-&gt;data)      { LNode *q = pa; pa = pa-&gt;next; free(q); }
+        else if (pa-&gt;data &gt; pb-&gt;data){ LNode *q = pb; pb = pb-&gt;next; free(q); }
+        else {
+            LNode *qa = pa-&gt;next, *qb = pb-&gt;next;
+            tail-&gt;next = pa; tail = pa; pa-&gt;next = NULL;
+            pa = qa; free(pb); pb = qb;
+        }
+    }
+    while (pa) { LNode *q = pa; pa = pa-&gt;next; free(q); }
+    while (pb) { LNode *q = pb; pb = pb-&gt;next; free(q); }
+    /* B 表头结点由调用者处理（置空或释放） */
+}
+</code></pre>
+<p>复杂度：O(m+n), O(1)。易错：①相等时要把 pb 释放（只要一份）；②扫描结束后剩余段全释放；③尾结点 next 置 NULL 防串链。</p>
+<p><strong>C28</strong>【2019统考】设 L=(a₁,a₂,…,aₙ)，重排为 (a₁,aₙ,a₂,aₙ₋₁,a₃,aₙ₋₂,…)。要求不建新结点、尽量高效。</p>
+<p>思路：三步走——快慢指针找中点断开 → 后半段逆置 → 两段交替合并。</p>
+<pre><code class="language-c">void Rearrange(LinkList L) {
+    if (!L-&gt;next || !L-&gt;next-&gt;next) return;
+    /* 1. 快慢找中点，slow 落在前半段末尾 */
+    LNode *slow = L-&gt;next, *fast = L-&gt;next;
+    while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) { slow = slow-&gt;next; fast = fast-&gt;next-&gt;next; }
+    /* n 偶数时 slow 在 n/2 处，n 奇数时在正中 */
+    /* 2. 逆置后半段 */
+    LNode *p = slow-&gt;next, *q;
+    slow-&gt;next = NULL;
+    LNode *half = NULL;
+    while (p) { q = p-&gt;next; p-&gt;next = half; half = p; p = q; }
+    /* 3. 前半段 L-&gt;next 与 half 交替合并 */
+    LNode *front = L-&gt;next, *tail = L;
+    while (front &amp;&amp; half) {
+        tail-&gt;next = front; tail = front; front = front-&gt;next;
+        tail-&gt;next = half;  tail = half;  half = half-&gt;next;
+    }
+    tail-&gt;next = front ? front : half;     /* 奇数时 front 剩一个 */
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：①找中点后必须断开（slow-&gt;next=NULL）再逆置，否则逆置会反噬前半段；②奇数个时前半段多一个中间结点，收尾接上；③三步任何一步的指针保存（q）不能省。</p>
+<p><strong>C29</strong> 判断单链表（存整数序列）是否中心对称（回文）。要求 O(n)、辅助 O(1)。</p>
+<p>思路：快慢找中点 → 后半段逆置 → 前后半逐结点比较 → （可选）再逆置恢复。</p>
+<pre><code class="language-c">int IsPalindrome(LinkList L) {             /* 带头结点 */
+    if (!L-&gt;next || !L-&gt;next-&gt;next) return 1;
+    LNode *slow = L-&gt;next, *fast = L-&gt;next;
+    while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) { slow = slow-&gt;next; fast = fast-&gt;next-&gt;next; }
+    LNode *p = slow-&gt;next, *half = NULL, *q;
+    slow-&gt;next = NULL;
+    while (p) { q = p-&gt;next; p-&gt;next = half; half = p; p = q; }
+    int ok = 1;
+    LNode *a = L-&gt;next, *b = half;
+    while (b) {                            /* 后半段较短，只比它 */
+        if (a-&gt;data != b-&gt;data) { ok = 0; break; }
+        a = a-&gt;next; b = b-&gt;next;
+    }
+    /* 若要求不破坏原链，把 half 再逆置回接到 slow 之后（略） */
+    return ok;
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：①比到短的那段就停；②奇数长度时中间结点不影响；③题目若要求"处理后恢复原链"要补二次逆置。栈解法（前半入栈）更直观但空间 O(n)，按题目要求选。</p>
+<p><strong>C30</strong> 双链表基本指针操作：在 p 所指结点<strong>之前</strong>插入结点 s；删除 p 所指结点。</p>
+<pre><code class="language-c">void InsertBefore(DNode *p, DNode *s) {
+    s-&gt;prior = p-&gt;prior;
+    s-&gt;next  = p;
+    p-&gt;prior-&gt;next = s;
+    p-&gt;prior = s;
+}
+void DeleteNode(DNode *p) {
+    p-&gt;prior-&gt;next = p-&gt;next;
+    if (p-&gt;next) p-&gt;next-&gt;prior = p-&gt;prior;   /* p 可能是尾结点 */
+    free(p);
+}
+</code></pre>
+<p>复杂度：O(1)。易错：①InsertBefore 四条语句次序——先接 s 的两个指针再动 p 的两个指针，若先改 p-&gt;prior 会丢前驱；②DeleteNode 尾结点时 p-&gt;next 为 NULL，置其 prior 前要判空。</p>
+<h2>第四章 栈与队列（C31–C42）</h2>
+<p><strong>C31</strong> 括号匹配检验（只含 <code>(</code>、<code>)</code>、<code>[</code>、<code>]</code>、<code>{</code>、<code>}</code>）。</p>
+<p>思路：左括号入栈；右括号与栈顶配对，栈空或不配则失败；结束时要栈空。</p>
+<pre><code class="language-c">int Match(char s[], int n) {
+    char st[MaxSize]; int top = -1;
+    for (int i = 0; i &lt; n; i++) {
+        if (s[i]=='(' || s[i]=='[' || s[i]=='{') st[++top] = s[i];
+        else {
+            if (top == -1) return 0;
+            char l = st[top--];
+            if ((s[i]==')' &amp;&amp; l!='(') || (s[i]==']' &amp;&amp; l!='[') || (s[i]=='}' &amp;&amp; l!='{'))
+                return 0;
+        }
+    }
+    return top == -1;
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：①结束时必须判栈空（<code>((( )</code> 类）；②右括号先判栈空再取顶。</p>
+<p><strong>C32</strong> 两个栈 S1、S2 模拟一个队列（入队/出队）。</p>
+<p>思路：S1 专管入队，S2 专管出队；出队时 S2 空则把 S1 全部倒入 S2；S1、S2 都空才队空。</p>
+<pre><code class="language-c">int EnQ(Stack *S1, Stack *S2, int x) {     /* 返回0表示满 */
+    if (StackFull(S1)) {
+        if (!StackEmpty(S2)) return 0;     /* S2非空则真满 */
+        while (!StackEmpty(S1)) Push(S2, Pop(S1));  /* 倒过去腾空间 */
+    }
+    Push(S1, x); return 1;
+}
+int DeQ(Stack *S1, Stack *S2, int *x) {    /* 返回0表示空 */
+    if (StackEmpty(S2)) {
+        if (StackEmpty(S1)) return 0;
+        while (!StackEmpty(S1)) Push(S2, Pop(S1));
+    }
+    *x = Pop(S2); return 1;
+}
+</code></pre>
+<p>复杂度：均摊 O(1)（每元素最多倒两次）。易错：①"栈满且 S2 空"时才倒栈腾位——漏掉 S2 非空的判断会把满判成不满；②倒栈必须一次倒空，不能倒一半。</p>
+<p><strong>C33</strong> 循环队列（牺牲一个单元法）：判空、判满、入队、出队。</p>
+<pre><code class="language-c">typedef struct { int data[MaxSize]; int front, rear; } CirQueue;
+
+int Empty(CirQueue *Q) { return Q-&gt;front == Q-&gt;rear; }
+int Full (CirQueue *Q) { return (Q-&gt;rear + 1) % MaxSize == Q-&gt;front; }
+int EnQ(CirQueue *Q, int x) {
+    if (Full(Q)) return 0;
+    Q-&gt;data[Q-&gt;rear] = x;
+    Q-&gt;rear = (Q-&gt;rear + 1) % MaxSize;
+    return 1;
+}
+int DeQ(CirQueue *Q, int *x) {
+    if (Empty(Q)) return 0;
+    *x = Q-&gt;data[Q-&gt;front];
+    Q-&gt;front = (Q-&gt;front + 1) % MaxSize;
+    return 1;
+}
+</code></pre>
+<p>复杂度：各 O(1)。易错：①此法容量是 MaxSize-1；②判满 <code>(rear+1)%MaxSize==front</code> 与判空 <code>front==rear</code> 别背反；③指针移动必须取模。</p>
+<p><strong>C34</strong> 循环队列 tag 法：增设 tag，出队成功置 0、入队成功置 1，以此区分空满（容量可用满 MaxSize）。</p>
+<p>答：判空 <code>front==rear &amp;&amp; tag==0</code>；判满 <code>front==rear &amp;&amp; tag==1</code>。入队先判满，出队先判空，成功后置对应 tag。
+易错：tag 的语义是"最后一次操作是入队还是出队"，只有 front==rear 时才有区分作用；这是手写分析题常客，代码略。</p>
+<p><strong>C35</strong> 共享栈：两个栈共用一个数组空间 <code>data[MaxSize]</code>，栈顶相迎（top1=-1 起，top2=MaxSize 起）。</p>
+<pre><code class="language-c">typedef struct { int data[MaxSize]; int top1, top2; } ShareStack;
+/* 初始：top1=-1, top2=MaxSize */
+int Push1(ShareStack *S, int x) {
+    if (S-&gt;top1 + 1 == S-&gt;top2) return 0;  /* 栈满 */
+    S-&gt;data[++S-&gt;top1] = x; return 1;
+}
+int Push2(ShareStack *S, int x) {
+    if (S-&gt;top1 + 1 == S-&gt;top2) return 0;
+    S-&gt;data[--S-&gt;top2] = x; return 1;
+}
+</code></pre>
+<p>复杂度：O(1)。易错：栈满条件是 <code>top1+1==top2</code>（相邻即满）；共享栈优点——只有在总元素数超 MaxSize 才溢出，空间利用率高，这是简答题点。</p>
+<p><strong>C36</strong> 中缀转后缀表达式（操作数为单字母，含 + - * / ( )）。</p>
+<p>思路：数字直接输出；运算符与栈顶比较优先级，栈顶高则弹；<code>(</code> 直接入栈，<code>)</code> 弹到 <code>(</code> 为止。</p>
+<pre><code class="language-c">int Prio(char c) { return c=='*'||c=='/' ? 2 : c=='+'||c=='-' ? 1 : 0; }  /* ( 为 0 */
+void InfixToPost(char in[], char post[]) {
+    char st[MaxSize]; int top=-1, k=0;
+    for (int i = 0; in[i]; i++) {
+        char c = in[i];
+        if (c &gt;= 'a' &amp;&amp; c &lt;= 'z') { post[k++] = c; continue; }
+        if (c == '(') { st[++top] = c; }
+        else if (c == ')') {
+            while (top &gt;= 0 &amp;&amp; st[top] != '(') post[k++] = st[top--];
+            top--;                          /* 弹出 '(' */
+        } else {
+            while (top &gt;= 0 &amp;&amp; Prio(st[top]) &gt;= Prio(c)) post[k++] = st[top--];
+            st[++top] = c;
+        }
+    }
+    while (top &gt;= 0) post[k++] = st[top--];
+    post[k] = '\0';
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：①同优先级也要弹（左结合），条件是 <code>&gt;=</code> 不是 <code>&gt;</code>；②<code>)</code> 处理完要再弹掉 <code>(</code>。</p>
+<p><strong>C37</strong> 后缀（逆波兰）表达式求值。</p>
+<p>思路：数字入栈；遇运算符弹两个操作数（先弹的是右操作数！），计算后回压。</p>
+<pre><code class="language-c">int EvalPost(char post[]) {
+    int st[MaxSize], top = -1;
+    for (int i = 0; post[i]; i++) {
+        char c = post[i];
+        if (c &gt;= 'a' &amp;&amp; c &lt;= 'z') { st[++top] = c - 'a' + 1; continue; } /* 示例取值 */
+        int b = st[top--], a = st[top--];      /* b 是右操作数 */
+        switch (c) {
+            case '+': st[++top] = a + b; break;
+            case '-': st[++top] = a - b; break;
+            case '*': st[++top] = a * b; break;
+            case '/': st[++top] = a / b; break;
+        }
+    }
+    return st[top];
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：操作数次序——减法除法不满足交换律，<code>a-b</code> 中 a 是后弹的；写反全错。</p>
+<p><strong>C38</strong> 判断给定出栈序列是否合法（入栈序列固定为 1..n，给出目标序列判断）。</p>
+<p>思路：按 1..n 依次入栈，每当栈顶等于目标序列当前位就弹出；最后栈空即合法。</p>
+<pre><code class="language-c">int Valid(char in[], char out[], int n) {  /* out 为目标出栈序列（元素为字符'1'..'n'风格，示例用整型亦可） */
+    int st[MaxSize], top = -1, j = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        st[++top] = i;
+        while (top &gt;= 0 &amp;&amp; st[top] == out[j]) { top--; j++; }
+    }
+    return top == -1;
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：边入边弹（while 不是 if，可能连弹多个）；最终必须判栈空。手算题可用"312 法则"快速排除（如 3,1,2 非法——3 出栈后 1、2 已被压在 3 下面）。</p>
+<p><strong>C39</strong> 栈的应用：把十进制整数 N 转换为 d 进制输出（d=2~16）。</p>
+<pre><code class="language-c">void Convert(int N, int d) {
+    char tab[] = &quot;0123456789ABCDEF&quot;;
+    char st[64]; int top = -1;
+    if (N == 0) { printf(&quot;0&quot;); return; }
+    while (N) { st[++top] = tab[N % d]; N /= d; }
+    while (top &gt;= 0) printf(&quot;%c&quot;, st[top--]);
+}
+</code></pre>
+<p>复杂度：O(log n), O(log n)。易错：短除法余数是低位先进栈，出栈即高位；N=0 要特判。这也是"栈=LIFO 缓存"的典型简答例。</p>
+<p><strong>C40</strong> 逆序打印带头结点单链表：要求分别用递归和栈实现，并说明栈深。</p>
+<pre><code class="language-c">void PrintRevRec(LNode *p) {               /* 递归版：栈深 O(n) */
+    if (!p) return;
+    PrintRevRec(p-&gt;next);
+    printf(&quot;%d &quot;, p-&gt;data);
+}
+void PrintRevStack(LinkList L) {           /* 栈版 */
+    int st[MaxSize], top = -1;
+    for (LNode *p = L-&gt;next; p; p = p-&gt;next) st[++top] = p-&gt;data;
+    while (top &gt;= 0) printf(&quot;%d &quot;, st[top--]);
+}
+</code></pre>
+<p>复杂度：O(n)。易错：递归版打印在递归调用<strong>之后</strong>；n 很大时递归栈深 O(n) 可能溢出，这是两种实现的对比论述点。</p>
+<p><strong>C41</strong> 两个队列模拟一个栈。</p>
+<p>思路：保持一个队列为"主队列"，push 进主队列；pop 时把主队列前 n-1 个元素倒进辅助队列，最后一个出队即栈顶，然后交换两队列角色。</p>
+<pre><code class="language-c">int Pop(Queue *Q1, Queue *Q2, int *x) {    /* Q1 主队列 */
+    if (Empty(Q1)) return 0;
+    while (Length(Q1) &gt; 1) EnQ(Q2, DeQ(Q1));
+    *x = DeQ(Q1);
+    Queue *t = Q1; Q1 = Q2; Q2 = t;        /* 指针交换（或传二级指针） */
+    return 1;
+}
+</code></pre>
+<p>复杂度：pop O(n)，push O(1)。易错：交换的是队列指针/角色；若 pop 后忘记交换，下一轮会错倒。</p>
+<p><strong>C42</strong> 用队列打印杨辉三角前 n 行（队列的"层次分隔"应用）。</p>
+<p>思路：每行入队时前后行通过"队首取出 + 队尾累加"生成；用 0（或行计数）做行分隔。</p>
+<pre><code class="language-c">void YangHui(int n) {
+    Queue Q; Init(&amp;Q);
+    EnQ(&amp;Q, 1);                            /* 第 1 行 */
+    for (int r = 1; r &lt;= n; r++) {
+        int len = r, prev = 0;
+        for (int i = 0; i &lt; len; i++) {
+            int x = DeQ(&amp;Q);
+            printf(&quot;%d &quot;, x);
+            EnQ(&amp;Q, prev + x);             /* 下一行的元素 */
+            prev = x;
+        }
+        EnQ(&amp;Q, 1);                        /* 行末的 1 */
+        printf(&quot;\n&quot;);
+    }
+}
+</code></pre>
+<p>复杂度：O(n²)。易错：<code>prev+x</code> 正是"上一行相邻两数之和"；队列为空即一行结束，也可用计数控制。此题证明"队列=公平排队/层序推进"的思想，与树的层序遍历呼应。</p>
+<h2>第五章 串（C43–C47）</h2>
+<p><strong>C43</strong> 朴素（BF）模式匹配：返回子串 T 在主串 S 中首次出现的位置（下标 0 起，失败返回 -1）。</p>
+<pre><code class="language-c">int BF(char S[], char T[]) {
+    int i = 0, j = 0;
+    while (S[i] &amp;&amp; T[j]) {
+        if (S[i] == T[j]) { i++; j++; }
+        else { i = i - j + 1; j = 0; }     /* 主串回溯到开始匹配的下一个位置 */
+    }
+    return T[j] ? -1 : i - j;
+}
+</code></pre>
+<p>复杂度：最坏 O(mn)。易错：回溯公式 <code>i-j+1</code> 推一遍再背；j 用 <code>T[j]</code> 判成功（j 走完了）。</p>
+<p><strong>C44</strong> 求 KMP 的 next 数组（下标从 0 起，next[0]=-1 风格）。</p>
+<p>思路：next[i] = T[0..i-1] 最长相等前后缀长度。递推：已知 next[i-1]=k，若 T[i-1]==T[k] 则 next[i]=k+1，否则 k=next[k] 继续缩。</p>
+<pre><code class="language-c">void GetNext(char T[], int next[]) {
+    int m = strlen(T);
+    next[0] = -1;
+    int k = -1, i = 0;
+    while (i &lt; m - 1) {
+        if (k == -1 || T[i] == T[k]) {
+            next[++i] = ++k;
+        } else {
+            k = next[k];                   /* 缩短前缀继续找 */
+        }
+    }
+}
+</code></pre>
+<p>复杂度：O(m)。易错：①k==-1 分支（无相等前后缀时 next[i]=0）；②手算题按"最长相等前后缀"逐位写，考卷常给 1 起标号版本，看清题目约定。</p>
+<p><strong>C45</strong> KMP 主算法。</p>
+<pre><code class="language-c">int KMP(char S[], char T[], int next[]) {
+    int i = 0, j = 0, n = strlen(S), m = strlen(T);
+    while (i &lt; n &amp;&amp; j &lt; m) {
+        if (j == -1 || S[i] == T[j]) { i++; j++; }
+        else j = next[j];                  /* 主串不回溯 */
+    }
+    return j == m ? i - m : -1;
+}
+</code></pre>
+<p>复杂度：O(m+n), O(m)。易错：与 BF 的唯一区别是失配时 j=next[j]、i 不动——这是"KMP 为什么快"的标准论述答案；j==-1 时 i、j 同步进（模式串从头开始）。</p>
+<p><strong>C46</strong> nextval 改进：当 T[i]==T[next[i]] 时，next[i] 直接改为 next[next[i]]（避免无效比较）。</p>
+<p>答：在 GetNext 中，赋值后加一句判断：</p>
+<pre><code class="language-c">if (k == -1 || T[i] == T[k]) {
+    ++i; ++k;
+    nextval[i] = (T[i] == T[next[i]]) ? nextval[next[i]] : next[i];
+}
+</code></pre>
+<p>手算规则：逐位看，若"该位字符 == 其 next 指向位的字符"，则 nextval 取 next[next 位置] 的值，否则保持 next 值。
+易错：手算 nextval 必须基于已算好的 next 数组逐位改，跳着改必错。</p>
+<p><strong>C47</strong> 统计模式串 T 在主串 S 中<strong>不重叠</strong>出现的次数。</p>
+<pre><code class="language-c">int Count(char S[], char T[]) {
+    int cnt = 0, i = 0, j = 0, m = strlen(T);
+    while (S[i]) {
+        if (S[i] == T[j]) {
+            i++; j++;
+            if (!T[j]) { cnt++; j = 0; }   /* 匹配成功，j 从头继续（不重叠） */
+        } else {
+            i = i - j + 1; j = 0;
+        }
+    }
+    return cnt;
+}
+</code></pre>
+<p>复杂度：O(mn)。易错：不重叠 → 匹配成功后 j 直接置 0、i 继续前移；若允许重叠则 j 回退到 next[m]（KMP 版本）。此题考"对匹配过程的理解"而非算法效率。</p>
+<h2>第六章 树与二叉树（C48–C63）</h2>
+<p><strong>C48</strong> 二叉树四种遍历（递归版，一行一型）。</p>
+<pre><code class="language-c">void Pre(BiTNode *t)  { if (t){ visit(t); Pre(t-&gt;lchild); Pre(t-&gt;rchild);} }
+void In (BiTNode *t)  { if (t){ In(t-&gt;lchild); visit(t); In(t-&gt;rchild);} }
+void Post(BiTNode *t) { if (t){ Post(t-&gt;lchild); Post(t-&gt;rchild); visit(t);} }
+</code></pre>
+<p>（层序见 C52。）
+易错：visit 的位置决定遍历型——先序=根左右；手算题给先序+中序还原，先序第一个是根。</p>
+<p><strong>C49</strong> 中序遍历非递归（栈）。</p>
+<p>思路：一路向左入栈；弹栈访问；转右子树；重复。</p>
+<pre><code class="language-c">void InOrder(BiTNode *t) {
+    BiTNode *st[MaxSize]; int top = -1;
+    BiTNode *p = t;
+    while (p || top &gt;= 0) {
+        if (p) { st[++top] = p; p = p-&gt;lchild; }
+        else {
+            p = st[top--];
+            visit(p);
+            p = p-&gt;rchild;
+        }
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：外层是 <code>while(p || top&gt;=0)</code>——p 为空但栈非空也要继续弹；visit 后转右子树而不是继续弹。</p>
+<p><strong>C50</strong> 先序遍历非递归。</p>
+<p>思路：访问后先压右孩子再压左孩子（先序要左先出）。</p>
+<pre><code class="language-c">void PreOrder(BiTNode *t) {
+    if (!t) return;
+    BiTNode *st[MaxSize]; int top = -1;
+    st[++top] = t;
+    while (top &gt;= 0) {
+        BiTNode *p = st[top--];
+        visit(p);
+        if (p-&gt;rchild) st[++top] = p-&gt;rchild;  /* 右先压 */
+        if (p-&gt;lchild) st[++top] = p-&gt;lchild;  /* 左后压、先出 */
+    }
+}
+</code></pre>
+<p>易错：压栈次序是"先右后左"；与中序的"一路向左"写法结构完全不同，别混。</p>
+<p><strong>C51</strong> 后序遍历非递归（双栈法，考场最稳）。</p>
+<p>思路：按"根右左"做变形先序压入栈1，出栈顺序压入栈2；最后依次弹栈2访问即"左右根"。</p>
+<pre><code class="language-c">void PostOrder(BiTNode *t) {
+    if (!t) return;
+    BiTNode *s1[MaxSize], *s2[MaxSize]; int t1 = -1, t2 = -1;
+    s1[++t1] = t;
+    while (t1 &gt;= 0) {
+        BiTNode *p = s1[t1--];
+        s2[++t2] = p;
+        if (p-&gt;lchild) s1[++t1] = p-&gt;lchild;
+        if (p-&gt;rchild) s1[++t1] = p-&gt;rchild;
+    }
+    while (t2 &gt;= 0) visit(s2[t2--]);
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：栈1 出的是"根右左"，再倒一次栈正好反序；另一种"记录上次访问结点"的单栈法易错点多，考场首选双栈。</p>
+<p><strong>C52</strong> 层序遍历（队列）。</p>
+<pre><code class="language-c">void LevelOrder(BiTNode *t) {
+    if (!t) return;
+    BiTNode *Q[MaxSize]; int f = 0, r = 0;
+    Q[r++] = t;
+    while (f &lt; r) {
+        BiTNode *p = Q[f++];               /* 数组队列，f&lt;=r */
+        visit(p);
+        if (p-&gt;lchild) Q[r++] = p-&gt;lchild;
+        if (p-&gt;rchild) Q[r++] = p-&gt;rchild;
+    }
+}
+</code></pre>
+<p>易错：队满扩容不考但要在注释说明；孩子<strong>先左后右</strong>入队；这是求宽度、判断完全二叉树、按层输出的母版，必须默写级。</p>
+<p><strong>C53</strong> 求二叉树深度。</p>
+<pre><code class="language-c">int Depth(BiTNode *t) {
+    if (!t) return 0;
+    int l = Depth(t-&gt;lchild), r = Depth(t-&gt;rchild);
+    return (l &gt; r ? l : r) + 1;
+}
+</code></pre>
+<p>复杂度：O(n), O(n) 递归栈。易错：空树返回 0（不是 1）；返回值 +1 别漏。</p>
+<p><strong>C54</strong> 求叶结点个数与双分支结点个数。</p>
+<pre><code class="language-c">int Leaves(BiTNode *t) {
+    if (!t) return 0;
+    if (!t-&gt;lchild &amp;&amp; !t-&gt;rchild) return 1;
+    return Leaves(t-&gt;lchild) + Leaves(t-&gt;rchild);
+}
+int Two(BiTNode *t) {
+    if (!t) return 0;
+    int self = (t-&gt;lchild &amp;&amp; t-&gt;rchild) ? 1 : 0;
+    return self + Two(t-&gt;lchild) + Two(t-&gt;rchild);
+}
+</code></pre>
+<p>易错：手算关系式 n₀=n₂+1 只对二叉树成立（度1结点不影响），选择题高频；求"度为1结点数"时用 n₁=n-n₀-n₂。</p>
+<p><strong>C55</strong> 复制二叉树；交换所有结点的左右子树。</p>
+<pre><code class="language-c">BiTNode *Copy(BiTNode *t) {
+    if (!t) return NULL;
+    BiTNode *n = (BiTNode *)malloc(sizeof(BiTNode));
+    n-&gt;data = t-&gt;data;
+    n-&gt;lchild = Copy(t-&gt;lchild);
+    n-&gt;rchild = Copy(t-&gt;rchild);
+    return n;
+}
+void Swap(BiTNode *t) {                    /* 原地交换 */
+    if (!t) return;
+    BiTNode *tmp = t-&gt;lchild;
+    t-&gt;lchild = t-&gt;rchild; t-&gt;rchild = tmp;
+    Swap(t-&gt;lchild); Swap(t-&gt;rchild);
+}
+</code></pre>
+<p>易错：Swap 的先序写法即可，但注意先交换再递归时递归参数已是交换后的孩子——结果正确（想想为什么：每个结点都会被访问一次）。</p>
+<p><strong>C56</strong> 判断两棵二叉树是否相同（结构+值）。</p>
+<pre><code class="language-c">int Same(BiTNode *a, BiTNode *b) {
+    if (!a &amp;&amp; !b) return 1;
+    if (!a || !b) return 0;
+    return a-&gt;data == b-&gt;data &amp;&amp; Same(a-&gt;lchild, b-&gt;lchild) &amp;&amp; Same(a-&gt;rchild, b-&gt;rchild);
+}
+</code></pre>
+<p>易错：三种情况别漏"一空一非空"；先判同空，再判单空，最后判值。</p>
+<p><strong>C57</strong> 先序+中序重建二叉树（返回根），并说明为什么中序不可缺。</p>
+<p>思路：先序首元素为根；在中序中找根划分左右子树；递归。为高效可传中序区间下标。</p>
+<pre><code class="language-c">BiTNode *Build(int pre[], int in[], int pl, int pr, int il, int ir) { /* 闭区间 */
+    if (pl &gt; pr) return NULL;
+    BiTNode *root = (BiTNode *)malloc(sizeof(BiTNode));
+    root-&gt;data = pre[pl];
+    int k = il;
+    while (in[k] != pre[pl]) k++;          /* 根在中序中的位置 */
+    int leftn = k - il;                    /* 左子树结点数 */
+    root-&gt;lchild = Build(pre, in, pl+1, pl+leftn, il, k-1);
+    root-&gt;rchild = Build(pre, in, pl+leftn+1, pr, k+1, ir);
+    return root;
+}
+</code></pre>
+<p>复杂度：O(n²)（找根线性扫；排序哈希可到 O(n)，408 不要求）。
+易错：①区间长度必须用"左子树结点数"对齐，pre 和 in 的区间错位是最常见错误；②论述题：只有先序+后序<strong>不能</strong>唯一确定（一个孩子时无法分辨左右），必须含中序——简答高频。</p>
+<p><strong>C58</strong> 求二叉树的 WPL（带权路径长度）：结点带权 data，WPL=Σ(权×深度)，根深度为 0。</p>
+<p>思路：先序带层参递归；叶子结点才计入（哈夫曼树语境）。</p>
+<pre><code class="language-c">long WPL(BiTNode *t, int depth) {
+    if (!t) return 0;
+    if (!t-&gt;lchild &amp;&amp; !t-&gt;rchild)          /* 叶子才计入（哈夫曼树） */
+        return (long)t-&gt;data * depth;
+    return WPL(t-&gt;lchild, depth+1) + WPL(t-&gt;rchild, depth+1);
+}
+/* 调用：WPL(root, 0) */
+</code></pre>
+<p>易错：①哈夫曼语境只有叶子有权，非哈夫曼语境题面若说"所有结点带权"则去掉叶子判断；②根深度是 0 还是 1 看题面；③用 long 防溢出是好习惯。【2014统考真题就是求 WPL——比大小手算时"哈夫曼树 WPL=非叶结点权值和"这个性质能秒算。】</p>
+<p><strong>C59</strong> 判断二叉树是否为完全二叉树（层序 + 空洞标记）。</p>
+<p>思路：层序遍历，允许入队 NULL；一旦出队遇到 NULL，之后出队的必须全为 NULL。</p>
+<pre><code class="language-c">int IsComplete(BiTNode *t) {
+    if (!t) return 1;
+    BiTNode *Q[MaxSize]; int f = 0, r = 0;
+    Q[r++] = t;
+    int seenNull = 0;
+    while (f &lt; r) {
+        BiTNode *p = Q[f++];
+        if (!p) { seenNull = 1; continue; }
+        if (seenNull) return 0;            /* NULL 之后出现实结点 */
+        Q[r++] = p-&gt;lchild;
+        Q[r++] = p-&gt;rchild;
+    }
+    return 1;
+}
+</code></pre>
+<p>复杂度：O(n), O(n)。易错：①必须把空孩子也入队（这是算法核心，漏了就是普通层序）；②判据是"NULL 之后不许再有实结点"，不是"最后一层必须满"。</p>
+<p><strong>C60</strong> 判断二叉树是否为二叉排序树（BST）。</p>
+<p>思路：中序递增 ⇔ BST。递归中保存"上一个访问的值"。</p>
+<pre><code class="language-c">int IsBST(BiTNode *t, int *prev) {
+    if (!t) return 1;
+    if (!IsBST(t-&gt;lchild, prev)) return 0;
+    if (*prev != INT_MIN &amp;&amp; t-&gt;data &lt;= *prev) return 0;  /* 严格递增 */
+    *prev = t-&gt;data;
+    return IsBST(t-&gt;rchild, prev);
+}
+/* 调用：int prev = INT_MIN; IsBST(root, &amp;prev); */
+</code></pre>
+<p>易错：①判 <code>&lt;=</code>（BST 无重复值时严格递增；若题目允许重复值需按"左≤根&lt;右"改判据，看题面）；②自顶向下传区间(min,max)法也可，但 prev 法最短；③不能只判"每结点左&lt;根&lt;右"——反例 [3,1,5,null,null,2,6]（孙辈越界）。</p>
+<p><strong>C61</strong> 判断二叉树是否为平衡二叉树（AVL 判定）。</p>
+<p>思路：自底向上——先算左右子树高度，不平衡即一路返回 -1 剪枝。</p>
+<pre><code class="language-c">int H(BiTNode *t) {                        /* 平衡返回高度，否则返回 -1 */
+    if (!t) return 0;
+    int l = H(t-&gt;lchild);
+    if (l == -1) return -1;
+    int r = H(t-&gt;rchild);
+    if (r == -1) return -1;
+    if (l - r &gt; 1 || r - l &gt; 1) return -1;
+    return (l &gt; r ? l : r) + 1;
+}
+int IsAVL(BiTNode *t) { return H(t) != -1; }
+</code></pre>
+<p>复杂度：O(n)。易错：①自顶向下算高度是 O(n²)，408 大题按 O(n) 估分；②只判根平衡不够——要每层都平衡（剪枝写法天然保证）。</p>
+<p><strong>C62</strong> 在二叉树中查找值为 x 的结点，返回其层号（根为第 1 层）；不存在返回 0。</p>
+<pre><code class="language-c">int Level(BiTNode *t, int x, int dep) {    /* dep 初始传 1 */
+    if (!t) return 0;
+    if (t-&gt;data == x) return dep;
+    int l = Level(t-&gt;lchild, x, dep+1);
+    if (l) return l;
+    return Level(t-&gt;rchild, x, dep+1);
+}
+</code></pre>
+<p>易错：先序带层参数是"求层号/求路径"类题的通用模板；求所有祖先则传路径数组回溯，模板同源。</p>
+<p><strong>C63</strong> 中序线索二叉树：为中序线索化（建立 ltag/rtag 与前驱后继线索）。</p>
+<pre><code class="language-c">typedef struct ThreadNode {
+    int data;
+    struct ThreadNode *lchild, *rchild;
+    int ltag, rtag;                        /* 0=孩子，1=线索 */
+} ThreadNode;
+
+ThreadNode *pre = NULL;                    /* 全局：刚访问的结点 */
+void InThread(ThreadNode *p) {
+    if (!p) return;
+    InThread(p-&gt;lchild);
+    if (p-&gt;lchild == NULL) { p-&gt;ltag = 1; p-&gt;lchild = pre; }
+    if (pre &amp;&amp; pre-&gt;rchild == NULL) { pre-&gt;rtag = 1; pre-&gt;rchild = p; }
+    pre = p;
+    InThread(p-&gt;rchild);
+}
+void CreateInThread(ThreadNode *T) {
+    pre = NULL;
+    if (T) { InThread(T);
+        if (pre-&gt;rchild == NULL) pre-&gt;rtag = 1;  /* 处理最后一个结点 */
+    }
+}
+</code></pre>
+<p>复杂度：O(n)。易错：①pre 的处理在"访问当前结点时"补前驱的后继——两半逻辑分开写；②最后一个结点的 rchild 线索要单独收尾；③线索树的中序遍历不再用栈，沿 rtag=1 走后继——简答题常问"如何在线索树中找中序后继"。</p>
+<h2>第七章 图（C64–C73）</h2>
+<p><strong>C64</strong> 图的两种存储结构定义（必须默写级）。</p>
+<pre><code class="language-c">/* 邻接矩阵 */
+typedef struct {
+    int n, e;                              /* 顶点数、边数 */
+    int edge[MaxVex][MaxVex];              /* 0/1 或权值，INF 表不邻接 */
+    int vex[MaxVex];                       /* 顶点信息 */
+} MGraph;
+
+/* 邻接表 */
+typedef struct ArcNode {
+    int adjvex;
+    struct ArcNode *next;
+    int w;                                 /* 权值（网） */
+} ArcNode;
+typedef struct {
+    ArcNode *first[MaxVex];
+    int n, e;
+} ALGraph;
+</code></pre>
+<p>易错：①无向图的矩阵对称、邻接表每条边存两次；②n 顶点 e 边的邻接表边结点数=2e（无向）；③"邻接矩阵 BFS/DFS 序列与邻接表不同"（表序依赖建表次序）——选择题高频。</p>
+<p><strong>C65</strong> 深度优先搜索（递归）+ 非连通图处理。</p>
+<pre><code class="language-c">int visited[MaxVex];
+void DFS(ALGraph *G, int v) {
+    visited[v] = 1;
+    visit(v);
+    for (ArcNode *p = G-&gt;first[v]; p; p = p-&gt;next)
+        if (!visited[p-&gt;adjvex]) DFS(G, p-&gt;adjvex);
+}
+void DFSTraverse(ALGraph *G) {
+    for (int i = 0; i &lt; G-&gt;n; i++) visited[i] = 0;
+    for (int i = 0; i &lt; G-&gt;n; i++)
+        if (!visited[i]) DFS(G, i);        /* 非连通图：多个连通分量 */
+}
+</code></pre>
+<p>复杂度：邻接表 O(n+e)，邻接矩阵 O(n²)。易错：①外套 for 处理非连通——漏了就只遍历一个分量；②复杂度差异来自"找邻接点的代价"，这是论述题标准答案。</p>
+<p><strong>C66</strong> 广度优先搜索（BFS）+ 求单源最短跳数。</p>
+<pre><code class="language-c">void BFS(ALGraph *G, int v) {
+    int Q[MaxVex], f = 0, r = 0;
+    for (int i = 0; i &lt; G-&gt;n; i++) visited[i] = 0;
+    visited[v] = 1; Q[r++] = v;
+    while (f &lt; r) {
+        int u = Q[f++]; visit(u);
+        for (ArcNode *p = G-&gt;first[u]; p; p = p-&gt;next)
+            if (!visited[p-&gt;adjvex]) {
+                visited[p-&gt;adjvex] = 1;    /* 入队即标记，防重复入队 */
+                Q[r++] = p-&gt;adjvex;
+            }
+    }
+}
+</code></pre>
+<p>易错：①"入队即置 visited"，出队才置会重复入队（队列爆炸）；②无权图最短路径=BFS，d[] 随层 +1——这是"BFS 求最短路"的论述依据。</p>
+<p><strong>C67</strong> 邻接矩阵转邻接表。</p>
+<pre><code class="language-c">void M2AL(MGraph *M, ALGraph *G) {
+    G-&gt;n = M-&gt;n; G-&gt;e = M-&gt;e;
+    for (int i = 0; i &lt; M-&gt;n; i++) G-&gt;first[i] = NULL;
+    for (int i = 0; i &lt; M-&gt;n; i++)
+        for (int j = M-&gt;n - 1; j &gt;= 0; j--)    /* 倒序头插 → 表中序号升序 */
+            if (M-&gt;edge[i][j] != 0 &amp;&amp; M-&gt;edge[i][j] != INF) {
+                ArcNode *p = (ArcNode *)malloc(sizeof(ArcNode));
+                p-&gt;adjvex = j; p-&gt;w = M-&gt;edge[i][j];
+                p-&gt;next = G-&gt;first[i]; G-&gt;first[i] = p;
+            }
+}
+</code></pre>
+<p>易错：想得到"边结点按序号升序"就倒序扫描头插；正序头插得到降序——两种都算对，但 DFS/BFS 序列会不同，答题要自洽。</p>
+<p><strong>C68</strong> 拓扑排序（Kahn，入度法），输出序列或报告有环。</p>
+<p>思路：入度为 0 的顶点入栈/队列；出队输出，删其出边（邻接点入度减 1），入度归 0 则入队；输出个数 &lt; n 即有环。</p>
+<pre><code class="language-c">int TopoSort(ALGraph *G, int topo[]) {
+    int indeg[MaxVex] = {0}, Q[MaxVex], f = 0, r = 0, cnt = 0;
+    for (int i = 0; i &lt; G-&gt;n; i++)
+        for (ArcNode *p = G-&gt;first[i]; p; p = p-&gt;next) indeg[p-&gt;adjvex]++;
+    for (int i = 0; i &lt; G-&gt;n; i++)
+        if (!indeg[i]) Q[r++] = i;
+    while (f &lt; r) {
+        int u = Q[f++];
+        topo[cnt++] = u;
+        for (ArcNode *p = G-&gt;first[u]; p; p = p-&gt;next)
+            if (--indeg[p-&gt;adjvex] == 0) Q[r++] = p-&gt;adjvex;
+    }
+    return cnt == G-&gt;n;                    /* 0 = 有环 */
+}
+</code></pre>
+<p>复杂度：O(n+e)。易错：①"输出数&lt;n ⇔ 有环"是判环通用结论（选择题常直接考）；②用栈和队列得到的序列都可能不唯一，判断题"拓扑序唯一"错误（除非每步入度0顶点恰一个）；③AOV 网有环⇔拓扑排序失败。</p>
+<p><strong>C69</strong> Prim 最小生成树（O(n²) 邻接矩阵版）。</p>
+<p>思路：维护 lowcost[i]=i 到已建树部分的最短距离；每轮选非树中最小者加入。</p>
+<pre><code class="language-c">void Prim(MGraph *G, int u0) {
+    int lowcost[MaxVex], inTree[MaxVex] = {0};
+    for (int i = 0; i &lt; G-&gt;n; i++) lowcost[i] = G-&gt;edge[u0][i];
+    inTree[u0] = 1; lowcost[u0] = 0;
+    for (int k = 1; k &lt; G-&gt;n; k++) {
+        int u = -1, min = INF;
+        for (int i = 0; i &lt; G-&gt;n; i++)
+            if (!inTree[i] &amp;&amp; lowcost[i] &lt; min) { min = lowcost[i]; u = i; }
+        inTree[u] = 1;
+        /* 此处 lowcost[u] 即本次选中的边权，可输出 (u, pre[u]) */
+        for (int i = 0; i &lt; G-&gt;n; i++)
+            if (!inTree[i] &amp;&amp; G-&gt;edge[u][i] &lt; lowcost[i])
+                lowcost[i] = G-&gt;edge[u][i];
+    }
+}
+</code></pre>
+<p>复杂度：O(n²)，与边数无关 → <strong>稠密图用 Prim</strong>。易错：①lowcost 更新只在"新点加入后"；②手算题每步写清"候选边集"，圈定已加入顶点。</p>
+<p><strong>C70</strong> Kruskal 最小生成树（并查集实现）。</p>
+<p>思路：边按权升序排列，依次取不构成回路的边（用并查集判两端是否同根）。</p>
+<pre><code class="language-c">int fa[MaxVex];
+int Find(int x) { while (fa[x] != x) x = fa[x]; return x; }
+
+int Kruskal(Edge edges[], int m, int n) {  /* m 条边，n 个顶点；edges 已按权升序 */
+    for (int i = 0; i &lt; n; i++) fa[i] = i;
+    int cnt = 0, cost = 0;
+    for (int i = 0; i &lt; m &amp;&amp; cnt &lt; n - 1; i++) {
+        int a = Find(edges[i].u), b = Find(edges[i].v);
+        if (a != b) { fa[a] = b; cost += edges[i].w; cnt++; }
+    }
+    return cnt == n - 1 ? cost : -1;       /* -1 = 非连通 */
+}
+</code></pre>
+<p>复杂度：排序 O(elog e) → <strong>稀疏图用 Kruskal</strong>。易错：①判"同根=会成环"；②选满 n-1 条边即停；③ MST 的"cut 性质"（横切边最小必在某个 MST 中）是选择/简答理论依据。</p>
+<p><strong>C71</strong> Dijkstra 单源最短路（邻接矩阵 O(n²) 版）。</p>
+<pre><code class="language-c">void Dijkstra(MGraph *G, int v0, int dist[], int path[]) {
+    int done[MaxVex] = {0};
+    for (int i = 0; i &lt; G-&gt;n; i++) {
+        dist[i] = G-&gt;edge[v0][i];
+        path[i] = (dist[i] &lt; INF &amp;&amp; i != v0) ? v0 : -1;
+    }
+    done[v0] = 1; dist[v0] = 0;
+    for (int k = 1; k &lt; G-&gt;n; k++) {
+        int u = -1, min = INF;
+        for (int i = 0; i &lt; G-&gt;n; i++)
+            if (!done[i] &amp;&amp; dist[i] &lt; min) { min = dist[i]; u = i; }
+        if (u == -1) break;
+        done[u] = 1;
+        for (int i = 0; i &lt; G-&gt;n; i++)
+            if (!done[i] &amp;&amp; dist[u] + G-&gt;edge[u][i] &lt; dist[i]) {
+                dist[i] = dist[u] + G-&gt;edge[u][i];
+                path[i] = u;
+            }
+    }
+}
+</code></pre>
+<p>复杂度：O(n²)。易错：①<strong>不能处理负权边</strong>（贪心"确定即定"被破坏）——简答必考；②dist[u]+edge 与 INF 相加可能溢出，判 <code>G-&gt;edge[u][i]!=INF</code> 前置更稳；③path 数组回溯打印路径。</p>
+<p><strong>C72</strong> Floyd 全源最短路（三重循环）。</p>
+<pre><code class="language-c">void Floyd(MGraph *G, int dist[][MaxVex]) {
+    for (int i = 0; i &lt; G-&gt;n; i++)
+        for (int j = 0; j &lt; G-&gt;n; j++) dist[i][j] = G-&gt;edge[i][j];
+    for (int k = 0; k &lt; G-&gt;n; k++)         /* 中间点必须放最外层！ */
+        for (int i = 0; i &lt; G-&gt;n; i++)
+            for (int j = 0; j &lt; G-&gt;n; j++)
+                if (dist[i][k] + dist[k][j] &lt; dist[i][j])
+                    dist[i][j] = dist[i][k] + dist[k][j];
+}
+</code></pre>
+<p>复杂度：O(n³), O(n²)。易错：①k 放最外层是算法正确性的关键（顺序迭代动态规划），内层任意；②允许负权边但不允许负权回路——与 Dijkstra 的区别是论述题常客。</p>
+<p><strong>C73</strong> 判断无向图是否为一棵树（连通 + 恰有 n-1 条边）。</p>
+<p>思路：条件=连通且边数 n-1（二者合起来已排除环）；实现=DFS 计数访问到的顶点数。</p>
+<pre><code class="language-c">int cntV;
+void dfs(ALGraph *G, int v) {
+    visited[v] = 1; cntV++;
+    for (ArcNode *p = G-&gt;first[v]; p; p = p-&gt;next)
+        if (!visited[p-&gt;adjvex]) dfs(G, p-&gt;adjvex);
+}
+int IsTree(ALGraph *G) {
+    if (G-&gt;e != G-&gt;n - 1) return 0;
+    for (int i = 0; i &lt; G-&gt;n; i++) visited[i] = 0;
+    cntV = 0;
+    dfs(G, 0);
+    return cntV == G-&gt;n;
+}
+</code></pre>
+<p>易错：只判连通不判边数不够（n 个点 n 条边的单环也连通）；只判边数不判连通也不够（两个孤立块）。两个条件缺一不可——这是本题主旨。</p>
+<h2>第八章 查找（C74–C81）</h2>
+<p><strong>C74</strong> 折半查找（非递归，含失败判定）。</p>
+<pre><code class="language-c">int BinSearch(int a[], int n, int x) {    /* a 升序，下标 0..n-1 */
+    int l = 0, h = n - 1, mid;
+    while (l &lt;= h) {
+        mid = (l + h) / 2;
+        if (a[mid] == x) return mid;
+        else if (a[mid] &gt; x) h = mid - 1;
+        else l = mid + 1;
+    }
+    return -1;
+}
+</code></pre>
+<p>复杂度：O(log₂n)。易错：①循环条件 <code>l&lt;=h</code>（写成 &lt; 会漏单元素区间）；②mid±1 必须跳过（死循环陷阱）；③手算判定树：⌈log₂(n+1)⌉ 层，成功 ASL=Σ(层×个数)/n。</p>
+<p><strong>C75</strong> 折半查找递归版。</p>
+<pre><code class="language-c">int BinRec(int a[], int l, int h, int x) {
+    if (l &gt; h) return -1;
+    int mid = (l + h) / 2;
+    if (a[mid] == x) return mid;
+    if (a[mid] &gt; x) return BinRec(a, l, mid - 1, x);
+    return BinRec(a, mid + 1, h, x);
+}
+</code></pre>
+<p>易错：递归栈深 O(log n)；"折半查找判定树是平衡二叉树"——判断题正确（高度差≤1），但"是满二叉树"错误。</p>
+<p><strong>C76</strong> BST 插入（非递归），含建树。</p>
+<pre><code class="language-c">void BSTInsert(BSTNode **root, int x) {
+    BSTNode *s = (BSTNode *)malloc(sizeof(BSTNode));
+    s-&gt;data = x; s-&gt;lchild = s-&gt;rchild = NULL;
+    if (*root == NULL) { *root = s; return; }
+    BSTNode *p = *root;
+    while (1) {
+        if (x &lt; p-&gt;data) {
+            if (!p-&gt;lchild) { p-&gt;lchild = s; return; }
+            p = p-&gt;lchild;
+        } else if (x &gt; p-&gt;data) {
+            if (!p-&gt;rchild) { p-&gt;rchild = s; return; }
+            p = p-&gt;rchild;
+        } else return;                     /* 已存在，不插 */
+    }
+}
+</code></pre>
+<p>易错：①相同值不插入（408 约定 BST 无重复）；②插入的新结点<strong>一定是叶子</strong>——选择题考点；③查找路径长度=比较次数，ASL=路径和/结点数。</p>
+<p><strong>C77</strong> BST 删除（三种情况）。</p>
+<p>思路：叶子直接删；单孩子用孩子顶替；双孩子用<strong>中序前驱</strong>（左子树最右）或<strong>中序后继</strong>（右子树最左）的值替换，再删那个替身结点。</p>
+<pre><code class="language-c">BSTNode *DelNode(BSTNode *t, int x) {
+    if (!t) return NULL;
+    if (x &lt; t-&gt;data) t-&gt;lchild = DelNode(t-&gt;lchild, x);
+    else if (x &gt; t-&gt;data) t-&gt;rchild = DelNode(t-&gt;rchild, x);
+    else {
+        if (t-&gt;lchild &amp;&amp; t-&gt;rchild) {      /* 双孩子：找中序后继 */
+            BSTNode *s = t-&gt;rchild;
+            while (s-&gt;lchild) s = s-&gt;lchild;
+            t-&gt;data = s-&gt;data;
+            t-&gt;rchild = DelNode(t-&gt;rchild, s-&gt;data);
+        } else {                           /* 叶子或单孩子 */
+            BSTNode *c = t-&gt;lchild ? t-&gt;lchild : t-&gt;rchild;
+            free(t);
+            return c;
+        }
+    }
+    return t;
+}
+</code></pre>
+<p>易错：①双孩子删除后<strong>树高可能变</strong>、BST 性质不破坏；②手算题删除序列时注意"用后继替换后，后继结点仍要按规则删"；③删除平均 O(log n)，最坏 O(n)（退化成链）。</p>
+<p><strong>C78</strong> 散列表——链地址法：插入 + 查找（除留余数法 H(key)=key%p）。</p>
+<pre><code class="language-c">#define P 13
+typedef struct HNode { int key; struct HNode *next; } HNode;
+HNode *ht[P];                              /* 初始化为 NULL */
+
+int Hash(int key) { return key % P; }
+void HInsert(int key) {
+    int h = Hash(key);
+    HNode *s = (HNode *)malloc(sizeof(HNode));
+    s-&gt;key = key;
+    s-&gt;next = ht[h]; ht[h] = s;            /* 头插：O(1) */
+}
+HNode *HSearch(int key) {
+    for (HNode *p = ht[Hash(key)]; p; p = p-&gt;next)
+        if (p-&gt;key == key) return p;
+    return NULL;
+}
+</code></pre>
+<p>易错：①同义词用链表串接、头插最省事；②ASL计算：成功=Σ(每链第i个比较i次)/元素数，失败=Σ(链长)/p（408 常考这个"失败 ASL 分母是 p 不是 n"）；③装填因子 α=n/m，越大冲突越狠。</p>
+<p><strong>C79</strong> 散列表——线性探测法：插入 + 查找。</p>
+<pre><code class="language-c">#define M 16
+int ht2[M];                                /* 用 -1 表示空（初始） */
+
+int Hash2(int key) { return key % M; }
+int LInsert(int key) {
+    int h = Hash2(key);
+    while (ht2[h] != -1) h = (h + 1) % M;  /* 探测下一单元 */
+    ht2[h] = key;
+    return h;
+}
+int LSearch(int key) {
+    int h = Hash2(key);
+    while (ht2[h] != -1) {
+        if (ht2[h] == key) return h;
+        h = (h + 1) % M;
+    }
+    return -1;
+}
+</code></pre>
+<p>易错：①"堆积（聚集）"：非同义词争夺同一探测序列，ASL 上升——简答必考；②线性探测<strong>删除不能物理置空</strong>（会截断探测链），要打删除标记——判断题高频；③探测次序 (h+1),(h+2)... %M，最多探测 M 次。</p>
+<p><strong>C80</strong> 顺序查找——哨兵法（从后往前，省去越界判断）。</p>
+<pre><code class="language-c">int SeqSearch(int a[], int n, int x) {     /* a[0] 空作哨兵，数据在 a[1..n] */
+    a[0] = x;
+    int i = n;
+    while (a[i] != x) i--;
+    return i;                              /* 0 表示失败 */
+}
+</code></pre>
+<p>易错：①哨兵价值=少一次 i&gt;=1 判断，约省一半比较时间——简答题点；②无序表必用顺序查找；成功 ASL=(n+1)/2。</p>
+<p><strong>C81</strong> 分块查找（索引顺序查找）：块间有序、块内无序。</p>
+<p>思路：先在索引表（存每块最大值）中折半/顺序定位块，再在块内顺序查找。</p>
+<pre><code class="language-c">typedef struct { int maxval; int start, end; } IndexItem;
+
+int BlockSearch(int a[], IndexItem idx[], int m, int x) { /* m 块 */
+    int lo = 0, hi = m - 1, bi = -1;
+    while (lo &lt;= hi) {                     /* 索引表折半找最后一块 maxval&gt;=x */
+        int mid = (lo + hi) / 2;
+        if (idx[mid].maxval &gt;= x) { bi = mid; hi = mid - 1; }
+        else lo = mid + 1;
+    }
+    if (bi == -1) return -1;
+    for (int i = idx[bi].start; i &lt;= idx[bi].end; i++)
+        if (a[i] == x) return i;
+    return -1;
+}
+</code></pre>
+<p>复杂度：ASL≈√n 量级（分块最优 s=√n）。易错：①块内必须顺序查找（无序）；②索引表折半时"找最后一个 ≥x 的块"与普通折半的细节不同——考过；③它=顺序查找与折半查找的折中，408 概念题爱考"插块内插入不需移动其他块"（链接存储时）。</p>
+<h2>第九章 排序（C82–C94）</h2>
+<p><strong>C82</strong> 直接插入排序。</p>
+<pre><code class="language-c">void InsertSort(int a[], int n) {          /* 下标 0..n-1 */
+    for (int i = 1; i &lt; n; i++)
+        if (a[i] &lt; a[i-1]) {
+            int t = a[i], j = i - 1;
+            while (j &gt;= 0 &amp;&amp; a[j] &gt; t) { a[j+1] = a[j]; j--; }
+            a[j+1] = t;
+        }
+}
+</code></pre>
+<p>复杂度：最好 O(n)（基本有序），最坏/平均 O(n²)，稳定。易错：基本有序时直接插入接近 O(n)——"哪一种排序对基本有序序列最有利"高频；哨兵版下标从 1 起。</p>
+<p><strong>C83</strong> 折半插入排序（比较次数 O(n log n)，移动次数仍 O(n²)）。</p>
+<pre><code class="language-c">void BinInsertSort(int a[], int n) {
+    for (int i = 1; i &lt; n; i++) {
+        int t = a[i], l = 0, h = i - 1;
+        while (l &lt;= h) {                   /* 找最后一个 &lt;=t 的位置 */
+            int mid = (l + h) / 2;
+            if (a[mid] &gt; t) h = mid - 1; else l = mid + 1;
+        }
+        for (int j = i - 1; j &gt;= l; j--) a[j+1] = a[j];
+        a[l] = t;
+    }
+}
+</code></pre>
+<p>易错：只减少<strong>比较</strong>不减少<strong>移动</strong>——稳定性、移动次数与直接插入相同；手算题别把比较次数按直接插入算。</p>
+<p><strong>C84</strong> 希尔排序（增量 d=n/2 递减）。</p>
+<pre><code class="language-c">void ShellSort(int a[], int n) {
+    for (int d = n / 2; d &gt;= 1; d /= 2)
+        for (int i = d; i &lt; n; i++)        /* 对各分组做插入（按间隔 d 遍历即等价） */
+            if (a[i] &lt; a[i-d]) {
+                int t = a[i], j = i - d;
+                while (j &gt;= 0 &amp;&amp; a[j] &gt; t) { a[j+d] = a[j]; j -= d; }
+                a[j+d] = t;
+            }
+}
+</code></pre>
+<p>复杂度：约 O(n^1.3)，不稳定。易错：①希尔不稳定（相同元素可能分到不同组被打乱次序）——判断题；②手算"第 d 趟结果"= 每组内插排后的整体数组，不是只排一组。</p>
+<p><strong>C85</strong> 冒泡排序（带提前结束优化）。</p>
+<pre><code class="language-c">void BubbleSort(int a[], int n) {
+    for (int i = 0; i &lt; n - 1; i++) {
+        int swapped = 0;
+        for (int j = 0; j &lt; n - 1 - i; j++)
+            if (a[j] &gt; a[j+1]) { int t=a[j]; a[j]=a[j+1]; a[j+1]=t; swapped = 1; }
+        if (!swapped) break;
+    }
+}
+</code></pre>
+<p>复杂度：最好 O(n)（一趟无交换），平均 O(n²)，稳定。易错：①第 i 趟后<strong>最大 i 个元素到位</strong>（从大到小依次沉底），手算按这个推；②交换条件 <code>&gt;</code> 不取等——取等就不稳定了。</p>
+<p><strong>C86</strong> 快速排序（挖坑法 partition + 递归）。</p>
+<pre><code class="language-c">int Partition(int a[], int l, int h) {
+    int pivot = a[l];                      /* 首元素为基准 */
+    while (l &lt; h) {
+        while (l &lt; h &amp;&amp; a[h] &gt;= pivot) h--;
+        a[l] = a[h];                       /* 小的填左坑 */
+        while (l &lt; h &amp;&amp; a[l] &lt;= pivot) l++;
+        a[h] = a[l];                       /* 大的填右坑 */
+    }
+    a[l] = pivot;
+    return l;
+}
+void QuickSort(int a[], int l, int h) {
+    if (l &lt; h) {
+        int p = Partition(a, l, h);
+        QuickSort(a, l, p - 1);
+        QuickSort(a, p + 1, h);
+    }
+}
+</code></pre>
+<p>复杂度：平均 O(n log n)（空间 O(log n) 递归栈），最坏 O(n²)（基本有序+首基准！），不稳定。
+易错：①最坏情形恰是"初始有序或逆序"——与直接插入相反，辨析题；②手算"一趟"= 基准落位 + 左小右大，基准<strong>必在最终位置</strong>；③内层 <code>&gt;=</code>/<code>&lt;=</code> 不取等会死循环（相等元素来回换）。</p>
+<p><strong>C87</strong> 简单选择排序。</p>
+<pre><code class="language-c">void SelectSort(int a[], int n) {
+    for (int i = 0; i &lt; n - 1; i++) {
+        int k = i;
+        for (int j = i + 1; j &lt; n; j++)
+            if (a[j] &lt; a[k]) k = j;
+        if (k != i) { int t = a[i]; a[i] = a[k]; a[k] = t; }
+    }
+}
+</code></pre>
+<p>复杂度：比较恒 O(n²)（与初始序列无关！），移动最多 3(n-1) 次，不稳定（交换跨距大）。易错："比较次数与初始状态无关"的排序：简单选择、折半插入——判断题常考。</p>
+<p><strong>C88</strong> 堆排序完整版（建堆 + 依次取顶）。</p>
+<pre><code class="language-c">void SiftDown(int a[], int k, int n) {     /* 大根堆，下标 0..n-1 */
+    int t = a[k];
+    for (int i = 2*k + 1; i &lt; n; i = 2*i + 1) {
+        if (i + 1 &lt; n &amp;&amp; a[i] &lt; a[i+1]) i++;   /* 取较大孩子 */
+        if (t &gt;= a[i]) break;
+        a[k] = a[i]; k = i;
+    }
+    a[k] = t;
+}
+void HeapSort(int a[], int n) {
+    for (int i = n/2 - 1; i &gt;= 0; i--)     /* 建堆：最后一个分支结点起 */
+        SiftDown(a, i, n);
+    for (int i = n - 1; i &gt; 0; i--) {
+        int t = a[0]; a[0] = a[i]; a[i] = t;   /* 顶（最大）放末尾 */
+        SiftDown(a, 0, i);
+    }
+}
+</code></pre>
+<p>复杂度：O(n log n) 全程，空间 O(1)，不稳定。
+易错：①建堆从 <code>n/2-1</code> <strong>倒着</strong>调整（0 下标版），1 下标版从 n/2 起——两套下标别背混，考卷写清自己用哪套；②升序用<strong>大根堆</strong>（每次取最大放后面）；③建堆 O(n)、之后 n-1 次调整 O(n log n)——"建堆复杂度"辨析题；④手算建堆从最后一个分支结点逐个往前 sift。</p>
+<p><strong>C89</strong> 归并排序（2 路，递归 + merge）。</p>
+<pre><code class="language-c">void Merge(int a[], int l, int m, int r, int tmp[]) {
+    int i = l, j = m + 1, k = l;
+    while (i &lt;= m &amp;&amp; j &lt;= r) tmp[k++] = (a[i] &lt;= a[j]) ? a[i++] : a[j++];
+    while (i &lt;= m) tmp[k++] = a[i++];
+    while (j &lt;= r) tmp[k++] = a[j++];
+    for (int t = l; t &lt;= r; t++) a[t] = tmp[t];
+}
+void MergeSort(int a[], int l, int r, int tmp[]) {
+    if (l &gt;= r) return;
+    int m = (l + r) / 2;
+    MergeSort(a, l, m, tmp);
+    MergeSort(a, m + 1, r, tmp);
+    Merge(a, l, m, r, tmp);
+}
+</code></pre>
+<p>复杂度：O(n log n) 全程、空间 O(n)，<strong>稳定</strong>。
+易错：①"n 个元素 2 路归并趟数=⌈log₂n⌉，与初始序列无关"——判断题；②<code>&lt;=</code> 取等保证稳定；③归并是唯一稳定的 O(n log n) 排序（堆排/快排都不稳）——辨析题最爱。</p>
+<p><strong>C90</strong> 基数排序（最低位优先 LSD，以三位数为例）。</p>
+<p>思路：按个、十、百位依次"分配-收集"，d 趟后整体有序。用队列实现分配。</p>
+<pre><code class="language-c">void RadixSort(int a[], int n) {           /* 0&lt;=a[i]&lt;1000 */
+    int b[10][MaxSize], cnt[10];
+    for (int d = 1; d &lt;= 3; d++) {         /* d=1 个位, 2 十位, 3 百位 */
+        for (int q = 0; q &lt; 10; q++) cnt[q] = 0;
+        for (int i = 0; i &lt; n; i++) {
+            int dig = (a[i] / e10(d)) % 10;
+            b[dig][cnt[dig]++] = a[i];     /* 分配 */
+        }
+        int k = 0;
+        for (int q = 0; q &lt; 10; q++)       /* 收集 */
+            for (int t = 0; t &lt; cnt[q]; t++) a[k++] = b[q][t];
+    }
+}
+int e10(int d) { int r = 1; while (--d) r *= 10; return r; }
+</code></pre>
+<p>复杂度：O(d(n+r))，d=位数、r=基数（10），空间 O(r+n)，<strong>稳定</strong>。
+易错：①每趟收集时桶序 0→9 依次取，桶内先进先出（稳定的前提）；②"适合 d 小 n 大的整数序列"适用性论述；③判断题：基数排序比较次数为 0。</p>
+<p><strong>C91</strong> 双向冒泡（一趟冒两个方向：最小沉底+最大浮顶）。</p>
+<pre><code class="language-c">void Bubble2(int a[], int n) {
+    int l = 0, h = n - 1, swapped = 1;
+    while (l &lt; h &amp;&amp; swapped) {
+        swapped = 0;
+        for (int j = l; j &lt; h; j++)        /* 正向：大的冒到 h */
+            if (a[j] &gt; a[j+1]) { int t=a[j]; a[j]=a[j+1]; a[j+1]=t; swapped = 1; }
+        h--;
+        for (int j = h; j &gt; l; j--)        /* 反向：小的沉到 l */
+            if (a[j] &lt; a[j-1]) { int t=a[j]; a[j]=a[j-1]; a[j-1]=t; swapped = 1; }
+        l++;
+    }
+}
+</code></pre>
+<p>易错：每完成一对方向，l++ 且 h--；这是"变形排序"大题的典型（题目一般给出明确规则，按题面走）。</p>
+<p><strong>C92</strong>【王道风格】O(n) 时间把正整数序列调整为"奇数在前偶数在后"（不要求稳定）。</p>
+<p>思路：双指针相向而走，左找偶、右找奇，交换。</p>
+<pre><code class="language-c">void OddEven(int a[], int n) {
+    int i = 0, j = n - 1;
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; a[i] % 2 == 1) i++;    /* 左跳过奇数 */
+        while (i &lt; j &amp;&amp; a[j] % 2 == 0) j--;    /* 右跳过偶数 */
+        if (i &lt; j) { int t = a[i]; a[i] = a[j]; a[j] = t; i++; j--; }
+    }
+}
+</code></pre>
+<p>复杂度：O(n), O(1)。易错：①题目若要求"相对次序不变"就不能这么干（要稳定得用辅助数组 O(n) 空间）；②内层循环条件都要带 <code>i&lt;j</code> 防越界；③此题考"以比较交换为基本操作、一趟双指针"的快排 partition 思想变体。</p>
+<p><strong>C93</strong> 九种排序总表（背诵级，辨析题全覆盖）。</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均</th>
+<th>最坏</th>
+<th>最好</th>
+<th>空间</th>
+<th>稳定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接插入</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(n)·基本有序</td>
+<td>O(1)</td>
+<td>稳</td>
+</tr>
+<tr>
+<td>折半插入</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>稳</td>
+</tr>
+<tr>
+<td>希尔</td>
+<td>≈O(n^1.3)</td>
+<td>O(n²)</td>
+<td>—</td>
+<td>O(1)</td>
+<td>不稳</td>
+</tr>
+<tr>
+<td>冒泡</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>稳</td>
+</tr>
+<tr>
+<td>快排</td>
+<td>O(n log n)</td>
+<td>O(n²)·有序</td>
+<td>O(n log n)</td>
+<td>O(log n)</td>
+<td>不稳</td>
+</tr>
+<tr>
+<td>简单选择</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(n²)</td>
+<td>O(1)</td>
+<td>不稳</td>
+</tr>
+<tr>
+<td>堆排</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(1)</td>
+<td>不稳</td>
+</tr>
+<tr>
+<td>归并</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n)</td>
+<td>稳</td>
+</tr>
+<tr>
+<td>基数</td>
+<td>O(d(n+r))</td>
+<td>同左</td>
+<td>同左</td>
+<td>O(r+n)</td>
+<td>稳</td>
+</tr>
+</tbody>
+</table>
+<p>口诀：<strong>稳定 = 插冒归基</strong>（其他全不稳）；O(n log n) 三兄弟=快堆归（快最坏炸、堆空间省、归稳定）。
+"比较次数与初始序列无关"：简单选择、折半插入、基数（无比较）、堆排（建堆后必调整）。
+"适合基本有序"：直接插入、冒泡（可 O(n)）。
+"每趟至少一个元素落最终位"：快排（基准）、简单选择、堆排（顶）；冒泡（每趟最大到位）也算。</p>
+<p><strong>C94</strong> 手算题通用技巧（大题第一问）。</p>
+<ol>
+<li><strong>插入/冒泡/选择/希尔</strong>：按趟写全数组状态；插入只动前 i+1 个、其余不动。</li>
+<li><strong>快排一趟</strong>：只保证基准落位，两侧内部顺序"恰好是过程结果"，必须模拟挖坑过程，不能想当然。</li>
+<li><strong>建堆一趟</strong>：从最后分支结点起逐个 sift；写 sift 中间交换路径（家长与哪个孩子换）。</li>
+<li><strong>归并一趟</strong>：按当前分组两两归并，写每对合并结果。</li>
+<li><strong>基数一趟</strong>：只按当前位分配收集，其余位不动。</li>
+<li>大题常给"某趟结果反推趟数/算法"：先用"落位元素"识别快排/选择/堆排，再用"部分有序形态"识别插入/冒泡——识别顺序：先查落位，再查形态。</li>
+</ol>
+<hr />
+<p><strong>完结</strong>：C01–C94 与开头 22 道默写级配套使用。复习节奏：第 1 遍按章学完就做对应题 → 错题标记 → 3 天后重做 → 第二轮只做错题+默写级 22 题。</p></div></body></html>

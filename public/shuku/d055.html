@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408大题专练_数据结构 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 大题专练 · 数据结构（35题·算法设计25+应用演算10）</h1>
+<blockquote>
+<p>2026-10-29 生成。408 数据结构大题约 13-15 分：算法设计题按"<strong>思想→代码→复杂度</strong>"三段给分，应用演算题必须写过程。本册 25 道算法题覆盖 408 历年高频考点，10 道演算题覆盖手算题型。
+难度：★基础 ★★中等 ★★★难点。代码均为可背诵的 408 风格标准写法（C 语言）。与《数据结构_考题集》《408选择题题库_数据结构》配套。</p>
+</blockquote>
+<h2>第一部分 算法设计题（DSD1–DSD25）</h2>
+<p><strong>DSD1.</strong>★ 设计算法删除顺序表中所有值重复的元素（表已非递减有序），使各元素只保留一个，返回新表长。要求 O(n) 时间 O(1) 空间。</p>
+<blockquote>
+<p><strong>思想</strong>：表有序则重复元素相邻。设 k 指向"已保留区"末尾，扫描指针 i 遇到与 a[k] 不同的元素才前移保留。
+<strong>代码</strong>：
+<code>c
+int delRep(int a[], int n){            // a 非递减有序
+    if(n == 0) return 0;
+    int k = 0;                          // a[0..k] 为已保留区
+    for(int i = 1; i &lt; n; i++)
+        if(a[i] != a[k]) a[++k] = a[i];
+    return k + 1;                       // 新表长
+}</code>
+<strong>复杂度</strong>：时间 O(n)，空间 O(1)。<strong>评分点</strong>：无序表不能这么做（需 O(n²) 或散列），题干"有序"是关键前提。</p>
+</blockquote>
+<p><strong>DSD2.</strong>★ 设计算法将不带头结点的单链表原地逆转，返回新表头。</p>
+<blockquote>
+<p><strong>思想</strong>：三指针迭代：p 当前、q 前驱、r 暂存后继，逐个把 next 反指。
+<strong>代码</strong>：
+<code>c
+LinkList rev(LinkList L){
+    Node *p = L, *q = NULL, *r;
+    while(p){
+        r = p-&gt;next;        // 先存后继，防断链
+        p-&gt;next = q;
+        q = p; p = r;
+    }
+    return q;               // q 即新表头
+}</code>
+<strong>复杂度</strong>：O(n) / O(1)。<strong>评分点</strong>：先存 r 再改 next（顺序错丢分）；空表与单结点表自然兼容。</p>
+</blockquote>
+<p><strong>DSD3.</strong>★★ 设计算法找单链表的中间结点（偶数个时取中间靠左），只允许一趟扫描。</p>
+<blockquote>
+<p><strong>思想</strong>：快慢指针——快指针每次走 2 步、慢指针走 1 步，快指针到不了下一步时慢指针恰在中点。
+<strong>代码</strong>：
+<code>c
+Node* midNode(Node *h){
+    Node *s = h, *f = h;
+    while(f-&gt;next &amp;&amp; f-&gt;next-&gt;next){
+        s = s-&gt;next;
+        f = f-&gt;next-&gt;next;
+    }
+    return s;
+}</code>
+<strong>复杂度</strong>：O(n) / O(1)，一趟。<strong>评分点</strong>：循环条件两个判断的顺序（先 f-&gt;next 防空指针）；"一趟"排除了先求长度再走 n/2 的做法。</p>
+</blockquote>
+<p><strong>DSD4.</strong>★ 设 La、Lb 为两个元素递增有序的单链表（带头结点），设计算法合并为 Lc，要求利用原表结点、不申请新空间。</p>
+<blockquote>
+<p><strong>思想</strong>：尾插法归并，谁小摘谁；最后把非空残余链整体接上。
+<strong>代码</strong>：
+<code>c
+void mergeList(LinkList La, LinkList Lb, LinkList Lc){
+    Node *pa = La-&gt;next, *pb = Lb-&gt;next, *pc = Lc;
+    while(pa &amp;&amp; pb){
+        if(pa-&gt;data &lt;= pb-&gt;data){ pc-&gt;next = pa; pc = pa; pa = pa-&gt;next; }
+        else                     { pc-&gt;next = pb; pc = pb; pb = pb-&gt;next; }
+    }
+    pc-&gt;next = pa ? pa : pb;    // 接上剩余段
+    free(Lb);                   // Lb 头结点已无用
+}</code>
+<strong>复杂度</strong>：O(m+n) / O(1)。<strong>评分点</strong>：必须"摘结点"而非复制数据；残余链一次接上不能丢；等号取 ≤ 保证稳定性。</p>
+</blockquote>
+<p><strong>DSD5.</strong>★★ 设计算法将长度 n 的顺序表循环左移 p 位（0&lt;p&lt;n），要求时间 O(n)、空间 O(1)。</p>
+<blockquote>
+<p><strong>思想</strong>：三次逆置——整体逆置后，前 n−p 段与后 p 段各自再逆置。
+<strong>代码</strong>：
+<code>c
+void rev(int a[], int l, int r){
+    while(l &lt; r){ int t = a[l]; a[l] = a[r]; a[r] = t; l++; r--; }
+}
+void leftShift(int a[], int n, int p){
+    rev(a, 0, n-1);         // 整体逆转
+    rev(a, 0, n-p-1);       // 前段（原后 p 个之前的 n-p 个）复原
+    rev(a, n-p, n-1);       // 后 p 个复原
+}</code>
+<strong>复杂度</strong>：O(n) / O(1)。<strong>评分点</strong>：三段逆置次序可换但不许少；另一解法（循环置换按最大公约数分组）也给满分但难写对。</p>
+</blockquote>
+<p><strong>DSD6.</strong>★ 设计算法判断一个仅含 ()、[]、{} 的字符序列是否括号匹配。</p>
+<blockquote>
+<p><strong>思想</strong>：左括号进栈；右括号弹栈比对，栈空或不配即失败；结束时栈必须为空。
+<strong>代码</strong>：
+<code>c
+bool match(char s[], int n){
+    char st[MaxSize]; int top = -1;
+    for(int i = 0; i &lt; n; i++){
+        if(s[i]=='(' || s[i]=='[' || s[i]=='{') st[++top] = s[i];
+        else if(s[i]==')' || s[i]==']' || s[i]=='}'){
+            if(top == -1) return false;             // 右括号无对象
+            char c = st[top--];
+            if((s[i]==')'&amp;&amp;c!='(') || (s[i]==']'&amp;&amp;c!='[') || (s[i]=='}'&amp;&amp;c!='{'))
+                return false;
+        }
+    }
+    return top == -1;                               // 有剩余左括号也失败
+}</code>
+<strong>复杂度</strong>：O(n) / O(n)。<strong>评分点</strong>：三种失败情形（提前弹空、类型不配、结束非空）各占分。</p>
+</blockquote>
+<p><strong>DSD7.</strong>★★ 设计一个两栈共享同一数组空间 S[0..MaxSize-1] 的数据结构（栈顶分别设在两端），给出入栈、出栈算法与栈满条件。</p>
+<blockquote>
+<p><strong>思想</strong>：栈1 从下标 0 向上长，栈2 从 MaxSize−1 向下长；两栈顶相邻即满，充分利用空间。
+<strong>代码</strong>：
+<code>c
+typedef struct { int S[MaxSize]; int top1, top2; } DStack;
+void init(DStack *d){ d-&gt;top1 = -1; d-&gt;top2 = MaxSize; }
+bool push1(DStack *d, int x){
+    if(d-&gt;top1 + 1 == d-&gt;top2) return false;        // 栈满
+    d-&gt;S[++d-&gt;top1] = x; return true;
+}
+bool push2(DStack *d, int x){
+    if(d-&gt;top1 + 1 == d-&gt;top2) return false;
+    d-&gt;S[--d-&gt;top2] = x; return true;
+}
+bool pop1(DStack *d, int *x){
+    if(d-&gt;top1 == -1) return false;                 // 栈1空
+    *x = d-&gt;S[d-&gt;top1--]; return true;
+}</code>
+<strong>复杂度</strong>：均为 O(1)。<strong>评分点</strong>：满条件 top1+1==top2；两个空条件不同（−1 与 MaxSize）。</p>
+</blockquote>
+<p><strong>DSD8.</strong>★★ 循环队列不牺牲存储单元，用"标记 tag"区分队空与队满，设计入队、出队算法。</p>
+<blockquote>
+<p><strong>思想</strong>：仅当 front==rear 时有歧义：tag=1 表示"刚入队过"→队满，tag=0 表示"刚出队过"→队空。
+<strong>代码</strong>：
+<code>c
+typedef struct { int data[MaxSize]; int front, rear, tag; } CQueue;
+bool enQueue(CQueue *Q, int x){
+    if(Q-&gt;front == Q-&gt;rear &amp;&amp; Q-&gt;tag == 1) return false;   // 满
+    Q-&gt;data[Q-&gt;rear] = x;
+    Q-&gt;rear = (Q-&gt;rear + 1) % MaxSize;
+    Q-&gt;tag = 1; return true;                               // 标记"刚入队"
+}
+bool deQueue(CQueue *Q, int *x){
+    if(Q-&gt;front == Q-&gt;rear &amp;&amp; Q-&gt;tag == 0) return false;   // 空
+    *x = Q-&gt;data[Q-&gt;front];
+    Q-&gt;front = (Q-&gt;front + 1) % MaxSize;
+    Q-&gt;tag = 0; return true;
+}</code>
+<strong>复杂度</strong>：O(1)。<strong>评分点</strong>：tag 更新时机（入队置1、出队置0）；该方案存满 MaxSize 个元素。</p>
+</blockquote>
+<p><strong>DSD9.</strong>★★ 写出二叉树先序遍历的<strong>非递归</strong>算法。</p>
+<blockquote>
+<p><strong>思想</strong>：访问根后先入栈再深入左子树；左走到底后弹栈转右子树。
+<strong>代码</strong>：
+<code>c
+void preOrder(BiTree T){
+    Node *st[MaxSize]; int top = -1; Node *p = T;
+    while(p || top != -1){
+        if(p){ visit(p); st[++top] = p; p = p-&gt;lchild; }  // 沿左链下行
+        else { p = st[top--]; p = p-&gt;rchild; }            // 弹栈转右
+    }
+}</code>
+<strong>复杂度</strong>：O(n) / O(h)。<strong>评分点</strong>：先 visit 再入栈是先序的标志；中序只把 visit 移到弹栈处，后序需加"最近访问"标记。</p>
+</blockquote>
+<p><strong>DSD10.</strong>★ 写出二叉树的层次遍历算法。</p>
+<blockquote>
+<p><strong>思想</strong>：队列——出队访问，孩子按左先右后入队。
+<strong>代码</strong>：
+<code>c
+void levelOrder(BiTree T){
+    if(!T) return;
+    Node *q[MaxSize]; int f = 0, r = 0;
+    q[r++] = T;
+    while(f &lt; r){
+        Node *p = q[f++]; visit(p);
+        if(p-&gt;lchild) q[r++] = p-&gt;lchild;
+        if(p-&gt;rchild) q[r++] = p-&gt;rchild;
+    }
+}</code>
+<strong>复杂度</strong>：O(n) / O(n)（队列最宽一层）。<strong>评分点</strong>：空树特判；孩子判空再入队。</p>
+</blockquote>
+<p><strong>DSD11.</strong>★ 设计算法求二叉树的高度（递归），并用它说明递归栈深与树高的关系。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+int depth(BiTree T){
+    if(!T) return 0;
+    int l = depth(T-&gt;lchild), r = depth(T-&gt;rchild);
+    return (l &gt; r ? l : r) + 1;
+}</code>
+<strong>复杂度</strong>：O(n) / O(h)——递归深度恰为树高。<strong>评分点</strong>：max+1 别写成 max；空树返 0（若题目定义叶为 0 层则相应调整）。</p>
+</blockquote>
+<p><strong>DSD12.</strong>★★ 设计算法判断二叉树是否为二叉排序树（结点值为 int，可利用 long 或全局变量）。</p>
+<blockquote>
+<p><strong>思想</strong>：BST 的中序序列严格递增——中序遍历时保存"上一个访问值"，发现不增即假。
+<strong>代码</strong>：
+<code>c
+bool isBST(BiTree T, long *pre){        // pre：中序前驱值
+    if(!T) return true;
+    if(!isBST(T-&gt;lchild, pre)) return false;
+    if(T-&gt;data &lt;= *pre) return false;   // 必须严格递增
+    *pre = T-&gt;data;
+    return isBST(T-&gt;rchild, pre);
+}
+// 调用：long pre = LONG_MIN; isBST(T, &amp;pre);</code>
+<strong>复杂度</strong>：O(n) / O(h)。<strong>评分点</strong>：只比较"父子两代"是经典错误（如右子树最小值可能小于根）；用中序全局前驱才正确。</p>
+</blockquote>
+<p><strong>DSD13.</strong>★★ 设二叉树为二叉链表（叶结点含权值 data），设计算法求其带权路径长度 WPL。</p>
+<blockquote>
+<p><strong>思想</strong>：递归带深度参数——叶结点贡献 data×深度；内部结点归零。
+<strong>代码</strong>：
+<code>c
+int WPL(BiTree T, int d){               // 根的深度 d=1
+    if(!T) return 0;
+    if(!T-&gt;lchild &amp;&amp; !T-&gt;rchild) return T-&gt;data * d;
+    return WPL(T-&gt;lchild, d+1) + WPL(T-&gt;rchild, d+1);
+}</code>
+<strong>复杂度</strong>：O(n) / O(h)。<strong>评分点</strong>：只有叶子计权（内部结点 data 无效）；等价的层次遍历累加法也给满分。</p>
+</blockquote>
+<p><strong>DSD14.</strong>★★ 描述由 n 个权值构造哈夫曼树并生成哈夫曼编码的算法思想，并说明为什么哈夫曼编码保证不产生歧义。</p>
+<blockquote>
+<p><strong>思想</strong>：①初始化 n 棵单结点树；②每次取权值最小的两棵合并（新根权=和），插入集合；重复 n−1 次。编码：左分支记 0、右分支记 1，从根到叶的路径即该叶的编码。
+<strong>无歧义原因</strong>：哈夫曼树中<strong>字符只出现在叶子上</strong>——任何编码都不是另一编码的前缀（前缀码性质），译码时从根出发走到叶即停，无需分隔符。
+<strong>复杂度</strong>：用小根堆/两次扫描最小值实现为 O(nlogn)（408 手算构造即可）。</p>
+</blockquote>
+<p><strong>DSD15.</strong>★★ 在中序线索二叉树中，写出求结点 p 的中序后继的算法（结点含 ltag/rtag）。</p>
+<blockquote>
+<p><strong>思想</strong>：rtag==1 时 rchild 即后继线索；rtag==0（有右孩子）时后继=右子树中最左结点。
+<strong>代码</strong>：
+<code>c
+ThreadNode *inNext(ThreadNode *p){
+    if(p-&gt;rtag == 0){                    // 有右孩子
+        ThreadNode *q = p-&gt;rchild;
+        while(q-&gt;ltag == 0) q = q-&gt;lchild;   // 右子树最左结点
+        return q;
+    }
+    return p-&gt;rchild;                    // rtag==1：线索即后继
+}</code>
+<strong>复杂度</strong>：O(h)。<strong>评分点</strong>：两种情况别弄反；对应地，"中序前驱"看 ltag 与左子树最右。</p>
+</blockquote>
+<p><strong>DSD16.</strong>★ 写出邻接表存储下从顶点 v 出发的深度优先遍历（DFS）算法。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+bool visited[MaxVex] = {false};
+void DFS(ALGraph G, int v){
+    visited[v] = true; visit(v);
+    for(ArcNode *p = G.vertices[v].first; p; p = p-&gt;next)
+        if(!visited[p-&gt;adjvex]) DFS(G, p-&gt;adjvex);
+}
+void DFSTraverse(ALGraph G){
+    for(int i = 0; i &lt; G.vexnum; i++) visited[i] = false;
+    for(int i = 0; i &lt; G.vexnum; i++)
+        if(!visited[i]) DFS(G, i);      // 保证非连通图也遍历完
+}</code>
+<strong>复杂度</strong>：邻接表 O(n+e)（邻接矩阵 O(n²)）。<strong>评分点</strong>：visited 重置；外层循环处理森林。</p>
+</blockquote>
+<p><strong>DSD17.</strong>★★ 设计算法判断无向图（邻接表存储）是否连通。</p>
+<blockquote>
+<p><strong>思想</strong>：从任一顶点 BFS/DFS 一次，统计被访问顶点数；等于 n 即连通。
+<strong>代码</strong>：
+<code>c
+bool isConnected(ALGraph G){
+    bool vis[MaxVex] = {false};
+    int q[MaxVex], f = 0, r = 0, cnt = 0;
+    q[r++] = 0; vis[0] = true;
+    while(f &lt; r){
+        int v = q[f++]; cnt++;
+        for(ArcNode *p = G.vertices[v].first; p; p = p-&gt;next)
+            if(!vis[p-&gt;adjvex]){ vis[p-&gt;adjvex] = true; q[r++] = p-&gt;adjvex; }
+    }
+    return cnt == G.vexnum;
+}</code>
+<strong>复杂度</strong>：O(n+e) / O(n)。<strong>评分点</strong>：计数从 1 开始（起点已入队）；连通分量个数=对每个未访问点做一次 BFS 的次数。</p>
+</blockquote>
+<p><strong>DSD18.</strong>★★ 写出基于邻接表的拓扑排序算法，并用返回值说明如何判断有向图有环。</p>
+<blockquote>
+<p><strong>思想</strong>：统计入度→入度 0 者进栈→弹栈输出并把出边邻点入度减 1，减到 0 者进栈；输出顶点数 &lt; n 说明有环。
+<strong>代码</strong>：
+<code>c
+bool topoSort(ALGraph G){
+    int indeg[MaxVex] = {0}, st[MaxVex], top = -1, cnt = 0;
+    for(int i = 0; i &lt; G.vexnum; i++)
+        for(ArcNode *p = G.vertices[i].first; p; p = p-&gt;next)
+            indeg[p-&gt;adjvex]++;
+    for(int i = 0; i &lt; G.vexnum; i++)
+        if(indeg[i] == 0) st[++top] = i;
+    while(top != -1){
+        int v = st[top--]; printf("%d ", v); cnt++;
+        for(ArcNode *p = G.vertices[v].first; p; p = p-&gt;next)
+            if(--indeg[p-&gt;adjvex] == 0) st[++top] = p-&gt;adjvex;
+    }
+    return cnt == G.vexnum;             // false ⇔ 存在回路
+}</code>
+<strong>复杂度</strong>：O(n+e)。<strong>评分点</strong>：先算入度再找入度0；"输出计数 &lt; n ⇔ 有环"是判环依据。</p>
+</blockquote>
+<p><strong>DSD19.</strong>★★★ 写出 Dijkstra 算法（邻接矩阵存储、求单源最短路径），并说明为什么它不适用于带负权边的图。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+void dijkstra(MGraph G, int v){
+    int dist[MaxVex], path[MaxVex];
+    bool done[MaxVex] = {false};
+    for(int i = 0; i &lt; G.vexnum; i++){
+        dist[i] = G.edge[v][i];
+        path[i] = (G.edge[v][i] &lt; INF &amp;&amp; i != v) ? v : -1;
+    }
+    dist[v] = 0; done[v] = true;
+    for(int i = 1; i &lt; G.vexnum; i++){
+        int u = -1, min = INF;
+        for(int j = 0; j &lt; G.vexnum; j++)
+            if(!done[j] &amp;&amp; dist[j] &lt; min){ min = dist[j]; u = j; }
+        if(u == -1) break;
+        done[u] = true;                              // 确定u的最短路
+        for(int j = 0; j &lt; G.vexnum; j++)
+            if(!done[j] &amp;&amp; G.edge[u][j] &lt; INF
+               &amp;&amp; dist[u] + G.edge[u][j] &lt; dist[j]){
+                dist[j] = dist[u] + G.edge[u][j];
+                path[j] = u;
+            }
+    }
+}</code>
+<strong>复杂度</strong>：O(n²)。<strong>负权不适用原因</strong>：算法把"本轮 dist 最小者"标记为最终确定——有负边时，经由后选点的更长前缀加负边可能更短，"确定"不再成立。
+<strong>评分点</strong>：三个数组（dist/done/path）缺一扣分；双重循环结构。</p>
+</blockquote>
+<p><strong>DSD20.</strong>★★ 写出快速排序的一次划分（partition）算法与递归框架。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+int partition(int a[], int l, int r){
+    int pivot = a[l];                        // 枢轴取首元素
+    while(l &lt; r){
+        while(l &lt; r &amp;&amp; a[r] &gt;= pivot) r--;   // 从右找小者
+        a[l] = a[r];
+        while(l &lt; r &amp;&amp; a[l] &lt;= pivot) l++;   // 从左找大者
+        a[r] = a[l];
+    }
+    a[l] = pivot;                            // 枢轴归位
+    return l;
+}
+void quickSort(int a[], int l, int r){
+    if(l &lt; r){
+        int p = partition(a, l, r);
+        quickSort(a, l, p-1);
+        quickSort(a, p+1, r);
+    }
+}</code>
+<strong>复杂度</strong>：平均 O(nlogn)，最坏 O(n²)（基本有序）；空间 O(logn)（递归栈）。<strong>评分点</strong>：两个内层 while 的 &gt;=/&lt;=（等号防死循环）；枢轴最后归位。</p>
+</blockquote>
+<p><strong>DSD21.</strong>★★ 写出堆排序中的"筛选"（大根堆下沉调整）与建初堆算法。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+void siftDown(int a[], int n, int i){    // 0起编号，大根堆
+    while(2*i + 1 &lt; n){
+        int j = 2*i + 1;                             // 左孩子
+        if(j+1 &lt; n &amp;&amp; a[j+1] &gt; a[j]) j++;            // 取较大孩子
+        if(a[i] &gt;= a[j]) break;
+        int t = a[i]; a[i] = a[j]; a[j] = t;
+        i = j;                                       // 下沉继续
+    }
+}
+void buildHeap(int a[], int n){
+    for(int i = n/2 - 1; i &gt;= 0; i--) siftDown(a, n, i);
+}
+// 排序主体：每次交换堆顶a[0]与a[end]，堆规模减1，siftDown(a,end,0)</code>
+<strong>复杂度</strong>：建堆 O(n)，单次调整 O(logn)，总排序 O(nlogn) / O(1)。<strong>评分点</strong>：建堆从 ⌊n/2⌋−1 起倒序；孩子选较大者再与父比。</p>
+</blockquote>
+<p><strong>DSD22.</strong>★★ 写出二叉排序树的插入算法（递归），并说明按有序序列插入会发生什么。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+void bstInsert(BiTree *T, int k){        // T为根指针的指针
+    if(*T == NULL){
+        *T = (BiTree)malloc(sizeof(Node));
+        (*T)-&gt;data = k;
+        (*T)-&gt;lchild = (*T)-&gt;rchild = NULL;
+    }
+    else if(k &lt; (*T)-&gt;data)      bstInsert(&amp;(*T)-&gt;lchild, k);
+    else if(k &gt; (*T)-&gt;data)      bstInsert(&amp;(*T)-&gt;rchild, k);
+    // 相等：不插入（不允许重复）
+}</code>
+<strong>有序序列插入的后果</strong>：每步都往同一侧走，树退化成高度 n 的单支树，查找退化为 O(n)——这正是引入 AVL 平衡化的动机。<strong>评分点</strong>：传二级指针或返回新根均可；相等不插。</p>
+</blockquote>
+<p><strong>DSD23.</strong>★★ 设计算法合并两个递增有序数组到第三个数组（归并的数组版）。</p>
+<blockquote>
+<p><strong>代码</strong>：
+<code>c
+int merge(int a[], int n, int b[], int m, int c[]){
+    int i = 0, j = 0, k = 0;
+    while(i &lt; n &amp;&amp; j &lt; m)
+        c[k++] = (a[i] &lt;= b[j]) ? a[i++] : b[j++];
+    while(i &lt; n) c[k++] = a[i++];
+    while(j &lt; m) c[k++] = b[j++];
+    return k;                            // c 的新长度
+}</code>
+<strong>复杂度</strong>：O(m+n)。<strong>评分点</strong>：两个残余 while 不能漏；等号决定稳定性。</p>
+</blockquote>
+<p><strong>DSD24.</strong>★★★ 设计时间 O(n) 的算法：找出数组中的主元素（出现次数超过 n/2 的元素），不存在则返回 −1。要求 O(1) 辅助空间。</p>
+<blockquote>
+<p><strong>思想</strong>（摩尔投票法）：候选 cand 与计数 cnt——同号加一、异号减一、归零换候选。若存在主元素，它必是最后的候选；再扫描一遍验证计数是否真超 n/2。
+<strong>代码</strong>：
+<code>c
+int majority(int a[], int n){
+    int cand = 0, cnt = 0;
+    for(int i = 0; i &lt; n; i++){
+        if(cnt == 0){ cand = a[i]; cnt = 1; }
+        else cnt += (a[i] == cand) ? 1 : -1;
+    }
+    if(cnt == 0) return -1;              // 提前排除（可选）
+    int c = 0;                            // 第二遍验证
+    for(int i = 0; i &lt; n; i++) if(a[i] == cand) c++;
+    return c &gt; n/2 ? cand : -1;
+}</code>
+<strong>复杂度</strong>：O(n) / O(1)。<strong>评分点</strong>：第二遍验证不可省（无主元素时候选可能是"幸存者"）；排序法 O(nlogn) 扣一半分。</p>
+</blockquote>
+<p><strong>DSD25.</strong>★★★ 设计算法判断一棵二叉树是否为<strong>平衡二叉树</strong>（AVL），返回是否平衡，同时给出高效实现。</p>
+<blockquote>
+<p><strong>思想</strong>：自底向上——递归函数同时返回高度与平衡性，避免每个结点重复求高（自顶向下判是 O(n²)）。
+<strong>代码</strong>：
+<code>c
+typedef struct { bool bal; int h; } Info;
+Info check(BiTree T){
+    Info r = {true, 0};
+    if(!T) return r;
+    Info L = check(T-&gt;lchild);
+    Info R = check(T-&gt;rchild);
+    r.h = (L.h &gt; R.h ? L.h : R.h) + 1;
+    r.bal = L.bal &amp;&amp; R.bal &amp;&amp; (L.h - R.h &gt;= -1) &amp;&amp; (L.h - R.h &lt;= 1);
+    return r;
+}
+bool isAVL(BiTree T){ return check(T).bal; }</code>
+<strong>复杂度</strong>：O(n) / O(h)。<strong>评分点</strong>：一次后序遍历带回两个信息是关键；不平衡定义 |L−R|&gt;1（含左右子树内部也不平衡）。</p>
+</blockquote>
+<h2>第二部分 应用演算题（DSD26–DSD35）</h2>
+<p><strong>DSD26.</strong>★★ 依次插入关键字 {45, 24, 53, 12, 37, 93} 构造二叉排序树，画出结构并求查找成功的平均查找长度 ASL。</p>
+<blockquote>
+<p>建树过程：45 为根；24&lt;45 入左，53&gt;45 入右；12&lt;45&lt;24 入 24 左；37&gt;24 且 &lt;45 入 24 右；93&gt;45 入 53 右。
+<code>45
+         /    \
+       24      53
+      /  \       \
+    12    37     93</code>
+各结点深度：45:1，24:2，53:2，12:3，37:3，93:3。
+<strong>ASL = (1+2+2+3+3+3)/6 = 14/6 = 7/3 ≈ 2.33</strong>。</p>
+</blockquote>
+<p><strong>DSD27.</strong>★★ 以权值 {7, 5, 2, 4} 构造哈夫曼树，写出各叶子的哈夫曼编码并求 WPL。</p>
+<blockquote>
+<p>构造（每次合并最小两棵）：2+4=6；5+6=11；7+11=18。
+<code>18
+          /  \
+         7    11
+             /  \
+            5    6
+                / \
+               2   4</code>
+编码（左0右1）：7→0，5→10，2→110，4→111。
+<strong>WPL = 7×1 + 5×2 + 2×3 + 4×3 = 7+10+6+12 = 35</strong>。
+检查：非叶权之和 6+11+18 = 35 ✓（两种算法互验）。</p>
+</blockquote>
+<p><strong>DSD28.</strong>★★★ 有向图 V={1,2,3,4,5}，弧（权）：1→2=10，1→4=30，1→5=100，2→3=50，3→5=10，4→3=20，4→5=60。用 Dijkstra 求顶点 1 到各点的最短路径，列出每轮 dist 数组的变化。</p>
+<blockquote>
+<p>初始：dist = [0, 10, ∞, 30, 100]，done={1}。
+| 轮次 | 选中u | done | dist[1..5] | 说明 |
+|---|---|---|---|---|
+| 初 | — | {1} | 0, 10, ∞, 30, 100 | 初始化 |
+| 1 | 2 (10) | +2 | 0, 10, <strong>60</strong>, 30, 100 | 经2松弛3：10+50=60 |
+| 2 | 4 (30) | +4 | 0, 10, <strong>50</strong>, 30, <strong>90</strong> | 经4松弛3：30+20=50&lt;60；松弛5：30+60=90 |
+| 3 | 3 (50) | +3 | 0, 10, 50, 30, <strong>60</strong> | 经3松弛5：50+10=60&lt;90 |
+| 4 | 5 (60) | +5 | 0, 10, 50, 30, 60 | 结束 |
+<strong>最短路径</strong>：1→2 (10)；1→4 (30)；1→4→3 (50)；1→4→3→5 (60)。</p>
+</blockquote>
+<p><strong>DSD29.</strong>★★ 无向图 V={1..6}，边（权）：(1,3)=1，(4,6)=2，(2,5)=3，(3,6)=4，(1,4)=5，(2,3)=5，(1,2)=6，(3,5)=6，(5,6)=6。分别用 Kruskal 与 Prim（从1出发）求最小生成树，给出边集与总权值。</p>
+<blockquote>
+<p><strong>Kruskal</strong>（边按权排序，并查集判环）：取 (1,3)=1 ✓ → (4,6)=2 ✓ → (2,5)=3 ✓ → (3,6)=4 ✓ → (1,4)=5 ✗（1,4 已连通成环）→ (2,3)=5 ✓（满 5 条边，结束）。
+<strong>MST 边集：{(1,3),(4,6),(2,5),(3,6),(2,3)}，总权 = 1+2+3+4+5 = 15</strong>。
+<strong>Prim（从1）</strong>：割 {1}：最近为 (1,3)=1 → 割{1,3}：最近 (3,6)=4 → 割{1,3,6}：最近 (4,6)=2 → 割{1,3,4,6}：最近 (2,3)=5 → 割{1,2,3,4,6}：最近 (2,5)=3。<strong>同一棵树</strong>。
+结论：边权互异时 MST 唯一，两种算法必得同解。</p>
+</blockquote>
+<p><strong>DSD30.</strong>★★ AOV 网活动关系：1→2，1→3，2→4，3→4，4→5。写出全部拓扑序列，并说明"拓扑序列不唯一"的条件。</p>
+<blockquote>
+<p>每次只能摘入度 0 的顶点：1 必须第一；2、3 互不制约可任意先后；4 须等 2、3 都输出；5 最后。
+<strong>全部拓扑序列：{1,2,3,4,5} 与 {1,3,2,4,5}，共 2 个</strong>。
+条件：当某一时刻入度为 0 的顶点多于一个时，选择次序产生分支 ⇒ 序列不唯一；若每一步恒只有唯一入度 0 顶点（如线性链 a→b→c），拓扑序列才唯一。</p>
+</blockquote>
+<p><strong>DSD31.</strong>★★★ 3 阶 B 树中依次插入关键字 12, 24, 45, 53, 37, 60, 30, 27，画出最终结构，并说明"双重分裂"发生的位置。</p>
+<blockquote>
+<p>过程：12、24 直接入根叶；插 45 时叶溢出 [12,24,45] → 24 上移，根 [24]，孩子 [12]、[45]。
+插 53 → [45,53]；插 37 → 叶 [37,45,53] 溢出 → 45 上移：根 [24,45]，孩子 [12]、[37]、[53]。
+插 60 → [53,60]；插 30 → 叶 [37] 变 [30,37]；<strong>插 27</strong> → 叶 [27,30,37] 溢出，30 上移使根变 [24,30,45] —— 根也有 3 个关键字，<strong>再分裂</strong>：30 上移为新根。
+<strong>最终结构</strong>：
+<code>[30]                    ← 根（第1层）
+            /    \
+        [24]      [45]               ← 第2层
+       /  \      /   \
+    [12] [27] [37]  [53,60]          ← 第3层（叶）</code>
+叶子全在同一层 ✓；发生双重分裂的是插入 <strong>27</strong> 时（叶分裂引发根分裂）。</p>
+</blockquote>
+<p><strong>DSD32.</strong>★★ 散列表长 10，散列函数 H(k)=k mod 7，用线性探测处理冲突，依次插入 {12, 8, 15, 22, 36}。画出最终表，求查找成功与查找失败的平均查找长度。</p>
+<blockquote>
+<p>12→5；8→1；15→1 被占→2；22→1,2 被占→3；36→1,2,3 被占→4。
+| 槽位 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 关键字 | 空 | 8 | 15 | 22 | 36 | 12 | 空 | 空 | 空 | 空 |
+<strong>ASL成功 = (1+1+2+3+4)/5 = 11/5 = 2.2</strong>。
+<strong>ASL失败</strong>（对 H 值 0~6 逐一模拟到首个空槽）：H=0:1；H=1:6（探到槽6）；H=2:5；H=3:4；H=4:3；H=5:2；H=6:1。
+<strong>ASL失败 = (1+6+5+4+3+2+1)/7 = 22/7 ≈ 3.14</strong>。
+评分点：失败 ASL 的分母是<strong>散列函数的取值个数 7</strong>，不是表长。</p>
+</blockquote>
+<p><strong>DSD33.</strong>★★ 模式串 P = "abaabc"（1 起编号），按 next[1]=0 约定求 next 数组，并说明 next 的含义。</p>
+<blockquote>
+<p>next[j] = "P[1..j−1] 的最长相等真前缀真后缀长度 + 1"：
+j=1: 约定 0；j=2: "a"→0+1=1；j=3: "ab"→0+1=1；j=4: "aba"→"a"匹配→2；j=5: "abaa"→"a"→2；j=6: "abaab"→"ab"→3。
+<strong>next = [0, 1, 1, 2, 2, 3]</strong>。
+含义：P[j] 失配时，模式串滑动使 <strong>P[next[j]]</strong> 对准主串当前位置继续比较——主串指针 i 不回溯，这就是 KMP 优于朴素匹配（O(mn)→O(m+n)）的原因。</p>
+</blockquote>
+<p><strong>DSD34.</strong>★★ 已知序列 {49, 38, 65, 97, 76, 13, 27}：
+(1) 写出以 49 为枢轴的快速排序<strong>一趟</strong>结果；
+(2) 将 {47, 78, 56, 32, 42, 17} 建成大根堆（画出数组形态），并写出第一个元素出堆后的堆。</p>
+<blockquote>
+<p>(1) partition 过程（49 归位）：<strong>{27, 38, 13, 49, 76, 97, 65}</strong> —— 49 左侧全 ≤49、右侧全 ≥49。
+(2) 建堆（从 ⌊6/2⌋−1=2 起倒序 siftDown）：47 与孩子 78、56 比 → 78 上浮 → 继续调整。
+<strong>大根堆：{78, 47, 56, 32, 42, 17}</strong>（78≥47,56；47≥32,42；56≥17 ✓）。
+出堆：78 与末尾 17 交换后筛 17 下沉：17 与 56 交换 → 56 与孩子…最终 <strong>{56, 47, 17, 32, 42}</strong>。
+验证：56≥47,17；47≥32,42 ✓。</p>
+</blockquote>
+<p><strong>DSD35.</strong>★★ 无向图 V={a,b,c,d,e}，边：ab, ac, bd, ce, de。邻接表中各点邻接点均按字母序。
+(1) 从 a 出发的 DFS 与 BFS 序列；(2) 若邻接点次序改为倒序，DFS 序列变为？说明原因。</p>
+<blockquote>
+<p>(1) <strong>DFS：a → b → d → e → c</strong>（a 的邻接 b,c 取 b；b 的邻接 d；d 的邻接 e；e 的邻接 c）。
+   <strong>BFS：a → b → c → d → e</strong>（逐层：a；b,c；d,e）。
+(2) 邻接点倒序后 DFS：a → c → e → d → b；<strong>BFS 不变</strong>（仍 a,b,c,d,e）。
+原因：DFS 深入到底，受邻接表内邻接点次序影响，序列不唯一；BFS 按层扩散，同一连通图从同一起点出发，各层成员固定（层内次序由存储次序决定，本例恰一致）。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：DSD1–DSD35。使用节奏：算法设计题每天 5 题（<strong>默写代码</strong>，对答案时逐行找"我漏了什么"——408 算法题的分全在边界与初始化上）；演算题两天做完（每题必须手算到结果，与考研答卷要求一致）。错题按考点标回《数据结构_知识点与难点》对应章节。</p></div></body></html>

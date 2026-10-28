@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408操作系统精讲_概述与进程线程 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 操作系统精讲 · 概述与进程线程（定义剖析 + 985考题）</h1>
+<blockquote>
+<p>OS精讲第1批（共4批）：①概述+进程线程调度 ✅ ②同步互斥+死锁 ③内存管理 ④文件+I/O。
+OS的985分差点：<strong>概念的确切边界</strong>（并发vs并行、用户态vs核心态、共享的两种方式）与<strong>调度算法的全套演算</strong>。本册前者讲透、后者演到底。</p>
+</blockquote>
+<hr />
+<h1>第1章 操作系统概述</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 操作系统</strong>：管理计算机<strong>软硬件资源</strong>、控制程序执行、方便用户使用的系统软件。
+【资源视角】处理机、存储器、文件、设备四大管理。</p>
+<p><strong>D2 四大特征（必背+必辨）</strong>：
+- <strong>并发</strong>：多个事件<strong>同一时间间隔内</strong>发生（宏观同时、微观交替）。<strong>辨析：并行=同一时刻</strong>（多核才算真并行）——"单核CPU与外设可并行、单核上进程只能并发"；
+- <strong>共享</strong>：资源可被多个进程共同使用。两种方式：<strong>互斥共享</strong>（打印机、临界资源——一段时间内只允许一个）与<strong>同时共享</strong>（磁盘、可重入代码——宏观同时微观交替访问）；
+- <strong>虚拟</strong>：一个物理实体→若干逻辑对应物。<strong>时分复用</strong>（处理机分时、SPOOLing）+<strong>空分复用</strong>（虚拟内存）；
+- <strong>异步</strong>：进程以不可预知的速度推进（走走停停）。
+【关联】<strong>并发与共享互为存在条件</strong>——没有并发就没有共享的必要，没有共享（资源共享机制）并发无法实现。</p>
+<p><strong>D3 运行机制：两种态</strong>：
+- <strong>核心态（管态）</strong>：可执行<strong>特权指令</strong>（I/O指令、置时钟、开关中断、修改页表基址寄存器）；
+- <strong>用户态（目态）</strong>：只能执行非特权指令。
+【高频判断】<strong>凡是"修改页表基址寄存器、I/O指令、开关中断"都是特权指令；"读时钟、取操作数"不是</strong>。</p>
+<p><strong>D4 中断与异常（用户态→核心态的唯一天然入口）</strong>：
+- <strong>外中断（中断）</strong>：与当前指令无关——时钟中断、I/O中断；
+- <strong>内中断（异常）</strong>：与当前指令有关——<strong>陷入trap（主动，系统调用）</strong>、故障（缺页，可修复继续）、终止（致命错误）；
+- 中断处理流程：关中断→保存断点→中断服务程序寻址（硬件完成）→保存现场和屏蔽字（软件）→开中断执行服务→恢复→返回。
+【要点】<strong>"用户态→核心态"的唯一入口是中断/异常（含系统调用陷入）</strong>；"核心态→用户态"靠修改程序状态字的特权指令（如中断返回指令）。</p>
+<p><strong>D5 系统调用</strong>：用户程序请求OS内核服务的接口。
+【过程排序（必会）】用户态传递参数 → 执行<strong>陷入(trap)指令</strong> → 转核心态 → 执行相应内核服务例程 → 返回用户态。
+【辨析】库函数可能封装系统调用，也可能纯用户态实现（如strcpy）；<strong>系统调用的执行一定在核心态</strong>。</p>
+<p><strong>D6 体系结构</strong>：大内核（宏内核：性能高、耦合大、Linux）vs 微内核（功能最少化、消息传递通信、可靠可扩展但频繁切换效率低）。</p>
+<h2>二、OS发展史一句话链</h2>
+<p>手工阶段（无OS）→ <strong>单道批处理</strong>（内存一道、自动逐个）→ <strong>多道批处理</strong>（内存多道并发、提高利用率、无交互）→ <strong>分时系统</strong>（时间片轮转、交互）→ <strong>实时系统</strong>（可靠性优先、及时）→ 网络与分布式。
+<strong>多道程序设计的计算</strong>：内存放多道程序，CPU在"一道等待I/O"时切换到另一道计算——<strong>CPU利用率公式（简化模型）</strong>：每道程序等待I/O的概率为 p，则内存中 n 道程序时 CPU 利用率 ≈ 1−pⁿ。</p>
+<h2>三、本章考题（3题）</h2>
+<p><strong>题1（多道程序利用率）</strong> 每道程序运行时用于I/O等待的时间占80%，内存中同时驻留4道程序（独立运行），求CPU利用率。
+【解】p=0.8，CPU利用率≈1−p⁴=1−0.4096=<strong>59.04%</strong>。
+（单道时利用率仅20%——多道程序设计的意义所在。这是简化模型：假设各程序互相独立、CPU总有就绪任务。）∎</p>
+<p><strong>题2（态切换判断）</strong> 下列事件是否引起用户态→核心态的切换：①读时钟当前值；②调用printf；③缺页；④除零；⑤修改页表基址寄存器。
+【答】①否（读时钟非特权，有用户态接口）；②<strong>是</strong>（printf内部触发write系统调用→陷入）；③是（缺页异常）；④是（终止类异常）；⑤修改页表基址寄存器本身是<strong>特权指令</strong>，只能在核心态执行——它不"引起"切换，而是切换后才能做。∎
+（⑤是985面试的精确陷阱题：特权指令与态切换的方向关系。）</p>
+<p><strong>题3（发展史逻辑）</strong> 分时系统为什么必须引入时间片？实时系统的"实时"指什么？
+【答】分时=多用户交互：必须给每个用户<strong>及时响应</strong>，故把CPU按<strong>时间片</strong>轮转分配（时间片不能太大——响应差；不能太小——切换开销大）。实时指系统能在<strong>严格规定的时间内</strong>完成处理并响应（如工业控制、导弹制导），可靠性要求高于吞吐。∎</p>
+<hr />
+<h1>第2章 进程与线程（概念、控制、调度）</h1>
+<h2>一、定义精讲</h2>
+<p><strong>P1 进程</strong>：程序的一次执行过程，是系统<strong>资源分配和调度</strong>的独立单位。
+【程序 vs 进程】程序=静态的指令集合（永久）；进程=动态的执行过程（有生命周期）。<strong>动态性是进程最基本的特征</strong>。
+【组成】进程=<strong>PCB+程序段+数据段</strong>。PCB常驻内存、是进程存在的唯一标志；包含：PID、状态、程序计数器、寄存器现场、调度信息、打开文件表、内存信息等。
+【要点】PCB应常驻内存；进程切换时保存/恢复的就是PCB中的现场信息。</p>
+<p><strong>P2 五状态模型（转换条件必须精确）</strong>：
+<strong>创建→就绪→运行→终止</strong>；运行⇄就绪（时间片到/被剥夺=运行→就绪；被调度=就绪→运行）；运行→<strong>阻塞（主动，等I/O或事件）</strong>；阻塞→<strong>就绪（被动，事件完成）</strong>。
+【三大不能】<strong>阻塞→运行 ✗</strong>（必须先经就绪）；<strong>就绪→阻塞 ✗</strong>（没运行谈何等待）；<strong>运行→阻塞是主动行为</strong>，运行→就绪是被动行为（被剥夺）。</p>
+<p><strong>P3 七状态模型（挂起）</strong>：加入<strong>活动阻塞→静止阻塞</strong>（换出到外存）、<strong>活动就绪→静止就绪</strong>（挂起）；激活=反向。中级调度=挂起/激活（提高内存利用率）。</p>
+<p><strong>P4 线程</strong>：<strong>调度和分派的基本单位</strong>；进程是资源分配的基本单位。
+【共享 vs 私有（必背表）】共享：<strong>地址空间（代码数据堆）、全局变量、打开文件表、信号量等内核资源</strong>；私有：<strong>栈、寄存器组（含PC）、线程控制块TCB</strong>。
+【多线程模型】多对一（一个内核线程管多个用户线程：一个阻塞全阻塞、不能并行）；一对一（真并行、创建开销大）；多对多（折中）。
+【要点】<strong>用户级线程的切换不经过核心态</strong>；内核级线程的切换需要核心态——并发能力与切换开销的权衡。</p>
+<h2>二、调度精讲（演算主战场）</h2>
+<p><strong>S1 三个层次</strong>：高级调度（作业：外存→内存，建进程）；<strong>中级调度</strong>（内存↔外存，挂起）；低级调度（进程调度：就绪→运行，<strong>最频繁</strong>）。
+<strong>S2 调度时机</strong>：进程终止/阻塞（主动）；时间片到、更高优先级就绪（被动，抢占式）。<strong>不能进行进程切换的情况</strong>：处理中断时、内核临界区中、原子操作中。
+<strong>S3 七种算法（准则+特点）</strong>：
+| 算法 | 规则 | 特点 | 优缺点 |
+|---|---|---|---|
+| FCFS | 先来先服务 | 非抢占 | 公平简单；对短作业不利 |
+| SJF/SRTN | 最短(剩余)作业优先 | 非抢占/抢占 | 平均等待/周转最短；长作业饥饿 |
+| HRRN | 响应比=(等待+要求服务)/要求服务 | 非抢占 | 综合FCFS与SJF、无饥饿 |
+| RR | 时间片轮转 | 抢占 | 交互响应好；切换开销、不分轻重 |
+| 优先级 | 优先级高者先 | 可抢占 | 灵活；低优先级饥饿→老化 |
+| 多级反馈队列 | 多队列+时间片递增+可抢占 | <strong>综合所有优点</strong> | 系统最通用；实现复杂 |</p>
+<p>【SRTN的抢占规则】新进程的<strong>剩余时间</strong>比当前进程的剩余时间短 → 剥夺。
+【HRRN的计算】响应比 R=(等待时间+要求服务时间)/要求服务时间——等待越久越大（治饥饿）。
+【多级反馈队列要点】多队列优先级递减、时间片递增；新进程进最高队列；用完时间片<strong>降级</strong>，未用完被抢占则回<strong>原队列</strong>（尾）。</p>
+<p><strong>S4 四个时间指标（计算题定义）</strong>：
+- 周转时间 = 完成时间 − 到达时间；
+- 带权周转时间 = 周转时间 / 服务时间（≥1，越接近1越好）；
+- 等待时间 = 周转时间 − 服务时间（纯等CPU）；
+- 响应时间 = 首次响应（交互系统看这个）。
+【结论】<strong>SJF/SRTN 的平均等待时间、平均周转时间最少</strong>（证明直觉：短任务先做，总等待=Σ前驱服务时间最小化）。</p>
+<h2>三、本章考题（4题·调度全套演算）</h2>
+<p><strong>统一数据</strong>：四进程，到达时间与服务时间（单位ms）：
+| 进程 | 到达 | 服务 |
+|---|---|---|
+| P1 | 0 | 7 |
+| P2 | 1 | 4 |
+| P3 | 3 | 2 |
+| P4 | 6 | 4 |</p>
+<p><strong>题1（FCFS）</strong>
+【甘特图】P1: 0–7；P2: 7–11；P3: 11–13；P4: 13–17。
+周转：P1=7，P2=11−1=10，P3=13−3=10，P4=17−6=11 → 平均 <strong>9.5ms</strong>。
+带权：1，2.5，5，2.75 → 平均 <strong>2.8125</strong>。∎</p>
+<p><strong>题2（SJF非抢占）</strong>
+P1: 0–7（期间P2、P3、P4全部到达）。t=7 选服务最短者：P3(2) → 7–9；再选：P2(4)与P4(4)并列 → 先来者P2 → 9–13；P4: 13–17。
+周转：7，12，6，11 → 平均 <strong>9ms</strong>；带权：1，3，3，2.75 → 平均 <strong>2.4375</strong>。∎</p>
+<p><strong>题3（SRTN抢占）</strong>
+t=0：P1运行。t=1：P2剩余4 &lt; P1剩余6 → <strong>抢占</strong>，P2运行。t=3：P3剩余2 = P2剩余2 → 平局不抢（按先来继续P2）。t=5：P2完成；就绪{P1剩6, P3剩2, P4? 未到} → P3运行5–7。t=6：P4(4)到达，P1剩余6 &gt; P4剩余4 → <strong>抢占</strong>，P4运行7–11。t=11：P1运行11–17。
+完成时间：P1=17，P2=5，P3=7，P4=11。
+周转：17，4，4，5 → 平均 <strong>7.5ms</strong>（四算法中最优）；带权：17/7≈2.43，1，2，1.25 → 平均 <strong>1.67</strong>。∎</p>
+<p><strong>题4（HRRN）</strong>
+t=0–7：P1。t=7算响应比：P2=(5+4)/4=2.25，P3=(3+2)/2=<strong>2.5</strong>，P4=(2+4)/4=1.5 → P3运行7–9。t=9：P2=(7+4)/4=2.75，P4=(3+4)/4=1.75 → P2运行9–13；P4: 13–17。
+周转：7，12，6，11 → 平均 <strong>9ms</strong>；带权：1，3，3，2.75 → <strong>2.4375</strong>。∎</p>
+<p><strong>题5（RR时间片=2·完整演算）</strong>
+t=0–2：P1（剩5）。t=1：P2入队。t=2：P1回队尾 → 就绪{P2,P1}。t=2–4：P2（剩2）；t=3：P3入队 → 就绪{P1,P3,P2}。t=4–6：P1（剩3）；t=6：P4入队、P1回队尾 → {P3,P2,P4,P1}。t=6–8：P3完成（<strong>周转=8−3=5</strong>）。t=8–10：P2完成（<strong>周转=10−1=9</strong>）。t=10–12：P4（剩2）回队尾 → {P1,P4}。t=12–14：P1（剩1）回队尾 → {P4,P1}。t=14–15：P4完成（<strong>周转=15−6=9</strong>）。t=15–16：P1完成（<strong>周转=16</strong>）。
+平均周转=(16+9+5+9)/4=<strong>9.75ms</strong>；带权≈<strong>2.32</strong>。∎</p>
+<p><strong>五算法汇总</strong>：
+| | FCFS | SJF | SRTN | HRRN | RR(q=2) |
+|---|---|---|---|---|---|
+| 平均周转 | 9.5 | 9 | <strong>7.5</strong> | 9 | 9.75 |
+| 平均带权 | 2.8125 | 2.4375 | <strong>1.67</strong> | 2.4375 | 2.32 |
+（SRTN最优但饥饿长作业；RR响应好但周转差——没有全能算法，只有场景适配。）</p>
+<h2>四、本章考题补遗（3题）</h2>
+<p><strong>题6（状态转换·精确判断）</strong> 判断正误：①进程获得除CPU外的所有资源时处于就绪态；②阻塞态进程被唤醒后直接进入运行态；③进程由运行转阻塞是被动行为。
+【答】①对；②错（先经就绪）；③错（运行→阻塞是<strong>主动</strong>调用阻塞原语）。∎</p>
+<p><strong>题7（线程共享辨析）</strong> 同一进程的两线程不共享：①全局变量 ②堆 ③打开文件 ④栈 ⑤程序计数器。
+【答】④⑤（栈与寄存器现场私有）。两线程共享代码段、数据段、堆、打开文件。∎</p>
+<p><strong>题8（进程通信）</strong> 管道通信的两条限制是什么？
+【答】①管道是<strong>半双工</strong>的（双向需两根管道）；②各进程<strong>互斥</strong>访问管道；③数据写入后即从管道消失（非持久）；④管道写满/读空时读写进程阻塞。∎</p>
+<h2>五、本章必会清单</h2>
+<ol>
+<li>四特征两两辨析（并发/并行、互斥共享/同时共享、时分/空分复用）；</li>
+<li>特权指令清单与态切换方向（用户→核心靠中断异常，反向靠特权指令）；</li>
+<li>系统调用五步顺序；缺页=故障（可修复继续执行）；</li>
+<li>五状态转换图及"三大不能"；PCB常驻内存、进程存在的唯一标志；</li>
+<li>线程共享/私有一览；用户级vs内核级线程切换是否进核心态；</li>
+<li>调度计算题规范：甘特图→周转→带权→平均（FCFS/SJF/SRTN/HRRN/RR五算法一套数据全演算）；</li>
+<li>SJF平均周转最优的证明直觉；多级反馈队列的降级/回队规则。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第2/4批）：<strong>同步互斥与死锁</strong>——临界区四原则、PV操作六大经典模型完整推演（生产者消费者/读者写者/吸烟者/哲学家）、银行家算法全套演算、死锁判定与解除。说"继续"交付。</p>
+</blockquote></div></body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408数据结构精讲_图 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 数据结构精讲 · 图（定义原理 + 985演算）</h1>
+<blockquote>
+<p>数据结构精讲第3批。图是数据结构与离散数学的交界，408的高频演算区：<strong>遍历序列、最小生成树、Dijkstra逐步表、关键路径四大参数</strong>。本册构造三个小图 G1/G2/G3，所有算法演算在其上完整展开。</p>
+</blockquote>
+<hr />
+<h1>第6章 图</h1>
+<h2>一、定义与存储精讲</h2>
+<p><strong>D1 图的基本概念</strong>：G=(V,E)；有向图弧<vi,vj>有向、无向边(vi,vj)对称；<strong>完全图</strong>：无向任意两顶点有边（n(n−1)/2条），有向任意两顶点双向有弧（n(n−1)条）。
+<strong>D2 度与连通</strong>：
+- 无向：度 TD(v)=关联边数；<strong>握手定理 ΣTD=2e</strong>（每边贡献两个度——推导一切度数题）；
+- 有向：入度ID+出度OD=TD；<strong>ΣID=ΣOD=e</strong>；
+- 无向连通：任意两顶点有路径；连通分量=极大连通子图；<strong>生成树</strong>=含全部n个顶点的极小连通子图（n−1条边，加边有环、去边不连通）；
+- 有向强连通：任意两顶点互达；<strong>强连通图最少n条边</strong>（有向环）；非强连通图的强连通分量用两次DFS求。
+【推导】n个顶点e条边的无向图：连通⇒e≥n−1；n−1条边且连通⇔恰是树。</p>
+<p><strong>D3 四种存储（对比表）</strong>：
+| 存储 | 适用 | 空间 | 求度 |
+|---|---|---|---|
+| 邻接矩阵 | 稠密图 | O(n²)（对称矩阵可压缩） | 无向：行和；有向：行=出度、列=入度 |
+| 邻接表 | 稀疏图 | O(n+e)（无向2e个边结点） | 出度=边结点数；入度需遍历或逆表 |
+| 十字链表 | 有向图 | O(n+e) | 出入度都易 |
+| 邻接多重表 | 无向图 | O(n+e) | 每边只存一次，便于"对边"操作 |</p>
+<h2>二、遍历精讲</h2>
+<p><strong>B1 DFS</strong>：递归（栈）；<strong>邻接表 O(n+e)，邻接矩阵 O(n²)</strong>；空间 O(n)（递归栈最深）。
+<strong>B2 BFS</strong>：队列；同上复杂度；<strong>无权图单源最短路径</strong>（按层扩展，首达即最短）。
+<strong>B3 序列唯一性（高频辨析）</strong>：
+- <strong>邻接矩阵</strong>存储：邻居次序固定 → DFS/BFS序列<strong>唯一</strong>；
+- <strong>邻接表</strong>存储：取决于建表时边结点的插入次序 → 序列<strong>不唯一</strong>；
+- 非连通图：一次遍历只能访问一个连通分量，<strong>调用遍历的次数=连通分量数</strong>。
+<strong>B4 遍历应用</strong>：连通分量计数、判断是否有环（无向图DFS遇已访问的非双亲结点→有环）、路径存在性。</p>
+<h2>三、最小生成树（MST）</h2>
+<p><strong>M1 Prim</strong>：从某顶点出发，<strong>每次选择"树内↔树外"的最小权边</strong>把一个新顶点并入；O(n²)——<strong>与边数无关，适合稠密图</strong>。
+<strong>M2 Kruskal</strong>：边按权排序，<strong>从小到大试选，并查集判环</strong>（不成环才要）；O(elog₂e)——<strong>适合稀疏图</strong>。
+<strong>M3 正确性直觉（985面试）</strong>：割性质——把顶点集分成树内/树外两半，跨越割的最小权边必属于某棵MST（若不选它而选别的跨割边，把那条换成它总权更小且仍连通——与最小矛盾）。Prim与Kruskal都是这条性质的不同实现。
+<strong>M4 唯一性</strong>：<strong>权值互异⇒MST唯一</strong>；否则MST不唯一但<strong>总权值唯一且最小</strong>。</p>
+<p><strong>图G1</strong>（无向带权，本批演算主图）：V={A,B,C,D,E}，边：A-C=1，B-C=2，D-E=3，A-B=4，B-D=5，C-D=8，C-E=10。</p>
+<p><strong>考题1（Prim从A出发演算）</strong>
+| 步 | 并入顶点 | 选的边 | 树内集合 |
+|---|---|---|---|
+| 1 | C | A-C=1 | {A,C} |
+| 2 | B | C-B=2 | {A,C,B} |
+| 3 | D | B-D=5 | {A,C,B,D} |
+| 4 | E | D-E=3 | {A,C,B,D,E} |
+MST={AC,BC,BD,DE}，W=1+2+5+3=<strong>11</strong>。∎</p>
+<p><strong>考题2（Kruskal演算）</strong> 排序：AC1，BC2，DE3，AB4，BD5，CD8，CE10。
+选AC✓、BC✓、DE✓；AB：A、B已连通（并查集find同根）<strong>弃</strong>；BD：B与D已连通（经AC-BC-DE）<strong>弃</strong>；CD、CE同样弃——已有4条边，停止。
+结果与Prim一致：<strong>W=11</strong>。∎</p>
+<h2>四、最短路径</h2>
+<p><strong>S1 Dijkstra（单源，禁负权边）</strong>：贪心——每轮把"当前 dist 最小的未定顶点"定为永久最短，再松弛其邻边。O(n²)。
+<strong>图G2</strong>（有向带权）：A→B=2，A→C=5，B→C=1，B→D=6，C→D=2，D→E=1，C→E=7。</p>
+<p><strong>考题3（Dijkstra逐步表·从A）</strong>
+| 轮 | 选出 | dist[A,B,C,D,E] | 更新说明 |
+|---|---|---|---|
+| 初始 | — | 0, 2, 5, ∞, ∞ | A的邻边 |
+| 1 | B(2) | 0, 2, <strong>3</strong>, 8, ∞ | 经B松弛C：2+1=3&lt;5；D：2+6=8 |
+| 2 | C(3) | 0, 2, 3, <strong>5</strong>, <strong>10</strong> | 经C松弛D：3+2=5&lt;8；E：3+7=10 |
+| 3 | D(5) | 0, 2, 3, 5, <strong>6</strong> | 经D松弛E：5+1=6&lt;10 |
+| 4 | E(6) | 结束 | |
+最短路径：A→B(2)、A→B→C(3)、A→B→C→D(5)、A→B→C→D→E(6)。∎
+【负权禁区·反例】A→B=1，A→C=2，C→B=−2：Dijkstra第1轮后选B(1)并<strong>永久确定</strong>，但真实最短是经C的0——"永久确定"的前提（当前最小者不会再被改进）被负权破坏。负权用Floyd或SPFA。
+<strong>S2 Floyd（多源）</strong>：动态规划，依次允许经过顶点1..n 中转：d⁽ᵏ⁾(i,j)=min(d⁽ᵏ⁻¹⁾, d⁽ᵏ⁻¹⁾(i,k)+d⁽ᵏ⁻¹⁾(k,j))，三重循环 <strong>O(n³)</strong>；可处理负权边（禁负权回路）。</p>
+<h2>五、拓扑排序与关键路径</h2>
+<p><strong>P1 拓扑排序（AOV网）</strong>：每次取<strong>入度为0</strong>的顶点输出并删除其出边（栈/队列均可）；<strong>输出顶点数&lt;n ⇒ 有环</strong>；拓扑序列<strong>不唯一</strong>；DFS按完成时间逆序也是拓扑序。O(n+e)。</p>
+<p><strong>P2 关键路径（AOE网）</strong>：源→汇；事件最早发生 ve(源)=0，<strong>ve(j)=max{ve(i)+w<i,j>}</strong>（按拓扑序）；最迟 vl(汇)=ve(汇)，<strong>vl(i)=min{vl(j)−w}</strong>（按逆拓扑序）。
+活动四大参数（活动a=<i,j>，时长w）：
+<strong>最早开始 e(a)=ve(i)；最迟开始 l(a)=vl(j)−w；时间余量=l−e；余量=0 → 关键活动</strong>。
+【要点】①关键路径=最长路径，<strong>可有多条</strong>；②<strong>缩短某一关键活动不一定缩短工期</strong>（关键路径可能转移）；③只有"所有关键路径都经过"的活动被缩短才有效。</p>
+<p><strong>图G3</strong>（AOE网）：活动与时长：1→2=3，1→3=2，2→4=2，2→5=3，3→5=3，4→5=1。</p>
+<p><strong>考题4（关键路径四大参数完整演算）</strong>
+【拓扑序】1,2,3,4,5；【逆拓扑序】5,4,2,3,1。
+ve：ve1=0；ve2=ve1+3=3；ve3=ve1+2=2；ve4=ve2+2=5；ve5=max(ve2+3, ve3+3, ve4+1)=max(6,5,6)=<strong>6</strong>。
+vl：vl5=6；vl4=vl5−1=5；vl3=vl5−3=3；vl2=min(vl4−2, vl5−3)=min(3,3)=3；vl1=min(vl2−3, vl3−2)=0。
+| 活动 | w | e=ve(尾) | l=vl(头)−w | 余量 | 关键? |
+|---|---|---|---|---|---|
+| 1→2 | 3 | 0 | 3−3=0 | 0 | ✓ |
+| 1→3 | 2 | 0 | 3−2=1 | 1 | |
+| 2→4 | 2 | 3 | 5−2=3 | 0 | ✓ |
+| 2→5 | 3 | 3 | 6−3=3 | 0 | ✓ |
+| 3→5 | 3 | 2 | 6−3=3 | 1 | |
+| 4→5 | 1 | 5 | 6−1=5 | 0 | ✓ |
+<strong>工期=ve5=6；关键路径两条：1→2→5 与 1→2→4→5</strong>。∎
+（验证：ve=max 分支里两条路径同为6——"多条关键路径"的活例。）</p>
+<p><strong>考题5（拓扑排序演算·栈与队列结果不同）</strong> 对G3的AOV图（同G3顶点与有向边）分别用队列与栈做拓扑排序。
+【解】初始入度：1:0，2:1，3:1，4:1，5:3。
+<strong>队列</strong>：出1→入度2,3归零 → {2,3}；出2→4入队 → {3,4}；出3→5剩1（来自4）；出4→5入队；出5。序列 <strong>1,2,3,4,5</strong>。
+<strong>栈</strong>：出1→压2,3；弹3（5还差2的入度）；弹2→4、5就绪压栈；弹5、弹4。序列 <strong>1,3,2,5,4</strong>。
+两个都是合法拓扑序列——<strong>数据结构（栈/队列）的选择改变输出序列，但不改变合法性</strong>。∎</p>
+<h2>六、本章考题补遗（3题）</h2>
+<p><strong>题6（度数与边数）</strong> 无向图有16条边，度为3的顶点有4个、度为4的顶点有3个，其余顶点度均≤2? 求最少顶点数。
+【解】ΣTD=2e=32。已知贡献 3×4+4×3=24，剩余度数=8，其余每个顶点至少1度（若连通）? 题设"度≤2"的顶点<strong>至少0度</strong>——最少顶点=让剩余度数尽量集中：每个≤2 → 至少 8/2=4 个顶点。总最少 <strong>4+4+3=11个顶点</strong>。∎
+（握手定理 ΣTD=2e 是一切度数计算的入口。）</p>
+<p><strong>题7（BFS最短路应用）</strong> 无权图 G1 中求 A 到 E 的最短路径（边数最少）。
+【解】BFS从A：层0={A}，层1={C,B,D}，层2={E}（经C或D）→ 最短<strong>2条边</strong>，路径 A→C→E? G1中C-E=10存在边 ✓ 或 A→D→E。∎</p>
+<p><strong>题8（概念钉子）</strong> 判断：①强连通有向图最少n条边；②权互异的无向图MST唯一；③Dijkstra可处理负权边只要无负权回路；④缩短任一关键活动必缩短工期。
+【答】①<strong>对</strong>（有向环）；②<strong>对</strong>；③<strong>错</strong>（负权边即破坏贪心前提，反例见S1）；④<strong>错</strong>（多条关键路径时，只缩短一条上的活动，工期不变——G3中缩短1→2超过1个单位前，工期仍由两条关键路径的max决定）。∎</p>
+<h2>七、本章必会清单</h2>
+<ol>
+<li>握手定理 ΣTD=2e 及度数题；强连通最少n条边；生成树n−1条边的充要表述；</li>
+<li>四种存储的度计算方式与空间复杂度；无向邻接表 2e 个边结点；</li>
+<li>DFS/BFS复杂度（邻接表O(n+e)、矩阵O(n²)）、序列唯一性（矩阵唯一/表不唯一）、非连通图遍历次数=分量数；</li>
+<li>Prim O(n²) 稠密、Kruskal O(elog₂e) 稀疏+并查集判环；割性质直觉；权互异⇒MST唯一；</li>
+<li>Dijkstra逐步表+负权反例；Floyd三重循环与负权边；</li>
+<li>拓扑排序（栈/队列序列不同、输出&lt;n⇒有环）；关键路径四大参数公式与多条关键路径的工期判断。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第4/4批·收官）：<strong>查找+排序</strong>——折半查找判定树与ASL、B树/B+树插入删除演算、散列（线性探测/拉链ASL计算模板）、九大排序逐个推导（快排partition趟、堆建堆筛选、基数分配收集）与稳定性证明。说"继续"交付收官。</p>
+</blockquote></div></body></html>

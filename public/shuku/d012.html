@@ -1,0 +1,708 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_积分学专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 积分学专项（150题带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，三部曲第三册（前两部：《极限与连续专项》《微分学专项》），配合《高数_知识点与难点》第4章使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题把题号标到《数学考题集》同章节旁，三天后重做。
+全部自编或改编经典题型，覆盖：不定积分技巧（换元/分部/有理函数）、定积分计算与对称性、变限积分与积分方程、反常积分敛散与计算、定积分应用（面积/弧长/旋转体/物理）。</p>
+</blockquote>
+<h2>§1 不定积分技巧（J1–J45）</h2>
+<p><strong>J1.</strong>★ ∫x³dx。</p>
+<blockquote>
+<p>幂法则 ∫xᵘdx = x^{u+1}/(u+1)：<strong>= x⁴/4 + C</strong>。C 永远不能丢，考试扣分重灾区。</p>
+</blockquote>
+<p><strong>J2.</strong>★ ∫(1/x)dx。</p>
+<blockquote>
+<p><strong>ln|x| + C</strong>。绝对值别丢——负区间内 ln(−x) 才有意义。</p>
+</blockquote>
+<p><strong>J3.</strong>★ ∫eˣdx 与 ∫aˣdx。</p>
+<blockquote>
+<p><strong>eˣ + C；aˣ/lna + C</strong>（a&gt;0，a≠1）。</p>
+</blockquote>
+<p><strong>J4.</strong>★ ∫sinx dx 与 ∫cosx dx。</p>
+<blockquote>
+<p><strong>−cosx + C；sinx + C</strong>。sin 的导是 cos，反着积出来带负号。</p>
+</blockquote>
+<p><strong>J5.</strong>★ ∫sec²x dx、∫csc²x dx。</p>
+<blockquote>
+<p><strong>tanx + C；−cotx + C</strong>。它们分别就是 tanx、cotx 的导数。</p>
+</blockquote>
+<p><strong>J6.</strong>★ ∫dx/(1+x²) 与 ∫dx/√(1−x²)。</p>
+<blockquote>
+<p><strong>arctanx + C；arcsinx + C</strong>。两个基本反三角原型，出现 a²+x²、a²−x² 时先想着它们。</p>
+</blockquote>
+<p><strong>J7.</strong>★ ∫(√x + 1/√x)dx。</p>
+<blockquote>
+<p>= ∫(x^{1/2} + x^{−1/2})dx = <strong>(2/3)x^{3/2} + 2√x + C</strong>。</p>
+</blockquote>
+<p><strong>J8.</strong>★ ∫tan²x dx。</p>
+<blockquote>
+<p>tan²x = sec²x − 1 ⇒ <strong>tanx − x + C</strong>。"三角平方降次"是固定起手。</p>
+</blockquote>
+<p><strong>J9.</strong>★ ∫sin²(x/2)dx。</p>
+<blockquote>
+<p>降幂：sin²(x/2) = (1−cosx)/2 ⇒ <strong>x/2 − sinx/2 + C</strong>。</p>
+</blockquote>
+<p><strong>J10.</strong>★ ∫x·e^{x²}dx。</p>
+<blockquote>
+<p>凑微分：x dx = d(x²)/2 ⇒ <strong>(1/2)e^{x²} + C</strong>。</p>
+</blockquote>
+<p><strong>J11.</strong>★ ∫x/(1+x⁴)dx。</p>
+<blockquote>
+<p>xdx = d(x²)/2 ⇒ (1/2)∫d(x²)/(1+x⁴) = <strong>(1/2)arctan(x²) + C</strong>。</p>
+</blockquote>
+<p><strong>J12.</strong>★ ∫(lnx)/x dx（x&gt;0）。</p>
+<blockquote>
+<p>(lnx)/x dx = lnx·d(lnx) ⇒ <strong>(1/2)ln²x + C</strong>。</p>
+</blockquote>
+<p><strong>J13.</strong>★ ∫e^{eˣ}·eˣ dx。</p>
+<blockquote>
+<p>eˣdx = d(eˣ) ⇒ <strong>e^{eˣ} + C</strong>。看到"指数的指数"配它自己的导数。</p>
+</blockquote>
+<p><strong>J14.</strong>★ ∫sin³x dx。</p>
+<blockquote>
+<p>拆 sin³ = (1−cos²x)sinx，令 u=cosx：
+∫(u²−1)du = u³/3 − u = <strong>cos³x/3 − cosx + C</strong>。</p>
+</blockquote>
+<p><strong>J15.</strong>★★ ∫sin²x·cos²x dx。</p>
+<blockquote>
+<p>sinxcosx = sin2x/2 ⇒ 被积函数 = sin²2x/4 = (1−cos4x)/8。
+<strong>= x/8 − sin4x/32 + C</strong>。</p>
+</blockquote>
+<p><strong>J16.</strong>★★ 默写 ∫tanx dx 与 ∫cotx dx。</p>
+<blockquote>
+<p><strong>∫tanx dx = −ln|cosx| = ln|secx| + C；∫cotx dx = ln|sinx| + C</strong>。</p>
+</blockquote>
+<p><strong>J17.</strong>★★ 默写 ∫secx dx 与 ∫cscx dx。</p>
+<blockquote>
+<p><strong>∫secx dx = ln|secx + tanx| + C；∫cscx dx = ln|cscx − cotx| + C</strong>。
+sec 型凑 (sec+tan) 的导数；csc 型结果里是减号。</p>
+</blockquote>
+<p><strong>J18.</strong>★★ ∫dx/(x²+2x+3)。</p>
+<blockquote>
+<p>配方：(x+1)²+2 ⇒ ∫d(x+1)/[(x+1)²+(√2)²] = <strong>(1/√2)arctan[(x+1)/√2] + C</strong>。</p>
+</blockquote>
+<p><strong>J19.</strong>★★ ∫dx/√(4−x²)。</p>
+<blockquote>
+<p>套 a=2：= <strong>arcsin(x/2) + C</strong>。</p>
+</blockquote>
+<p><strong>J20.</strong>★★ ∫x²/(x²+1)dx。</p>
+<blockquote>
+<p>假分式先拆：x²/(x²+1) = 1 − 1/(x²+1) ⇒ <strong>x − arctanx + C</strong>。</p>
+</blockquote>
+<p><strong>J21.</strong>★★ ∫dx/(1+sinx)。</p>
+<blockquote>
+<p>分子分母乘 (1−sinx)：= ∫(1−sinx)/cos²x dx = ∫(sec²x − tanx·secx)dx = <strong>tanx − secx + C</strong>。</p>
+</blockquote>
+<p><strong>J22.</strong>★★ ∫dx/(sinx·cosx)。</p>
+<blockquote>
+<p>= ∫(sec²x/tanx)dx（上下同除 cos²x）= ∫d(tanx)/tanx = <strong>ln|tanx| + C</strong>。</p>
+</blockquote>
+<p><strong>J23.</strong>★★ ∫dx/√(x²+1)。</p>
+<blockquote>
+<p>结论：<strong>ln(x + √(x²+1)) + C</strong>（三角换元 x=tanθ 可推；这也是反双曲正弦 arsinhx）。
+与它成对的：∫dx/√(x²−1) = ln|x+√(x²−1)| + C（见 J24）。</p>
+</blockquote>
+<p><strong>J24.</strong>★★ ∫dx/√(x²−1)（x&gt;1）。</p>
+<blockquote>
+<p><strong>ln|x + √(x²−1)| + C</strong>。与 J23 只差一个符号，结果结构相同，成对背。</p>
+</blockquote>
+<p><strong>J25.</strong>★★ ∫√(a²−x²)dx（a&gt;0）。</p>
+<blockquote>
+<p>三角换元 x=asinθ：= ∫a²cos²θdθ = a²(θ/2 + sin2θ/4)。
+<strong>= (x/2)√(a²−x²) + (a²/2)arcsin(x/a) + C</strong>。
+几何理解：半圆 x 从 0 到 x 的面积 = 扇形 + 三角形，公式不用死背也能现场拼出来。</p>
+</blockquote>
+<p><strong>J26.</strong>★ ∫x/√(1−x²)dx。</p>
+<blockquote>
+<p>d(1−x²) = −2xdx ⇒ = −½∫(1−x²)^{−1/2}d(1−x²) = <strong>−√(1−x²) + C</strong>。</p>
+</blockquote>
+<p><strong>J27.</strong>★★ ∫dx/(1+√x)。</p>
+<blockquote>
+<p>令 t=√x，dx=2tdt：2∫t/(1+t)dt = 2∫(1 − 1/(1+t))dt = 2t − 2ln(1+t)。
+<strong>= 2√x − 2ln(1+√x) + C</strong>。</p>
+</blockquote>
+<p><strong>J28.</strong>★★ ∫dx/(1+³√x)。</p>
+<blockquote>
+<p>令 t=³√x，dx=3t²dt：3∫t²/(1+t)dt = 3∫(t−1 + 1/(1+t))dt。
+<strong>= 3[t²/2 − t + ln(1+t)] + C，t=³√x</strong>。根号次数 n 就设 t=x^{1/n}。</p>
+</blockquote>
+<p><strong>J29.</strong>★★ ∫x/(1+x)²dx。</p>
+<blockquote>
+<p>拆分子：x = (1+x)−1 ⇒ = ∫[1/(1+x) − 1/(1+x)²]dx = <strong>ln(1+x) + 1/(1+x) + C</strong>。</p>
+</blockquote>
+<p><strong>J30.</strong>★ ∫x·eˣdx。</p>
+<blockquote>
+<p>分部（幂函数留作 u，指数进 dv）：= xeˣ − ∫eˣdx = <strong>xeˣ − eˣ + C</strong>。</p>
+</blockquote>
+<p><strong>J31.</strong>★ ∫x·lnx dx。</p>
+<blockquote>
+<p>分部（对数留作 u）：= (x²/2)lnx − ∫x/2 dx = <strong>(x²/2)lnx − x²/4 + C</strong>。</p>
+</blockquote>
+<p><strong>J32.</strong>★★ ∫x²eˣdx。</p>
+<blockquote>
+<p>两次分部：= x²eˣ − 2∫xeˣ = x²eˣ − 2(xeˣ−eˣ) = <strong>eˣ(x²−2x+2) + C</strong>。
+幂次每分部一次降一阶，到 0 为止。</p>
+</blockquote>
+<p><strong>J33.</strong>★ ∫x·sinx dx。</p>
+<blockquote>
+<p>= −xcosx + ∫cosx = <strong>−xcosx + sinx + C</strong>。</p>
+</blockquote>
+<p><strong>J34.</strong>★★ ∫lnx dx。</p>
+<blockquote>
+<p>把 1 当 x⁰ 分部：= xlnx − ∫1 dx = <strong>xlnx − x + C</strong>。"∫lnx 不用换元，直接分部"。</p>
+</blockquote>
+<p><strong>J35.</strong>★★ ∫arctanx dx。</p>
+<blockquote>
+<p>= x·arctanx − ∫x/(1+x²)dx = <strong>x·arctanx − ½ln(1+x²) + C</strong>。</p>
+</blockquote>
+<p><strong>J36.</strong>★★ ∫eˣ·sinx dx。</p>
+<blockquote>
+<p>分部两次出现循环：设 I=∫eˣsinx，得 I = eˣsinx − eˣcosx − I。
+<strong>I = (eˣ/2)(sinx − cosx) + C</strong>。e^{ax}sinbx 一族都用这招解方程。</p>
+</blockquote>
+<p><strong>J37.</strong>★★ ∫e^{√x}dx。</p>
+<blockquote>
+<p>t=√x：2∫te^t dt = 2e^t(t−1) = <strong>2e^{√x}(√x − 1) + C</strong>（换元套分部的复合套路）。</p>
+</blockquote>
+<p><strong>J38.</strong>★★ ∫x·arctanx dx。</p>
+<blockquote>
+<p>= ½∫arctanx·d(x²) = ½x²arctanx − ½∫x²/(1+x²)dx
+= <strong>½x²arctanx − ½x + ½arctanx + C</strong>。</p>
+</blockquote>
+<p><strong>J39.</strong>★★ ∫(lnx)²/x² dx。</p>
+<blockquote>
+<p>u=(lnx)²，dv=dx/x²：= −(lnx)²/x + 2∫(lnx)/x² dx = −(lnx)²/x − 2lnx/x − 2/x。
+<strong>= −[(lnx)² + 2lnx + 2]/x + C</strong>。</p>
+</blockquote>
+<p><strong>J40.</strong>★★★ ∫ln(1+x)/(1+x)² dx。</p>
+<blockquote>
+<p>u=ln(1+x)，dv=dx/(1+x)²（dv = −d[1/(1+x)]）：
+= −ln(1+x)/(1+x) + ∫dx/(1+x)² = <strong>−[ln(1+x)+1]/(1+x) + C</strong>。</p>
+</blockquote>
+<p><strong>J41.</strong>★★ ∫(x+1)/[(x−1)(x+2)]dx。</p>
+<blockquote>
+<p>待定系数：(x+1) = A(x+2)+B(x−1)。x=1 ⇒ A=2/3；x=−2 ⇒ B=1/3。
+<strong>= (2/3)ln|x−1| + (1/3)ln|x+2| + C</strong>。</p>
+</blockquote>
+<p><strong>J42.</strong>★★ ∫dx/[x(x²+1)]。</p>
+<blockquote>
+<p>拆：1/[x(x²+1)] = 1/x − x/(x²+1)。
+<strong>= ln|x| − ½ln(1+x²) + C</strong>。</p>
+</blockquote>
+<p><strong>J43.</strong>★★ ∫dx/(x²+2x+5)。</p>
+<blockquote>
+<p>配方：(x+1)²+4 ⇒ <strong>(1/2)arctan[(x+1)/2] + C</strong>。</p>
+</blockquote>
+<p><strong>J44.</strong>★★ ∫dx/(1+cosx)。</p>
+<blockquote>
+<p>半角：1+cosx = 2cos²(x/2) ⇒ = ½∫sec²(x/2)dx = <strong>tan(x/2) + C</strong>。</p>
+</blockquote>
+<p><strong>J45.</strong>★★ ∫dx/(eˣ+1)。</p>
+<blockquote>
+<p>分子分母乘 e^{−x}：= ∫e^{−x}/(1+e^{−x})dx = −ln(1+e^{−x}) + C。
+也可写成 <strong>x − ln(1+eˣ) + C</strong>（两者只差常数）。</p>
+</blockquote>
+<h2>§2 定积分计算与性质（J46–J80）</h2>
+<p><strong>J46.</strong>★ 用几何意义求 ∫₋₁¹ |x|dx。</p>
+<blockquote>
+<p>两块三角形，每块 ½ ⇒ <strong>1</strong>。简单绝对值函数先画图，比算快。</p>
+</blockquote>
+<p><strong>J47.</strong>★ ∫₀^π sinx dx。</p>
+<blockquote>
+<p>= [−cosx]₀^π = <strong>2</strong>（半周期正弦的面积，常用值）。</p>
+</blockquote>
+<p><strong>J48.</strong>★ ∫₋₁¹ (x² + x³)dx。</p>
+<blockquote>
+<p>x³ 奇函数积分为 0；∫x² = 2/3 ⇒ <strong>2/3</strong>。对称区间先扫奇偶。</p>
+</blockquote>
+<p><strong>J49.</strong>★ ∫₋ₐᵃ (x³cosx + x²)dx。</p>
+<blockquote>
+<p>x³cosx 是奇函数（奇×偶=奇）⇒ 归零。<strong>= 2a³/3</strong>。</p>
+</blockquote>
+<p><strong>J50.</strong>★★ ∫₀^π x·sinx dx。</p>
+<blockquote>
+<p>分部：= [−xcosx]₀^π + ∫₀^π cosx = π + 0 = <strong>π</strong>。
+推广 ∫₀^π x·f(sinx)dx = (π/2)∫₀^π f(sinx)dx，见 J80。</p>
+</blockquote>
+<p><strong>J51.</strong>★★ ∫₀¹ x·e^{−x}dx。</p>
+<blockquote>
+<p>分部：= [−xe^{−x}]₀¹ + ∫₀¹e^{−x} = −1/e + (1−1/e) = <strong>1 − 2/e</strong>。</p>
+</blockquote>
+<p><strong>J52.</strong>★★ ∫₁ᵉ ln x dx。</p>
+<blockquote>
+<p>分部：= [xlnx − x]₁ᵉ = (e−e) − (0−1) = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>J53.</strong>★★ ∫₀^{π/2} sin²x dx 与 ∫₀^{π/2} cos²x dx。</p>
+<blockquote>
+<p>降幂各为 <strong>π/4</strong>（两者相等且和为 π/2）。图形对称，直接背。</p>
+</blockquote>
+<p><strong>J54.</strong>★★ 用华里士公式求 ∫₀^{π/2} sin⁴x dx 与 ∫₀^{π/2} sin³x dx。</p>
+<blockquote>
+<p>公式：∫₀^{π/2}sinⁿ = [(n−1)!!/n!!]·(π/2 若 n 偶；1 若 n 奇)。
+sin⁴：(3·1)/(4·2)·π/2 = <strong>3π/16</strong>；sin³：(2/3)·1 = <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>J55.</strong>★★ ∫₀¹ √(1−x²)dx。</p>
+<blockquote>
+<p>单位圆第一象限四分之一圆盘 ⇒ <strong>π/4</strong>（几何意义秒杀，别硬算）。</p>
+</blockquote>
+<p><strong>J56.</strong>★★ ∫₀¹ x·√(1−x²)dx。</p>
+<blockquote>
+<p>令 u=1−x²：= ½∫₀¹ u^{1/2}du = <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>J57.</strong>★★ ∫₀^{2π} |sinx| dx。</p>
+<blockquote>
+<p>四个拱，每拱面积 2 ⇒ <strong>4</strong>。绝对值必须拆段或用对称。</p>
+</blockquote>
+<p><strong>J58.</strong>★★ ∫₀^{2π} sin²x·cos²x dx。</p>
+<blockquote>
+<p>= ¼∫₀^{2π}sin²2x dx = ¼·(平均½×周期2π) = ¼·π = <strong>π/4</strong>。</p>
+</blockquote>
+<p><strong>J59.</strong>★★ ∫₁ᵉ (lnx)/x dx。</p>
+<blockquote>
+<p>= ∫₀¹ u du（u=lnx）= <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>J60.</strong>★★ ∫₀¹ dx/(1+eˣ)。</p>
+<blockquote>
+<p>分子分母乘 e^{−x} 或拆 1/(1+eˣ) = 1 − eˣ/(1+eˣ)：
+= [x − ln(1+eˣ)]₀¹ = <strong>1 + ln2 − ln(1+e)</strong>。</p>
+</blockquote>
+<p><strong>J61.</strong>★★ ∫₀^{ln2} √(eˣ−1) dx。</p>
+<blockquote>
+<p>令 t=√(eˣ−1)：x=ln(1+t²)，dx=2t/(1+t²)dt，积分限 0→1：
+2∫₀¹ t²/(1+t²)dt = 2[t − arctant]₀¹ = <strong>2 − π/2</strong>。</p>
+</blockquote>
+<p><strong>J62.</strong>★ ∫₀² |x−1|dx。</p>
+<blockquote>
+<p>拆 [0,1] 与 [1,2]：½ + ½ = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>J63.</strong>★★ ∫₀^π √(1+cos2x) dx。</p>
+<blockquote>
+<p>1+cos2x = 2cos²x ⇒ 被积函数 = √2|cosx|。
+√2[∫₀^{π/2}cosx − ∫_{π/2}^π cosx] = √2(1+1) = <strong>2√2</strong>。<strong>开根号必须加绝对值！</strong></p>
+</blockquote>
+<p><strong>J64.</strong>★★★ ∫₀^{π/4} ln(1+tanx) dx。</p>
+<blockquote>
+<p>区间再现 x→π/4−x：tan(π/4−x)=(1−tanx)/(1+tanx)，1+tan(⋯)=2/(1+tanx)。
+I = ∫₀^{π/4}ln2·dx − I ⇒ 2I = (π/4)ln2 ⇒ <strong>I = (π/8)ln2</strong>。</p>
+</blockquote>
+<p><strong>J65.</strong>★★ ∫₋₁¹ (x² + 2x + √(1−x²))dx。</p>
+<blockquote>
+<p>三项分开：∫x²=2/3；∫2x=0（奇）；∫√(1−x²)=π/2（半圆）。
+<strong>= 2/3 + π/2</strong>。</p>
+</blockquote>
+<p><strong>J66.</strong>★★ ∫₀¹ (eˣ−1)/(eˣ+1) dx。</p>
+<blockquote>
+<p>= ∫₀¹ [1 − 2/(eˣ+1)]dx = 1 − 2·J60 = 1 − 2[1+ln2−ln(1+e)] = <strong>2ln[(1+e)/2] − 1</strong>。</p>
+</blockquote>
+<p><strong>J67.</strong>★★ ∫₀¹ x·arctanx dx。</p>
+<blockquote>
+<p>分部：= ½x²arctanx |₀¹ − ½∫₀¹ x²/(1+x²)dx = π/8 − ½(1−π/4) = <strong>π/4 − 1/2</strong>。</p>
+</blockquote>
+<p><strong>J68.</strong>★★ ∫₀^{π/2} eˣ·sinx dx。</p>
+<blockquote>
+<p>由 J36 的原函数：[eˣ(sinx−cosx)/2]₀^{π/2} = e^{π/2}(1−0)/2 − (0−1)/2 = <strong>(e^{π/2}+1)/2</strong>。</p>
+</blockquote>
+<p><strong>J69.</strong>★★ 不计算，比较 ∫₀^{π/2} sinx dx 与 ∫₀^{π/2} sin²x dx 的大小。</p>
+<blockquote>
+<p>0≤x≤π/2 时 sinx ∈ [0,1] ⇒ sinx ≥ sin²x（等号仅在端点）。
+严格不等 ⇒ <strong>前者大</strong>（1 &gt; π/4，验证一致）。保序性是积分不等式的根基。</p>
+</blockquote>
+<p><strong>J70.</strong>★★ 用积分中值定理，对 ∫₀¹ eˣdx 找出 ξ。</p>
+<blockquote>
+<p>(1/(1−0))∫₀¹eˣ = e−1 = e^ξ ⇒ <strong>ξ = ln(e−1) ≈ 0.54 ∈ [0,1]</strong> ✓。
+中值定理的 ξ 是具体存在的，验证题就这么算。</p>
+</blockquote>
+<p><strong>J71.</strong>★★ 求 lim(x→0) [∫₀ˣ (sint/t)dt] / x²。</p>
+<blockquote>
+<p>变限求导 + 洛必达：lim (sinx/x)/(2x) = lim (sinx)/(2x²) = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>J72.</strong>★ 求 lim(x→0) [∫₀ˣ cost² dt] / x。</p>
+<blockquote>
+<p>= lim cosx² = <strong>1</strong>（F′(0)=cos0）。变限积分求导后直接代。</p>
+</blockquote>
+<p><strong>J73.</strong>★★ ∫₀^{2π} x·sin²x dx。</p>
+<blockquote>
+<p>sin²x = (1−cos2x)/2：∫x/2 = π²；∫xcos2x 分部后 = 0（周期对消）。
+<strong>= π²</strong>。</p>
+</blockquote>
+<p><strong>J74.</strong>★★ ∫₀^{π/2} sinx/(sinx+cosx) dx。</p>
+<blockquote>
+<p>对偶换元 x→π/2−x，得 I = ∫cosx/(sinx+cosx)。
+I+I′ = ∫₀^{π/2}1 dx = π/2 ⇒ <strong>I = π/4</strong>。</p>
+</blockquote>
+<p><strong>J75.</strong>★★★ 求 ∫₋₁¹ x²/(1+eˣ) dx。</p>
+<blockquote>
+<p>区间再现 x→−x：I = ∫₋₁¹ x²·eˣ/(1+eˣ)dx。
+两式相加：2I = ∫₋₁¹ x²dx = 2/3 ⇒ <strong>I = 1/3</strong>。
+<strong>1/(1+eˣ) 型在对称区间上"加它自己的倒影等于 1"</strong>，经典结构。</p>
+</blockquote>
+<p><strong>J76.</strong>★★ ∫₀^π sin⁶(x/2) dx。</p>
+<blockquote>
+<p>sin⁶(x/2) = [(1−cosx)/2]³ = (1/8)(1 − 3cosx + 3cos²x − cos³x)。
+∫₀^π：cosx 与 cos³x 归零，∫cos²x = π/2 ⇒ (1/8)(π + 3π/2) = <strong>5π/16</strong>。</p>
+</blockquote>
+<p><strong>J77.</strong>★★ ∫₁⁴ x/√(x+1) dx。</p>
+<blockquote>
+<p>令 t=√(x+1)：x=t²−1，dx=2tdt，限 √2→√5：
+∫2(t²−1)dt = [2t³/3 − 2t] = <strong>(4√5 + 2√2)/3</strong>。
+（√5 处：10√5/3−2√5=4√5/3；√2 处：4√2/3−2√2=−2√2/3；相减即得。）</p>
+</blockquote>
+<p><strong>J78.</strong>★★ 求 lim(n→∞) Σ_{k=1}^n 1/(n+k)。</p>
+<blockquote>
+<p>= lim (1/n)Σ 1/(1+k/n) = ∫₀¹ dx/(1+x) = <strong>ln2</strong>。
+定积分定义求极限的识别标志：Σ 里出现 k/n 或 1/n 因子。</p>
+</blockquote>
+<p><strong>J79.</strong>★★ 求 lim(n→∞) n²·∫₀^{1/n} x·eˣ dx。</p>
+<blockquote>
+<p>∫₀^{1/n}xeˣ = e^{1/n}(1/n−1) + 1（分部）。
+泰勒展开：e^{1/n}(1/n−1)+1 = 1/(2n²) + O(1/n³)。
+n² 倍 ⇒ <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>J80.</strong>★★★ 证明 ∫₀^π x·f(sinx)dx = (π/2)∫₀^π f(sinx)dx，并用它求 ∫₀^π x·sinx/(1+cos²x) dx。</p>
+<blockquote>
+<p>x→π−x：sin(π−x)=sinx，I = ∫₀^π (π−x)f(sinx)dx；相加得 2I = π∫₀^π f(sinx)。∎
+应用：∫₀^π sinx/(1+cos²x) = [−arctan(cosx)]₀^π = π/4+π/4 = π/2。
+原式 = (π/2)(π/2) = <strong>π²/4</strong>。</p>
+</blockquote>
+<h2>§3 变限积分与积分方程（J81–J105）</h2>
+<p><strong>J81.</strong>★ 默写变限积分求导定理。</p>
+<blockquote>
+<p>f 连续 ⇒ F(x)=∫ₐˣ f(t)dt 可导且 F′=f；f 只可积 ⇒ F 连续。
+<strong>"原函数存在定理"：连续函数必有原函数。</strong></p>
+</blockquote>
+<p><strong>J82.</strong>★ 求 d/dx ∫ₓᵃ f(t)dt。</p>
+<blockquote>
+<p>= <strong>−f(x)</strong>（上下限反了差个负号）。</p>
+</blockquote>
+<p><strong>J83.</strong>★★ 求 d/dx ∫₀^{x²} sint² dt。</p>
+<blockquote>
+<p>链式：F′ = sin(x²)² · (x²)′ = <strong>2x·sinx⁴</strong>。</p>
+</blockquote>
+<p><strong>J84.</strong>★★ 求 d/dx ∫_{x²}^{eˣ} t dt。</p>
+<blockquote>
+<p>先算出被积：= d/dx [e^{2x}/2 − x⁴/2] = <strong>e^{2x} − 2x³</strong>。
+验证通式：F′ = eˣ·f(eˣ) − 2x·f(x²)，f(t)=t ⇒ e^{2x}−2x³ ✓。</p>
+</blockquote>
+<p><strong>J85.</strong>★★ 求 d/dx [x·∫₀ˣ f(t)dt]。</p>
+<blockquote>
+<p>乘积法则：<strong>∫₀ˣ f(t)dt + x·f(x)</strong>（x 同时是因子和上限，两处都要动）。</p>
+</blockquote>
+<p><strong>J86.</strong>★★ 求 d/dx ∫₀ˣ (x−t)f(t)dt。</p>
+<blockquote>
+<p>先拆：= x∫₀ˣf − ∫₀ˣ t·f(t)dt，再求导：∫₀ˣf + xf(x) − x·f(x) = <strong>∫₀ˣ f(t)dt</strong>。
+<strong>陷阱：被积函数里的 x 是参数，直接对它求导是经典错误。</strong></p>
+</blockquote>
+<p><strong>J87.</strong>★★ 求 lim(x→0) [∫₀^{x²} sin√t dt] / x³。</p>
+<blockquote>
+<p>F′ = 2x·sinx ⇒ F ≈ 2∫₀ˣ tsin t dt ≈ 2·x³/3。
+或洛必达：lim (2x·sinx)/(3x²) = <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>J88.</strong>★★★ 求 d/dx ∫₀ˣ t·f(x²−t²)dt（f 连续）。</p>
+<blockquote>
+<p>令 u=x²−t²，du=−2tdt（x 固定时对 t）：t 从 0→x 对应 u 从 x²→0。
+原式 = ½∫₀^{x²}f(u)du ⇒ 求导 = ½·2x·f(x²) = <strong>x·f(x²)</strong>。</p>
+</blockquote>
+<p><strong>J89.</strong>★★ 已知 ∫₀ˣ f(t)dt = x·sinx，求 f(x)。</p>
+<blockquote>
+<p>两边求导：<strong>f(x) = sinx + x·cosx</strong>（乘积法则）。</p>
+</blockquote>
+<p><strong>J90.</strong>★★ 解积分方程：f(x) = x + λ∫₀¹ f(t)dt（λ≠1，f 连续）。</p>
+<blockquote>
+<p>两边在 [0,1] 积分：∫₀¹f = ½ + λ∫₀¹f ⇒ ∫₀¹f = 1/[2(1−λ)]。
+<strong>f(x) = x + λ/[2(1−λ)]</strong>。"未知数是一个数"型积分方程，整体积分一次就解出。</p>
+</blockquote>
+<p><strong>J91.</strong>★★ 默写原函数奇偶性结论。</p>
+<blockquote>
+<p>f 奇 ⇒ F(x)=∫₀ˣf 为<strong>偶</strong>函数；f 偶 ⇒ F 为<strong>奇</strong>函数（对任意下限的变限积分，奇偶看的是"从0积"）。
+例：f=t³ 奇，∫₀ˣt³ = x⁴/4 偶 ✓。</p>
+</blockquote>
+<p><strong>J92.</strong>★★ f 以 T 为周期，∫ₐ^{a+T} f(t)dt 与 a 有关吗？</p>
+<blockquote>
+<p><strong>无关</strong>（=∫₀^T f）。推论：F(x)=∫₀ˣf 以 T 为周期 ⟺ ∫₀^T f = 0（如 |sinx| 的原函数不周期，sinx 的原函数 −cosx 周期）。</p>
+</blockquote>
+<p><strong>J93.</strong>★★ 求 ∫₀^{100π} |cosx| dx。</p>
+<blockquote>
+<p>|cosx| 周期 π，共 100 个周期，每周期 ∫₀^π|cosx| = 2 ⇒ <strong>200</strong>。</p>
+</blockquote>
+<p><strong>J94.</strong>★★ 设 f(x)=x(1−x)，讨论 F(x)=∫₀ˣ f(t)dt 的单调性与极值。</p>
+<blockquote>
+<p>F′=f=x(1−x)：(0,1) 上正，x&gt;1 负。
+F 在 (0,1) 增、x&gt;1 减 ⇒ <strong>x=1 处取极大 F(1)=1/6</strong>（F′=0 且变号）。极值点由 f 的变号点决定。</p>
+</blockquote>
+<p><strong>J95.</strong>★★★ 求 F(x)=∫₀ˣ (x−t)²·f(t)dt 的三阶导数（f 连续）。</p>
+<blockquote>
+<p>F′ = 2∫₀ˣ(x−t)f(t)dt；F″ = 2∫₀ˣ f(t)dt；F‴ = <strong>2f(x)</strong>。
+每求一次导，(x−t) 的幂次降一阶（对 x 求导时 t 是常数）。</p>
+</blockquote>
+<p><strong>J96.</strong>★★ 求 lim(x→0) [∫₀ˣ sint³ dt] / x⁴。</p>
+<blockquote>
+<p>sint³ ~ t³ ⇒ ∫₀ˣ sint³dt ~ ∫₀ˣ t³dt = x⁴/4 ⇒ 极限 = <strong>1/4</strong>。（洛必达验证：分子导 sinx³ ~ x³，分母 4x³ ⇒ 1/4 ✓）</p>
+</blockquote>
+<p><strong>J97.</strong>★★ 设 x = ∫₀^y √(1+t³) dt，求 dy/dx。</p>
+<blockquote>
+<p>对 x 求导：1 = √(1+y³)·y′ ⇒ <strong>dy/dx = 1/√(1+y³)</strong>（反函数思想的变限版）。</p>
+</blockquote>
+<p><strong>J98.</strong>★★ f 连续，∫₀¹ f = 1，∫₀¹ x·f(x)dx = 2。求 ∫₀¹ (2x+1)f(x)dx。</p>
+<blockquote>
+<p>线性组合：2·2 + 1·1 = <strong>5</strong>。积分对被积函数是线性的，已知两个矩就够。</p>
+</blockquote>
+<p><strong>J99.</strong>★★★ 设 f 在 x₀ 连续，F(x)=∫₀ˣ f(t)dt。证明 F′(x₀)=f(x₀)。</p>
+<blockquote>
+<p>F(x₀+h)−F(x₀) = ∫_{x₀}^{x₀+h} f(t)dt = h·f(ξ)（积分中值定理，ξ 在 x₀ 与 x₀+h 之间）。
+h→0 时 ξ→x₀，f 连续 ⇒ 差商 → f(x₀)。∎</p>
+</blockquote>
+<p><strong>J100.</strong>★★★ f 连续，且 f(x) = f′(x) + 2x 对所有 x 成立。求 f 的通解。</p>
+<blockquote>
+<p>移项 f′ − f = 2x（一阶线性）：积分因子 e^{−x}：(fe^{−x})′ = 2xe^{−x}。
+∫2xe^{−x} = −2(x+1)e^{−x} ⇒ f·e^{−x} = −2(x+1)e^{−x} + C。
+<strong>f(x) = Ceˣ − 2x − 2</strong>。变限积分与微分方程的桥：F′=f 这一条随时能用。</p>
+</blockquote>
+<p><strong>J101.</strong>★★ f 在 [0,a] 递增。证明：(1/a)∫₀ᵃ f(x)dx ≤ f(a)。</p>
+<blockquote>
+<p>f 递增 ⇒ x≤a 时 f(x)≤f(a) ⇒ ∫₀ᵃ f ≤ ∫₀ᵃ f(a)dx = a·f(a)。∎</p>
+</blockquote>
+<p><strong>J102.</strong>★★★ 证明柯西—施瓦茨积分不等式：[∫₀¹ f(x)dx]² ≤ ∫₀¹ f²(x)dx。</p>
+<blockquote>
+<p>对任意实 λ：0 ≤ ∫₀¹ (f − λ)² = ∫f² − 2λ∫f + λ²。
+右端是 λ 的二次函数恒非负 ⇒ 判别式 ≤ 0：4(∫f)² − 4∫f² ≤ 0。∎</p>
+</blockquote>
+<p><strong>J103.</strong>★ f 连续且 f(0)=3，求 lim(x→0) [∫₀ˣ f(t)dt] / x。</p>
+<blockquote>
+<p>= F′(0) = f(0) = <strong>3</strong>。</p>
+</blockquote>
+<p><strong>J104.</strong>★★★ 已知 lim(x→0) [∫₀ˣ f(t)dt] / x² = 2（f 连续），求 f(0) 与 f′(0)。</p>
+<blockquote>
+<p>∫₀ˣf ~ 2x² ⇒ 差商 F′=f 满足 f(x) ~ 4x ⇒ <strong>f(0)=0，f′(0)=4</strong>。
+逻辑：F(x)/x² → 2 ⇒ F(x)=2x²+o(x²) ⇒ F′=f = 4x+o(x)。</p>
+</blockquote>
+<p><strong>J105.</strong>★★★ F(x)=∫₀ˣ (t²−3t+2)dt，求 F 的极值。</p>
+<blockquote>
+<p>F′=(x−1)(x−2)：(0,1) 正、(1,2) 负、x&gt;2 正。
+<strong>极大 F(1)=5/6；极小 F(2)=2/3</strong>（F(1)=1/3−3/2+2；F(2)=8/3−6+4）。</p>
+</blockquote>
+<h2>§4 反常积分（J106–J130）</h2>
+<p><strong>J106.</strong>★ 计算 ∫₁^{+∞} x^{−2}dx，并说明 ∫₁^{+∞} dx/x 为何发散。</p>
+<blockquote>
+<p>∫₁^{+∞}x^{−2} = [−1/x]₁^{+∞} = <strong>1</strong>。
+∫₁^{+∞}dx/x = ln(+∞) 发散。<strong>p=1 是无穷区间积分的临界线：p&gt;1 收敛，p≤1 发散。</strong></p>
+</blockquote>
+<p><strong>J107.</strong>★ 计算 ∫₀¹ dx/√x，并默写瑕积分 p 判别法。</p>
+<blockquote>
+<p>= [2√x]₀¹ = <strong>2</strong>。
+∫₀¹ dx/xᵖ：<strong>p&lt;1 收敛，p≥1 发散</strong>（与无穷区间方向相反，别背反）。</p>
+</blockquote>
+<p><strong>J108.</strong>★★ ∫₀^{+∞} e^{−x}dx 与 ∫₀^{+∞} x·e^{−x}dx。</p>
+<blockquote>
+<p>第一个 = 1。第二个分部：[−xe^{−x}]₀^{+∞} + ∫₀^{+∞}e^{−x} = 0 + 1 = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>J109.</strong>★★ 求 ∫₀^{+∞} x²e^{−x}dx，并给出 Γ(n+1)。</p>
+<blockquote>
+<p>两次分部：x²e^{−x} 型逐次降幂 = 2·1 = <strong>2</strong>。
+<strong>Γ(n+1)=n!</strong>，Γ(s+1)=sΓ(s)，Γ(1)=1。</p>
+</blockquote>
+<p><strong>J110.</strong>★ ∫_{−∞}^{+∞} dx/(1+x²)。</p>
+<blockquote>
+<p>拆成 (−∞,0] 与 [0,+∞)，各收敛：π/2 + π/2 = <strong>π</strong>。两侧必须都收敛，定义不允许"取中间极限凑"。</p>
+</blockquote>
+<p><strong>J111.</strong>★★ ∫₀^{+∞} dx/(1+x²)^{3/2}。</p>
+<blockquote>
+<p>x=tanθ：dx=sec²θdθ，分母 = sec³θ ⇒ ∫₀^{π/2}cosθdθ = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>J112.</strong>★★ ∫₀^{+∞} e^{−x}sinx dx 与 ∫₀^{+∞} e^{−x}cosx dx。</p>
+<blockquote>
+<p>由 J36 原函数代入 0 与 +∞：
+sin 版 = [e^{−x}(−sinx−cosx)/2]₀^{+∞} = <strong>1/2</strong>；cos 版同为 <strong>1/2</strong>（[e^{−x}(sinx−cosx)/2] 型）。</p>
+</blockquote>
+<p><strong>J113.</strong>★★ 计算 ∫₁^{+∞} dx/[x·√(1+x²)]。</p>
+<blockquote>
+<p>令 x=1/t：dx = −dt/t²，x 从 1→∞ 对应 t 从 1→0。
+被积函数 = 1/[ (1/t)·√(1+t²)/t ]·(dt/t²) 化简后 = ∫₀¹ dt/√(1+t²) = <strong>ln(1+√2)</strong>。</p>
+</blockquote>
+<p><strong>J114.</strong>★★ 计算 ∫₀¹ dx/√(x(1−x))。</p>
+<blockquote>
+<p>令 x=sin²t（0→π/2）：dx=2sint·cost dt，分母 = sint·cost。
+= 2∫₀^{π/2}dt = <strong>π</strong>。两个瑕点同时处理，此换元一次全消。</p>
+</blockquote>
+<p><strong>J115.</strong>★ ∫₀^{+∞} dx/(1+x)³。</p>
+<blockquote>
+<p>= [−1/(2(1+x)²)]₀^{+∞} = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>J116.</strong>★ ∫₀^{+∞} x/(1+x²)² dx。</p>
+<blockquote>
+<p>u=1+x²：= ½∫₁^{+∞}u^{−2}du = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>J117.</strong>★★ 只判敛不计算：∫₁^{+∞} dx/(x²·√x) 与 ∫₀¹ dx/x^{0.9}。</p>
+<blockquote>
+<p>第一个 p=5/2&gt;1 ⇒ <strong>收敛</strong>；第二个 p=0.9&lt;1 ⇒ <strong>收敛</strong>。两道都是"背口诀"题，考的就是临界方向。</p>
+</blockquote>
+<p><strong>J118.</strong>★★ ∫₀¹ lnx dx。</p>
+<blockquote>
+<p>瑕点在 0。分部：[xlnx − x]₀¹ = (0−1) − lim(xlnx−x)|_{x→0⁺} = −1 − 0 = <strong>−1</strong>。
+xlnx→0 是 ∞×0 的经典极限，这里必须交代。</p>
+</blockquote>
+<p><strong>J119.</strong>★ ∫₀¹ x·lnx dx。</p>
+<blockquote>
+<p>分部：= ½∫₀¹ lnx·d(x²) = ½[lnx·x²]₀¹ − ½∫₀¹ x dx = 0 − ¼ = <strong>−1/4</strong>。</p>
+</blockquote>
+<p><strong>J120.</strong>★★★ 求 ∫₀^{+∞} lnx/(1+x²) dx。</p>
+<blockquote>
+<p>区间再现 x→1/x：lnx/(1+x²) dx → ln(1/x)/(1+1/t²)·(−dt/t²)… 化简后新积分 = −I（x 与 1/x 换位，分母不变分子变号）。
+I = −I ⇒ <strong>I = 0</strong>。对称结构直接判零，不用算出收敛速度。</p>
+</blockquote>
+<p><strong>J121.</strong>★ ∫₀^{+∞} e^{−ax}dx（a&gt;0）的值与敛散条件。</p>
+<blockquote>
+<p>= 1/a，<strong>当且仅当 a&gt;0 收敛</strong>；a≤0 时被积函数不衰减，发散。参数积分先问参数范围。</p>
+</blockquote>
+<p><strong>J122.</strong>★ ∫_{−∞}^0 x·eˣ dx。</p>
+<blockquote>
+<p>分部：[xeˣ − eˣ]_{−∞}^0 = (0−1) − 0 = <strong>−1</strong>。</p>
+</blockquote>
+<p><strong>J123.</strong>★★ 判断 ∫₂^{+∞} dx/(x·lnx) 的敛散。</p>
+<blockquote>
+<p>= ∫ d(lnx)/lnx = lnlnx |₂^{+∞} → +∞ ⇒ <strong>发散</strong>。
+陷阱：看起来像 1/(x·something) 该收敛，实际 ln lnx 无界。对照 ∫₂^{+∞}dx/(x·ln²x) = 1/ln2 收敛。</p>
+</blockquote>
+<p><strong>J124.</strong>★★ 比较敛散：∫₁^{+∞} dx/(x²+1) 与 ∫₁^{+∞} dx/√(x²+1)。</p>
+<blockquote>
+<p>前者 ~1/x² 收敛（值 = π/2 − π/4）；后者 ~1/x 发散。
+<strong>大 O 比较是反常积分判敛的第一工具</strong>：看无穷远处等价主部。</p>
+</blockquote>
+<p><strong>J125.</strong>★★★ 证明 Γ(½)=√π。</p>
+<blockquote>
+<p>Γ(½) = ∫₀^{+∞} t^{−1/2}e^{−t}dt，令 t=u²：= 2∫₀^{+∞}e^{−u²}du = 2·(√π/2) = <strong>√π</strong>。
+（用到概率论里的高斯积分 ∫_{−∞}^{+∞}e^{−u²}du=√π，两边平方用极坐标可证。）</p>
+</blockquote>
+<p><strong>J126.</strong>★★ 求 ∫₀^{+∞} t^{3/2}e^{−t}dt。</p>
+<blockquote>
+<p>= Γ(5/2) = (3/2)Γ(3/2) = (3/2)(1/2)Γ(½) = <strong>3√π/4</strong>。</p>
+</blockquote>
+<p><strong>J127.</strong>★★★ 求 I = ∫₀^{π/2} ln(sinx) dx。</p>
+<blockquote>
+<p>由对称性 I = ∫₀^{π/2}ln(cosx)dx。相加：2I = ∫ln(sinx·cosx) = ∫ln(sin2x)dx − (π/2)ln2。
+∫₀^{π/2}ln(sin2x)dx = ½∫₀^π ln(sinu)du = ½·2I = I（半角换元+对称）。
+2I = I − (π/2)ln2 ⇒ <strong>I = −(π/2)ln2</strong>。瑕积分收敛但原函数初等写不出——对称法是唯一通路。</p>
+</blockquote>
+<p><strong>J128.</strong>★★ 判断 ∫₁^{+∞} (sinx)/x² dx 的绝对收敛性。</p>
+<blockquote>
+<p>|sinx/x²| ≤ 1/x²，而 ∫₁^{+∞}x^{−2} 收敛 ⇒ <strong>绝对收敛</strong>。</p>
+</blockquote>
+<p><strong>J129.</strong>★★★ 说明 ∫₁^{+∞} (sinx)/x dx 收敛但不绝对收敛。</p>
+<blockquote>
+<p>收敛：分部 ∫₁^{∞}sinx/x = [−cosx/x]₁^{∞} − ∫₁^{∞}cosx/x² dx，两项都收敛。
+不绝对：|sinx|/x ≥ sin²x/x = (1−cos2x)/(2x)，∫(1/(2x)) 部分发散 ⇒ ∫|sinx|/x 发散。∎
+<strong>条件收敛的教科书例子</strong>，考研选择常考"收敛但不绝对收敛"。</p>
+</blockquote>
+<p><strong>J130.</strong>★★★ 讨论 p 为何值时 ∫₀^{+∞} dx/[x^p·(1+x²)] 收敛。</p>
+<blockquote>
+<p>0 处（若 p&gt;0）：被积 ~ 1/x^p，需 p&lt;1；p≤0 时 0 处无瑕点。
++∞ 处：被积 ~ 1/x^{p+2}，需 p+2&gt;1 即 p&gt;−1，恒成立（p&lt;1 时自动满足）。
+<strong>收敛 ⟺ p&lt;1</strong>。</p>
+</blockquote>
+<h2>§5 定积分应用（J131–J150）</h2>
+<p><strong>J131.</strong>★ 求 y=x² 与 y=x 围成图形的面积。</p>
+<blockquote>
+<p>交点 (0,0)、(1,1)，直线在上：∫₀¹(x−x²)dx = ½−⅓ = <strong>1/6</strong>。</p>
+</blockquote>
+<p><strong>J132.</strong>★ 求 y=eˣ、y=e^{−x} 与 x=1 围成的面积。</p>
+<blockquote>
+<p>eˣ ≥ e^{−x}（x≥0）：∫₀¹(eˣ−e^{−x})dx = (e−1) − (1−1/e) = <strong>e + 1/e − 2</strong>。</p>
+</blockquote>
+<p><strong>J133.</strong>★★ 求 y²=2x 与 x²=2y 围成的面积。</p>
+<blockquote>
+<p>交点 (0,0)、(2,2)。上支 y=√(2x)：
+∫₀²[√(2x) − x²/2]dx = [2√2·x^{3/2}/3 − x³/6]₀² = 8/3 − 4/3 = <strong>4/3</strong>。</p>
+</blockquote>
+<p><strong>J134.</strong>★★ 求 y=√x 与 y=x³ 围成的面积。</p>
+<blockquote>
+<p>0≤x≤1 上 √x ≥ x³：∫₀¹(√x−x³) = 2/3 − 1/4 = <strong>5/12</strong>。</p>
+</blockquote>
+<p><strong>J135.</strong>★★ 用极坐标面积公式求 r=2acosθ 的面积。</p>
+<blockquote>
+<p>S = ½∫_{−π/2}^{π/2} 4a²cos²θdθ = 2a²·(π/2) = <strong>πa²</strong>（就是半径 a 的圆，验算一致）。</p>
+</blockquote>
+<p><strong>J136.</strong>★★ 求心形线 r=a(1+cosθ)（a&gt;0）围成的面积。</p>
+<blockquote>
+<p>S = ½∫₀^{2π} a²(1+cosθ)²dθ = (a²/2)∫(1 + 2cosθ + cos²θ)
+∫1=2π，∫cosθ=0，∫cos²θ=π ⇒ S = (a²/2)(3π) = <strong>3πa²/2</strong>。</p>
+</blockquote>
+<p><strong>J137.</strong>★ 求 y=x²（0≤x≤1）绕 x 轴旋转一周的体积。</p>
+<blockquote>
+<p>圆盘法：V = π∫₀¹x⁴dx = <strong>π/5</strong>。</p>
+</blockquote>
+<p><strong>J138.</strong>★★ 求 y=√x 与 y=x 在 [0,1] 之间区域绕 x 轴的旋转体体积。</p>
+<blockquote>
+<p>垫圈法：π∫₀¹[(√x)² − x²]dx = π(½−⅓) = <strong>π/6</strong>。</p>
+</blockquote>
+<p><strong>J139.</strong>★★ 求 y=1/x（1≤x≤2）与 x 轴之间区域绕 y 轴的旋转体体积。</p>
+<blockquote>
+<p>柱壳法：V = 2π∫₁² x·(1/x)dx = 2π·1 = <strong>2π</strong>。
+（垫圈法要解出 x=1/y 且分两段，麻烦得多——外径内径嵌套时优先柱壳。）</p>
+</blockquote>
+<p><strong>J140.</strong>★★ 用定积分推导球体积公式。</p>
+<blockquote>
+<p>y=√(R²−x²) 绕 x 轴：V = π∫_{−R}^R (R²−x²)dx = π[2R³ − 2R³/3] = <strong>4πR³/3</strong>。∎</p>
+</blockquote>
+<p><strong>J141.</strong>★ 求 y=eˣ（0≤x≤1）绕 x 轴的旋转体体积。</p>
+<blockquote>
+<p>V = π∫₀¹e^{2x}dx = <strong>π(e²−1)/2</strong>。</p>
+</blockquote>
+<p><strong>J142.</strong>★★ 求 y=x²（0≤x≤1）绕 y 轴的旋转体体积。</p>
+<blockquote>
+<p>解出 x=√y（0≤y≤1）：V = π∫₀¹ y·dy = <strong>π/2</strong>（垫圈：外径 √y 内径 0）。</p>
+</blockquote>
+<p><strong>J143.</strong>★★ 求曲线 y=(2/3)x^{3/2} 在 [0,3] 上的弧长。</p>
+<blockquote>
+<p>y′=√x：L = ∫₀³√(1+x)dx = (2/3)(1+x)^{3/2}|₀³ = (2/3)(8−1) = <strong>14/3</strong>。</p>
+</blockquote>
+<p><strong>J144.</strong>★★ 求 y=lncosx 在 [0,π/4] 上的弧长。</p>
+<blockquote>
+<p>y′=−tanx，√(1+y′²)=secx：
+L = ∫₀^{π/4}secx dx = [ln(secx+tanx)]₀^{π/4} = <strong>ln(1+√2)</strong>。</p>
+</blockquote>
+<p><strong>J145.</strong>★★★ 求渐开线 x=a(cost+tsint)，y=a(sint−tcost) 在 [0,2π] 上的弧长。</p>
+<blockquote>
+<p>x′=at·cost，y′=at·sint ⇒ √(x′²+y′²) = at。
+L = ∫₀^{2π}at·dt = <strong>2aπ²</strong>。"参数方程弧长的题，√ 里经常天生是完全平方"。</p>
+</blockquote>
+<p><strong>J146.</strong>★★ 用定积分推导球面（旋转曲面）面积公式。</p>
+<blockquote>
+<p>y=√(R²−x²)：y′=−x/y，√(1+y′²) = R/y。
+S = 2π∫_{−R}^R y·(R/y)dx = 2πR·2R = <strong>4πR²</strong>。∎（"y 与 √ 恰好约掉"是球面的特殊恩赐）</p>
+</blockquote>
+<p><strong>J147.</strong>★ 弹簧劲度 k=100 N/m，从平衡位置拉长 0.1 m，求做的功。</p>
+<blockquote>
+<p>W = ∫₀^{0.1}100x dx = 100·(0.1)²/2 = <strong>0.5 J</strong>。变力做功 = 力对位移积分。</p>
+</blockquote>
+<p><strong>J148.</strong>★ 质点速度 v(t)=3t²，求 0≤t≤2 的位移。</p>
+<blockquote>
+<p>s = ∫₀² 3t²dt = <strong>8</strong>（v 是位移的导数，反着积回去）。</p>
+</blockquote>
+<p><strong>J149.</strong>★★ 宽 2 m、高 3 m 的矩形闸门竖直放置、上沿与水面齐，求单侧水压力。</p>
+<blockquote>
+<p>深度 x 处压强 ρgx，面积微元 2dx：
+P = ρg∫₀³2x dx = ρg·9 = 9800×9 = <strong>88200 N ≈ 88.2 kN</strong>。</p>
+</blockquote>
+<p><strong>J150.</strong>★★★ 直线 y=cx（c&gt;0）与 y=x² 围成面积 S(c)，求 c 使 S=2/3。</p>
+<blockquote>
+<p>交点 x=0 与 x=c，直线上方：S(c)=∫₀^c(cx−x²)dx = c³/2 − c³/3 = c³/6。
+c³/6 = 2/3 ⇒ c³ = 4 ⇒ <strong>c = ∛4 = 2^{2/3}</strong>（2026-10-29复审订正：原版根指数误写为4次方根，应为立方根）。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：J1–J150。使用节奏：①§1 分 3 天（换元/分部/有理函数各一天，凑微分要练到"看一眼就知道 d 什么"）→②§2 分 3 天（对称性、华里士、区间再现三大件）→③§3 两天（变限求导必须零失误）→④§4 两天（p 判别方向背死）→⑤§5 两天（公式表：面积/旋转/弧长/侧面积/物理五套微元）。错题标回《数学考题集》第4章旁。三部曲收官后，直接进《高数_题型精讲与强化题集》做套题。</p></div></body></html>

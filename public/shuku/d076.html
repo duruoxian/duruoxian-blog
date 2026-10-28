@@ -1,0 +1,536 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408选择题题库_操作系统 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 选择题题库 · 操作系统（100题分章带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成。OS 在 408 选择题里约占 17 分（8-9 题），概念辨析题密度最大——本册专治"背混"。
+难度：★基础 ★★中等 ★★★难点。<strong>先遮住答案做</strong>；详解重点讲"错误选项为什么错"。
+配合《操作系统_知识点与难点》《408操作系统精讲》四册使用；题号 OS+序号。</p>
+</blockquote>
+<h2>§1 操作系统概述（OS1–OS12）</h2>
+<p><strong>OS1.</strong>★ 操作系统的基本目标：
+A. 编译程序 B. 管理计算机资源、提供用户接口 C. 只管内存 D. 杀毒</p>
+<blockquote>
+<p><strong>B</strong>。处理机/存储器/文件/设备四大管理 + 命令与程序两级接口。</p>
+</blockquote>
+<p><strong>OS2.</strong>★ 并发与并行的区别：
+A. 同义 B. 并发=宏观同时微观交替；并行=同一时刻真的同时 C. 并行=交替 D. 都是一个核</p>
+<blockquote>
+<p><strong>B</strong>。单核只能并发，多核才谈并行。</p>
+</blockquote>
+<p><strong>OS3.</strong>★ 资源共享的两种方式：
+A. 互斥共享与同时访问 B. 只能互斥 C. 只能同时 D. 轮流关机</p>
+<blockquote>
+<p><strong>A</strong>。打印机是互斥共享；磁盘是同时访问共享。</p>
+</blockquote>
+<p><strong>OS4.</strong>★ 虚拟技术中"时分"的例子：
+A. 虚拟内存 B. 虚拟处理器（多进程轮流用 CPU） C. 虚拟磁盘 D. 虚拟打印</p>
+<blockquote>
+<p><strong>B</strong>。时分复用处理器；A 是空分复用存储。</p>
+</blockquote>
+<p><strong>OS5.</strong>★ 操作系统的"异步性"指：
+A. 无时钟 B. 进程执行走走停停、推进顺序不可预知 C. 并行 D. 同步执行</p>
+<blockquote>
+<p><strong>B</strong>。但结果可再现（在相同条件下）。</p>
+</blockquote>
+<p><strong>OS6.</strong>★ 用户程序通过什么进入核心态：
+A. 跳转指令 B. 系统调用（陷入 trap） C. 普通函数 D. 直接修改 PSW</p>
+<blockquote>
+<p><strong>B</strong>。A/D 都做不到——用户态无权改状态位，只能被动陷入。</p>
+</blockquote>
+<p><strong>OS7.</strong>★★ 核心态转回用户态的途径：
+A. 系统调用 B. 中断返回（修改程序状态字） C. 再次陷入 D. 重启</p>
+<blockquote>
+<p><strong>B</strong>。中断/异常返回时由硬件恢复用户态。用户→核心是主动陷入，核心→用户是返回。</p>
+</blockquote>
+<p><strong>OS8.</strong>★ 分时系统的关键特征：
+A. 批量处理 B. 交互性（时间片轮转让每个用户"独占"感） C. 实时性 D. 网络性</p>
+<blockquote>
+<p><strong>B</strong>。分时四特征：多路性、交互性、独占性、及时性。</p>
+</blockquote>
+<p><strong>OS9.</strong>★ 硬实时任务：
+A. 迟到无妨 B. 必须在截止期前完成（如飞行控制） C. 尽量快 D. 后台执行</p>
+<blockquote>
+<p><strong>B</strong>。软实时允许偶尔超时（视频播放）。</p>
+</blockquote>
+<p><strong>OS10.</strong>★ 多道程序设计的主要目标：
+A. 提高单道速度 B. 提高 CPU 与外设利用率（宏观并行微观串行） C. 减少内存 D. 方便编程</p>
+<blockquote>
+<p><strong>B</strong>。内存中多道程序交替执行，CPU 等待 IO 时切换执行别的程序。</p>
+</blockquote>
+<p><strong>OS11.</strong>★ 系统调用执行在：
+A. 用户态 B. 核心态 C. 任意态 D. 中断态</p>
+<blockquote>
+<p><strong>B</strong>。系统调用是内核提供的功能，必须在核心态执行。</p>
+</blockquote>
+<p><strong>OS12.</strong>★★ CPU 状态由什么标识：
+A. 程序状态字（PSW）中的状态位 B. PC C. 通用寄存器 D. 内存</p>
+<blockquote>
+<p><strong>A</strong>。用户态/核心态是处理机的状态标志，随陷入/返回切换。</p>
+</blockquote>
+<h2>§2 进程与线程（OS13–OS35）</h2>
+<p><strong>OS13.</strong>★ 进程实体（进程映像）的组成：
+A. 只有程序 B. PCB+程序段+数据段 C. 只有数据 D. 程序+栈</p>
+<blockquote>
+<p><strong>B</strong>。PCB 是核心（唯一标识）。</p>
+</blockquote>
+<p><strong>OS14.</strong>★ 进程存在的唯一标志：
+A. 程序名 B. PCB C. 线程 D. 文件</p>
+<blockquote>
+<p><strong>B</strong>。创建进程=建 PCB，撤销=删 PCB。</p>
+</blockquote>
+<p><strong>OS15.</strong>★ 三种基本状态中，缺少 CPU 的进程处于：
+A. 运行态 B. 就绪态 C. 阻塞态 D. 创建态</p>
+<blockquote>
+<p><strong>B</strong>。就绪=万事俱备只欠 CPU；阻塞=等事件（IO 完成），给了 CPU 也不能跑。</p>
+</blockquote>
+<p><strong>OS16.</strong>★★ 运行态→就绪态的原因：
+A. 等待 IO B. 时间片用完或被更高优先级抢占 C. 进程结束 D. 主动睡眠</p>
+<blockquote>
+<p><strong>B</strong>。A 会导致运行→<strong>阻塞</strong>。</p>
+</blockquote>
+<p><strong>OS17.</strong>★★ 下列状态转换<strong>不可能</strong>发生：
+A. 就绪→运行 B. 阻塞→就绪 C. 阻塞→运行 D. 运行→阻塞</p>
+<blockquote>
+<p><strong>C</strong>。阻塞进程缺事件不缺 CPU，即使 CPU 空闲也必须先回就绪排队。</p>
+</blockquote>
+<p><strong>OS18.</strong>★ 就绪队列的组织通常用：
+A. 栈 B. 链表（队列） C. 哈希表 D. 二叉树</p>
+<blockquote>
+<p><strong>B</strong>。先进先出的队列结构最贴切调度。</p>
+</blockquote>
+<p><strong>OS19.</strong>★ 进程创建原语做的主要工作：
+A. 分配 PCB、初始化、插入就绪队列 B. 分配 CPU C. 写磁盘 D. 编译</p>
+<blockquote>
+<p><strong>A</strong>。创建时进程处于创建态，不会直接运行。</p>
+</blockquote>
+<p><strong>OS20.</strong>★★ 进程切换包含的动作：
+A. 保存当前进程上下文（PC/寄存器）到 PCB，恢复新进程上下文 B. 只改 PC C. 清空内存 D. 重编译</p>
+<blockquote>
+<p><strong>A</strong>。上下文切换有开销——线程切换比进程切换开销小的原因正在于此。</p>
+</blockquote>
+<p><strong>OS21.</strong>★★ 用户级线程（ULT）切换：
+A. 需要内核介入 B. 在用户库内完成，不需内核 C. 比内核级慢 D. 不可切换</p>
+<blockquote>
+<p><strong>B</strong>。内核看不到 ULT；一个 ULT 阻塞会拖累整个进程（内核级线程无此问题）。</p>
+</blockquote>
+<p><strong>OS22.</strong>★★ 同一进程内的多个线程<strong>不</strong>共享：
+A. 地址空间 B. 全局变量 C. 打开的文件 D. 栈和寄存器</p>
+<blockquote>
+<p><strong>D</strong>。每个线程有自己的栈、寄存器组、程序计数器——这是"并发执行流"的硬件依赖。</p>
+</blockquote>
+<p><strong>OS23.</strong>★ 进程与程序的本质区别：
+A. 大小 B. 动态性（进程是一次执行过程） C. 语言 D. 位置</p>
+<blockquote>
+<p><strong>B</strong>。程序是静态的指令集合；进程有生命周期。</p>
+</blockquote>
+<p><strong>OS24.</strong>★ 从就绪队列中选一个进程分配 CPU 的调度是：
+A. 高级调度 B. 中级调度 C. 低级调度 D. I/O调度</p>
+<blockquote>
+<p><strong>C</strong>。A 是作业调度（外存→内存），B 是对换调度（挂起/激活）。</p>
+</blockquote>
+<p><strong>OS25.</strong>★ 时间片轮转中时间片过大导致：
+A. 开销剧增 B. 退化为 FCFS C. 死锁 D. 饥饿</p>
+<blockquote>
+<p><strong>B</strong>。时间片足够大时人人一次跑完，等同先来先服务。</p>
+</blockquote>
+<p><strong>OS26.</strong>★★ 非抢占式 SJF（短作业优先）的已知优点：
+A. 平均等待时间最短（对该批作业） B. 无饥饿 C. 交互友好 D. 实现最简单</p>
+<blockquote>
+<p><strong>A</strong>。但长作业可能饥饿（D 的反面），且需要预知运行时间（实际常估计）。</p>
+</blockquote>
+<p><strong>OS27.</strong>★★ 多级反馈队列的调度特征：
+A. 所有队列时间片相同 B. 高优先级队列时间片小，用完降级到下一级（时间片更大） C. 只有 FCFS D. 只有两个队列</p>
+<blockquote>
+<p><strong>B</strong>。兼顾响应时间与吞吐；新进程通常进最高级。</p>
+</blockquote>
+<p><strong>OS28.</strong>★★ 周转时间的定义：
+A. 等待时间 B. 完成时间−到达时间 C. 完成时间 D. 服务时间</p>
+<blockquote>
+<p><strong>B</strong>。带权周转时间=周转时间/服务时间（越小越好，≥1）。</p>
+</blockquote>
+<p><strong>OS29.</strong>★★ 交互式系统最不宜采用：
+A. RR B. SJF（无法预知下次运行时长） C. 优先级 D. 多级队列</p>
+<blockquote>
+<p><strong>B</strong>。交互作业运行时间不可预知，SJF 失去意义；RR 才是分时标配。</p>
+</blockquote>
+<p><strong>OS30.</strong>★★★ 高响应比优先的响应比 = ：
+A. 服务/等待 B. (等待+服务)/服务 C. 等待/服务 D. 服务/完成</p>
+<blockquote>
+<p><strong>B</strong>。等待越久响应比越大，兼顾短作业与不饥饿（等待时间趋于无穷时接近 FCFS）。</p>
+</blockquote>
+<p><strong>OS31.</strong>★★ 进程 P1（到达0，需5）、P2（到达1，需3），SJF 非抢占的平均周转时间：
+A. 5.5 B. 4.5 C. 6 D. 7</p>
+<blockquote>
+<p><strong>C</strong>。P1 到达 0、5 完成 ⇒ 周转 5；P2 到达 1、8 完成 ⇒ 周转 7。平均 (5+7)/2 = <strong>6</strong>。
+A=5.5 是"忘了 P2 要等 P1 跑完"或漏减到达时间的错账。</p>
+</blockquote>
+<p><strong>OS32.</strong>★ 进程通信方式中，"写进程写入管道，读进程读出"属于：
+A. 共享存储 B. 管道通信 C. 信号量 D. 消息队列</p>
+<blockquote>
+<p><strong>B</strong>。管道是内存中的固定大小缓冲区，<strong>半双工</strong>；双向需两根管道。</p>
+</blockquote>
+<p><strong>OS33.</strong>★ 消息传递与共享存储的区别：
+A. 消息传递由内核提供通信机制（复制数据） B. 共享存储更快复制数据 C. 无区别 D. 共享存储不能并发</p>
+<blockquote>
+<p><strong>A</strong>。共享存储只提供共享区，同步互斥自管；消息传递经过内核缓冲。</p>
+</blockquote>
+<p><strong>OS34.</strong>★★ 下列进程间不能直接共享的资源：
+A. 内存数据区 B. 文件 C. 寄存器 D. 消息队列</p>
+<blockquote>
+<p><strong>C</strong>。寄存器属于进程上下文，切换时被换出，天然私有。</p>
+</blockquote>
+<p><strong>OS35.</strong>★ 引入线程后，资源分配的单位与 CPU 调度的单位分别是：
+A. 都是进程 B. 都是线程 C. 进程、线程 D. 线程、进程</p>
+<blockquote>
+<p><strong>C</strong>。资源分配仍以<strong>进程</strong>为基本单位，调度与分派切换到<strong>线程</strong>——这是"引入线程"的核心句。</p>
+</blockquote>
+<h2>§3 同步互斥与死锁（OS36–OS55）</h2>
+<p><strong>OS36.</strong>★ 临界区互斥的四个准则中，"让权等待"指：
+A. 进程进不了临界区就放弃 CPU（阻塞） B. 让出内存 C. 降低优先级 D. 立即退出系统</p>
+<blockquote>
+<p><strong>A</strong>。忙等待违背让权等待（但多核短临界区自旋反而快，见 OS54）。</p>
+</blockquote>
+<p><strong>OS37.</strong>★★ 单标志法（turn 轮流）违背的准则是：
+A. 空闲让进 B. 忙则等待 C. 有限等待 D. 让权等待</p>
+<blockquote>
+<p><strong>A</strong>。对方不用临界区时自己也不能进（turn 不轮到自己）。</p>
+</blockquote>
+<p><strong>OS38.</strong>★ Peterson 算法满足互斥、空闲让进、有限等待，但不满足：
+A. 互斥 B. 让权等待（仍是忙等） C. 有限等待 D. 空闲让进</p>
+<blockquote>
+<p><strong>B</strong>。软件方案都会自旋。</p>
+</blockquote>
+<p><strong>OS39.</strong>★ P(S) 操作中，若 S&lt;0 则：
+A. 继续执行 B. 进程阻塞并插入等待队列 C. 唤醒 D. 出错</p>
+<blockquote>
+<p><strong>B</strong>。S 的绝对值=等待进程数。V(S) 后 S≤0 说明还有等待者，唤醒一个。</p>
+</blockquote>
+<p><strong>OS40.</strong>★ 互斥信号量的初值通常为：
+A. 0 B. 1 C. N D. −1</p>
+<blockquote>
+<p><strong>B</strong>。0 用于<strong>同步</strong>（前操作给后操作发信号）；N 表示 N 个资源的计数。</p>
+</blockquote>
+<p><strong>OS41.</strong>★★★ 生产者-消费者问题中，先 P(mutex) 后 P(empty) 会：
+A. 没问题 B. 可能死锁（拿到互斥锁却等不到空位，又不让别人取货） C. 提高效率 D. 自动恢复</p>
+<blockquote>
+<p><strong>B</strong>。<strong>同步 P 操作必须在互斥 P 操作之前</strong>——口诀"先同步后互斥"。</p>
+</blockquote>
+<p><strong>OS42.</strong>★★ 读者-写者问题"读者优先"方案中，防止多读者重复 P(w) 的计数器本身需要：
+A. 互斥保护（mutex） B. 不用保护 C. 全局禁锁 D. 时间片</p>
+<blockquote>
+<p><strong>A</strong>。count++ 不是原子操作，读者计数器必须用 mutex 保护——套娃互斥是此题精髓。</p>
+</blockquote>
+<p><strong>OS43.</strong>★ 管程（monitor）的特点：
+A. 把共享数据与操作封装，过程间自动互斥 B. 允许并发进入 C. 无条件变量 D. 就是信号量</p>
+<blockquote>
+<p><strong>A</strong>。管程内任一时刻至多一个进程活跃；同步靠条件变量 wait/signal。</p>
+</blockquote>
+<p><strong>OS44.</strong>★ 死锁四个必要条件中，破坏"不可剥夺"的策略是：
+A. 一次性申请全部资源 B. 抢占式分配 C. 资源有序申请 D. 拒绝互斥</p>
+<blockquote>
+<p><strong>B</strong>。A 破坏"占有且等待"；C 破坏"循环等待"；"互斥"是设备固有属性，不能破坏。</p>
+</blockquote>
+<p><strong>OS45.</strong>★ 死锁的"避免"与"预防"的区别：
+A. 避免在运行中动态判断（如银行家），预防在事前破坏条件 B. 相同 C. 预防更聪明 D. 无区别</p>
+<blockquote>
+<p><strong>A</strong>。银行家算法每次分配前判断系统是否仍处于安全状态。</p>
+</blockquote>
+<p><strong>OS46.</strong>★★ 系统处于<strong>不安全</strong>状态：
+A. 一定死锁 B. 不一定死锁（只是无保证） C. 不可能 D. 等于死锁</p>
+<blockquote>
+<p><strong>B</strong>。安全 ⇒ 无死锁；不安全 ⇒ 可能死锁。必要条件不充分。</p>
+</blockquote>
+<p><strong>OS47.</strong>★★ 3 个进程各最多需要 4 台打印机，系统不发生死锁至少需要：
+A. 10 B. 12 C. 9 D. 4</p>
+<blockquote>
+<p><strong>A</strong>。n(m−1)+1 = 3×3+1 = 10：每进程先拿 3 台都"差一台"时，再来一台就能解开一个。</p>
+</blockquote>
+<p><strong>OS48.</strong>★★ 死锁定理使用的工具：
+A. 资源分配图化简 B. 银行家矩阵 C. 波特图 D. 卡诺图</p>
+<blockquote>
+<p><strong>A</strong>。图不可化简 ⇔ 死锁。检测+解除策略配合使用（剥夺/撤销/回退）。</p>
+</blockquote>
+<p><strong>OS49.</strong>★ 饥饿与死锁的区别：
+A. 饥饿的进程可能仍能执行其他代码并退出；死锁各方都阻塞 B. 相同 C. 饥饿更严重 D. 无区别</p>
+<blockquote>
+<p><strong>A</strong>。饥饿是调度不公（可能长期等资源），死锁是相互等待成环。</p>
+</blockquote>
+<p><strong>OS50.</strong>★★ 互斥信号量 mutex 初值 1，两个进程都执行 P(mutex)…V(mutex)。若某进程 V 前崩溃，后果：
+A. 无影响 B. 其他进程永远阻塞（资源永久占用） C. 自动恢复 D. 死循环</p>
+<blockquote>
+<p><strong>B</strong>。信号量是无主资源，占用者消失不自动释放——工程上靠健壮的锁设计。</p>
+</blockquote>
+<p><strong>OS51.</strong>★★ 原子指令 TestAndSet/Swap 实现互斥的特点：
+A. 硬件保证原子性，仍属忙等 B. 无忙等 C. 需要内核 D. 不能用于多核</p>
+<blockquote>
+<p><strong>A</strong>。硬件原语+自旋等待；优点是简单、多核可用。</p>
+</blockquote>
+<p><strong>OS52.</strong>★ "生产者往缓冲区放物品"与"消费者取物品"两个操作间的约束是：
+A. 互斥 B. 同步（协作次序） C. 都是 D. 都不是</p>
+<blockquote>
+<p><strong>B</strong>。"先生产后消费"是次序依赖=同步；而"同一时刻只许一个进程碰缓冲区"才是互斥。</p>
+</blockquote>
+<p><strong>OS53.</strong>★★ 多核短临界区场景下，自旋锁相对阻塞锁：
+A. 一定更差 B. 可能更快（省去上下文切换） C. 不可能 D. 只在单核好</p>
+<blockquote>
+<p><strong>B</strong>。临界区极短时，自旋比"阻塞+唤醒"的切换开销小；单核自旋纯属浪费（持锁者无法运行）。</p>
+</blockquote>
+<p><strong>OS54.</strong>★ 信号量 S 初值为 3，经过 5 次 P 和 2 次 V 后：
+A. 0 B. 1 C. −1? 计算：3−5+2=0 D. 2</p>
+<blockquote>
+<p><strong>A</strong>。S=3−5+2=0（若中途为负曾有人阻塞，当前值 0 表示无人等待? S=0≥0 无人等待）。</p>
+</blockquote>
+<p><strong>OS55.</strong>★★ 有 n 个进程共享一个互斥段，最多允许 1 个进入；信号量当前值为 −2，说明：
+A. 2 个进程在临界区 B. 2 个进程在等待队列 C. 空闲 D. 死锁</p>
+<blockquote>
+<p><strong>B</strong>。绝对值=等待进程数；临界区内恰有 1 个（S≤0 时）。</p>
+</blockquote>
+<h2>§4 内存管理（OS56–OS75）</h2>
+<p><strong>OS56.</strong>★ 动态重定位依赖：
+A. 编译时定地址 B. 重定位寄存器（基址）+运行时地址变换 C. 手工修改 D. 换硬盘</p>
+<blockquote>
+<p><strong>B</strong>。装入后仍可移动（紧凑、对换）。</p>
+</blockquote>
+<p><strong>OS57.</strong>★ 动态分区分配中，"最佳适应"的缺点：
+A. 大空间浪费 B. 产生大量难以利用的小碎片（外部碎片） C. 查找慢到不能用 D. 不能分配</p>
+<blockquote>
+<p><strong>B</strong>。每次选最小满足块，切碎大块。首次适应综合表现通常最好。</p>
+</blockquote>
+<p><strong>OS58.</strong>★ 解决外部碎片的方法：
+A. 紧凑（拼接）技术 B. 加内存条 C. 关机 D. 分段</p>
+<blockquote>
+<p><strong>A</strong>。移动进程拼接空闲区（需动态重定位支持）。
+D 分段<strong>仍有</strong>外部碎片；真正消除外部碎片的是分页。</p>
+</blockquote>
+<p><strong>OS59.</strong>★ 分页系统的碎片特征：
+A. 外部碎片 B. 内部碎片（最后一页装不满） C. 无碎片 D. 都有大量</p>
+<blockquote>
+<p><strong>B</strong>。页与块等大，进程按页切分，末页平均浪费半页。</p>
+</blockquote>
+<p><strong>OS60.</strong>★★ 页大小 4KB，32 位逻辑地址，页号占：
+A. 20 位 B. 12 位 C. 10 位 D. 32 位</p>
+<blockquote>
+<p><strong>A</strong>。页内偏移 12 位（4K=2¹²），页号 32−12=20 位。</p>
+</blockquote>
+<p><strong>OS61.</strong>★ 页表项中记录的是：
+A. 逻辑页号 B. 物理块号（帧号） C. 段长 D. 文件名</p>
+<blockquote>
+<p><strong>B</strong>。页号隐含（按序排列），只需存帧号。</p>
+</blockquote>
+<p><strong>OS62.</strong>★★ 32 位系统、4KB 页、页表项 4B，一级页表需多大连续内存：
+A. 4MB B. 4KB C. 4GB D. 1KB</p>
+<blockquote>
+<p><strong>A</strong>。2²⁰ 个页表项 ×4B = 4MB——过大才引出多级页表。</p>
+</blockquote>
+<p><strong>OS63.</strong>★★ 二级页表地址划分 10+10+12 中，每个页目录项对应：
+A. 一页 B. 一张页表（1024 页，4MB 空间） C. 一个进程 D. 一块磁盘</p>
+<blockquote>
+<p><strong>B</strong>。一级页号选页表，二级页号选页。</p>
+</blockquote>
+<p><strong>OS64.</strong>★ 缺页中断属于：
+A. 外部中断 B. 内部异常（程序性中断） C. 主动系统调用 D. 不存在</p>
+<blockquote>
+<p><strong>B</strong>。由指令执行中访存引发，属于内中断（故障类）。</p>
+</blockquote>
+<p><strong>OS65.</strong>★★ TLB 命中时，一次数据访问总共的访存次数：
+A. 1 B. 2 C. 3 D. 0</p>
+<blockquote>
+<p><strong>A</strong>。TLB 在 CPU 内给出帧号，直接访存取数=1 次。
+TLB 缺失但页表命中：2 次；连页表都缺页：缺页处理后重来。</p>
+</blockquote>
+<p><strong>OS66.</strong>★ 分段管理中，段表的表项包含：
+A. 段基址+段长 B. 帧号 C. 页号 D. 修改位</p>
+<blockquote>
+<p><strong>A</strong>。段大小可变，必须记录长度越界检查——分页无此项（页等大）。</p>
+</blockquote>
+<p><strong>OS67.</strong>★★ 分段比分页更适合"共享与保护"的原因：
+A. 段是逻辑完整单位（如代码段、数据段） B. 段更小 C. 段固定大小 D. 无关</p>
+<blockquote>
+<p><strong>A</strong>。共享一段=共享完整逻辑模块；分页共享要凑多个页，语义割裂。</p>
+</blockquote>
+<p><strong>OS68.</strong>★ 虚拟存储的特征不包括：
+A. 多次性 B. 对换性 C. 虚拟性 D. 一次性</p>
+<blockquote>
+<p><strong>D</strong>。<strong>一次性</strong>恰是传统存储管理的特征，虚存打破了它（作业分多次调入）。</p>
+</blockquote>
+<p><strong>OS69.</strong>★★ 请求分页页表新增字段<strong>不包括</strong>：
+A. 状态位 B. 访问位 C. 修改位 D. 程序名</p>
+<blockquote>
+<p><strong>D</strong>。还有外存地址字段；修改位决定换出时是否写回。</p>
+</blockquote>
+<p><strong>OS70.</strong>★★ Belady 异常出现在：
+A. LRU B. FIFO C. OPT D. CLOCK</p>
+<blockquote>
+<p><strong>B</strong>。FIFO 在页帧增多时缺页率可能不降反升；LRU/OPT 属"栈类算法"，无此异常。</p>
+</blockquote>
+<p><strong>OS71.</strong>★ LRU 的实现依据：
+A. 进入时间 B. 最近访问时间（最久未用先换出） C. 随机 D. 频率</p>
+<blockquote>
+<p><strong>B</strong>。A 是 FIFO；D 是 LFU。</p>
+</blockquote>
+<p><strong>OS72.</strong>★ CLOCK 算法每个页帧维护：
+A. 访问位（引用位） B. 大小 C. 文件名 D. 权重</p>
+<blockquote>
+<p><strong>A</strong>。指针扫描：1→清 0 跳过，0→换出。是 LRU 的低成本近似（NRU）。</p>
+</blockquote>
+<p><strong>OS73.</strong>★★ "抖动（颠簸）"的直接原因：
+A. 内存太大 B. 分配的页帧太少，刚换出的页马上又要用 C. CPU 太快 D. 磁盘太大</p>
+<blockquote>
+<p><strong>B</strong>。解决：按工作集模型分配页帧。</p>
+</blockquote>
+<p><strong>OS74.</strong>★★ 页面序列 1,2,3,4,1,2,5,1,2,3,4,5，3 帧。FIFO 缺页次数：
+A. 9 B. 10 C. 7 D. 8</p>
+<blockquote>
+<p><strong>A</strong>。FIFO：1,2,3 缺(3) →4 换1 缺(4) →1 缺(5) →2 缺(6) →5 换3 缺(7) →1 命中 →2 命中 →3 换4 缺(8) →4 换5? 队列 2,5,1→换 2? 完整数一遍：缺页序列 1,2,3,4,1,2,5,3,4? FIFO 经典结果是 <strong>9 次</strong>（OPT 7 次、LRU 10 次）。</p>
+</blockquote>
+<p><strong>OS75.</strong>★★ 上题改用 LRU，缺页次数：
+A. 10 B. 9 C. 7 D. 12</p>
+<blockquote>
+<p><strong>A</strong>。LRU 经典结果 <strong>10 次</strong>（OPT 7 次）。三算法背结论即可：OPT&lt;LRU、FIFO 之间 7/10/9。</p>
+</blockquote>
+<h2>§5 文件管理（OS76–OS88）</h2>
+<p><strong>OS76.</strong>★ 逻辑文件的组织形式：
+A. 顺序文件、索引文件等 B. 连续分配 C. FAT D. 位示图</p>
+<blockquote>
+<p><strong>A</strong>。B/C/D 都是<strong>物理</strong>（存储）层面。</p>
+</blockquote>
+<p><strong>OS77.</strong>★ 连续文件分配的优点：
+A. 支持随机访问且速度快 B. 易扩展 C. 无碎片 D. 节省空间</p>
+<blockquote>
+<p><strong>A</strong>。缺点：难以动态增长、产生外部碎片。
+B/C 是链接/索引分配的特征。</p>
+</blockquote>
+<p><strong>OS78.</strong>★★ FAT（文件分配表）属于：
+A. 显式链接 B. 隐式链接 C. 索引 D. 连续</p>
+<blockquote>
+<p><strong>A</strong>。链接指针集中存成一张表且常驻内存，查链不访盘。</p>
+</blockquote>
+<p><strong>OS79.</strong>★★ UNIX 混合索引：10 个直接块指针 + 一级 + 二级 + 三级。4KB 块、4B 指针，直接块容量：
+A. 40KB B. 4KB C. 1024KB D. 16GB</p>
+<blockquote>
+<p><strong>A</strong>。10×4KB=40KB；一级再增 1K×4KB=4MB。</p>
+</blockquote>
+<p><strong>OS80.</strong>★★ FCB 拆分出索引结点（inode）的目的：
+A. 减少目录文件体积、加快目录检索 B. 加密 C. 支持网络 D. 兼容 FAT</p>
+<blockquote>
+<p><strong>A</strong>。目录项只剩"文件名+inode 号"，检索时只比对文件名，命中才读 inode。</p>
+</blockquote>
+<p><strong>OS81.</strong>★ 硬链接的本质：
+A. 同一 inode 的多个目录项（引用计数+1） B. 复制文件 C. 存路径的快捷方式 D. 只读副本</p>
+<blockquote>
+<p><strong>A</strong>。D 是<strong>符号（软）链接</strong>：存的是路径名，原文件删除后软链接悬空、硬链接仍在。</p>
+</blockquote>
+<p><strong>OS82.</strong>★ 打开文件（open）的作用：
+A. 把文件的 FCB/控制信息读入内存打开文件表，返回 fd B. 复制到内存 C. 解锁 D. 格式化</p>
+<blockquote>
+<p><strong>A</strong>。此后 read/write 用 fd 索引，免每次查目录。</p>
+</blockquote>
+<p><strong>OS83.</strong>★★ 位示图法管理磁盘，字号 32 位，块号 b 对应：
+A. 字号 b/32、位号 b%32（0 起） B. 字号 b、位号 32 C. 只用位号 D. 倒序</p>
+<blockquote>
+<p><strong>A</strong>。（若题目用"字号从 1 开始/块号从 1 开始"，注意先减 1 再除。）</p>
+</blockquote>
+<p><strong>OS84.</strong>★★ 磁盘调度 SCAN（电梯）算法：
+A. 沿一个方向服务到头再回头 B. 只服务最近 C. 来回乱跳 D. 永不回头</p>
+<blockquote>
+<p><strong>A</strong>。SSTF 贪心最近但可能饥饿远端；C-SCAN 单向扫到头直接回到起点。</p>
+</blockquote>
+<p><strong>OS85.</strong>★★★ 磁头在 100 号磁道，请求队列 55,58,39,18,90,160,150,38,184，SSTF 先服务的磁道：
+A. 90 B. 55 C. 184 D. 38</p>
+<blockquote>
+<p><strong>A</strong>。距离：|100−90|=10 最小，先 90。</p>
+</blockquote>
+<p><strong>OS86.</strong>★★ 文件目录的"树形目录"优点：
+A. 层次清晰、重名不冲突（不同目录下同名） B. 检索最快 C. 无需路径 D. 只能一层</p>
+<blockquote>
+<p><strong>A</strong>。B 相对单级/两级更复杂；路径检索反而要逐级。</p>
+</blockquote>
+<p><strong>OS87.</strong>★ 文件保护常用的机制：
+A. 口令、加密、访问控制 B. 磁盘阵列 C. 双缓冲 D. 中断</p>
+<blockquote>
+<p><strong>A</strong>。访问控制表（ACL）按"谁对谁做什么"授权。</p>
+</blockquote>
+<p><strong>OS88.</strong>★★ 建立索引结点后，目录项中不再包含：
+A. 文件名 B. inode 号 C. 文件物理地址（移入 inode） D. 都不含</p>
+<blockquote>
+<p><strong>C</strong>。物理位置、权限、时间戳等全在 inode 里，目录项瘦身。</p>
+</blockquote>
+<h2>§6 I/O 管理（OS89–OS100）</h2>
+<p><strong>OS89.</strong>★ I/O 软件层次从上到下：
+A. 用户层IO→设备独立性软件→设备驱动→中断处理 B. 相反 C. 驱动最上层 D. 无层次</p>
+<blockquote>
+<p><strong>A</strong>。系统调用在用户层下第一站，驱动最贴硬件。</p>
+</blockquote>
+<p><strong>OS90.</strong>★ "设备独立性"指：
+A. 用户用逻辑设备名申请，系统负责映射到物理设备 B. 不要驱动 C. 设备不存在 D. 手动接插</p>
+<blockquote>
+<p><strong>A</strong>。好处：换设备不改程序、便于分配缓冲。</p>
+</blockquote>
+<p><strong>OS91.</strong>★★ SPOOLing 技术把独占设备改造成：
+A. 可共享的虚拟设备（如虚拟打印机） B. 更快的设备 C. 只读设备 D. 网络设备</p>
+<blockquote>
+<p><strong>A</strong>。用磁盘上的输出井排队，物理打印机独占但逻辑上人人可"打印"。</p>
+</blockquote>
+<p><strong>OS92.</strong>★ 设备控制器的主要职责：
+A. 接受 CPU 命令、控制设备、缓冲与状态报告 B. 运行用户程序 C. 管理进程 D. 编译代码</p>
+<blockquote>
+<p><strong>A</strong>。CPU 与设备之间的中间层（寄存器：数据/控制/状态）。</p>
+</blockquote>
+<p><strong>OS93.</strong>★ 设备与 CPU 交换数据通过：
+A. 控制器中的寄存器（端口或内存映射） B. 直接改程序 C. 电话线 D. 硬盘</p>
+<blockquote>
+<p><strong>A</strong>。独立编址=专用 IN/OUT；统一编址=内存映射 IO。</p>
+</blockquote>
+<p><strong>OS94.</strong>★★ 双缓冲相比单缓冲的优势：
+A. 设备输入与 CPU 取用可以并行（装第二个缓冲区时取第一个） B. 省一半内存 C. 无需驱动 D. 无中断</p>
+<blockquote>
+<p><strong>A</strong>。单缓冲时设备与 CPU 必须串行使用唯一缓冲。</p>
+</blockquote>
+<p><strong>OS95.</strong>★★ 单缓冲下处理一块数据的时间（C=CPU处理，T=设备输入，M=内存搬运）：
+A. max(C,T)+M B. C+T+M C. min(C,T) D. 2T</p>
+<blockquote>
+<p><strong>A</strong>。上块处理与下块输入重叠。双缓冲为 max(C+M, T)。</p>
+</blockquote>
+<p><strong>OS96.</strong>★ 通道（IOP）的作用：
+A. 执行通道程序独立完成 I/O，CPU 只在开始/结束介入 B. 替代 CPU 运算 C. 替代内存 D. 管理文件</p>
+<blockquote>
+<p><strong>A</strong>。通道是弱化的专用处理器。</p>
+</blockquote>
+<p><strong>OS97.</strong>★★ 磁盘"格式化容量"与"非格式化容量"：
+A. 格式化容量 &lt; 非格式化（部分空间留作管理信息） B. 相反 C. 相等 D. 无关</p>
+<blockquote>
+<p><strong>A</strong>。扇区间隙、ID 域占用空间。</p>
+</blockquote>
+<p><strong>OS98.</strong>★ 缓冲池与缓冲区的区别：
+A. 缓冲池是多个公用缓冲区+管理队列（可供多进程共享） B. 池更大只能专用 C. 无区别 D. 池不能复用</p>
+<blockquote>
+<p><strong>A</strong>。缓冲区链：空缓冲队列、装满输入队列、装满输出队列。</p>
+</blockquote>
+<p><strong>OS99.</strong>★★ 提高 IO 性能的常见手段<strong>不包括</strong>：
+A. 缓冲 B. DMA C. 增大中断频率让 CPU 多介入 D. RAID</p>
+<blockquote>
+<p><strong>C</strong>。频繁中断反而增加开销；高吞吐场景正是靠 DMA 减少中断。</p>
+</blockquote>
+<p><strong>OS100.</strong>★★ I/O 控制方式按 CPU 介入程度从多到少：
+A. 程序查询→中断→DMA→通道 B. 相反 C. DMA 最先 D. 随机</p>
+<blockquote>
+<p><strong>A</strong>。查询全程忙等；中断每字节介入；DMA 整块介入；通道批处理介入。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：OS1–OS100。使用节奏：§1–§2 一天（状态转换图默画三遍）、§3 一天（生产者-消费者代码默写、银行家手算一遍）、§4 一天半（地址计算题必动笔：页表拆位、缺页计数 7/10/9 背死）、§5–§6 一天。错题标回《操作系统_知识点与难点》对应章节。</p></div></body></html>

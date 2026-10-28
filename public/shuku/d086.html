@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>计算机网络_知识点与难点 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>计算机网络 · 知识点与难点（408·25分）</h1>
+<blockquote>
+<p>分值最低但内容最杂，2027年5-7月启动。主线：王道计网课 + <strong>B站「湖科大教书匠」</strong>（图解全网最清楚）+ 谢希仁《计算机网络》。本文件=体系表+计算公式+易错+【难点专攻】。</p>
+</blockquote>
+<hr />
+<h2>第1章 体系结构与性能指标</h2>
+<h3>结构（背熟这张对应表，判断题年年考）</h3>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>功能关键词</th>
+<th>典型协议</th>
+<th>设备</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 应用层</td>
+<td>报文</td>
+<td>HTTP/FTP/SMTP/DNS/DHCP</td>
+<td>主机</td>
+</tr>
+<tr>
+<td>4 传输层</td>
+<td>端到端、进程间</td>
+<td>TCP/UDP</td>
+<td>主机</td>
+</tr>
+<tr>
+<td>3 网络层</td>
+<td>主机到主机、分组转发</td>
+<td>IP/ICMP/ARP/IGMP/路由协议</td>
+<td><strong>路由器</strong></td>
+</tr>
+<tr>
+<td>2 数据链路层</td>
+<td>相邻结点、帧</td>
+<td>以太网/PPP/VLAN/CSMA</td>
+<td><strong>交换机、网桥</strong></td>
+</tr>
+<tr>
+<td>1 物理层</td>
+<td>比特传输</td>
+<td>RS232/曼彻斯特编码</td>
+<td><strong>集线器、中继器</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>OSI七层比五层多：表示层（编码加密压缩）、会话层（建立管理会话）。</li>
+</ul>
+<h3>性能指标（计算必考）</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>公式/说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发送时延</td>
+<td>分组长度L / 发送速率R</td>
+</tr>
+<tr>
+<td>传播时延</td>
+<td>信道长度d / 电磁波速率v（铜线2.3×10⁸, 光纤2×10⁸ m/s）</td>
+</tr>
+<tr>
+<td>时延带宽积</td>
+<td>传播时延 × 带宽（"以比特为单位的链路长度"）</td>
+</tr>
+<tr>
+<td>往返时间RTT</td>
+<td>2×传播时延（+处理）</td>
+</tr>
+<tr>
+<td>信道利用率</td>
+<td>发送时间/(发送+RTT)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>第2章 物理层</h2>
+<ul>
+<li><strong>奈奎斯特</strong>（无噪声）：极限速率 = 2W·log₂V (b/s)，V=码元离散电平数。</li>
+<li><strong>香农</strong>（有噪声）：C = W·log₂(1+S/N)；信噪比dB = 10·lg(S/N)。</li>
+<li><strong>两公式对比</strong>：奈氏限制码元速率（波特率上限），香农限制比特速率；受两者同时约束取小者。</li>
+<li>编码：不归零NRZ、归零RZ、<strong>曼彻斯特</strong>（每比特中间跳变，数据率=波特率/2）、差分曼彻斯特（看起始有无跳变）。</li>
+<li>复用：FDM/TDM/统计TDM/WDM/CDMA（码片正交计算：规格化内积=0为不同站）。</li>
+<li>宽带接入：ADSL（电话线，频分，上行&lt;下行）、HFC、FTTx。</li>
+</ul>
+<hr />
+<h2>第3章 数据链路层（计算重镇）</h2>
+<h3>三大功能</h3>
+<ul>
+<li>封装成帧；<strong>透明传输</strong>：字节填充（帧定界符前插ESC）/比特填充（5个1后插0，HDLC）；差错检测：奇偶、<strong>CRC（模2除法，考计算）</strong>、海明（纠1位）。</li>
+</ul>
+<h3>可靠传输三协议（滑动窗口，计算高频）</h3>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>发送窗口</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>停止-等待</td>
+<td>1</td>
+<td>信道利用率 = T_D/(T_D+RTT+T_A)</td>
+</tr>
+<tr>
+<td>回退N帧GBN</td>
+<td><strong>W≤2ⁿ−1</strong>（n位编号）</td>
+<td>接收窗口1，出错重传之后全部</td>
+</tr>
+<tr>
+<td>选择重传SR</td>
+<td><strong>W≤2^(n−1)</strong>（收发各半）</td>
+<td>接收窗口=发送窗口，逐帧确认</td>
+</tr>
+</tbody>
+</table>
+<h3>介质访问控制</h3>
+<ul>
+<li>随机接入：ALOHA（纯/时隙）、<strong>CSMA/CD（以太网）</strong>：</li>
+<li><strong>最小帧长 = 2τ × 数据率</strong>（τ=单程端到端传播时延；争用期=2τ）。例：10Mb/s、争用期51.2μs → 最小帧64B。</li>
+<li>二进制指数退避：第i次冲突从 {0..2^min(i,10)−1} 随机选k，等 k×争用期；16次失败放弃。</li>
+<li>CSMA/CA（802.11无线，因无线无法"边发边听"）。</li>
+<li>轮询/令牌（令牌环，确定性，重负载优）。</li>
+<li><strong>信道划分</strong>：FDM/TDM/CDMA（复习第2章）。</li>
+</ul>
+<h3>局域网与设备</h3>
+<ul>
+<li>以太网V2 MAC帧：目的6+源6+类型2+数据(46-1500)+FCS4；<strong>数据字段46~1500B</strong>（不足46填充）。</li>
+<li><strong>VLAN（802.1Q）</strong>：在源地址后插4字节标签，隔离广播域。</li>
+<li>PPP：面向字节、无纠错只检错、支持多协议（帧格式：7E定界）。</li>
+<li><strong>交换机自学习</strong>：查表转发；表无此项→泛洪；同端口→丢弃。<strong>冲突域与广播域</strong>：集线器1个冲突域；交换机隔离冲突域不隔离广播域；路由器两者都隔离。</li>
+</ul>
+<hr />
+<h3>无线局域网 802.11（WLAN）【选择概念】</h3>
+<ul>
+<li>MAC 方式：<strong>CSMA/CA</strong>——无线无法"边发边听"（自身信号远强于远端），故不能用 CD；靠<strong>ACK确认</strong>在链路层保可靠。</li>
+<li><strong>RTS/CTS</strong> 预约机制：解决<strong>隐藏站</strong>问题（A、C 都听不到 B 发送）。</li>
+<li>帧间间隔：SIFS（最短，高优先如ACK）&lt; DIFS（数据帧）。</li>
+<li>结构：BSS（含 AP 的基础结构网络）+ SSID；AP 之间漫游；帧内<strong>三/四个地址字段</strong>（经 AP 转发时区分源/目的/AP）。</li>
+<li>与以太网对比：802.11 帧也有 MAC 地址与 FCS，但引入第4地址与序号控制（重传去重）。</li>
+</ul>
+<h2>第4章 网络层（计算重镇：子网划分）</h2>
+<h3>IPv4</h3>
+<ul>
+<li>数据报首部20B固定：版本、首部长(×4B)、总长度、TTL(过路由器−1，=0丢弃)、协议(6=TCP,17=UDP)、首部校验和。</li>
+<li>分类地址：A(1-126)/B(128-191)/C(192-223)；私有地址：10/8、172.16/12、192.168/16。</li>
+<li><strong>子网划分五步法（模板）</strong>：
+  ①主机位 k=log₂(需主机数+2)（+2是网络地址与广播地址）；②掩码=32−k位全1；③块大小=2^k；④各子网网络地址=块整数倍；⑤可用主机=2^k−2。</li>
+<li>例：192.168.1.0/24 划4个子网 → k=6 → 掩码/26（255.255.255.192），块64：0、64、128、192，各62台。</li>
+<li><strong>CIDR聚合</strong>：取地址二进制公共前缀。例：194.24.0.0 与 194.24.1.0 → /23聚合194.24.0.0/23。</li>
+<li><strong>最长前缀匹配</strong>：路由表多条匹配取前缀最长者。</li>
+</ul>
+<h3>其他协议</h3>
+<ul>
+<li><strong>ARP</strong>：IP→MAC，同网段直接ARP，跨网段对<strong>默认网关</strong>ARP；ARP请求广播、响应单播。</li>
+<li>ICMP：差错报告（终点不可达/超时/参数问题）+ 询问（回送请求/回答→ping）；<strong>ICMP不是传输层协议</strong>。</li>
+<li>DHCP：UDP、C/S、<strong>Discover(广播)→Offer→Request(广播)→ACK</strong> 四步，自动配置IP。</li>
+<li>NAT：私网地址转换，改IP+端口（NAPT）。</li>
+<li>路由协议：<strong>RIP</strong>（距离向量，跳数≤15，坏消息传得慢）、<strong>OSPF</strong>（链路状态，Dijkstra，区域，直接封装IP）、<strong>BGP</strong>（AS间，路径向量，策略优先）。</li>
+<li>IPv6：128位、首部固定40B、无校验和、<strong>只在源节点分片</strong>、即插即用；从IPv4过渡：双协议栈+隧道。</li>
+</ul>
+<hr />
+<h3>路由器的结构与转发流程（综合题模板）</h3>
+<p>路由器 = 路由选择部分（路由选择处理机，运行RIP/OSPF/BGP，维护路由表）+ 分组转发部分（交换结构 + 一组输入端口 + 一组输出端口）。
+转发流程：①输入端口收帧、剥离链路层封装 → ②按目的IP查路由表（<strong>最长前缀匹配</strong>） → ③交换结构送往输出端口（端口忙则排队，溢出丢包） → ④TTL减1、重算首部校验和 → ⑤输出端口重新封装链路层帧（每跳重写二层头）。
+考点：路由器隔离广播域；直接交付（同网段）vs 间接交付（跨网段经网关）；默认路由 0.0.0.0/0 兜底。</p>
+<h3>IPv6 / 移动IP / SDN（了解级清单）</h3>
+<ul>
+<li><strong>IPv6</strong>：地址128位、首部固定40B、<strong>取消首部校验和</strong>、只在源结点分片、支持地址自动配置；过渡：双协议栈 + 隧道。</li>
+<li><strong>移动IP</strong>：移动结点 = 永久地址（归属地址）+ 转交地址；归属代理截获发往永久地址的分组并经隧道转发至外地代理。</li>
+<li><strong>SDN</strong>：数据平面与控制平面分离，控制器集中计算并下发流表（OpenFlow协议），设备只负责按流表转发。</li>
+</ul>
+<h2>第5章 传输层（综合题大户：TCP）</h2>
+<ul>
+<li><strong>UDP</strong>：无连接、8B首部、不保证可靠、支持一对多；适合实时（DNS/ DHCP/ RTP）。</li>
+<li><strong>TCP</strong>：面向连接、全双工、点对点、可靠有序、流量/拥塞控制。</li>
+<li><strong>三次握手</strong>：SYN(seq=x) → SYN+ACK(seq=y, ack=x+1) → ACK(ack=y+1)；<strong>为什么三次</strong>：防已失效的连接请求到达造成资源浪费 + 双方确认收发能力。</li>
+<li><strong>四次挥手</strong>：FIN→ACK→FIN→ACK；主动方TIME_WAIT等<strong>2MSL</strong>：保证最后一个ACK到达+旧报文消逝。</li>
+<li>可靠机制：序号+确认（累积确认）、超时重传（RTTs加权，RTO）、快重传（<strong>3个冗余ACK</strong>立即重传）。</li>
+<li><strong>流量控制</strong>：接收窗口rwnd通告；持续计时器防死锁（零窗口探测）。</li>
+<li><strong>拥塞控制四件套（必考画图/计算）</strong>：</li>
+<li><strong>慢启动</strong>：cwnd从1MSS起每RTT翻倍（指数）→ 到阈值ssthresh转拥塞避免；</li>
+<li><strong>拥塞避免</strong>：每RTT +1MSS（线性）；</li>
+<li>超时：ssthresh=当前cwnd/2，cwnd=1 重新慢启动；</li>
+<li><strong>快重传+快恢复</strong>：3冗余ACK → ssthresh=cwnd/2，cwnd=新阈值（快恢复）继续线性增。</li>
+<li>发送窗口 = min(rwnd, cwnd)。</li>
+</ul>
+<hr />
+<h2>第6章 应用层</h2>
+<ul>
+<li>C/S（服务器常开）vs P2P（对等，扩展性强）。</li>
+<li><strong>DNS</strong>：层次域名树；<strong>递归查询（主机→本地）+ 迭代查询（本地→根/顶级/权限）</strong>；UDP 53（区域传送用TCP）；资源记录：A、NS、CNAME、MX、PTR。</li>
+<li><strong>FTP</strong>：<strong>控制21 / 数据20</strong> 两个TCP连接，控制全程保持。</li>
+<li>邮件：<strong>SMTP推（25）+ POP3拉（110）/IMAP</strong>；邮件网关间用SMTP。</li>
+<li><strong>HTTP</strong>：TCP 80；HTTP1.0非持续（每对象2×RTT）；<strong>1.1持续连接</strong>（流水线方式1×RTT+所有对象传输）；无状态（Cookie补状态）；HTTPS=HTTP+TLS(443)。</li>
+<li><strong>DHCP、WWW、CDN</strong>概念级。</li>
+</ul>
+<hr />
+<h1>计算机网络 · 难点专攻</h1>
+<h2>1. 子网划分/聚合计算五步法（408年年考，背模板）</h2>
+<p>①按主机需求定 k=log₂(N+2)；②掩码/前缀=32−k；③块大小=2^k；④子网网络地址按块对齐；⑤聚合：转二进制找公共前缀。<strong>口算器：/26=每块64台，/27=32，/28=16，/25=128</strong>。</p>
+<h2>2. 最小帧长/争用期（CSMA-CD）</h2>
+<p>最小帧长 = 2τ×R。反向题：给帧长和速率求最大网段距离 → τ=帧长/(2R)，距离=τ×v。<strong>以太网帧不足64B须填充</strong>。</p>
+<h2>3. 滑动窗口+信道利用率组合题</h2>
+<p>停止等待利用率 = T_D/(T_D+RTT+T_A)；连续ARQ利用率 = min(1, W×T_D/(T_D+RTT))。<strong>窗口编号位数反推</strong>：GBN W≤2ⁿ−1，SR W≤2ⁿ⁻¹。</p>
+<h2>4. TCP拥塞窗口演化（画表题）</h2>
+<p>逐RTT列 cwnd：慢启动 1→2→4→8（到ssthresh止）→线性 9→10…；遇超时：ssthresh=cwnd/2、cwnd=1；遇3冗余ACK：ssthresh=cwnd/2、cwnd=ssthresh（快恢复）。<strong>横轴用RTT不用拍</strong>。</p>
+<h2>5. 各层协议归属速记（判断题秒杀）</h2>
+<p>属于网络层：IP、ICMP、ARP、IGMP、路由协议（RIP/OSPF/BGP是"协议"其报文载体不同：RIP走UDP 520，OSPF直接走IP，BGP走TCP 179）；应用层全走TCP：HTTP/FTP/SMTP/BGP；走UDP：DNS/DHCP/RIP/TFTP/SNMP。</p>
+<h2>6. 报文发送综合题模板</h2>
+<p>"主机A发一个2KB文件给B，经路由器R，链路速率与传播时延给定"：总时间=各段发送时延+各段传播时延（分组化后按"流水线"算：首组全程+其余组每段发送时延）。<strong>分组交换：总时间=首组传播全程 + 所有组的发送时延之和（分段叠加）</strong>。</p></div></body></html>

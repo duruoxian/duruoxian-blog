@@ -1,0 +1,517 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_概率统计专项题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 概率统计专项题集（120题分章带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，配合《概率统计_知识点与难点》使用。覆盖：随机事件与概率、一维/二维随机变量、数字特征、大数定律与中心极限定理、数理统计基础、参数估计与假设检验。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题标回《数学考题集》同章节旁。
+全部自编或改编经典题型。记号：A̅ 为对立事件，X̄ 为样本均值，S² 为样本方差。</p>
+</blockquote>
+<h2>§1 随机事件与概率（G1–G25）</h2>
+<p><strong>G1.</strong>★ 对立事件与互斥事件的关系：</p>
+<blockquote>
+<p>对立<strong>必</strong>互斥，互斥<strong>未必</strong>对立（还可能"都不发生"）。对立 = 互斥 + 必有一个发生。</p>
+</blockquote>
+<p><strong>G2.</strong>★ 默写加法公式。</p>
+<blockquote>
+<p><strong>P(A∪B) = P(A)+P(B)−P(AB)</strong>；互斥时第三项为 0。</p>
+</blockquote>
+<p><strong>G3.</strong>★ P(A−B) = ?</p>
+<blockquote>
+<p><strong>P(A) − P(AB)</strong>。特别地 A−B 与 AB 互斥且并成 A。</p>
+</blockquote>
+<p><strong>G4.</strong>★ P(A̅B̅) = ?</p>
+<blockquote>
+<p>德摩根：A̅B̅ = (A∪B)‾ ⇒ <strong>= 1−P(A∪B) = 1−P(A)−P(B)+P(AB)</strong>。</p>
+</blockquote>
+<p><strong>G5.</strong>★ 条件概率定义。</p>
+<blockquote>
+<p><strong>P(A|B) = P(AB)/P(B)</strong>（P(B)&gt;0）。缩减样本空间的思想。</p>
+</blockquote>
+<p><strong>G6.</strong>★ 独立与互斥能否同时成立（P(A),P(B)&gt;0）？</p>
+<blockquote>
+<p><strong>不能</strong>。独立 ⇒ P(AB)=P(A)P(B)&gt;0；互斥 ⇒ P(AB)=0，矛盾。
+直觉：互斥=一个发生另一个必不发生（强相关）。</p>
+</blockquote>
+<p><strong>G7.</strong>★ 掷两枚骰子，点数和为 7 的概率。</p>
+<blockquote>
+<p>6 种有利 / 36 ⇒ <strong>1/6</strong>（和为 7 的组合最多：1+6 到 6+1）。</p>
+</blockquote>
+<p><strong>G8.</strong>★ 抽签问题：n 签 1 中，先抽后抽中奖概率：</p>
+<blockquote>
+<p><strong>相同（=1/n）</strong>——抽签与顺序无关，古典概型逐位计算可验证。</p>
+</blockquote>
+<p><strong>G9.</strong>★ 默写全概率公式。</p>
+<blockquote>
+<p>完备事件组 A₁,…,Aₙ：<strong>P(B) = ΣP(Aᵢ)P(B|Aᵢ)</strong>。"由因求果"。</p>
+</blockquote>
+<p><strong>G10.</strong>★ 默写贝叶斯公式。</p>
+<blockquote>
+<p><strong>P(Aⱼ|B) = P(Aⱼ)P(B|Aⱼ)/ΣP(Aᵢ)P(B|Aᵢ)</strong>。"执果索因"。</p>
+</blockquote>
+<p><strong>G11.</strong>★★ 两箱：甲有 3 红 2 白，乙有 1 红 4 白。随机取一箱再取一球，求取得红球的概率；已知是红球，求来自甲箱的概率。</p>
+<blockquote>
+<p>P(红) = ½·(3/5) + ½·(1/5) = <strong>2/5</strong>。
+P(甲|红) = (3/10)/(2/5) = <strong>3/4</strong>（贝叶斯）。</p>
+</blockquote>
+<p><strong>G12.</strong>★★ 每次试验 P(A)=0.1，独立重复 3 次，求 A 至少发生一次的概率。</p>
+<blockquote>
+<p>1−(1−0.1)³ = 1−0.729 = <strong>0.271</strong>。"至少一次"用对立事件。</p>
+</blockquote>
+<p><strong>G13.</strong>★★★ 长度 1 的线段上随机取两点，距离小于 1/2 的概率。</p>
+<blockquote>
+<p>几何概型：单位正方形 |x−y|&lt;1/2 的面积 = 1 − 2·(1/2)(1/2)² = <strong>3/4</strong>。</p>
+</blockquote>
+<p><strong>G14.</strong>★ P(A∪B∪C) 的展开式（容斥）。</p>
+<blockquote>
+<p>= P(A)+P(B)+P(C) − P(AB)−P(AC)−P(BC) + P(ABC)。</p>
+</blockquote>
+<p><strong>G15.</strong>★ 默写德摩根律。</p>
+<blockquote>
+<p>(A∪B)‾ = A̅B̅；(AB)‾ = A̅∪B̅。</p>
+</blockquote>
+<p><strong>G16.</strong>★ 从 n 个不同元素取 k 个（不计顺序）的组合数：</p>
+<blockquote>
+<p><strong>C(n,k) = n!/[k!(n−k)!]</strong>。放回抽样乘 C(n,k) 外还要乘概率幂。</p>
+</blockquote>
+<p><strong>G17.</strong>★★ A、B 独立，证明 A̅ 与 B̅ 独立。</p>
+<blockquote>
+<p>P(A̅B̅) = 1−P(A∪B) = 1−P(A)−P(B)+P(AB) = (1−P(A))(1−P(B)) = P(A̅)P(B̅)。∎
+对立、差运算都保独立性。</p>
+</blockquote>
+<p><strong>G18.</strong>★★ "两两独立"与"相互独立"的关系：</p>
+<blockquote>
+<p><strong>两两独立 ⇏ 相互独立</strong>（经典：掷两骰，A=第一枚偶，B=第二枚偶，C=同奇偶，两两独立但 P(ABC)=1/4≠1/8）。相互独立更强。</p>
+</blockquote>
+<p><strong>G19.</strong>★ P(B|A) + P(B̅|A) = ?</p>
+<blockquote>
+<p><strong>1</strong>（条件概率也满足概率公理，对同一条件 A）。</p>
+</blockquote>
+<p><strong>G20.</strong>★★ 袋中 5 白 3 黑，不放回取 2 只，至少一只黑的概率。</p>
+<blockquote>
+<p>1−P(全白) = 1−C(5,2)/C(8,2) = 1−10/28 = <strong>9/14</strong>。</p>
+</blockquote>
+<p><strong>G21.</strong>★★ 甲乙丙产量占 25%/35%/40%，次品率 5%/4%/2%。任取一件是次品的概率：</p>
+<blockquote>
+<p>0.25×0.05+0.35×0.04+0.40×0.02 = 0.0125+0.014+0.008 = <strong>0.0345</strong>（全概率）。</p>
+</blockquote>
+<p><strong>G22.</strong>★★ 上题中已知取到次品，它来自乙的概率：</p>
+<blockquote>
+<p>0.014/0.0345 = 28/69 ≈ <strong>0.406</strong>（贝叶斯）。</p>
+</blockquote>
+<p><strong>G23.</strong>★ 条件概率 P(·|B) 是否满足概率公理（非负、规范性、可加）？</p>
+<blockquote>
+<p><strong>满足</strong>——它是以 B 为样本空间的新的概率测度，因此一切概率公式都可用。</p>
+</blockquote>
+<p><strong>G24.</strong>★ 掷硬币直到首次出现正面，恰在第 k 次出现的概率：</p>
+<blockquote>
+<p><strong>(1/2)^k</strong>（前 k−1 次反面 + 第 k 次正面；几何分布）。</p>
+</blockquote>
+<p><strong>G25.</strong>★ 化简 (A∪B)(A∪B̅)。</p>
+<blockquote>
+<p>分配律：A∪(BB̅) = A∪∅ = <strong>A</strong>。</p>
+</blockquote>
+<h2>§2 一维随机变量（G26–G45）</h2>
+<p><strong>G26.</strong>★ 分布函数 F(x) 的定义与四条性质。</p>
+<blockquote>
+<p>F(x)=P(X≤x)：单调不减、右连续、F(−∞)=0、F(+∞)=1。</p>
+</blockquote>
+<p><strong>G27.</strong>★ 用 F 表示 P(a&lt;X≤b)。</p>
+<blockquote>
+<p><strong>F(b)−F(a)</strong>。</p>
+</blockquote>
+<p><strong>G28.</strong>★ 0-1分布（两点分布）：</p>
+<blockquote>
+<p>P(X=1)=p，P(X=0)=1−p。一切"成败"试验的基础。</p>
+</blockquote>
+<p><strong>G29.</strong>★ 二项分布 B(n,p)：写出分布律并求 n=3、p=1/2 时 P(X=2)。</p>
+<blockquote>
+<p>P(X=k)=C(n,k)pᵏ(1−p)^{n−k}；P(X=2)=C(3,2)(1/2)³ = <strong>3/8</strong>。</p>
+</blockquote>
+<p><strong>G30.</strong>★ 泊松分布 P(λ) 的分布律与参数含义。</p>
+<blockquote>
+<p>P(X=k)=λᵏe^{−λ}/k!（k=0,1,…）；<strong>λ=E(X)=D(X)</strong>（单位时间/面积的平均发生数）。</p>
+</blockquote>
+<p><strong>G31.</strong>★ X~P(2)，求 P(X=0)。</p>
+<blockquote>
+<p>2⁰e^{−2}/0! = <strong>e^{−2} ≈ 0.135</strong>。</p>
+</blockquote>
+<p><strong>G32.</strong>★ 几何分布的无记忆性：</p>
+<blockquote>
+<p>P(X&gt;m+n|X&gt;m) = <strong>P(X&gt;n)</strong>——"已经等了 m 次不等于更接近成功"。</p>
+</blockquote>
+<p><strong>G33.</strong>★ 超几何分布与二项分布的关系：</p>
+<blockquote>
+<p>超几何=<strong>不放回</strong>抽取；二项=放回（独立）。总体很大时超几何≈二项。</p>
+</blockquote>
+<p><strong>G34.</strong>★ 密度函数 f(x) 的两条性质。</p>
+<blockquote>
+<p>f≥0 且 <strong>∫_{−∞}^{+∞}f = 1</strong>。注意 f(x) 本身可以大于 1，它不是概率。</p>
+</blockquote>
+<p><strong>G35.</strong>★ F(x) 与 f(x) 的关系。</p>
+<blockquote>
+<p><strong>F(x)=∫_{−∞}^x f(t)dt；F′(x)=f(x)</strong>（在 f 连续点）。</p>
+</blockquote>
+<p><strong>G36.</strong>★ X~U(a,b)，写出密度并求 P(X&gt;c)（a&lt;c&lt;b）。</p>
+<blockquote>
+<p>f=1/(b−a)；P(X&gt;c) = (b−c)/(b−a)。均匀分布概率=长度比。</p>
+</blockquote>
+<p><strong>G37.</strong>★ 指数分布的密度、分布函数与无记忆性。</p>
+<blockquote>
+<p>f=λe^{−λx}（x≥0）；<strong>F=1−e^{−λx}</strong>；P(X&gt;s+t|X&gt;s)=P(X&gt;t)。</p>
+</blockquote>
+<p><strong>G38.</strong>★ X~E(1/2)（λ=1/2），求 P(X&gt;2)。</p>
+<blockquote>
+<p>e^{−λx} = e^{−1} ≈ <strong>0.368</strong>。</p>
+</blockquote>
+<p><strong>G39.</strong>★ 正态变量标准化的公式。</p>
+<blockquote>
+<p>X~N(μ,σ²) ⇒ <strong>Z=(X−μ)/σ ~ N(0,1)</strong>。</p>
+</blockquote>
+<p><strong>G40.</strong>★ X~N(0,1)，Φ(1)=0.8413，求 P(|X|&lt;1)。</p>
+<blockquote>
+<p>2Φ(1)−1 = <strong>0.6826</strong>（1σ 原则）。</p>
+</blockquote>
+<p><strong>G41.</strong>★ X~N(2,4)，求 P(X&lt;4)。</p>
+<blockquote>
+<p>Z=(4−2)/2=1 ⇒ <strong>Φ(1)=0.8413</strong>。σ²=4 ⇒ σ=2，别把方差当 σ。</p>
+</blockquote>
+<p><strong>G42.</strong>★ 正态分布关于 μ 对称 ⇒ P(X&gt;μ) = ?</p>
+<blockquote>
+<p><strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>G43.</strong>★ 3σ 原则的含义。</p>
+<blockquote>
+<p>P(|X−μ|&lt;3σ) ≈ <strong>0.9974</strong>（正态变量几乎都在 3σ 内）。</p>
+</blockquote>
+<p><strong>G44.</strong>★★ F(x)=1−e^{−x²}（x≥0），0（x&lt;0）。求密度。</p>
+<blockquote>
+<p><strong>f(x)=2xe^{−x²}（x≥0），0（x&lt;0）</strong>。分布→密度就求导（注意分段点）。</p>
+</blockquote>
+<p><strong>G45.</strong>★ 连续型变量取单点值的概率与"不可能事件"的关系。</p>
+<blockquote>
+<p>P(X=c)=0 <strong>但 {X=c} 不是不可能事件</strong>——零概率事件可发生，这是与离散型的本质区别。</p>
+</blockquote>
+<h2>§3 二维随机变量（G46–G60）</h2>
+<p><strong>G46.</strong>★ 二维分布函数 F(x,y) 的定义。</p>
+<blockquote>
+<p><strong>F(x,y)=P(X≤x, Y≤y)</strong>——左下角无穷矩形上的概率。</p>
+</blockquote>
+<p><strong>G47.</strong>★ 边缘分布怎么求？</p>
+<blockquote>
+<p>离散：联合分布<strong>按行/列求和</strong>；连续：<strong>对另一变量积分</strong> f_X(x)=∫f(x,y)dy。</p>
+</blockquote>
+<p><strong>G48.</strong>★ X、Y 独立的等价条件（连续型）。</p>
+<blockquote>
+<p><strong>f(x,y)=f_X(x)·f_Y(y)</strong> 几乎处处成立；或联合=边缘乘积（对一切 x,y）。</p>
+</blockquote>
+<p><strong>G49.</strong>★ (X,Y) 在单位圆盘上均匀分布，写出联合密度。</p>
+<blockquote>
+<p><strong>f=1/π（x²+y²≤1），0 其他</strong>。概率=面积比。</p>
+</blockquote>
+<p><strong>G50.</strong>★ 条件分布 P(X=xᵢ | Y=yⱼ) 的计算。</p>
+<blockquote>
+<p><strong>= P(X=xᵢ,Y=yⱼ)/P(Y=yⱼ)</strong>（联合除以边缘，行/列归一）。</p>
+</blockquote>
+<p><strong>G51.</strong>★★ 联合分布 P(1,1)=1/6，P(1,2)=1/3，P(2,1)=1/3，P(2,2)=1/6。X、Y 独立吗？</p>
+<blockquote>
+<p>边缘：P(X=1)=1/2，P(Y=1)=1/2。若独立应 P(1,1)=1/4≠1/6 ⇒ <strong>不独立</strong>（一个格子反例足矣）。</p>
+</blockquote>
+<p><strong>G52.</strong>★ 二维正态 (X,Y)~N(μ₁,μ₂,σ₁²,σ₂²,ρ)：ρ=0 的特殊含义。</p>
+<blockquote>
+<p>对<strong>二维正态</strong>：ρ=0 ⟺ <strong>X 与 Y 独立</strong>（一般分布只有"不相关"）。</p>
+</blockquote>
+<p><strong>G53.</strong>★ 二维正态的边缘分布是什么？反之呢？</p>
+<blockquote>
+<p>边缘都是一维正态；<strong>边缘都是正态推不出联合是二维正态</strong>（可构造反例）。</p>
+</blockquote>
+<p><strong>G54.</strong>★ 独立 X、Y 相加的密度公式（卷积）与正态特例。</p>
+<blockquote>
+<p>f_Z(z)=∫f_X(x)f_Y(z−x)dx；<strong>X~N(μ₁,σ₁²), Y~N(μ₂,σ₂²) ⇒ X+Y~N(μ₁+μ₂, σ₁²+σ₂²)</strong>。</p>
+</blockquote>
+<p><strong>G55.</strong>★★ 独立 X、Y：M=max(X,Y) 的分布函数。</p>
+<blockquote>
+<p><strong>F_M(z) = F_X(z)·F_Y(z)</strong>（两者都不超过 z）。</p>
+</blockquote>
+<p><strong>G56.</strong>★★ 独立 X、Y：N=min(X,Y) 的分布函数。</p>
+<blockquote>
+<p>F_N(z) = 1−P(X&gt;z,Y&gt;z) = <strong>1−[1−F_X(z)][1−F_Y(z)]</strong>。</p>
+</blockquote>
+<p><strong>G57.</strong>★★ X,Y 独立且都~U(0,1)，求 P(X+Y≤1)。</p>
+<blockquote>
+<p>单位正方形内三角形面积 1/2 ⇒ <strong>1/2</strong>（几何概型秒算）。</p>
+</blockquote>
+<p><strong>G58.</strong>★★ 联合分布表中求 P(X=1|Y=2)：</p>
+<blockquote>
+<p>= P(1,2)/P(Y=2)——<strong>列归一</strong>（固定 Y=2 那一列做分母）。</p>
+</blockquote>
+<p><strong>G59.</strong>★ 一个离散一个连续的混合型怎么处理？</p>
+<blockquote>
+<p>全概率公式搭桥：P(a&lt;X&lt;b) = Σᵢ P(Y=i)·P(a&lt;X&lt;b | Y=i)。</p>
+</blockquote>
+<p><strong>G60.</strong>★ 证明不独立最快的办法：</p>
+<blockquote>
+<p>找<strong>一个</strong>格子使联合 ≠ 边缘乘积即可（独立要求处处成立）。</p>
+</blockquote>
+<h2>§4 数字特征（G61–G80）</h2>
+<p><strong>G61.</strong>★ 期望的定义（离散与连续）。</p>
+<blockquote>
+<p>离散：<strong>E(X)=Σxᵢpᵢ</strong>；连续：<strong>E(X)=∫xf(x)dx</strong>（要求绝对收敛）。</p>
+</blockquote>
+<p><strong>G62.</strong>★ E(aX+bY) = ?（需要独立吗？）</p>
+<blockquote>
+<p>= aE(X)+bE(Y)，<strong>线性性不需要独立</strong>——期望最重要的性质。</p>
+</blockquote>
+<p><strong>G63.</strong>★ E(XY)=E(X)E(Y) 成立的条件：</p>
+<blockquote>
+<p><strong>X 与 Y 独立</strong>（或至少不相关，见 G69）；一般情况不成立。</p>
+</blockquote>
+<p><strong>G64.</strong>★ 默写五大分布的期望。</p>
+<blockquote>
+<p>B(n,p)=np；P(λ)=λ；U(a,b)=(a+b)/2；E(λ)=1/λ；N(μ,σ²)=μ。</p>
+</blockquote>
+<p><strong>G65.</strong>★ 方差的两条基本公式。</p>
+<blockquote>
+<p><strong>D(X)=E(X²)−[E(X)]²；D(aX+b)=a²D(X)</strong>（平移不改变离散程度）。</p>
+</blockquote>
+<p><strong>G66.</strong>★ 默写五大分布的方差。</p>
+<blockquote>
+<p>B(n,p)=np(1−p)；P(λ)=λ；U(a,b)=(b−a)²/12；E(λ)=1/λ²；N(μ,σ²)=σ²。</p>
+</blockquote>
+<p><strong>G67.</strong>★ X~B(4,1/2)，求 E(X) 与 D(X)。</p>
+<blockquote>
+<p>E=np=<strong>2</strong>；D=np(1−p)=<strong>1</strong>。</p>
+</blockquote>
+<p><strong>G68.</strong>★ 协方差的定义与 Cov(X,X)。</p>
+<blockquote>
+<p>Cov(X,Y)=E[(X−EX)(Y−EY)] = <strong>E(XY)−E(X)E(Y)</strong>；Cov(X,X)=D(X)。</p>
+</blockquote>
+<p><strong>G69.</strong>★ 不相关与独立的关系：</p>
+<blockquote>
+<p>独立 ⇒ 不相关；<strong>不相关 ⇏ 独立</strong>（二维正态是唯一反例豁免地：不相关⟺独立）。</p>
+</blockquote>
+<p><strong>G70.</strong>★ 相关系数的定义与取值范围。</p>
+<blockquote>
+<p><strong>ρ=Cov(X,Y)/(√D(X)·√D(Y))</strong>，|ρ|≤1；|ρ|=1 ⟺ 存在线性关系。</p>
+</blockquote>
+<p><strong>G71.</strong>★★ 举例"不相关但不独立"：</p>
+<blockquote>
+<p>X~U(−1,1)，Y=X²：E(XY)=E(X³)=0=E(X)E(Y) ⇒ 不相关；但 Y 由 X 完全决定 ⇒ <strong>不独立</strong>。</p>
+</blockquote>
+<p><strong>G72.</strong>★ 默写切比雪夫不等式。</p>
+<blockquote>
+<p><strong>P(|X−μ|≥ε) ≤ D(X)/ε²</strong>（方差越小越集中）。</p>
+</blockquote>
+<p><strong>G73.</strong>★ D(X)=4，用切比雪夫估计 P(|X−E(X)|≥2)。</p>
+<blockquote>
+<p>≤ 4/4 = <strong>1</strong>（估计很粗但成立；说明切比雪夫是"兜底"界）。</p>
+</blockquote>
+<p><strong>G74.</strong>★ k 阶原点矩与中心矩的定义。</p>
+<blockquote>
+<p>原点矩 <strong>E(Xᵏ)</strong>；中心矩 <strong>E[(X−EX)ᵏ]</strong>。一阶原点=期望，二阶中心=方差。</p>
+</blockquote>
+<p><strong>G75.</strong>★ E(X)=2，D(X)=1，求 E(X²)。</p>
+<blockquote>
+<p>E(X²)=D(X)+E²(X)=<strong>5</strong>。反用方差公式，高频。</p>
+</blockquote>
+<p><strong>G76.</strong>★ D(X+Y) = ?</p>
+<blockquote>
+<p>= D(X)+D(Y)+2Cov(X,Y)；<strong>独立时 Cov=0 ⇒ D(X)+D(Y)</strong>。</p>
+</blockquote>
+<p><strong>G77.</strong>★ 独立时 D(X−Y) = ?</p>
+<blockquote>
+<p><strong>D(X)+D(Y)</strong>——"减号不减方差"，误差只会叠加。</p>
+</blockquote>
+<p><strong>G78.</strong>★ 几何分布的期望：</p>
+<blockquote>
+<p><strong>E(X)=1/p</strong>（平均等 1/p 次才成功）。</p>
+</blockquote>
+<p><strong>G79.</strong>★ 上 α 分位数的定义。</p>
+<blockquote>
+<p>P(X&gt;x_α)=<strong>α</strong> 的点 x_α；标准正态 z₀.₀₂₅=1.96 要记住。</p>
+</blockquote>
+<p><strong>G80.</strong>★ X~P(λ)，求 E(X²)。</p>
+<blockquote>
+<p>E(X²)=D(X)+E²(X)=<strong>λ+λ²</strong>。</p>
+</blockquote>
+<h2>§5 大数定律与中心极限定理（G81–G88）</h2>
+<p><strong>G81.</strong>★ 依概率收敛的定义。</p>
+<blockquote>
+<p>∀ε&gt;0：lim P(|Xₙ−a|&lt;ε) = 1，记 Xₙ→a (P)。"大概率接近"，不是逐点收敛。</p>
+</blockquote>
+<p><strong>G82.</strong>★ 大数定律说明的现象：</p>
+<blockquote>
+<p>大量重复试验中<strong>频率稳定于概率</strong>、样本均值稳定于期望——统计推断的合理性来源。</p>
+</blockquote>
+<p><strong>G83.</strong>★ 辛钦大数定律的条件与结论。</p>
+<blockquote>
+<p><strong>独立同分布 + 期望存在</strong> ⇒ X̄→E(X)（依概率）。不要求方差存在（弱于切比雪夫版本）。</p>
+</blockquote>
+<p><strong>G84.</strong>★ 伯努利大数定律的结论。</p>
+<blockquote>
+<p>n 重伯努利中频率 n_A/n → p（依概率）。G83 的特例。</p>
+</blockquote>
+<p><strong>G85.</strong>★ 列维—林德伯格中心极限定理的条件与结论。</p>
+<blockquote>
+<p>独立同分布 + 期望 μ 方差 σ² 存在 ⇒ <strong>(ΣXᵢ−nμ)/(√n σ) → N(0,1)</strong>（近似）。</p>
+</blockquote>
+<p><strong>G86.</strong>★★ 100 次独立试验 p=1/2，用 CLT 估计 P(成功次数&gt;55)。</p>
+<blockquote>
+<p>ΣX ~ 近似 N(50, 25)：Z=(55−50)/5=1 ⇒ 1−Φ(1) = <strong>0.1587</strong>。</p>
+</blockquote>
+<p><strong>G87.</strong>★ 棣莫弗—拉普拉斯定理是什么的特例？</p>
+<blockquote>
+<p><strong>二项分布的正态近似</strong>（n 大时 B(n,p)≈N(np,npq)）。</p>
+</blockquote>
+<p><strong>G88.</strong>★★ 10000 次试验 p=0.2，估计样本比例落在 [0.19,0.21] 的概率。</p>
+<blockquote>
+<p>σ=√(0.2×0.8/10000)=0.004；Z=(0.01)/0.004=2.5 ⇒ 2Φ(2.5)−1 ≈ <strong>0.9876</strong>。</p>
+</blockquote>
+<h2>§6 数理统计基本概念（G89–G100）</h2>
+<p><strong>G89.</strong>★ 什么是简单随机样本？</p>
+<blockquote>
+<p>与总体同分布且<strong>相互独立</strong>的 n 个个体。</p>
+</blockquote>
+<p><strong>G90.</strong>★ 统计量的定义。</p>
+<blockquote>
+<p>样本的函数且<strong>不含未知参数</strong>（如 X̄、S²；含 μ 的 X̄−μ 不是统计量）。</p>
+</blockquote>
+<p><strong>G91.</strong>★ 样本方差的定义（分母！）与期望。</p>
+<blockquote>
+<p><strong>S² = Σ(Xᵢ−X̄)²/(n−1)</strong>；<strong>E(S²)=σ²</strong>——分母 n−1 保证无偏。</p>
+</blockquote>
+<p><strong>G92.</strong>★ 三大抽样分布：</p>
+<blockquote>
+<p><strong>χ²（标准正态平方和）、t（正态除以卡方开根）、F（两个卡方除自由度之比）</strong>。</p>
+</blockquote>
+<p><strong>G93.</strong>★ χ²(n) 的期望与方差。</p>
+<blockquote>
+<p><strong>E=n，D=2n</strong>（可加性：χ²(m)+χ²(n)=χ²(m+n)）。</p>
+</blockquote>
+<p><strong>G94.</strong>★ t 分布的定义与形状。</p>
+<blockquote>
+<p>t = X/(√(Y/n))（X~N(0,1)，Y~χ²(n)，独立）；<strong>关于 0 对称</strong>，n→∞ 趋于 N(0,1)。</p>
+</blockquote>
+<p><strong>G95.</strong>★ F 分布的定义与倒数性质。</p>
+<blockquote>
+<p>F=(U/n₁)/(V/n₂)（U,V 独立卡方）；<strong>1/F(n₁,n₂) ~ F(n₂,n₁)</strong>——查表反向要用。</p>
+</blockquote>
+<p><strong>G96.</strong>★ 正态总体下 X̄ 的分布。</p>
+<blockquote>
+<p><strong>X̄~N(μ, σ²/n)</strong>，√n(X̄−μ)/σ~N(0,1)——区间估计与检验的基石。</p>
+</blockquote>
+<p><strong>G97.</strong>★ 正态总体下 (n−1)S²/σ² 的分布：</p>
+<blockquote>
+<p><strong>χ²(n−1)</strong>（自由度 n−1：损失一个自由度给 X̄）。</p>
+</blockquote>
+<p><strong>G98.</strong>★ 正态总体下 X̄ 与 S² 的关系：</p>
+<blockquote>
+<p><strong>相互独立</strong>——这是 t 统计量构造的前提（一般总体不成立）。</p>
+</blockquote>
+<p><strong>G99.</strong>★ σ 未知时对 μ 的枢轴量及分布：</p>
+<blockquote>
+<p><strong>t = √n(X̄−μ)/S ~ t(n−1)</strong>。</p>
+</blockquote>
+<p><strong>G100.</strong>★★ n=16，σ=2，求 P(|X̄−μ|&lt;1)。</p>
+<blockquote>
+<p>X̄~N(μ, 4/16)：Z=1/(1/2)=2 ⇒ 2Φ(2)−1 ≈ <strong>0.9544</strong>。</p>
+</blockquote>
+<h2>§7 参数估计与假设检验（G101–G120）</h2>
+<p><strong>G101.</strong>★ 矩估计法的思想。</p>
+<blockquote>
+<p><strong>用样本矩替换总体矩</strong>（令 E(X)=X̄ 等方程解参数）。一阶矩够用就不上二阶。</p>
+</blockquote>
+<p><strong>G102.</strong>★ X~U(0,θ)，求 θ 的矩估计。</p>
+<blockquote>
+<p>E(X)=θ/2=X̄ ⇒ <strong>θ̂=2X̄</strong>。</p>
+</blockquote>
+<p><strong>G103.</strong>★ 最大似然估计的思想。</p>
+<blockquote>
+<p>取使<strong>似然函数 L(θ)=∏f(xᵢ;θ)</strong> 达到最大的 θ̂——"已经发生的事最可能"。</p>
+</blockquote>
+<p><strong>G104.</strong>★ 0-1分布 p 的最大似然估计。</p>
+<blockquote>
+<p>L=p^Σxᵢ(1−p)^{n−Σxᵢ}，求导得 <strong>p̂=X̄</strong>（频率估计概率）。</p>
+</blockquote>
+<p><strong>G105.</strong>★★ X~U(0,θ)，求 θ 的最大似然估计。</p>
+<blockquote>
+<p>L=1/θⁿ 要求所有 xᵢ≤θ ⇒ θ≥max(xᵢ)；L 关于 θ 递减 ⇒ <strong>θ̂=max(Xᵢ)</strong>。
+与矩估计 2X̄ <strong>不同</strong>——两种方法可能给出不同估计，经典对比。</p>
+</blockquote>
+<p><strong>G106.</strong>★ 无偏性的定义；X̄ 是 μ 的无偏估计吗？</p>
+<blockquote>
+<p>E(θ̂)=θ；<strong>是</strong>，E(X̄)=μ 恒成立。</p>
+</blockquote>
+<p><strong>G107.</strong>★★ 为什么样本方差分母是 n−1？</p>
+<blockquote>
+<p>分母 n 时 E=σ²(n−1)/n 有偏；<strong>除以 n−1 才有 E(S²)=σ²</strong>（无偏）。</p>
+</blockquote>
+<p><strong>G108.</strong>★ 有效性的比较标准。</p>
+<blockquote>
+<p>同为无偏估计时，<strong>方差小者更有效</strong>。</p>
+</blockquote>
+<p><strong>G109.</strong>★ 一致性（相合性）的含义。</p>
+<blockquote>
+<p>n→∞ 时估计量<strong>依概率收敛</strong>于真参数——大样本下的品质。</p>
+</blockquote>
+<p><strong>G110.</strong>★ 置信水平 1−α 的含义（频率学派口径）。</p>
+<blockquote>
+<p>反复抽样构造的区间中<strong>约 (1−α) 比例盖住真值</strong>；对一个已算出的区间，真值要么在内要么不在。</p>
+</blockquote>
+<p><strong>G111.</strong>★ σ 已知时 μ 的置信区间。</p>
+<blockquote>
+<p><strong>X̄ ± z_{α/2}·σ/√n</strong>（z 分位数）。</p>
+</blockquote>
+<p><strong>G112.</strong>★ σ 未知时 μ 的置信区间。</p>
+<blockquote>
+<p><strong>X̄ ± t_{α/2}(n−1)·S/√n</strong>（t 分位数替换 z）。</p>
+</blockquote>
+<p><strong>G113.</strong>★★ n=16，X̄=10，S=2，t_{0.025}(15)=2.13。求 μ 的 95% 置信区间。</p>
+<blockquote>
+<p>10 ± 2.13×(2/4) = 10 ± 1.065 ⇒ <strong>(8.935, 11.065)</strong>。</p>
+</blockquote>
+<p><strong>G114.</strong>★ 假设检验的两类错误。</p>
+<blockquote>
+<p><strong>第一类：弃真</strong>（H₀ 真却拒绝，概率 α）；<strong>第二类：取伪</strong>（H₀ 假却接受，概率 β）。</p>
+</blockquote>
+<p><strong>G115.</strong>★ 显著性水平 α 是什么的上界：</p>
+<blockquote>
+<p><strong>犯第一类错误的概率</strong>。固定 α 再设法压 β（增大 n）。</p>
+</blockquote>
+<p><strong>G116.</strong>★ 假设检验的步骤（默写五步）。</p>
+<blockquote>
+<p>①提 H₀/H₁；②选统计量（σ知→Z，σ不知→t）；③定 α 与拒绝域；④代入样本算值；⑤比较下结论。</p>
+</blockquote>
+<p><strong>G117.</strong>★ 什么时候用单侧检验？</p>
+<blockquote>
+<p>备择假设是<strong>单向</strong>的（如 H₁:μ&gt;μ₀）——只关心"变差"或"变好"一侧。</p>
+</blockquote>
+<p><strong>G118.</strong>★ p 值的含义。</p>
+<blockquote>
+<p>在 H₀ 成立时，出现<strong>当前或更极端</strong>样本结果的概率；p&lt;α 就拒绝 H₀。</p>
+</blockquote>
+<p><strong>G119.</strong>★★ σ=2，n=25，X̄=10.6。检验 H₀:μ=10（α=0.05，双侧）。</p>
+<blockquote>
+<p>Z = (10.6−10)/(2/5) = 1.5 &lt; 1.96 ⇒ <strong>不拒绝 H₀</strong>（证据不足，不是证明 H₀ 对）。</p>
+</blockquote>
+<p><strong>G120.</strong>★ 检验功效的定义：</p>
+<blockquote>
+<p><strong>1−β</strong>：H₀ 确实为假时正确拒绝它的概率；与 β 此消彼长。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：G1–G120。使用节奏：①§1 两天（全概率/贝叶斯三道实算）→②§2 一天半（八大分布一张表默写）→③§3 一天（独立判定一个反例思路）→④§4 一天半（方差公式 E(X²)=D+E² 反复用）→⑤§5–§6 一天（三大分布定义+三句话结论）→⑥§7 一天（MLE 两例对比、两类错误一句话各背一条）。错题标回《数学考题集》第9章。</p></div></body></html>

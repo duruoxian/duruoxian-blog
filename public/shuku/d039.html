@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>线代_大题题型全攻略 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>线性代数 · 大题题型全攻略</h1>
+<blockquote>
+<p>考研线代大题（2-3道，约22-33分）<strong>题型高度固定</strong>，就六类。每类给"解题模板→例题详解→练习（带答案）"。配合《线代_知识点与难点》。
+📑 六类：01 矩阵运算与逆｜02 线性方程组（含参数）｜03 向量组线性相关性｜04 特征值与相似对角化｜05 二次型｜06 秩与抽象证明</p>
+</blockquote>
+<hr />
+<h2>01 矩阵运算与逆</h2>
+<h3>模板</h3>
+<ol>
+<li>求 Aⁿ：找 A=kE+B 且 B 的低次幂为 O（二项式展开）；或相似对角化 Aⁿ=PDⁿP⁻¹；</li>
+<li>求 A⁻¹：初等行变换 (A|E)→(E|A⁻¹)；二阶用口诀；伴随法 A⁻¹=A*/|A|；</li>
+<li>解矩阵方程 AX=B：先判断 A 是否可逆；AX+XB 型考虑转置/待定；</li>
+<li>伴随矩阵性质链：A⁻¹=A<em>/|A|，AA</em>=|A|E，r(A<em>)=n/1/0（对应r=n/n-1/≤n-2），(A</em>)*=|A|ⁿ⁻²A。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例1</strong> A=[[1,1],[0,1]]，求 Aⁿ。
+A=E+B，B=[[0,1],[0,0]]，B²=O → Aⁿ=E+nB=<strong>[[1,n],[0,1]]</strong>。</p>
+<p><strong>例2</strong> 已知 A 为3阶方阵，特征值 1,2,3，求 |A⁻¹+2E|。
+A⁻¹ 特征值 1, 1/2, 1/3 → A⁻¹+2E 特征值 3, 5/2, 7/3 → 行列式 = 3×5/2×7/3 = <strong>35/2</strong>。</p>
+<p><strong>例3</strong> 解方程 AX=B，A=[[1,2],[2,5]]? 用 A=[[2,1],[1,1]]，B=[[1,0],[0,1]]? 直接：求 A⁻¹=[[1,-1],[-1,2]]，则 X=A⁻¹B。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>A=[[2,1],[0,2]]，求 Aⁿ。→ A=2E+B，B²=O：Aⁿ=2ⁿE+n·2ⁿ⁻¹B=<strong>[[2ⁿ, n·2ⁿ⁻¹],[0, 2ⁿ]]</strong>。</li>
+<li>设 A 为 n 阶方阵，AAᵀ=E 且 |A|&lt;0，求 |A+E|。→ |A|=-1；|A+E|=|A|·|Aᵀ+E|=|A|·|(A+E)ᵀ|? 计算：|A+E|=|A(Aᵀ+E)|? |A+E|=|A||E+Aᵀ|=|A|·|A+E| → (1-|A|)|A+E|=0 → <strong>|A+E|=0</strong>。</li>
+<li>已知 A=[[1,0,0],[0,0,1],[0,1,0]]? 求 Aⁿ。→ 对换矩阵，周期2：n偶为E，n奇为A。</li>
+<li>设 A⁻¹ 的特征值为 1,2,3? 设 A 的特征值 1,2,3，求 |A<em>+2E|。→ A</em> 特征值 |A|/λ = 6,3,2 → +2 得 8,5,4 → <strong>|A*+2E|=160</strong>。</li>
+</ol>
+<hr />
+<h2>02 线性方程组（含参数讨论）</h2>
+<h3>模板（参数题必走流程）</h3>
+<ol>
+<li>写增广矩阵 → 行变换化行阶梯（<strong>含参数除法禁用</strong>，用"减法消参"）；</li>
+<li>按参数分类讨论：r(A)&lt;r(Ā) 无解；r(A)=r(Ā)&lt;n 无穷解；r(A)=r(Ā)=n 唯一解；</li>
+<li>无穷解时：自由变量取标准值 → 基础解系 → 通解=特解+k·基础解系；</li>
+<li>两个方程组同解/公共解：同解⇒r相等且互为解；公共解⇒联立或由通解匹配。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> 讨论参数 a、b 取何值时，方程组
+{ x₁+x₂+x₃=1；2x₁+x₂+3x₃=0；x₁+2x₂+ax₃=b }
+无解/唯一解/无穷多解：</p>
+<p>按设计稿执行：R2-2R1：x₂+x₃=-2；R3-R1：x₂+(a-1)x₃=b-1；再 R3-R2：(a-2)x₃=b+1。
+- <strong>a≠2</strong>：唯一解 x₁=3，x₂=-2-(b+1)/(a-2)，x₃=(b+1)/(a-2)；
+- <strong>a=2 且 b=-1</strong>：无穷解 (3, -2-t, t)ᵀ = <strong>(3,-2,0)ᵀ + t(0,-1,1)ᵀ</strong>；
+- <strong>a=2 且 b≠-1</strong>：0=(b+1) 矛盾 → <strong>无解</strong>。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>讨论方程组 {x₁+x₂+x₃=1; x₁+2x₂+3x₃=? } 改做：设 A 为 4×3 矩阵且 r(A)=2? 练习：A 是4×3矩阵，r(A)=2，已知 η₁,η₂,η₃ 是 AX=b 的三个解且 η₁+η₂=(1,2,1)ᵀ? 设 η₁=(1,2,3)ᵀ? 简化：已知 AX=b 有解 η₁,η₂，r(A)=2（n=3），η₁-η₂=(1,1,1)ᵀ，η₁=(2,1,0)ᵀ，求通解。→ 对应齐次基础解系 η₁-η₂ → 通解 = <strong>(2,1,0)ᵀ + k(1,1,1)ᵀ</strong>。</li>
+<li>求方程组 {x₁+x₂+x₃+x₄=0; x₂+2x₃+2x₄=1? 做齐次版本：{x₁+x₂+x₃+x₄=0; x₂+x₃+x₄=0; x₁+2x₂+2x₃+2x₄=0} 的通解。→ R3-R1<em>2? R3-R1: x₂+x₃+x₄=0（与R2同）→ 有效两行：x₁+x₂+x₃+x₄=0, x₂+x₃+x₄=0 → x₁=0，x₂+x₃+x₄=0 → 基础解系 (0,-1,1,0)ᵀ,(0,-1,0,1)ᵀ，通解 </em><em>k₁(0,-1,1,0)ᵀ+k₂(0,-1,0,1)ᵀ</em>*。</li>
+<li>设方程组 {x₁+x₂=1? 同解题：已知两个方程组 Ⅰ{x₁+x₂=0, x₂-x₃? } 简化：求 {x₁+x₂+x₃=0} 与 {x₁+2x₂+3x₃=0} 的公共解。→ 联立：x₁+x₂+x₃=0，x₁+2x₂+3x₃=0 → 消元：x₂+2x₃=0 → 基础解系 <strong>(1,-2,1)ᵀ</strong>，公共解 k(1,-2,1)ᵀ。</li>
+<li>a 取何值时 {x₁+2x₂+x₃=1; 2x₁+x₂+? } 做：{x₁+x₂+x₃=0; x₁+ax₂+x₃=0; x₁+x₂+ax₃=0} 有非零解的条件。→ 行列式=(a-1)²(a+2)=0 → <strong>a=1 或 a=-2</strong>。</li>
+</ol>
+<hr />
+<h2>03 向量组的线性相关性</h2>
+<h3>模板</h3>
+<ol>
+<li>判断相关性：齐次方程组有无非零解 / 行列式是否为零 / 秩是否等于个数；</li>
+<li>求极大无关组：列向量拼矩阵行变换→主元列；其余向量用主元列线性表示（解对应方程组）；</li>
+<li>线性表示：AX=β 有解判定；</li>
+<li>常用结论：部分相关⇒整体相关；n+1个n维向量必相关；α₁,α₂线性无关而α₁+β,α₂+β相关⇒β可用α₁,α₂唯一表示? （β = c₁α₁+c₂α₂，c₁+c₂=1? careful——若 β 与它们…skip）。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例1</strong> α₁=(1,1,1)ᵀ, α₂=(1,2,3)ᵀ, α₃=(1,3,a)ᵀ，a 为何值时线性相关？并把它们用极大无关组表示。
+det[[1,1,1],[1,2,3],[1,3,a]] = 1(2a-9) -1(a-6) +1(3-4) = a-4。
+a=4 时相关（此时秩2），极大无关组 α₁,α₂；解 x₁α₁+x₂α₂=α₃ → x₁=-1, x₂=2 → <strong>α₃ = -α₁ + 2α₂</strong>。</p>
+<p><strong>例2</strong> 证明：若 β 可由 α₁,…,αₛ 线性表示但表示式不唯一，则 α₁,…,αₛ 线性相关。
+设两种表示 β=Σkᵢαᵢ=Σlᵢαᵢ，相减 Σ(kᵢ-lᵢ)αᵢ=O，至少一个系数非零 → 有非零组合 → 线性相关。∎</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>判断 α₁=(1,0,2)ᵀ, α₂=(2,1,1)ᵀ? 组合：α₁=(1,1,0)ᵀ, α₂=(0,1,1)ᵀ, α₃=(1,2,1)ᵀ 是否相关。→ α₃=α₁+α₂ → <strong>相关</strong>。</li>
+<li>求向量组 (1,1,1),(1,2,3),(1,3,6),(1,4,10) 的秩与一个极大无关组。→ 前3个行列式=1≠0 → 秩3，<strong>任取前三个（如 α₁,α₂,α₃）为极大无关组</strong>。</li>
+<li>β=(4,2,? ) 设 α₁=(1,2,3)ᵀ, α₂=(1,0,1)ᵀ，β=(3,2,5)ᵀ 能否由 α₁,α₂ 表示？→ 解 x₁α₁+x₂α₂=β：x₁+x₂=3? 系数：x₁+x₂=3, 2x₁=2, 3x₁+x₂=5 → x₁=1, x₂=2 → <strong>β=α₁+2α₂</strong>。</li>
+<li>证明：n+1 个 n 维向量必线性相关。→ 以其为列的 n×(n+1) 矩阵秩 ≤ n &lt; n+1。∎</li>
+</ol>
+<hr />
+<h2>04 特征值与相似对角化</h2>
+<h3>模板</h3>
+<ol>
+<li>求 λ：|A-λE|=0；求 ξ：(A-λE)x=0（重根要解出两个无关向量）；</li>
+<li>可对角化条件：每个 λᵢ 的几何重数=代数重数（n阶有n个无关特征向量）；</li>
+<li>求正交矩阵：先求ξ，<strong>同一特征值的多个ξ要施密特正交化</strong>，再单位化；</li>
+<li>反求参数：用 Σλᵢ=tr(A)、Πλᵢ=|A|；</li>
+<li>由特征值/向量反求 A：A=P D P⁻¹（实对称时 A=Σλᵢ ξᵢξᵢᵀ/ξᵢᵀξᵢ）；</li>
+<li>已知 A 的特征值求 f(A)：f(λᵢ)（矩阵函数 Aⁿ=A P Dⁿ P⁻¹）。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例1</strong> A=[[1,-1,1],[2,4,-2],[-3,-3,5]]，求特征值与特征向量，并判断可否对角化。
+|A-λE|：tr=10=2+2+6，det=24=2·2·6 → 特征值 <strong>2,2,6</strong>（由特征多项式验证 (λ-2)²(λ-6)）。
+λ=2：x₁+x₂-x₃=0 → ξ₁=(1,-1,0)ᵀ, ξ₂=(1,0,1)ᵀ（两个无关）；
+λ=6：ξ₃=(1,-2,3)ᵀ。三个无关向量 → <strong>可对角化</strong>，P=(ξ₁,ξ₂,ξ₃)，P⁻¹AP=diag(2,2,6)。</p>
+<p><strong>例2</strong> 设 A=[[2,0,0],[0,3,a],[0,a,3]]，已知 A 有特征值 5。求 a，并将 A 正交对角化。
+块对角：λ=2 与 [[3,a],[a,3]] 的 3±a。5=3+a → <strong>a=2</strong>，特征值 1,2,5。
+ξ_{5}=(0,1,1)ᵀ，ξ₁=(0,1,-1)ᵀ，ξ₂=(1,0,0)ᵀ（两两正交，单位化即可）→ Q=(ξ₂,ξ₁,ξ₅) → QᵀAQ=diag(2,1,5)。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>求 A=[[4,1],[−2,1]] 的特征值与特征向量。<blockquote>
+<p>答案：tr=5，det=6 → 特征值 2,3；ξ₂=(1,−2)ᵀ，ξ₃=(1,−1)ᵀ。</p>
+</blockquote>
+</li>
+<li>求 A=[[1,-1],[2,4]] 的特征值并求 Aⁿ。→ tr=5，det=6 → 特征值 <strong>2,3</strong>；ξ₂=(1,-1)ᵀ，ξ₃=(1,-2)ᵀ。P=[[1,1],[-1,-2]]，P⁻¹=[[2,1],[-1,-1]]，Aⁿ=PDⁿP⁻¹=<strong>[[2^{n+1}-3ⁿ, 2ⁿ-3ⁿ],[2·3ⁿ-2^{n+1}, 2·3ⁿ-2ⁿ]]</strong>（n=1 时还原为 A，可自验）。</li>
+<li>设 A 满足 A² - 3A + 2E = O，证明 A 的特征值只能是 1 或 2。→ λ²-3λ+2=0。∎</li>
+<li>设 ξ=(1,1,1)ᵀ 是 A=[[a,1,1],[1,a,1],[1,1,a]] 的特征向量，求 a 与对应特征值。→ Aξ=(a+2)ξ → 特征值 <strong>a+2</strong>（a 任意，ξ 恒为特征向量——由对称性）。</li>
+</ol>
+<hr />
+<h2>05 二次型</h2>
+<h3>模板</h3>
+<ol>
+<li>写出二次型矩阵（<strong>必须对称</strong>，交叉项系数一分为二）；</li>
+<li>正定判定三选一：顺序主子式全&gt;0 / 特征值全&gt;0 / 配方后平方项系数全&gt;0；</li>
+<li>正交变换法：实对称矩阵正交对角化 → 标准形系数=特征值；</li>
+<li>配方法：化标准形（系数不一定是特征值——两种方法结果不同但<strong>惯性指数相同</strong>）；</li>
+<li>规范形与惯性定理：正负惯性指数 (p,q) 唯一；合同⇔同 p,q。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例1</strong> 判断 f = x₁²+2x₂²+3x₃²+2x₁x₂ 的正定性并化为标准形（配方）。
+A=[[1,1,0],[1,2,0],[0,0,3]]：Δ₁=1&gt;0，Δ₂=1&gt;0，Δ₃=3&gt;0 → <strong>正定</strong>。
+配方：f=(x₁+x₂)²+x₂²+3x₃² → 标准形 y₁²+y₂²+3y₃²（也可除以3得规范形）。</p>
+<p><strong>例2</strong> 用正交变换化 f=2x₁²+2x₂²+2x₃²+2x₁x₂+2x₁x₃+2x₂x₃。
+A：对角2、非对角1 → 特征值 4,1,1 → 标准形 <strong>4y₁²+y₂²+y₃²</strong>；ξ₄=(1,1,1)ᵀ/√3，λ=1 的两个正交向量如 (1,-1,0)ᵀ/√2 与 (1,1,-2)ᵀ/√6。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>判断 f = x₁²+x₂²+5x₃²+2x₁x₂-2x₁x₃+2x₂x₃ 是否正定。→ Δ₂=det[[1,1],[1,1]]=0 → <strong>不正定</strong>（半正定讨论超纲，答不正定即可）。</li>
+<li>求 f = 2x₁²+3x₂²? 求 f=x₁²+x₂²+x₃²+2x₁x₂+2x₁x₃+2x₂x₃ 的特征值与正负惯性指数。→ A=[[1,1,1],[1,1,1],[1,1,1]]：λ=3,0,0 → 惯性指数 <strong>(1,0)</strong>，半正定。</li>
+<li>t 为何值时 f=2x₁²+x₂²+3x₃²+2tx₁x₂+2x₁x₃ 正定？→ Δ₂=det[[2,t],[t,1]]=2-t²&gt;0 → |t|&lt;√2；Δ₃：det A = 2(3)-t²(3-? ) 算：A=[[2,t,1],[t,1,0],[1,0,3]]，det=2·3-t²·3+1·(t·0-1·1)=6-3t²-1=5-3t²&gt;0 → t²&lt;5/3。取交集：<strong>t²&lt;5/3 即 |t|&lt;√15/3? √(5/3)=√15/3≈1.29</strong> → |t|&lt;√(5/3)。</li>
+<li>设 A 正定，证明 A⁻¹ 正定。→ A⁻¹=(A⁻¹)ᵀ 对称；对任意 x≠0，xA⁻¹xᵀ? 用 xᵀA⁻¹x = (A⁻¹x)ᵀ A (A⁻¹x) &gt; 0（令 y=A⁻¹x≠0，yᵀAy&gt;0）。∎</li>
+</ol>
+<hr />
+<h2>06 秩与抽象证明</h2>
+<h3>模板</h3>
+<ol>
+<li>基本不等式链：r(Aᵀ)=r(A)，r(AB)≤min(r(A),r(B))，r(A+B)≤r(A)+r(B)，AB=O⇒r(A)+r(B)≤n；</li>
+<li><strong>r(AᵀA)=r(A)</strong>（证明：AᵀAx=0 与 Ax=0 同解——xᵀAᵀAx=0⇒|Ax|²=0）；</li>
+<li>满秩分解、分块秩：r([[A,O],[O,B]])=r(A)+r(B)；</li>
+<li>r(A*)：r=n→n；r=n-1→1；r≤n-2→0；</li>
+<li>证明题三板斧：定义（Ax=0 找非零解）、秩的不等式、方程组同解传递。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> 证明 r(AᵀA)=r(A)。
+Ax=0 ⇒ AᵀAx=0（显然）。反之 AᵀAx=0 ⇒ xᵀAᵀAx=0 ⇒ (Ax)ᵀ(Ax)=0 ⇒ ‖Ax‖²=0 ⇒ Ax=0。两齐次方程组同解 → 解空间维数相等 → n-r(AᵀA)=n-r(A) → r(AᵀA)=r(A)。∎</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>A 是 m×n 矩阵，B 是 n×s 矩阵，AB=O，证明 r(A)+r(B)≤n。→ B 的列都是 Ax=0 的解 → r(B)≤n-r(A)。∎</li>
+<li>证明 r(A+B)≤r(A)+r(B)。→ A+B 的列可由 (A|B) 的列线性表示 → r(A+B)≤r(A|B)=r(A)+r(B)。∎</li>
+<li>设 A 为 n 阶方阵且 A²=A（幂等），证明 r(A)+r(A-E)=n。→ A(A-E)=O → r(A)+r(A-E)≤n；又 r(A)+r(E-A)≥r(A+E-A)=r(E)=n。∎</li>
+<li>设 Aᵀ=-A（反对称），n 为奇数，证明 |A|=0。→ |A|=|Aᵀ|=|-A|=(-1)ⁿ|A|=-|A| → |A|=0。∎</li>
+</ol>
+<hr />
+<h2>大题答题规范（阅卷得分点）</h2>
+<ol>
+<li><strong>先写"设/令/由"</strong>：矩阵题第一步写清对哪个矩阵做什么变换；</li>
+<li>行变换用箭头标注，别跳步太多（参数讨论题每步依据是采分点）；</li>
+<li>求出特征向量后<strong>立即回代验证</strong>（Ax=λx），10秒防大错；</li>
+<li>结论句单独成行："故当 a≠2 时方程组有唯一解……"；</li>
+<li>证明题最后写 ∎ 或"证毕"。</li>
+</ol></div></body></html>

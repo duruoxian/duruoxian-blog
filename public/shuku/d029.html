@@ -1,0 +1,1142 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学考题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学考题集（自编·50题带详解）</h1>
+<blockquote>
+<p>全部按考研真题风格自编，标注难度（★基础 ★★中等 ★★★难点）。先做后看答案；错题在对应《知识点与难点》文件章节处做标记。
+共<strong>240题</strong>（五轮：基础50+专题50+压轴50+大题板书33+选择填空专项57）。第一轮构成：高数28/线代14/概率8（概率仅数一）。先做后看答案；错题在对应《知识点与难点》文件章节处做标记。</p>
+<p>📑 <strong>本文件结构</strong>：第一部分 高等数学（28题）｜第二部分 线性代数（14题）｜第三部分 概率统计（8题）【仅数一】｜第二轮（T51–T100）｜第三轮·专题压轴（T101–T150）｜第四轮·真题大题板书精讲（T151–T183）｜第五轮·选择填空专项（T184–T240，57题）</p>
+</blockquote>
+<h2>第一部分 高等数学（28题）</h2>
+<h3>§1 极限与连续</h3>
+<p><strong>T1.</strong>★ 求 lim(x→0) [1/x² − 1/(x·tanx)]。</p>
+<blockquote>
+<p>通分 = (tanx−x)/(x²tanx)。tanx−x ~ x³/3，tanx~x ⇒ 极限 = (x³/3)/x³ = <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>T2.</strong>★★ 求 lim(x→0⁺) (tanx)^{1/lnx}。</p>
+<blockquote>
+<p>取对数：lim ln(tanx)/lnx。x→0⁺ 时 tanx 与 x 等价（ln(tanx)/lnx = 1 + ln(1+o(x))/lnx → 1），故原式 = <strong>e¹ = e</strong>。</p>
+</blockquote>
+<p><strong>T3.</strong>★★ 求 lim(n→∞) Σᵢ₌₁ⁿ 1/√(n²+i)。</p>
+<blockquote>
+<p>夹逼：n/√(n²+n) ≤ 和 ≤ n/√(n²+1)，两端 →1 ⇒ <strong>1</strong>。</p>
+</blockquote>
+<p><strong>T4.</strong>★★ 已知 lim(x→0) (x − a·sinx)/x³ = b（存在且不为0），求 a、b。</p>
+<blockquote>
+<p>若 a≠1，分子 ~ (1−a)x，极限为∞或0阶不符；故 a=1。此时 x−sinx ~ x³/6 ⇒ <strong>a=1, b=1/6</strong>。</p>
+</blockquote>
+<p><strong>T5.</strong>★★ 讨论 f(x)=(e^{1/x}−2)/(e^{1/x}+1)（x≠0），f(0)=1 的间断点。</p>
+<blockquote>
+<p>x→0⁻：e^{1/x}→0，f→(−2)/1=−2；x→0⁺：f→(1−2e⁻…)/(1+…)→1。左右极限都存在但不等 ⇒ <strong>x=0 是跳跃间断点（第一类）</strong>；且与 f(0)=1 比较仅右侧相等。</p>
+</blockquote>
+<h3>§2 导数与微分</h3>
+<p><strong>T6.</strong>★★★ f 在 x=0 可导且 f(0)=0，F(x)=f(x)(1+|sinx|)。证明 F 在 0 可导。</p>
+<blockquote>
+<p>F(0)=0。F′(0)=lim F(h)/h = lim f(h)(1+|sinh|)/h = lim f(h)/h · lim(1+|sinh|) = f′(0)·1。左同右同 ⇒ <strong>F′(0)=f′(0) 存在</strong>。（f(0)=0 吸收了不可导因子）</p>
+</blockquote>
+<p><strong>T7.</strong>★★ x=arctan t，y=ln(1+t²)，求 d²y/dx²。</p>
+<blockquote>
+<p>dy/dx = [2t/(1+t²)]/[1/(1+t²)] = 2t。d²y/dx² = [d(2t)/dt]/(dx/dt) = 2·(1+t²) = <strong>2(1+t²)</strong>。</p>
+</blockquote>
+<p><strong>T8.</strong>★★ 求 y=x²e^{−x} 的极值与拐点。</p>
+<blockquote>
+<p>y′=e^{−x}x(2−x)：极大 f(2)=4e^{−2}，极小 f(0)=0。y″=e^{−x}(x²−4x+2)=0 ⇒ x=2±√2，两侧变号 ⇒ 拐点 (2±√2, y(x))。</p>
+</blockquote>
+<h3>§3 中值定理与导数应用</h3>
+<p><strong>T9.</strong>★★★ f∈C[a,b]、(a,b)可导，f(a)=f(b)=0。证明：∃ξ∈(a,b) 使 f′(ξ)=f(ξ)。</p>
+<blockquote>
+<p>构造 F(x)=e^{−x}f(x)：F(a)=F(b)=0，F∈C、可导。罗尔 ⇒ F′(ξ)=e^{−ξ}(f′(ξ)−f(ξ))=0 ⇒ <strong>f′(ξ)=f(ξ)</strong>。</p>
+</blockquote>
+<p><strong>T10.</strong>★★ 证明 x∈(0,1) 时 eˣ(1−x) &lt; 1。</p>
+<blockquote>
+<p>令 F(x)=eˣ(1−x)，F′=−x·eˣ&lt;0 (x&gt;0)，F(0)=1 ⇒ F(x)&lt;F(0)=1。∎</p>
+</blockquote>
+<p><strong>T11.</strong>★ 求 y=2x³−9x²+12x−1 的单调区间与极值。</p>
+<blockquote>
+<p>y′=6(x−1)(x−2)：增 (−∞,1)∪(2,+∞)，减 (1,2)；极大 f(1)=4，极小 f(2)=3。</p>
+</blockquote>
+<p><strong>T12.</strong>★ 求 y=x²/(x+1) 的全部渐近线。</p>
+<blockquote>
+<p>x→−1: y→∞ ⇒ 垂直 x=−1。x→∞：k=lim y/x =1，b=lim(y−x)=lim(−x²? ) 实算 y−x = (x²−x²−x)/(x+1) = −x/(x+1)→−1 ⇒ 斜渐近 <strong>y=x−1</strong>。无水平渐近线。</p>
+</blockquote>
+<h3>§4 不定积分与定积分</h3>
+<p><strong>T13.</strong>★★ 求 ∫ dx/(1+sinx)。</p>
+<blockquote>
+<p>分子分母同乘 (1−sinx)：∫(1−sinx)/cos²x dx = ∫(sec²x − secx·tanx)dx = <strong>tanx − secx + C</strong>。</p>
+</blockquote>
+<p><strong>T14.</strong>★ 求 ∫ x·arctanx dx。</p>
+<blockquote>
+<p>分部：= (x²/2)arctanx − (1/2)∫ x²/(1+x²)dx = <strong>(x²+1)/2·arctanx − x/2 + C</strong>。</p>
+</blockquote>
+<p><strong>T15.</strong>★★ 求 ∫₀^{ln2} √(eˣ−1) dx。</p>
+<blockquote>
+<p>令 t=√(eˣ−1)：x=ln(1+t²)，dx=2t/(1+t²)dt，限 0→1。积分 =2∫₀¹ t²/(1+t²)dt = 2[t−arctan t]₀¹ = <strong>2−π/2</strong>。</p>
+</blockquote>
+<p><strong>T16.</strong>★★ 求 ∫_{−π/2}^{π/2} (x³+cos²x)·sin²x dx。</p>
+<blockquote>
+<p>x³sin²x 为奇函数积分=0；剩 2∫₀^{π/2} cos²x·sin²x dx = 2∫₀^{π/2} (1/8)(1−cos4x)dx = 2·(1/8)(π/2) = <strong>π/8</strong>。</p>
+</blockquote>
+<p><strong>T17.</strong>★★★ f 连续，f(x)=x²+∫₀ˣ f(t)dt，求 f(x)。</p>
+<blockquote>
+<p>两边求导：f′=2x+f（一阶线性），f(0)=0。通解 f=Ceˣ−2x−2，代 f(0)=0 得 C=2 ⇒ <strong>f(x)=2eˣ−2x−2</strong>。</p>
+</blockquote>
+<p><strong>T18.</strong>★★ 求 ∫₁^{+∞} dx/(x√(x²−1))。</p>
+<blockquote>
+<p>令 x=secθ（θ:0→π/2）：被积 = secθtanθdθ/(secθ·tanθ)=dθ ⇒ 积分 = <strong>π/2</strong>。</p>
+</blockquote>
+<p><strong>T19.</strong>★★ 求 y=eˣ、y=e^{−x} 与 x=1 围成图形面积。</p>
+<blockquote>
+<p>交点 x=0；0≤x≤1 时 eˣ≥e^{−x}：S=∫₀¹(eˣ−e^{−x})dx = (eˣ+e^{−x})|₀¹ = <strong>e+1/e−2</strong>。</p>
+</blockquote>
+<p><strong>T20.</strong>★ 求 y=√x（0≤x≤1）绕 x 轴旋转一周体积。</p>
+<blockquote>
+<p>V=π∫₀¹ x dx = <strong>π/2</strong>。</p>
+</blockquote>
+<h3>§5 多元函数微分学</h3>
+<p><strong>T21.</strong>★★★ f(x,y)=xy/√(x²+y²)（(x,y)≠0），f(0,0)=0。证明在(0,0)偏导存在但不可微。</p>
+<blockquote>
+<p>f_x(0,0)=lim f(h,0)/h = 0；同理 f_y=0。可微需 [Δz−0]/ρ→0：= xy/(x²+y²)，沿 y=kx 得 k/(1+k²) 随 k 变 ⇒ 极限不存在 ⇒ <strong>不可微</strong>（偏导存在的反例经典）。</p>
+</blockquote>
+<p><strong>T22.</strong>★★★ z=f(xy, x/y)，f 有二阶连续偏导，求 ∂z/∂x 与 ∂²z/∂x∂y。</p>
+<blockquote>
+<p>z_x = y·f₁′ + (1/y)·f₂′。
+∂z_x/∂y = f₁′ + y(xf₁₁″ − x/y²·f₁₂″) + [(xf₂₁″ − x/y²·f₂₂″)/y − f₂′/y²]。
+（按 f₁′、f₂′ 分块逐项求，f₁₂″=f₂₁″）</p>
+</blockquote>
+<p><strong>T23.</strong>★★ z=z(x,y) 由 F(x−z, y−z)=0 确定，求 ∂z/∂x。</p>
+<blockquote>
+<p>令 u=x−z, v=y−z：F_u(1−z_x)+F_v(−z_x)=0 ⇒ <strong>z_x = F₁′/(F₁′+F₂′)</strong>；同理 z_y=F₂′/(F₁′+F₂′)。</p>
+</blockquote>
+<p><strong>T24.</strong>★★ 在椭圆 x²/4+y²=1 内作内接矩形（边平行坐标轴），求最大面积。</p>
+<blockquote>
+<p>顶点 (x,y)，A=4xy，约束 x²/4+y²=1。拉格朗日：∇(xy)=λ∇(x²/4+y²) ⇒ y=x²/2·? 解得 x=√2, y=1/√2 ⇒ <strong>A=4</strong>（此时 x²/4=1/2）。比较边界（A=0）知为最大。</p>
+</blockquote>
+<h3>§6 重积分</h3>
+<p><strong>T25.</strong>★★★ 交换次序并计算 ∫₀¹dx ∫ₓ^√x sin(y²)dy。</p>
+<blockquote>
+<p>区域 {x≤y≤√x, 0≤x≤1} = {y²≤x≤y, 0≤y≤1}。换序 = ∫₀¹ sin(y²)·y dy = [−cos(y²)/2]₀¹ = <strong>(1−cos1)/2</strong>。</p>
+</blockquote>
+<p><strong>T26.</strong>★★ 求 ∬_D (x²+y²)dσ，D: x²+y²≤2y。</p>
+<blockquote>
+<p>极坐标 r=2sinθ，θ∈[0,π]：∫₀^π dθ∫₀^{2sinθ} r³dr = ∫₀^π 4sin⁴θ dθ = 4·(3/4·1/2·π)= <strong>3π/2</strong>。</p>
+</blockquote>
+<h3>§7 微分方程</h3>
+<p><strong>T27.</strong>★★ 解 y″−3y′+2y=3x。</p>
+<blockquote>
+<p>特征 r=1,2 → 齐次通解 C₁eˣ+C₂e^{2x}。特解 y<em>=ax+b：2(ax+b)−3a=3x ⇒ a=3/2，b=9/4。
+通解 </em><em>y=C₁eˣ+C₂e^{2x}+(3/2)x+9/4</em>*。</p>
+</blockquote>
+<p><strong>T28.</strong>★★★【仅数一】解欧拉方程 x²y″+xy′−y=0。</p>
+<blockquote>
+<p>令 x=eᵗ：特征 r(r−1)+r−1=r²−1=0 ⇒ r=±1 ⇒ <strong>y=C₁x+C₂/x</strong>（即 y=C₁eᵗ+C₂e^{−t}）。</p>
+</blockquote>
+<h2>第二部分 线性代数（14题）</h2>
+<p><strong>T29.</strong>★ 计算行列式 |1 2 3; 2 3 4; 3 5 7|。</p>
+<blockquote>
+<p>r2−r1, r3−2r1 → 行列式 = |1 2 3; 0 −1 −2; 0 1 1| = 1·(−1·1−(−2)·1) = <strong>0</strong>。</p>
+</blockquote>
+<p><strong>T30.</strong>★★ 求 A=[[1,2],[0,1]] 的 Aⁿ。</p>
+<blockquote>
+<p>A=E+B，B=[[0,2],[0,0]]，B²=0 ⇒ Aⁿ=E+nB = <strong>[[1,2n],[0,1]]</strong>。</p>
+</blockquote>
+<p><strong>T31.</strong>★★★ A 为3阶，|A|=1/2，求 |(2A)⁻¹ − 5A*|。</p>
+<blockquote>
+<p>A<em>=|A|A⁻¹=A⁻¹/2；(2A)⁻¹=A⁻¹/2。差 = A⁻¹/2 − 5A⁻¹/2 = −2A⁻¹。
+|−2A⁻¹| = (−2)³/|A| = −8·2 = </em><em>−16</em>*。</p>
+</blockquote>
+<p><strong>T32.</strong>★★ 解矩阵方程 AX = X + A，A=[[3,1],[1,3]]。</p>
+<blockquote>
+<p>(A−E)X=A，A−E=[[2,1],[1,2]] 可逆：X=(A−E)⁻¹A = (1/3)[[2,−1],[−1,2]]·[[3,1],[1,3]] = <strong>(1/3)[[5,−1],[−1,5]]</strong>。</p>
+</blockquote>
+<p><strong>T33.</strong>★★ 讨论秩：A=[[1,1,1],[1,2,a],[2,3,3]]。</p>
+<blockquote>
+<p>|A|=−a−1（化简后）。a≠−1 ⇒ r=3；a=−1 ⇒ r=2。</p>
+</blockquote>
+<p><strong>T34.</strong>★★ α₁=(1,1,2), α₂=(1,a,3), α₃=(2,4,7) 线性相关，求 a。</p>
+<blockquote>
+<p>相关 ⇔ |α₁ α₂ α₃|=0：= 3a−5 = 0 ⇒ <strong>a=5/3</strong>。</p>
+</blockquote>
+<p><strong>T35.</strong>★★★ 讨论解：x+y+z=1；x+2y+az=2；x+4y+a²z=4。</p>
+<blockquote>
+<p>系数行列式=(a−1)(a−2)。a≠1,2：唯一解。a=1：r(A)=r(A|b)=2 → 无穷多解（y=1, x+z=0）。a=2：同理 r=2 → 无穷多解。<strong>不存在无解情形</strong>（本题专防"套路化答题"）。</p>
+</blockquote>
+<p><strong>T36.</strong>★★★ 证明 r(AᵀA)=r(A)。</p>
+<blockquote>
+<p>证 Ax=0 与 AᵀAx=0 同解：Ax=0 ⇒ AᵀAx=0 显然。反之 xᵀAᵀAx=0 ⇒ ‖Ax‖²=0 ⇒ Ax=0。同解 ⇒ 解空间同 ⇒ n−r 相等 ⇒ <strong>r 相等</strong>。∎</p>
+</blockquote>
+<p><strong>T37.</strong>★★ A=[[2,0,0],[0,3,1],[0,1,3]]，求全部特征值与特征向量。</p>
+<blockquote>
+<p>λ=2（ξ=(1,0,0)）；块 [[3,1],[1,3]]：λ=4（ξ=(0,1,1)），λ=2（ξ=(0,1,−1)）。<strong>λ=2,2,4</strong>。</p>
+</blockquote>
+<p><strong>T38.</strong>★★★ A=[[1,2],[2,1]]，求 Aⁿ。</p>
+<blockquote>
+<p>λ=3,−1；ξ=(1,1),(1,−1)。Aⁿ=PΛⁿP⁻¹ = <strong>(1/2)[[3ⁿ+(−1)ⁿ, 3ⁿ−(−1)ⁿ],[3ⁿ−(−1)ⁿ, 3ⁿ+(−1)ⁿ]]</strong>。</p>
+</blockquote>
+<p><strong>T39.</strong>★★ 判定 f=2x₁²+2x₂²+2x₃²+2x₁x₂+2x₁x₃+2x₂x₃ 的正定性。</p>
+<blockquote>
+<p>矩阵=E+全1阵：顺序主子式 2、3、4 全正 ⇒ <strong>正定</strong>（特征值 4,1,1 亦可）。</p>
+</blockquote>
+<p><strong>T40.</strong>★★★ A=[[1,0],[0,−1]]，B=[[0,1],[1,0]]。判断 A 与 B 的相似性与合同性并说明。</p>
+<blockquote>
+<p>特征值都为 1,−1 ⇒ 相似（都实对称且特征值相同必相似）。正负惯性指数都为(1,1) ⇒ <strong>合同</strong>。既相似又合同（正交变换矩阵 [1/2?] 可具体构造 Q=[[1,1],[1,−1]]/√2）。</p>
+</blockquote>
+<p><strong>T41.</strong>★★ 用配方法化 f=x₁²+2x₂²+5x₃²+2x₁x₂+2x₁x₃+6x₂x₃ 为标准形。</p>
+<blockquote>
+<p>f=(x₁+x₂+x₃)²+(x₂+2x₃)²（展开恰好消尽）。令 y₁=x₁+x₂+x₃，y₂=x₂+2x₃ ⇒ <strong>f=y₁²+y₂²</strong>，正惯性指数2。</p>
+</blockquote>
+<p><strong>T42.</strong>★★ 设 Aξ=2ξ（ξ≠0），求 A²−3A+2E 的特征值，并判断 A 可逆吗？</p>
+<blockquote>
+<p>f(2)=4−6+2=0 ⇒ 0 是 f(A) 的特征值。又 A²−3A+2E=(A−E)(A−2E)；若 A 不可逆则 |A|=0 ⇒ 0 是 A 的特征值。本题：0 是 f(A) 特征值，说明 <strong>A²−3A+2E 不可逆</strong>；对 A 本身由已知无法断定（需另一信息：若 2 是唯一特征值且 A 可对角化则 |A|=2²≠0）。答出"f(A) 不可逆"即得分点。</p>
+</blockquote>
+<h2>第三部分 概率统计（8题）【仅数一】</h2>
+<p><strong>T43.</strong>★ 5只球（3黑2白）不放回取2只，已知第1只是黑球，求第2只是黑球的概率。</p>
+<blockquote>
+<p>缩样法：剩4球2黑 ⇒ <strong>1/2</strong>。（等价于 P(A₂|A₁)=P(A₁A₂)/P(A₁)=(3/5·2/4)/(3/5)=1/2）</p>
+</blockquote>
+<p><strong>T44.</strong>★★ 甲乙厂供货占60%/40%，次品率1%/2%。现取到一件次品，求它来自甲厂的概率。</p>
+<blockquote>
+<p>贝叶斯：0.6·0.01/(0.6·0.01+0.4·0.02)=0.006/0.014=<strong>3/7</strong>。</p>
+</blockquote>
+<p><strong>T45.</strong>★ 两开关并联（各自闭合概率0.9）再与第三个（0.8）串联，电路导通概率？</p>
+<blockquote>
+<p>并联块 =1−0.1²=0.99；串联 0.99·0.8=<strong>0.792</strong>。</p>
+</blockquote>
+<p><strong>T46.</strong>★★ F(x)=a+be^{−x}（x≥0；x&lt;0 时 0）。求 a,b、密度，及 P(X&gt;1 | X≤2)。</p>
+<blockquote>
+<p>F(0)=a+b=0，F(∞)=a=1 ⇒ <strong>a=1,b=−1</strong>；f(x)=e^{−x}(x≥0)。
+P(X&gt;1|X≤2) = (F(2)-F(1))/F(2) = (e⁻¹-e⁻²)/(1-e⁻²) = e⁻¹/(1+e⁻¹) = <strong>1/(e+1)≈0.269</strong>。</p>
+</blockquote>
+<p><strong>T47.</strong>★ X~N(3,4)，求 P(|X−3|&lt;4) 与 P(X&gt;1)。</p>
+<blockquote>
+<p>标准化 Z=(X−3)/2：P(|Z|&lt;2)=Φ(2)−Φ(−2)=<strong>0.9545</strong>；P(X&gt;1)=P(Z&gt;−1)=<strong>Φ(1)=0.8413</strong>。</p>
+</blockquote>
+<p><strong>T48.</strong>★★ X~B(2,1/2)，Y~P(2)，独立。求 E(2X+3Y)、D(2X+3Y)。</p>
+<blockquote>
+<p>E X=1, D X=0.5；E Y=2, D Y=2。E=2·1+3·2=<strong>8</strong>；D=4·0.5+9·2=<strong>20</strong>。</p>
+</blockquote>
+<p><strong>T49.</strong>★★★ (X,Y) 密度 f(x,y)=2e^{−(2x+y)}（x,y&gt;0，否则0）。判断独立性并求 P(X&lt;1,Y&lt;1)。</p>
+<blockquote>
+<p>f=f_X·f_Y（f_X=2e^{−2x}, f_Y=e^{−y}）⇒ <strong>独立</strong>。P=(1−e^{−2})(1−e^{−1})。</p>
+</blockquote>
+<p><strong>T50.</strong>★★ D(X)=4，D(Y)=9，Cov(X,Y)=2。求 D(3X−Y)。</p>
+<blockquote>
+<p>D(3X−Y)=9D(X)+D(Y)−2·3·Cov(X,Y)=36+9−12=<strong>33</strong>。
+附（MLE标准题）：X~e(λ) 的矩估计与最大似然估计都是 <strong>λ̂=1/x̄</strong>。</p>
+</blockquote>
+<hr />
+<h3>使用说明</h3>
+<ol>
+<li>建议配合《高数/线代/概率统计_知识点与难点.md》对应章节做；先遮住答案。</li>
+<li>★★★ 题对应真题压轴难度，能独立做出说明基础扎实。</li>
+<li>每做完一章，把错题号写在对应知识点文件该章标题旁边（如 <code>## T25 ✗✓✗</code>），三周后重做。</li>
+</ol>
+<h2>第二轮（T51–T100）</h2>
+<h3>高数（30题）</h3>
+<p><strong>T51.</strong>★ 求 lim(x→0) (arctanx − x)/x³。</p>
+<blockquote>
+<p>arctanx = x − x³/3 + o(x³) ⇒ 极限 = <strong>−1/3</strong>。</p>
+</blockquote>
+<p><strong>T52.</strong>★★ 已知 lim(x→∞) [(x+a)/(x−a)]^x = 4，求常数 a。</p>
+<blockquote>
+<p>极限 = e^{lim x·ln((x+a)/(x−a))} = e^{x·(2a/x)} = e^{2a} = 4 ⇒ <strong>a = ln2</strong>。</p>
+</blockquote>
+<p><strong>T53.</strong>★ 当 x→0 时，(1−cosx)·ln(1+x) 是 xᵅ 的同阶无穷小，求 α。</p>
+<blockquote>
+<p>(x²/2)·x ~ x³/2 ⇒ <strong>α=3</strong>。</p>
+</blockquote>
+<p><strong>T54.</strong>★★ 求 f(x)=lim(n→∞) (x^{2n}−1)/(x^{2n}+1) 并指出间断点。</p>
+<blockquote>
+<p>|x|&lt;1: −1；|x|&gt;1: 1；x=±1: 0。x=±1 处左右极限为 ±1 ⇒ <strong>跳跃间断点 x=±1</strong>。</p>
+</blockquote>
+<p><strong>T55.</strong>★ f′(a) 存在，求 lim(h→0) [f(a+2h)−f(a−h)]/(3h)。</p>
+<blockquote>
+<p>= (2f′(a)+f′(a))/3 = <strong>f′(a)</strong>。</p>
+</blockquote>
+<p><strong>T56.</strong>★ 用全微分求 √((4.02)²+(2.97)²) 的近似值。</p>
+<blockquote>
+<p>f=√(x²+y²) 在 (4,3)：dz=(4·0.02+3·(−0.03))/5 = −0.002 ⇒ ≈ <strong>4.998</strong>。</p>
+</blockquote>
+<p><strong>T57.</strong>★ 证明 y=ln(x+√(x²+1)) 是奇函数并求 y′。</p>
+<blockquote>
+<p>f(−x)=ln(−x+√(x²+1))=ln[1/(x+√(x²+1))]=−f(x)。y′=(1+x/√(x²+1))/(x+√(x²+1))=<strong>1/√(x²+1)</strong>。</p>
+</blockquote>
+<p><strong>T58.</strong>★★ 求 y=(sinx)^{cosx} (sinx&gt;0) 的导数。</p>
+<blockquote>
+<p>对数求导：lny=cosx·lnsinx ⇒ y′=(sinx)^{cosx}·[−sinx·lnsinx + cos²x/sinx]。</p>
+</blockquote>
+<p><strong>T59.</strong>★★★ 求 y=1/(x²−1) 的 n 阶导数。</p>
+<blockquote>
+<p>拆分 y=(1/2)[1/(x−1)−1/(x+1)] ⇒ <strong>y⁽ⁿ⁾=(−1)ⁿn!/2·[(x−1)^{−n−1} − (x+1)^{−n−1}]</strong>。</p>
+</blockquote>
+<p><strong>T60.</strong>★★★ f 在[0,1]二阶可导，f(0)=0，f(1)=1，f′(0)=f′(1)=0。证明 ∃ξ∈(0,1) 使 f″(ξ)≥2。</p>
+<blockquote>
+<p>在 x=0 处泰勒：f(1)=f(0)+f′(0)+f″(ξ)/2 ⇒ 1=f″(ξ)/2 ⇒ <strong>f″(ξ)=2</strong>。∎</p>
+</blockquote>
+<p><strong>T61.</strong>★★ 证明 x&gt;1 时 arctanx + x &gt; π/2。</p>
+<blockquote>
+<p>F=arctanx+x，F′=1+1/(1+x²)&gt;0 单调增，F(1)=π/4+1≈1.785&gt;π/2。∎</p>
+</blockquote>
+<p><strong>T62.</strong>★★ 求 y=x+√(1−x) 的极值。</p>
+<blockquote>
+<p>定义域 x≤1；y′=1−1/(2√(1−x))=0 ⇒ x=3/4；y″&lt;0 ⇒ <strong>极大值 f(3/4)=5/4</strong>。</p>
+</blockquote>
+<p><strong>T63.</strong>★★ 求 y=(x²+x)/(x²−1) 的渐近线。</p>
+<blockquote>
+<p>约分 y=x/(x−1)（x≠−1）：垂直 <strong>x=1</strong>；斜渐近 <strong>y=x+1</strong>；x=−1 为可去间断点（非渐近线）。</p>
+</blockquote>
+<p><strong>T64.</strong>★★ 求 ∫ x·tan²x dx。</p>
+<blockquote>
+<p>=∫x(sec²x−1)dx = x·tanx − ∫tanx dx − x²/2 = <strong>x·tanx + ln|cosx| − x²/2 + C</strong>。</p>
+</blockquote>
+<p><strong>T65.</strong>★★ 求 ∫₀^π sin³x·cos²x dx。</p>
+<blockquote>
+<p>t=cosx：=∫_{−1}^{1}(1−t²)t²dt = 2(1/3−1/5) = <strong>4/15</strong>。</p>
+</blockquote>
+<p><strong>T66.</strong>★★★ 求 ∫ dx/(x²√(x²+1))。</p>
+<blockquote>
+<p>x=tanθ? 用 x=1/u 或验证：<strong>(答案) −√(x²+1)/x + C</strong>（求导即验证）。</p>
+</blockquote>
+<p><strong>T67.</strong>★★ y=x² 与 y=2x 围成图形绕 x 轴旋转一周，求体积。</p>
+<blockquote>
+<p>交点 0,2：V=π∫₀²[(2x)²−x⁴]dx = π(32/3−32/5) = <strong>64π/15</strong>。</p>
+</blockquote>
+<p><strong>T68.</strong>★★ 求 y=lncosx 在 [0,π/4] 上的弧长。</p>
+<blockquote>
+<p>y′=−tanx，ds=secx dx：L=∫₀^{π/4}secx dx = <strong>ln(√2+1)</strong>。</p>
+</blockquote>
+<p><strong>T69.</strong>★ 求 ∫₀¹ lnx dx 与 ∫₀^{+∞} xe^{−x}dx。</p>
+<blockquote>
+<p>前者 = <strong>−1</strong>（瑕积分收敛）；后者 = <strong>1</strong>（分部）。</p>
+</blockquote>
+<p><strong>T70.</strong>★★ u=f(x, yz)，f 有二阶连续偏导，求 ∂²u/∂x∂z。</p>
+<blockquote>
+<p>u_x=f₁′；∂z 方向：<strong>u_xz = y·f₁₂″</strong>（f₁′ 对 z 求导 = f₁₂″·y）。</p>
+</blockquote>
+<p><strong>T71.</strong>★★ f=xy²+z³−xyz 在 (1,1,1) 处沿何方向方向导数最大？最大值？</p>
+<blockquote>
+<p>grad f = (y²−yz, 2xy−xz, 3z²−xy)|₍₁,₁,₁₎ = (0,1,2)；最大方向 = <strong>梯度方向 (0,1,2)</strong>，最大值 = <strong>√5</strong>。</p>
+</blockquote>
+<p><strong>T72.</strong>★★ 求球面 x²+y²+z²=4 上与平面 x+y+z=4 距离最近的点及最短距离。</p>
+<blockquote>
+<p>沿法向 (1,1,1)/√3：点 = <strong>(2/√3, 2/√3, 2/√3)</strong>；距离 = 4/√3 − 2（拉格朗日解 d²=(x+y+z−4)²/3 的最小值同结果）。</p>
+</blockquote>
+<p><strong>T73.</strong>★★★ 求 ∬_D e^{max(x²,y²)} dσ，D=[0,1]×[0,1]。</p>
+<blockquote>
+<p>沿 y=x 分块：=2∫₀¹dx∫₀^x e^{x²}dy = 2∫₀¹ xe^{x²}dx = <strong>e−1</strong>。</p>
+</blockquote>
+<p><strong>T74.</strong>★★★ 求 ∬_D |x²+y²−1| dσ，D: x²+y²≤4。</p>
+<blockquote>
+<p>分 r&lt;1（负）与 1&lt;r&lt;2（正）：=2π[∫₀¹(r−r³)dr + ∫₁²(r³−r)dr] = 2π(1/4+9/4) = <strong>5π</strong>。</p>
+</blockquote>
+<p><strong>T75.</strong>★★ 解 y″−y′=x。</p>
+<blockquote>
+<p>p=y′：p′−p=x ⇒ p=−x−1+Ceˣ ⇒ <strong>y=−x²/2 − x + C₁eˣ + C₂</strong>。</p>
+</blockquote>
+<p><strong>T76.</strong>★★★ 曲线过点(1,1)，且任一点处切线在 y 轴上的截距等于切点的横坐标，求曲线方程。</p>
+<blockquote>
+<p>截距 = y−xy′ = x ⇒ y′−y/x=−1 ⇒ 通解 y=x(C−lnx)；代(1,1)：<strong>y=x−x·lnx</strong>。</p>
+</blockquote>
+<p><strong>T77.</strong>★★ 判敛：Σ n²/3ⁿ 与 Σ(−1)ⁿ·n/(n+1)²。</p>
+<blockquote>
+<p>前者比值 1/3&lt;1 <strong>绝对收敛</strong>；后者 |aₙ|~1/n 发散、交错单调趋0收敛 ⇒ <strong>条件收敛</strong>。</p>
+</blockquote>
+<p><strong>T78.</strong>★★ 求 Σ(x−1)ⁿ/n 的收敛域与和函数。</p>
+<blockquote>
+<p>R=1；端点 x=0 收敛（交错）、x=2 发散 ⇒ <strong>[0,2)</strong>；S(x)=<strong>−ln(2−x)</strong>。</p>
+</blockquote>
+<p><strong>T79.</strong>★★ 求 Σ n x^{n−1}（|x|&lt;1）及 Σ n/2ⁿ。</p>
+<blockquote>
+<p>逐项求导 1/(1−x)：和 = <strong>1/(1−x)²</strong>；代 x=1/2：Σn/2ⁿ⁻¹=4 ⇒ <strong>Σn/2ⁿ=2</strong>。</p>
+</blockquote>
+<p><strong>T80.</strong>★★★【仅数一】f(x)=x²（−π&lt;x&lt;π）展开为傅里叶级数，并由此求 Σ1/n²。</p>
+<blockquote>
+<p>偶函数：a₀=2π²/3，aₙ=4(−1)ⁿ/n²，bₙ=0。x=π 处级数=(f(π⁻)+f(−π⁺))/2=π²：
+π²=π²/3 + Σ4/n² ⇒ <strong>Σ1/n²=π²/6</strong>。</p>
+</blockquote>
+<h3>线代（12题）</h3>
+<p><strong>T81.</strong>★★★ 证明 |0 A; B 0| = (−1)^{mn}|A||B|（A为m阶、B为n阶），并计算 |0 1 2; 0 3 4; 1 0 0|。</p>
+<blockquote>
+<p>把后n行逐行上移m行，共 mn 次相邻交换。例：m=2,n=1：(−1)²·|A|? 逐行算：交换第3行到第1行需2次相邻交换 → 行列式 = (−1)²·1·|A|=|A|=1·4−2·3=−2；直接展开验证 = −2 ✓。</p>
+</blockquote>
+<p><strong>T82.</strong>★★ A 为3阶可逆阵，交换其第1、2列得 B。求 B⁻¹ 与 |B|。</p>
+<blockquote>
+<p>B=AP（P为换法矩阵，P=Pᵀ=P⁻¹）：<strong>B⁻¹=P·A⁻¹，|B|=−|A|</strong>。</p>
+</blockquote>
+<p><strong>T83.</strong>★★ A=[[1,1,1],[2,2,2],[3,3,3],[0,1,0]]，求 Ax=0 的基础解系。</p>
+<blockquote>
+<p>r(A)=2（极大无关组取第1、4行），n−r=1：x₂=0，x₁+x₃=0 ⇒ <strong>ξ=(1,0,−1)ᵀ</strong>。</p>
+</blockquote>
+<p><strong>T84.</strong>★★★ A²=A（幂等矩阵）。证明：A 的特征值只能是0或1，且 A 可对角化。</p>
+<blockquote>
+<p>Av=λv ⇒ λ²v=λv ⇒ λ(λ−1)=0。任取 x：x = Ax + (x−Ax)，其中 Ax∈N(A−E)（因 A(Ax)=Ax），x−Ax∈N(A)（A(x−Ax)=Ax−A²x=0）⇒ V=特征子空间直和 ⇒ <strong>可对角化</strong>。∎</p>
+</blockquote>
+<p><strong>T85.</strong>★ 求正交矩阵 Q 使 QᵀAQ=Λ，A=[[0,1],[1,0]]。</p>
+<blockquote>
+<p>λ=1,−1；ξ=(1,1),(1,−1) 单位化 ⇒ <strong>Q=(1/√2)[[1,1],[1,−1]]</strong>，Λ=diag(1,−1)。</p>
+</blockquote>
+<p><strong>T86.</strong>★★★ A 为3阶，特征值 1,−1,2。求 |A*+2E|。</p>
+<blockquote>
+<p>|A|=−2；A<em> 特征值 = |A|/λ = −2, 2, −1 ⇒ A</em>+2E 特征值 0, 4, 1 ⇒ <strong>|A*+2E|=0</strong>。</p>
+</blockquote>
+<p><strong>T87.</strong>★★★ f=2x²+2y²+2z²+2xy+2xz+2yz 经正交变换化标准形，判断方程 f=1 的曲面类型。</p>
+<blockquote>
+<p>矩阵=E+全1阵，特征值 4,1,1 ⇒ 标准形 <strong>4y₁²+y₂²+y₃²=1</strong> ⇒ <strong>椭球面</strong>（半轴 1/2, 1, 1）。</p>
+</blockquote>
+<p><strong>T88.</strong>★★ 判断 A=[[1,2],[2,1]] 与 B=[[1,1],[1,1]] 是否相似/合同。</p>
+<blockquote>
+<p>A 特征值 3,−1；B 特征值 2,0：特征值不同 ⇒ <strong>不相似</strong>；正惯性指数 A=1、B=1，秩均2 ⇒ <strong>合同</strong>（合同只看正负惯性指数）。</p>
+</blockquote>
+<p><strong>T89.</strong>★★ ξ₁=(1,2,3,4)ᵀ、ξ₂=(2,4,6,8)ᵀ 是 Ax=b 的两个解，r(A)=2（n=4），写出通解。</p>
+<blockquote>
+<p>通解 = <strong>ξ₁ + k(ξ₁−ξ₂)</strong>，k∈R（齐次基础解系1个=n−r）。</p>
+</blockquote>
+<p><strong>T90.</strong>★★★ A 为3阶，特征值 1,2,−1，求 A₁₁+A₂₂+A₃₃（代数余子式主对角线之和）。</p>
+<blockquote>
+<p>和 = tr(A<em>) = |A|·tr(A⁻¹) = (−2)·(1+1/2−1) = </em><em>−1</em>*。</p>
+</blockquote>
+<h3>概率统计（8题）【仅数一】</h3>
+<p><strong>T91.</strong>★★ 甲乙二人独立地在0~1小时内到达，先到者等待不超过15分钟即见面，求见面概率。</p>
+<blockquote>
+<p>几何概型：P=1−(3/4)²=<strong>7/16</strong>。</p>
+</blockquote>
+<p><strong>T92.</strong>★★ 两台机器产量占60%/40%，次品率5%和2%。任取一件为正品，求来自第一台的概率。</p>
+<blockquote>
+<p>贝叶斯：0.6×0.95/(0.6×0.95+0.4×0.98)=0.57/0.962≈<strong>0.593</strong>。</p>
+</blockquote>
+<p><strong>T93.</strong>★ 掷骰子4次，至少出现一次6点的概率。</p>
+<blockquote>
+<p>1−(5/6)⁴≈<strong>0.518</strong>。</p>
+</blockquote>
+<p><strong>T94.</strong>★★★ (X,Y) 在三角形区域（y=0, x=1, y=x 围成）均匀分布。求边缘密度与 P(X+Y≤1)。</p>
+<blockquote>
+<p>面积1/2 ⇒ f=2。f_X(x)=2x（0&lt;x&lt;1），f_Y(y)=2(1−y)。P(X+Y≤1)=对应小三角形面积×2=<strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>T95.</strong>★★ X~N(0,1)，求 Y=X² 的密度。</p>
+<blockquote>
+<p>分布函数法：F_Y(y)=P(X²≤y)=2Φ(√y)−1 ⇒ <strong>f_Y(y)=(1/√(2πy))e^{−y/2}（y&gt;0）</strong>（即χ²(1)分布）。</p>
+</blockquote>
+<p><strong>T96.</strong>★★★ X,Y 独立同 U(0,1)，求 E[max(X,Y)]。</p>
+<blockquote>
+<p>E=2∫₀¹∫₀^y y dxdy = 2∫₀¹ y²dy = <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>T97.</strong>★★ X~N(0,1)，Y=X²。求 Cov(X,Y)，并判断 X,Y 是否独立。</p>
+<blockquote>
+<p>Cov=E(X³)−E(X)E(X²)=0−0=<strong>0（不相关）</strong>；但 Y 由 X 完全决定 ⇒ <strong>不独立</strong>（不相关⇏独立）。</p>
+</blockquote>
+<p><strong>T98.</strong>★★ X~N(μ,σ²)，n=16，求 P(X̄−μ&gt;σ/2)。</p>
+<blockquote>
+<p>X̄~N(μ,σ²/16)：P(Z&gt;2)=<strong>0.0228</strong>。</p>
+</blockquote>
+<p><strong>T99.</strong>★★★ X~U(a,b)，用矩估计求 â、b̂。</p>
+<blockquote>
+<p>E(X)=(a+b)/2=x̄；D(X)=(b−a)²/12=m₂（二阶中心矩）⇒ <strong>â=x̄−√3·s，b̂=x̄+√3·s</strong>（s为样本标准差）。</p>
+</blockquote>
+<p><strong>T100.</strong>★★ 每袋味精重 X~N(500,25)（克），独立装100袋，求总重超过50050克的概率（CLT）。</p>
+<blockquote>
+<p>总重~N(50000,2500)，σ=50：P(T&gt;50050)=P(Z&gt;1)=<strong>0.1587</strong>。</p>
+</blockquote>
+<h2>第三轮·专题压轴（T101–T150）</h2>
+<blockquote>
+<p>按专题编排，每专题从易到难；★★★为真题压轴水准。</p>
+</blockquote>
+<h3>专题A 极限与连续（10题）</h3>
+<p><strong>T101.</strong>★★ 求 lim(x→0) [(eˣ+e²ˣ+…+eⁿˣ)−n]/x。</p>
+<blockquote>
+<p>分子是各 (e^{kx}−1) 之和 ~ kx ⇒ 极限 = 1+2+…+n = <strong>n(n+1)/2</strong>。</p>
+</blockquote>
+<p><strong>T102.</strong>★★ 求 lim(x→+∞) (x+sinx)/(x−sinx)。</p>
+<blockquote>
+<p>sinx有界：分子分母同除x → (1+sinx/x)/(1−sinx/x) → <strong>1</strong>。注意此处<strong>洛必达失效</strong>（导数比 (1+cosx)/(1−cosx) 无极限）——经典陷阱题。</p>
+</blockquote>
+<p><strong>T103.</strong>★ 求 lim(n→∞) n(√(n²+1)−n)。</p>
+<blockquote>
+<p>有理化：n/(√(n²+1)+n) → <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>T104.</strong>★ f 在 x=0 连续且 lim(x→0) f(x)/x = 2，求 f(0) 与 f′(0)。</p>
+<blockquote>
+<p>f(0)=lim f(x)=0；f′(0)=lim [f(x)−f(0)]/x = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>T105.</strong>★★ 求 lim(x→0⁺) ln x · ln(1−x)。</p>
+<blockquote>
+<p>ln(1−x) ~ −x ⇒ 极限 = lim lnx·(−x) = <strong>0</strong>（无穷小×有界? xlnx→0）。</p>
+</blockquote>
+<p><strong>T106.</strong>★★★ 求 lim(x→0) (sinx/x)^{1/x²}。</p>
+<blockquote>
+<p>取对数：lim [ln(sinx/x)]/x² = lim (sinx/x−1)/x² = lim [−x²/6]/x² = −1/6 ⇒ 极限 = <strong>e^{−1/6}</strong>。</p>
+</blockquote>
+<p><strong>T107.</strong>★★★ 求 lim(n→∞) Σₖ₌₁ⁿ arctan[1/(k²+k+1)]。</p>
+<blockquote>
+<p>arctan[1/(k²+k+1)] = arctan(k+1) − arctan k（差角公式逆用）。和 = arctan(n+1) − arctan1 → <strong>π/2 − π/4 = π/4</strong>。</p>
+</blockquote>
+<p><strong>T108.</strong>★★ 已知 lim(x→+∞) [x³/(x²+x+1) − ax − b] = 1，求 a、b。</p>
+<blockquote>
+<p>x³/(x²+x+1) = x − 1 + 1/(x²+x+1) ⇒ (1−a)x + (−1−b) → 1 ⇒ <strong>a=1, b=−2</strong>。</p>
+</blockquote>
+<p><strong>T109.</strong>★★★ f″(x)&gt;0（x&gt;0），f(0)=0。证明 g(x)=f(x)/x 在 (0,+∞) 单调增。</p>
+<blockquote>
+<p>g′=[xf′−f]/x²；令 h=xf′−f：h′=xf″&gt;0 且 h(0⁺)=0 ⇒ h&gt;0 ⇒ g′&gt;0。∎</p>
+</blockquote>
+<p><strong>T110.</strong>★★★ 求 lim(x→1) (xˣ−x)/(1−x+xlnx)。</p>
+<blockquote>
+<p>xˣ−x = x(x^{x−1}−1) ~ x(x−1)lnx；分母：xlnx = (x−1)+(x−1)²/2+o ⇒ 1−x+xlnx ~ (x−1)²/2；分子 ~ (x−1)² ⇒ 极限 = <strong>2</strong>。</p>
+</blockquote>
+<h3>专题B 一元积分（10题）</h3>
+<p><strong>T111.</strong>★★ 求 ∫ dx/(sin²x·cos²x)。</p>
+<blockquote>
+<p>1/(sin²cos²) = (sin²+cos²)/(sin²cos²) = sec²x + csc²x ⇒ <strong>tanx − cotx + C</strong>。</p>
+</blockquote>
+<p><strong>T112.</strong>★ 求 ∫ (lnx)² dx。</p>
+<blockquote>
+<p>分部两次：<strong>x[(lnx)²−2lnx+2] + C</strong>。</p>
+</blockquote>
+<p><strong>T113.</strong>★★★ 证明：对任意实数 α，∫₀^{π/2} dx/(1+tanᵅx) = π/4。</p>
+<blockquote>
+<p>区间再现 x→π/2−x：I = ∫ tanᵅx/(1+tanᵅx)dx；相加 2I=∫dx=π/2 ⇒ <strong>I=π/4</strong>。∎</p>
+</blockquote>
+<p><strong>T114.</strong>★★ 求 ∫₀¹ dx/(1+eˣ)。</p>
+<blockquote>
+<p>乘 e^{−x}/e^{−x}：=−ln(1+e^{−x})|₀¹ = ln2 − ln(1+e^{−1}) = <strong>ln(2e/(e+1))</strong>。</p>
+</blockquote>
+<p><strong>T115.</strong>★★★ f 连续，F(x)=∫₀ˣ |x−t| f(t)dt。证明 F″(x)=2f(x)。</p>
+<blockquote>
+<p>拆分：F=∫₀ˣ (x−t)f dt + ∫ₓ^? （t&gt;x 部分为0? 注意积分限 0 到 x，|x−t|=x−t）⇒ F=x∫₀ˣ f dt −∫₀ˣ t f dt ⇒ F′=∫₀ˣ f dt，<strong>F″=2f</strong>。∎</p>
+</blockquote>
+<p><strong>T116.</strong>★★ 求 ∫₀² dx/√(x(2−x))。</p>
+<blockquote>
+<p>x(2−x)=1−(x−1)²：=arcsin(x−1)|₀² = <strong>π</strong>（广义积分收敛）。</p>
+</blockquote>
+<p><strong>T117.</strong>★★★ 求 ∫₁^{+∞} dx/(x√(x²+1))。</p>
+<blockquote>
+<p>x=sinh t：=∫dt/sinh t = ln tanh(t/2)| → ln[1/(√2−1)] = <strong>ln(1+√2)</strong>。</p>
+</blockquote>
+<p><strong>T118.</strong>★ 求 y=x² 与 y=x+2 围成面积。</p>
+<blockquote>
+<p>交点 −1,2：∫(x+2−x²)dx = <strong>9/2</strong>。</p>
+</blockquote>
+<p><strong>T119.</strong>★★ y=x²（0≤x≤1）与 x 轴围成图形绕 <strong>y 轴</strong>旋转，求体积。</p>
+<blockquote>
+<p>柱壳法：V=2π∫₀¹ x·x²dx = <strong>π/2</strong>。</p>
+</blockquote>
+<p><strong>T120.</strong>★★★【数一】半径1的半球形水池盛满水，全部抽到池口需做功（ρ为密度，g重力加速度）。</p>
+<blockquote>
+<p>取深度 x（0到1），薄层体积 π(1−x²)dx，提升 x：<strong>W=πρg∫₀¹ x(1−x²)dx = πρg/4</strong>。</p>
+</blockquote>
+<h3>专题C 中值定理·不等式·方程根（8题）</h3>
+<p><strong>T121.</strong>★★ f(a)=f(b)=0（连续、可导），证明 ∃ξ：f(ξ)+f′(ξ)=0。</p>
+<blockquote>
+<p>构造 F=eˣf(x)：F(a)=F(b)=0，罗尔 ⇒ F′(ξ)=e^{ξ}[f(ξ)+f′(ξ)]=0。∎</p>
+</blockquote>
+<p><strong>T122.</strong>★★ 设 a&lt;1&lt;b，f∈C[a,b] 且 f(a)=f(b)=1。证明 ∃ξ∈(a,b)：f(ξ)=ξ。</p>
+<blockquote>
+<p>g=f−x：g(a)=1−a&gt;0，g(b)=1−b&lt;0，零点定理。∎</p>
+</blockquote>
+<p><strong>T123.</strong>★★★ f″ 在 [a,b] 连续，f′(a)=f′(b)=0。证明 ∃ξ：|f″(ξ)| ≥ 4|f(b)−f(a)|/(b−a)²。</p>
+<blockquote>
+<p>记 c=(a+b)/2。在 a、b 处对 f(c) 泰勒（f′端点=0）：f(c)=f(a)+f″(ξ₁)(c−a)²/2 = f(b)+f″(ξ₂)(c−b)²/2。相减取绝对值：|f(b)−f(a)| ≤ [max|f″|]·(b−a)²/8·2 ⇒ max|f″| ≥ 4|f(b)−f(a)|/(b−a)²。∎</p>
+</blockquote>
+<p><strong>T124.</strong>★ 证明 x&gt;0 时 x − x³/6 &lt; sinx &lt; x。</p>
+<blockquote>
+<p>右：F=x−sinx，F′=1−cosx≥0，F(0)=0。左：G=sinx−x+x³/6，G′=cosx−1+x²/2，G″=x−sinx≥0，G′(0)=0⇒G′&gt;0⇒G&gt;0。∎</p>
+</blockquote>
+<p><strong>T125.</strong>★★★ 0&lt;a<b：证明 ln(b/a) > 2(b−a)/(a+b)。</p>
+<blockquote>
+<p>固定 a，F(x)=lnx − 2(x−a)/(x+a)：F′ = (x−a)²/[x(x+a)²] &gt; 0（x&gt;a）⇒ F(b)&gt;F(a)=0。∎</p>
+</blockquote>
+<p><strong>T126.</strong>★★★ 讨论方程 lnx = kx 根的个数（按 k 分类）。</p>
+<blockquote>
+<p>令 g=lnx/x：g′=(1−lnx)/x²，最大 g(e)=1/e。
+<strong>k&gt;1/e：无根；k=1/e：1根（x=e）；0&lt;k&lt;1/e：2根；k≤0：1根（0&lt;x&lt;1）</strong>。</p>
+</blockquote>
+<p><strong>T127.</strong>★★ x₁=√2，xₙ₊₁=√(2+xₙ)。证明收敛并求极限。</p>
+<blockquote>
+<p>单调增（归纳：√(2+xₙ)&gt;xₙ ⇔ xₙ²−xₙ−2&lt;0 ⇔ xₙ&lt;2）且有界（&lt;2）⇒ 收敛；设极限 L：L²=2+L ⇒ <strong>L=2</strong>。</p>
+</blockquote>
+<p><strong>T128.</strong>★★ 用定积分求 lim(n→∞) Σₖ₌₁ⁿ (k/n²)·e^{k/n}。</p>
+<blockquote>
+<p>= (1/n)Σ(k/n)e^{k/n} → ∫₀¹ xeˣdx = [xeˣ−eˣ]₀¹ = <strong>1</strong>。</p>
+</blockquote>
+<h3>专题D 级数与微分方程（8题）</h3>
+<p><strong>T129.</strong>★ 判敛 Σ(−1)ⁿ(arctan n)²。</p>
+<blockquote>
+<p>通项→(π/2)²≠0 ⇒ <strong>发散</strong>（必要条件失败）。</p>
+</blockquote>
+<p><strong>T130.</strong>★★ 求 Σ(1/√n − 1/√(n+1)) 的和。</p>
+<blockquote>
+<p>裂项相消：部分和 = 1−1/√(n+1) → <strong>1</strong>。</p>
+</blockquote>
+<p><strong>T131.</strong>★★★ 求幂级数 Σn(n+1)xⁿ 的和函数。</p>
+<blockquote>
+<p>Σ(n+1)xⁿ = 1/(1-x)²（对 Σxⁿ=1/(1-x) 求导后乘 x）。再求导一次：<strong>Σn(n+1)xⁿ = x·d/dx[1/(1-x)²] = 2x/(1-x)³</strong>，|x|&lt;1。</p>
+</blockquote>
+<p><strong>T132.</strong>★★★ 将 f(x)=1/(x²−3x+2) 展开为 x 的幂级数。</p>
+<blockquote>
+<p>部分分式：f = −1/(x−1) + 1/(x−2) = −Σxⁿ − Σxⁿ/2^{n+1} = <strong>−Σ(1 + 1/2^{n+1})xⁿ，|x|&lt;1</strong>。</p>
+</blockquote>
+<p><strong>T133.</strong>★★ 求 Σ C(n+2,2)·xⁿ（即 Σ(n+1)(n+2)xⁿ/2）。</p>
+<blockquote>
+<p>1/(1−x) 两次求导：Σ(n+2)(n+1)xⁿ = 2/(1−x)³ ⇒ 级数 = <strong>1/(1−x)³</strong>，|x|&lt;1。</p>
+</blockquote>
+<p><strong>T134.</strong>★★【数一】把 f(x)=x（0≤x≤π）展开为正弦级数。</p>
+<blockquote>
+<p>bₙ=(2/π)∫₀^π x·sinnx dx = 2(−1)^{n+1}/n ⇒ <strong>x = 2Σ(−1)^{n+1}·sinnx/n（0≤x&lt;π）</strong>。</p>
+</blockquote>
+<p><strong>T135.</strong>★★★ 解 y″+2y′+y = x·e^{−x}。</p>
+<blockquote>
+<p>特征 (r+1)²；λ=−1 为二重根 ⇒ 特解 y<em>=x²(ax+b)e^{−x}，代入比较得 a=1/6, b=0：
+</em><em>y=(C₁+C₂x)e^{−x} + (x³/6)e^{−x}</em>*。</p>
+</blockquote>
+<p><strong>T136.</strong>★★★ 写出以 y₁=eˣ、y₂=2xeˣ、y₃=cosx 为解的常系数齐次线性微分方程。</p>
+<blockquote>
+<p>特征根：1（二重，因 xeˣ 出现）、±i：(r−1)²(r²+1)=r⁴−2r³+2r²−2r+1。
+<strong>y⁽⁴⁾−2y‴+2y″−2y′+y=0</strong>。</p>
+</blockquote>
+<h3>线代综合（10题）</h3>
+<p><strong>T137.</strong>★ A 为4阶，|A|=3，求 |2A⁻¹|。</p>
+<blockquote>
+<p>=2⁴/|A| = <strong>16/3</strong>。</p>
+</blockquote>
+<p><strong>T138.</strong>★★ A 可逆，证明 (A<em>)ᵀ = (Aᵀ)</em>。</p>
+<blockquote>
+<p>(A<em>)ᵀ=(|A|A⁻¹)ᵀ=|A|(Aᵀ)⁻¹=|Aᵀ|(Aᵀ)⁻¹=(Aᵀ)</em>。∎</p>
+</blockquote>
+<p><strong>T139.</strong>★★ A=[[2,−1],[−1,2]]，求 Aⁿ。</p>
+<blockquote>
+<p>λ=1,3；ξ=(1,1),(1,−1)：<strong>Aⁿ=(1/2)[[3ⁿ+1, 3ⁿ−1],[3ⁿ−1, 3ⁿ+1]]</strong>。</p>
+</blockquote>
+<p><strong>T140.</strong>★★★ 讨论 A=[[λ,1,0],[0,λ,0],[0,0,2]] 能否对角化。</p>
+<blockquote>
+<p>λ≠2：特征值 λ(二重),2；λ 的几何重数=1（只有一个自由未知量）&lt;2 ⇒ 不可对角化。λ=2：特征值全2，r(A−2E)=1 ⇒ 几何重数2&lt;3 ⇒ 仍不可对角化。<strong>结论：无论 λ 取何值都不可对角化</strong>。</p>
+</blockquote>
+<p><strong>T141.</strong>★★ 验证分块求逆公式：M=[[A,O],[C,B]]（A、B可逆）⇒ M⁻¹=[[A⁻¹,O],[−B⁻¹CA⁻¹, B⁻¹]]。</p>
+<blockquote>
+<p>直接乘 M·M⁻¹=E 验证（三块乘齐即可）；数值例：A=1,B=3,C=2 ⇒ M⁻¹=[[1,0],[−2/3,1/3]]。</p>
+</blockquote>
+<p><strong>T142.</strong>★★★ f=x₁²+x₂²+x₃²+2a(x₁x₂+x₂x₃+x₃x₁)。a 为何值时秩为2？此时写规范形。</p>
+<blockquote>
+<p>矩阵=E+aJ（J全1）：特征值 1+3a, 1, 1。<strong>a=−1/3 时秩2</strong>；特征值 0,1,1 ⇒ 规范形 <strong>y₁²+y₂²</strong>。</p>
+</blockquote>
+<p><strong>T143.</strong>★★ 证明实对称矩阵不同特征值对应的特征向量正交。</p>
+<blockquote>
+<p>λ₁x₁ᵀ? 设 Ax₁=λ₁x₁，Ax₂=λ₂x₂：λ₁x₂ᵀx₁ = x₂ᵀAx₁ = (Ax₂)ᵀx₁ = λ₂x₂ᵀx₁ ⇒ (λ₁−λ₂)x₂ᵀx₁=0 ⇒ 正交。∎</p>
+</blockquote>
+<p><strong>T144.</strong>★★★ A 为 n 阶正交矩阵且 |A|=−1。证明 −1 是 A 的特征值。</p>
+<blockquote>
+<p>A(Aᵀ+E)=AAᵀ+A=E+A ⇒ |A|·|Aᵀ+E|=|E+A| ⇒ (−1)·|A+E|=|A+E| ⇒ |A+E|=0 ⇒ λ=−1。∎</p>
+</blockquote>
+<p><strong>T145.</strong>★★ α=(1,1,1,1)ᵀ，A=E+ααᵀ/2。求 A 的特征值与 |A|。</p>
+<blockquote>
+<p>ααᵀ秩1：特征值 αᵀα/2=2 与 0(三重) ⇒ A 特征值 <strong>3, 1, 1, 1</strong>，|A|=<strong>3</strong>。</p>
+</blockquote>
+<p><strong>T146.</strong>★★ A 正定。证明 A⁻¹ 与 A* 都正定。</p>
+<blockquote>
+<p>A⁻¹ 特征值=1/λᵢ&gt;0 且对称 ⇒ 正定；A*=|A|A⁻¹，|A|&gt;0 ⇒ 正定。∎</p>
+</blockquote>
+<h3>概率统计（4题）【仅数一】</h3>
+<p><strong>T147.</strong>★★ P(A)=0.4，P(B|A)=0.5，P(A|B)=0.6。求 P(B) 与 P(A∪B)。</p>
+<blockquote>
+<p>P(AB)=0.2；P(B)=0.2/0.6=<strong>1/3</strong>；P(A∪B)=0.4+1/3−0.2=<strong>8/15</strong>。</p>
+</blockquote>
+<p><strong>T148.</strong>★★ 每次试验成功率 p=0.1，独立重复，求"至少成功一次"概率不低于0.9所需的最小次数 n。</p>
+<blockquote>
+<p>1−0.9ⁿ≥0.9 ⇒ 0.9ⁿ≤0.1 ⇒ n≥ln0.1/ln0.9≈21.9 ⇒ <strong>n=22</strong>。</p>
+</blockquote>
+<p><strong>T149.</strong>★ (X,Y) 服从二维正态 N(μ₁,μ₂,σ₁²,σ₂²,ρ)：判断"X与Y独立 ⇔ ρ=0"并求 E(2X−Y)。</p>
+<blockquote>
+<p>二维正态时<strong>成立</strong>（一般分布不相关⇏独立）；E(2X−Y)=<strong>2μ₁−μ₂</strong>。</p>
+</blockquote>
+<p><strong>T150.</strong>★★ σ²已知，n=9，X̄=5，σ=1：求 μ 的95%置信区间。</p>
+<blockquote>
+<p>5±1.96·(1/3) ⇒ <strong>(4.35, 5.65)</strong>（z₀.₀₂₅≈1.96）。</p>
+</blockquote>
+<h2>第四轮·真题大题板书精讲（T151–T183）</h2>
+<blockquote>
+<p>与前三轮不同，本轮每题给出<strong>考场板书级完整解答</strong>（按真题评分步骤书写，可直接模仿答题格式）。难度对标真题解答题。</p>
+</blockquote>
+<h3>专题一 中值定理·不等式·方程根（5题）</h3>
+<p><strong>T151.</strong>★★★ f在[0,1]连续、(0,1)可导，f(0)=0，f(1)=1。证明：存在相异ξ,η∈(0,1)使 f′(ξ)f′(η)≥1。</p>
+<blockquote>
+<p>因f连续，由介值定理存在c∈(0,1)使f(c)=1/2。在[0,c]、[c,1]分别用拉格朗日中值定理：
+∃ξ∈(0,c)：f′(ξ)=(f(c)−f(0))/c=1/(2c)；∃η∈(c,1)：f′(η)=(f(1)−f(c))/(1−c)=1/(2(1−c))，且ξ&lt;c&lt;η相异。
+相乘：f′(ξ)f′(η)=1/[4c(1−c)] ≥ 1（因c(1−c)≤1/4）。∎</p>
+</blockquote>
+<p><strong>T152.</strong>★★★ f在[0,2]二阶可导，f(0)=2，f(1)=1，f(2)=2。证明：∃ξ∈(0,2)使 f″(ξ)=2。</p>
+<blockquote>
+<p>构造 g(x)=f(x)−(x−1)²，则 g(0)=g(1)=g(2)=1。
+在[0,1]、[1,2]分别用罗尔：∃ξ₁∈(0,1)、ξ₂∈(1,2)使 g′(ξ₁)=g′(ξ₂)=0。
+在[ξ₁,ξ₂]对g′再用罗尔：∃ξ∈(ξ₁,ξ₂)⊂(0,2)使 g″(ξ)=0，即 f″(ξ)−2=0。∎</p>
+</blockquote>
+<p><strong>T153.</strong>★★ 讨论方程 eˣ = kx 根的个数（按k分类）。</p>
+<blockquote>
+<p>令 g(x)=eˣ/x（x≠0）：g′(x)=eˣ(x−1)/x²。
+x&gt;0：g在x=1取最小 g(1)=e ⇒ k&gt;e：两根；k=e：一根(x=1)；0&lt;k&lt;e：无根。
+x&lt;0：g从0⁻单调降到−∞ ⇒ k&lt;0：恰一根（负根）。
+<strong>结论：k&lt;0一根；0≤k<e无根；k=e一根；k>e两根。</strong></p>
+</blockquote>
+<p><strong>T154.</strong>★★ 证明：0&lt;x&lt;π/2 时 tanx &gt; x + x³/3。</p>
+<blockquote>
+<p>令 F=tanx−x−x³/3，F(0)=0；F′=sec²x−1−x²=tan²x−x²=(tanx−x)(tanx+x)。
+因 tanx&gt;x（x&gt;0），F′&gt;0 ⇒ F单调增 ⇒ F(x)&gt;F(0)=0。∎</p>
+</blockquote>
+<p><strong>T156.</strong>★★ 设f在[0,+∞)可导，f(0)=1，且 |f′(x)|&lt;f(x)。证明：f(x)&lt;eˣ。</p>
+<blockquote>
+<p>令 F(x)=f(x)e^{−x}：F′=e^{−x}(f′−f)。
+由 |f′|&lt;f 得 −f&lt;f′&lt;f ⇒ f′−f&lt;0 ⇒ F′&lt;0，F单调递减 ⇒ F(x)≤F(0)=1。
+又 F(x)=f(x)e^{−x}=1 时需 f′=f 恒成立与 |f′|&lt;f 矛盾 ⇒ 严格 f(x)&lt;eˣ。∎</p>
+</blockquote>
+<h3>专题二 积分与二重积分（6题）</h3>
+<p><strong>T157.</strong>★★★ 求 I=∫₀^π [x·sinx/(1+cos²x)]dx。</p>
+<blockquote>
+<p>区间再现 x→π−x：I=∫₀^π [(π−x)sinx/(1+cos²x)]dx。相加：
+2I=π∫₀^π sinx/(1+cos²x)dx。令 t=cosx（dt=−sinx dx）：
+2I=π∫_{−1}^{1} dt/(1+t²)=π·(π/2) ⇒ <strong>I=π²/4</strong>。</p>
+</blockquote>
+<p><strong>T158.</strong>★★ 求 ∫₀¹ x·ln(1+x)dx。</p>
+<blockquote>
+<p>分部：=(x²/2)ln(1+x)|₀¹ − (1/2)∫₀¹ x²/(1+x)dx。
+x²/(1+x)=x−1+1/(1+x) ⇒ ∫₀¹=1/2−1+ln2=ln2−1/2。
+I=(1/2)ln2 − (1/2)(ln2−1/2) = <strong>1/4</strong>。</p>
+</blockquote>
+<p><strong>T159.</strong>★★★ 求 ∬_D x dσ，D 由 y=x² 与 x=y+2（即 y=x−2）围成。</p>
+<blockquote>
+<p>交点：y²=y+2 ⇒ y=2, −1（X型需拆，改用<strong>Y型</strong>）：∫<em>{−1}^{2}dy∫</em>{y²}^{y+2} x dx
+= ½∫<em>{−1}^{2} [(y+2)²−y⁴]dy = ½[y³/3+2y²+4y−y⁵/5]</em>{−1}^{2} = ½(184/15+32/15) = <strong>36/5</strong>。</p>
+</blockquote>
+<p><strong>T160.</strong>★★ 求 ∬_D e^{−(x²+y²)}dσ，D: x²+y²≤R²。</p>
+<blockquote>
+<p>极坐标：∫₀^{2π}dθ∫₀^R e^{−r²}·r dr = 2π·[−e^{−r²}/2]₀^R = <strong>π(1−e^{−R²})</strong>。
+（令R→+∞得反常积分 ∬_{R²}e^{−(x²+y²)}=π——概率密度归一化的经典来源。）</p>
+</blockquote>
+<p><strong>T161.</strong>★★ 设f连续。证明 F(x)=∫₀ˣ f(t)(x−t)dt 满足 F″(x)=f(x)。</p>
+<blockquote>
+<p>拆开：F=x∫₀ˣ f(t)dt − ∫₀ˣ t·f(t)dt。
+F′=∫₀ˣ f(t)dt + x·f(x) − x·f(x) = ∫₀ˣ f(t)dt。
+F″=f(x)。∎（技巧：被积函数含x时先"提出x再求导"。）</p>
+</blockquote>
+<p><strong>T162.</strong>★★ 求 ∫₀^{+∞} x/(1+x⁴)dx。</p>
+<blockquote>
+<p>令 u=x²（du=2x dx）：=(1/2)∫₀^{+∞} du/(1+u²)=(1/2)·(π/2)=<strong>π/4</strong>。</p>
+</blockquote>
+<h3>专题三 常微分方程（2题）</h3>
+<p><strong>T164.</strong>★★★ 解 y″−2y′+y = x²·eˣ。</p>
+<blockquote>
+<p>特征方程 (r−1)²=0，二重根 r=1 ⇒ 齐次通解 (C₁+C₂x)eˣ。
+技巧：令 y=eˣ·u，则 (D−1)²y = eˣ·u″（算子位移公式），方程化为 eˣu″=x²eˣ ⇒ u″=x²。
+积分两次：u=x⁴/12+C₁x+C₂。
+<strong>通解 y=(C₁+C₂x+x⁴/12)eˣ</strong>。</p>
+</blockquote>
+<p><strong>T165.</strong>★★ 解 y″+y = cos2x。</p>
+<blockquote>
+<p>特征 r=±i，齐次通解 C₁cosx+C₂sinx。
+2i 不是特征根 ⇒ 设 y<em>=Acos2x+Bsin2x：代入 y″+y=−4Acos2x−4Bsin2x+Acos2x+Bsin2x=cos2x。
+−3A=1、−3B=0 ⇒ A=−1/3，B=0。
+</em><em>通解 y=C₁cosx+C₂sinx−(1/3)cos2x</em>*。</p>
+</blockquote>
+<h3>专题四 无穷级数（3题）</h3>
+<p><strong>T167.</strong>★★ 判敛 Σ(1+1/n)^{−n²}。</p>
+<blockquote>
+<p>根值法：lim (aₙ)^{1/n} = lim (1+1/n)^{−n} = e^{−1} &lt; 1 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>T168.</strong>★★★ 求幂级数 Σ(−1)^{n−1}·x^{2n}/(2n−1) 的和函数与收敛域。</p>
+<blockquote>
+<p>逐项积分路线：S(x)=x·Σ(−1)^{n−1}x^{2n−1}/(2n−1)。
+已知 arctanx = Σ(−1)^{n−1}x^{2n−1}/(2n−1)（|x|≤1）。
+故 <strong>S(x)=x·arctanx</strong>，收敛域 <strong>[−1,1]</strong>（端点处级数=±Σ(−1)^{n−1}/(2n−1) 交错收敛）。</p>
+</blockquote>
+<p><strong>T169.</strong>★★★【数一】将 f(x)=x²（0≤x≤π）展开为余弦级数，并求 Σ(−1)^{n−1}/n²。</p>
+<blockquote>
+<p>偶延拓：bₙ=0；a₀=(2/π)∫₀^π x²dx=2π²/3；aₙ=(2/π)∫₀^π x²cosnx dx=4(−1)ⁿ/n²。
+<strong>x²=π²/3 + 4Σ(−1)ⁿcos(nx)/n²</strong>（0≤x&lt;π）。
+令 x=0：0=π²/3+4Σ(−1)ⁿ/n² ⇒ <strong>Σ(−1)^{n−1}/n²=π²/12</strong>。</p>
+</blockquote>
+<h3>专题五 多元与曲面积分（5题）【数一】</h3>
+<p><strong>T170.</strong>★★ 求 f=xyz 在 (1,1,1) 处沿方向 l=(1,2,2) 的方向导数（l为从该点出发的方向）。</p>
+<blockquote>
+<p>grad f=(yz,xz,xy)|₍₁,₁,₁₎=(1,1,1)；单位化 l₀=(1,2,2)/3。
+方向导数 = (1,1,1)·(1,2,2)/3 = <strong>5/3</strong>。</p>
+</blockquote>
+<p><strong>T171.</strong>★★★ 求椭球 x²/a²+y²/b²+z²/c²≤1 内接长方体（各面平行坐标面）的最大体积。</p>
+<blockquote>
+<p>设第一卦限顶点 (x,y,z)，V=8xyz。拉格朗日：∇(xyz)=λ∇(x²/a²+y²/b²+z²/c²) ⇒ 由对称性 x=a/√3, y=b/√3, z=c/√3。
+<strong>V_max = 8abc/(3√3)</strong>。</p>
+</blockquote>
+<p><strong>T172.</strong>★★★ 用高斯公式求 F=(x,y,z) 穿过 Σ（抛物面 z=x²+y² 与 z=1 所围闭曲面外侧）的通量。</p>
+<blockquote>
+<p>div F = 1+1+1 = 3 ⇒ 通量 = 3·V。
+V=∬(1−r²)r dr dθ = 2π·[r²/2−r⁴/4]₀¹ = π/2。
+<strong>通量 = 3π/2</strong>。</p>
+</blockquote>
+<p><strong>T173.</strong>★★★【数一】用斯托克斯公式求 ∮_L y dx + z dy + x dz，L 为平面 x+y+z=0 截球面 x²+y²+z²=a² 的圆周，从 z 轴正向看去取逆时针。</p>
+<blockquote>
+<p>F=(y,z,x)：curl F=(∂x/∂y−∂z/∂z, ∂y/∂z−∂x/∂x, ∂z/∂x−∂y/∂y)=(−1,−1,1)。
+Σ：平面圆盘，法向量与 L 成右手 ⇒ n=(1,1,1)/√3。
+curl·n = (−1−1+1)/√3 = −1/√3 ⇒ ∮ = −(1/√3)·πa² = <strong>−πa²/√3</strong>。</p>
+</blockquote>
+<p><strong>T174.</strong>★★ 求 ∬_Σ (x²+y²)dS，Σ 为锥面 z=√(x²+y²) 被 z=1 截下的部分。</p>
+<blockquote>
+<p>dS=√(1+z_x²+z_y²)dxdy=√2·dxdy；投影区域 D: x²+y²≤1。
+=√2∫₀^{2π}dθ∫₀¹ r²·r dr = √2·2π·(1/4) = <strong>π√2/2</strong>。</p>
+</blockquote>
+<h3>专题六 线性代数大题板书（5题）</h3>
+<p><strong>T175.</strong>★★★ 讨论方程组 {x+y+λz=1; x+λy+z=2; λx+y+z=−3} 解的情况。</p>
+<blockquote>
+<p>系数行列式 = −(λ−1)²(λ+2)（按对角展开验证）。
+<strong>λ≠1且λ≠−2：唯一解</strong>（克拉默）。
+<strong>λ=1</strong>：三行全为(1,1,1)，右端(1,2,−3)不一致 ⇒ r(A)=1&lt;r(A|b)=2 ⇒ <strong>无解</strong>。
+<strong>λ=−2</strong>：通解推导——r1−r2: 3y−3z=−1 ⇒ y=z−1/3；r1: x=1−y+2z=4/3+z；r3自动满足。
+<strong>无穷多解：x=(4/3,−1/3,0)+t(1,1,1)</strong>，t∈R。</p>
+</blockquote>
+<p><strong>T176.</strong>★★★ 求可逆矩阵 P 使 P⁻¹AP=Λ：A=[[1,−1,1],[2,4,−2],[−3,−3,5]]。</p>
+<blockquote>
+<p>特征多项式 (λ−2)²(λ−6)（tr=10、det=24、主 minors 和=28 三重校验）。
+λ=2：(2E−A)x=0 ⇒ x₁+x₂−x₃=0 ⇒ ξ₁=(1,−1,0)ᵀ, ξ₂=(1,0,1)ᵀ。
+λ=6：ξ₃=(1,−2,3)ᵀ（验算 Aξ₃=6ξ₃ ✓）。
+<strong>P=(ξ₁,ξ₂,ξ₃)，Λ=diag(2,2,6)</strong>。</p>
+</blockquote>
+<p><strong>T177.</strong>★★★ 用正交变换化二次型 f=x₁²+6x₂²+2x₃²+8x₁x₃ 为标准形。</p>
+<blockquote>
+<p>矩阵 A=[[1,0,4],[0,6,0],[4,0,2]]：特征多项式 |A−λE|=−(λ−6)²(λ+2) ⇒ λ=6,6,−2。
+λ=6：ξ₁=(1,0,1)ᵀ, ξ₂=(0,1,0)ᵀ；λ=−2：ξ₃=(1,0,−1)ᵀ（三者已正交）。
+单位化：q₁=(1,0,1)/√2, q₂=(0,1,0), q₃=(1,0,−1)/√2。
+<strong>Q=(q₁,q₂,q₃)，f=6y₁²+6y₂²−2y₃²</strong>。</p>
+</blockquote>
+<p><strong>T178.</strong>★★ 证明：A 正定 ⇔ 存在可逆矩阵 C 使 A=CᵀC。</p>
+<blockquote>
+<p>充分性：x≠0 时 xᵀAx=xᵀCᵀCx=(Cx)ᵀ(Cx)=|Cx|²&gt;0（C可逆⇒Cx≠0）。
+必要性：A 正定 ⇒ 特征值全正 ⇒ 正交对角化 A=QᵀΛQ（Q正交），Λ=diag(λ₁,…,λₙ)，λᵢ&gt;0。
+取 C=Λ^{1/2}Q（Λ^{1/2} 对角元素 √λᵢ，可逆），则 CᵀC=QᵀΛQ=A。∎</p>
+</blockquote>
+<p><strong>T179.</strong>★★ 证明：若 A~B，则 Aᵀ~Bᵀ。</p>
+<blockquote>
+<p>A~B ⇒ ∃可逆P：A=P⁻¹BP ⇒ 两边转置：Aᵀ=PᵀBᵀ(P⁻¹)ᵀ=PᵀBᵀ(Pᵀ)⁻¹。
+取 Q=(Pᵀ)⁻¹（可逆）：Aᵀ=Q⁻¹BᵀQ ⇒ <strong>Aᵀ~Bᵀ</strong>。∎</p>
+</blockquote>
+<h3>专题七 概率统计大题板书（4题）</h3>
+<p><strong>T180.</strong>★★★ (X,Y) 密度 f(x,y)=A·e^{−2x−3y}（x,y&gt;0，否则0）。(1)求A；(2)判断独立性；(3)求P(X&lt;1,Y&lt;1)。</p>
+<blockquote>
+<p>(1) ∫₀^∞e^{−2x}dx·∫₀^∞e^{−3y}dy·A = A·(1/2)(1/3)=1 ⇒ <strong>A=6</strong>。
+(2) f=6e^{−2x}e^{−3y}=f_X·f_Y（f_X=2e^{−2x}, f_Y=3e^{−3y}）⇒ <strong>独立</strong>。
+(3) P=F(1,1)=(1−e^{−2})(1−e^{−3})≈<strong>0.918</strong>。</p>
+</blockquote>
+<p><strong>T181.</strong>★★ X~泊松P(λ)，样本 x₁,…,xₙ。求 λ 的矩估计与最大似然估计。</p>
+<blockquote>
+<p>矩估计：E(X)=λ=x̄ ⇒ <strong>λ̂₁=x̄</strong>。
+MLE：L(λ)=Π[e^{−λ}λ^{xᵢ}/xᵢ!] = e^{−nλ}·λ^{Σxᵢ}/Πxᵢ!；
+lnL=−nλ+(Σxᵢ)lnλ−ln(Πxᵢ!)；令 dlnL/dλ = −n+(Σxᵢ)/λ=0 ⇒ <strong>λ̂₂=x̄</strong>（两者相同）。</p>
+</blockquote>
+<p><strong>T182.</strong>★★ X~N(0,1)，求 Y=X² 的密度。</p>
+<blockquote>
+<p>y&gt;0：F_Y(y)=P(X²≤y)=P(−√y≤X≤√y)=2Φ(√y)−1。
+求导：f_Y(y)=2φ(√y)·(1/(2√y)) = <strong>(1/√(2πy))·e^{−y/2}（y&gt;0）</strong>，即 χ²(1) 分布。</p>
+</blockquote>
+<p><strong>T183.</strong>★★ 掷硬币10000次，正面次数 X。用CLT估计 P(4900≤X≤5100)。</p>
+<blockquote>
+<p>X~B(10000, 1/2)：μ=5000，σ²=npq=2500，σ=50。
+标准化：P((−100)/50≤Z≤(100)/50)=P(|Z|≤2)=<strong>0.9545</strong>。</p>
+</blockquote>
+<h2>第五轮·选择填空专项（T184–T240，57题）</h2>
+<blockquote>
+<p>对标数学一卷面结构（10选择+6填空）：选择40题+填空20题。答案与一行解析紧跟题后（冲刺期可只看速查）。标注【数一】的为概率/级数/空间题。</p>
+</blockquote>
+<h3>一、高等数学（选择18题）</h3>
+<p><strong>T181.</strong>★ lim(x→+∞) (√(x²+x)−x) =　A.0 B.<strong>1/2</strong> C.1 D.∞</p>
+<blockquote>
+<p>有理化：x/(√(x²+x)+x) → 1/2。</p>
+</blockquote>
+<p><strong>T182.</strong>★★ 当 x→0⁺ 时，√x·lnx 是 x^{1/2} 的：A.等价 B.同阶 C.高阶 D.<strong>低阶</strong></p>
+<blockquote>
+<p>比值 = lnx → −∞（绝对值发散）⇒ 低阶。</p>
+</blockquote>
+<p><strong>T183.</strong>★★★ f(x)=|x|³ 在 x=0 处：
+A. 一阶可导二阶不可导　B. <strong>二阶可导三阶不可导</strong>　C. 三阶可导　D. 不可导</p>
+<blockquote>
+<p>f′=3x|x|（存在），f″=6|x|（f″(0)=0 存在），f‴(0)=lim 6|h|/h 左右不等 ⇒ 不存在。</p>
+</blockquote>
+<p><strong>T184.</strong>★★ 设 f′(x)=x(x−1)²(x−2)，则 f 的极值点个数为：A.1 B.<strong>2</strong> C.3 D.4</p>
+<blockquote>
+<p>f′ 在 x=0、x=2 处<strong>变号</strong>（x=1 两侧同号）⇒ 2个极值点。</p>
+</blockquote>
+<p><strong>T185.</strong>★★ 曲线 y=x·e^{1/x²} 的渐近线条数：
+A. 0 B. 1 C. <strong>2</strong> D. 3</p>
+<blockquote>
+<p>x→∞：y=x+1/x+… ⇒ 斜渐近 y=x；x→0⁺：y→+∞ ⇒ 垂直 x=0。共2条。</p>
+</blockquote>
+<p><strong>T186.</strong>★★ ∫₀^{2π} √(1+cosx) dx =　A.√2 B.2√2 C.<strong>4√2</strong> D.0</p>
+<blockquote>
+<p>1+cosx=2cos²(x/2)：原式=√2∫₀^{2π}|cos(x/2)|dx = √2(2+2)=4√2。</p>
+</blockquote>
+<p><strong>T187.</strong>★★ 下列反常积分中收敛的是：
+A. ∫₁^∞ dx/√x　B. ∫₀¹ dx/x　C. <strong>∫₀¹ lnx dx</strong>　D. ∫₁^∞ dx/x</p>
+<blockquote>
+<p>A、B、D 均发散；∫₀¹lnx dx = <strong>−1</strong> 收敛。</p>
+</blockquote>
+<p><strong>T188.</strong>★★【数一】级数 Σ(−1)^{n−1}/nᵖ 绝对收敛的条件：A. p&gt;0 B. 0<p≤1 C. **p>1** D. p≥1</p>
+<blockquote>
+<p>|·|=Σ1/nᵖ 在 p&gt;1 时收敛。</p>
+</blockquote>
+<p><strong>T189.</strong>★★ 微分方程 y″+2y′+5y=0 的通解：
+A. C₁e^{−x}+C₂e^{5x}　B. C₁cos2x+C₂sin2x　C. <strong>e^{−x}(C₁cos2x+C₂sin2x)</strong>　D. e^{2x}(C₁cosx+C₂sinx)</p>
+<blockquote>
+<p>r=−1±2i。</p>
+</blockquote>
+<p><strong>T190.</strong>★★ 下列函数在 (0,0) 处偏导存在但<strong>不</strong>连续的是：
+A. e^{x²+y²}　B. x²+y²　C. <strong>xy/(x²+y²)</strong>（原点补充定义0）　D. |x|+|y|</p>
+<blockquote>
+<p>经典反例：沿不同路径极限不同 ⇒ 不连续，但 f_x(0,0)=0 存在。</p>
+</blockquote>
+<p><strong>T191.</strong>★★ 交换次序：∫₀¹dy∫<em>y^{√y} f(x,y)dx =　A. ∫₀¹dx∫₀^{x²}f　B. <strong>∫₀¹dx∫_{x²}^{x}f</strong>　C. ∫₀¹dx∫_x^{x²}f　D. ∫₀¹dx∫</em>{x}^{√x}f</p>
+<blockquote>
+<p>区域 {y≤x≤√y}={x²≤y≤x, 0≤x≤1}。</p>
+</blockquote>
+<p><strong>T192.</strong>★★【数一】xOy 面上曲线 y²=2x 绕 x 轴旋转一周所得曲面方程：
+A. y²+z²=2x　B. x²+z²=2y　C. y²=2(x²+z²)　D. <strong>y²+z²=2x</strong>（A同义但D为标准写法）</p>
+<blockquote>
+<p>绕 x 轴：y 换成 ±√(y²+z²)。</p>
+</blockquote>
+<p><strong>T193.</strong>★★【数一】∮_L x²ds（L: x²+y²=1）=　A. 2π B. <strong>π</strong> C. π/2 D. 0</p>
+<blockquote>
+<p>轮换对称：∮x²ds=∮y²ds=½∮(x²+y²)ds=½∮ds=π。</p>
+</blockquote>
+<p><strong>T194.</strong>★★【数一】能用斯托克斯公式直接计算的是：
+A. 平面闭曲线积分变曲面积分　B. 空间闭曲线积分变曲面积分　C. <strong>空间闭曲线积分 = 张在某曲面上的曲面积分</strong>　D. 任意曲面积分化为线积分</p>
+<blockquote>
+<p>斯托克斯：空间闭曲线 ⇔ 张在其上的曲面积分（方向右手匹配）。</p>
+</blockquote>
+<p><strong>T195.</strong>★ 级数收敛的<strong>必要</strong>条件是：A. 部分和有界 B. <strong>通项趋于0</strong> C. 单调 D. 正项</p>
+<blockquote>
+<p>必要条件 lim aₙ=0（不充分——调和级数）。</p>
+</blockquote>
+<p><strong>T196.</strong>★★ 幂级数 Σ_{n=1}^∞ (−1)ⁿxⁿ/n! 的和函数：
+A. eˣ　B. e^{−x}　C. <strong>e^{−x}−1</strong>　D. 1−e^{−x}</p>
+<blockquote>
+<p>Σ_{n=0}^∞(−1)ⁿxⁿ/n!=e^{−x}，去掉 n=0 项（=1）。</p>
+</blockquote>
+<p><strong>T197.</strong>★ 二元函数二阶混合偏导相等的充分条件是：
+A. 偏导存在　B. 连续　C. <strong>f_xy 与 f_yx 连续</strong>　D. 可微</p>
+<blockquote>
+<p>克莱罗定理：二阶混合偏导连续则相等。</p>
+</blockquote>
+<p><strong>T198.</strong>★★ 方程 F(x,y,z)=0 在点 P₀ 邻域确定隐函数 z=f(x,y) 的条件：
+A. F(P₀)=0　B. <strong>F(P₀)=0 且 F_z(P₀)≠0（F有连续偏导）</strong>　C. F_z(P₀)=0　D. 任意</p>
+<h3>二、线性代数（选择12题）</h3>
+<p><strong>T199.</strong>★★ |A|=0（A为n阶）<strong>不能</strong>推出的是：
+A. A不可逆　B. 0是A的特征值　C. A的列向量线性相关　D. <strong>A=O</strong></p>
+<blockquote>
+<p>不可逆矩阵未必是零矩阵。</p>
+</blockquote>
+<p><strong>T200.</strong>★★ A²=E，则 A 的特征值只能是：A. 0 B. 1 C. <strong>±1</strong> D. 任意</p>
+<blockquote>
+<p>λ²=1 ⇒ λ=±1（且此时A必可对角化）。</p>
+</blockquote>
+<p><strong>T201.</strong>★★ 秩1矩阵 A=αβᵀ，则 A² =　A. A B. (αᵀβ)A　C. <strong>(βᵀα)A</strong>　D. O</p>
+<blockquote>
+<p>A²=α(βᵀα)βᵀ=(βᵀα)·αβᵀ（βᵀα为标量）。</p>
+</blockquote>
+<p><strong>T202.</strong>★ 分块对角阵 [[A,O],[O,B]] 的逆为：A. [[A⁻¹,O],[O,B⁻¹]]（即自身分别求逆）　B. [[B⁻¹,O],[O,A⁻¹]]　C. [[O,A⁻¹],[B⁻¹,O]]　D. 不存在</p>
+<blockquote>
+<p><strong>答案 A</strong>（主对角分块分别求逆）。</p>
+</blockquote>
+<p><strong>T203.</strong>★★ 正交矩阵 A 的行列式：A. 恒为1 B. 恒为−1 C. <strong>±1</strong> D. 任意非零</p>
+<blockquote>
+<p>|A|²=|AᵀA|=1。</p>
+</blockquote>
+<p><strong>T204.</strong>★★★ A~B，下列<strong>不一定</strong>成立的是：
+A. |A|=|B|　B. tr(A)=tr(B)　C. Aᵀ~Bᵀ　D. <strong>A 的列向量组与 B 的列向量组等价</strong></p>
+<blockquote>
+<p>相似不保持列空间。</p>
+</blockquote>
+<p><strong>T205.</strong>★★ n阶实对称矩阵必可对角化的依据：
+A. 行列式非零　B. <strong>k重特征值恰有k个线性无关特征向量（实对称定理）</strong>　C. 特征值互异　D. 正定</p>
+<p><strong>T206.</strong>★★ 二次型 f=x₁²+x₂²+x₃²+2x₁x₂ 的秩与正惯性指数：
+A. 3,3　B. <strong>2,2</strong>　C. 2,1　D. 3,2</p>
+<blockquote>
+<p>矩阵=[[1,1,0],[1,1,0],[0,0,1]]：f=(x₁+x₂)²+x₃² ⇒ 秩2、正惯性2。</p>
+</blockquote>
+<p><strong>T207.</strong>★★ Ax=0（4元，r(A)=2）的基础解系含向量个数：A. 1 B. <strong>2</strong> C. 3 D. 4</p>
+<blockquote>
+<p>n−r=2。</p>
+</blockquote>
+<p><strong>T208.</strong>★★★ ξ₁,ξ₂ 是 Ax=b 的两个解，则<strong>一定</strong>是 Ax=b 解的是：
+A. ξ₁+ξ₂　B. ξ₁−ξ₂　C. <strong>(ξ₁+2ξ₂)/3</strong>　D. 2ξ₁−ξ₂</p>
+<blockquote>
+<p>系数和为1的组合仍是解：1/3+2/3=1 ✓（B是齐次解，D系数和=1? 2−1=1 ✓ D也对——标准答案取C，注意D同样正确，本题考"系数和=1"判据）。</p>
+</blockquote>
+<p><strong>T209.</strong>★ A 为3阶，|A|=2，则 |−A| =　A. −2 B. <strong>−2</strong>?（计算：(−1)³×2=−2）</p>
+<blockquote>
+<p>选项：A. −2 B. 2 C. −8 D. 8 ⇒ <strong>A（−2）</strong>。|−A|=(−1)³|A|=−2。</p>
+</blockquote>
+<p><strong>T210.</strong>★★【数一】由基 α₁,α₂ 到基 β₁,β₂ 的过渡矩阵 C 满足：
+A. (α₁,α₂)=(β₁,β₂)C　B. <strong>(β₁,β₂)=(α₁,α₂)C</strong>　C. C=AB　D. 无固定关系</p>
+<blockquote>
+<p>坐标变换定义。</p>
+</blockquote>
+<h3>三、概率统计（选择10题）【数一】</h3>
+<p><strong>T211.</strong>★ 由分布函数 F(x) 求 P(X=a)：
+A. F(a)　B. <strong>F(a)−F(a⁻)</strong>　C. F(a⁺)　D. 0</p>
+<blockquote>
+<p>点概率=该点跃度。</p>
+</blockquote>
+<p><strong>T212.</strong>★★ X,Y 独立：P(0,0)、P(0,1)、P(1,0) 分别为 0.4,0.3,0.1，则 P(X+Y≤1) =　A. 0.7 B. <strong>0.8</strong> C. 0.9 D. 1</p>
+<blockquote>
+<p>P(0,0)+P(0,1)+P(1,0)+P(1,1)；P(1,1)=1−0.4−0.3−0.1=0.2；P(X+Y≤1)=0.4+0.3+0.1=0.8。</p>
+</blockquote>
+<p><strong>T213.</strong>★★ X~N(1,4)，Y~N(2,9) 独立，则 X−Y~　A. N(−1,5) B. <strong>N(−1,13)</strong> C. N(1,13) D. N(−1,√13)</p>
+<blockquote>
+<p>均值相减、方差相加。</p>
+</blockquote>
+<p><strong>T214.</strong>★ X~P(2)、Y~P(3) 独立，则 X+Y~　A. P(√13) B. <strong>P(5)</strong>　C. P(6) D. N(5,5)</p>
+<blockquote>
+<p>泊松分布可加性。</p>
+</blockquote>
+<p><strong>T215.</strong>★ Cov(X,Y)=0 且 D(X)D(Y)&gt;0，则：A. 独立 B. <strong>不相关</strong> C. 必不独立 D. 相关系数为1</p>
+<blockquote>
+<p>不相关⇏独立。</p>
+</blockquote>
+<p><strong>T216.</strong>★ 恒成立的不等式：A. E(X²)&lt;(EX)²　B. <strong>E(X²)≥(EX)²</strong>　C. D(X)≤0　D. E(X²)≤EX</p>
+<blockquote>
+<p>D(X)=E(X²)−(EX)²≥0。</p>
+</blockquote>
+<p><strong>T217.</strong>★★ X~U(0,4)，则 P(X&gt;3|X&gt;2) =　A. 1/3 B. <strong>1/2</strong> C. 2/3 D. 3/4</p>
+<blockquote>
+<p>缩样：(区间(2,4)内&gt;(3)的比例)=(1)/(2)。</p>
+</blockquote>
+<p><strong>T218.</strong>★ 依概率收敛的含义：∀ε&gt;0，lim P(|Xₙ−a|≥ε) =　A. 1 B. <strong>0</strong> C. 不存在 D. 视分布而定</p>
+<blockquote>
+<p>定义。</p>
+</blockquote>
+<p><strong>T219.</strong>★★ X₁,…,X₁₆ iid N(μ,4)，则 D(X̄) =　A. 4 B. <strong>1/4</strong> C. 1/16 D. 2</p>
+<blockquote>
+<p>σ²/n=4/16。</p>
+</blockquote>
+<p><strong>T220.</strong>★ S² 是样本方差（分母n−1），则 E(S²) =　A. σ²/n　B. σ²/n? 　C. <strong>σ²</strong>　D. (n−1)σ²</p>
+<blockquote>
+<p>无偏性。</p>
+</blockquote>
+<h3>四、填空题（20题）</h3>
+<p><strong>T221.</strong>★ lim(x→0) (1−cosx)/(x·sinx) = ______。</p>
+<blockquote>
+<p><strong>1/2</strong>（1−cosx~x²/2，x·sinx~x²）。</p>
+</blockquote>
+<p><strong>T222.</strong>★★ f(x)=x(x−1)(x−2)(x−3)，则 f′(0) = ______。</p>
+<blockquote>
+<p><strong>−6</strong>（f′(0)=(0−1)(0−2)(0−3)=−6）。</p>
+</blockquote>
+<p><strong>T223.</strong>★ 曲线 y=x³−3x²+9 的拐点为 ______。</p>
+<blockquote>
+<p><strong>(1,7)</strong>（y″=6x−6）。</p>
+</blockquote>
+<p><strong>T224.</strong>★★ ∫₀^{π/2} sin⁶x dx = ______。</p>
+<blockquote>
+<p>华里士：<strong>5π/32</strong>。</p>
+</blockquote>
+<p><strong>T225.</strong>★★ 微分方程 y′+y=e^{−x} 的通解 ______。</p>
+<blockquote>
+<p><strong>y=e^{−x}(x+C)</strong>。</p>
+</blockquote>
+<p><strong>T226.</strong>★★【数一】曲面 z=x²+y² 在点 (1,1,2) 处的切平面方程 ______。</p>
+<blockquote>
+<p><strong>2x+2y−z−2=0</strong>。</p>
+</blockquote>
+<p><strong>T227.</strong>★★【数一】∫_L (x²+y²)ds，L 为 (0,0) 到 (1,1) 的线段 = ______。</p>
+<blockquote>
+<p><strong>2√2/3</strong>（∫₀¹2t²·√2dt）。</p>
+</blockquote>
+<p><strong>T228.</strong>★★ 幂级数 Σxⁿ/(n·2ⁿ) 的收敛域为 ______。</p>
+<blockquote>
+<p>R=2，端点 x=2 发散、x=−2 收敛 ⇒ <strong>[−2,2)</strong>。</p>
+</blockquote>
+<p><strong>T229.</strong>★★ A 为3阶，|A|=3，则 |2A*| = ______。</p>
+<blockquote>
+<p>|A<em>|=3²=9 ⇒ 2³×9=</em><em>72</em>*。</p>
+</blockquote>
+<p><strong>T230.</strong>★★ A 为4阶，r(A)=2，则 r(A*) = ______。</p>
+<blockquote>
+<p>r(A)≤n−2=2 ⇒ <strong>0</strong>。</p>
+</blockquote>
+<p><strong>T231.</strong>★★ 二次型 f=x₁²+x₂²+2x₃²+2x₁x₂ 的正惯性指数 = ______。</p>
+<blockquote>
+<p>特征值 2,2,0 ⇒ <strong>2</strong>。</p>
+</blockquote>
+<p><strong>T232.</strong>★ A=[[1,2],[2,1]] 的相似对角形为 ______。</p>
+<blockquote>
+<p>特征值 3,−1 ⇒ <strong>diag(3,−1)</strong>。</p>
+</blockquote>
+<p><strong>T233.</strong>★ P(A)=0.5、P(B)=0.4 且独立，则 P(A∪B) = ______。</p>
+<blockquote>
+<p>0.5+0.4−0.2=<strong>0.7</strong>。</p>
+</blockquote>
+<p><strong>T234.</strong>★ X~U(−1,2)，则 P(X&gt;0) = ______。</p>
+<blockquote>
+<p><strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>T235.</strong>★ D(X)=4，则 D(−2X+3) = ______。</p>
+<blockquote>
+<p><strong>16</strong>。</p>
+</blockquote>
+<p><strong>T236.</strong>★★ X~P(2)，则 E(X²) = ______。</p>
+<blockquote>
+<p>D+E²=2+4=<strong>6</strong>。</p>
+</blockquote>
+<p><strong>T237.</strong>★ X~N(3,4)，则 P(X≤3) = ______。</p>
+<blockquote>
+<p><strong>0.5</strong>（正态关于均值对称）。</p>
+</blockquote>
+<p><strong>T238.</strong>★★ X₁,…,X₈ 来自 N(μ,σ²)，则 Σ(Xᵢ−X̄)²/σ² ~ ______。</p>
+<blockquote>
+<p><strong>χ²(7)</strong>。</p>
+</blockquote>
+<p><strong>T239.</strong>★ X~B(1,p)，样本 x₁,…,xₙ，p 的矩估计 ______。</p>
+<blockquote>
+<p><strong>p̂=x̄</strong>。</p>
+</blockquote>
+<p><strong>T240.</strong>★ X~e(2)（λ=2），则 P(X&gt;1) = ______。</p>
+<blockquote>
+<p><strong>e^{−2}</strong>（无记忆性口径 F(1)=1−e^{−2}）。</p>
+</blockquote>
+<h3>选择题答案速查</h3>
+<table>
+<thead>
+<tr>
+<th>181-190</th>
+<th>191-200</th>
+<th>201-210</th>
+<th>211-220</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B D B B C</td>
+<td>C B C C B</td>
+<td>A D B C A</td>
+<td>D B B B B</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>221-230</th>
+<th>231-240</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1/2 ／ −6 ／ (1,7) ／ 5π/32 ／ y=e^{−x}(x+C) ／ 2x+2y−z−2=0 ／ 2√2/3 ／ [−2,2) ／ 72 ／ 0</td>
+<td>2 ／ diag(3,−1) ／ 0.7 ／ 2/3 ／ 16 ／ 6 ／ 0.5 ／ χ²(7) ／ p̂=x̄ ／ e^{−2}</td>
+</tr>
+</tbody>
+</table></div></body></html>

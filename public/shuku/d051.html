@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408全真模拟卷5 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 全真模拟卷（自编·第五套）</h1>
+<blockquote>
+<p>结构同真题：40×2' 选择 + 7道综合题共70分 = 150分，180分钟。答案解析在卷末。</p>
+</blockquote>
+<h1>一、单项选择题（每题2分）</h1>
+<h2>数据结构（1~10）</h2>
+<p><strong>1.</strong> 顺序表中"等概率"平均删除一个元素需移动的元素个数为：
+A. n　B. <strong>(n−1)/2</strong>　C. n/2　D. (n+1)/2</p>
+<p><strong>2.</strong> 表达式 a+b×(c−d)−e/f 的后缀表达式：
+A. abcd−<em>+ef/−　B. ab+cd−</em>ef/−　C. abcd−<em>ef+/−　D. abc+d</em>−ef/</p>
+<blockquote>
+<p><strong>A</strong>。后缀：a b c d − * + e f / −。</p>
+</blockquote>
+<p><strong>3.</strong> 用带尾指针 rear 的循环单链表表示队列，入队操作（在队尾插入）：
+A. <strong>新结点插到 rear 之后，并令 rear 指向新结点</strong>　B. 新结点插到 rear-&gt;next（队头）之前　C. 需遍历找队尾　D. 必须增加头指针</p>
+<blockquote>
+<p><strong>A</strong>。rear-&gt;next 即队头，插入在 rear 之后 O(1) 完成。</p>
+</blockquote>
+<p><strong>4.</strong> 高度为 h 的 AVL 树最少结点数 N(h) 的递推：
+A. N(h)=N(h−1)+1　B. <strong>N(h)=N(h−1)+N(h−2)+1</strong>　C. N(h)=2N(h−1)　D. N(h)=2^h−1</p>
+<blockquote>
+<p>（N(0)=0? N(1)=1、N(2)=2 → N(5)=12。）</p>
+</blockquote>
+<p><strong>5.</strong> 无向图 G 的邻接矩阵是对称矩阵，这是因为：
+A. G 必为完全图　B. <strong>无向图中 (vi,vj) 与 (vj,vi) 是同一条边</strong>　C. G 必连通　D. G 必有环</p>
+<blockquote>
+<p>无向图邻接矩阵必对称；有向图一般不对称。</p>
+</blockquote>
+<p><strong>6.</strong> 一棵二叉树的先序序列与中序序列<strong>相同</strong>，则该树：
+A. 是空树或<strong>任一结点无左孩子</strong>　B. 是完全二叉树　C. 是哈夫曼树　D. 必为满二叉树</p>
+<blockquote>
+<p>先序=中序 ⇔ 每个结点没有左孩子（链状右斜树）。</p>
+</blockquote>
+<p><strong>7.</strong> 对二叉排序树进行<strong>中序</strong>遍历得到：
+A. 无序序列　B. <strong>递增有序序列</strong>　C. 递减序列　D. 层次序列</p>
+<p><strong>8.</strong> 堆排序在<strong>最坏</strong>情况下的时间复杂度：
+A. O(n²)　B. O(n)　C. <strong>O(nlogn)</strong>　D. O(logn)</p>
+<p><strong>9.</strong> 下列排序算法中，<strong>一趟</strong>排序后不一定能选出一个元素放在其最终位置上的是：
+A. 冒泡　B. 快速　C. 简单选择　D. <strong>直接插入</strong></p>
+<p><strong>10.</strong> 顺序查找长度为 n 的表（查找成功），等概率下 ASL：
+A. (n+1)/2　B. n/2　C. <strong>(n+1)/2</strong>　D. n</p>
+<blockquote>
+<p>（1+2+…+n)/n=(n+1)/2。A、C 同义，标准写法 (n+1)/2。</p>
+</blockquote>
+<h2>计算机组成原理（11~22）</h2>
+<p><strong>11.</strong> 汉字"大"的区码为20、位码为08，其国标码（十六进制）：
+A. 3408H　B. <strong>3428H</strong>（区码+32→34H? 20+32=52=34H；08+32=40=28H → 3428H）　C. 1408H　D. 9428H</p>
+<blockquote>
+<p>国标码=区码位码各加32（20H）。</p>
+</blockquote>
+<p><strong>12.</strong> 某机器字长16位，补码表示的整数范围：
+A. −32767~32767　B. <strong>−32768~32767</strong>　C. −32768~32768　D. −65535~65535</p>
+<p><strong>13.</strong> 采用变形补码（双符号位）判断溢出，若结果符号位为 01，则：
+A. 无溢出（正数）　B. <strong>正溢出</strong>　C. 负溢出　D. 结果正确</p>
+<p><strong>14.</strong> 动态半导体存储器（DRAM）需要刷新的原因：
+A. 电容电荷会泄漏　B. 触发器不稳定　C. 地址线太多　D. 读出破坏信息</p>
+<p><strong>15.</strong> Cache 与主存的地址映射由<strong>硬件</strong>自动完成，其目的：
+A. 降低成本　B. <strong>保证速度（软件映射太慢）</strong>　C. 便于编程　D. 增大容量</p>
+<p><strong>16.</strong> 相对寻址的转移指令，位移量用补码表示，可实现：
+A. 只能向前转移　B. <strong>双向转移（前后均可）</strong>　C. 只能向后　D. 不能转移</p>
+<p><strong>17.</strong> 一条机器指令对应一段微程序，该说法适用于：
+A. 硬布线控制器　B. <strong>微程序控制器</strong>　C. 两者皆是　D. 两者皆非</p>
+<p><strong>18.</strong> 指令流水线中"结构冒险"的成因：
+A. 指令太快　B. <strong>多条指令争用同一硬件资源</strong>　C. 转移指令　D. 数据依赖</p>
+<p><strong>19.</strong> 总线独立请求方式的优点：
+A. 线数最少　B. <strong>响应速度快、优先级灵活</strong>　C. 天然公平　D. 无需控制器</p>
+<p><strong>20.</strong> 中断向量地址是：
+A. 中断服务程序本身　B. <strong>中断服务程序的入口地址（所在地址）</strong>　C. 断点地址　D. 屏蔽字地址</p>
+<p><strong>21.</strong> 键盘与 CPU 之间最合适的 IO 方式：
+A. DMA　B. <strong>程序中断</strong>　C. 程序查询　D. 通道</p>
+<p><strong>22.</strong> 磁盘存储器属于：
+A. 字符设备　B. <strong>块设备（可寻址、按块传输）</strong>　C. 独占型输入设备　D. 虚拟设备</p>
+<h2>操作系统（23~32）</h2>
+<p><strong>23.</strong> 引入多道程序设计的主要目的：
+A. 减少内存　B. <strong>提高CPU与外设的并行性与利用率</strong>　C. 简化编程　D. 增强交互</p>
+<p><strong>24.</strong> 进程创建时系统为其建立：
+A. 页表　B. <strong>PCB</strong>　C. 索引节点　D. 缓冲区</p>
+<p><strong>25.</strong> 时间片轮转调度中，若时间片大到足够每个进程一次跑完，则退化为：
+A. SJF　B. 优先级　C. <strong>FCFS</strong>　D. HRRN</p>
+<p><strong>26.</strong> 信号量 S 初值为3，经过5次P操作、2次V操作后，S 的值为：
+A. <strong>0</strong>　B. 1　C. −1? 计算：3−5+2=0　D. 2</p>
+<blockquote>
+<p><strong>A（0）</strong>。</p>
+</blockquote>
+<p><strong>27.</strong> 死锁的"避免"与"预防"的区别：
+A. 无区别　B. <strong>避免是运行时动态判断资源分配安全性，预防是静态限制</strong>　C. 预防更智能　D. 避免破坏互斥</p>
+<p><strong>28.</strong> 虚拟内存的容量受以下哪个限制：
+A. 仅磁盘大小　B. <strong>指令地址位宽与外存容量（与内存无关）</strong>　C. 仅内存大小　D. 页表大小</p>
+<p><strong>29.</strong> 请求分页系统中，"缺页中断"属于：
+A. 外中断　B. <strong>内中断（故障）</strong>　C. IO中断　D. 时钟中断</p>
+<p><strong>30.</strong> 打开文件（open）的主要工作：
+A. 把整个文件读入内存　B. <strong>把目录项/FCB（inode）读入内存并返回描述符</strong>　C. 复制文件　D. 删除旧文件</p>
+<p><strong>31.</strong> 磁盘的"平均存取时间"通常指：
+A. 旋转时间　B. <strong>寻道时间+旋转延迟+传输时间（平均）</strong>　C. 仅寻道　D. 仅传输</p>
+<p><strong>32.</strong> 设备独立性（设备无关性）的含义：
+A. 设备没有驱动　B. <strong>用户程序不直接指定物理设备（用逻辑设备名）</strong>　C. 设备不用电　D. 无需驱动程序</p>
+<h2>计算机网络（33~40）</h2>
+<p><strong>33.</strong> 五层模型中，数据链路层的协议数据单元（PDU）：
+A. 报文　B. 分组　C. <strong>帧</strong>　D. 比特流</p>
+<p><strong>34.</strong> 若网络形状为总线型，其拓扑属于：
+A. 星形　B. 环形　C. <strong>总线形</strong>　D. 网状</p>
+<p><strong>35.</strong> 集线器（Hub）工作在：
+A. 物理层　B. 数据链路层? 　C. 网络层　D. 传输层</p>
+<blockquote>
+<p><strong>A</strong>（只放大转发比特，一个冲突域）。</p>
+</blockquote>
+<p><strong>36.</strong> IP 地址 192.168.1.255（掩码255.255.255.0）是：
+A. 主机地址　B. <strong>直接广播地址</strong>　C. 网络地址　D. 环回地址</p>
+<p><strong>37.</strong> 以太网交换机的转发依据：
+A. IP地址　B. <strong>MAC地址</strong>　C. 端口号（传输层）　D. 域名</p>
+<p><strong>38.</strong> TCP 连接的"三次握手"完成的根本目的：
+A. 交换窗口大小　B. <strong>同步双方初始序号并确认双向通路可达</strong>　C. 交换MAC地址　D. 协商加密</p>
+<p><strong>39.</strong> 下列协议中，使用 TCP 的是：
+A. DNS　B. DHCP　C. <strong>FTP</strong>　D. SNMP</p>
+<p><strong>40.</strong> 浏览器与 Web 服务器之间的应用层协议：
+A. FTP　B. SMTP　C. <strong>HTTP</strong>　D. Telnet</p>
+<h1>二、综合应用题（共70分）</h1>
+<p><strong>综合1（数据结构，8分）</strong> 一维数组含 n 个整数，设计<strong>时间 O(n)、空间 O(1)</strong> 的算法将其循环左移 p（0&lt;p&lt;n）位。例如 (a₀,…,aₙ₋₁) 左移2位变为 (a₂,…,aₙ₋₁,a₀,a₁)。给出思想与代码。</p>
+<p><strong>综合2（数据结构，7分）</strong> 两个等长升序序列 A、B（各 n 个元素），设计 O(logn) 算法求它们合并后的<strong>中位数</strong>（下中位）。以 A={1,3,5,7,9}、B={2,4,6,8,10} 为例执行。</p>
+<p><strong>综合3（计组，10分）</strong> 用双符号位补码求和并判溢出：(1) x=−0.75，y=−0.5；(2) x=−0.65625（−0.10101₂），y=0.78125（0.11001₂）。每题写出 [x]补、[y]补、和的补码与溢出判断。</p>
+<p><strong>综合4（计组，10分）</strong> 写出指令 <strong>STA (R1), R2</strong>（把寄存器R2的内容存入主存单元(R1)，间接寻址）在单总线结构下的<strong>微操作序列与控制信号</strong>（取指→间址→执行）。</p>
+<p><strong>综合5（操作系统，10分）</strong> 系统有 P0~P2 三个进程、两类资源 R1(共7个)、R2(共5个)。当前 Allocation：P0(2,1)、P1(1,1)、P2(1,1)；Max：P0(5,3)、P1(3,2)、P2(4,3)。(1) 求 Need 与 Available；(2) 判断当前是否安全（给出安全序列）；(3) 此时 P2 请求 (2,1)，能否分配？</p>
+<p><strong>综合6（操作系统，10分）</strong> 某文件系统采用<strong>段页式? </strong>——改为：某系统采用二级页表：逻辑地址32位、页面4KB、页表项4B。(1) 给出地址结构；(2) TLB 命中率90%、访问TLB 20ns、访存100ns，求有效访问时间 EAT；(3) 若发生缺页（处理8ms），缺页率 p 满足什么条件才能保证 EAT≤400ns？</p>
+<p><strong>综合7（网络，15分）</strong> (1) 求地址 141.14.72.24/20 所在网络地址、广播地址与可用主机数；(2) TCP 连接：A 发送序号从 1000 开始，连续发送两个 500B 的报文段，第二个报文段丢失。写出 B 收到第一个报文段和收到重传的第二个报文段时分别回送的确认号；(3) ssthresh=9MSS 时 cwnd=9，收到3个冗余ACK后写出 ssthresh、cwnd 及其后两个RTT的cwnd。</p>
+<h2>---</h2>
+<h1>答案与解析</h1>
+<h2>选择题速查</h2>
+<table>
+<thead>
+<tr>
+<th>1-5</th>
+<th>6-10</th>
+<th>11-15</th>
+<th>16-20</th>
+<th>21-25</th>
+<th>26-30</th>
+<th>31-35</th>
+<th>36-40</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B A A B B</td>
+<td>B B C D C</td>
+<td>B B B B B</td>
+<td>B B B B B</td>
+<td>B B C A C</td>
+<td>B B B B C</td>
+<td>C B A B B</td>
+<td>C B C B C</td>
+</tr>
+</tbody>
+</table>
+<p><strong>要点解析</strong>：
+1. B (n−1)/2（每次删第i个移动n−i个，平均(n−1)/2）。
+2. A 后缀：abcd−*+ef/−。
+3. A 尾指针循环队列：入队=rear后插。
+4. B AVL最少结点递推（斐波那契型）。
+5. B 无向图邻接矩阵对称。
+6. B 先序=中序⇒无左孩子。
+7. B BST中序即排序。
+8. C 堆排最坏O(nlogn)。
+9. D 直接插入每趟只把当前元素插入已排序前缀，无"最终位置"保证。
+10. C (n+1)/2。
+11. B 区位码各+32（20H）=国标码。
+12. B 16位补码范围。
+13. B 01=正溢。
+14. B DRAM电容漏电需定期刷新。
+15. B 硬件映射保证访存速度。
+16. B 补码位移量有正负。
+17. B 微程序控制特征。
+18. B 结构冒险=资源争用。
+19. B 独立请求方式最快最灵活。
+20. B 向量地址指向服务程序入口。
+21. B 键盘中断方式（数据率低但要求及时）。
+22. B 磁盘=块设备。
+23. B 多道程序提高利用率。
+24. B 进程创建建立PCB。
+25. C 时间片够大退化为FCFS。
+26. A 3−5+2=0。
+27. B 避免=动态；预防=静态。
+28. B 虚存容量由地址结构+外存决定。
+29. B 缺页=内部故障。
+30. B open读inode入内存。
+31. B 平均存取=寻道+旋转+传输。
+32. B 逻辑设备名与物理设备解耦。
+33. C 链路层PDU=帧。
+34. C 总线拓扑。
+35. A 集线器=物理层。
+36. B 主机位全1=广播。
+37. B 交换机按MAC转发。
+38. B 三次握手同步序号。
+39. C FTP用TCP；DNS/DHCP/SNMP用UDP。
+40. C HTTP=80。</p>
+<h2>综合题解析</h2>
+<p><strong>综合1</strong>：三次逆置法（2010真题）：先逆置前 p 个，再逆置后 n−p 个，最后整体逆置。</p>
+<pre><code class="language-c">void Reverse(int a[], int l, int r){
+    int t;
+    while(l&lt;r){ t=a[l]; a[l]=a[r]; a[r]=t; l++; r--; }
+}
+void LeftShift(int a[], int n, int p){
+    Reverse(a,0,p-1); Reverse(a,p,n-1); Reverse(a,0,n-1);
+}   /* 三次调用共 O(n)，空间 O(1) */
+</code></pre>
+<p>示例：abcdefg 左移2：ba cdefg → ba gfedc → cdefgab ✓。</p>
+<p><strong>综合2</strong>：思想——比较 A、B 的中位数：相等即为所求；a中位&lt;b中位 ⇒ 丢弃 A 的前半与 B 的后半（保持等长）；反之对称。每次规模减半 ⇒ O(logn)。
+执行：n=5：A中位5 &lt; B中位6 → 保留 A{5,7,9} 与 B{2,4,6}；
+n=3：A中位7 &gt; B中位4 → 保留 A{5,7} 与 B{4,6}；
+n=2：A中位5 &gt; B中位4 → 保留 A{5} 与 B{6}；
+n=1：中位数 = min(5,6) = <strong>5</strong>（合并序列 1..10 的下中位）。</p>
+<p><strong>综合3</strong>：
+(1) [x]补=<strong>11.01000</strong>（−0.75：11.01000），[y]补=<strong>11.10000</strong>（−0.5）；
+和 = 11.01000+11.10000 = <strong>110.11000</strong> → 丢弃模4进位 = 10.11000，双符号位<strong>10 ⇒ 负溢出</strong>（真值和=−1.25&lt;−1，合理）。
+(2) [x]补=<strong>11.01011</strong>，[y]补=<strong>00.11001</strong>；
+和 = 11.01011+00.11001 = <strong>100.00100</strong> → 模4丢弃进位 = 00.00100，双符号位<strong>00 ⇒ 无溢出</strong>，真值 +0.00100₂ = <strong>+0.125</strong> ✓。</p>
+<p><strong>综合4</strong>：
+| 阶段 | 微操作 | 控制信号 |
+|---|---|---|
+| 取指 | (PC)→MAR | PCout, MARin |
+|  | M(MAR)→MDR | MemR, MDRinE |
+|  | (MDR)→IR | MDRout, IRin |
+|  | (PC)+1→PC | +1, PCin |
+| 间址 | (R1)→MAR | R1out, MARin |
+| 执行 | (R2)→MDR | R2out, MDRin |
+|  | (MDR)→M(MAR) | MemW |
+（要点：STA 是<strong>写</strong>操作，执行段不需要 ALU；间址只走一轮访存。）</p>
+<p><strong>综合5</strong>：
+(1) Need=Max−Alloc：P0(3,2)、P1(2,1)、P2(3,2)；Alloc合计(4,3) ⇒ Available=(7−4, 5−3)=(<strong>3,2</strong>)。
+(2) 安全性：Work(3,2) → P1(2,1)✓ → 回收(1,1) → (4,3) → P0(3,2)✓ → (6,4) → P2(3,2)✓。
+<strong>安全序列 <P1,P0,P2>，系统安全</strong>。
+(3) P2 请求(2,1)：≤Need(3,2) ✓、≤Available(3,2) ✓；试分配后 Available=(1,1)、P2 Alloc=(3,2)、P2 Need=(1,1)。
+安全检测：P2(1,1)≤(1,1) ✓ → (4,3) → P1(2,1)✓ → (5,4) → P0(3,2)✓ ⇒ 存在安全序列 <strong><P2,P1,P0></strong> ⇒ <strong>可以分配</strong>。</p>
+<p><strong>综合6</strong>：
+(1) 页内偏移12位，页号20位；20位页号×4B=4MB 页表太大 → 两级：<strong>页目录10位 | 页表10位 | 页内偏移12位</strong>。
+(2) EAT = 0.9×(20+100) + 0.1×(20+100+100+100) = 108+32 = <strong>140ns</strong>。
+(3) EAT ≈ 140(1−p)? 简化口径：140 + p×(8×10⁶) ≤ 400 ⇒ p ≤ 260/(8×10⁶) = <strong>3.25×10⁻⁵</strong>。</p>
+<p><strong>综合7</strong>：
+(1) /20 → 第三字节块16：72∈[64,79] ⇒ 网络 <strong>141.14.64.0/20</strong>；广播 <strong>141.14.79.255</strong>；可用主机 <strong>2¹²−2=4094</strong>。
+(2) B 收到第一段（字节1000~1499）后，第二段未到 ⇒ 回 <strong>ACK=1500</strong>（期望下一字节）；当重传的第二段到达后（1500~1999）⇒ 回 <strong>ACK=2000</strong>。
+(3) 快恢复：<strong>ssthresh=⌈9/2⌉=4? 9/2=4.5 → 取4或5（常取⌊9/2⌋=4）</strong>；cwnd=ssthresh=4，随后线性：RTT+1=5、6。</p></div></body></html>

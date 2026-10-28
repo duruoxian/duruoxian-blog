@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408真题考点地图 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 历年真题考点地图（2009–2025）</h1>
+<blockquote>
+<p>依据公开统考真题整理的考点分布规律（个别年份细节以官方试卷/正版真题集为准）。用途：①定位复习权重 ②对照本库"母题清单"逐个练到条件反射。</p>
+</blockquote>
+<h2>一、总体结构（每年固定）</h2>
+<ul>
+<li>单选 40×2'=80 + 综合应用题 70 = 150分。</li>
+<li>分值：数据结构45（选择~26+综合~19? 常态2大题）｜计组45（选择~22? +综合2大题）｜操作系统35（综合1-2大题）｜网络25（综合1大题）。</li>
+<li>综合题"铁三角"：<strong>OS的PV/存储题、计组的Cache/流水题、网络的子网/TCP题</strong>——每年必考其一的变体。</li>
+</ul>
+<h2>二、数据结构（45分）</h2>
+<h3>选择题高频（每年8-13题）</h3>
+<table>
+<thead>
+<tr>
+<th>章</th>
+<th>高频点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>绪论</td>
+<td>时间复杂度比较</td>
+</tr>
+<tr>
+<td>线性表</td>
+<td>顺序/链表操作语句、插入删除次数</td>
+</tr>
+<tr>
+<td>栈队列</td>
+<td>出栈序列合法性、循环队列计算、共享栈</td>
+</tr>
+<tr>
+<td>树</td>
+<td>二叉树性质(n₀=n₂+1)、遍历、线索树、哈夫曼、平衡树旋转</td>
+</tr>
+<tr>
+<td>图</td>
+<td>度与边数、连通/生成树、拓扑、最短路概念、邻接矩阵/表</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>折半查找次数/判定树、B树性质、哈希冲突与ASL</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>一趟结果辨析、稳定性、复杂度比较、堆的性质</td>
+</tr>
+</tbody>
+</table>
+<h3>综合题规律（约15分/年）</h3>
+<ul>
+<li><strong>算法设计题</strong>（10-15分）：近十年集中于——链表操作（重排/去重/找环）、二叉树（路径/带权路径/双序遍历）、图（最短路/拓扑应用）、排序思想应用。答题三件套：<strong>思想1-2行 + C/C++代码 + 复杂度</strong>。</li>
+<li>应用题：哈夫曼构造与编码、堆的手工执行、并查集、KMP next 手算。</li>
+</ul>
+<h2>三、计算机组成原理（45分）</h2>
+<h3>选择题高频</h3>
+<p>数据表示（补码范围/溢出、IEEE754、海明、CRC）、存储系统（Cache计算、RAM/ROM、交叉存储）、指令（寻址方式EA、扩展操作码）、CPU（流水线、微程序vs硬布线）、总线（仲裁、定时、带宽）、IO（三种方式、中断、DMA）。</p>
+<h3>综合题规律（两大题/年）</h3>
+<ul>
+<li><strong>存储系统综合</strong>（最高频）：主存-Cache 映射（直接/组相联）+ 地址划分 + 平均访存时间；或 虚存-页表-TLB-Cache 三级查找。</li>
+<li><strong>CPU/指令综合</strong>：给定指令序列写<strong>微操作序列与控制信号</strong>；流水线时空图与冒险分析；或 数据通路运算。</li>
+<li>次高频：总线带宽计算、DMA/中断的时间占比、磁盘存取时间。</li>
+</ul>
+<h2>四、操作系统（35分）</h2>
+<h3>选择题高频</h3>
+<p>进程状态转换、调度算法特征、同步互斥概念、死锁条件、内存管理概念（分页/分段/虚存）、页面置换算法特征、文件（FCB/索引/目录）、IO方式与缓冲。</p>
+<h3>综合题规律（1-2大题/年）</h3>
+<ul>
+<li><strong>PV操作</strong>（几乎每年）：生产者消费者变体、读者写者变体、司机售票员/桥/果盘类建模。</li>
+<li><strong>内存</strong>：页面置换（FIFO/LRU/Clock演算）+ 有效访问时间；或 分页地址翻译（含快表）。</li>
+<li><strong>文件</strong>：混合索引最大文件与访盘次数、FAT/位示图计算。</li>
+<li><strong>磁盘</strong>：调度算法移道数、读写时间。</li>
+<li>调度算法计算（周转时间）隔年出现。</li>
+</ul>
+<h2>五、计算机网络（25分）</h2>
+<h3>选择题高频</h3>
+<p>分层与设备、性能指标计算、滑动窗口与协议、以太网（CSMA-CD、帧、交换机）、IP（首部、分片、转发）、路由协议概念、TCP（握手挥手、序号确认、拥塞控制概念）、应用层端口。</p>
+<h3>综合题规律（1大题/年，常常一题多问）</h3>
+<ul>
+<li><strong>子网划分/路由聚合/转发判断</strong>（出现率最高）。</li>
+<li><strong>TCP 拥塞窗口演化</strong>（画表/画图）+ 序号确认推演。</li>
+<li>分组发送总时长（存储转发流水线）、HTTP/浏览器访问过程（DNS+TCP+HTTP合成题）。</li>
+<li>链路层：CRC计算、最小帧长/信道利用率。</li>
+</ul>
+<h2>六、大题"母题"清单 → 本库题号对照（练到条件反射）</h2>
+<table>
+<thead>
+<tr>
+<th>母题</th>
+<th>本库练习位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PV操作建模</td>
+<td>操作系统考题集 A3/A4/A12/A22 + 知识点第3章模板</td>
+</tr>
+<tr>
+<td>页面置换+EAT</td>
+<td>操作系统 A6/A14/A15/A21</td>
+</tr>
+<tr>
+<td>混合索引</td>
+<td>操作系统 A16</td>
+</tr>
+<tr>
+<td>磁盘调度/存取</td>
+<td>操作系统 A9/A10/A18/A19/A27</td>
+</tr>
+<tr>
+<td>Cache映射+平均访存</td>
+<td>计组考题集 A3/A4/A12/A19 + 知识点第3章五步法</td>
+</tr>
+<tr>
+<td>微操作序列</td>
+<td>计组 知识点第5章示例 + A6/A13/A20</td>
+</tr>
+<tr>
+<td>IEEE754互转</td>
+<td>计组 A1/A2/A10/A18</td>
+</tr>
+<tr>
+<td>中断屏蔽字</td>
+<td>计组 A7</td>
+</tr>
+<tr>
+<td>DMA/中断时间占比</td>
+<td>计组 A14/A21</td>
+</tr>
+<tr>
+<td>子网划分/聚合</td>
+<td>网络 A4/A5/A6/A11/A12/A17/A19</td>
+</tr>
+<tr>
+<td>TCP拥塞窗口</td>
+<td>网络 A8/A15/A16/A22/A23</td>
+</tr>
+<tr>
+<td>分组发送时长</td>
+<td>网络 A1/A14? （综合题 A1/A21）</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>网络 A13/A20</td>
+</tr>
+<tr>
+<td>算法设计（DS）</td>
+<td>数据结构_代码题22题 + 考题集综合D41-D50</td>
+</tr>
+</tbody>
+</table>
+<p>（题号以当前文件为准；"网络 A21"等为第三轮重编号后的编号。）</p>
+<h2>七、复习权重建议</h2>
+<ol>
+<li>时间紧先保：<strong>OS的PV+内存、计组的Cache+CPU、网络的子网+TCP、DS的算法设计</strong>——四科大题来源高度稳定。</li>
+<li>选择题覆盖面广，靠《知识点与难点》"易错点"+《考题集》选择题三轮刷。</li>
+<li>真题使用节奏：第一轮学完一科刷该科历年真题选择；10月起整卷限时（配合本库两套模拟卷）。</li>
+</ol></div></body></html>

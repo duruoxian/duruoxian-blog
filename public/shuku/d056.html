@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408大题专练_计算机组成 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 大题专练 · 计算机组成原理（30题·计算与综合）</h1>
+<blockquote>
+<p>2026-10-29 生成。计组大题约 23 分，几乎全部是<strong>计算与分析题</strong>：Cache、存储扩展、流水线、磁盘、浮点运算、总线、中断/DMA。本册 30 题全部给出<strong>完整计算过程</strong>，按考研给分点分步呈现。
+难度：★基础 ★★中等 ★★★难点。与《计组_知识点与难点》《408选择题题库_计算机组成》配套；题号 CND+序号。</p>
+</blockquote>
+<h2>一、数据的表示与运算（CND1–CND7）</h2>
+<p><strong>CND1.</strong>★★ 用双符号位补码计算 (−13) + (−10)（双符号位+6位数值，共8位），判断是否溢出。</p>
+<blockquote>
+<p>−13 = −001101₂ → [−13]补 = <strong>11 110011</strong>；−10 = −001010₂ → [−10]补 = <strong>11 110110</strong>。
+相加：11 110011 + 11 110110 = 1 11 101001 → 丢弃最高位进位，得 <strong>11 101001</strong>。
+判断：双符号位为 11（两位相同）⇒ <strong>无溢出</strong>，结果为负数。
+真值验证：数值部分 101001 取反加一 = 010111₂ = 23 = 13+10 ✓。
+<strong>结果 = [−23]补，无溢出</strong>（若双符号位为 01 为正溢出、10 为负溢出）。</p>
+</blockquote>
+<p><strong>CND2.</strong>★★ 用补码一位乘（Booth）计算 x=−3 × y=5（数值 3 位）。</p>
+<blockquote>
+<p>[x]补 = 1.101，[−x]补 = 0.011，[y]补 = 0.101，附加位 y₄=0。
+部分积 P=0.000；从 y 最低位起（y₃y₂y₁=101，附加位 0）：
+① y₁yₙ₊₁ = 10 → P += [−x]补：0.011 → 右移 0.001（算术右移）
+② y₂yₙ₊₁ = 01 → P += [x]补：0.001+1.101 = 1.110 → 右移 1.111
+③ y₃yₙ₊₁ = 10 → P += [−x]补：1.111+0.011 = 0.010 → 右移 0.001
+最后一步不再移位，补上符号处理。
+<strong>结果 = 1.0001111...按双符号位整理：[x·y]补 = 1.0001111，真值 = −0.1111001₂ = −15</strong> ✓（−3×5）。
+评分点：三步判断规则（00/11 移位、01 加[x]补、10 加[−x]补）与右移保符号。</p>
+</blockquote>
+<p><strong>CND3.</strong>★★ 将 −0.75 与 0.4375 写成 IEEE 754 单精度格式。</p>
+<blockquote>
+<p>0.75 = 0.11₂；−0.75 = −1.1₂×2⁻¹。
+符号 1；阶码 = −1+127 = 126 = 0111 1110；尾数 = 100…0（23位，隐含首 1）。
+<strong>−0.75：1 | 01111110 | 10000000000000000000000</strong>。
+0.4375 = 0.0111₂ = 1.11₂×2⁻²。阶码 = −2+127 = 125 = 0111 1101；尾数 1100…0。
+<strong>0.4375：0 | 01111101 | 11000000000000000000000</strong>。
+评分点：规格化到 1.xxx 再定阶；隐含最高位 1 不占尾数字段。</p>
+</blockquote>
+<p><strong>CND4.</strong>★★★ 用浮点加减五步法计算 0.5 + (−0.4375)（二进制，尾数 4 位，阶码 4 位含 1 位符号）。</p>
+<blockquote>
+<p>0.5 = 0.1000₂×2⁰（原码尾数形式）；−0.4375 = −0.0111₂×2⁰ = −0.1110×2⁻¹。
+① <strong>对阶</strong>（小阶向大阶）：−0.1110×2⁻¹ → −0.0111×2⁰。
+② <strong>尾数相加</strong>：0.1000 − 0.0111 = 0.0001（和的阶码为 0）。
+③ <strong>规格化</strong>：0.0001 不是规格化数，左规 3 位 → 0.1000×2⁻³。
+④ <strong>舍入</strong>：无丢弃位，不变。
+⑤ <strong>判溢出</strong>：阶码 −3 在范围内，不溢出。
+<strong>结果 = 0.1000×2⁻³ = 0.0001₂ = 1/16 = 0.0625</strong> ✓（0.5−0.4375）。</p>
+</blockquote>
+<p><strong>CND5.</strong>★★ 数据 0101 1010（8 位信息），用汉明码（偶校验分组）编码；若接收到 0101 1110，指出错误位并纠正。</p>
+<blockquote>
+<p>k=4 位校验：2⁴=16 ≥ 8+4+1=13 ✓。校验位放 1,2,4,8 号位。
+信息位按位填入 3,5,6,7,9,10,11,12：信息 0101 1010 → D=0,1,0,1,1,0,1,0 依次入位。
+各校验位 = 其覆盖位组的异或（偶校验）：P1 覆盖 1,3,5,7,9,11；P2 覆盖 2,3,6,7,10,11；P4 覆盖 4,5,6,7,12；P8 覆盖 8,9,10,11,12。
+接收后重新校验得出错位号 S₄S₂S₁ 组成的二进制：接收 0101 1110 与发送码逐位异或 → 错在第 <strong>6</strong> 位（按分组检验位 S₄S₂S₁=0110）。
+<strong>纠正：第 6 位取反</strong>。评分点：校验位位置 2 的幂；错误定位号=各分组奇偶结果拼成的二进制数。</p>
+</blockquote>
+<p><strong>CND6.</strong>★★ 信息位 1011，生成多项式 G(x)=x³+x²+1（码 1101），求 CRC 码字并验证。</p>
+<blockquote>
+<p>信息左移 3 位（r=3）：1011000。模 2 除以 1101（异或除法）：
+① 1011 ⊕ 1101 = 0110，落下一位 → 1100
+② 1100 ⊕ 1101 = 0001，落下一位 → 0010
+③ 首位 0 商 0 → 0100；④ 仍首位 0 → 1000
+⑤ 1000 ⊕ 1101 = 0101
+<strong>余数 FCS = 101，码字 = 1011101</strong>。
+验证：1011101 ⊕ 按同样除法 → 余 000 ✓。评分点：模 2 除"够位就异或、首位 0 商 0"；余数位数 = G 的最高次数。</p>
+</blockquote>
+<p><strong>CND7.</strong>★★ 判断信息 1101010 能否被 G(x)=x³+x+1（1011）整除，写出其 CRC 码字。</p>
+<blockquote>
+<p>1101010000 ÷ 1011（左移3位后除）：
+1101 ⊕ 1011 = 0110 → 1100 → 1100 ⊕ 1011 = 0111 → 1110 → 1110 ⊕ 1011 = 0101 → 1010 → 1010 ⊕ 1011 = 0001 → 0010 → 0100 → 0100 → 1000 → 1000 ⊕ 1011 = 0011。
+<strong>余数 = 011 ≠ 000 ⇒ 有错（或尚未编码）</strong>；编码：把信息 1101010 左移 3 位除以 1011 得余数 011，<strong>CRC 码字 = 1101010011</strong>。</p>
+</blockquote>
+<h2>二、存储系统（CND8–CND14）</h2>
+<p><strong>CND8.</strong>★★ CPU 地址线 20 位、数据线 8 位。用 2K×4 的 RAM 芯片构成 64K×8 存储器，需要多少片？共分几组？片选译码需要几位地址？</p>
+<blockquote>
+<p>位扩展：2 片拼成 2K×8 一组。字扩展：64K/2K = 32 组。<strong>共需 2×32 = 64 片</strong>。
+片内地址 11 位（2K=2¹¹），字扩展译码需 <strong>5 位</strong>（32=2⁵），11+5 = 16 位 —— 注意题目 20 位地址线多于所需，余 4 位可留空或用于其他空间。
+评分点：先位扩后字扩的次序；"芯片数=位扩片数×字扩组数"。</p>
+</blockquote>
+<p><strong>CND9.</strong>★★★ 主存按字节编址，块大小 16B，直接映射 Cache 有 64 行。
+(1) 32 位主存地址如何划分？(2) 主存地址 0x12345 映射到哪一行？(3) 若 Cache 存取 2ns、主存 50ns、命中率 94%，平均访问时间？</p>
+<blockquote>
+<p>(1) 块内 4 位（16B=2⁴），行号 6 位（64=2⁶），<strong>标记 = 32−4−6 = 22 位</strong>。
+(2) 0x12345 = 0001 0010 0011 0100 0101₂。块内偏移 = 0101（低4位）；行号 = 高 22 位中的低 6 位 = 110100₂（地址位 4..9 = 1101 00）→ <strong>第 52 行</strong>（110100₂=52）；标记 = 其余 22 位。
+(3) T = 0.94×2 + 0.06×50 = 1.88 + 3 = <strong>4.88ns</strong>（若缺失需先访 Cache 再访主存，则 0.94×2+0.06×52 = 5ns——按题目口径）。</p>
+</blockquote>
+<p><strong>CND10.</strong>★★ 2 路组相联 Cache，容量 8KB，块大小 32B，32 位地址。求组数、组号位数、标记位数，并说明主存地址 0x0000ABCD 的映射位置。</p>
+<blockquote>
+<p>块数 = 8KB/32B = 256 块；每组 2 行 ⇒ <strong>128 组</strong>（组号 7 位）；块内 5 位；<strong>标记 = 32−7−5 = 20 位</strong>。
+0x0000ABCD = 0000 0000 0000 0000 1010 1011 1100 1101₂。
+块内偏移 = 01101（低5位）；组号 = 地址位 5..11 = 101 0111₂ = 87。<strong>映射到第 87 组</strong>，组内两行按标记比较（0xABCD 的标记 = 高 20 位 = 0x0000A…即 0000 0000 0000 0000 1010）。</p>
+</blockquote>
+<p><strong>CND11.</strong>★★★ CPU 依次访问以下地址（十六进制，块大小 16B，直接映射，Cache 初始为空，共 4 行）：
+00, 04, 10, 24, 30, 34, 40, 44, 10。求每次访问后 Cache 命中情况与最终命中率。</p>
+<blockquote>
+<p>行号 = (地址/16) mod 4；标记 = 地址/64。
+| 地址 | 行号 | 标记 | 结果 |
+|---|---|---|---|
+| 00 | 0 | 0 | 缺（装入） |
+| 04 | 0 | 0 | <strong>中</strong> |
+| 10 | 1 | 0 | 缺 |
+| 24 | 1 | 1 | 缺（顶出行内标记0） |
+| 30 | 3 | 1 | 缺 |
+| 34 | 3 | 1 | <strong>中</strong> |
+| 40 | 0 | 1 | 缺（顶出 00） |
+| 44 | 0 | 1 | <strong>中</strong> |
+| 10 | 1 | 0 | 缺（24 曾顶出标记0） |
+命中 3/9 ≈ <strong>33.3%</strong>。评分点：直接映射的"行内标记替换"就是冲突缺失的来源（10 被顶出两次）。</p>
+</blockquote>
+<p><strong>CND12.</strong>★★ 4 体低位交叉存储器，每体存取周期 100ns，总线传送周期 25ns。流水读取 16 个连续字需多长时间？若为高位交叉呢？</p>
+<blockquote>
+<p>低位交叉：T + (16−1)τ = 100 + 15×25 = <strong>475ns</strong>（流水重叠，每 25ns 出一个字）。
+高位交叉（顺序存储在单体内）：须逐体访问? 连续字在同一体内要等整周期，跨体依次——最坏按 16×(100+25) 计不流水 ⇒ 约 2000ns 量级。<strong>结论：低位交叉支持流水并行，带宽≈4 倍</strong>。</p>
+</blockquote>
+<p><strong>CND13.</strong>★★ 页式虚存：虚地址 32 位、页大小 4KB、物理地址 24 位。求虚拟页号位数、页内偏移位数、页表项数、物理帧号位数。</p>
+<blockquote>
+<p>偏移 12 位；虚拟页号 = 32−12 = <strong>20 位</strong>（页表 2²⁰ 项，约 100 万项）；物理帧号 = 24−12 = <strong>12 位</strong>（4096 帧）。
+页表项若 4B，一级页表占 2²⁰×4B = <strong>4MB 连续内存</strong>——引出多级页表。</p>
+</blockquote>
+<p><strong>CND14.</strong>★★ 系统含 TLB（命中 5ns）、Cache（命中 10ns）、主存（100ns）。TLB 命中率 90%，TLB 命中后访 Cache 命中率 80%（未中访主存）。求一次访存（含取数）的平均时间（TLB 缺失但页在内存的代价按"访问一次页表 100ns"计，页表访问后仍要访存取数）。</p>
+<blockquote>
+<p>简化模型（常规口径）：取数时间 = TLB查找 + (地址转换) + Cache/主存取数。
+地址转换部分：0.9×5 + 0.1×(5+100) = 4.5 + 10.5 = 15ns。
+取数部分：0.8×10 + 0.2×100 = 8 + 20 = 28ns。
+<strong>平均 ≈ 15 + 28 = 43ns</strong>（口径不同答案不同——408 会给定明确口径，关键是分清"转换"与"取数"两段独立计算）。</p>
+</blockquote>
+<h2>三、指令系统与 CPU（CND15–CND22）</h2>
+<p><strong>CND15.</strong>★★ 指令字长 16 位，操作码 4 位，地址码各 4 位。若三地址指令 15 条、二地址指令 15 条、一地址指令 15 条，剩余还可扩展多少条零地址指令？</p>
+<blockquote>
+<p>三地址：15 条占 0000~1110，留 1111 扩展。
+二地址：1111 + 4 位 → 15 条（留 1111 1111）。
+一地址：1111 1111 + 4 位 → 15 条（留 1111 1111 1111）。
+零地址：1111 1111 1111 + 4 位 = <strong>16 条</strong>（可全部用尽）。</p>
+</blockquote>
+<p><strong>CND16.</strong>★★ 相对寻址转移指令占 2 个字节，存于内存 2000H 处（指令第一字节地址），转移目标为 1FF0H。指令第二字节（8 位位移量，补码）是多少？</p>
+<blockquote>
+<p>取指后 PC = 2000+2 = 2002H。目标 = PC + 偏移 ⇒ 偏移 = 1FF0 − 2002 = −12H = −18。
+<strong>8 位补码 −18 = 1110 1110 = EEH</strong>。评分点：偏移基准是"取指后的 PC"（下条指令地址），不是本指令地址。</p>
+</blockquote>
+<p><strong>CND17.</strong>★★★ 某机主频 2GHz，5 段流水线（每段 1 个时钟周期）。执行 100 条指令：(1) 总时间；(2) 加速比；(3) 实际 CPI；(4) 若数据冒险需停顿共 20 周期，重算。</p>
+<blockquote>
+<p>(1) T = (5 + 100 − 1) × 0.5ns = 104 × 0.5 = <strong>52ns</strong>。
+(2) 串行 = 100×5×0.5 = 250ns；<strong>S = 250/52 ≈ 4.81</strong>。
+(3) <strong>CPI = 104/100 = 1.04</strong>。
+(4) T = (104+20)×0.5 = 62ns；CPI = 124/100 = <strong>1.24</strong>；S = 250/62 ≈ 4.03。</p>
+</blockquote>
+<p><strong>CND18.</strong>★★★ 下列指令序列在 5 段流水线（IF ID EX MEM WB）中有哪些数据冒险？如何用"转发"解决？</p>
+<pre><code>I1: add r1, r2, r3
+I2: sub r4, r1, r5
+I3: and r6, r1, r7
+I4: or  r8, r1, r9
+I5: xor r10, r11, r12
+</code></pre>
+<blockquote>
+<p>I2、I3、I4 都依赖 I1 写的 r1 ⇒ <strong>3 个 RAW 冒险</strong>（真相关）；无 WAW/WAR（顺序流水不重叠写回时无）。
+转发路径：EX/MEM → EX（I1 的 EX 段结果直送 I2 的 EX 输入）；对 I3/I4 同理从 MEM/WB 或 EX/MEM 段转发。
+若不用转发，需在 I1 后插入 <strong>2 个气泡</strong>（等待 WB 写回后才可读）——转发后 I2 可紧接 I1 执行（EX 段错开 2 拍，结果已就绪）。</p>
+</blockquote>
+<p><strong>CND19.</strong>★★ 分支指令占比 20%，分支预测准确率 90%，预测错惩罚 3 个周期。程序 CPI 基础为 1，求实际 CPI。</p>
+<blockquote>
+<p>分支代价 = 0.2 × 0.1 × 3 = <strong>0.06</strong>。
+实际 CPI = 1 + 0.06 = <strong>1.06</strong>。评分点：只有"预测错"才付代价（0.1 而非 0.9）。</p>
+</blockquote>
+<p><strong>CND20.</strong>★★ 水平型微指令 32 位，其中 6 个互斥微命令组各需 2/2/3/4/5/6 种编码，1 个不译码直接控制的字段 10 位。求控制字段最少位数与可判定性。</p>
+<blockquote>
+<p>互斥组用字段译码：2→2位? 用最小编码：⌈log₂2⌉=1？每组需含"无操作"码 ⇒ 编码数 = 种类+1：3,3,4,5,6,7 → 位数 2,2,2,3,3,3 = 15 位；下地址字段另计。
+直接控制 10 位。<strong>控制字段 = 15+10 = 25 位</strong>。评分点：互斥组译码要留"空操作"编码；水平型=直接控制为主。</p>
+</blockquote>
+<p><strong>CND21.</strong>★★★ 中断源 A/B/C/D 的响应优先级为 A&gt;B&gt;C&gt;D。要求处理次序为 C&gt;A&gt;D&gt;B，写出各中断源服务程序中的屏蔽字（1=屏蔽，0=开放，对应位 A B C D）。</p>
+<blockquote>
+<p>规则：<strong>处理优先级高者屏蔽低者</strong>（自己与更高者屏蔽）。
+处理次序 C&gt;A&gt;D&gt;B ⇒ 优先级 C&gt;A&gt;D&gt;B：
+A：屏蔽 A、B、D（低于A的B、D），开放 C → <strong>1010? 按位 A B C D：A=1,B=1,C=0,D=1 → 1101</strong>
+等等，重新明确：屏蔽字某位=1 表示屏蔽该源。处理 A 时：屏蔽 B、D（处理级低于 A），不屏蔽 C（C 更高），屏蔽自身 A。
+| 源 | A | B | C | D |
+|---|---|---|---|---|
+| A 服务 | 1 | 1 | 0 | 1 |
+| B 服务 | 0 | 1 | 0 | 0 |
+| C 服务 | 1 | 1 | 1 | 1 |
+| D 服务 | 0 | 1 | 0 | 1 |
+验证：C 处理中谁都打不断（最高）✓；A 处理中仅 C 可打断 ✓；D 处理中 A、C 可打断 ✓；B 处理中都可打断 ✓。</p>
+</blockquote>
+<p><strong>CND22.</strong>★★ 设备数据率 1MB/s，采用 DMA 周期挪用，每次挪用一个存取周期（100ns），主存被 CPU 独占时 CPU 速率 10MB/s。求 DMA 期间 CPU 速度下降比例（忽略预处理后处理）。</p>
+<blockquote>
+<p>DMA 需要的挪用比例 = 1MB/s ÷ (1/100ns 每次一字节? 每存取周期传 1B ⇒ 主存总带宽 10MB/s 中 DMA 占 1MB/s = <strong>10%</strong>。
+<strong>CPU 访存速度约下降 10%</strong>。评分点：周期挪用只在"DMA 要用总线时"让出，不整段时间封锁 CPU。</p>
+</blockquote>
+<h2>四、总线与 I/O（CND23–CND26）</h2>
+<p><strong>CND23.</strong>★★ 同步总线时钟 100MHz（每周期传一次 32 位数据），求总线带宽；若改为每周期传一次 64 位数据呢？</p>
+<blockquote>
+<p>带宽 = 频率 × 每次字节 = 100M × 4B = <strong>400MB/s</strong>；64 位版 = 100M × 8B = <strong>800MB/s</strong>。</p>
+</blockquote>
+<p><strong>CND24.</strong>★★ 磁盘转速 7200 转/分，每道 200 扇区（每扇区 512B），寻道时间平均 4ms。求读一个扇区的平均存取时间与最大数据传输率。</p>
+<blockquote>
+<p>旋转一周 = 60000/7200 ≈ 8.33ms；平均旋转延迟 = 半周 ≈ 4.17ms。
+平均存取时间 = 寻道 4 + 旋转 4.17 + 传输(512B ÷ 每道 200×512B/8.33ms) ≈ 4 + 4.17 + 0.02 = <strong>约 8.2ms</strong>。
+数据传输率 = 每道容量/转一周 = 200×512B / 8.33ms ≈ <strong>12.3MB/s</strong>。</p>
+</blockquote>
+<p><strong>CND25.</strong>★★ 程序查询、中断、DMA 三种方式传 1MB 数据（外设 1MB/s，CPU 主存 10MB/s），分别估算 CPU 用于该传输的时间量级并比较。</p>
+<blockquote>
+<p><strong>程序查询</strong>：全程忙等 ⇒ 约 1s（传输期 CPU 全占用）。
+<strong>中断</strong>：按 1B/次中断、每次处理 5μs ⇒ 10⁶ 次 × 5μs = 5s? 过重——按每中断处理 2μs ⇒ 2s 量级（CPU 时间被中断压垮，说明字节级中断不适合高速设备）。
+<strong>DMA</strong>：仅初始化与结束处理（约几十 μs 量级）+ 周期挪用占用存取周期 1MB/10MB/s = 0.1s 的主存带宽 ⇒ <strong>CPU 开销毫秒级</strong>。
+结论：数据率越高越要用 DMA/通道。</p>
+</blockquote>
+<p><strong>CND26.</strong>★★★ 键盘、鼠标、打印机、硬盘四类设备分别适合哪种 I/O 方式？说明理由并指出"中断嵌套"发生时的处理原则。</p>
+<blockquote>
+<p>键盘/鼠标：<strong>中断</strong>——随机突发、数据量小。
+打印机：<strong>中断或 SPOOLing</strong>（输出井排队化独占为共享）。
+硬盘：<strong>DMA</strong>——成块传输、数据率高。
+嵌套原则：服务程序提前<strong>开中断</strong>+设屏蔽字（只屏蔽处理级更低者）；现场保存顺序=先硬件断点后软件现场，恢复时逆序；嵌套深度受栈空间限制。</p>
+</blockquote>
+<h2>五、综合分析（CND27–CND30）</h2>
+<p><strong>CND27.</strong>★★ 描述指令 ADD (R0), R1（功能：M[R0]+R1→M[R0]，主存按字编址）的完整微操作序列（取指、取操作数、执行、写回）。</p>
+<blockquote>
+<p>取指：PC→MAR→M→MDR→IR；(PC)+1→PC。
+取地址：R0→MAR（间接：M(MAR)→MDR→MAR 若为一级间接；本题 (R0) 表示寄存器间接：R0 即有效地址）。
+取数：M(MAR)→MDR。
+运算：MDR + R1 → MDR（ALU）。
+写回：MDR→M（MAR 不变）。
+评分点：间址一次访存、取数一次、写回一次共 <strong>3 次访存</strong>（取指另计）。</p>
+</blockquote>
+<p><strong>CND28.</strong>★★ RISC 与 CISC 从指令数、指令长宽、访存方式、控制器实现、流水线友好度五方面对比，并说明"为什么 RISC 上编译器更重要"。</p>
+<blockquote>
+<p>指令少而精 vs 多而全；定长 vs 变长；只有 Load/Store 访存 vs 任意指令可访存；硬布线为主 vs 微程序为主；指令等长单周期段 vs 长度不定难流水。
+RISC 指令贫瘠 ⇒ 复杂操作由编译器用简单指令序列组合实现 ⇒ <strong>编译器优化决定性能</strong>；CISC 把复杂性埋进硬件，编译器省心但流水线吃亏。</p>
+</blockquote>
+<p><strong>CND29.</strong>★★ CPU 完成一条指令的过程被划分为取指（2 节拍）、间址（可选 1 节拍）、执行（3 节拍）。若机器主频 500MHz，一条含间址的指令至少需要多久？</p>
+<blockquote>
+<p>节拍 = 1/(500M) = 2ns；总节拍 = 2+1+3 = 6 ⇒ <strong>12ns</strong>。
+评分点：间址周期"可有可无"由指令寻址方式决定；指令周期≥机器周期≥节拍的层级关系。</p>
+</blockquote>
+<p><strong>CND30.</strong>★★★ 某机字长 32 位，按字节编址，采用小端序（little-endian）。将 32 位数据 0x12345678 存入地址 0x1000，写出 0x1000~0x1003 各字节的值；再说明"网络字节序"为何规定为大端。</p>
+<blockquote>
+<p>小端：低位字节存低地址 ⇒ <strong>0x1000:78, 0x1001:56, 0x1002:34, 0x1003:12</strong>。
+网络统一大端（高位在前）：不同主机字节序不同时，直接传内存映像会读反，故 TCP/IP 规定网络字节序=大端，发送前 htonl() 转换。
+评分点：小端=低对低；跨系统数据交换需要统一字节序。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：CND1–CND30。使用节奏：计算题（CND4/8/9/10/11/17/21/24）必须<strong>动笔全过程手算</strong>，408 大题给分点是过程不是结果；分析题（CND19/25/28）背"结论+一句原因"即可。错题标回《计组_知识点与难点》。</p></div></body></html>

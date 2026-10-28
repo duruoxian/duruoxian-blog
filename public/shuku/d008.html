@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_微分学专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 微分学专项（150题带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，与《数学_极限与连续专项》连成高数三部曲，配合《高数_知识点与难点》第2–3章使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题把题号标到《数学考题集》同章节旁，三天后重做。
+全部自编或改编经典题型，覆盖：导数定义与可微性、求导法则（含隐函数/参数方程/对数求导）、高阶导数与莱布尼茨公式、微分中值定理证明题（构造辅助函数）、单调性/极值/凹凸/渐近线/曲率、不等式证明、方程根个数讨论。</p>
+</blockquote>
+<h2>§1 导数定义与可微性（W1–W30）</h2>
+<p><strong>W1.</strong>★ 用定义求 f(x)=x² 在 x=2 处的导数。</p>
+<blockquote>
+<p>f'(2)=lim(h→0)[(2+h)²−4]/h = lim(h→0)(4h+h²)/h = <strong>4</strong>。</p>
+</blockquote>
+<p><strong>W2.</strong>★ 用定义求 y=√x 的导数。</p>
+<blockquote>
+<p>(√x)′ = lim(Δx→0)[√(x+Δx)−√x]/Δx，分子有理化 = lim 1/[√(x+Δx)+√x] = <strong>1/(2√x)</strong>。</p>
+</blockquote>
+<p><strong>W3.</strong>★ f(x)=|x|+|x−1| 在哪些点不可导？</p>
+<blockquote>
+<p>分段去绝对值：x&lt;0 时 f=−2x+1（导 −2）；0&lt;x&lt;1 时 f=1（导 0）；x&gt;1 时 f=2x−1（导 2）。
+x=0 左导 −2 右导 0，x=1 左导 0 右导 2 ⇒ <strong>x=0 与 x=1 两点不可导</strong>。</p>
+</blockquote>
+<p><strong>W4.</strong>★★ f(x)=x²sin(1/x)（x≠0），f(0)=0。讨论 x=0 处的可导性与 f′ 的连续性。</p>
+<blockquote>
+<p>f′(0)=lim(x→0)[x²sin(1/x)−0]/x = lim x·sin(1/x) = <strong>0，可导</strong>。
+x≠0 时 f′(x)=2xsin(1/x)−cos(1/x)，x→0 无极限 ⇒ <strong>f′ 在 x=0 不连续</strong>。
+经典结论：可导推不出导函数连续（这题是"导函数不连续"的标准反例）。</p>
+</blockquote>
+<p><strong>W5.</strong>★ f(x)=x|x| 在 x=0 处是否可导？</p>
+<blockquote>
+<p>x≥0 时 f=x²，x&lt;0 时 f=−x²。f′(0)=lim f(h)/h：h&gt;0 得 h→0；h&lt;0 得 −h→0。
+<strong>可导且 f′(0)=0</strong>（|x| 的"尖"被乘 x 磨平了）。</p>
+</blockquote>
+<p><strong>W6.</strong>★★ 设 f′(x₀)=A，求 lim(h→0) [f(x₀+2h)−f(x₀−h)]/(3h)。</p>
+<blockquote>
+<p>拆两项：[f(x₀+2h)−f(x₀)]/(3h) + [f(x₀)−f(x₀−h)]/(3h) = (2/3)A + (1/3)A = <strong>A</strong>。
+只能凑定义，<strong>不能对分子用洛必达</strong>——题目只给了 x₀ 一点的导数。</p>
+</blockquote>
+<p><strong>W7.</strong>★★ 设 f 连续且 lim(x→0) f(x)/x = 2，求 f(0) 与 f′(0)。</p>
+<blockquote>
+<p>分母→0 而极限存在 ⇒ f(x)→0，连续 ⇒ <strong>f(0)=0</strong>。
+于是 f′(0)=lim(x→0)[f(x)−f(0)]/x = lim f(x)/x = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>W8.</strong>★ 求 lim(h→0) [f(x₀)−f(x₀−h)]/h（f 可导）。</p>
+<blockquote>
+<p>Δx=−h：[f(x₀)−f(x₀−h)]/h = [f(x₀+(−h))−f(x₀)]/(−h) → <strong>f′(x₀)</strong>。
+陷阱：负负得正，不是 −f′(x₀)。</p>
+</blockquote>
+<p><strong>W9.</strong>★★ f(x)=(x−1)(x−2)⋯(x−100)，求 f′(1)。</p>
+<blockquote>
+<p>定义：f′(1)=lim(x→1) [(x−1)(x−2)⋯(x−100)]/(x−1) = lim(x→1) (x−2)⋯(x−100)。
+每个因子取 x=1：<strong>(−1)(−2)⋯(−99) = (−1)⁹⁹·99! = −99!</strong>。</p>
+</blockquote>
+<p><strong>W10.</strong>★★ f(x)=x(x+1)(x+2)⋯(x+n)，求 f′(0)。</p>
+<blockquote>
+<p>f′(0)=lim(x→0) f(x)/x = lim(x→0) (x+1)(x+2)⋯(x+n) = <strong>n!</strong>（比 W9 干净，因为 f(0)=0 直接约掉 x）。</p>
+</blockquote>
+<p><strong>W11.</strong>★ 判断："可导必连续，连续必可导。"</p>
+<blockquote>
+<p>前半句对，后半句错。反例：<strong>y=|x| 在 x=0 连续但不可导</strong>。
+连续是可导的必要不充分条件——填空常考。</p>
+</blockquote>
+<p><strong>W12.</strong>★★★ f(x)=x³|x| 在 x=0 处最高几阶导数存在？</p>
+<blockquote>
+<p>f = x⁴（x≥0），−x⁴（x&lt;0）。逐阶算：f′=±4x³ ⇒ f′(0)=0；f″=±12x² ⇒ f″(0)=0；f‴=±24x ⇒ f‴(0)=0（每阶差商都是"h 的幂 / h"仍趋 0）。
+但 f⁽⁴⁾ 左右为 +24 与 −24 ⇒ f⁽⁴⁾(0) 不存在。<strong>三阶可导，四阶不存在</strong>。</p>
+</blockquote>
+<p><strong>W13.</strong>★★ f(x) = sinx（x≤0），ax+b（x&gt;0）。a、b 取何值时 f 在 x=0 处可导？</p>
+<blockquote>
+<p>可导必先连续：左极限 sin0=0 ⇒ <strong>b=0</strong>。
+左导 cos0=1，右导 a ⇒ <strong>a=1</strong>。即 f(x)=sinx（x≤0），x（x&gt;0）——正好是 sinx 的泰勒前两项。</p>
+</blockquote>
+<p><strong>W14.</strong>★★ f′(0) 存在，求 lim(x→0) [f(x)−f(−x)]/x。</p>
+<blockquote>
+<p>= lim [f(x)−f(0)]/x + [f(0)−f(−x)]/x = f′(0) + f′(0) = <strong>2f′(0)</strong>。
+第二项即 Δx=−x 的导数定义（差商同号）。</p>
+</blockquote>
+<p><strong>W15.</strong>★ 奇函数的导函数是什么函数？举例验证。</p>
+<blockquote>
+<p><strong>偶函数</strong>。如 (x³)′=3x² 为偶。同理：偶函数的导数是奇函数；周期函数的导数仍是同周期函数。</p>
+</blockquote>
+<p><strong>W16.</strong>★★ 曲线 y=lnx 上哪一点的切线经过原点？写出该切线。</p>
+<blockquote>
+<p>设切点 (a, lna)，切线 y−lna=(1/a)(x−a)。代入 (0,0)：−lna=−1 ⇒ a=e。
+切点 (e,1)，切线 <strong>y = x/e</strong>。注意"切线过原点"≠"原点是切点"。</p>
+</blockquote>
+<p><strong>W17.</strong>★★ 求过原点且与抛物线 y=x²+1 相切的所有直线。</p>
+<blockquote>
+<p>设直线 y=kx：kx=x²+1 ⇒ x²−kx+1=0，相切需 Δ=k²−4=0 ⇒ k=±2。
+<strong>两条：y=2x 与 y=−2x</strong>。k=−2 的切点在 x=−1（左支），别只写一条。</p>
+</blockquote>
+<p><strong>W18.</strong>★ 求 y=x² 在点 (1,1) 处的法线方程。</p>
+<blockquote>
+<p>切线斜率 2 ⇒ 法线斜率 −1/2：y−1=−(x−1)/2，即 <strong>x+2y−3=0</strong>。</p>
+</blockquote>
+<p><strong>W19.</strong>★ 曲线 y=x³−3x 上斜率为 3 的切线有几条？</p>
+<blockquote>
+<p>3x²−3=3 ⇒ x=±1，切点 (1,−2) 与 (−1,2)，切线 y=3x−5 与 y=3x+5，<strong>共 2 条</strong>。</p>
+</blockquote>
+<p><strong>W20.</strong>★ 写出可微的定义，并说明 dy 与 Δy 的关系。</p>
+<blockquote>
+<p>若 Δy=AΔx+o(Δx)（A 与 Δx 无关），称 f 在 x₀ 可微，且 dy=AΔx。
+<strong>Δy−dy=o(Δx)</strong>：两者之差是 Δx 的高阶无穷小。Δy≈dy 只是线性近似，别划等号。</p>
+</blockquote>
+<p><strong>W21.</strong>★ 一元函数可导与可微的关系？</p>
+<blockquote>
+<p><strong>可导 ⇔ 可微</strong>，且 dy=f′(x₀)Δx。注意二元函数里"偏导存在"推不出"可微"，别把一元结论搬过去。</p>
+</blockquote>
+<p><strong>W22.</strong>★★★ 设 f 在 x₀ 连续，讨论 |f(x)| 在 x₀ 的可导性。</p>
+<blockquote>
+<p>① f(x₀)≠0：由连续性 f 在 x₀ 附近保号，|f|′ = ±f′ ⇒ <strong>可导</strong>。
+② f(x₀)=0 且 f′(x₀)≠0：|f(x)|~|f′(x₀)||x−x₀|，左右差商 = ±|f′(x₀)| ⇒ <strong>不可导</strong>（如 |x|）。
+③ f(x₀)=0 且 f′(x₀)=0：|f(x)|/|x−x₀| → |f′(x₀)|=0 ⇒ <strong>可导</strong>。
+记法：<strong>|f| 的不可导点只可能出在 f 的零点处，且需 f′≠0</strong>。</p>
+</blockquote>
+<p><strong>W23.</strong>★★★ f(x)=x^λ·sin(1/x)（x≠0），f(0)=0。λ 为何值时 f 在 0 处连续？可导？</p>
+<blockquote>
+<p>连续：sin(1/x) 有界，x^λ→0 需 <strong>λ&gt;0</strong>。
+可导：f′(0)=lim x^{λ−1}sin(1/x)，需 <strong>λ&gt;1</strong>（λ−1&gt;0 才能压住有界振荡）。
+λ=1 时差商 = sin(1/x) 无极限。边界值各差 1，是讨论题的标准结构。</p>
+</blockquote>
+<p><strong>W24.</strong>★★ f 在 x=1 处连续，且 lim(x→1) f(x)/(x−1) = 2，求 f′(1)。</p>
+<blockquote>
+<p>极限存在 ⇒ f(x)→0 ⇒ 连续 ⇒ f(1)=0。
+f′(1)=lim [f(x)−f(1)]/(x−1) = lim f(x)/(x−1) = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>W25.</strong>★★ f′(x₀)=A，求 lim(h→0) [f(x₀+mh)−f(x₀−nh)]/h（m、n 为常数）。</p>
+<blockquote>
+<p>拆成 m·[f(x₀+mh)−f(x₀)]/(mh) + n·[f(x₀)−f(x₀−nh)]/(nh) = mA + nA = <strong>(m+n)A</strong>。</p>
+</blockquote>
+<p><strong>W26.</strong>★ 设 f′(x₀) 存在，求 lim(n→∞) n[f(x₀+1/n)−f(x₀)]。</p>
+<blockquote>
+<p>令 h=1/n→0⁺：原式 = lim [f(x₀+h)−f(x₀)]/h = <strong>f′(x₀)</strong>。
+离散数列极限走的是右侧差商，导数存在时左右相等，所以成立。</p>
+</blockquote>
+<p><strong>W27.</strong>★★ 判断："f 在 x₀ 可导、g 在 x₀ 不可导，则 f+g 必不可导；则 f·g 必不可导。"</p>
+<blockquote>
+<p>第一句<strong>对</strong>：反证，若 f+g 可导，则 g=(f+g)−f 可导，矛盾。
+第二句<strong>错</strong>：f≡0 时 fg≡0 处处可导。（若 f(x₀)≠0 且都可导另说——积的可导性要看"另一方在该点是否为0"。）</p>
+</blockquote>
+<p><strong>W28.</strong>★ y=|lnx| 在 x=1 处是否可导？</p>
+<blockquote>
+<p>x&lt;1 时 |lnx|=−lnx，导 −1/x→−1；x&gt;1 时导 1/x→1。左右导数不等 ⇒ <strong>不可导</strong>（但连续）。</p>
+</blockquote>
+<p><strong>W29.</strong>★ 求曲线 y=eˣ 上切线斜率为 2 的切线方程。</p>
+<blockquote>
+<p>eˣ=2 ⇒ x=ln2，切点 (ln2, 2)，切线 <strong>y = 2x + 2 − 2ln2</strong>。</p>
+</blockquote>
+<p><strong>W30.</strong>★★ f 在 x₀ 可导，求 lim(x→x₀) [x·f(x₀) − x₀·f(x)]/(x−x₀)。</p>
+<blockquote>
+<p>分子 = (x−x₀)f(x₀) − x₀[f(x)−f(x₀)]（加减 x₀f(x₀) 拆开）。
+除以 (x−x₀)：f(x₀) − x₀·[f(x)−f(x₀)]/(x−x₀) → <strong>f(x₀) − x₀f′(x₀)</strong>。</p>
+</blockquote>
+<h2>§2 求导法则与高阶导数（W31–W70）</h2>
+<p><strong>W31.</strong>★ y = x³ + 3x² − 2x + 1，求 y′。</p>
+<blockquote>
+<p>逐项求导：<strong>y′ = 3x² + 6x − 2</strong>。</p>
+</blockquote>
+<p><strong>W32.</strong>★ y = x²eˣ，求 y′。</p>
+<blockquote>
+<p>乘积法则：y′ = 2xeˣ + x²eˣ = <strong>(x²+2x)eˣ</strong>。</p>
+</blockquote>
+<p><strong>W33.</strong>★ y = x²lnx（x&gt;0），求 y′。</p>
+<blockquote>
+<p>y′ = 2x·lnx + x²·(1/x) = <strong>x(2lnx + 1)</strong>。</p>
+</blockquote>
+<p><strong>W34.</strong>★ 默写四个三角反三角求导公式：(tanx)′、(cotx)′、(secx)′、(cscx)′。</p>
+<blockquote>
+<p><strong>(tanx)′=sec²x；(cotx)′=−csc²x；(secx)′=secx·tanx；(cscx)′=−cscx·cotx</strong>。
+记法：正的为正、余的为负；sec 的导"自己乘 tan"。</p>
+</blockquote>
+<p><strong>W35.</strong>★ 默写反三角求导公式。</p>
+<blockquote>
+<p><strong>(arcsinx)′=1/√(1−x²)；(arccosx)′=−1/√(1−x²)；(arctanx)′=1/(1+x²)；(arccotx)′=−1/(1+x²)</strong>。
+arcsin 与 arccos、arctan 与 arccot 各互为相反数（和为常数）。</p>
+</blockquote>
+<p><strong>W36.</strong>★ y = ln(x + √(x²+1))，求 y′。</p>
+<blockquote>
+<p>y′ = [1 + x/√(x²+1)] / [x + √(x²+1)] = [√(x²+1)+x] / [√(x²+1)·(x+√(x²+1))] = <strong>1/√(x²+1)</strong>。
+这个函数是 arsinhx，反双曲正弦，导数极简，记结论。</p>
+</blockquote>
+<p><strong>W37.</strong>★ y = e^{sin2x}，求 y′。</p>
+<blockquote>
+<p>链式：y′ = e^{sin2x}·cos2x·2 = <strong>2cos2x·e^{sin2x}</strong>。</p>
+</blockquote>
+<p><strong>W38.</strong>★ y = ln√[(1+x)/(1−x)]，求 y′。</p>
+<blockquote>
+<p>先化简：y = ½[ln(1+x) − ln(1−x)]。
+y′ = ½[1/(1+x) + 1/(1−x)] = ½ · 2/(1−x²) = <strong>1/(1−x²)</strong>。先化简再求导省一半力气。</p>
+</blockquote>
+<p><strong>W39.</strong>★ y = x^{sinx}（x&gt;0），求 y′。</p>
+<blockquote>
+<p>对数求导：lny = sinx·lnx，(lny)′ = cosx·lnx + sinx/x。
+<strong>y′ = x^{sinx}·(cosx·lnx + sinx/x)</strong>。</p>
+</blockquote>
+<p><strong>W40.</strong>★★ y = (1+x²)^{1/x}，求 y′。</p>
+<blockquote>
+<p>lny = ln(1+x²)/x，(lny)′ = [2x/(1+x²)·x − ln(1+x²)]/x² = 2/(1+x²) − ln(1+x²)/x²。
+<strong>y′ = (1+x²)^{1/x}·[2/(1+x²) − ln(1+x²)/x²]</strong>。</p>
+</blockquote>
+<p><strong>W41.</strong>★★ y = √[(x−1)(x−2)/((x−3)(x−4))]，求 y′（对数求导）。</p>
+<blockquote>
+<p>lny = ½[ln(x−1)+ln(x−2)−ln(x−3)−ln(x−4)]。
+y′ = ½·y·[1/(x−1) + 1/(x−2) − 1/(x−3) − 1/(x−4)]（连乘除的函数必用此法，别硬展开）。</p>
+</blockquote>
+<p><strong>W42.</strong>★★ 由方程 x² + xy + y² = 4 确定 y=y(x)，求 y′。</p>
+<blockquote>
+<p>两边对 x 求导（y 视为 x 的函数）：2x + y + xy′ + 2yy′ = 0。
+<strong>y′ = −(2x+y)/(x+2y)</strong>。xy 项用乘积法则，是隐函数求导最容易漏的地方。</p>
+</blockquote>
+<p><strong>W43.</strong>★★ 由 e^y + xy = e 确定 y=y(x)，求 y′(0)。</p>
+<blockquote>
+<p>x=0 代入：e^y = e ⇒ y=1。
+求导：e^y·y′ + y + xy′ = 0 ⇒ y′(0) = −y/e^y = <strong>−1/e</strong>。先定 y 再代，别带着未知 y 算到底。</p>
+</blockquote>
+<p><strong>W44.</strong>★★ 参数方程 x = ln(1+t²)，y = t − arctan t，求 dy/dx 与 d²y/dx²。</p>
+<blockquote>
+<p>dx/dt = 2t/(1+t²)，dy/dt = 1 − 1/(1+t²) = t²/(1+t²)。
+dy/dx = (dy/dt)/(dx/dt) = <strong>t/2</strong>。
+d²y/dx² = [d(dy/dx)/dt]/(dx/dt) = (1/2)·(1+t²)/(2t) = <strong>(1+t²)/(4t)</strong>。
+陷阱：d²y/dx² 不是对 t/2 再对 t 求导，必须除以 dx/dt。</p>
+</blockquote>
+<p><strong>W45.</strong>★★ 摆线 x = a(t−sint)，y = a(1−cost)，求 d²y/dx² 在 t=π 处的值。</p>
+<blockquote>
+<p>dy/dx = asint/[a(1−cost)] = sint/(1−cost) = cot(t/2)。
+d(dy/dx)/dt = −½csc²(t/2)；dx/dt = 2a·sin²(t/2)。
+d²y/dx² = −1/[4a·sin⁴(t/2)]，t=π 时 sin(π/2)=1 ⇒ <strong>−1/(4a)</strong>。</p>
+</blockquote>
+<p><strong>W46.</strong>★ y = f(x²)（f 二阶可导），求 y′ 与 y″。</p>
+<blockquote>
+<p>y′ = 2x·f′(x²)。
+y″ = 2f′(x²) + 2x·f″(x²)·2x = <strong>2f′(x²) + 4x²f″(x²)</strong>。内层还要链式，两处都不能丢。</p>
+</blockquote>
+<p><strong>W47.</strong>★★ y = f(lnx)，求 y″。</p>
+<blockquote>
+<p>y′ = f′(lnx)/x。
+y″ = [f″(lnx)·(1/x)·x − f′(lnx)]/x² = <strong>[f″(lnx) − f′(lnx)]/x²</strong>（商法则 + 链式）。</p>
+</blockquote>
+<p><strong>W48.</strong>★★ y = f(f(x))，求 y′ 与 y″。</p>
+<blockquote>
+<p>y′ = f′(f(x))·f′(x)。
+y″ = f″(f(x))·[f′(x)]² + f′(f(x))·f″(x)。<strong>外层链式平方项</strong>别丢。</p>
+</blockquote>
+<p><strong>W49.</strong>★★ 设 f 有反函数 x=g(y)，用 f′ 表示 g′(f(x₀))。</p>
+<blockquote>
+<p>g′(y) = 1/f′(x)（y=f(x)）⇒ g′(f(x₀)) = <strong>1/f′(x₀)</strong>（要求 f′(x₀)≠0）。
+几何：反函数与原函数图像关于 y=x 对称，切线斜率互为倒数。</p>
+</blockquote>
+<p><strong>W50.</strong>★ y = xˣ（x&gt;0），求 y′。</p>
+<blockquote>
+<p>lny = x·lnx ⇒ (lny)′ = lnx + 1 ⇒ <strong>y′ = xˣ(lnx + 1)</strong>。</p>
+</blockquote>
+<p><strong>W51.</strong>★★ y = (sinx)^{cosx}（0&lt;x&lt;π/2），求 y′。</p>
+<blockquote>
+<p>lny = cosx·lnsinx，(lny)′ = −sinx·lnsinx + cosx·(cosx/sinx)。
+<strong>y′ = (sinx)^{cosx}·[cos²x/sinx − sinx·lnsinx]</strong>。</p>
+</blockquote>
+<p><strong>W52.</strong>★★ y = arctan(eˣ)，求 y′。</p>
+<blockquote>
+<p>y′ = eˣ/(1+e^{2x})。若再问 dy/dx|_{x=0} = <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>W53.</strong>★★ y = x·arctanx − ½ln(1+x²)，化简后求 y′。</p>
+<blockquote>
+<p>y′ = arctanx + x/(1+x²) − x/(1+x²) = <strong>arctanx</strong>。
+这说明该函数是 arctanx 的一个原函数——积分学里分部积分的常用结果，此处先埋个种子。</p>
+</blockquote>
+<p><strong>W54.</strong>★ y = sin⁴x + cos⁴x，求 y′。</p>
+<blockquote>
+<p>先降幂：sin⁴+cos⁴ = 1 − 2sin²xcos²x = 1 − ½sin²2x。
+y′ = −½·2sin2x·cos2x·2 = <strong>−sin4x</strong>。先化简再求导，直接硬算会绕很久。</p>
+</blockquote>
+<p><strong>W55.</strong>★ y = sin²x，求 y‴。</p>
+<blockquote>
+<p>y′ = sin2x，y″ = 2cos2x，y‴ = <strong>−4sin2x</strong>。</p>
+</blockquote>
+<p><strong>W56.</strong>★★ y = 1/(x²−3x+2)，求 y′。</p>
+<blockquote>
+<p>部分分式：1/[(x−1)(x−2)] = 1/(x−2) − 1/(x−1)。
+y′ = <strong>1/(x−1)² − 1/(x−2)²</strong>。有理函数求导前先拆分，n 阶导时是保命技巧（见 W60）。</p>
+</blockquote>
+<p><strong>W57.</strong>★★ y = x²e^{2x}，求 y⁽ⁿ⁾。</p>
+<blockquote>
+<p>莱布尼茨公式（e^{2x} 的 n 阶导是 2ⁿe^{2x}）：
+y⁽ⁿ⁾ = 2ⁿe^{2x}·x² + n·2^{n−1}e^{2x}·2x + C(n,2)·2^{n−2}e^{2x}·2
+= <strong>e^{2x}[2ⁿx² + n·2ⁿx + n(n−1)·2^{n−2}]</strong>。</p>
+</blockquote>
+<p><strong>W58.</strong>★★ y = 1/(x²+3x+2)，求 y⁽ⁿ⁾。</p>
+<blockquote>
+<p>拆分：1/[(x+1)(x+2)] = 1/(x+1) − 1/(x+2)（验证：[(x+2)−(x+1)]/((x+1)(x+2)) ✓）。
+[1/(x+a)]⁽ⁿ⁾ = (−1)ⁿn!/(x+a)^{n+1}。
+<strong>y⁽ⁿ⁾ = (−1)ⁿn![1/(x+1)^{n+1} − 1/(x+2)^{n+1}]</strong>（2026-10-29复审订正：原版两项顺序写反，拆分式会差一个负号）。</p>
+</blockquote>
+<p><strong>W59.</strong>★ y = eˣsinx，求 y⁽ⁿ⁾。</p>
+<blockquote>
+<p>归纳或配对技巧：y′ = eˣ(sinx+cosx) = √2·eˣ·sin(x+π/4)。
+每求一阶相当于"√2 倍 + 相位 π/4"⇒ <strong>y⁽ⁿ⁾ = (√2)ⁿ·eˣ·sin(x + nπ/4)</strong>。</p>
+</blockquote>
+<p><strong>W60.</strong>★ y = sin2x，求 y⁽ⁿ⁾。</p>
+<blockquote>
+<p><strong>y⁽ⁿ⁾ = 2ⁿ·sin(2x + nπ/2)</strong>。sinx 的 n 阶导 sin(x+nπ/2)，乘个 2 每阶多因子 2。</p>
+</blockquote>
+<p><strong>W61.</strong>★ y = ln(1+x)，求 y⁽ⁿ⁾（n≥1）。</p>
+<blockquote>
+<p>y′ = 1/(1+x) = (1+x)^{−1}，之后每阶多一个负号和幂：
+<strong>y⁽ⁿ⁾ = (−1)^{n−1}·(n−1)!/(1+x)ⁿ</strong>。</p>
+</blockquote>
+<p><strong>W62.</strong>★★ y = x·lnx，求 y⁽ⁿ⁾（n≥2）。</p>
+<blockquote>
+<p>y′ = lnx + 1，y″ = 1/x。
+从二阶起套 (1/x)⁽ᵏ⁾ = (−1)ᵏk!/x^{k+1}：
+<strong>y⁽ⁿ⁾ = (−1)ⁿ·(n−2)!/x^{n−1}（n≥2）</strong>。验证 n=2：(−1)²·0!/x = 1/x ✓。</p>
+</blockquote>
+<p><strong>W63.</strong>★★ y = x/(1−x²)，求 y⁽ⁿ⁾。</p>
+<blockquote>
+<p>部分分式：x/(1−x²) = ½[1/(1−x) − 1/(1+x)]。
+注意 1/(1−x) = −1/(x−1)，其 n 阶导 = n!/(1−x)^{n+1}；1/(1+x) 的 n 阶导 = (−1)ⁿn!/(1+x)^{n+1}。
+<strong>y⁽ⁿ⁾ = (n!/2)[1/(1−x)^{n+1} + (−1)ⁿ/(1+x)^{n+1}]</strong>。</p>
+</blockquote>
+<p><strong>W64.</strong>★ 用微分近似计算 √4.02。</p>
+<blockquote>
+<p>f(x)=√x，f(4)=2，f′(4)=1/4，Δx=0.02。
+√4.02 ≈ 2 + (1/4)(0.02) = <strong>2.005</strong>。</p>
+</blockquote>
+<p><strong>W65.</strong>★ 由方程 y² − x² = 1 求 dy。</p>
+<blockquote>
+<p>微分两边：2y·dy − 2x·dx = 0 ⇒ <strong>dy = (x/y)dx</strong>。</p>
+</blockquote>
+<p><strong>W66.</strong>★★ 由 sin(xy) = x 确定 y=y(x)，求 y′。</p>
+<blockquote>
+<p>两边求导：cos(xy)·(y + xy′) = 1。
+<strong>y′ = [1 − y·cos(xy)]/(x·cos(xy))</strong>。</p>
+</blockquote>
+<p><strong>W67.</strong>★★ 气球半径 r 以 2 cm/s 的速率增大，求 r=5 cm 时体积的增长速率。</p>
+<blockquote>
+<p>V = (4/3)πr³，dV/dt = 4πr²·dr/dt。
+r=5：dV/dt = 4π·25·2 = <strong>200π cm³/s</strong>。相关变化率三步：找关系式→两边对 t 求导→代入当下值。</p>
+</blockquote>
+<p><strong>W68.</strong>★★ 梯长 5 m 斜靠墙，底端离墙 3 m 并以 0.5 m/s 远离墙滑，求此时顶端下滑速率。</p>
+<blockquote>
+<p>x²+y²=25（x 为底端离墙距离，y 为顶端高度）。
+2x·dx/dt + 2y·dy/dt = 0，x=3、y=4：dy/dt = −3(0.5)/4 = <strong>−0.375 m/s</strong>（负号即下滑）。
+陷阱：先由勾股求出当下的 y=4 再代，y 不是常数也不是 5。</p>
+</blockquote>
+<p><strong>W69.</strong>★ 求 y = x³ − 3x + 1 的驻点。</p>
+<blockquote>
+<p>y′ = 3x² − 3 = 0 ⇒ <strong>驻点 x=±1</strong>（驻点=导数为零的点，与极值点不是一回事）。</p>
+</blockquote>
+<p><strong>W70.</strong>★★ 设 y=y(x) 满足 √(x²+y²) = e^{arctan(y/x)}（x&gt;0），求 y′。</p>
+<blockquote>
+<p>两边取对数：½ln(x²+y²) = arctan(y/x)。
+求导：(x+yy′)/(x²+y²) = (xy′−y)/(x²+y²) ⇒ x + yy′ = xy′ − y。
+<strong>y′ = (x+y)/(x−y)</strong>。先取对数化掉指数是这类题的固定起手。</p>
+</blockquote>
+<h2>§3 微分中值定理与证明题（W71–W105）</h2>
+<blockquote>
+<p>本节是考研证明题主战场。万能思路：<strong>要证什么，就构造什么</strong>——看到 f+xf′ 就造 xf(x)，看到 xf′−f 就造 f(x)/x，看到 xf′+nf 就造 xⁿf(x)。</p>
+</blockquote>
+<p><strong>W71.</strong>★ 默写罗尔定理并验证 f(x)=lnsinx 在 [π/6, 5π/6] 上的结论。</p>
+<blockquote>
+<p>罗尔定理：闭区间连续、开区间可导、f(a)=f(b)，则 ∃ξ∈(a,b)：f′(ξ)=0。
+f(π/6)=ln½=f(5π/6)；f′=cotx=0 ⇒ <strong>ξ=π/2</strong>∈(π/6, 5π/6) ✓。</p>
+</blockquote>
+<p><strong>W72.</strong>★ 对 f(x)=x³−3x+2 在 [1,2] 上求拉格朗日中值定理的 ξ。</p>
+<blockquote>
+<p>[f(2)−f(1)]/(2−1) = 4−0 = 4；f′(ξ)=3ξ²−3=4 ⇒ ξ²=7/3。
+<strong>ξ = √(7/3) ≈ 1.53 ∈ (1,2)</strong>。</p>
+</blockquote>
+<p><strong>W73.</strong>★★ f 在 [0,1] 连续、(0,1) 可导，f(1)=0。证明 ∃ξ∈(0,1)：f(ξ)+ξf′(ξ)=0。</p>
+<blockquote>
+<p>构造 F(x)=x·f(x)：F 连续可导，F(0)=0，F(1)=f(1)=0。
+罗尔 ⇒ F′(ξ)=f(ξ)+ξf′(ξ)=0。∎ <strong>乘积求导出现"f+xf′"，造 xf(x) 是条件反射。</strong></p>
+</blockquote>
+<p><strong>W74.</strong>★★ f 在 [a,b] 连续（a&gt;0）、(a,b) 可导，f(a)=f(b)=0。证明 ∃ξ∈(a,b)：ξf′(ξ)=f(ξ)。</p>
+<blockquote>
+<p>构造 F(x)=f(x)/x：F(a)=F(b)=0，罗尔 ⇒ F′(ξ)=[ξf′(ξ)−f(ξ)]/ξ²=0。∎
+对比 W73：差一个符号，辅助函数就从 xf(x) 换成 f(x)/x。</p>
+</blockquote>
+<p><strong>W75.</strong>★★ f 在 [0,1] 连续，f(0)=0，f(1)=1。证明 ∃ξ∈(0,1)：f(ξ)=1−ξ。</p>
+<blockquote>
+<p>构造 g(x)=f(x)+x−1：g(0)=−1，g(1)=1，由介值定理 ∃ξ 使 g(ξ)=0。∎
+这题用介值不用中值定理——别被"证明题"吓到就硬套罗尔。</p>
+</blockquote>
+<p><strong>W76.</strong>★ 证明：|sinb − sina| ≤ |b−a|。</p>
+<blockquote>
+<p>拉格朗日：sinb−sina = cosξ·(b−a)，|cosξ|≤1 ⇒ |sinb−sina| ≤ |b−a|。∎</p>
+</blockquote>
+<p><strong>W77.</strong>★★ 证明 x&gt;0 时：x/(1+x) &lt; ln(1+x) &lt; x。</p>
+<blockquote>
+<p>对 ln(1+x) 在 [0,x] 用拉格朗日：ln(1+x) − 0 = x/(1+ξ)，0&lt;ξ&lt;x。
+1/(1+x) &lt; 1/(1+ξ) &lt; 1，乘 x 即得。∎（双边不等式一个拉格朗日全拿下）</p>
+</blockquote>
+<p><strong>W78.</strong>★★ 证明：eˣ &gt; 1+x（x≠0）。</p>
+<blockquote>
+<p>令 g(x)=eˣ−1−x，g′=eˣ−1：x&gt;0 时 g′&gt;0，x&lt;0 时 g′&lt;0 ⇒ g 在 0 取最小值 g(0)=0 ⇒ g(x)&gt;0。∎</p>
+</blockquote>
+<p><strong>W79.</strong>★★★ f 在 [0,1] 连续、(0,1) 可导，f(0)=0，f(1)=1。证明 ∃ξ,η∈(0,1)：1/f′(ξ) + 1/f′(η) = 2。</p>
+<blockquote>
+<p>由介值定理取 c∈(0,1) 使 f(c)=½。
+[0,c] 拉格朗日：f′(ξ)=(½)/c ⇒ 1/f′(ξ)=2c；
+[c,1] 拉格朗日：f′(η)=(½)/(1−c) ⇒ 1/f′(η)=2(1−c)。
+相加 = 2c + 2−2c = 2。∎ <strong>双中值题的标配：介值取中间点，两段各用一次拉格朗日。</strong></p>
+</blockquote>
+<p><strong>W80.</strong>★★ f 在 [a,b] 连续（a&gt;0）、(a,b) 可导。证明 ∃ξ∈(a,b)：f(b)−f(a) = ξf′(ξ)·ln(b/a)。</p>
+<blockquote>
+<p>柯西中值定理，取 g(x)=lnx（g′=1/x≠0）：
+[f(b)−f(a)]/[lnb−lna] = f′(ξ)/(1/ξ) = ξf′(ξ)。∎</p>
+</blockquote>
+<p><strong>W81.</strong>★★ 证明：若 f′ 在 (a,b) 内无零点，则 f 在 (a,b) 内至多有一个零点。</p>
+<blockquote>
+<p>反证：设 f 有两个零点 x₁&lt;x₂，f(x₁)=f(x₂)=0，罗尔 ⇒ f′ 在 (x₁,x₂) 有零点，矛盾。∎</p>
+</blockquote>
+<p><strong>W82.</strong>★★ f 在 [a,b] 上二阶可导，且存在 c∈(a,b) 使 f(a)=f(c)=f(b)。证明 ∃ξ：f″(ξ)=0。</p>
+<blockquote>
+<p>[a,c] 罗尔 ⇒ f′(ξ₁)=0；[c,b] 罗尔 ⇒ f′(ξ₂)=0。
+对 f′ 在 [ξ₁,ξ₂] 再用罗尔 ⇒ f″(ξ)=0。∎ <strong>"三点等值"⇒ 二阶导零点，两次罗尔。</strong></p>
+</blockquote>
+<p><strong>W83.</strong>★★★ f 在 [0,1] 二阶可导，f(0)=f(1)=0，且 f 在 (0,1) 内取得最小值 −1。证明 ∃ξ：f″(ξ) ≥ 8。</p>
+<blockquote>
+<p>设最小值点 c∈(0,1)：f(c)=−1，由费马引理 f′(c)=0。
+泰勒（在 c 处展开到二阶，余项取拉格朗日型）：
+f(0) = f(c) + f′(c)(−c) + f″(η₁)c²/2 = −1 + f″(η₁)c²/2 = 0 ⇒ f″(η₁)=2/c²。
+同理 f(1)=0 ⇒ f″(η₂)=2/(1−c)²。
+c≤½ 时 2/c² ≥ 8；c&gt;½ 时 2/(1−c)² &gt; 8。∎</p>
+</blockquote>
+<p><strong>W84.</strong>★★ 证明：0&lt;x&lt;π/2 时 tanx &gt; x。</p>
+<blockquote>
+<p>令 g=tanx−x：g′=sec²x−1=tan²x&gt;0 ⇒ g 严格增，g(0)=0 ⇒ g&gt;0。∎</p>
+</blockquote>
+<p><strong>W85.</strong>★ 对 f(x)=x³ 在 [0,1] 用拉格朗日，求 ξ 并说明唯一性。</p>
+<blockquote>
+<p>[f(1)−f(0)]/(1−0) = 1 = 3ξ² ⇒ <strong>ξ = 1/√3，唯一</strong>。
+对比 W102：区间对称时 ξ 可以不唯一。</p>
+</blockquote>
+<p><strong>W86.</strong>★ 证明恒等式：arcsinx + arccosx = π/2（x∈[−1,1]）。</p>
+<blockquote>
+<p>导数：1/√(1−x²) − 1/√(1−x²) = 0 ⇒ 原函数在 (−1,1) 内为常数，连续延拓到端点。
+取 x=0 定值：0 + π/2 = π/2。∎ <strong>"导数恒零 + 一点定值"证恒等式的标准套路。</strong></p>
+</blockquote>
+<p><strong>W87.</strong>★★ f 在 [a,b] 连续（a&gt;0）、(a,b) 可导，f(a)=f(b)=0。证明 ∃ξ∈(a,b)：f′(ξ) = −2f(ξ)/ξ。</p>
+<blockquote>
+<p>构造 F(x)=x²·f(x)：F(a)=F(b)=0，罗尔 ⇒ F′(ξ)=2ξf(ξ)+ξ²f′(ξ)=0，ξ≠0。
+两边除 ξ：<strong>f′(ξ) = −2f(ξ)/ξ</strong>。∎ 系数 2 对应幂次：xⁿf(x) 给出 f′=−nf/ξ。</p>
+</blockquote>
+<p><strong>W88.</strong>★★ 设 f′ 在 (a,b) 内有界：|f′|≤M。证明 f 在 (a,b) 上一致连续。</p>
+<blockquote>
+<p>任取 x,y∈(a,b)，拉格朗日：|f(x)−f(y)| = |f′(ξ)||x−y| ≤ M|x−y|。
+这是利普希茨条件，由利普希茨 ⇒ 一致连续（∀ε，取 δ=ε/M）。∎</p>
+</blockquote>
+<p><strong>W89.</strong>★★★ f 在 [−1,1] 上三阶可导，f(−1)=0，f(1)=1，f′(0)=0。证明 ∃η∈(−1,1)：f‴(η)&gt;0。</p>
+<blockquote>
+<p>在 x=0 处泰勒（f′(0)=0，余项拉格朗日型）：
+f(1) = f(0) + f″(a)/2，a∈(0,1)；f(−1) = f(0) + f″(b)/2，b∈(−1,0)。
+两式相减：1 = [f″(a)−f″(b)]/2。对 f″ 用拉格朗日：f″(a)−f″(b) = f‴(η)(a−b)。
+⇒ f‴(η) = 2/(a−b) &gt; 0（a−b&gt;0 且 a−b&lt;2，实际上 f‴(η)&gt;1）。∎</p>
+</blockquote>
+<p><strong>W90.</strong>★ 对 f(x)=x²，g(x)=x³ 在 [1,2] 验证柯西中值定理并求 ξ。</p>
+<blockquote>
+<p>[f(2)−f(1)]/[g(2)−g(1)] = 3/7；f′/g′ = 2ξ/3ξ² = 2/(3ξ)。
+2/(3ξ)=3/7 ⇒ <strong>ξ = 14/9 ∈ (1,2)</strong> ✓。注意柯西的 ξ 对 f、g 是同一个点，不能分别用拉格朗日。</p>
+</blockquote>
+<p><strong>W91.</strong>★★ 证明 x&gt;0 时：arctanx + arctan(1/x) = π/2。</p>
+<blockquote>
+<p>求导：1/(1+x²) + [−1/x²]/(1+1/x²) = 1/(1+x²) − 1/(1+x²) = 0 ⇒ 常数。
+取 x=1：π/4 + π/4 = π/2。∎</p>
+</blockquote>
+<p><strong>W92.</strong>★★★ 设 lim(x→+∞) f′(x) = a。证明 lim(x→+∞) f(x)/x = a。</p>
+<blockquote>
+<p>取定点 c&gt;0，对任意 x&gt;c 在 [c,x] 用拉格朗日：f(x) = f(c) + f′(ξ)(x−c)，ξ∈(c,x)→+∞。
+f(x)/x = f(c)/x + f′(ξ)(1−c/x) → 0 + a·1 = <strong>a</strong>。∎（固定一点做拉格朗日，是处理"f′ 极限已知"的最短路径）</p>
+</blockquote>
+<p><strong>W93.</strong>★ 证明：|arctana − arctanb| ≤ |a−b|。</p>
+<blockquote>
+<p>拉格朗日：arctana−arctanb = (1/(1+ξ²))(a−b)，0&lt;1/(1+ξ²)≤1 ⇒ 得证。∎</p>
+</blockquote>
+<p><strong>W94.</strong>★★ f(x)=x(x−1)(x−2)(x−3) 的导函数有几个零点？各在什么范围？</p>
+<blockquote>
+<p>f 的四个零点 0,1,2,3。相邻零点之间用罗尔：(0,1)、(1,2)、(2,3) 内各有 f′ 的零点，共至少 3 个。
+f′ 是三次多项式至多 3 个零点 ⇒ <strong>恰好 3 个，分布在 (0,1)、(1,2)、(2,3)</strong>。</p>
+</blockquote>
+<p><strong>W95.</strong>★ 证明：x&gt;0 时 sinx &lt; x。</p>
+<blockquote>
+<p>拉格朗日于 [0,x]：sinx−0 = cosξ·x，|cosξ|&lt;1（ξ∈(0,x)&lt;π/2 时 cosξ∈(0,1)）⇒ sinx&lt;x。∎</p>
+</blockquote>
+<p><strong>W96.</strong>★★ 证明：1 − cosx ≤ x²/2（x∈R）。</p>
+<blockquote>
+<p>泰勒：cosx = 1 − x²/2 + cos(θx)·x⁴/24（0&lt;θ&lt;1）。
+x⁴≥0 但 cos(θx) 可负 ⇒ 分两段：|x|≥√2 时右端 1−x²/2 ≤ 0 ≤ 1−cosx 显然；|x|&lt;√2 时 cosx &gt; 1−x²/2 同样由拉格朗日型余项得。∎
+更稳的做法：g=1−cosx−x²/2，g′=sinx−x≤0（W95）⇒ g 递减，g(0)=0 ⇒ x≥0 时 g≤0；偶函数 ⇒ 全域成立。</p>
+</blockquote>
+<p><strong>W97.</strong>★★★ f 在 [a,b] 二阶可导，f′(a)=f′(b)=0。证明 ∃ξ∈(a,b)：|f″(ξ)| ≥ 4|f(b)−f(a)|/(b−a)²。</p>
+<blockquote>
+<p>记 L=b−a，在 c=(a+b)/2 处分别向两端泰勒（余项拉格朗日型）：
+f(c) = f(a) + f′(a)L/2 + f″(η₁)L²/8 = f(a) + f″(η₁)L²/8；
+f(c) = f(b) − f′(b)L/2 + f″(η₂)L²/8 = f(b) + f″(η₂)L²/8。
+相减：f(b)−f(a) = L²[f″(η₁)−f″(η₂)]/8 ⇒ |Δ| ≤ L²(|f″(η₁)|+|f″(η₂)|)/8 ≤ L²·2M/8。
+其中 M=max(|f″(η₁)|,|f″(η₂)|) ⇒ M ≥ 4|f(b)−f(a)|/L²。∎</p>
+</blockquote>
+<p><strong>W98.</strong>★★ 证明 x&gt;0 时：√(1+x) &lt; 1 + x/2。</p>
+<blockquote>
+<p>拉格朗日于 [0,x]：√(1+x)−1 = x/(2√(1+ξ))，ξ∈(0,x) ⇒ √(1+ξ)&gt;1 ⇒ 右端 &lt; x/2。∎</p>
+</blockquote>
+<p><strong>W99.</strong>★★ f 在 [0,1] 连续、(0,1) 可导，f(0)=0，f(1)=1。证明 ∃ξ∈(0,1)：f′(ξ)=2ξ。</p>
+<blockquote>
+<p>构造 F(x)=f(x)−x²：F(0)=0，F(1)=1−1=0，罗尔 ⇒ F′(ξ)=f′(ξ)−2ξ=0。∎</p>
+</blockquote>
+<p><strong>W100.</strong>★★ f 在 [0,1] 可导，0&lt;f′(x)≤1，f(0)=0。证明 f(x)≤x（x∈[0,1]），并说明等号何时成立。</p>
+<blockquote>
+<p>拉格朗日于 [0,x]：f(x)=f′(ξ)x ≤ x。
+等号需 f′(ξ)=1；若 f 在某点取等而 f′&lt;1 于子区间，则 f(x)&lt;x。只有 f′≡1（即 f=x）时恒取等。∎</p>
+</blockquote>
+<p><strong>W101.</strong>★★ 证明：f′(x)≡c（常数）⇔ f(x)=cx+b。</p>
+<blockquote>
+<p>（⇐）求导显然。（⇒）令 g=f−cx，g′=0。任取 x₁&lt;x₂，拉格朗日：g(x₂)−g(x₁)=g′(ξ)(x₂−x₁)=0 ⇒ g 常值 =b。∎</p>
+</blockquote>
+<p><strong>W102.</strong>★ 对 f(x)=x³ 在 [−1,1] 用拉格朗日，ξ 是否唯一？</p>
+<blockquote>
+<p>[f(1)−f(−1)]/2 = 1 = 3ξ² ⇒ ξ=±1/√3，<strong>两个</strong>。对称区间+偶函数场景，ξ 一般成对出现。</p>
+</blockquote>
+<p><strong>W103.</strong>★★★ f 在 [a,b] 连续、(a,b) 可导，f(a)=f(b)，f′(a)f′(b)&lt;0。证明 ∃ξ∈(a,b)：f′(ξ)=0。</p>
+<blockquote>
+<p>不妨 f′(a)&gt;0&gt;f′(b)。f′(a)&gt;0 ⇒ 存在 x₁&gt;a 使 f(x₁)&gt;f(a)；f′(b)&lt;0 ⇒ 存在 x₂<b 使 f(x₂)>f(b)。
+f 在 [x₁,x₂] 上连续，最大值 ≥ max{f(x₁),f(x₂)} &gt; f(a)=f(b) ⇒ 最大值点 ξ 在内部取得。
+费马引理 ⇒ f′(ξ)=0。∎（这是"导函数取遍介值"的达布定理的特例版本）</p>
+</blockquote>
+<p><strong>W104.</strong>★★ 证明 x&gt;0 时：eˣ &gt; 1 + x + x²/2。</p>
+<blockquote>
+<p>三阶泰勒：eˣ = 1 + x + x²/2 + e^{θx}·x³/6（0&lt;θ&lt;1），x&gt;0 时余项 &gt; 0。∎
+规律：eˣ 的泰勒截断不等式对 x&gt;0 恒成立，截到几阶就是"大于前几项和"。</p>
+</blockquote>
+<p><strong>W105.</strong>★★★ f 在 [0,1] 连续、(0,1) 可导，f(0)=0，f(1)=1。证明 ∃ξ,η∈(0,1)（可取不同）：f′(ξ)·f′(η) ≥ 1。</p>
+<blockquote>
+<p>介值取 c 使 f(c)=½（f 连续从 0 到 1）。
+[0,c]：f′(ξ)=1/(2c)；[c,1]：f′(η)=1/[2(1−c)]。
+乘积 = 1/[4c(1−c)] ≥ 1（因 4c(1−c)≤1）。∎
+对比 W79：乘积版给的是 ≥1，倒数和版给的是 =2——题型相近，结论形态不同，别背混。</p>
+</blockquote>
+<h2>§4 单调性、极值、凹凸、渐近线与曲率（W106–W125）</h2>
+<p><strong>W106.</strong>★ 求 y=x³−3x²+2 的单调区间与极值。</p>
+<blockquote>
+<p>y′=3x²−6x=3x(x−2)：增 (−∞,0)∪(2,+∞)，减 (0,2)。
+<strong>极大 f(0)=2，极小 f(2)=−2</strong>。</p>
+</blockquote>
+<p><strong>W107.</strong>★ 求 y=x−ln(1+x) 的单调区间、极值，并说明它 ≥0 的原因。</p>
+<blockquote>
+<p>定义域 x&gt;−1。y′=1−1/(1+x)=x/(1+x)：减 (−1,0)，增 (0,+∞)。
+<strong>极小（也是最小）f(0)=0</strong> ⇒ y≥0，即 ln(1+x)≤x（W77 的单调性版证明）。</p>
+</blockquote>
+<p><strong>W108.</strong>★★ 求 y=x²e^{−x} 的极值。</p>
+<blockquote>
+<p>y′=e^{−x}(2x−x²)=x(2−x)e^{−x}：x&lt;0 减，0&lt;x&lt;2 增，x&gt;2 减。
+<strong>极小 f(0)=0（也是最小值），极大 f(2)=4/e²</strong>。</p>
+</blockquote>
+<p><strong>W109.</strong>★★ 求 y=x^{1/x}（x&gt;0）的单调区间与最大值。</p>
+<blockquote>
+<p>lny = lnx/x，(lny)′ = (1−lnx)/x²：增 (0,e)，减 (e,+∞)。
+<strong>极大（最大）y(e)=e^{1/e} ≈ 1.445</strong>。顺带结论：x^{1/x} 的最大值在 e 取得，整数里 3^{1/3} 最大。</p>
+</blockquote>
+<p><strong>W110.</strong>★★ 极值第二充分条件在 f″(x₀)=0 时失效。举例说明两种结局。</p>
+<blockquote>
+<p>y=x⁴：f″(0)=0 失效，但 x=0 是<strong>极小值点</strong>（四阶导 24&gt;0，或直接看两侧同正）。
+y=x³：f″(0)=0 失效，x=0 <strong>不是极值点</strong>。失效就得回第一充分条件（看 f′ 变号）。</p>
+</blockquote>
+<p><strong>W111.</strong>★★ 求 y=(x²−1)³+2 的极值。</p>
+<blockquote>
+<p>y′=6x(x²−1)²：驻点 −1,0,1。
+x=0 两侧 y′ 由负变正 ⇒ <strong>极小 f(0)=1</strong>；x=±1 两侧同号（平方因子）⇒ 不是极值。三重根不产生极值。</p>
+</blockquote>
+<p><strong>W112.</strong>★ 求 y=x³ 的凹凸区间与拐点。</p>
+<blockquote>
+<p>y″=6x：<strong>凸（上凸）(−∞,0)，凹 (0,+∞)，拐点 (0,0)</strong>。原点两侧 y″ 变号。</p>
+</blockquote>
+<p><strong>W113.</strong>★ 求 y=3x⁴−4x³+1 的拐点。</p>
+<blockquote>
+<p>y″=36x²−24x=12x(3x−2)：变号点 x=0 与 x=2/3。
+<strong>拐点 (0,1) 与 (2/3, 11/27)</strong>。</p>
+</blockquote>
+<p><strong>W114.</strong>★★ 求 y=x·e^{1/x²} 的全部渐近线。</p>
+<blockquote>
+<p>x→0±：e^{1/x²}→∞，且压倒一次幂 ⇒ y→∞，<strong>垂直渐近线 x=0</strong>。
+x→∞：e^{1/x²}=1+1/x²+o(1/x²) ⇒ y = x + 1/x + ⋯ ⇒ <strong>斜渐近线 y=x</strong>（k=lim y/x=1，b=lim(y−x)=0）。</p>
+</blockquote>
+<p><strong>W115.</strong>★★ 求 y=xlnx 的渐近线。</p>
+<blockquote>
+<p>x→0⁺：xlnx→0，不趋于无穷，<strong>无垂直渐近线</strong>（这是常见错觉：log 在 0 处炸，但乘了 x 压平了）。
+x→+∞：y/x=lnx→∞，无斜/水平渐近线。<strong>结论：没有渐近线</strong>。</p>
+</blockquote>
+<p><strong>W116.</strong>★★ 求 y=(x²+1)/(x−1) 的渐近线。</p>
+<blockquote>
+<p>除法化简：y = x+1+2/(x−1)。
+<strong>垂直渐近线 x=1；斜渐近线 y=x+1</strong>。有理分式先做多项式除法，斜渐近线一眼读出。</p>
+</blockquote>
+<p><strong>W117.</strong>★ 求 y=e^{1/x} 的渐近线。</p>
+<blockquote>
+<p>x→0⁺：→∞ ⇒ 垂直渐近线 x=0（x→0⁻ 时 →0，单侧垂直渐近线）。
+x→∞：→1 ⇒ <strong>水平渐近线 y=1</strong>。</p>
+</blockquote>
+<p><strong>W118.</strong>★★ 求 y=x² 在点 (1,1) 处的曲率。</p>
+<blockquote>
+<p>y′=2x=2，y″=2。K = |y″|/(1+y′²)^{3/2} = 2/(1+4)^{3/2} = <strong>2/(5√5)</strong>。</p>
+</blockquote>
+<p><strong>W119.</strong>★★ 求 y=eˣ 在点 (0,1) 处的曲率半径与曲率中心。</p>
+<blockquote>
+<p>y′=1，y″=1。K = 1/(1+1)^{3/2} = 1/(2√2) ⇒ <strong>曲率半径 ρ=2√2</strong>。
+曲率中心 (X,Y) = (x − y′(1+y′²)/y″, y + (1+y′²)/y″) = (0−2, 1+2) = <strong>(−2, 3)</strong>。</p>
+</blockquote>
+<p><strong>W120.</strong>★★ 边长 a 的正方形铁皮四角各剪去小正方形折成无盖盒，求最大容积。</p>
+<blockquote>
+<p>设剪去边长 x：V=x(a−2x)²，V′=(a−2x)(a−6x)。
+驻点 x=a/6（x=a/2 舍）⇒ <strong>V_max=(a/6)(2a/3)²=2a³/27</strong>。</p>
+</blockquote>
+<p><strong>W121.</strong>★★ 求点 (0,1) 到抛物线 y=x² 的最短距离。</p>
+<blockquote>
+<p>距离平方 d²=x²+(x²−1)²=x⁴−x²+1，导数 4x³−2x=2x(2x²−1)=0 ⇒ x²=½。
+<strong>最近点 (±√2/2, ½)，最短距离 √3/2</strong>（d²=3/4）。</p>
+</blockquote>
+<p><strong>W122.</strong>★★ 证明 f(x)=x+cosx 在 R 上严格单调增。</p>
+<blockquote>
+<p>f′=1−sinx ≥ 0，且仅在孤立点 x=π/2+2kπ 处为零。
+任何区间上 f′ 不恒为零 ⇒ f 严格增。∎ <strong>"导数≥0 且零点孤立"就够严格单调，不必 f′&gt;0 处处成立。</strong></p>
+</blockquote>
+<p><strong>W123.</strong>★ 半径 R 的圆内接矩形何时面积最大？</p>
+<blockquote>
+<p>设一边所对圆心角 2θ：面积 S=2Rsinθ·2Rcosθ=2R²sin2θ ≤ 2R²。
+<strong>θ=π/4 即正方形时最大，S_max=2R²</strong>。</p>
+</blockquote>
+<p><strong>W124.</strong>★ 默写极值必要条件，并举"驻点但非极值"的反例。</p>
+<blockquote>
+<p>费马引理：可导点取极值 ⇒ 该点 f′=0。
+反例 y=x³：x=0 是驻点但单调增穿过，非极值。<strong>驻点是候选，不是判决。</strong></p>
+</blockquote>
+<p><strong>W125.</strong>★★★ 求 y=x³−3|x| 的极值。</p>
+<blockquote>
+<p>分段：x&lt;0 时 y=x³+3x（y′=3x²+3&gt;0，严格增到 0）；x≥0 时 y=x³−3x（y′=3x²−3，在 (0,1) 减）。
+x=0 处左侧增右侧减 ⇒ <strong>极大 f(0)=0</strong>；<strong>极小 f(1)=−2</strong>（x=−1 处 y=−4 只是过渡点，两侧同为增，非极值）。
+带绝对值函数的极值必须分段+考察分段点两侧，别直接求导。</p>
+</blockquote>
+<h2>§5 不等式证明与方程根个数（W126–W150）</h2>
+<p><strong>W126.</strong>★★ 证明 x&gt;0 且 x≠1 时：eˣ &gt; ex。</p>
+<blockquote>
+<p>令 g=eˣ−ex：g′=eˣ−e，g 在 x=1 取最小 g(1)=0 ⇒ x≠1 时 g&gt;0。∎
+即 eˣ ≥ ex，等号仅 x=1——"e 是自己的最优除数"。</p>
+</blockquote>
+<p><strong>W127.</strong>★★ 证明 x&gt;0 时：ln(1+x) &gt; x/(1+x)。</p>
+<blockquote>
+<p>令 h=ln(1+x)−x/(1+x)：h′=1/(1+x) − 1/(1+x)² = x/(1+x)²&gt;0，h(0)=0 ⇒ h&gt;0。∎</p>
+</blockquote>
+<p><strong>W128.</strong>★★ 证明 0&lt;x&lt;π/2 时：tanx &gt; x + x³/3。</p>
+<blockquote>
+<p>令 g=tanx−x−x³/3：g′=sec²x−1−x²=tan²x−x²&gt;0（由 W84 tanx&gt;x 平方放大）。
+g 严格增，g(0)=0 ⇒ g&gt;0。∎</p>
+</blockquote>
+<p><strong>W129.</strong>★★ 证明 x&gt;0 时：(1+x)ln(1+x) &gt; x·lnx。</p>
+<blockquote>
+<p>令 F=(1+x)ln(1+x)−xlnx：F′=ln(1+x)+1−lnx−1=ln(1+1/x)&gt;0。
+F(0⁺)=0（xlnx→0，(1+x)ln(1+x)→0）⇒ F&gt;0。∎</p>
+</blockquote>
+<p><strong>W130.</strong>★★ 证明 x&gt;1 时：2√x &gt; 3 − 1/x。</p>
+<blockquote>
+<p>令 f=2√x−3+1/x：f(1)=0；f′=1/√x − 1/x² = (x^{3/2}−1)/x²&gt;0（x&gt;1）⇒ f&gt;0。∎</p>
+</blockquote>
+<p><strong>W131.</strong>★★★ 证明：e&lt;a<b 时 a^b > b^a。</p>
+<blockquote>
+<p>两边取对数化为 blna &gt; alnb，即 lna/a &gt; lnb/b。
+令 h=lnx/x：h′=(1−lnx)/x²&lt;0（x&gt;e）⇒ h 递减，a<b ⇒ h(a)>h(b)。∎</p>
+</blockquote>
+<p><strong>W132.</strong>★★ 讨论方程 x³−3x+1=0 的实根个数与分布。</p>
+<blockquote>
+<p>f′=3(x²−1)：极大 f(−1)=3&gt;0，极小 f(1)=−1&lt;0。
+又 f(−2)=−1&lt;0，f(2)=3&gt;0 ⇒ <strong>三个实根：分别在 (−2,−1)、(0,1)、(1,2)</strong>。</p>
+</blockquote>
+<p><strong>W133.</strong>★★ 讨论 a 为何值时方程 xlnx = a 的根的个数。</p>
+<blockquote>
+<p>f=xlnx：f′=lnx+1，极小 f(1/e)=−1/e。
+<strong>a&lt;−1/e：无根；a=−1/e：一根；−1/e&lt;a&lt;0：两根；a≥0：一根</strong>（a=0 时根为 x=1）。
+极值高度与水平线比高低，是"根个数"题的标准画法。</p>
+</blockquote>
+<p><strong>W134.</strong>★ 证明方程 sinx = x 有且仅有一个实根。</p>
+<blockquote>
+<p>f=x−sinx：f′=1−cosx≥0 且零点孤立 ⇒ 严格增 ⇒ 至多一根；f(0)=0 ⇒ <strong>唯一根 x=0</strong>。</p>
+</blockquote>
+<p><strong>W135.</strong>★★★ 讨论 b 为何值时方程 eˣ = bx 的根的个数。</p>
+<blockquote>
+<p>f=eˣ−bx：f″=eˣ&gt;0 凸，f′=eˣ−b 唯一零点 c=lnb，极小 f(c)=b(1−lnb)。
+<strong>b<e：无根；b=e：一根（x=1）；b>e：两根</strong>。
+对照 W126：b=e 时方程 eˣ=ex 只有 x=1 一个解，完全一致。</p>
+</blockquote>
+<p><strong>W136.</strong>★★ 证明方程 x³+px+q=0（p&gt;0）有且仅有一个实根。</p>
+<blockquote>
+<p>f′=3x²+p&gt;0 ⇒ 严格增 ⇒ 至多一根；x→±∞ 时 f→±∞ ⇒ 介值 ⇒ 至少一根。∎</p>
+</blockquote>
+<p><strong>W137.</strong>★ 证明方程 tanx = x 在 (0,π/2) 内无根。</p>
+<blockquote>
+<p>f=tanx−x：f′=sec²x−1=tan²x&gt;0，f(0)=0 ⇒ f&gt;0 于 (0,π/2)。∎</p>
+</blockquote>
+<p><strong>W138.</strong>★★★ 设 f 在 [0,+∞) 可导，f(0)=0，且 f′(x)&gt;f(x)。证明 f(x)&gt;0（x&gt;0）。</p>
+<blockquote>
+<p>构造 g=e^{−x}f(x)：g′=e^{−x}[f′−f]&gt;0 ⇒ g 严格增。
+g(0)=0 ⇒ x&gt;0 时 g&gt;0，而 e^{−x}&gt;0 ⇒ f(x)&gt;0。∎
+乘个 e^{−x} 把"f′−f"做成一个函数的导数——解线性微分方程的积分因子思想在证明题里的用法。</p>
+</blockquote>
+<p><strong>W139.</strong>★★★ 证明 x&gt;0 时：sinx &gt; x − x³/6。</p>
+<blockquote>
+<p>令 g=sinx−x+x³/6。逐阶求导：g‴=1−cosx≥0 ⇒ g″ 严格增，g″(0)=0 ⇒ g″&gt;0 ⇒ g′ 严格增，g′(0)=0 ⇒ g′&gt;0 ⇒ g&gt;0。∎
+<strong>从高阶往回推单调，三层楼梯</strong>——泰勒余项法的等价化身。</p>
+</blockquote>
+<p><strong>W140.</strong>★ 比较 (ln3)/3 与 (ln4)/4 的大小。</p>
+<blockquote>
+<p>h=lnx/x 在 x&gt;e 递减（W131），3&lt;4 ⇒ <strong>(ln3)/3 &gt; (ln4)/4</strong>。</p>
+</blockquote>
+<p><strong>W141.</strong>★★ 证明 x&gt;0 时：1/(1+x) &lt; ln(1+1/x) &lt; 1/x。</p>
+<blockquote>
+<p>左：W127 把 x 换成 1/x：ln(1+1/x) &gt; (1/x)/(1+1/x) = 1/(1+x)。
+右：ln(1+t)&lt;t（W77 右半），t=1/x。∎ 两个旧结论一拼即得新不等式。</p>
+</blockquote>
+<p><strong>W142.</strong>★★★ 讨论 k 为何值时方程 lnx = kx 的根的个数。</p>
+<blockquote>
+<p>f=lnx−kx。
+k≤0：f′=1/x−k&gt;0 严格增；k=0 时根 x=1；k&lt;0 时 f 从 −∞ 增到 +∞ ⇒ 一根。
+k&gt;0：f′ 零点 x=1/k，极大值 f(1/k)=−lnk−1：<strong>k&gt;1/e 无根；k=1/e 一根（相切）；k&lt;1/e 两根</strong>。</p>
+</blockquote>
+<p><strong>W143.</strong>★★★ 证明方程 2ˣ = x² 恰有三个实根。</p>
+<blockquote>
+<p>验证：x=2（4=4）、x=4（16=16）是根；f=2ˣ−x² 在 (−1,0)：f(−1)=−0.5&lt;0，f(0)=1&gt;0 ⇒ 第三根在 (−1,0)。
+根的上界：f‴=2ˣln³2&gt;0 ⇒ f″ 至多一个零点 ⇒ f′ 至多两个零点 ⇒ f 至多三个零点（罗尔反推）。∎
+<strong>f⁽ⁿ⁾ 恒正 ⇒ f⁽ⁿ⁻¹⁾ 至多一根 ⇒ … ⇒ f 至多 n 个零点</strong>的递推链是标准论证。</p>
+</blockquote>
+<p><strong>W144.</strong>★★ 设 0&lt;a&lt;1，b&gt;0。证明方程 x = a·sinx + b 有且仅有一个正根。</p>
+<blockquote>
+<p>F=x−asinx−b：F′=1−acosx ≥ 1−a&gt;0 ⇒ 严格增 ⇒ 至多一根。
+F(0)=−b&lt;0；F(a+b)=a(1−sin(a+b)) ≥ 0 ⇒ 至少一根（含端点情形）。∎</p>
+</blockquote>
+<p><strong>W145.</strong>★★ 证明 x&lt;1 时：eˣ ≤ 1/(1−x)。</p>
+<blockquote>
+<p>等价于 f=eˣ(1−x)−1 ≤ 0。f′=−xeˣ：x&lt;0 增，0&lt;x&lt;1 减 ⇒ 在 x=0 取最大 f(0)=0。∎</p>
+</blockquote>
+<p><strong>W146.</strong>★★ 设 f 在 R 上可导且 f′(x)≡f(x)，f(0)=1。证明 f(x)=eˣ。</p>
+<blockquote>
+<p>构造 g=f/eˣ：g′=(f′−f)/eˣ=0 ⇒ g≡C。f(0)=1 ⇒ C=1 ⇒ f=eˣ。∎</p>
+</blockquote>
+<p><strong>W147.</strong>★★ 证明 x&gt;0 时：arctanx &gt; x/(1+x²)。</p>
+<blockquote>
+<p>令 g=arctanx−x/(1+x²)：g′=1/(1+x²) − (1−x²)/(1+x²)² = 2x²/(1+x²)²&gt;0。
+g(0)=0 ⇒ g&gt;0。∎</p>
+</blockquote>
+<p><strong>W148.</strong>★★ 证明 x&gt;0 时：eˣ &gt; 1 + x + x²/2（不用泰勒余项，用单调链）。</p>
+<blockquote>
+<p>g=eˣ−1−x−x²/2：g′=eˣ−1−x，由 W78 知 g′&gt;0（x&gt;0）。
+g(0)=0 ⇒ g&gt;0。∎ 与 W104 的泰勒证法殊途同归。</p>
+</blockquote>
+<p><strong>W149.</strong>★★ 分解 x³−3x²+4 并说明方程 x³−3x²+4=0 的根。</p>
+<blockquote>
+<p>试根 x=−1：−1−3+4=0 ⇒ 因式分解 (x+1)(x²−4x+4) = <strong>(x+1)(x−2)²</strong>。
+根为 <strong>x=−1（单根）与 x=2（二重根）</strong>，共两个不同实根。二重根处曲线与 x 轴相切（f′(2)=0）。</p>
+</blockquote>
+<p><strong>W150.</strong>★★★ 证明 x≥1 时：eˣ ≥ e·x²/2。</p>
+<blockquote>
+<p>令 g=eˣ−e·x²/2：g′=eˣ−ex，g″=eˣ−e。
+x≥1 ⇒ g″≥0 ⇒ g′ 递增，g′(1)=0 ⇒ g′≥0 ⇒ g 递增，g(1)=e/2&gt;0 ⇒ g&gt;0。∎
+三层递推同 W139：<strong>高阶定符号 → 低阶定单调 → 原函数定大小</strong>。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：W1–W150。使用节奏：①第 1 天做 §1（配合教材/网课导数定义部分）→②§2 分 4 天每天 10 题（求导法则练熟到不假思索）→③§3 分 4 天，中值定理证明题每天 9 题左右，先自己想 10 分钟构造辅助函数再看答案→④§4 一天→⑤§5 分 3 天；全程错题标回《数学考题集》同章节。三天后只重做错题。与《极限与连续专项》合称三部曲：极限管"趋势"，微分管"变化"，积分管"累积"。</p></div></body></html>

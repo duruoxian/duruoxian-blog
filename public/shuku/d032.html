@@ -1,0 +1,1033 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学选择题_高数 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 选择题库 高数（250题·刷题网页版）</h1>
+<blockquote>
+<p>2026-10-29 生成，为刷题网页（博客「刷题」）配套的数学选择题库第一册：极限与连续 / 导数与应用 / 中值定理与不等式 / 积分学 / 微分方程 / 多元微分 / 重积分 / 级数（数一）。
+格式：<strong>MG+题号</strong>，答案与简析紧随（与 408 题库同构，可被网页直接解析）。难度 ★~★★★。
+已逐题验算。配合《数学选择题_线代》《数学选择题_概率》构成数学刷题库。</p>
+</blockquote>
+<h2>§1 极限与连续（MG1–MG35）</h2>
+<p><strong>MG1.</strong>★ lim(x→0) (1−cos2x)/x² = ?
+A. 1　B. 2　C. 4　D. 1/2</p>
+<blockquote>
+<p><strong>B</strong>。1−cos2x ~ (2x)²/2 = 2x²，比值 = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>MG2.</strong>★ lim(x→∞) (2x³−x+1)/(3x³+x²) = ?
+A. 2/3　B. 3/2　C. 0　D. ∞</p>
+<blockquote>
+<p><strong>A</strong>。抓最高次项 <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>MG3.</strong>★ lim(x→0) ln(1+2x)/sin3x = ?
+A. 2/3　B. 3/2　C. 1　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。ln(1+2x)~2x，sin3x~3x ⇒ <strong>2/3</strong>。</p>
+</blockquote>
+<p><strong>MG4.</strong>★★ lim(x→0) (e^x + e^{2x} − 2)/x = ?
+A. 1　B. 2　C. 3　D. 0</p>
+<blockquote>
+<p><strong>C</strong>。分子 ~ (1+2)x = 3x（泰勒一阶和）⇒ <strong>3</strong>。</p>
+</blockquote>
+<p><strong>MG5.</strong>★★ lim(x→0) (tanx−x)/x³ = ?
+A. 1/3　B. 1/2　C. 1/6　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。tanx−x ~ x³/3 ⇒ <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>MG6.</strong>★★ lim(x→0⁺) lnx·e^{−1/x} = ?
+A. 0　B. 1　C. ∞　D. 不存在</p>
+<blockquote>
+<p><strong>A</strong>。令 t=1/x→+∞：−lnt·e^{−t} → 0（幂压对数的指数版）。</p>
+</blockquote>
+<p><strong>MG7.</strong>★★ lim(x→0) [(1+x)^{1/x} − e]/x = ?
+A. −e/2　B. e/2　C. −e　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。(1+x)^{1/x} = e^{1/x·ln(1+x)} = e^{1−x/2+o(x)}，差 −ex/2 ⇒ <strong>−e/2</strong>。</p>
+</blockquote>
+<p><strong>MG8.</strong>★ f(x) = x·sin(1/x) 在 x=0 无定义，补充 f(0)=0 后：
+A. 连续且可导　B. 连续不可导　C. 不连续　D. 可导且导数为1</p>
+<blockquote>
+<p><strong>B</strong>。极限 0 存在 ⇒ 连续；f′(0)=lim sin(1/h) 不存在 ⇒ <strong>连续不可导</strong>。</p>
+</blockquote>
+<p><strong>MG9.</strong>★★ lim(x→0) [(e^{x²}−cosx)/x²] = ?
+A. 1/2　B. 3/2　C. 1　D. 2</p>
+<blockquote>
+<p><strong>B</strong>。e^{x²}−1 ~ x²，1−cosx ~ x²/2：分子 = (e^{x²}−1)+(1−cosx) ~ x²+x²/2 = 3x²/2 ⇒ <strong>3/2</strong>。</p>
+</blockquote>
+<p><strong>MG10.</strong>★ 数列极限 lim n²(1/n − 1/(n+1))? = lim n²/(n(n+1)) = 1。改问：lim(n→∞) (1+2ⁿ+3ⁿ)^{1/n} = ?
+A. 3　B. 2　C. 6　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。抓最大项 3ⁿ：(3ⁿ)^{1/n} = 3（夹逼：3 ≤ … ≤ 3·3^{1/n}）。</p>
+</blockquote>
+<p><strong>MG11.</strong>★★ lim(x→0⁺) (tanx/x)^{1/x²} = ?
+A. e^{1/3}　B. e^{1/6}　C. e^{−1/3}　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。ln(tanx/x) ~ (x²/3)/x² = 1/3（ln(tanx/x) = ln(1+(tanx−x)/x) ~ x²/3）⇒ <strong>e^{1/3}</strong>。</p>
+</blockquote>
+<p><strong>MG12.</strong>★ x=0 是 f(x)=e^{1/x} 的：
+A. 可去间断点　B. 跳跃间断点　C. 无穷间断点　D. 第二类振荡间断点</p>
+<blockquote>
+<p><strong>C</strong>。x→0⁺ → ∞（第二类间断，属无穷型）。</p>
+</blockquote>
+<p><strong>MG13.</strong>★★ f(x) = (x²−1)/(|x|·(x−1)) 的间断点情况：
+A. x=1 可去、x=0 无穷　B. x=0 跳跃　C. x=1 无穷　D. 两个都可去</p>
+<blockquote>
+<p><strong>A</strong>。x=1 处极限 (x+1)/|x| → 2 存在（可去）；x=0 处分母→0 而分子→−1 ⇒ 无穷间断。</p>
+</blockquote>
+<p><strong>MG14.</strong>★ lim(x→∞) (x²+1)·x/(x³+x+1) = ?
+A. 1　B. 0　C. ∞　D. 不存在</p>
+<blockquote>
+<p><strong>A</strong>。~ x²·x/x³ = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>MG15.</strong>★★ 设 lim(x→0) f(x)/x³ = 2，则 lim(x→0) f(x)/x = ?
+A. 0　B. 2　C. ∞　D. 不能确定</p>
+<blockquote>
+<p><strong>A</strong>。f(x) ~ 2x³ ⇒ f(x)/x ~ 2x² → <strong>0</strong>。</p>
+</blockquote>
+<p><strong>MG16.</strong>★ lim(x→1) (x−1)·sin(1/(x−1)) = ?
+A. 0　B. 1　C. 不存在　D. ∞</p>
+<blockquote>
+<p><strong>A</strong>。无穷小 × 有界 = <strong>0</strong>。</p>
+</blockquote>
+<p><strong>MG17.</strong>★★ 数列 {xₙ}: x₁=√2, xₙ₊₁=√(2+xₙ)，则 lim xₙ = ?
+A. 2　B. √2　C. 1+√2　D. 发散</p>
+<blockquote>
+<p><strong>A</strong>。单调有界：xₙ≤2 归纳 + 递增；设极限 L：L²=2+L ⇒ L=2（取正根）。</p>
+</blockquote>
+<p><strong>MG18.</strong>★ lim(x→0) (x²sin(1/x))/(sinx) = ?
+A. 0　B. 1　C. 不存在　D. −1</p>
+<blockquote>
+<p><strong>A</strong>。= x·[x/sinx]·sin(1/x) → 0·1·有界 = <strong>0</strong>。</p>
+</blockquote>
+<p><strong>MG19.</strong>★★ lim(x→0) (aˣ−bˣ)/x（a,b&gt;0, a≠b）= ?
+A. ln(a/b)　B. ln a − 1　C. ab　D. ln(ab)</p>
+<blockquote>
+<p><strong>A</strong>。aˣ−1 ~ xlna，bˣ−1 ~ xlnb ⇒ 差 = x(lna−lnb) ⇒ <strong>ln(a/b)</strong>。</p>
+</blockquote>
+<p><strong>MG20.</strong>★ 函数 f(x)=√(x²−1)/√(2−x²)? 定义域内连续性问：改：f(x) = ln(x²−1) 的连续区间：
+A. (−∞,−1)∪(1,+∞)　B. (1,+∞)　C. (−1,1)　D. R</p>
+<blockquote>
+<p><strong>A</strong>。x²&gt;1 ⇒ <strong>(−∞,−1)∪(1,+∞)</strong>。</p>
+</blockquote>
+<p><strong>MG21.</strong>★★ lim(x→0) [∫₀ˣ sin(t²)dt]/x³ = ?
+A. 1/3　B. 1/4　C. 1/2　D. 2/3</p>
+<blockquote>
+<p><strong>A</strong>。洛必达：sinx²~x² ⇒ x²/3x² = <strong>1/3</strong>。</p>
+</blockquote>
+<p><strong>MG22.</strong>★ lim(x→+∞) arctanx/x = ?
+A. 0　B. π/2　C. 1　D. 不存在</p>
+<blockquote>
+<p><strong>A</strong>。有界/无穷 = <strong>0</strong>。</p>
+</blockquote>
+<p><strong>MG23.</strong>★★ lim(x→0) [(1+x)(1+2x)(1+3x) − 1]/x = ?
+A. 6　B. 5　C. 3　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。展开主部 = (1+2+3)x = 6x ⇒ <strong>6</strong>。</p>
+</blockquote>
+<p><strong>MG24.</strong>★ 若 lim(x→0) f(x) 存在，则 f(x) 在 x=0：
+A. 必连续　B. 未必有定义　C. 必有定义　D. 必可导</p>
+<blockquote>
+<p><strong>B</strong>。极限存在与该点是否有定义无关（如 (x²−1)/(x−1) 在 1 处）。</p>
+</blockquote>
+<p><strong>MG25.</strong>★★ lim(x→0) [x − ∫₀ˣ e^{−t²}dt]/x³ = ?
+A. −1/3　B. 1/3　C. 0　D. −2/3</p>
+<blockquote>
+<p><strong>A</strong>。洛必达：[1−e^{−x²}]/3x² = −(e^{−x²}−1)/3x² → −x²/3x² = <strong>−1/3</strong>。</p>
+</blockquote>
+<p><strong>MG26.</strong>★ x→0 时，x²、x−sinx、1−cos2x 中最高阶的无穷小是：
+A. x²　B. x−sinx　C. 1−cos2x　D. 同阶</p>
+<blockquote>
+<p><strong>B</strong>。x−sinx ~ x³/6 为三阶最高；x² 与 1−cos2x ~ 2x² 同为二阶。</p>
+</blockquote>
+<p><strong>MG27.</strong>★★ f′(0) 存在，则 lim(x→0) [f(x)−f(2x)]/x = ?
+A. −f′(0)　B. f′(0)　C. 2f′(0)　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。[f(x)−f(2x)]/x = [f(x)−f(0)]/x − [f(2x)−f(0)]/x → f′(0) − 2f′(0) = <strong>−f′(0)</strong>。</p>
+</blockquote>
+<p><strong>MG28.</strong>★ lim(x→π) sinx/(π−x) = ?
+A. 1　B. 0　C. −1　D. 不存在</p>
+<blockquote>
+<p><strong>A</strong>。令 u=π−x：sin(π−u)/u = sinu/u → <strong>1</strong>。</p>
+</blockquote>
+<p><strong>MG29.</strong>★★ lim(n→∞) (n!/(nⁿ))^{1/n} = ?
+A. 1/e　B. e　C. 1　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。(n!)^{1/n}/n → 1/e（斯特林式经典结论，由 (1+1/k)ᵏ 乘积导出）。</p>
+</blockquote>
+<p><strong>MG30.</strong>★ f(x)=x²|x| 在 x=0 处：
+A. 二阶可导　B. 仅一阶可导　C. 三阶可导　D. 不可导</p>
+<blockquote>
+<p><strong>A</strong>。f = ±x³：f′, f″ 存在（f″(0)=0），f‴ 左右 ±6 不存在 ⇒ <strong>二阶可导</strong>。</p>
+</blockquote>
+<p><strong>MG31.</strong>★★ lim(x→0) [(1+sinx)^{1/x} − (1+tx)^{1/x}]? 太怪。改：lim(x→0) (cosx)^{1/x²} = ?
+A. e^{−1/2}　B. e^{−1}　C. 1　D. e^{1/2}</p>
+<blockquote>
+<p><strong>A</strong>。ln(cosx)/x² ~ (−x²/2)/x² = −1/2 ⇒ <strong>e^{−1/2}</strong>。</p>
+</blockquote>
+<p><strong>MG32.</strong>★ lim(x→0⁺) x^sinx = ?
+A. 1　B. 0　C. e　D. 不存在</p>
+<blockquote>
+<p><strong>A</strong>。取对数 sinx·lnx ~ x·lnx → 0 ⇒ e⁰ = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>MG33.</strong>★★ 已知 lim(x→0) [f(1)−f(1−x)]/2x = −1，则 f′(1) = ?
+A. −2　B. 2　C. −1　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。[f(1)−f(1−x)]/(2x) = ½·[f(1)−f(1−x)]/x → ½f′(1) = −1 ⇒ f′(1) = <strong>−2</strong>。</p>
+</blockquote>
+<p><strong>MG34.</strong>★ 无穷大量与有界函数的乘积：
+A. 必为无穷大　B. 必为无穷小　C. 可能无极限　D. 必为常数</p>
+<blockquote>
+<p><strong>C</strong>。如 x·sinx → 不存在（无极限）。</p>
+</blockquote>
+<p><strong>MG35.</strong>★★ lim(x→0) [(1+2x)/(2+x)]^{1/x} = ?
+A. 0　B. e^{1/2}　C. 不存在　D. 1</p>
+<blockquote>
+<p><strong>C</strong>。底数趋于 1/2 而非 1：x→0⁺ 时 (1/2)^{1/x}→0，x→0⁻ 时→∞ ⇒ <strong>不存在</strong>。
+陷阱：指数型 1^∞ 的标准套路在这里失效——先用底数是否趋 1 做"资格检查"。</p>
+</blockquote>
+<h2>§2 导数与微分（MG36–MG70）</h2>
+<p><strong>MG36.</strong>★ f′(x₀)=2，则 lim(h→0) [f(x₀+h)−f(x₀−h)]/(2h) = ?
+A. 2　B. 4　C. 1　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。两项平均：[f′+f′]/2 = f′(x₀) = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>MG37.</strong>★ y = x²e^{3x}，y′ = ?
+A. e^{3x}(2x+3x²)　B. e^{3x}(2x+3)　C. 2xe^{3x}　D. e^{3x}(x²+3x)</p>
+<blockquote>
+<p><strong>A</strong>。2xe^{3x}+3x²e^{3x}。</p>
+</blockquote>
+<p><strong>MG38.</strong>★★ y = ln(x+√(x²+a²))，则 y′ = ?
+A. 1/√(x²+a²)　B. 1/(x+√(x²+a²))　C. x/√(x²+a²)　D. a/√(x²+a²)</p>
+<blockquote>
+<p><strong>A</strong>。（分子有理化必得）。</p>
+</blockquote>
+<p><strong>MG39.</strong>★ d(arctan e^{2x})/dx = ?
+A. 2e^{2x}/(1+e^{4x})　B. e^{2x}/(1+e^{2x})　C. 2e^{2x}/(1+e^{2x})　D. 2/(1+e^{4x})</p>
+<blockquote>
+<p><strong>A</strong>。链式乘 2。</p>
+</blockquote>
+<p><strong>MG40.</strong>★★ y = x^{sinx}（x&gt;0），y′ = ?
+A. x^{sinx}(cosx·lnx + sinx/x)　B. x^{sinx}·cosx·lnx　C. x^{sinx−1}sinx　D. x^{sinx}·lnx·sinx/x</p>
+<blockquote>
+<p><strong>A</strong>。对数求导。</p>
+</blockquote>
+<p><strong>MG41.</strong>★ f(x)=x|x| 的 f′(0) = ?
+A. 0　B. 不存在　C. 1　D. −1</p>
+<blockquote>
+<p><strong>A</strong>。左右差商都 →0。</p>
+</blockquote>
+<p><strong>MG42.</strong>★★ 设 f(x) 在 0 处可导且 f(0)=0，则 lim(x→0) [f(x)−f(−x)]/2x = ?
+A. f′(0)　B. 2f′(0)　C. 0　D. −f′(0)</p>
+<blockquote>
+<p><strong>A</strong>。两项各贡献 f′(0)，和的一半 = <strong>f′(0)</strong>。</p>
+</blockquote>
+<p><strong>MG43.</strong>★ 曲线 y=x³−3x 在 x=1 处切线斜率 = ?
+A. 0　B. 3　C. −2　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。y′=3x²−3，x=1 ⇒ <strong>0</strong>（切线水平，该点为极小）。</p>
+</blockquote>
+<p><strong>MG44.</strong>★★ 参数方程 x=t², y=t³：d²y/dx² = ?
+A. 3/(4t)　B. 3/4　C. 3t/2　D. 3/2</p>
+<blockquote>
+<p><strong>A</strong>。dy/dx = (3t²)/(2t) = (3/2)t；d²y/dx² = (3/2)/(2t) = <strong>3/(4t)</strong>。</p>
+</blockquote>
+<p><strong>MG45.</strong>★ y = ln(1+x²)，dy = ?
+A. 2x/(1+x²) dx　B. 1/(1+x²) dx　C. 2x/(1+x²)　D. x/(1+x²) dx</p>
+<blockquote>
+<p><strong>A</strong>。（微分带 dx）。</p>
+</blockquote>
+<p><strong>MG46.</strong>★★ 隐函数 x²+2xy−y²=1? 求 y′ at (1,0)? F=...：2x+2y+2xy′−2yy′ = 0 ⇒ y′ = (y−x)/(x−y)? = −1（除 y=x 处）。通用问法：曲线 x²+xy+y²=4 在 (2,0) 处切线斜率：
+A. −2　B. −1/2　C. 2　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。2x + y + xy′ + 2yy′ = 0 ⇒ y′ = −(2x+y)/(x+2y) = −4/2 = <strong>−2</strong>。</p>
+</blockquote>
+<p><strong>MG47.</strong>★ 对数求导适用于：
+A. 幂指函数　B. 多因子乘除　C. A和B　D. 一切函数</p>
+<blockquote>
+<p><strong>C</strong>。</p>
+</blockquote>
+<p><strong>MG48.</strong>★★ y = (1+x²)^{arctanx}? 太重。改：y = √(x√x)，y′ = ?
+A. (3/4)x^{−1/4}　B. (3/2)x^{1/2}　C. (3/4)x^{1/4}　D. x^{−1/2}/2</p>
+<blockquote>
+<p><strong>A</strong>。y = x^{3/4} ⇒ (3/4)x^{−1/4}。</p>
+</blockquote>
+<p><strong>MG49.</strong>★ 设 y=f(u)，u=x²：dy/dx = ?
+A. f′(x²)·2x　B. f′(x²)　C. 2x f′(x)　D. f′(u)·2u</p>
+<blockquote>
+<p><strong>A</strong>。链式。</p>
+</blockquote>
+<p><strong>MG50.</strong>★★ 微分 dy 与 Δy 的关系（f″&gt;0 时）：
+A. Δy &gt; dy（Δx&gt;0）　B. Δy &lt; dy　C. 相等　D. 无法比较</p>
+<blockquote>
+<p><strong>A</strong>。f″&gt;0 时曲线在切线上方，增量大于线性近似。</p>
+</blockquote>
+<p><strong>MG51.</strong>★ 近似计算 √26：≈ ?
+A. 5.1　B. 5.2　C. 5.05　D. 5.01</p>
+<blockquote>
+<p><strong>A</strong>。√25 + (1/10)·1 = <strong>5.1</strong>。</p>
+</blockquote>
+<p><strong>MG52.</strong>★★ 反函数求导：x=g(y) 是 y=f(x) 的反函数，g′(y₀) = ?
+A. 1/f′(x₀)（f′(x₀)≠0）　B. f′(x₀)　C. −1/f′(x₀)　D. f″(x₀)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG53.</strong>★ 曲线 y=eˣ 过 (0,1) 的法线斜率：
+A. −1　B. 1　C. −e　D. e</p>
+<blockquote>
+<p><strong>A</strong>。切线斜率 1 ⇒ 法线 <strong>−1</strong>。</p>
+</blockquote>
+<p><strong>MG54.</strong>★★ 曲线 y=x² 上点 P 处的切线经过点 (0,−1)，则 P 的横坐标：
+A. ±1　B. 1　C. 2　D. ±2</p>
+<blockquote>
+<p><strong>A</strong>。切线 y−x₀² = 2x₀(x−x₀)，代入 (0,−1)：−1−x₀² = −2x₀² ⇒ x₀² = 1。</p>
+</blockquote>
+<p><strong>MG55.</strong>★ 高阶导数 (e^{2x})⁽ⁿ⁾ = ?
+A. 2ⁿe^{2x}　B. n!2ⁿe^{2x}　C. e^{2x}　D. 2e^{2x}</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG56.</strong>★★ (x·eˣ)⁽ⁿ⁾ = ?
+A. eˣ(x+n)　B. eˣ(x+n−1)　C. neˣ　D. eˣ·xⁿ</p>
+<blockquote>
+<p><strong>A</strong>。莱布尼茨：eˣ(x+C(n,1)) = <strong>eˣ(x+n)</strong>。</p>
+</blockquote>
+<p><strong>MG57.</strong>★ (sin2x)⁽ⁿ⁾ = ?
+A. 2ⁿsin(2x+nπ/2)　B. sin(2x+nπ/2)　C. 2ⁿcos(2x)　D. n!2ⁿsin2x</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG58.</strong>★★ [ln(1+x)]⁽ⁿ⁾（n≥1）= ?
+A. (−1)^{n−1}(n−1)!/(1+x)ⁿ　B. (−1)ⁿ(n−1)!/(1+x)ⁿ　C. (−1)^{n−1}n!/(1+x)ⁿ　D. (n−1)!/(1+x)ⁿ</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG59.</strong>★ 参数方程一阶导 dy/dx = (dy/dt)/(dx/dt) 的适用条件：
+A. dx/dt≠0　B. dy/dt≠0　C. t≠0　D. 无条件</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG60.</strong>★★ y = y(x) 由 y = 1 + xe^y 确定? at? 求隐函数 y′ 的一般式：
+y′ = e^y + xe^y·y′ ⇒ y′ = e^y/(1−xe^y)。改选择题：方程 y=1+xe^y 隐含 y′ = ?
+A. e^y/(1−xe^y)　B. e^y/(xe^y−1)　C. 1/(1−xe^y)　D. e^y·(1−xe^y)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG61.</strong>★ 可微 ⇔ 可导（一元）：
+A. 对　B. 错　C. 仅在解析函数　D. 仅高维</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG62.</strong>★★ f 在 x₀ 可导，f(x₀)=0 且 |f| 在 x₀ 也可导，则必有：
+A. f′(x₀)=0　B. f′(x₀)≠0　C. f″(x₀)=0　D. f 连续但不可导</p>
+<blockquote>
+<p><strong>A</strong>。f(x₀)=0 且 f′(x₀)≠0 时 |f| 尖点不可导（左右差商 ±|f′|），与题设矛盾 ⇒ 只能 f′(x₀)=0。</p>
+</blockquote>
+<p><strong>MG63.</strong>★ 周期函数的导函数：
+A. 仍是周期函数　B. 不是　C. 一定是常数　D. 一定变号</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG64.</strong>★★ 设 y = f(lnx)，y″ = ?
+A. [f″(lnx)−f′(lnx)]/x²　B. f″(lnx)/x²　C. [f″+f′]/x²　D. f″(lnx)/x</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG65.</strong>★ 曲线 y=x²+1 上切线平行于 y=2x+3 的点：
+A. (1,2)　B. (2,5)　C. (0,1)　D. (−1,2)</p>
+<blockquote>
+<p><strong>A</strong>。2x=2 ⇒ x=1，y=<strong>2</strong>。</p>
+</blockquote>
+<p><strong>MG66.</strong>★★ 极坐标曲线 r=θ 在 θ=π/2 处的切线斜率：
+A. −2/π　B. −π/2　C. 2/π　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。dy/dx = (r′sinθ + r cosθ)/(r′cosθ − r sinθ)，r′=1：分子 = 1，分母 = −π/2 ⇒ <strong>−2/π</strong>。</p>
+</blockquote>
+<p><strong>MG67.</strong>★ 相关变化率：球体积 V 对半径 r 的导数 dV/dr = ?
+A. 4πr²　B. (4/3)πr³　C. 4πr　D. 2πr</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG68.</strong>★★ 若 f″(x₀) 存在，则 lim(h→0) [f(x₀+2h)−2f(x₀+h)+f(x₀)]/h² = ?
+A. f″(x₀)　B. 2f″(x₀)　C. 0　D. f′(x₀)</p>
+<blockquote>
+<p><strong>A</strong>。泰勒展开二阶项 2h²f″/2 = f″h² ⇒ 商 → <strong>f″(x₀)</strong>。</p>
+</blockquote>
+<p><strong>MG69.</strong>★ 函数在一点可导、连续、极限存在、有定义四者从弱到强排列：
+A. 极限 ⊂ 连续 ⊂ 可导（同一定义域内）　B. 相反　C. 不可比　D. 可导 ⊂ 连续</p>
+<blockquote>
+<p><strong>A</strong>。可导⇒连续⇒极限存在（需有定义）。</p>
+</blockquote>
+<p><strong>MG70.</strong>★★ 设 f(x) = |x|³? 已考。改：曲线 y = f(x) 由 y=1+x e^{y}? no. 求导概念题：若 f(x)=xⁿ（n 正整数），f⁽ⁿ⁾(x) = ?
+A. n!　B. n!x　C. n·(n−1)!x　D. nⁿ</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<h2>§3 中值定理与不等式（MG71–MG95）</h2>
+<p><strong>MG71.</strong>★ 罗尔定理中 f(a)=f(b) 的条件缺失时，结论：
+A. 一定不成立　B. 一定成立　C. 可能不成立（如 y=x）　D. 与条件无关</p>
+<blockquote>
+<p><strong>C</strong>。y=x 在 [0,1] 无水平切线。</p>
+</blockquote>
+<p><strong>MG72.</strong>★★ f(x)=x³−3x 在 [0,√3] 上拉格朗日的 ξ = ?
+A. 1　B. √3/2　C. 2　D. 1/2</p>
+<blockquote>
+<p><strong>A</strong>。f(√3)=0=f(0)：罗尔 ⇒ 3ξ²−3=0 ⇒ <strong>ξ=1</strong>。</p>
+</blockquote>
+<p><strong>MG73.</strong>★ 拉格朗日中值定理的几何意义：
+A. 存在点切线平行于弦　B. 切线过端点　C. 曲线是直线　D. 端点相等</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG74.</strong>★★ 证明 arctanx+arccotx = π/2 用的核心工具：
+A. 导数恒零+取值定常数　B. 罗尔　C. 洛必达　D. 泰勒</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG75.</strong>★ x&gt;0 时 ln(1+x) 与 x 的大小：
+A. ln(1+x)<x　B. >　C. =　D. 不定</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG76.</strong>★★ 不等式 |sina−sinb| ≤ |a−b| 的证明工具：
+A. 拉格朗日+|cosξ|≤1　B. 单调性　C. 凹凸　D. 积分</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG77.</strong>★★★ f 在 [0,1] 连续可导，f(0)=0，f(1)=1，则 ∃ξ,η：
+A. 1/f′(ξ)+1/f′(η)=2　B. f′(ξ)·f′(η)=1　C. f′(ξ)=f′(η)　D. f″(ξ)=0</p>
+<blockquote>
+<p><strong>A</strong>。（经典双中值：介值取 f(c)=½，两段拉格朗日。）</p>
+</blockquote>
+<p><strong>MG78.</strong>★ 费马引理：可导极值点处：
+A. f′=0　B. f″=0　C. f′&gt;0　D. f″&gt;0</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG79.</strong>★★ 柯西中值定理对 f=x², g=x³ 在 [1,2] 的 ξ = ?
+A. 14/9　B. 7/9　C. 9/14　D. 5/4</p>
+<blockquote>
+<p><strong>A</strong>。2/(3ξ)=3/7 ⇒ ξ=14/9。</p>
+</blockquote>
+<p><strong>MG80.</strong>★ 达布定理说明导函数：
+A. 取遍介值（即使不连续）　B. 必连续　C. 必有界　D. 必单调</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG81.</strong>★★ eˣ ≥ ex 的等号条件：
+A. x=1　B. x=0　C. x=e　D. 无等号</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG82.</strong>★ 单调增函数的导函数：
+A. 可能不单调　B. 必单调增　C. 必≥0且增　D. 必恒正</p>
+<blockquote>
+<p><strong>A</strong>。如 y=x³ 增，y′=3x² 不单调。</p>
+</blockquote>
+<p><strong>MG83.</strong>★★ f′ 在 [a,b] 存在且 |f′|≤M，则 f 在 [a,b] 上：
+A. Lipschitz 从而一致连续　B. 必单调　C. 必凸　D. 必有极值</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG84.</strong>★ 泰勒公式拉格朗日余项中 θ 满足：
+A. 0&lt;θ&lt;1　B. θ=1　C. θ∈(0,+∞)　D. θ 随 n 增大趋 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG85.</strong>★★ 用泰勒求 lim(x→0) (x−sinx)/x³ = ?
+A. 1/6　B. 1/3　C. 1/2　D. 1/12</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG86.</strong>★ 方程 x³+x−1=0 的实根个数：
+A. 1　B. 2　C. 3　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。f′=3x²+1&gt;0 严格增 + 介值 ⇒ <strong>唯一</strong>。</p>
+</blockquote>
+<p><strong>MG87.</strong>★★ f 在 [a,b] 二阶可导，f(a)=f(c)=f(b)，则：
+A. ∃ξ: f″(ξ)=0　B. f″≡0　C. f′≡0　D. f″&gt;0</p>
+<blockquote>
+<p><strong>A</strong>。两次罗尔。</p>
+</blockquote>
+<p><strong>MG88.</strong>★ 拉格朗日中值定理的 ξ：
+A. 至少一个，可能多个　B. 唯一　C. 恰两个　D. 必在中点</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG89.</strong>★★ 构造辅助函数证 f+xf′=0 型结论，应设：
+A. F=x·f(x)　B. F=f(x)/x　C. F=eˣf(x)　D. F=x²f(x)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG90.</strong>★ 证 ξf′(ξ)−f(ξ)=0 型，辅助函数：
+A. f(x)/x　B. x·f(x)　C. e^{−x}f(x)　D. x²f(x)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG91.</strong>★★ 证 f′(ξ) = −2f(ξ)/ξ 型，辅助函数：
+A. x²·f(x)　B. x·f(x)　C. f(x)/x²　D. e^{2x}f(x)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG92.</strong>★ 洛必达法则使用的首要前提：
+A. 0/0 或 ∞/∞ 型　B. 分母连续　C. 分子单调　D. 极限存在</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG93.</strong>★★ 若 lim(x→∞) f′(x) = 2，则 lim(x→+∞) f(x)/x = ?
+A. 2　B. 0　C. ∞　D. 不能确定</p>
+<blockquote>
+<p><strong>A</strong>。（固定点拉格朗日：f(x)/x = f(c)/x + f′(ξ)(1−c/x) → 2。）</p>
+</blockquote>
+<p><strong>MG94.</strong>★ 单调有界定理适用于：
+A. 数列收敛判定　B. 函数极限计算　C. 级数求和　D. 一切极限</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG95.</strong>★★ 若 f′(x) &gt; f(x)（x∈R）且 f(0)=0，则 x&gt;0 时：
+A. f(x)&gt;0　B. f(x)&lt;0　C. f(x)=0　D. 不定</p>
+<blockquote>
+<p><strong>A</strong>。g=e^{−x}f(x) 严格增，g(0)=0。</p>
+</blockquote>
+<h2>§4 积分学（MG96–MG135）</h2>
+<p><strong>MG96.</strong>★ ∫x·cos(x²)dx = ?
+A. ½sin(x²)+C　B. sin(x²)+C　C. x²sin(x²)+C　D. −½cos(x²)+C</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG97.</strong>★ ∫₀¹ √(1−x²)dx = ?
+A. π/4　B. π/2　C. 1　D. π</p>
+<blockquote>
+<p><strong>A</strong>。（四分之一单位圆。）</p>
+</blockquote>
+<p><strong>MG98.</strong>★★ ∫₀^π x·sinx dx = ?
+A. π　B. 2π　C. π/2　D. 2</p>
+<blockquote>
+<p><strong>A</strong>。（已验算：π。）</p>
+</blockquote>
+<p><strong>MG99.</strong>★ ∫₁ᵉ ln x dx = ?
+A. 1　B. e−1　C. 0　D. −1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG100.</strong>★★ ∫₀^{π/2} sin⁴x dx = ?
+A. 3π/16　B. π/4　C. 3π/8　D. π/16</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG101.</strong>★★ ∫eˣ(1+sinx)dx = ?
+A. eˣ + eˣ(sinx−cosx)/2 + C　B. eˣsinx + C　C. eˣ(1+cosx) + C　D. eˣ(1−cosx)/2 + C</p>
+<blockquote>
+<p><strong>A</strong>。拆成 ∫eˣdx + ∫eˣsinx dx；后者分部两次解方程得 eˣ(sinx−cosx)/2。</p>
+</blockquote>
+<p><strong>MG102.</strong>★★ F(x)=∫₀^{x²} cos√t dt（x&gt;0），F′(x) = ?
+A. 2x·cosx　B. cosx　C. 2x·cos√(x²)　D. 2x·cosx²</p>
+<blockquote>
+<p><strong>A</strong>。链式：F′ = cos√(x²)·2x = cos|x|·2x；x&gt;0 时 cosx·2x。
+提醒：√(x²)=|x|——若区间含负数，答案要带绝对值。</p>
+</blockquote>
+<p><strong>MG103.</strong>★ 定积分几何意义：∫₋₁¹ |x| dx = ?
+A. 1　B. 2　C. 1/2　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG104.</strong>★★ ∫₀^{2π}|sinx|dx = ?
+A. 4　B. 2　C. 0　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG105.</strong>★ 反常积分 ∫₁^{+∞} dx/x^{3/2} = ?
+A. 2　B. 1　C. 1/2　D. 发散</p>
+<blockquote>
+<p><strong>A</strong>。[−2/√x]₁^∞ = 2。</p>
+</blockquote>
+<p><strong>MG106.</strong>★★ ∫₀¹ dx/√(1−x²) = ?
+A. π/2　B. π　C. π/4　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG107.</strong>★ p-积分判别：∫₁^∞ dx/xᵖ 收敛 ⟺ ?
+A. p&gt;1　B. p≥1　C. p&lt;1　D. p≤1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG108.</strong>★★ Γ(1/2) = ?
+A. √π　B. π　C. 1　D. π/2</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG109.</strong>★★ lim(n→∞) Σ_{k=1}^n k/(n²+k²) = ?
+A. ½ln2　B. ln2　C. 1　D. ¼ln2</p>
+<blockquote>
+<p><strong>A</strong>。=(1/n)Σ (k/n)/(1+(k/n)²) → ∫₀¹ x/(1+x²)dx = ½ln2。</p>
+</blockquote>
+<p><strong>MG110.</strong>★★ 区间再现：∫₀^π x·sinx/(1+cos²x) dx = ?
+A. π²/4　B. π²/2　C. π²　D. π/4</p>
+<blockquote>
+<p><strong>A</strong>。（J80 结论。）</p>
+</blockquote>
+<p><strong>MG111.</strong>★ ∫₀¹ ln x dx = ?
+A. −1　B. 0　C. 1　D. 发散</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG112.</strong>★★ 分部积分次序法（反对幂三指）中"反"指：
+A. 反三角函数最优先保留为 u　B. 最后积分　C. 不参与　D. 先积</p>
+<blockquote>
+<p><strong>A</strong>。（口诀：反、对、幂、三、指——排前者留作 u。）</p>
+</blockquote>
+<p><strong>MG113.</strong>★ ∫∫? 单变量：∫ dx/(1+cosx) = ?
+A. tan(x/2)+C　B. −cotx+C　C. secx+C　D. ln|1+cosx|+C</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG114.</strong>★★ 华里士公式 ∫₀^{π/2} sinⁿx dx 当 n 奇时 = ?
+A. (n−1)!!/n!!　B. (n−1)!!/n!!·π/2　C. n!!/(n−1)!!　D. 2/π</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG115.</strong>★ 换元 t=√x 后 ∫dx/(1+√x) 变为：
+A. 2∫t/(1+t)dt　B. ∫t/(1+t)dt　C. 2∫1/(1+t)dt　D. ∫1/(1+t)dt</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG116.</strong>★★ 变限积分奇偶性：f 奇 ⇒ F(x)=∫₀ˣf：
+A. 偶函数　B. 奇函数　C. 无奇偶　D. 周期</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG117.</strong>★ ∫₋₂² (x⁵+x)dx = ?
+A. 0　B. 4　C. 8　D. 2</p>
+<blockquote>
+<p><strong>A</strong>。奇函数对称区间。</p>
+</blockquote>
+<p><strong>MG118.</strong>★★ ∫₀^∞ e^{−x}cosx dx = ?
+A. 1/2　B. 1　C. 0　D. 2</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG119.</strong>★ 定积分中值定理的 ξ 在：
+A. [a,b] 闭区间内　B. (a,b) 开区间（加强版）　C. 区间外　D. a 或 b</p>
+<blockquote>
+<p><strong>A</strong>。（标准形式闭区间；加强结论可取开区间。）</p>
+</blockquote>
+<p><strong>MG120.</strong>★★ 柯西—施瓦茨积分不等式：
+A. [∫₀¹f]² ≤ ∫₀¹f²　B. ≥　C. =　D. 无此不等式</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG121.</strong>★ 面积：y=x² 与 y=2x 围成面积 = ?
+A. 4/3　B. 2/3　C. 1　D. 8/3</p>
+<blockquote>
+<p><strong>A</strong>。∫₀²(2x−x²) = 4−8/3 = 4/3。</p>
+</blockquote>
+<p><strong>MG122.</strong>★★ 旋转体：y=x²（0≤x≤1）绕 x 轴体积 = ?
+A. π/5　B. π/3　C. 2π/5　D. π/2</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG123.</strong>★ 弧长公式（直角坐标）：
+A. ∫√(1+y′²)dx　B. ∫(1+y′)dx　C. ∫√(1+y′)dx　D. ∫y′dx</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG124.</strong>★★ ∫₀^π √(1+cos2x)dx = ?
+A. 2√2　B. √2　C. 0　D. 4</p>
+<blockquote>
+<p><strong>A</strong>。√2|cosx| 对称积分 = 2√2。</p>
+</blockquote>
+<p><strong>MG125.</strong>★ ∫₀^{+∞} dx/(1+x²) = ?
+A. π/2　B. π　C. π/4　D. 2</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG126.</strong>★★ 广义二重积分 ∫∫_{R²} e^{−x²−y²}dA = ?
+A. π　B. 2π　C. √π　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG127.</strong>★ 曲率公式 K = ?
+A. |y″|/(1+y′²)^{3/2}　B. |y″|/(1+y′²)　C. y″/(1+y′²)　D. |y′|/(1+y″²)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG128.</strong>★★ ∫₀^{π/2} dx/(1+tanx) = ?
+A. π/4　B. π/2　C. π　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。（与 J74 同构。）</p>
+</blockquote>
+<p><strong>MG129.</strong>★ 部分分式：1/(x²−1) = ?
+A. ½[1/(x−1) − 1/(x+1)]　B. ½[1/(x+1) − 1/(x−1)]　C. 1/(x−1) − 1/(x+1)　D. 1/(x²) − 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG130.</strong>★★ ∫₂^{+∞} dx/(x·ln²x) = ?
+A. 1/ln2　B. ln2　C. 发散　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG131.</strong>★ 液体压力微元（深 x 处）：
+A. dP = ρg x ·(宽度)dx　B. ρg·dx　C. ρx·dx　D. ρg·宽度·dx</p>
+<blockquote>
+<p><strong>A</strong>。（压强 ρgx 乘面积微元。）</p>
+</blockquote>
+<p><strong>MG132.</strong>★★ 变限积分求导陷阱：d/dx ∫₀ˣ (x−t)f(t)dt = ?
+A. ∫₀ˣ f(t)dt　B. (x−x)f(x) = 0　C. xf(x)　D. f(x)</p>
+<blockquote>
+<p><strong>A</strong>。（先拆 x∫f − ∫tf 再求导。）</p>
+</blockquote>
+<p><strong>MG133.</strong>★ ∫ (1/x)dx 的结果在负区间：
+A. ln|x|+C　B. ln x+C　C. 无原函数　D. −lnx+C</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG134.</strong>★★ 比较大小：∫₀^π sinx dx 与 ∫₀^π sin²x dx：
+A. 前者大　B. 后者大　C. 相等　D. 无法比较</p>
+<blockquote>
+<p><strong>A</strong>。sinx ≥ sin²x 于 [0,π]（1 vs π/4）。</p>
+</blockquote>
+<p><strong>MG135.</strong>★ 华里士公式适用范围：
+A. [0,π/2] 上 sin/cos 的幂　B. 全体积分　C. 仅 sinⁿ　D. 仅偶次幂</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<h2>§5 多元微积分（MG136–MG165）</h2>
+<p><strong>MG136.</strong>★ z=x²y，zy = ?
+A. x²　B. 2xy　C. xy　D. 2x</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG137.</strong>★★ 二元极限 lim(x,y)→(0,0) xy/(x²+y²)：
+A. 不存在　B. 0　C. 1/2　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。（沿 y=kx 得 k/(1+k²)。）</p>
+</blockquote>
+<p><strong>MG138.</strong>★ f 偏导存在与可微：
+A. 偏导存在 ⇏ 可微　B. 等价　C. 可微⇏偏导　D. 无关</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG139.</strong>★★ z=e^{x/y}，zx = ?
+A. e^{x/y}/y　B. e^{x/y}　C. xe^{x/y}　D. e^{x/y}·(−x/y²)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG140.</strong>★ 曲面 z=f(x,y) 在点处法向量含分量：
+A. (zx, zy, −1)　B. (1, zx, zy)　C. (zx, zy, 1)　D. (zx, −zy, 1)</p>
+<blockquote>
+<p><strong>A</strong>。（F=z−f(x,y) 的梯度。）</p>
+</blockquote>
+<p><strong>MG141.</strong>★★ 方向导数与梯度：D_l f 最大值 = ?
+A. |grad f|　B. grad f　C. f　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG142.</strong>★ 链式 z=f(u,v), u=xy, v=x+y：zx = ?
+A. y f₁ + f₂　B. x f₁ + f₂　C. f₁+f₂　D. y f₁ − f₂</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG143.</strong>★★ 隐函数 zx = −Fx/Fz 的条件：
+A. Fz≠0　B. F≠0　C. Fx≠0　D. 无条件</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG144.</strong>★ 全微分形式不变性说明：
+A. dz 对任何自变量结构都 = f₁du + f₂dv　B. 只对 x,y 成立　C. 与微分无关　D. 仅线性函数</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG145.</strong>★★ 二元极值判别 AC−B²&lt;0 时驻点：
+A. 不是极值　B. 是极大　C. 是极小　D. 需三阶判定</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG146.</strong>★ 条件极值拉格朗日函数 L = ?
+A. f + λφ（φ=0 约束）　B. f·λ　C. f−φ　D. λφ</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG147.</strong>★★ 用二重积分的对称性：D 关于 y 轴对称，被积函数含 x³ 项，该项积分 = ?
+A. 0　B. 2×半区　C. ∞　D. 不能确定</p>
+<blockquote>
+<p><strong>A</strong>。奇函数归零。</p>
+</blockquote>
+<p><strong>MG148.</strong>★ 极坐标二重积分面积元：
+A. r dr dθ　B. dr dθ　C. r² dr dθ　D. dxdy</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG149.</strong>★★ ∬_{x²+y²≤1} (x+y)² dA = ?
+A. π/2　B. π　C. π/4　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。= ∬x²+∬y²+2∬xy = π/4+π/4+0 = π/2。</p>
+</blockquote>
+<p><strong>MG150.</strong>★ 先二后一法适用于：
+A. 被积函数只含 z（或可分离）且截面易算　B. 一切　C. 仅球体　D. 仅柱体</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG151.</strong>★★ 交换次序 ∫₀¹dx∫₀^{x²} f dy = ?
+A. ∫₀¹dy∫_{√y}¹ f dx　B. ∫₀¹dy∫₀^{√y} f dx　C. ∫₀¹dy∫_y¹ f dx　D. ∫₀¹dy∫₀^y f dx</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG152.</strong>★ 三重积分球坐标体积元：
+A. r²sinφ dr dφ dθ　B. r dr dφ dθ　C. r²dr dφ dθ　D. sinφ drdφdθ</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG153.</strong>★★ 球体 r≤R 的 ∭z²dV = ?
+A. 4πR⁵/15　B. 4πR⁵/5　C. 2πR⁵/15　D. πR⁵/5</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG154.</strong>★ 质心坐标公式中 z̄ = ?
+A. ∭zρdV / ∭ρdV　B. ∭z dV　C. ∭ρdV/∭z　D. ∭zρdV</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG155.</strong>★★ 二重积分中值定理：∫∫_D f dA = ?
+A. f(ξ,η)·S_D　B. f(ξ,η)　C. S_D·f 边界值　D. 0</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG156.</strong>★ 椭球体积（半轴 a,b,c）：
+A. 4πabc/3　B. (4/3)πab　C. πabc　D. 2πabc</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG157.</strong>★★ ∫∫_{x²+y²≤x} √(x²+y²) dA = ?
+A. 4/9　B. 2/3　C. π/2　D. 8/9</p>
+<blockquote>
+<p><strong>A</strong>。（r≤cosθ，(1/3)∫cos³θdθ·? 已验算 4/9。）</p>
+</blockquote>
+<p><strong>MG158.</strong>★ 偏导数几何意义：zx 是曲面被 y=y₀ 截得的曲线在该点的：
+A. 切线对 x 轴斜率　B. 法向　C. 曲率　D. 面积</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG159.</strong>★★ 混合偏导相等（zxy=zyx）的条件：
+A. 二阶偏导连续　B. f 可微　C. f 连续　D. 总成立</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG160.</strong>★ 梯度方向是函数值：
+A. 增长最快方向　B. 下降最快　C. 零方向　D. 等值线方向</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG161.</strong>★★ ∫∫_{x²+y²≤4} √(4−x²−y²) dA = ?
+A. 16π/3　B. 8π/3　C. 4π　D. 32π/3</p>
+<blockquote>
+<p><strong>A</strong>。（半球体积半径 2。）</p>
+</blockquote>
+<p><strong>MG162.</strong>★ 条件极值中 λ 的个数等于：
+A. 约束个数　B. 变量个数　C. 极值个数　D. 1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG163.</strong>★★ 二元函数在闭区域最值 = 内部驻点值 与 ______ 比较：
+A. 边界最值　B. 0　C. 梯度　D. 无需比较</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG164.</strong>★ 高斯公式联系：
+A. 曲面积分与三重积分　B. 曲线与曲面积分　C. 两类曲线积分　D. 曲线与三重积分</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG165.</strong>★★ 格林公式中 P=x−y, Q=x+y 沿单位圆正向的积分 = ?
+A. 2π　B. π　C. 0　D. 4π</p>
+<blockquote>
+<p><strong>A</strong>。∂Q/∂x−∂P/∂y = 2，面积 π ⇒ 2π。</p>
+</blockquote>
+<h2>§6 级数与微分方程（数一）（MG166–MG200）</h2>
+<p><strong>MG166.</strong>★ 级数收敛的必要条件：
+A. 通项→0　B. 通项单调　C. 部分和有界（任意级数）　D. 通项为正</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG167.</strong>★★ 调和级数 Σ1/n：
+A. 发散　B. 收敛　C. 条件收敛　D. 绝对收敛</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG168.</strong>★ p-级数 Σ1/nᵖ 收敛 ⟺ ?
+A. p&gt;1　B. p≥1　C. p&lt;1　D. p≤1</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG169.</strong>★★ 比值判别法 lim aₙ₊₁/aₙ = ρ：
+A. ρ&lt;1 收敛，ρ&gt;1 发散，ρ=1 失效　B. 总有效　C. ρ=1 收敛　D. ρ=1 发散</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG170.</strong>★ 交错级数莱布尼茨判别条件：
+A. 单调不增 + 趋 0　B. 只需趋 0　C. 只需单调　D. 绝对值收敛</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG171.</strong>★★ Σ(−1)ⁿ/n² 是：
+A. 绝对收敛　B. 条件收敛　C. 发散　D. 无法判断</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG172.</strong>★ 绝对收敛级数重排后：
+A. 和不变　B. 可变任意和　C. 必发散　D. 无法确定</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG173.</strong>★★ 幂级数收敛半径公式 R = ?
+A. 1/lim|aₙ₊₁/aₙ|　B. lim aₙ　C. lim|aₙ|　D. 无公式</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG174.</strong>★ Σxⁿ 的和函数（|x|&lt;1）：
+A. 1/(1−x)　B. 1/(1+x)　C. x/(1−x)　D. ln(1−x)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG175.</strong>★★ Σn·xⁿ = ?
+A. x/(1−x)²　B. 1/(1−x)²　C. x/(1−x)　D. 1/(1−x)³</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG176.</strong>★ eˣ 的泰勒展开收敛域：
+A. R　B. (−1,1)　C. [0,∞)　D. (−1,1]</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG177.</strong>★★ arctanx 的展开及收敛域：
+A. Σ(−1)ⁿx^{2n+1}/(2n+1)，[−1,1]　B. 收敛域 (−1,1)　C. Σx^{2n+1}/(2n+1)　D. 收敛域 R</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG178.</strong>★ 逐项求导后收敛半径：
+A. 不变　B. 变大　C. 变小　D. 不确定</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG179.</strong>★★ 傅里叶级数在间断点收敛于：
+A. 左右极限平均值　B. 函数值　C. 0　D. 发散</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG180.</strong>★ f 为偶函数时傅里叶展开只含：
+A. 余弦项　B. 正弦项　C. 常数　D. 全部</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG181.</strong>★★ 微分方程 y′=2xy 的通解：
+A. y=Ce^{x²}　B. y=Ce^{2x}　C. y=2x+C　D. y=Cx²</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG182.</strong>★ y′+P(x)y=0 的通解 = ?
+A. Ce^{−∫Pdx}　B. Ce^{∫Pdx}　C. −Ce^{∫P}　D. ∫P dx</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG183.</strong>★★ 特征方程 y″+py′+qy=0 有二重根 r 时通解：
+A. (C₁+C₂x)e^{rx}　B. C₁e^{rx}　C. C₁e^{rx}+C₂e^{−rx}　D. e^{rx}(C₁cos+C₂sin)</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG184.</strong>★ y″−2y′−3y=0 的特征根：
+A. 3 和 −1　B. −3 和 1　C. 3 和 1　D. ±3</p>
+<blockquote>
+<p><strong>A</strong>。(r−3)(r+1)。</p>
+</blockquote>
+<p><strong>MG185.</strong>★★ 特解形式中"乘 x"的条件：
+A. λ 是特征单根　B. λ 是二重根　C. λ 非根　D. 任意</p>
+<blockquote>
+<p><strong>A</strong>。（单根乘一次。）</p>
+</blockquote>
+<p><strong>MG186.</strong>★ y″+y=0 的通解：
+A. C₁cosx+C₂sinx　B. C₁eˣ+C₂e^{−x}　C. (C₁+C₂x)eˣ　D. C₁+C₂x</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG187.</strong>★★ 可降阶：y″=f(y′)（缺 y）设：
+A. p=y′，y″=p′　B. p=y′，y″=p·dp/dy　C. p=y″　D. 直接积分</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG188.</strong>★ 缺 x 型（y″=f(y,y′)）设 y″ = ?
+A. p·dp/dy　B. dp/dx　C. p²　D. dp/dy</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG189.</strong>★★ 欧拉方程 x²y″+xy′−y=0 的特征方程：
+A. r²−1=0　B. r²+r−1=0　C. r²−r−1=0　D. r²+1=0</p>
+<blockquote>
+<p><strong>A</strong>。r(r−1)+r−1 = r²−1。</p>
+</blockquote>
+<p><strong>MG190.</strong>★ 一阶线性方程 y′+y=e^{−x} 的特解形式：
+A. axe^{−x}　B. ae^{−x}　C. ax　D. aeˣ</p>
+<blockquote>
+<p><strong>A</strong>。（λ=−1 是特征根，乘 x。）</p>
+</blockquote>
+<p><strong>MG191.</strong>★★ 解的结构：非齐次两解之差是：
+A. 对应齐次的解　B. 也是非齐次解　C. 0　D. 特解</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG192.</strong>★ 二阶常系数非齐次通解 = ?
+A. 齐次通解 + 一个特解　B. 两个特解　C. 齐次特解　D. 特解之和</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG193.</strong>★★ 摆动方程 y″+ω²y=0 的周期：
+A. 2π/ω　B. ω/2π　C. 2πω　D. 1/ω</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG194.</strong>★ 指数增长模型 dP/dt=kP 的解：
+A. P=P₀e^{kt}　B. P=kt　C. P=P₀+kt　D. P=k</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG195.</strong>★★ Logistic 方程 dP/dt=kP(1−P/M) 的稳定平衡点：
+A. P=M　B. P=0　C. P=k　D. 无</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG196.</strong>★ 伯努利方程 y′+P(x)y = Q(x)·yⁿ 的标准转化：
+A. 令 z=y^{1−n}　B. 令 z=yⁿ　C. 令 z=y′　D. 令 z=lny</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG197.</strong>★★ 特征根为共轭复根 α±βi 的通解：
+A. e^{αx}(C₁cosβx+C₂sinβx)　B. C₁e^{αx}+C₂e^{βx}　C. e^{βx}(C₁cosαx+C₂sinαx)　D. e^{αx}cosβx</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG198.</strong>★ 可分离变量方程 dy/dx = f(x)g(y) 的解法：
+A. ∫dy/g(y) = ∫f(x)dx　B. 直接积分两次　C. 特征方程　D. 拉普拉斯</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG199.</strong>★★ 已知 y₁,y₂ 是二阶齐次线性方程的两个解，它们构成基础解系的条件：
+A. 线性无关　B. 相等　C. 线性相关　D. 为常数</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote>
+<p><strong>MG200.</strong>★ 全微分方程 M dx + N dy = 0 的判定：
+A. My = Nx　B. Mx = Ny　C. M=N　D. My = −Nx</p>
+<blockquote>
+<p><strong>A</strong>。</p>
+</blockquote></div></body></html>

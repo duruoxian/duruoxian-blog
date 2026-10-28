@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>操作系统_知识点与难点 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>操作系统 · 知识点与难点（408·35分）</h1>
+<blockquote>
+<p>主线：王道OS课（B站免费）+ 汤小丹《计算机操作系统》/ 现代操作系统。本文件=概念定义+要点表+易错+【难点专攻】（PV代码模板、页面置换、银行家、磁盘计算、文件计算）。</p>
+</blockquote>
+<hr />
+<h2>第1章 操作系统概述</h2>
+<ul>
+<li><strong>功能</strong>：处理机管理、存储管理、文件管理、设备管理；目标：方便性、有效性、可扩充性、开放性。</li>
+<li><strong>四大特征</strong>：<strong>并发</strong>（宏观同时微观交替）、共享（互斥共享+同时访问）、虚拟（时分/空分复用）、异步（进程走走停停）；并发与共享互为存在条件。</li>
+<li><strong>运行机制</strong>：内核态（核心态/管态）vs 用户态（目态）；<strong>系统调用</strong>=用户态通过陷入(trap)进入内核态的唯一入口；原语=不可中断的内核操作。</li>
+<li>中断分类：外中断（时钟、IO）、内中断/异常（陷入、故障、终止）。</li>
+<li>体系结构：大内核 vs 微内核（微内核：功能放用户态服务进程，性能差但稳定）。</li>
+</ul>
+<hr />
+<h2>第2章 进程与线程</h2>
+<h3>概念与PCB</h3>
+<ul>
+<li>进程=程序的一次执行过程，是<strong>资源分配的基本单位</strong>；线程是<strong>处理机调度的基本单位</strong>（408爱考：引入线程后，调度以线程为单位）。</li>
+<li>PCB包含：标识信息、状态、现场、控制信息；PCB常驻内存。</li>
+</ul>
+<h3>进程状态模型（图要会画）</h3>
+<ul>
+<li>五模型：<strong>运行（占CPU）→ 就绪（万事俱备缺CPU）→ 阻塞（等事件）</strong>+创建+终止。</li>
+<li>转换要点：运行→就绪（时间片到/被高优先抢占）；运行→阻塞（<strong>主动</strong>系统调用，如等IO）；阻塞→就绪（事件完成，<strong>被动</strong>）；阻塞<strong>不能</strong>直接到运行；就绪→阻塞不存在。</li>
+</ul>
+<h3>处理机调度（计算题必考）</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>规则</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FCFS</td>
+<td>先来先服务</td>
+<td>对长作业有利</td>
+</tr>
+<tr>
+<td>SJF/SRJF</td>
+<td>短作业优先</td>
+<td>平均等待时间最短，可能饿死长作业</td>
+</tr>
+<tr>
+<td>HRRN</td>
+<td>响应比=(等待+服务)/服务</td>
+<td>综合两者</td>
+</tr>
+<tr>
+<td><strong>RR</strong></td>
+<td>时间片轮转</td>
+<td>片过大退化FCFS，过小切换开销大</td>
+</tr>
+<tr>
+<td>多级反馈队列</td>
+<td>多级RR逐层降级</td>
+<td>兼顾响应与吞吐，无需预知时长</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>计算指标：周转时间=完成−到达；带权周转=周转/服务；等待=周转−服务。</li>
+<li>调度时机：进程终止/阻塞/时间片到/更高优先级到达（可抢占式）。</li>
+</ul>
+<h3>线程</h3>
+<ul>
+<li>用户级线程（内核不见，切换快，一个阻塞全阻塞）vs 内核级线程（内核调度，可并发利用多核）；多线程模型：多对一、一对一、多对多。</li>
+</ul>
+<hr />
+<h3>进程间通信（IPC）【408大纲要求】</h3>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>原理</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>共享存储</td>
+<td>两进程映射同一块共享内存区</td>
+<td>数据零拷贝、<strong>最快</strong>；互斥同步需进程自己用PV实现</td>
+</tr>
+<tr>
+<td>消息传递</td>
+<td>内核提供 send/receive 原语；直接（按进程id投递）/间接（经信箱）</td>
+<td>格式化报文，适合少量数据；数据经内核两次拷贝</td>
+</tr>
+<tr>
+<td>管道</td>
+<td>内存中固定大小的字符流缓冲区</td>
+<td><strong>半双工</strong>（双向需两根管道）；仅限<strong>有亲缘关系</strong>的进程；写满/读空则读写方阻塞</td>
+</tr>
+<tr>
+<td>信号</td>
+<td>异步事件通知（如 Ctrl+C → SIGINT）</td>
+<td>开销小，携带信息量少</td>
+</tr>
+</tbody>
+</table>
+<p>易错：①管道是半双工且有亲缘限制；②共享内存<strong>不自带同步机制</strong>，必须配信号量；③消息传递比共享内存慢（两次拷贝+系统调用）。
+自测：管道读空/写满时，读写进程各处于什么状态？（答：阻塞，待对方操作后由系统唤醒转就绪。）</p>
+<h2>第3章 同步与互斥（综合题必考PV）</h2>
+<ul>
+<li>临界资源/临界区四部分：进入区、临界区、退出区、剩余区；同步机制准则：空闲让进、忙则等待、有限等待、让权等待。</li>
+<li>实现：单标志、双标志先检查（违反忙则等待）、Peterson算法（软件）。</li>
+<li><strong>P(S)=申请资源减1，S&lt;0阻塞；V(S)=释放加1，S≤0唤醒一个</strong>。</li>
+<li>信号量意义：互斥S初值1；同步S初值0或资源数。</li>
+</ul>
+<h3>经典问题PV代码模板（背熟，综合题直接写）</h3>
+<p><strong>生产者-消费者</strong>（互斥P在同步P之后！否则死锁）：</p>
+<pre><code class="language-c">semaphore mutex=1, empty=n, full=0;
+Producer:                        Consumer:
+while(1){                        while(1){
+  生产产品;                         P(full);
+  P(empty);                        P(mutex);
+  P(mutex);                        从缓冲区取产品;
+  产品放入缓冲区;                    V(mutex);
+  V(mutex);                        V(empty);
+  V(full);                         消费;
+}                                }
+</code></pre>
+<p><strong>读者-写者</strong>（写者独占，读者共享；计数器+对计数器的互斥）：</p>
+<pre><code class="language-c">semaphore rw=1, mutex=1; int count=0;
+Writer: P(rw); 写; V(rw);
+Reader: P(mutex); if(count==0) P(rw); count++; V(mutex);
+        读;
+        P(mutex); count--; if(count==0) V(rw); V(mutex);
+</code></pre>
+<p><strong>哲学家进餐</strong>：先取奇数号左筷/偶数号右筷（破坏环路等待），或最多允许4人同时拿筷子。</p>
+<p><strong>吸烟者/理发师</strong>：本质=多同步信号量的轮流投放，考察能否把"轮流""限额"翻译成信号量。</p>
+<hr />
+<h2>第4章 死锁</h2>
+<ul>
+<li>定义与<strong>四个必要条件</strong>：互斥、请求并保持（占有且等待）、不可剥夺、<strong>循环等待</strong>（破坏任一即可预防）。</li>
+<li>静态预防：一次性申请全部资源（破坏请求保持）；资源有序分配（破坏循环等待）。</li>
+<li><strong>死锁避免=银行家算法</strong>：Available, Max, Allocation, Need=Max−Allocation；每次请求试分配→执行安全性检测（找 Need≤Work 的进程序列）→ 存在安全序列才正式分配。</li>
+<li>死锁检测：资源分配图化简（找非阻塞/孤立结点），<strong>不可完全化简⇔死锁</strong>；解除：剥夺资源/撤销进程。</li>
+<li>资源数与死锁：n进程各需k个资源，不发生死锁至少需 n(k−1)+1 个。</li>
+<li>注意：死锁≠饥饿（饥饿可因优先级调度，无循环等待）。</li>
+</ul>
+<hr />
+<h2>第5章 内存管理（综合题大户）</h2>
+<h3>程序装入与链接</h3>
+<ul>
+<li>绝对装入（单道）/可重定位装入（静态重定位）/动态运行时装入（<strong>重定位表，运行时才转</strong>，配合页式）。</li>
+<li>链接：静态/装入时/运行时。</li>
+</ul>
+<h3>连续分配</h3>
+<ul>
+<li>单一连续/固定分区/动态分区；动态分区分配算法：<strong>首次适应（最优综合性能）、最佳适应（碎片最细小）、最坏适应、循环首次适应</strong>；碎片可用紧凑（拼接）解决。</li>
+</ul>
+<h3>动态分区分配演算（首次/最佳/最坏适应）</h3>
+<p>空闲区表（起始，大小）：(100,100)、(500,500)、(900,200)、(1200,300)。现申请 212KB：
+| 算法 | 选中空闲区 | 分配后 |
+|---|---|---|
+| 首次适应 | 从头找第一个≥212 → (500,500) | 剩 (712,288) |
+| 最佳适应 | 找<strong>最小</strong>≥212 → (1200,300) | 剩 (1412,88) |
+| 最坏适应 | 找<strong>最大</strong> → (500,500) | 剩 (712,288)（本例与首次同） |
+易错：最佳适应会产生大量细小碎片；首次适应综合性能通常最好；最坏适应避免小碎片但大区耗尽快。</p>
+<h3>基本分页</h3>
+<ul>
+<li>逻辑地址=页号+页内偏移；物理=页框号+偏移；页表项存页框号与状态位。</li>
+<li><strong>地址计算</strong>：页面4KB=12位偏移；逻辑地址32位、页4KB → 页号20位。</li>
+<li><strong>快表TLB</strong>：有效访问时间(EAT) = λ(TLB访问) + α(命中率)×t(取数据) + (1−α)[t(访问页表)+t(取数据)]（一级TLB一次页表情形）。</li>
+</ul>
+<h3>分段与段页式</h3>
+<ul>
+<li>分段：按逻辑模块，二维地址（段号+段内偏移），段表项=基址+段长（<strong>要检查越界</strong>）；便于共享保护。</li>
+<li><strong>分页vs分段</strong>：页是物理单位（系统行为），段是逻辑单位（用户可见）；页大小固定、段不固定；分段有外部碎片无内部碎片，分页相反。</li>
+<li>段页式：先分段再分页，三次访存（段表→页表→数据），加TLB提速。</li>
+</ul>
+<h3>虚拟内存（请求分页）</h3>
+<ul>
+<li>关键位：状态位P、访问位A、修改位M、外存地址。</li>
+<li>
+<p><strong>页面置换算法（必考计算）</strong>：
+| 算法 | 规则 | 备注 |
+|---|---|---|
+| OPT | 淘汰最久以后不用的 | 理论最优，无法实现 |
+| FIFO | 淘汰最早进入 | 有<strong>Belady异常</strong> |
+| <strong>LRU</strong> | 淘汰最近最久未用 | 用过去预测，性能好 |
+| Clock/NRU | 循环扫A位：A=1清0过，A=0换出 | 改进Clock看(A,M)对：(0,0)最优 |</p>
+</li>
+<li>
+<p><strong>抖动（颠簸）</strong>：页面频繁换入换出，主因=分配的页框少于工作集；工作集=时间窗口内访问页集合。</p>
+</li>
+</ul>
+<hr />
+<h2>第6章 文件管理</h2>
+<ul>
+<li>文件逻辑结构：顺序/索引文件；FCB=基本信息+位置+存取控制+使用信息。</li>
+<li><strong>索引节点inode</strong>：FCB瘦身，文件名→inode号；磁盘inode含直接地址、一级/二级/三级间接指针。</li>
+<li><strong>文件物理分配（计算题高频）</strong>：
+| 方式 | 结构 | 优缺点 |
+|---|---|---|
+| 连续 | 顺序块 | 支持随机，难扩展 |
+| 隐式链接 | 块内含下一块指针 | 顺序慢、不可随机 |
+| 显式链接FAT | FAT表常驻内存 | 随机访问，FAT本身占空间 |
+| 索引 | inode存块号数组 | 支持随机；<strong>混合索引</strong>：直接块+间接块 |</li>
+<li><strong>混合索引计算模板</strong>（块4KB，块号4B → 每块1024个块号）：直接块k个 → 直接寻址 k×4KB；一级间接 +1024×4KB=4MB；二级 +1024×1024×4KB=4GB……给定文件大小算需访盘次数（查inode→直接1次/一级2次/二级3次数据访问）。</li>
+<li>目录：树形（绝对/相对路径）、无环图目录（共享，共享计数）；硬链接（计数）vs 符号链接（新文件指向路径）。</li>
+<li>空闲管理：位示图（字长计算题：块号b → 字号=⌊b/w⌋，位号=b mod w）、成组链接法。</li>
+</ul>
+<hr />
+<h2>第7章 输入输出管理</h2>
+<ul>
+<li>IO层次：用户层IO→设备独立性软件→设备驱动→中断处理→硬件。</li>
+<li>设备分类：块设备（可寻址，DMA）/字符设备；独占/共享/虚拟设备（SPOOLing把独占变共享）。</li>
+<li><strong>磁盘读写时间</strong>：T寻道（平均~磁臂移动）+ T旋转延迟（<strong>平均=半圈</strong>=60/(2r) ms）+ T传输（数据量/转速×每道字节数）。</li>
+<li><strong>磁盘调度（必考计算）</strong>：FCFS、<strong>SSTF</strong>（最近优先，可能饥饿）、<strong>SCAN</strong>（电梯：沿一方向服务到端再折返）、<strong>C-SCAN</strong>（单向服务，快速回起点，等待时间均匀）、LOOK/C-LOOK（不到端，到最远请求即回头）。</li>
+<li>磁盘管理：格式化（低级物理/高级逻辑）、引导块、坏块管理。</li>
+<li><strong>RAID</strong>：RAID0条带（快无冗余）、RAID1镜像（贵）、RAID5分布式奇偶校验（坏一块可恢复）。</li>
+</ul>
+<hr />
+<h1>操作系统 · 难点专攻</h1>
+<h2>1. PV大题四步写作法（综合题15分固定套路）</h2>
+<p>①定义信号量并写初值（mutex=1；同步/资源信号量看题意）；②左右两端列出双方动作；③互斥P放同步P<strong>之后</strong>；④成对V，标注释（V(full)="通知消费者"）。<strong>先写中文逻辑再翻PV，白给步骤分</strong>。</p>
+<h2>2. 页面置换计算模板（必考）</h2>
+<p>画表：列=访问序列，行=页框；每次访问标缺页(✓/✗)；LRU看"过去最久未用"，OPT看"将来最久不用"，Clock看A位循环指针。<strong>Belady异常只属于FIFO</strong>（增加页框缺页反而变多）。最后算缺页率与中断次数。</p>
+<h2>3. 银行家算法模板</h2>
+<p>①Need=Max−Allocation；②Request≤Need？≤Available？③试分配；④安全性：Work=Available，找Need_i≤Work者执行并回收，全找到→安全。<strong>答题把安全序列写出来才算完</strong>。</p>
+<h2>4. 磁盘存取时间与调度（模板）</h2>
+<p>总时间=寻道+旋转+传输。调度题：列请求序列磁道号，按算法算移动道数累计；SCAN注意方向与端点（题目说LOOK就到最远请求回头）。例：磁道100→请求55,58,39,18,90,160,150,38,184：SSTF=248道，SCAN(向大)=? 逐题演算。</p>
+<h2>5. 文件混合索引（模板）</h2>
+<p>块4KB、地址4B→每块1024个地址。文件最大=直接k块+一级1024+二级1024²(+三级…)。求"读第n字节需访盘几次"：定所在块→直接块：1次（读数据）+查inode已在内存为前提；一级间接：先读间接块+读数据=2次……<strong>题目若说明inode已在内存</strong>，直接从块访问算起。</p>
+<h2>6. 判断题高频坑</h2>
+<p>①"进程=程序+PCB"只对了一半（还有数据段/栈）；②时间片到：运行→就绪（不是阻塞）；③P操作可能导致阻塞，V操作<strong>不会</strong>阻塞；④LRU/OPT无Belady，FIFO才有；⑤段式无内部碎片、页式无外部碎片；⑥SPOOLing用共享设备模拟独占设备。</p></div></body></html>

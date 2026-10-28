@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>计组_知识点与难点 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>计算机组成原理 · 知识点与难点（408·45分）</h1>
+<blockquote>
+<p>408第二大科目（45分）。主线：王道计组课（B站免费）+ 唐朔飞《计算机组成原理》或袁春风教材。
+每节结构：【概念】清晰定义 →【要点】表格化 →【易错】→ 章末【难点专攻】配计算例题。</p>
+</blockquote>
+<hr />
+<h2>第1章 计算机系统概述</h2>
+<h3>概念</h3>
+<ul>
+<li><strong>存储程序</strong>：程序和数据以同等地位预先存入存储器，机器按地址自动逐条取指执行（冯·诺依曼机核心思想）。</li>
+<li>冯·诺依曼机五大部件：运算器、控制器、存储器、输入、输出；<strong>以运算器为中心</strong>（现代机以存储器为中心）。</li>
+<li>软硬件层次：高级语言机器 → 汇编语言机器 → 操作系统机器 → 机器语言机器 → 微程序机器。翻译（编译/汇编，整体转换）vs 解释（逐条转换）。</li>
+</ul>
+<h3>性能指标（计算题常考）</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>定义/公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主频 f</td>
+<td>时钟频率，时钟周期=1/f</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>执行一条指令所需时钟周期数（加权平均）</td>
+</tr>
+<tr>
+<td>CPU执行时间</td>
+<td>指令条数 × CPI × 时钟周期</td>
+</tr>
+<tr>
+<td>MIPS</td>
+<td>每秒百万条指令 = 主频/(CPI×10⁶)</td>
+</tr>
+<tr>
+<td>FLOPS</td>
+<td>每秒浮点运算次数</td>
+</tr>
+<tr>
+<td>数据通路带宽</td>
+<td>数据总线一次可传送的位数</td>
+</tr>
+<tr>
+<td>Amdahl定律</td>
+<td>加速比 = 1 / [(1−可增强比例) + 可增强比例/增强倍数]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>易错</strong>：①主频高≠机器快（CPI可能更大）；②MIPS基于指令数，不同架构指令功能不同，不能直接比；③基准程序是最靠谱的比较方式。</p>
+<hr />
+<h2>第2章 数据的表示与运算</h2>
+<h3>2.1 进制与编码</h3>
+<ul>
+<li>二/八/十六进制互转（三位/四位一组）；<strong>BCD码（8421）</strong>：4位二进制表示1位十进制，&gt;9 时+6修正。</li>
+</ul>
+<h3>2.2 校验码（选择高频）</h3>
+<table>
+<thead>
+<tr>
+<th>码</th>
+<th>原理</th>
+<th>能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>奇偶校验</td>
+<td>添1位使1的个数为奇/偶</td>
+<td>检1位错，不能纠</td>
+</tr>
+<tr>
+<td>海明码</td>
+<td>分组奇偶，k位校验位：<strong>2ᵏ ≥ n+k+1</strong></td>
+<td>检2纠1</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>信息码左移r位模2除生成多项式，余数作校验位</td>
+<td>检错（纠错配合不考计算）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>海明码校验位放在 2ⁱ 位置（第1,2,4,8…位）；纠错：异或所有校验组得"故障字"，其值即出错位号。</li>
+</ul>
+<h3>2.3 定点数（核心表）</h3>
+<table>
+<thead>
+<tr>
+<th>码制</th>
+<th>表示</th>
+<th>零的形式</th>
+<th>n+1位（含符号）范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td>符号+绝对值</td>
+<td>+0、−0 两种</td>
+<td>−(2ⁿ−1) ~ +(2ⁿ−1)</td>
+</tr>
+<tr>
+<td>反码</td>
+<td>负数取反</td>
+<td>+0、−0 两种</td>
+<td>同原码</td>
+</tr>
+<tr>
+<td>补码</td>
+<td>取反+1</td>
+<td>唯一0</td>
+<td><strong>−2ⁿ ~ +(2ⁿ−1)</strong></td>
+</tr>
+<tr>
+<td>移码</td>
+<td>补码符号位取反</td>
+<td>唯一0</td>
+<td>同补码；常用于阶码，便于比较大小</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>补码加减</strong>：[A+B]补=[A]补+[B]补（符号位参加运算）；减法转加补码负数。</li>
+<li><strong>溢出判断</strong>：①单符号位：最高数值位进位 ⊕ 符号位进位=1则溢出；②双符号位（变形补码）：两符号位不同=溢出，<strong>最高符号位始终是真正符号</strong>；③补码正溢出：两正数得负；负溢出相反。</li>
+<li>符号扩展：补码负数左添1，正数添0；定点小数右添0。</li>
+</ul>
+<h3>2.4 浮点数 IEEE 754（必考计算）</h3>
+<ul>
+<li><strong>单精度 float：1位符号 + 8位阶码（偏置127）+ 23位尾数</strong>（隐含最高位1，即 1.M）。</li>
+<li><strong>双精度 double：1 + 11（偏置1023）+ 52</strong>。</li>
+<li>真值 = (−1)ˢ × 1.M × 2^(E−127)（单精度，E为阶码字段无符号值）。</li>
+<li>特殊值：E全0：非规格化数/±0（尾数无隐含1）；E全1：尾数0=±∞，尾数非0=NaN。</li>
+<li><strong>浮点加减五步</strong>：对阶（小阶向大阶对齐，尾数右移）→ 尾数加减 → 规格化（左规尾数左移阶码减1；右规尾数右移进位1阶码加1）→ 舍入（0舍1入/恒置1）→ 溢出判断（阶码溢出才溢出）。</li>
+</ul>
+<p><strong>例</strong>：−0.75 的单精度表示：0.75=0.11B=1.1×2⁻¹ → S=1，E=−1+127=126=01111110，M=100…0 → 1 01111110 10000000000000000000000。</p>
+<h3>2.5 运算器</h3>
+<ul>
+<li>一位全加器（和=三位异或，进位=多数）；串行/并行进位（先行进位CLA消除等待）。</li>
+<li>补码乘法（Booth算法，了解规则：看yᵢyᵢ₊₁ 00不变/01加X/10减X/11不变，最后一步多看一位）；除法（恢复余数法、加减交替法）408近年以概念考查为主。</li>
+</ul>
+<hr />
+<h2>第3章 存储系统（408最爱出综合题）</h2>
+<h3>3.1 层次与主存</h3>
+<ul>
+<li>层次：寄存器 → Cache → 主存 → 磁盘（Cache-主存解决速度，主存-辅存解决容量）；依据：<strong>局部性原理</strong>（时间局部性：循环；空间局部性：数组顺序）。</li>
+<li>SRAM（触发器，快、贵，做Cache）vs DRAM（电容，需<strong>刷新</strong>（集中/分散/异步），做主存）；ROM：MROM/PROM/EPROM/EEPROM/Flash（U盘、SSD，写前须擦除）。</li>
+<li><strong>容量扩展</strong>：位扩展（8片1K×1→1K×8，共用片选）、字扩展（4片1K×8→4K×8，高位地址译码片选）、字位同时扩展。片选逻辑：nK×b 用高位地址线接译码器。</li>
+<li><strong>多体交叉存储器</strong>：低位交叉（地址 mod m 选体），流水存取 m 体连续读 m 字时间 ≈ T+(m−1)·τ（T为存取周期，τ为总线传送周期）；高位交叉=顺序编址不提速。</li>
+</ul>
+<h3>3.2 Cache（必考大题）</h3>
+<ul>
+<li>
+<p>地址划分与命中率：
+| 映射方式 | 主存地址划分 | 特点 |
+|---|---|---|
+| 直接映射 | 标记 | Cache行号 | 块内地址 | 一对一，冲突高，无需替换算法（冲突即替换） |
+| 全相联 | 标记 | 块内地址 | 任意放，最灵活，比较器昂贵 |
+| 组相联 | 标记 | 组号 | 块内地址 | 组间直接、组内全相联；路数=组内行数 |</p>
+</li>
+<li>
+<p>块大小 2^k B；主存地址位数 = 标记+组/行号+块内地址。</p>
+</li>
+<li>替换算法：<strong>LRU</strong>（近期最少用，用计数器，硬件易实现）、FIFO（Belady现象：增大块数缺页反而增多）、LFU、随机。直接映射不需要替换算法。</li>
+<li><strong>写策略</strong>：写命中——写直达（write through，同时写主存，配合写缓冲）vs 写回（write back，仅改Cache并置脏位，换出时写回）；写不命中——写分配法（调入+写，配写回）vs 非写分配（直接写主存，配写直达）。</li>
+<li><strong>平均访存时间 = 命中时间 + 缺失率 × 缺失代价</strong>（注意是否考虑多级Cache的局部命中率）。</li>
+</ul>
+<p><strong>例</strong>：主存16MB（24位地址），Cache 8KB，块大小16B，4路组相联 → 块内地址4位；Cache共 8KB/16B=512 块 → 128组 → 组号7位；标记=24−7−4=13位。</p>
+<h3>3.3 虚拟存储（与OS联动，408综合题最爱的结合点）</h3>
+<ul>
+<li>页式虚存：虚地址=虚页号+页内偏移；查<strong>页表</strong>得物理页框号；<strong>快表TLB</strong>（Cache页表项）加速。</li>
+<li>综合题套路：给虚地址 → 先查TLB（命中则得页框号）→ 未命中查页表（有效位0→缺页异常）→ 拼物理地址 → 再查Cache/主存。</li>
+<li>TLB缺失率、Cache缺失率、平均访存时间三者结合计算是<strong>408最经典大题</strong>。</li>
+</ul>
+<hr />
+<h3>外存储器与磁盘阵列 RAID【选择高频】</h3>
+<ul>
+<li>磁盘阵列：用多个独立磁盘组成一个大容量存储系统，通过数据分散与冗余提升性能与可靠性。
+| 级别 | 原理 | 特点 |
+|---|---|---|
+| RAID0 | 条带分布（无冗余） | 容量与带宽最大，<strong>可靠性最低</strong>（坏一块全盘受损） |
+| RAID1 | 镜像（两两互备） | <strong>可靠性最高</strong>，容量利用率50% |
+| RAID5 | 分布式奇偶校验 | 校验信息分散存放，允许坏一块并恢复，综合最优 |
+易错：RAID0无容错；RAID1容量减半；RAID5校验分散（不是专用校验盘）。</li>
+</ul>
+<h2>第4章 指令系统</h2>
+<ul>
+<li>指令格式：操作码 + 地址码；定长操作码 vs <strong>扩展操作码</strong>（短指令留出前缀给长指令）。</li>
+<li>扩展操作码计算：如4位基本操作码，15条三地址+15条二地址+15条一地址+16条零地址=61条（1111留作扩展前缀）。</li>
+<li><strong>寻址方式（EA=有效地址）</strong>：
+| 方式 | 有效地址 | 特点/用途 |
+|---|---|---|
+| 立即 | 操作数在指令中 | 最快，取指即得 |
+| 直接 | EA=A | 简单，寻址范围受限 |
+| 间接 | EA=(A) | 扩大范围，多次访存慢 |
+| 寄存器 | 操作数在寄存器R | 不访存，最快 |
+| 寄存器间接 | EA=(R) | 访存一次 |
+| 基址 | EA=(BR)+A | 面向操作系统（重定位/多道程序），基址寄存器内容不变（程序内） |
+| 变址 | EA=(IX)+A | 面向用户，适合数组循环（A为基准，IX变化） |
+| 相对 | EA=(PC)+A | 转移指令；<strong>PC已指向下一条指令</strong>（取指后自动+1），位移量以当前指令的下一条为基准 |
+| 堆栈 | SP指示 | 进出栈，SP修改方向依机器而定 |</li>
+<li><strong>CISC vs RISC</strong>：RISC——指令定长、种类少、格式少、只有LOAD/STORE访存、寄存器多、一个周期内完成（流水线友好）、组合逻辑控制；CISC相反、微程序控制。</li>
+</ul>
+<hr />
+<h2>第5章 中央处理器（综合题大户）</h2>
+<h3>数据通路与执行</h3>
+<ul>
+<li>取指→（PC送MAR→读存→MDR→IR，PC+1）→ 译码 → 取操作数 → 运算 → 写回。</li>
+<li>专用通路（多总线）vs 单总线（需暂存器）。</li>
+</ul>
+<h3>控制器</h3>
+<ul>
+<li><strong>硬布线</strong>：组合逻辑直接产生微命令，快、难改（RISC用）；<strong>微程序</strong>：微指令存控制存储器，逐条取出微命令，灵活、慢（CISC用）。</li>
+<li>微指令格式：水平型（并行能力强、字长长）vs 垂直型（类似机器指令）；后继微地址形成（增量/断定方式）。</li>
+</ul>
+<h3>指令流水线（必考计算）</h3>
+<ul>
+<li>五段：IF取指 → ID译码/取数 → EX执行 → MEM访存 → WB写回。</li>
+<li>吞吐率 TP = n / (总时间)；总时间 = (k+n−1)Δt（k段理想流水）；加速比 S = nkΔt / (k+n−1)Δt；效率 = 有效时空面积/总面积。</li>
+<li><strong>三种冒险</strong>：结构（部件争用→暂停/资源重复）、数据（后指令用到前指令结果→暂停/stalling、<strong>数据转发旁路</strong>、编译调度）、控制（转移指令→分支预测/延迟分支）。</li>
+<li>相关例：IF ID EX MEM WB 各1拍， LOAD-USE数据相关需停1拍+转发。</li>
+</ul>
+<h3>数据通路微操作序列示例（综合题模板）</h3>
+<p>设单总线结构、含暂存器 Y/Z，指令 <code>ADD (R1), R0</code>：R0 与主存单元 (R1) 相加，结果写回主存。
+| 阶段 | 微操作 | 控制信号（示例） |
+|---|---|---|
+| 取指 | (PC)→MAR | PCout, MARin |
+|  | M(MAR)→MDR | MemR, MDRinE |
+|  | (MDR)→IR | MDRout, IRin |
+|  | (PC)+1→PC | +1, PCin |
+| 间址取数 | (R1)→MAR | R1out, MARin |
+|  | M(MAR)→MDR | MemR, MDRinE |
+| 执行 | (R0)+(MDR)→Z | R0out, MDRout, ALUadd, Zin |
+| 写回 | (Z)→MDR | Zout, MDRin |
+|  | (MDR)→M(MAR) | MemW |</p>
+<p>要点：①取指后<strong>必须先 PC+1</strong> 再谈其他；②间接寻址多一轮访存；③答题按"阶段+微操作+控制信号"三列表格给分，写清每个节拍。</p>
+<h3>异常与中断</h3>
+<ul>
+<li>内部异常：故障（缺页，可恢复继续）、自陷（trap，系统调用，故意）、终止（硬件错误，致命）。</li>
+<li>外部中断：可屏蔽（INTR）/不可屏蔽（NMI）。</li>
+<li>中断处理流程：关中断 → 保存断点和现场 → 中断服务 → 恢复现场 → 开中断返回。</li>
+<li><strong>多重中断</strong>：服务程序中开中断后可被更高级打断；<strong>屏蔽字</strong>：每位对应一级中断，1=屏蔽；屏蔽字设计原则——<strong>对自己及更低级屏蔽，放行更高级</strong>（解题口诀）。</li>
+</ul>
+<hr />
+<h2>第6章 总线</h2>
+<ul>
+<li>分类：数据总线/地址总线/控制总线；地址总线位数决定寻址空间。</li>
+<li><strong>仲裁</strong>：集中式——链式查询（BG串行，优先级固定，离控制器近者高，对故障敏感）、计数器定时查询、独立请求（最快，控制复杂）；分布式（自检）。</li>
+<li><strong>定时</strong>：同步（统一时钟，快但受最慢设备约束）；异步（应答握手：<strong>不互锁/半互锁/全互锁</strong>，全互锁最可靠最慢）。</li>
+<li><strong>带宽计算</strong>：总线带宽 = 总线宽度(B) × 总线频率；若每周期传输1次，DDR类×2。例：32位总线、100MHz、每周期1次 → 4B×100M=400MB/s。</li>
+</ul>
+<hr />
+<h2>第7章 输入输出系统</h2>
+<ul>
+<li>接口：数据端口/状态端口/控制端口；<strong>端口编址</strong>：统一编址（与主存共用空间，无需专用IO指令但占地址）vs 独立编址（专用IN/OUT指令，需控制线区分）。</li>
+<li>三种IO方式对比（选择必考）：
+| 方式 | CPU干预 | 数据通路 | 特点 |
+|---|---|---|---|
+| 程序查询 | 轮询等待，全程占用 | CPU↔设备 | 最慢，CPU利用率最低 |
+| 程序中断 | 每传一字中断一次 | CPU↔设备 | CPU可并行其他任务，适合低速设备 |
+| DMA | 仅预处理/后处理 | <strong>设备↔主存直传</strong> | 适合高速块设备； stealing=<strong>周期挪用</strong> |</li>
+<li>DMA三方式：停止CPU访存/周期挪用（窃取）/交替访问；DMA传送三阶段：预处理（初始化）→ 数据传送（硬件完成）→ 后处理（中断告知CPU）。</li>
+<li><strong>中断与DMA配合</strong>：DMA结束（或出错）仍需中断告知CPU。</li>
+</ul>
+<hr />
+<h1>计组 · 难点专攻（拉开分差）</h1>
+<h2>1. Cache 映射五步计算法（模板）</h2>
+<p>①求块内地址位数=log₂块大小；②求Cache行/组数；③行号或组号位数；④标记位数=主存地址总位数−其余；⑤主存地址按“标记|组号|块内”拆分定位。<strong>组相联命中判断：组号匹配后再比标记</strong>。</p>
+<h2>2. IEEE 754 十进制↔二进制互转（模板）</h2>
+<p>十进制→IEEE：化绝对值为 1.M×2ᵉ → 阶码=e+127（转8位无符号二进制）→ 尾数去掉隐含1 → 拼符号位。反向先减127。<strong>警惕 −0.75、1.5、−128.125 这类“小而刁”的数值</strong>。</p>
+<h2>3. 流水线时空图（画图得分）</h2>
+<p>按指令×段画矩阵；标出每个暂停（stall）空格；LOAD后紧接用其结果 → 停1拍（无转发）或0拍（有转发）；分支在ID末判定 → 后2条作废（或预测成功不停）。总拍数=n+k−1+停顿数。</p>
+<h2>4. 中断屏蔽字设计（模板）</h2>
+<p>①按题给优先级排序；②每个屏蔽字：自身位置1、比它低的全部1、比它高的全部0；③验证：任意两中断嵌套关系符合优先级。</p>
+<h2>5. TLB–页表–Cache 三级查找综合题（408特色大题）</h2>
+<p>流程：虚地址→TLB（hit→页框号）→miss查页表（valid=0→缺页）→物理地址→Cache（hit→数据）→miss访主存。平均访存时间=各命中率加权，<strong>分清“TLB缺失率”与“Cache缺失率”作用在不同环节</strong>。</p>
+<h2>6. 容易混的三组概念（判断题克星）</h2>
+<p>①SRAM/DRAM刷新；②微程序（控制器内部）≠机器指令程序；③基址（OS用，系统）vs 变址（用户用，数组）；④同步总线≠一定比异步快（比较的前提是设备速度接近）。</p></div></body></html>

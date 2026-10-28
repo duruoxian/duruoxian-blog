@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>离散数学精讲_数理逻辑 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>离散数学精讲 · 数理逻辑（第1/4批）</h1>
+<blockquote>
+<p><strong>定位声明（先读）</strong>：离散数学<strong>不在数学一考纲</strong>（数一=高数+线代+概率）。本系列服务三件事：①<strong>408数据结构的理论层</strong>（图的性质、等价关系、逻辑推理是DS的数学根基）②<strong>复试</strong>（部分自命题/复试笔试考离散；面试常抽查本科核心课）③<strong>AI方向打底</strong>（数理逻辑→知识表示与推理；屈婉玲《离散数学基础》第3版正是你99_存档里那本本科教材）。
+<strong>使用纪律</strong>：初试前与AI系列同待遇——0投入；复试期（2028.1起）或408学到图论时对照翻阅。
+系列：①数理逻辑 ✅本册 ②集合论与关系 ③图论 ④代数结构+组合计数。</p>
+</blockquote>
+<hr />
+<h1>第一部分 命题逻辑</h1>
+<h2>一、命题与联结词</h2>
+<p><strong>D1 命题</strong>：能判断真假的陈述句（真值唯一）。
+【不是命题的】疑问句、祈使句、悖论（"我这句话是假的"）；"x+1&gt;5"（真值依赖x，是命题变元不是命题）。
+<strong>D2 五个联结词（真值表必背）</strong>：
+| p | q | ¬p | p∧q | p∨q | <strong>p→q</strong> | p↔q |
+|---|---|---|---|---|---|---|
+| T | T | F | T | T | <strong>T</strong> | T |
+| T | F | F | F | T | <strong>F</strong> | F |
+| F | T | T | F | T | <strong>T</strong> | T |
+| F | F | T | F | F | <strong>T</strong> | T |
+【蕴含陷阱（复试最高频概念题）】p→q <strong>只有"前真后假"才为假</strong>："如果2+2=5，那么雪是黑的"是真命题！口诀：<strong>"真推出假才是假"</strong>；F→任何=T（空真）。
+【自然语言对应】"只要p就q"=p→q；"只有p才q"=<strong>q→p</strong>（方向反！）；"p当且仅当q"=p↔q。
+【优先级】¬ &gt; ∧ &gt; ∨ &gt; → &gt; ↔。</p>
+<h2>二、等值演算</h2>
+<p><strong>T1 十六组重要等值式（核心八组）</strong>：
+- <strong>双重否定</strong>：¬¬p ⇔ p
+- <strong>德摩根</strong>：¬(p∧q) ⇔ ¬p∨¬q；¬(p∨q) ⇔ ¬p∧¬q
+- <strong>分配</strong>：p∧(q∨r) ⇔ (p∧q)∨(p∧r)；对偶式成立
+- <strong>蕴含等值</strong>：<strong>p→q ⇔ ¬p∨q</strong>（消箭头第一式）
+- <strong>等价等值</strong>：p↔q ⇔ (p→q)∧(q→p)
+- <strong>假言易位</strong>：p→q ⇔ ¬q→¬p（逆否命题）
+- <strong>等价否定等值</strong>：p↔q ⇔ ¬p↔¬q
+- <strong>吸收/幂等/排中/矛盾</strong>：p∨(p∧q)⇔p；p∧p⇔p；p∨¬p⇔T；p∧¬p⇔F
+【解题模板】证明等值式：①真值表法（穷举）；②等值演算法（从一边用等值式推到另一边）；③主范式法（两者主范式相同）。</p>
+<p><strong>考题1（等值演算）</strong> 证明 (p→q)∧(p→r) ⇔ p→(q∧r)。
+【证】左边=¬p∨q)∧(¬p∨r)（蕴含等值）=¬p∨(q∧r)（分配律）=p→(q∧r)（蕴含等值逆用）。∎</p>
+<h2>三、主范式（本部分计算核心）</h2>
+<p><strong>D3 极小项与极大项</strong>：n个变元：
+- <strong>极小项 mᵢ</strong>：每个变元恰出现一次（本身或否定）的<strong>合取式</strong>；mᵢ 仅在对应赋值为T时为T（m₅(p,q,r)=p∧¬q∧r，仅101时真）；
+- <strong>极大项 Mᵢ</strong>：析取式；Mᵢ 仅在对应赋值时为F；<strong>Mᵢ=¬mᵢ</strong>。
+<strong>D4 主析取/主合取范式</strong>：任何公式唯一地表为极小项之∨（主析取）与极大项之∧（主合取）。
+【转换钥匙】<strong>使公式为T的赋值→对应mᵢ进主析取范式；为F的→对应Mᵢ进主合取范式</strong>；两者下标互补：Σm ∪ ΠM 的下标 = 全体（缺一补一）。
+【双重否定无赋值使真】矛盾式主析取范式为0（写"0"）；永真式主合取范式为1。</p>
+<p><strong>考题2（主范式全程演算）</strong> 求 (p∨q)→r 的主析取范式与主合取范式。
+【解】原式=¬(p∨q)∨r=(¬p∧¬q)∨r。
+真值表（8种赋值，pqr顺序）：
+（逐行验算 pqr 序：TTT:T；TTF:F；TFT:F；TFF:F；FTT:T；FTF:F；FFT:T；FFF:T）
+真赋值：000(m₀),001(m₁),011(m₃),111(m₇)；假赋值：010,100,101,110(M₂,M₄,M₅,M₆)。
+<strong>主析取范式=m₀∨m₁∨m₃∨m₇</strong>=Σ(0,1,3,7)；
+<strong>主合取范式=M₂∧M₄∧M₅∧M₆</strong>=Π(2,4,5,6)。
+验证：Σ∪Π={0..7} 互补 ✓。∎
+【主合取的用途】化简后可"成组消去"（Π(2,4,5,6)=M₂∧M₄∧M₅∧M₆ 化简=？留给等值演算练习）。</p>
+<p><strong>考题3（公式类型判定）</strong> 判定 (p→q)∧(q→p)↔(p↔q) 是什么类型（永真/永假/可满足）？
+【解】(p→q)∧(q→p) ⇔ (p↔q)（等价等值式）→ 原式 ⇔ (p↔q)↔(p↔q) ⇔ T（同一律）。
+<strong>永真式（重言式）</strong>——主析取范式=全部4个m（Σ0,1,2,3）。∎</p>
+<h2>四、推理理论（复试证明题标准型）</h2>
+<p><strong>D5 有效推理</strong>：前提全真时结论必真（(A₁∧…∧Aₖ)→B 永真）。
+【注意】有效≠结论真——前提假时推什么都"有效"（蕴含陷阱的应用）。
+<strong>T2 推理定律（八条，名字要叫得出）</strong>：
+- <strong>假言推理（MP）</strong>：p→q, p ⊢ q
+- <strong>附加/化简</strong>：p ⊢ p∨q；p∧q ⊢ p
+- <strong>拒取式（MT）</strong>：p→q, ¬q ⊢ ¬p
+- <strong>假言三段论</strong>：p→q, q→r ⊢ p→r
+- <strong>析取三段论</strong>：p∨q, ¬p ⊢ q
+- <strong>构造性二难</strong>：p∨q, p→r, q→r ⊢ r
+<strong>T3 证明方法三件套</strong>：
+- <strong>直接法</strong>：前提+推理定律逐步推；
+- <strong>附加前提证明法（CP规则）</strong>：结论形如 B→C 时，把B加入前提推C——"证p→q 就假设p 推q"；
+- <strong>归谬法（反证）</strong>：把<strong>结论否定</strong>加入前提，推出矛盾（恒假式F）——与数学证明的反证法同源（呼应《985精讲_高数上》的证明套路）。</p>
+<p><strong>考题4（构造证明·直接法）</strong> 前提：p∨q，p→r，q→r。结论：r。
+【证】①p∨q（前提）；②p→r（前提）；③q→r（前提）；④r∨r（①②③构造性二难）；⑤r（④幂等）。∎</p>
+<p><strong>考题5（CP规则）</strong> 前提：p→(q→r)。结论：q→(p→r)。
+【证】结论形如 q→(...)：附加前提q。
+①p→(q→r)（前提）；②q（附加前提）；③p（附加前提，因结论还含→）；④q→r（①③MP）；⑤r（②④MP）。
+由CP规则（两次），q→(p→r) 得证。∎</p>
+<p><strong>考题6（归谬法）</strong> 前提：¬(p∧q)，p。结论：¬q。
+【证】归谬：假设¬(¬q)=q。
+①p（前提）；②q（假设）；③p∧q（①②合取引入）；④¬(p∧q)（前提）；③④矛盾 → <strong>假设不成立，¬q 得证</strong>。∎</p>
+<hr />
+<h1>第二部分 谓词逻辑（一阶逻辑）</h1>
+<h2>一、基本概念</h2>
+<p><strong>D6 个体词、谓词、量词</strong>：
+- 个体常元/变元（论域D中的对象）；谓词（性质/关系：F(x)="x是素数"）；
+- <strong>全称量词 ∀</strong>、<strong>存在量词 ∃</strong>。
+【符号化模板】"所有人都呼吸"=∀x(F(x)→G(x))（<strong>蕴含！</strong>——∀的框架是→）；"有人吸烟"=∃x(F(x)∧G(x))（<strong>合取！</strong>——∃的框架是∧）。<strong>"∀配→、∃配∧"</strong>是符号化第一大坑。
+<strong>D7 辖域与约束变元</strong>：量词的作用范围；变元约束则不能换名随意（换名规则：保持约束）。</p>
+<h2>二、等值式与推理</h2>
+<p><strong>T4 量词否定等值（德摩根的量词版，必背）</strong>：
+<strong>¬∀x F(x) ⇔ ∃x ¬F(x)；¬∃x F(x) ⇔ ∀x ¬F(x)</strong>
+（"不是所有人都…"="有人不…"——自然语言验证法）。
+<strong>T5 量词辖域收缩与扩张</strong>：∀x(F(x)∨G) ⇔ ∀xF(x)∨G（G不含x）等一组。
+<strong>T6 一阶推理定律</strong>：
+- <strong>UI规则</strong>（全称实例化）：∀xF(x) ⊢ F(y)——从"所有"取任意个体；
+- <strong>UG</strong>（全称概括）：F(y)对任意y成立 ⊢ ∀xF(x)；
+- <strong>EI</strong>（存在实例化）：∃xF(x) ⊢ F(c)——<strong>取特定c，且c必须新</strong>（不能与UI取的混用先后：<strong>EI先于UI取名</strong>）；
+- <strong>EG</strong>（存在概括）。
+【408连接】这四条规则就是"证明算法正确性/循环不变式"时用的推理工具（形式化验证的根基）；也是AI知识图谱推理（描述逻辑）的底层。</p>
+<p><strong>考题7（符号化+推理）</strong> 前提：∀x(F(x)→G(x))，∃xF(x)。结论：∃xG(x)。
+【证】①∃xF(x)（前提）→ EI：F(a)（<strong>先EI</strong>）；
+②∀x(F(x)→G(x))（前提）→ UI：F(a)→G(a)；
+③G(a)（①②MP）；
+④∃xG(x)（③EG）。∎
+【顺序警告】若先UI再EI并对同一个a使用，是无效推理（EI的a必须是"存在的那一个"，不能承载"任意"含义）——标准陷阱。</p>
+<hr />
+<h1>三、与408/AI的连接表</h1>
+<table>
+<thead>
+<tr>
+<th>离散内容</th>
+<th>408去处</th>
+<th>AI去处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蕴含真值（空真）</td>
+<td>数据依赖、逻辑题</td>
+<td>规则引擎"前提不满足则规则不触发"</td>
+</tr>
+<tr>
+<td>主范式</td>
+<td>——电路化简（计组）</td>
+<td>布尔检索/特征合取</td>
+</tr>
+<tr>
+<td>推理定律/归谬法</td>
+<td>算法正确性论证</td>
+<td>知识图谱推理、Agent的"自我检查"（critic环节=找矛盾）</td>
+</tr>
+<tr>
+<td>谓词逻辑+UI/EI</td>
+<td>形式化规格</td>
+<td>一阶知识表示（Prolog血统）、LLM的结构化约束</td>
+</tr>
+</tbody>
+</table>
+<h2>四、本册必会清单</h2>
+<ol>
+<li>命题判定；五联结词真值表与<strong>蕴含陷阱</strong>（仅T→F为假）；</li>
+<li>"只要…就"=p→q vs "只有…才"=q→p；</li>
+<li>八组核心等值式；蕴含等值 p→q⇔¬p∨q 消箭头；</li>
+<li>主范式求法（真值表→mᵢ/Mᵢ下标），Σ与Π下标互补；</li>
+<li>推理八定律名称与形式；CP规则、归谬法两大技巧；</li>
+<li>"∀配→、∃配∧"符号化；量词否定德摩根；</li>
+<li>UI/EI/UG/EG四规则与<strong>EI先于UI</strong>顺序陷阱；</li>
+<li>谓词推理证明的标准书写（①②③带依据）。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第2/4批）：集合论与关系</strong>——集合运算与恒等式、二元关系三性质（自反对称传递）与判定、<strong>等价关系与划分（并查集/连通分量的理论原型）</strong>、偏序与哈斯图、极大极小元、函数与基数概念。说"继续"交付。</p>
+</blockquote></div></body></html>

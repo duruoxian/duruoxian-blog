@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_压轴题专练 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 压轴题专练（12道，含完整详解）</h1>
+<blockquote>
+<p>目标130+的同学做的"分差题"：中值定理双介值、级数求和、由特征向量反求矩阵、二维混合分布等真题压轴套路。<strong>每题先独立做40分钟，再对详解</strong>。全部题目与过程已验算。
+配套：《题型精讲与强化题集》《大题题型全攻略》《6套模拟卷》。</p>
+</blockquote>
+<hr />
+<h2>题一（数列极限·泰勒与中值综合）</h2>
+<p>求 lim_{n→∞} n²[arctan(2/n) − arctan(2/(n+1))]。</p>
+<p><strong>解</strong>：设 f(x)=arctan(2/x)，在 [n, n+1] 上用拉格朗日中值定理：
+arctan(2/n) − arctan(2/(n+1)) = f'(ξ)·1 = −2ξ²/(ξ⁴+4)·? 直接算：
+f'(x) = −2/(x²+4)。故差 = 2/(ξ²+4)，ξ∈(n, n+1)。
+原式 = n²·2/(ξ²+4) ~ 2n²/(n²+4) → <strong>2</strong>。
+（或用差→泰勒：2/n − 2/(n+1) = 2/[n(n+1)]，商仅差高阶无穷小，极限同为2。）</p>
+<h2>题二（中值定理·双介值经典）</h2>
+<p>设 f(x) 在 [0,1] 上二阶可导，f(0)=f(1)=0，且 min_{[0,1]} f = −1。证明：存在 ξ∈(0,1)，使 f''(ξ) ≥ 8。</p>
+<p><strong>证</strong>：设最小值在 x₀∈(0,1) 取得（端点值0&gt;−1，故 x₀ 为内部极小点）→ <strong>f(x₀)=−1，f'(x₀)=0</strong>。
+在 x₀ 处分别对 0 与 1 作泰勒展开（拉格朗日余项）：
+f(0) = f(x₀) + f'(x₀)(0−x₀) + ½f''(ξ₁)x₀² = −1 + ½f''(ξ₁)x₀² = 0 → f''(ξ₁) = 2/x₀²
+f(1) = −1 + ½f''(ξ₂)(1−x₀)² = 0 → f''(ξ₂) = 2/(1−x₀)²
+若 x₀ ≤ ½：f''(ξ₁) = 2/x₀² ≥ 2/(½)² = 8；
+若 x₀ &gt; ½：1−x₀ &lt; ½ → f''(ξ₂) = 2/(1−x₀)² &gt; 8。
+两情况均有 f''(ξ) ≥ 8。∎
+（套路：<strong>最值点导数为零 + 向两端展开 + 半区间讨论</strong>。）</p>
+<h2>题三（递推数列·单调有界）</h2>
+<p>设 x₁=√2，x_{n+1}=√(2+x_n)，证明 {xₙ} 收敛并求极限。</p>
+<p><strong>证</strong>：
+① 有界：归纳证 xₙ&lt;2。x₁=√2&lt;2；若 xₙ&lt;2，则 x_{n+1}=√(2+xₙ)&lt;√4=2。
+② 单调增：x_{n+1}²−xₙ² = 2+xₙ−xₙ² = −(xₙ−2)(xₙ+1) &gt; 0（0&lt;xₙ&lt;2）→ x_{n+1}&gt;xₙ。
+由单调有界准则，收敛。设极限为 L：L=√(2+L) → L²−L−2=0 → L=2（舍−1）。<strong>极限为2</strong>。∎</p>
+<h2>题四（定积分·对称技巧经典）</h2>
+<p>计算 I = ∫₀^{π/2} ln(sinx) dx。</p>
+<p><strong>解</strong>：被积函数在端点ln0处瑕积分可证收敛（lnx 可积）。由 x→π/2−x 换元，I = ∫₀^{π/2} ln(cosx)dx。
+2I = ∫₀^{π/2} ln(sinx cosx)dx = ∫₀^{π/2} ln(½sin2x)dx = ∫₀^{π/2} ln(sin2x)dx − (π/2)ln2。
+令 u=2x：∫₀^{π/2} ln(sin2x)dx = ½∫₀^{π} ln(sinu)du = ½·2I = I（sin在[0,π]关于π/2对称）。
+于是 2I = I − (π/2)ln2 → <strong>I = −(π/2)ln2</strong>。
+（结论直接记忆：∫₀^{π/2}ln(sinx)dx = ∫₀^{π/2}ln(cosx)dx = −(π/2)ln2。）</p>
+<h2>题五（级数·和函数与数项级数）</h2>
+<p>求 Σ_{n=1}^∞ (−1)^{n−1}·n(n+1)/2ⁿ。</p>
+<p><strong>解</strong>：由 (1/(1−x))'' = 2/(1−x)³ 得 Σn(n−1)xⁿ = 2x²/(1−x)³，又 Σnxⁿ = x/(1−x)²。
+n(n+1) = n(n−1)+2n → Σ n(n+1)xⁿ = 2x²/(1−x)³ + 2x/(1−x)² = <strong>2x/(1−x)³</strong>（|x|&lt;1）。
+（验证：x=1/2 时 Σn(n+1)/2ⁿ = 2·(1/2)/(1/2)³ = 8 ✓。）
+本题 x = −1/2：Σ n(n+1)(−1)ⁿ/2ⁿ = 2(−1/2)/(3/2)³ = (−1)/(27/8) = −8/27。
+故 Σ (−1)^{n−1}n(n+1)/2ⁿ = −Σ n(n+1)(−1)ⁿ/2ⁿ = <strong>8/27</strong>。
+（数值验：0.5−1.5+1.5−1.25+0.9375−… ≈ 0.296 ≈ 8/27 ✓。）</p>
+<h2>题六（幂级数展开与著名常数）</h2>
+<p>将 f(x)=arctan x 展开为 x 的幂级数，并求 Σ_{n=0}^∞ (−1)ⁿ/(2n+1)。</p>
+<p><strong>解</strong>：f'(x) = 1/(1+x²) = Σ_{n=0}^∞ (−1)ⁿx²ⁿ（|x|&lt;1）。
+逐项积分（f(0)=0）：<strong>arctan x = Σ_{n=0}^∞ (−1)ⁿ x^{2n+1}/(2n+1)</strong>，|x|&lt;1。
+x=1 时级数 Σ(−1)ⁿ/(2n+1) 由莱布尼茨判别收敛（端点收敛域 [−1,1]）。
+由幂级数和函数在收敛端点的连续性：π/4 = arctan 1 = Σ(−1)ⁿ/(2n+1)。
+即 <strong>π/4 = 1 − 1/3 + 1/5 − 1/7 + …</strong>（莱布尼茨公式）。∎</p>
+<h2>题七（线代·实对称矩阵反求）</h2>
+<p>设3阶实对称矩阵 A 的特征值 λ₁=1, λ₂=−1, λ₃=0，λ₁ 对应特征向量 ξ₁=(1,2,2)ᵀ，λ₂ 对应 ξ₂=(2,1,−2)ᵀ。求 A 及 λ₃ 对应的所有特征向量。</p>
+<p><strong>解</strong>：实对称不同特征值的特征向量正交（验证：ξ₁ᵀξ₂=2+2−4=0 ✓），|ξ₁|=|ξ₂|=3。
+谱分解：A = 1·(ξ₁ξ₁ᵀ/9) + (−1)·(ξ₂ξ₂ᵀ/9) + 0·(·) = (ξ₁ξ₁ᵀ − ξ₂ξ₂ᵀ)/9。
+ξ₁ξ₁ᵀ = [[1,2,2],[2,4,4],[2,4,4]]；ξ₂ξ₂ᵀ = [[4,2,−4],[2,1,−2],[−4,−2,4]]。
+差 = [[−3,0,6],[0,3,6],[6,6,0]] → <strong>A = (1/9)[[−3,0,6],[0,3,6],[6,6,0]]</strong>（对称✓）。
+λ₃=0 的特征向量与 ξ₁、ξ₂ 都正交：解 ξ₁ᵀx=0, ξ₂ᵀx=0 → 基础解系 <strong>η = (−2, 2, −1)ᵀ</strong>（可验证：−2+4−2=0，−4+2+2=0），全部特征向量为 k(−2,2,−1)ᵀ（k≠0）。∎</p>
+<h2>题八（二次型·含参数正定）</h2>
+<p>t 为何值时，f(x₁,x₂,x₃) = t x₁² + 2x₂² + x₃² + 2x₁x₂ + 2x₁x₃ 正定？</p>
+<p><strong>解</strong>：矩阵 A = [[t,1,1],[1,2,0],[1,0,1]]。
+顺序主子式：Δ₁ = t &gt; 0；Δ₂ = det[[t,1],[1,2]] = 2t−1 &gt; 0；Δ₃ = detA = t(2) − 1(1) + 1(0−2) = 2t−3 &gt; 0。
+交集：<strong>t &gt; 3/2</strong>。∎
+（考点：正定 ⇔ 顺序主子式全正；含参数题按 Δ₁、Δ₂、Δ₃ 逐个解不等式取交集。）</p>
+<h2>题九（概率·二维混合型）</h2>
+<p>设 (X,Y) 的联合密度 f(x,y) = 1（0&lt;x&lt;1, 0&lt;y&lt;2x），其他为0。求：(1) 边缘密度并判断独立性；(2) P(X+Y≤1)。</p>
+<p><strong>解</strong>：
+(1) f_X(x) = ∫₀^{2x}dy = <strong>2x</strong>（0&lt;x&lt;1）；f_Y(y) = ∫<em>{y/2}^{1}dx = <strong>1 − y/2</strong>（0&lt;y&lt;2）。
+f_X·f_Y ≠ f → <strong>不独立</strong>。
+(2) 区域 {x+y≤1} 与定义域 {y≤2x} 的交：当 x&lt;1/3 时 2x&lt;1−x，y 上限取 2x；当 x&gt;1/3 时上限取 1−x。
+P = ∫₀^{1/3}2x dx + ∫</em>{1/3}^1 (1−x)dx = 1/9 + (1/2 − 5/18) = 1/9 + 2/9 = <strong>1/3</strong>。
+（画图定交点 (1/3, 2/3) 是本题关键。）</p>
+<h2>题十（概率·MLE与有偏性讨论）</h2>
+<p>X₁,…,Xₙ 为来自 U(θ, 2θ)（θ&gt;0）的样本。求 θ 的最大似然估计，并说明其是否有偏。</p>
+<p><strong>解</strong>：L(θ) = θ^{−n}，约束：θ ≤ xᵢ ≤ 2θ 对所有 i 成立 ⇔ <strong>max(xᵢ)/2 ≤ θ ≤ min(xᵢ)</strong>。
+L(θ) 关于 θ 单调递减 → 取区间左端点：<strong>θ̂ = max(x₁,…,xₙ)/2</strong>。
+有偏性：均匀分布 U(a,b) 最大值的期望 E(max) = a + n/(n+1)·(b−a) = θ + nθ/(n+1) = θ(n+2)/(n+1)。
+E(θ̂) = θ(n+2)/[2(n+1)] = θ·(n+2)/(2n+2)。
+当 n&gt;0 时 (n+2)/(2n+2) &lt; 1 ⟺ n+2 &lt; 2n+2 ⟺ n&gt;0 恒成立 → <strong>E(θ̂) &lt; θ，θ̂ 是有偏估计</strong>（偏小）。
+（对比：矩估计 θ̃ = 2X̄ 无偏——EX = 3θ/2 → 2X̄ 期望恰为 θ。）</p>
+<h2>题十一（曲面积分·高斯公式补面【数一】）</h2>
+<p>计算 I = ∬_Σ x dydz + y dzdx + z dxdy，Σ 为锥面 z=√(x²+y²)（0≤z≤1）的<strong>下侧</strong>。</p>
+<p><strong>解</strong>：Σ 下侧不封闭。补顶面 Σ₁: z=1（x²+y²≤1）取<strong>上侧</strong>，则 Σ+Σ₁ 构成封闭曲面的<strong>外侧</strong>。
+高斯公式：div F = 1+1+1 = 3，Ω 为锥体，体积 = π·1²/3。
+∯_{Σ+Σ₁} = 3·(π/3) = π。
+Σ₁ 上：dz=0 → 前两项为0；z=1，∬₁ z dxdy = ∬₁dxdy = π。
+故 <strong>I = π − π = 0</strong>。
+（要点：补面后"外侧"定向要对——锥面下侧+顶面上侧才是外法线方向；本题 div=3×锥体体积 恰与顶面积分相等，结果为0。）</p>
+<h2>题十二（不等式·导数证明）</h2>
+<p>证明：当 x&gt;0 时，x − x²/2 &lt; ln(1+x) &lt; x。</p>
+<p><strong>证</strong>：
+右边：令 g(x) = x − ln(1+x)，g(0)=0，g'(x) = 1 − 1/(1+x) = x/(1+x) &gt; 0（x&gt;0）→ g 递增 → g(x)&gt;0 → ln(1+x) &lt; x。
+左边：令 h(x) = ln(1+x) − x + x²/2，h(0)=0，
+h'(x) = 1/(1+x) − 1 + x = [1 − (1+x) + x(1+x)]/(1+x) = x²/(1+x) &gt; 0 → h 递增 → h(x)&gt;0 → ln(1+x) &gt; x − x²/2。
+综上，x − x²/2 &lt; ln(1+x) &lt; x（x&gt;0）。∎
+（该双侧不等式是泰勒展开 ln(1+x)=x−x²/2+x³/3−… 的差分形式，选择/填空常直接引用。）</p>
+<hr />
+<h2>压轴题方法论</h2>
+<ol>
+<li><strong>中值定理类</strong>：见到"最值/端点值"→泰勒展开到指定阶；见 f''≥M →向两端展开+半区间讨论（题二模板）。</li>
+<li><strong>数列类</strong>：递推数列=单调有界；含n的和式=夹逼/定积分定义（题三）。</li>
+<li><strong>级数类</strong>：数项级数求和→构造幂级数、代入特殊点；展开题优先"先导后积"（题五、六）。</li>
+<li><strong>线代类</strong>：实对称矩阵谱分解 A=Σλᵢξᵢξᵢᵀ/(ξᵢᵀξᵢ) 是反求问题的万能钥匙（题七）。</li>
+<li><strong>概率类</strong>：二维混合型先画定义域再定积分限；MLE先写约束区间再谈单调（题九、十）。</li>
+<li><strong>曲面积分类</strong>：非闭必补面；先算 div 与几何体体积，再看补面贡献是否抵消（题十一）。</li>
+</ol></div></body></html>

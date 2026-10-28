@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408大题专练_计算机网络 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 大题专练 · 计算机网络（30题·计算与分析）</h1>
+<blockquote>
+<p>2026-10-29 生成。计网大题约 23 分：子网划分、路由聚合、IP 分片、TCP 序号/确认号、拥塞窗口、交换机转发表、综合组网。本册 30 题全部给<strong>完整演算</strong>。
+难度：★基础 ★★中等 ★★★难点。与《计算机网络_知识点与难点》《408选择题题库_计算机网络》配套；题号 NETD+序号。</p>
+</blockquote>
+<h2>一、地址与子网计算（NETD1–NETD6）</h2>
+<p><strong>NETD1.</strong>★★ 将 192.168.1.0/24 划分为 4 个至少容纳 50 台主机的子网，写出每个子网的网络地址、可用地址范围与广播地址。</p>
+<blockquote>
+<p>50 ≤ 2ʰ−2 ⇒ h=6（62 台）⇒ 子网掩码 /26（255.255.255.192）。
+| 子网 | 网络地址 | 可用范围 | 广播 |
+|---|---|---|---|
+| 1 | 192.168.1.0/26 | .1~.62 | .63 |
+| 2 | 192.168.1.64/26 | .65~.126 | .127 |
+| 3 | 192.168.1.128/26 | .129~.190 | .191 |
+| 4 | 192.168.1.192/26 | .193~.254 | .255 |
+评分点：块大小 = 256−192 = 64；"网络地址+广播地址"不可分配。</p>
+</blockquote>
+<p><strong>NETD2.</strong>★★★ 用 VLSM 为 192.168.10.0/24 分配：部门 A 需 100 台、B 需 50 台、C 需 20 台、D 为两台路由器的互联链路。给出紧凑分配方案。</p>
+<blockquote>
+<p>按需求从大到小连续切分：
+A：/25 → 192.168.10.0/25（126 台，.1~.126）
+B：/26 → 192.168.10.128/26（62 台，.129~.190）
+C：/27 → 192.168.10.192/27（30 台，.193~.222）
+D：/30 → 192.168.10.224/30（2 台，.225~.226）
+评分点：VLSM 按"从大到小、地址连续"切才不碎；/30 恰好 2 个可用地址。</p>
+</blockquote>
+<p><strong>NETD3.</strong>★★ 将 192.168.0.0/24 ~ 192.168.3.0/24 四个网段聚合为一条路由。</p>
+<blockquote>
+<p>4 个连续 /24 ⇒ 需覆盖 2² = 4 块 ⇒ 前缀 24−2 = <strong>/22</strong>。
+<strong>聚合路由：192.168.0.0/22（掩码 255.255.252.0）</strong>。验证：第三字节 0~3 = 000000xx，前 6 位相同 ✓。</p>
+</blockquote>
+<p><strong>NETD4.</strong>★★ 路由表：172.18.0.0/16、172.18.64.0/24、172.18.64.0/26。分组目的地址 172.18.64.5 与 172.18.64.100 分别匹配哪条？</p>
+<blockquote>
+<p><strong>最长前缀匹配</strong>：172.18.64.5 同时匹配三条，取最具体的 <strong>/26</strong>（172.18.64.64/26 段? 注意 172.18.64.5 落在 172.18.64.0/26（0~63）内 ✓）。
+172.18.64.100 不在 /26（0~63）与 /24? /24 覆盖 .0~.255 ✓，/26 不含 .100 ⇒ <strong>匹配 /24</strong>。
+结论：同时匹配多条时用前缀最长者；一条都不匹配走默认路由。</p>
+</blockquote>
+<p><strong>NETD5.</strong>★★ 主机 IP 141.14.72.24/20。求其网络地址、广播地址与可用地址范围。</p>
+<blockquote>
+<p>掩码 /20 = 255.255.240.0。第三字节 72 = 0100 1000₂，&amp; 11110000 = 0100 0000 = 64。
+<strong>网络地址 141.14.64.0</strong>；块大小 16 ⇒ 广播 = <strong>141.14.79.255</strong>；可用 <strong>141.14.64.1 ~ 141.14.79.254</strong>（4094 台）。</p>
+</blockquote>
+<p><strong>NETD6.</strong>★★★ IP 数据报总长 3200B（含 20B 首部），经 MTU=1500 的链路传输。写出每个分片的长度、片偏移与 MF 标志。</p>
+<blockquote>
+<p>数据部分 = 3180B；每片数据 ≤ 1480B（1500−20）。
+| 分片 | 总长 | 数据 | 片偏移(8B单位) | MF |
+|---|---|---|---|---|
+| 1 | 1500 | 1480 | 0 | 1 |
+| 2 | 1500 | 1480 | 185（1480/8） | 1 |
+| 3 | 240 | 220 | 370（2960/8） | 0 |
+验证：1480+1480+220 = 3180 ✓；终点主机按"MF=0 的片 + 偏移"重组。</p>
+</blockquote>
+<h2>二、链路层分析（NETD7–NETD11）</h2>
+<p><strong>NETD7.</strong>★★ 主机 A（IP₁）要与<strong>另一网段</strong>的服务器（IP₂）通信，完整描述 ARP 的解析过程。</p>
+<blockquote>
+<p>① A 判断 IP₂ 与自己不在同一网段（按子网掩码）⇒ 目标 MAC 应为<strong>默认网关</strong>；
+② A 发 ARP 请求（<strong>广播</strong> MAC ff:ff:ff:ff:ff:ff）："谁是网关 IP_g"；
+③ 网关单播 ARP 应答（含网关 MAC），A 缓存；
+④ A 发出数据帧：目的 MAC=网关、<strong>目的 IP 仍是 IP₂</strong>；
+⑤ 路由器逐跳重复 ARP 解析下一跳，最终服务器网段完成直接交付。
+评分点：ARP 解析的是"下一跳"的 MAC；IP 端到端不变（NAT 除外），MAC 逐段变化。</p>
+</blockquote>
+<p><strong>NETD8.</strong>★★ 主机执行 tracert（TTL=1,2,3…）到远端主机，说明前三个应答报文分别是谁发的、类型是什么。</p>
+<blockquote>
+<p>TTL=1：第 1 个路由器将 TTL 减为 0，丢弃并回 <strong>ICMP 超时（类型11）</strong>——得到第 1 跳地址；
+TTL=2：第 2 个路由器同样回 ICMP 超时；
+TTL=3：第 3 个路由器回 ICMP 超时。
+到达终点后改为收到 <strong>ICMP 端口不可达（类型3）</strong>或回显应答，据此判定结束。</p>
+</blockquote>
+<p><strong>NETD9.</strong>★★★ 链路层帧信息位 10101010，生成多项式 G(x)=x⁴+x+1（10011），求 CRC 校验序列并写出发送的完整比特串。</p>
+<blockquote>
+<p>信息左移 4 位：101010100000 ÷ 10011：
+① 10101 ⊕ 10011 = 00110 → 1100（首0商0）
+② 11001 ⊕ 10011 = 01010
+③ 10100 ⊕ 10011 = 00111
+④ 01110（首0）→ 11100 ⊕ 10011 = 01111
+⑤ 11110 ⊕ 10011 = 01101
+⑥ 11010 ⊕ 10011 = 01001
+<strong>FCS = 1001，发送 101010101001</strong>。验证：整串 ÷10011 余 0 ✓。</p>
+</blockquote>
+<p><strong>NETD10.</strong>★★ 以太网速率 10Mb/s，端到端单程传播时延 25.6μs。求最短帧长与两站最大距离的关系，并计算本例最短帧长。</p>
+<blockquote>
+<p>最短帧长 = 2τ × 数据率 = 2×25.6μs × 10⁷b/s = 512 bit = <strong>64B</strong>。
+含义：发完一帧前必须能感知冲突 ⇒ 帧的发送时间 ≥ 2τ（往返）。
+若帧长不足 64B：发完了冲突还没传回来，发方误以为成功——CSMA/CD 失效。</p>
+</blockquote>
+<p><strong>NETD11.</strong>★★ 以太网极限信道利用率 S = T₀/(T₀+τ)。帧长 512B、速率 100Mb/s、单程时延 5.12μs，求 S；并说明为何长帧提高利用率。</p>
+<blockquote>
+<p>T₀ = 512×8/10⁸ = 40.96μs；S = 40.96/(40.96+5.12) = <strong>88.9%</strong>。
+帧越长，T₀ 越大，τ 占比越小 ⇒ 利用率趋近 1；但长帧也增大时延与独占时间，需权衡。</p>
+</blockquote>
+<h2>三、交换与 IP 转发（NETD12–NETD15）</h2>
+<p><strong>NETD12.</strong>★★★ 交换机 S 有 4 个端口：A 接 P1、B 接 P2、C 接 P3、D 接 P4。初始转发表为空，依次收到帧：①A→C ②C→A ③A→C ④D→A。写出每次的处理（转发/泛洪）与表变化。</p>
+<blockquote>
+<p>① A→C：表空 → 记 <strong>A@P1</strong>，查目的 C 无表项 → <strong>泛洪</strong>（P2,P3,P4）。
+② C→A：记 <strong>C@P3</strong>；A 已在表 → 从 <strong>P1 单发</strong>。
+③ A→C：表已有两项；A@P1 命中（刷新老化），C@P3 → <strong>P3 单发</strong>。
+④ D→A：记 <strong>D@P4</strong>；A@P1 → <strong>P1 单发</strong>。
+最终表：A→P1, C→P3, D→P4。评分点：自学习看<strong>源</strong>地址，转发查<strong>目的</strong>地址。</p>
+</blockquote>
+<p><strong>NETD13.</strong>★★ 划分 VLAN10（P1,P2）与 VLAN20（P3,P4）后：①P1→P2 的帧如何走？②P1→P3 呢？802.1Q 起什么作用？</p>
+<blockquote>
+<p>① 同 VLAN 同交换机：查 MAC 表从 P2 直接转发（帧带 VLAN10 标记）。
+② 不同 VLAN ⇒ 二层<strong>不通</strong>，必须经三层设备（路由器/三层交换机）路由。
+802.1Q 在以太网帧源地址后插入 <strong>4B 标签</strong>（含 12 位 VLAN ID），标识帧所属 VLAN；跨交换机干道（trunk）上携带标签，进访问口（access）时剥离。</p>
+</blockquote>
+<p><strong>NETD14.</strong>★★ PPP 建立连接需要经过哪些阶段？各阶段用什么协议？</p>
+<blockquote>
+<p>①链路建立：<strong>LCP</strong> 协商（MRU、认证方式、魔术字）；②可选<strong>认证</strong>：PAP（明文两次握手）或 CHAP（三次握手、挑战-应答、不传明文口令）；③网络层协商：<strong>NCP</strong>（如 IPCP 协商 IP 地址）；④链路打开；⑤终止仍由 LCP 收尾。
+PPP 帧无序号与确认：点对点链路误码率低，可靠性交上层。</p>
+</blockquote>
+<p><strong>NETD15.</strong>★★★ GBN 发送窗口 4、序号 3 位。发送方已发 0,1,2,3，收到 ACK1 后发生超时（2 号帧丢失）。分析此后双方的行动。</p>
+<blockquote>
+<p>ACK1 表示 0 号已确认，窗口推进到 [1,4]，已发 1,2,3（1 可能已到）。
+2 号帧超时 ⇒ <strong>重传 2,3,4 及其后已发送的所有帧</strong>（GBN 特性：回退 N）。
+接收方：按序收到 1 → 交付并 ACK2；收到 2 号之前乱序帧一律<strong>丢弃</strong>（接收窗口=1）。
+序号 3 位 ⇒ 发送窗口 ≤ 2³−1 = 7（本题 4 合法）。</p>
+</blockquote>
+<h2>四、TCP 分析（NETD16–NETD21）</h2>
+<p><strong>NETD16.</strong>★★ 停等协议：单向传播时延 10ms、发送速率 1Mb/s、帧长 1000B。求信道利用率与"每秒最多交付帧数"。</p>
+<blockquote>
+<p>T₀ = 8000b/10⁶ = 8ms；RTT = 20ms；忽略确认帧发送时延。
+U = 8/(8+20+0) ≈ <strong>28.6%</strong>。
+每帧周期 = 28ms ⇒ 约 35.7 帧/秒，有效速率 ≈ 8/28 × 1Mb/s ≈ <strong>286kb/s</strong>——信道远未被吃满，正是滑动窗口存在的理由。</p>
+</blockquote>
+<p><strong>NETD17.</strong>★★ TCP 三次握手：客户初始序号 x=100，服务器初始序号 y=300。写出三个报文的 seq/ack/SYN/ACK 值；随后客户发 100B 数据，服务器的确认号是多少？</p>
+<blockquote>
+<p>① SYN=1, seq=100（不消耗序号? SYN 消耗 1 个序号）。
+② SYN=1, ACK=1, seq=300, ack=101（对 SYN 确认=100+1）。
+③ ACK=1, seq=101, ack=301（对 SYN 确认=300+1）。
+数据段：seq=101，覆盖 101~200。<strong>服务器 ack = 201</strong>。
+评分点：SYN、FIN 各消耗一个序号，纯 ACK 不消耗。</p>
+</blockquote>
+<p><strong>NETD18.</strong>★★★ 发送方连续发送三个段：字节 1-1000、1001-2000、2001-3000。第 2 段丢失。写出接收方对第 1、3 段的应答以及最终补齐后的应答。</p>
+<blockquote>
+<p>收到 1-1000：ack = <strong>1001</strong>。
+收到 2001-3000（乱序缓存）：重复 ack = <strong>1001</strong>（累计确认，只认最高连续字节）。
+收到重传的 1001-2000 后：ack = <strong>3001</strong>（一次确认前两段）。
+快重传触发：发送方连续收到 <strong>3 个重复 ack=1001</strong> 即重传 2 段，无需等超时。</p>
+</blockquote>
+<p><strong>NETD19.</strong>★★★ TCP 拥塞控制：ssthresh 初始 16，cwnd 从 1 开始。列出前 12 轮 cwnd 演化；若第 12 轮结束时发生<strong>超时</strong>，写出此后 5 轮。</p>
+<blockquote>
+<p>慢开始（每轮×2）：1,2,4,8,16（第 5 轮达 ssthresh）；拥塞避免（+1）：17,18,…,24（第 12 轮）。
+第 12 轮超时：<strong>ssthresh = 24/2 = 12，cwnd = 1</strong>，重新慢开始。
+之后 5 轮：1, 2, 4, 8, 12（第 5 轮到达新 ssthresh 转入拥塞避免，下一轮 13）。
+评分点：慢开始期间是指数，到达 ssthresh 即转线性；超时与三重复 ACK 的处理不同（快恢复 cwnd=ssthresh 直接线性）。</p>
+</blockquote>
+<p><strong>NETD20.</strong>★★ RTT 首个样本 30ms。按 RFC 规则（首样本：RTTs=S，RTTd=S/2，RTO=RTTs+4RTTd）求首个 RTO。</p>
+<blockquote>
+<p>RTTs = 30ms；RTTd = 15ms；<strong>RTO = 30 + 4×15 = 90ms</strong>。
+后续样本按 α=1/8、β=1/4 平滑更新：RTTs←(1−α)RTTs+α×新样本。</p>
+</blockquote>
+<p><strong>NETD21.</strong>★★ 接收方通告 rwnd=4000，发送方已发未确认 3000B，拥塞窗口 cwnd=5000。现在还能再发多少？若此时收到 ack=3000 且 rwnd=2000 呢？</p>
+<blockquote>
+<p>发送窗口 = min(rwnd, cwnd) = 4000；在途 3000 ⇒ <strong>可再发 1000B</strong>。
+新确认后：在途清零，窗口 = min(2000,5000) = 2000 ⇒ <strong>可发 2000B</strong>（rwnd 缩小了——流量控制收紧，可能是接收缓存被应用读取得慢）。</p>
+</blockquote>
+<h2>五、应用与综合（NETD22–NETD30）</h2>
+<p><strong>NETD22.</strong>★★ 用户在浏览器输入 www.example.com，本地域名服务器采用"迭代查询"。写出完整解析链路与报文走向。</p>
+<blockquote>
+<p>①主机→本地服务器：<strong>递归</strong>（你必须给我答案）。
+②本地→根：迭代；根回复"去问 .com 顶级域"（给出 TLD 地址）。
+③本地→TLD：迭代；回复"去问权限服务器"。
+④本地→权限服务器：返回 IP。
+⑤本地→主机：递归地把最终 IP 交付。
+缓存：沿途各级命中即短路。评分点：递归（替你跑腿）与迭代（给你指路）的承担方。</p>
+</blockquote>
+<p><strong>NETD23.</strong>★★ DHCP 四步报文分别是谁发给谁？是否广播？各自的作用？</p>
+<blockquote>
+<p>①<strong>Discover</strong>：客户广播（0.0.0.0→255.255.255.255，源无 IP）——寻找服务器；
+②<strong>Offer</strong>：服务器→客户（广播或单播）——提供可租 IP 与参数；
+③<strong>Request</strong>：客户<strong>广播</strong>（告知所有服务器：我选了 X 服务器）；
+④<strong>ACK</strong>：被选服务器确认租约（含 IP、掩码、网关、租期）。
+全基于 UDP（服务器67/客户68）；广播保证"尚未有 IP"的客户能被找到。</p>
+</blockquote>
+<p><strong>NETD24.</strong>★★ 页面含 1 个基本 HTML（引用 5 个图片对象），RTT=50ms，对象传输均可忽略。非持续连接（每对象新建 TCP）与持续连接（流水线）总时间各多少？</p>
+<blockquote>
+<p>非持续：每对象 2×RTT（握手1 + 请求响应1）＝ 6×RTT? 严格：TCP 握手 1 RTT + 请求与收到对象 1 RTT ⇒ 2RTT/对象 × 6 对象 = <strong>600ms</strong>。
+持续+流水线：握手 1RTT + 基本对象 1RTT + 5 个图片并发/流水 1RTT ≈ <strong>150ms</strong>。
+评分点：非持续的"每对象"乘数是关键；HTTP/1.1 持续连接的收益。</p>
+</blockquote>
+<p><strong>NETD25.</strong>★★ FTP 主动模式与被动模式的连接建立有何不同？从防火墙角度说明被动模式更常用于客户端侧。</p>
+<blockquote>
+<p>主动：客户端从随机端口连服务器 <strong>21</strong>（控制），数据连接由<strong>服务器主动</strong>从 20 连向客户端指定端口——客户端防火墙常拦截"外来"数据连接。
+被动：数据连接由<strong>客户端</strong>发起，连服务器的临时高端口——对客户端防火墙友好，服务器需开放高端口段。</p>
+</blockquote>
+<p><strong>NETD26.</strong>★★ 用户 A（alice@a.com）发邮件给 B（bob@b.com），写出协议链路与各段使用的协议/端口。</p>
+<blockquote>
+<p>①A 的 UA →（<strong>SMTP 25</strong>）→ a.com 邮件服务器（入队）；
+②a.com 服务器 →（<strong>SMTP 25</strong>）→ b.com 邮件服务器（SMTP 逐跳"推"）；
+③B 的 UA →（<strong>POP3 110 或 IMAP 143</strong>）→ b.com 服务器"拉"取。
+评分点：服务器之间只能用 SMTP"推"；用户取信是"拉"（POP3/IMAP），Web 邮件两段都是 HTTP 是例外。</p>
+</blockquote>
+<p><strong>NETD27.</strong>★★ 私网主机 10.0.0.5:3345 访问 202.1.1.2:80，NAT 网关公网地址 200.1.1.1，为其分配端口 5001。写出 NAT 转换表与两个方向的地址改写。</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>内部地址</th>
+<th>外部地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.0.0.5:3345</td>
+<td>200.1.1.1:5001</td>
+</tr>
+<tr>
+<td>出方向：源 10.0.0.5:3345 → 改写为 <strong>200.1.1.1:5001</strong>（目的不变 202.1.1.2:80）。</td>
+<td></td>
+</tr>
+<tr>
+<td>入方向：源 202.1.1.2:80 → 目的改写回 <strong>10.0.0.5:3345</strong>。</td>
+<td></td>
+</tr>
+<tr>
+<td>评分点：NAT 依赖连接方向性（外网无法主动进入），这是"内网不可被主动访问"的原因。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p><strong>NETD28.</strong>★★ 两个 IPv6 岛屿被 IPv4 网络分隔，说明隧道过渡方案的工作原理。</p>
+<blockquote>
+<p>边界路由器双栈：入口把整个 <strong>IPv6 报文封装为 IPv4 载荷</strong>（协议字段=41），在 IPv4 网络中传输；出口路由器解封装还原 IPv6 报文继续转发。
+特点：中间网络无需升级即可承载 IPv6；代价是额外首部开销与 MTU 问题（需分片或减小 IPv6 MTU）。</p>
+</blockquote>
+<p><strong>NETD29.</strong>★★★ 路由器 B 的路由表：到网 N 距离 5（下一跳 A）。B 收到 C 发来的距离向量：N 的距离为 3。按 RIP 规则 B 的表如何更新？若 C 通告的距离是 7 呢？</p>
+<blockquote>
+<p>①先把收到的各距离 +1（经过 C 还要走一跳）：N → 3+1 = 4。
+4 &lt; 5 ⇒ <strong>更新</strong>：到 N 距离 4，下一跳 <strong>C</strong>。
+若 C 通告 7：7+1 = 8 &gt; 5 ⇒ 不更新（下一跳不是 C 时；<strong>若原下一跳恰是 C</strong>，则即使变差也要更新为 8——C "变坏了"必须如实记账）。
+评分点：+1 在先比较在后；"下一跳是通告者时无条件更新"是 RIP 高频陷阱。</p>
+</blockquote>
+<p><strong>NETD30.</strong>★★★ 为 2000 台规模的校园网设计接入方案：要求划分部门子网、自动分配地址、访问外网、内部隔离广播域。给出设备层次、协议选择与关键配置要点。</p>
+<blockquote>
+<p>层次：核心三层交换机 → 汇聚 → 接入交换机 → 终端；出口路由器+NAT。
+子网：按部门 VLSM 划分（如 /23、/24 按规模），每 VLAN 一个子网，<strong>VLAN 隔离广播域</strong>，VLAN 间经核心交换机 SVI 路由并可配 ACL 控制。
+地址：核心上部署 <strong>DHCP</strong>（中继 agent 转发各 VLAN 请求）+ 公网侧 <strong>NAT/PAT</strong> 共享出口。
+路由：内部静态/OSPF，出口默认路由指向 ISP；DNS 指向内部缓存服务器。
+评分点：三层结构分工、VLAN+VLSM 对应关系、"DHCP 中继"是跨网段分配的必答点。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：NETD1–NETD30。使用节奏：计算题（NETD1/2/5/6/10/11/16/17/19/20）动笔全过程演算；分析题（NETD7/12/22/27）按"步骤编号"作答——大题按点给分。错题标回《计算机网络_知识点与难点》。</p></div></body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计网精讲_数据链路层 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机网络精讲 · 数据链路层（原理推导 + 演算详解）</h1>
+<blockquote>
+<p>链路层是408计算题第一大户：<strong>海明码、CRC、滑动窗口效率、CSMA/CD最小帧长</strong>四类计算年年出。本册每个公式给推导，每个演算给全过程。
+配套：《数据链路层_知识点与难点》《考题集》《易错点与陷阱清单》《背诵冲刺手册》。</p>
+</blockquote>
+<hr />
+<h2>一、功能总览</h2>
+<p>链路层任务：把网络层交下的 IP 数据报<strong>封装成帧</strong>，在<strong>相邻两节点</strong>间实现无差错传输。五大功能：<strong>成帧、差错控制、流量控制、传输管理（介质访问）、链路管理</strong>。
+【要点】"相邻节点"=点到点（主机↔交换机、交换机↔路由器），区别于传输层的"端到端"。</p>
+<h2>二、组帧（四种方法）</h2>
+<p><strong>F1 字符计数法</strong>：帧首部设长度计数字段。
+【警示】计数出错 → 后续所有帧边界全错（<strong>错误传染</strong>）——已淘汰。</p>
+<p><strong>F2 字节填充法（PPP用）</strong>：定界符 0x7E，转义字节 0x7D。
+规则：信息字段中 0x7E→0x7D 0x5E；0x7D→0x7D 0x5D。</p>
+<p><strong>F3 比特填充法（HDLC用）</strong>：定界符 01111110；发送方<strong>每遇连续5个1自动插一个0</strong>；接收方每收5个连续1删除其后的0。
+【推导】这样保证信息字段不会出现6个连续1，定界符唯一。</p>
+<p><strong>F4 物理编码违例法</strong>：利用编码中的非法电平（如曼彻斯特的"高高/低低"）作定界——以太网实际靠此+前导码同步。</p>
+<p><strong>考题1（比特填充演算）</strong> HDLC帧信息字段为 011011111111000，写出线路上的实际比特串。
+【解】扫描：0 1 1 0 1 | 1 1 1 1 1 | 1 1 1 0 0 0——第6~10位是连续5个1，其后插0；新计数的3个1之后无再满5个：
+线路串 = <strong>0110111110 111000</strong>（在5个1后插入的0已加粗标位：…11111<strong>0</strong>111000）。
+接收端：每见5个连续1即删其后0 → 还原原串。∎</p>
+<p><strong>考题2（字节填充演算）</strong> PPP帧信息字段含十六进制 7E 45 7D，写出发送序列。
+【解】7E→7D 5E；7D→7D 5D：<strong>7D 5E 45 7D 5D</strong>。∎</p>
+<h2>三、差错控制</h2>
+<p><strong>E1 检错与纠错</strong>：链路层用 CRC <strong>只检错不纠错</strong>（纠错靠确认重传）；海明码可纠1位错（考概念与计算）。</p>
+<p><strong>E2 海明码（纠1位错）</strong>：
+- 校验位数：2^k ≥ n+k+1（n信息位，k校验位）；
+- 校验位放在 2^i 位置（1,2,4,8…），第 j 位被二进制含 2^i 的校验位组覆盖；
+- 每组偶校验；接收方算 syndrome（各组的异或）拼成二进制数=<strong>出错位置</strong>。</p>
+<p><strong>考题3（海明码全程演算）</strong> 信息位 1011（n=4），求海明码，并演示第5位出错时如何定位。
+【解】2³=8≥4+3+1 → k=3，码长7。布局（位置1~7）：P1 P2 D1 P4 D2 D3 D4 = P1 P2 1 P4 0 1 1。
+分组：P1管{1,3,5,7}，P2管{2,3,6,7}，P4管{4,5,6,7}（偶校验）：
+P1 = 1⊕0⊕1 = 0；P2 = 1⊕1⊕1 = 1；P4 = 0⊕1⊕1 = 0。
+<strong>海明码（位1→7）：0 1 1 0 0 1 1</strong>。
+第5位翻转（0→1）后：s1=0⊕1⊕1⊕1=1，s2=1⊕1⊕1⊕1=0，s4=0⊕1⊕1⊕1=1。
+syndrome = s4s2s1 = 101(2) = <strong>5</strong> → 第5位错，取反即纠。∎</p>
+<p><strong>E3 循环冗余校验 CRC</strong>：
+- 约定生成多项式 G(x)（r次），发送方：信息 M 左移 r 位后 <strong>模2除</strong> G，余数 r 位 = FCS 附在尾部；
+- 接收方：整个码字除以 G，余数=0 判无错（模2运算=异或，无进位借位）。</p>
+<p><strong>考题4（CRC全程演算·必会）</strong> 信息 M=110010，G(x)=x³+x+1（即 1011）。求 CRC 与发送序列。
+【解】M 左移3位：110010000，模2除 1011：</p>
+<pre><code>110010000
+1011         → 商1, 余0111
+ 111 0       → 1110⊕1011=0101? 演算：
+</code></pre>
+<p>逐步：窗口1100 ⊕1011=0111；下移1→1110，⊕1011=0101；下移0→1010，⊕1011=0001；下移0→0010（商0）；下移0→0100（商0）；下移0→1000，⊕1011=0011。
+<strong>余数 FCS=011</strong>，发送序列=<strong>110010011</strong>。
+接收验证：110010011 ÷ 1011 余数=<strong>0</strong> → 无错。∎</p>
+<p><strong>E4 CRC检错能力</strong>：可检出所有奇数个错、所有双比特错、所有长度≤r的突发错；长度&gt;r+1的突发漏检概率 2^{−r}。<strong>不能纠错</strong>。</p>
+<h2>四、流量控制与可靠传输（滑动窗口）</h2>
+<p><strong>W1 停止-等待协议</strong>：发一帧→等确认→再发。
+信道利用率 U = T_D/(T_D+RTT+T_A)，记 a=传播时延/T_D（确认帧发送时延常忽略）：
+<strong>U = 1/(1+2a)</strong>。
+【推导】一个周期总时间 = 发送 T_D + 单程传播 τ + 确认发送(≈0) + 确认传播 τ；有效时间只有 T_D。</p>
+<p><strong>W2 连续ARQ利用率通式</strong>：发送窗口 W 帧（每帧发送时延 T_D）：
+- 若 W·T_D ≤ RTT+T_D（窗口小，发完就停等）：<strong>U = W·T_D/(T_D+RTT+T_A) = W/(1+2a)</strong>；
+- 若 W·T_D &gt; RTT+T_D+T_A（窗口够大，可连续发送）：<strong>U = 1（信道饱和）</strong>。
+临界窗口 <strong>W* = 1+2a = (T_D+RTT+T_A)/T_D</strong>。</p>
+<p><strong>W3 窗口与序号位数（必背公式）</strong>：序号 n 位：
+- <strong>停止等待</strong>：W=1；
+- <strong>GBN（回退N帧）</strong>：发送窗口 W ≤ 2ⁿ−1，接收窗口=1；累积确认、失序丢弃、超时重传出错帧及之后全部帧；
+- <strong>SR（选择重传）</strong>：W_发+W_收 ≤ 2ⁿ（等窗时各 ≤2^{n−1}）；单独确认、失序缓存、只重传丢失帧。
+【推导】n 位序号共 2ⁿ 个，需保证"旧窗口的重复帧"与"新窗口的新帧"不混淆：GBN 用 2ⁿ−1 留1个间隔，SR 要求新旧窗口不重叠各占一半。</p>
+<p><strong>考题5（效率→窗口→序号位数三连·408标准大题）</strong> 卫星链路速率1Mb/s，单程传播时延250ms，帧长1000bit。忽略确认帧发送时延与差错。①停等协议利用率？②要使信道利用率达到连续发送，发送窗口至少多大？③用GBN与SR各需几位序号？
+【解】①T_D=1000/10⁶=1ms，a=250/1=250，U=1/(1+500)=1/501≈<strong>0.2%</strong>。
+②W<em>=1+2a=</em><em>501帧</em><em>。
+③GBN：2ⁿ−1≥501 → 2ⁿ≥502 → </em><em>n=9</em><em>（2⁹−1=511）；SR：W_收=501，501+501=1002 ≤ 2ⁿ → </em><em>n=10</em>*（2¹⁰=1024）。∎</p>
+<p><strong>考题6（GBN演算）</strong> 序号3位、W=7。发送方连发0~6号帧，其中2号丢失，其余正确到达。写出收发双方行为。
+【解】收方按序收到0、1（回ACK1），期待2号却收到3——<strong>丢弃3、4、5、6</strong>，对每个失序帧重复回ACK1；
+发送方收到0-1的ACK1后窗口滑到 [2..8]，继续发送7、8；2号帧<strong>超时</strong> → 重传 <strong>2,3,4,5,6,7,8 全部7帧</strong>；
+收方收到2号后按序交付2~8。∎</p>
+<p><strong>考题7（SR演算）</strong> W=4，序号任意。发送0~3，1号丢失，0、2、3到达。
+【解】收方：0按序交付（ACK0）；2、3失序但<strong>缓存</strong>（分别回ACK2、ACK3）；期待1。
+发送方：收到ACK0、ACK2、ACK3（2、3确认但窗口不动——1未确认）；1号超时 → <strong>只重传1号</strong>；
+收方收到1号 → 按序交付1、2、3，窗口滑到 [4..7]。∎</p>
+<h2>五、介质访问控制（MAC）</h2>
+<p><strong>M1 信道划分</strong>：FDM频分、TDM时分（含统计TDM）、WDM波分（光纤的频分）、CDM码分（码片正交，规格化内积判发送内容）。
+<strong>M2 随机访问</strong>：
+- 纯ALOHA：想发就发；吞吐率 S=Ge^{−2G}，<strong>最大18.4%</strong>（G=0.5）；
+- 时隙ALOHA：只准时隙开始发；S=Ge^{−G}，<strong>最大36.8%</strong>（G=1）——纯ALOHA的一半；
+- CSMA：1-坚持（贪心、冲突大）、非坚持（随机推迟、信道浪费）、p-坚持（时隙、折中）。
+<strong>M3 CSMA/CD（有线的半双工以太网）</strong>：
+- 边发边听：发时检测到冲突→停发+<strong>强化干扰</strong>+退避重发；
+- <strong>争用期（冲突窗口）=2τ</strong>：发完一帧的最短时间仍小于信号往返最远端的时间，就检测不到冲突 → <strong>最小帧长 = 2τ×数据率</strong>；
+- 截断二进制指数退避：第 i 次冲突后，k 从 {0,1,…,2^{min(i,10)}−1} 中随机取，等待 k×2τ；16次失败放弃报错。
+<strong>M4 CSMA/CA（无线802.11）</strong>：无线衰减大，无法"边发边听"→改为<strong>尽量避免冲突</strong>：帧间间隔IFS+随机退避+ACK确认；RTS/CTS预约信道解决<strong>隐蔽站</strong>。</p>
+<p><strong>考题8（最小帧长推导+计算）</strong> 以太网速率100Mb/s，两端相距2km，信号速率2×10⁸m/s。①求最小帧长；②若发500B的帧，能否正确检测冲突？
+【解】①τ=2000/2×10⁸=10μs；争用期2τ=20μs；
+最小帧长=数据率×2τ=10⁸×20×10⁻⁶=2000bit=<strong>250B</strong>。
+②500B发送时延=4000bit/10⁸=40μs&gt;20μs=2τ → 发完前必能检测到冲突（若发生），<strong>可以</strong>。∎</p>
+<p><strong>考题9（退避算法演算）</strong> 10Mb/s以太网，某帧经历第2次冲突。退避时间的取值范围与最大值？
+【解】i=2 → k∈{0,1,2,3}（2²=4个值），等待=k×2τ=k×51.2μs → 范围 <strong>{0, 51.2, 102.4, 153.6}μs</strong>。∎</p>
+<p><strong>考题10（CDMA码分计算）</strong> A、B、C 的码片分别为 (1,1,1,1)、(1,−1,1,−1)、(1,−1,−1,1)。收到 S=(2,0,2,0)。求各站发送情况。
+【解】规格化内积 (S·X)/4：
+S·A=2+0+2+0=4 → /4=<strong>+1 → A发送1</strong>；
+S·B=2+0+2+0=4 → <strong>+1 → B发送1</strong>；
+S·C=2−0−2+0=0 → <strong>0 → C未发送</strong>（或发送0与1抵消？标准答案：未发送）。∎
+（先验证码片两两正交：A·B=A·C=B·C=0——正交性是CDMA分离信号的数学根基。）</p>
+<h2>六、局域网与广域网</h2>
+<p><strong>L1 802.3以太网MAC帧</strong>：目的(6B)+源(6B)+类型(2B)+数据(46~1500B)+FCS(4B)=<strong>64~1518B</strong>。
+【要点】①<strong>无帧结束定界符</strong>（靠物理层前导码与帧间间隙）；②数据&lt;46B必须<strong>填充</strong>（保证冲突检测）；③FCS=CRC，只检错。
+<strong>L2 802.11无线</strong>：BSS（基本服务集）+AP；CSMA/CA三件套（IFS间隔、随机退避、ACK确认）；RTS/CTS预约（解决隐蔽站与暴露站中的隐蔽站）。
+<strong>L3 VLAN</strong>：802.1Q在帧中插入4B标签；<strong>交换机隔离冲突域，VLAN隔离广播域</strong>。
+<strong>L4 PPP</strong>：帧定界7E、字节填充、<strong>只检错不纠错、不使用序号确认</strong>（不可靠但简单）；NCP协商网络层参数（如IP地址）；PPPoE=以太网上的PPP（宽带拨号）。</p>
+<p><strong>考题11（帧长与填充）</strong> 上层交付30B的数据给以太网发送。帧总长多少？
+【解】30B&lt;46B → 填充16B到46B。总长=6+6+2+46+4=<strong>64B</strong>（恰好最小帧长）。∎</p>
+<p><strong>考题12（冲突域/广播域计数·必考套路）</strong> 拓扑：路由器R接交换机S1；S1的4个口分别接PC-a、PC-b、集线器H、R；H下挂PC-c、PC-d。求冲突域数与广播域数。
+【解】集线器不隔离冲突域（H与其下挂2PC+上行口=<strong>1个冲突域</strong>）；交换机每个端口一个冲突域：a口、b口、R口、H上行口共<strong>4个</strong> → 冲突域总数=<strong>5</strong>。
+广播域：交换机不隔离广播域，R隔离 → <strong>1个广播域</strong>。∎
+（口诀：<strong>交换机切冲突域，路由器切冲突域+广播域，集线器什么都不切</strong>；加VLAN则交换机也切广播域。）</p>
+<h2>七、本章必会清单</h2>
+<ol>
+<li>四种组帧法及比特/字节填充演算（HDLC插0、PPP转义）；</li>
+<li>海明码：2^k≥n+k+1、分组规则、syndrome定位纠错（全程演算）；</li>
+<li>CRC：左移+模2除+FCS（全程演算）+检错能力边界；</li>
+<li>停等 U=1/(1+2a)；连续ARQ通式 W/(1+2a) 与饱和条件；GBN W≤2ⁿ−1、SR W_发+W_收≤2ⁿ；</li>
+<li>CSMA/CD：争用期2τ、最小帧长=数据率×2τ、截断二进制指数退避；</li>
+<li>MAC帧最短64B与padding规则；PPP不编号不确认；</li>
+<li>冲突域/广播域计数口诀（交换机切冲突域、路由器加切广播域、VLAN切广播域）。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批：<strong>网络层</strong>——IPv4首部逐字段、子网划分与CIDR聚合（计算模板）、IP分片（偏移8B单位）、ARP/DHCP/ICMP全过程、RIP/OSPF/BGP三协议对比、IPv6。说"继续"交付。</p>
+</blockquote></div></body></html>

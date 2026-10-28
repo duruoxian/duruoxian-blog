@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408数据结构精讲_线性结构 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 数据结构精讲 · 绪论、线性表、栈队列数组（定义证明 + 985考题）</h1>
+<blockquote>
+<p>数据结构精讲系列第1批（共4批）：①线性结构 ✅本册 ②串+树与二叉树 ③图 ④查找+排序。
+体例同前：<strong>定义严谨表述+要点剖析 → 定理/公式推导（不背结论背推导）→ 985强度考题（详解已验算）→ 必会清单</strong>。与《算法代码题精练》《综合题精讲》互补（那边管"写代码"，这边管"懂原理"）。</p>
+</blockquote>
+<hr />
+<h1>第1章 绪论</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 数据结构三要素</strong>：
+① <strong>逻辑结构</strong>：数据元素之间的逻辑关系（与存储无关）——线性结构（线性表/栈/队列/串）与非线性结构（树/图/集合）；
+② <strong>存储结构（物理结构）</strong>：顺序存储、链式存储、索引存储、散列存储；
+③ <strong>数据的运算</strong>：运算的定义针对逻辑结构、实现针对存储结构。
+【985面试金句】"逻辑结构独立于存储结构；同一个逻辑结构可以有多种存储实现；<strong>运算的定义在逻辑结构上，实现在存储结构上</strong>。"</p>
+<p><strong>D2 算法五特性</strong>：有穷性、确定性、可行性、输入（≥0个）、输出（≥1个）。
+【辨析】程序可以不满足有穷性（操作系统），算法必须满足——"算法是程序的灵魂"。</p>
+<p><strong>D3 时间复杂度的严格定义（大O）</strong>：T(n)=O(f(n)) ⇔ 存在正常数 c 与 n₀，使 n≥n₀ 时恒有 T(n)≤c·f(n)。
+【配套记号】Ω（下界，≥c·f(n)）、Θ（上下界夹住）。"O"只给上界——<strong>说 O(n²) 的算法也可能实际是 O(n)</strong>，严谨表述要说 Θ(n²)。
+【要点】① 常数c与n₀的存在性是定义核心——"忽略常数与低阶项"的合法依据；② <strong>最坏时间复杂度</strong>是考研默认口径（给出上界保证），有时问平均复杂度（对输入分布求期望）。</p>
+<p><strong>D4 常见复杂度阶（从快到慢）</strong>：
+O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³) &lt; O(2ⁿ) &lt; O(n!)
+【直觉】log n = "折半才见底"；n log n = "每层折半、共n个元素"（归并/快排/堆）；2ⁿ = "每步两种选择全枚举"。</p>
+<h2>二、分析范式精讲</h2>
+<p><strong>A1 单层循环→O(n)，嵌套→乘积，折半→log</strong>。典型模式：</p>
+<pre><code class="language-c">i = 1;
+while (i &lt;= n) i = i * 3;      /* 执行次数k满足 3^k ≥ n → O(log₃n) */
+</code></pre>
+<p><strong>A2 递归式展开法</strong>：
+T(n)=T(n/2)+1 → 每层1次操作、共log₂n层 → <strong>O(log n)</strong>（二分查找）。
+T(n)=2T(n/2)+n → 每层合计n、共log₂n层 → <strong>O(n log n)</strong>（归并/快排平均）。
+T(n)=T(n−1)+1 → <strong>O(n)</strong>；T(n)=2T(n−1)+1 → 2ⁿ−1 → <strong>O(2ⁿ)</strong>（汉诺塔）。
+<strong>A3 双指针不嵌套</strong>：i、j 各自从两端向中间走，合计至多 n 步 → O(n) 而非 O(n²)。</p>
+<h2>三、本章考题（4题）</h2>
+<p><strong>题1（用定义证明）</strong> 证明 2n²+3n+1 = O(n²)。
+【证】n≥1 时，2n²+3n+1 ≤ 2n²+3n²+n² = 6n²。取 c=6，n₀=1 即满足定义。∎
+（同时可证 =Θ(n²)：下界 2n²≤2n²+3n+1 对 n≥1 成立，取 c=2。）</p>
+<p><strong>题2（嵌套含依赖·易错）</strong> 求：</p>
+<pre><code class="language-c">int sum = 0;
+for (i = 1; i &lt;= n; i++)
+    for (j = 1; j &lt;= i; j++)
+        sum++;
+</code></pre>
+<p>【解】内层次数=1+2+…+n=n(n+1)/2 → <strong>O(n²)</strong>。变体：j&lt;=i<em>i? → Σi²=O(n³)；j </em>= 2 → 内层O(log i)，总Σlog i=O(n log n)? Σ_{i≤n}log i = log(n!)≈n log n ✓。∎</p>
+<p><strong>题3（递归式）</strong> 设 T(n)=2T(n/2)+n，T(1)=1，求 T(n)。
+【解】展开：T(n)=n+2[n/2+2T(n/4)]=2n+4T(n/4)=…=kn+2^k T(n/2^k)。取 k=log₂n：T(n)=n·log₂n+n → <strong>O(n log₂n)</strong>。∎</p>
+<p><strong>题4（概念辨析）</strong> 判断：①数据的存储结构是逻辑结构在计算机中的映像；②同一逻辑结构只能有一种存储结构；③算法的时间复杂度与所用的存储结构无关。
+【答】①对；②错（线性表可顺序可链式）；③<strong>错</strong>（例：顺序表按位查找O(1) vs 链表O(n)——<strong>存储结构直接影响运算的实现效率</strong>）。∎</p>
+<hr />
+<h1>第2章 线性表</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 线性表</strong>：n（n≥0）个<strong>数据类型相同</strong>的元素的有限序列（a₁,a₂,…,aₙ）；元素个数 n 为表长；<strong>位序从1开始</strong>（数组下标从0开始——位序i对应下标i−1）。
+【要点】"相同类型"+"有序（逻辑序）"+"有限"——三者缺一不可；栈、队列、串都是<strong>受限的线性表</strong>。</p>
+<p><strong>D2 顺序表</strong>：逻辑相邻⇒物理相邻。地址公式（0基）：LOC(aᵢ)=LOC(a₀)+i×L。
+<strong>D3 链表族谱</strong>：单链表（带头结点）、双链表、循环单/双链表、静态链表（数组+游标，无指针环境用）。
+【头结点的作用】①首位置插入/删除与别处统一（不需改头指针）；②空表与非空表处理统一（判空=L-&gt;next==NULL）。</p>
+<h2>二、定理与公式推导（不背结论背推导）</h2>
+<p><strong>T1 顺序表插入/删除的平均移动次数（完整推导）</strong>：
+- 插入到第 i 个位置（i=1..n+1，等概率 p=1/(n+1)）需移动 <strong>n−i+1</strong> 个元素（第i到第n个后移）：
+E插入=Σ_{i=1}^{n+1} (n−i+1)/(n+1) = (n+(n−1)+…+0)/(n+1) = <strong>n/2</strong>。
+- 删除第 i 个元素（i=1..n，p=1/n）需移动 <strong>n−i</strong> 个：
+E删除=Σ_{i=1}^n (n−i)/n = <strong>(n−1)/2</strong>。∎
+（插入移动一半、删除移动一半差1——选择题爱考精确值。）</p>
+<p><strong>T2 双链表插入的语句次序（985面试经典）</strong>：在 p 之后插入 s：</p>
+<pre><code class="language-c">s-&gt;prior = p;          /* ① */
+s-&gt;next  = p-&gt;next;    /* ② */
+p-&gt;next-&gt;prior = s;    /* ③ */
+p-&gt;next = s;           /* ④ 必须最后——p-&gt;next 一改，原后继就&quot;丢&quot;了 */
+</code></pre>
+<p>【剖析】任何访问旧 p-&gt;next 的语句（②③）都必须在 ④ 之前；删除结点同理（先摘链后free）。</p>
+<p><strong>T3 循环单链表+仅设尾指针 rear</strong>：
+头 = rear-&gt;next-&gt;next（头结点的下一个）；<strong>头插、尾插、两表合并都 O(1)</strong>——合并两个循环链表只需交换指针，这是它相对单链表+头指针的核心优势。</p>
+<p><strong>T4 顺序表 vs 链表（决策表）</strong>：
+| 维度 | 顺序表 | 链表 |
+|---|---|---|
+| 按位存取 | O(1) | O(n) |
+| 插入/删除（已定位） | O(n)移动 | O(1)改指针 |
+| 存储 | 连续、无指针开销、可随机存取 | 分散、指针开销、缓存不友好 |
+| 适用 | 查多改少、长度可预估 | 频繁插删、长度动态 |</p>
+<h2>三、本章考题（5题）</h2>
+<p><strong>题1（设计·原地划分）</strong> 设计算法将顺序表的所有奇数移到所有偶数之前，时间O(n)、空间O(1)。
+【解】双指针相向扫（快排 partition 思想）：</p>
+<pre><code class="language-c">void OddBeforeEven(int A[], int n) {
+    int i = 0, j = n - 1, t;
+    while (i &lt; j) {
+        while (i &lt; j &amp;&amp; A[i] % 2 != 0) i++;   /* 左找偶 */
+        while (i &lt; j &amp;&amp; A[j] % 2 == 0) j--;   /* 右找奇 */
+        if (i &lt; j) { t = A[i]; A[i] = A[j]; A[j] = t; }
+    }
+}
+</code></pre>
+<p>时间O(n)（每元素至多被扫一次），空间O(1)。∎
+（<strong>不要求稳定</strong>时用 partition；要求稳定→另开辅助数组O(n)空间。两问对比是985出题套路。）</p>
+<p><strong>题2（设计·有序合并）</strong> 两个递增单链表（带头结点）La、Lb，合并为递增链表 Lc（复用结点）。
+【解】尾插版（与《算法代码题精练》题3的头插递减版对照记忆）：</p>
+<pre><code class="language-c">void MergeAsc(LinkList La, LinkList Lb, LinkList Lc) {
+    LNode *pa = La-&gt;next, *pb = Lb-&gt;next, *t, *tail = Lc;
+    while (pa &amp;&amp; pb) {
+        if (pa-&gt;data &lt;= pb-&gt;data) { t = pa; pa = pa-&gt;next; }
+        else                      { t = pb; pb = pb-&gt;next; }
+        tail-&gt;next = t; tail = t;          /* 尾插 */
+    }
+    tail-&gt;next = pa ? pa : pb;
+}
+</code></pre>
+<p>时间O(m+n)，空间O(1)。∎</p>
+<p><strong>题3（次序陷阱·判断改错）</strong> 在双链表中 p 结点<strong>之前</strong>插入 s，以下次序是否正确：
+<code>s-&gt;next=p; p-&gt;prior=s; s-&gt;prior=p-&gt;prior; p-&gt;prior-&gt;next=s;</code>？
+【答】<strong>错误</strong>：第二句执行后 p-&gt;prior 已指向 s，第四句变成 s-&gt;next=s 自环。正确次序必须保证用到旧 p-&gt;prior 的语句在前：<code>s-&gt;prior=p-&gt;prior; s-&gt;next=p; p-&gt;prior-&gt;next=s; p-&gt;prior=s;</code>。∎
+（记忆：<strong>"改指针前先备份"——谁会被覆盖，谁就要先被使用。</strong>）</p>
+<p><strong>题4（仅设尾指针的循环单链表）</strong> 证明：用带尾指针 rear 的循环单链表作队列，入队/出队均可 O(1)。
+【证】rear-&gt;next 即头结点（循环），出队删 rear-&gt;next-&gt;next（O(1)改两个指针）；入队在 rear 后插并 rear=rear-&gt;next（O(1)）。另：合并两个此类链表只需交换 rear-&gt;next 与 rear-&gt;next-&gt;next 的指向，O(1) 完成——这是普通单链表做不到的。∎</p>
+<p><strong>题5（静态链表概念）</strong> 静态链表中，"游标"存储的是什么？如何判空、判尾？
+【答】游标=<strong>后继元素在数组中的下标</strong>（逻辑链）。判尾：游标==−1（或约定值）；判空：头游标指向的仍是空闲区标志。插入/删除只需修改游标，无需 malloc/free。∎</p>
+<hr />
+<h1>第3章 栈、队列和数组</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 栈</strong>：只允许在一端（栈顶）插入删除的线性表，LIFO。
+<strong>D2 队列</strong>：只允许一端（队尾）插入、另一端（队头）删除，FIFO。
+【要点】栈和队列都是<strong>操作受限</strong>的线性表——受限带来"序列合法性"这类独有题型。
+<strong>D3 循环队列（牺牲一个单元法）</strong>：
+- 队满：(rear+1)%M == front；队空：front==rear；元素数=(rear−front+M)%M。
+<strong>D4 双端队列</strong>：两端都可插入删除。变体：<strong>输入受限</strong>（插入只许一端）、<strong>输出受限</strong>（删除只许一端）。</p>
+<h2>二、定理与公式推导</h2>
+<p><strong>T1 n个元素进栈的出栈序列个数=卡特兰数</strong> Cₙ=C(2n,n)/(n+1)。
+【推导（必会）】设 f(n)=以 n 个元素入栈为前提的出栈序列数。固定<strong>第1个出栈的是原第 i 个入栈元素</strong>：其前恰有 i−1 个元素先入栈且须全部先出（f(i−1) 种），其后 n−i 个后入栈（f(n−i) 种）。递推：
+f(n)=Σ_{i=1}^{n} f(i−1)·f(n−i)，f(0)=1 → 即卡特兰递推，<strong>f(n)=C(2n,n)/(n+1)</strong>。
+验证：f(3)=5，f(4)=14。∎
+<strong>T2 循环队列判满的三种方案</strong>：①牺牲单元（(rear+1)%M==front，元素数≤M−1）；②设尺寸变量 size（满：size==M）；③设标志位 tag（进队置1出队置0，front==rear且tag==1为满）。<strong>计算元素个数题先看清是哪种方案</strong>。
+<strong>T3 数组存储地址公式（推导）</strong>：
+- 行优先（0基，n列）：LOC(aᵢⱼ)=LOC(a₀₀)+(i·n+j)·L；
+- 列优先：LOC(aᵢⱼ)=LOC(a₀₀)+(j·m+i)·L。
+【推导】行优先=先存满一行：aᵢⱼ 之前有 i 个整行（i·n个元素）+本行 j 个。
+<strong>T4 对称矩阵压缩（下三角，1基位序）</strong>：aᵢⱼ（i≥j）存入 B[k]，<strong>k=i(i−1)/2+(j−1)</strong>（0基数组）。
+【推导】aᵢⱼ 之前存了第1~(i−1)行的全部（1+2+…+(i−1)=i(i−1)/2个）+本行 (j−1) 个。上三角部分 aᵢⱼ(i&lt;j) 取对称元素 a_{ji}。
+<strong>T5 三对角矩阵压缩</strong>：|i−j|≤1 的 aᵢⱼ 存入 B[k]（0基），<strong>k=2i+j−3</strong>（1基行列）。
+【验证】a₁₁→0，a₁₂→1，a₂₁→2，a₂₂→3，a₃₂→5（第3行从5起）✓。</p>
+<h2>三、本章考题（6题）</h2>
+<p><strong>题1（出栈序列合法性判定·算法+手算）</strong> 判断序列 4,3,5,1,2 是否为入栈序 1,2,3,4,5 的合法出栈序列。
+【手算】入1，入2，入3，入4 → 弹4；弹3；入5 → 弹5；弹1？栈中是[1,2]，栈顶2≠1 → <strong>非法</strong>。
+【判定算法】辅助栈模拟：按出栈序逐个"把元素压到栈顶等于目标为止"，目标弹不出即非法，时间O(n)。∎</p>
+<p><strong>题2（卡特兰数计算）</strong> 4个不同元素依次进栈，出栈序列共有多少种？
+【解】C₄=C(8,4)/5=70/5=<strong>14</strong>种。∎
+（对照：f(1)=1, f(2)=2, f(3)=5, f(4)=14——递推 f(n)=Σf(i−1)f(n−i) 现场可算。）</p>
+<p><strong>题3（循环队列·参数计算）</strong> 循环队列数组 Q[0..59]（容量60，牺牲单元法），front=20，rear=15。求元素个数、队满条件、再入队3个后的 front/rear。
+【解】元素数=(15−20+60)%60=<strong>55</strong>；队满：(rear+1)%60==front → 16==20? 队满条件此刻不成立（55=59−4? 55≤58可用）→ 未满。
+再入队3个：rear=(15+3)%60=<strong>18</strong>，front不变=20（元素58，仍&lt;59可用上限）。∎
+（若采用 size 方案，容量可达60无牺牲——两种方案的容量差1是选择题陷阱。）</p>
+<p><strong>题4（双端队列合法性·985易错）</strong> 输入序 a,b,c,d（必须依次进队/栈）。判断输出序列 4,2,1,3（对应 d,b,a? 按字母即 d,b,a,c? ——设 a=1,b=2,c=3,d=4，即输出 4,2,1,3）能否由：①输入受限双端队列（插入只能尾端，删除两端皆可）②输出受限双端队列（删除只能头端，插入两端皆可）得到。
+【解】①输入受限：只能尾插、两端删。想先出4：1,2,3尾插、4尾插 → 队列[1,2,3,4]；删尾得4✓；队列[1,2,3]，下一目标2：头=1、尾=3，<strong>2在中间取不到</strong> → <strong>非法</strong>。
+②输出受限：只能头删、两端插。1头插→[1]；2头插→[2,1]；3头插→[3,2,1]；4头插→[4,3,2,1]；依次头删：4,3,2,1——但目标是4,2,1,3：得4后头=3≠2。换策略：1尾插[1]；2头插[2,1]；3尾插[2,1,3]；4头插[4,2,1,3] → 头删4✓、2✓、1✓、3✓ → <strong>合法</strong>。∎
+（此类题的唯一解法：<strong>穷举两端插入/删除策略+逐步模拟</strong>，不存在通用公式。）</p>
+<p><strong>题5（压缩存储下标）</strong> 6阶对称矩阵 A（aᵢⱼ=aⱼᵢ）按行优先存下三角于 B[0..20]。求 a₆₃ 存放位置与 B 的总长。
+【解】a₆₃（i=6≥j=3）：k=6×5/2+(3−1)=15+2=<strong>17</strong>（B[17]，0基）。
+总长=n(n+1)/2=6×7/2=<strong>21</strong>。∎
+（上三角元素如 a₃₆ 取 a₆₃ 同位置。）</p>
+<p><strong>题6（三对角矩阵下标）</strong> n 阶三对角矩阵按行优先存 |i−j|≤1 的元素于 B（0基）。求 a₄₅ 的位置。
+【解】k=2i+j−3=2×4+5−3=<strong>10</strong>。验证：前三行存 3+3+3=9 个（第1行2个、第2行3个、第3行3个=8? ——第1行2个（a₁₁,a₁₂），第2、3行各3个，共2+3+3=8，a₄₅是第4行第2个 → 8+2=10 ✓）。∎</p>
+<h2>四、本章必会清单</h2>
+<ol>
+<li>数据结构三要素与"运算定义在逻辑结构、实现在存储结构"；</li>
+<li>大O的严格定义与递归式展开法（四种典型）；</li>
+<li>顺序表插入 n/2、删除 (n−1)/2 的期望推导；</li>
+<li>双链表插入/删除的语句次序原理（先备份后改写）；</li>
+<li>卡特兰数递推推导与 C(2n,n)/(n+1)；</li>
+<li>循环队列三方案、元素数公式；双端队列合法性穷举模拟；</li>
+<li>行/列优先、对称、三对角矩阵的下标公式推导。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第2/4批）：<strong>串（KMP：next数组两种口径推导+nextval）与树与二叉树</strong>（性质证明、遍历递归/非递归/线索二叉树规律、哈夫曼与WPL、树/森林与二叉树转换、并查集）。说"继续"交付。</p>
+</blockquote></div></body></html>

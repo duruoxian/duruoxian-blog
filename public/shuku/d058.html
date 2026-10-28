@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408操作系统精讲_内存管理 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 操作系统精讲 · 内存管理（地址变换推导 + 置换演算）</h1>
+<blockquote>
+<p>OS精讲第3批。内存管理的计算密度仅次于调度：<strong>地址变换、TLB有效访存时间、四大置换算法逐页模拟</strong>是408标准题型。本册全部推导+演算。</p>
+</blockquote>
+<hr />
+<h1>第3章 内存管理</h1>
+<h2>一、装入与保护精讲</h2>
+<p><strong>L1 三种装入方式</strong>：
+- <strong>绝对装入</strong>：编译时确定地址（单道批处理早期）；
+- <strong>静态重定位</strong>：装入时一次性转换（地址变换在装入时完成，<strong>装入后不能移动</strong>）；
+- <strong>动态重定位</strong>：运行时随时转换（重定位寄存器/基址寄存器+逻辑地址）——<strong>现代OS标配，配合进程换入换出与紧凑</strong>。
+<strong>L2 内存保护两法</strong>：上下限寄存器法；重定位寄存器（基址）+界地址寄存器（限长）法——越界即产生越界异常。
+【辨析】重定位寄存器/界地址寄存器的修改是<strong>特权指令</strong>（核心态）。
+<strong>L3 覆盖与交换</strong>：覆盖=程序内部段间复用同一内存区（程序员声明覆盖结构，已淘汰）；交换=内存紧张时把<strong>整个进程</strong>换出到外存（对换区，中级调度的实现）。</p>
+<h2>二、连续分配（碎片与算法演算）</h2>
+<p><strong>C1 两种碎片</strong>：
+- <strong>固定分区/页式</strong> → <strong>内部碎片</strong>（分配给进程但用不到的部分）；
+- <strong>动态分区/段式</strong> → <strong>外部碎片</strong>（分区之间的零头）——解决：<strong>紧凑</strong>（需动态重定位支持）。
+<strong>C2 动态分区分配算法（四兄弟）</strong>：
+| 算法 | 规则 | 优点 | 缺点 |
+|---|---|---|---|
+| 首次适应 First | 从低地址找<strong>第一个</strong>够用的 | 简单、开销小、高地址留大区 | 低端碎屑多 |
+| 邻近适应 Next | 从<strong>上次结束位置</strong>继续找 | 检索开销更小 | 高地址大区被分割 |
+| 最佳适应 Best | 找<strong>最小的</strong>够用分区 | 大区保得住 | <strong>产生最多微小碎片</strong> |
+| 最坏适应 Worst | 找<strong>最大的</strong>分区 | 残留区仍可用 | 大区迅速耗尽 |</p>
+<p><strong>考题1（四算法同题演算）</strong> 空闲分区按地址序为 100K、500K、200K、300K、600K。作业依次申请 212K、417K、112K。分别用四种算法，写出最终空闲分区表。
+【解】
+- <strong>首次</strong>：212→500K(剩288)；417→600K(剩183)；112→288K(剩176)。最终：100, 176, 200, 300, 183。
+- <strong>最佳</strong>：212→300K(剩88)；417→500K(剩83)；112→200K(剩88)。最终：100, 88, 88, 300, 183（<strong>两个88K碎屑——最佳适应的"最佳"是单次最佳</strong>）。
+- <strong>最坏</strong>：212→600K(剩388)；417→500K(剩83)；112→388K(剩276)。最终：100, 276, 200, 300, 83。
+- <strong>邻近</strong>：本次与首次相同（未发生回绕）→ 100, 176, 200, 300, 183。∎
+（结论可背：<strong>首次综合最优；最佳碎片最多；最坏大区先没</strong>。）</p>
+<h2>三、页式存储（地址变换推导）</h2>
+<p><strong>P1 分页原理</strong>：物理内存分<strong>页框</strong>，进程地址空间分<strong>页</strong>（等大，如4KB）；页表记录<strong>页号→页框号</strong>。
+【地址拆分】逻辑地址 A（页大小 2ᵏ）→ <strong>页号 = A ÷ 页长（高位段）</strong>，<strong>页内偏移 = A mod 页长（低位段）</strong>——拆位运算即可，无需除法：页大小4KB=2¹² → 低12位是偏移。
+<strong>物理地址 = 页框号×页长 + 页内偏移</strong>。</p>
+<p><strong>考题2（一级页表变换）</strong> 页大小1KB，页表{0→5, 1→10, 2→4, 3→8}。逻辑地址3500的物理地址？
+【解】页号=3500/1024=<strong>3</strong>，偏移=3500−3×1024=428。
+物理地址=8×1024+428=<strong>8620</strong>。
+二进制视角：3500=<strong>11 0110101100₂</strong>（低10位偏移=0110101100=428，高位页号=11=3）→ 物理地址=1000 0110101100₂=8620。∎
+（两种算法等价：<strong>除法拆分=二进制拆位</strong>；页大小为2的幂时永远用拆位。）</p>
+<p><strong>P2 二级页表（解决页表太大）</strong>：32位、页4KB、页表项4B → 单级页表 2²⁰ 项 = 4MB（又占1K个页框！）→ 二级：<strong>页目录(10位) + 页表(10位) + 页内偏移(12位)</strong>。
+【推导】每页表项4B → 一页装 4KB/4B=1024=2¹⁰ 项 → 页表本身也要分页 → 页目录再索引页表。
+【要点】①二级页表<strong>页目录常驻内存、页表可换出</strong>；②无TLB时访存<strong>3次</strong>（查页目录、查页表、取数据）；③地址位数计算：二级页表下"单进程最多页表空间"=页目录1页+1024页表页。</p>
+<p><strong>考题3（二级页表拆位）</strong> 32位系统、页4KB、二级页表（10-10-12）。虚拟地址 0x00403004 的页目录索引、页表索引、页内偏移各是多少？
+【解】0x00403004 = 0000 0000 <strong>01</strong> 0000 0000 <strong>11</strong> 0000 0000 0100₂。
+页目录索引（高10位）=<strong>1</strong>；页表索引（中10位）=<strong>3</strong>；页内偏移（低12位）=<strong>4</strong>。∎
+（模板：页大小4KB→偏移12位；页表项4B→每页表1024项→中间10位；剩余=页目录。）</p>
+<h2>四、TLB 与有效访存时间（必考计算）</h2>
+<p><strong>T1 快表TLB</strong>：页表项的高速缓存（相联存储器），命中则<strong>免查页表</strong>。
+<strong>EAT公式</strong>（TLB命中时1次访存取数，未命中2次）：
+<strong>EAT = h·(T_tlb + T_m) + (1−h)·(T_tlb + 2·T_m)</strong></p>
+<p><strong>考题4（EAT计算）</strong> TLB访问20ns，内存访问100ns，TLB命中率80%。求有效访存时间。
+【解】EAT=0.8×(20+100)+0.2×(20+100+100)=96+44=<strong>140ns</strong>。∎
+（若TLB与查页表<strong>并行</strong>访问：命中=100，未命中=220 → EAT=0.8×100+0.2×220=124ns——题干"并行/串行"决定公式，看清再算。）</p>
+<h2>五、虚拟内存（请求分页）</h2>
+<p><strong>V1 传统存储管理的两大缺陷</strong>：一次性（全装才跑）、驻留性（跑完才走）→ 虚拟内存：<strong>部分装入+请求调页+置换</strong>。
+<strong>V2 局部性原理</strong>（虚拟内存可行的理论根基）：时间局部性（刚访问过 soon 再访）+ 空间局部性（相邻地址 soon 被访）。
+<strong>V3 缺页中断</strong>：缺页是<strong>内中断（故障）</strong>，一条指令执行期间可产生并处理多次缺页；处理流程：保留现场→查页表定位→外存调入（无帧则先置换，脏页写回）→更新页表→重新执行被中断指令。
+<strong>V4 抖动（颠簸）</strong>：刚换出的页马上又要访问 → 频繁缺页，CPU大部分时间在换页。<strong>原因：分配的页框数 &lt; 工作集</strong>；<strong>解决：工作集模型（分配≥工作集）、降低多道程序度</strong>。</p>
+<h2>六、置换算法（四大逐页模拟·统一访问串）</h2>
+<p><strong>访问串</strong>：1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5（3个页框）。</p>
+<p><strong>考题5（OPT·理想算法）</strong> 淘汰"未来最久不使用"的页。
+【解】1F, 2F, 3F, 1F(淘汰未来最不用的3? 未来：4,1,2,5,1,2,3,4,5——3最远) → 帧{1,3,4}? 逐步：
+- 1F、2F、3F；4：淘汰3（未来最迟用3? 未来访问：4(当前),1,2,5,…，2在位置10、3在位置10? 未来串（4之后）：1,2,5,1,2,3,4,5——3首次出现在第7位，1在第1位，2在第2位 → 淘汰3）→ {4,1,2}；
+- 1H、2H；5：帧{4,1,2}，未来（5之后）：1,2,3,4,5——4在第4位、1第1位、2第2位 → 淘汰4 → {5,1,2}；
+- 1H、2H；3F淘汰5（5已用过且最后）→ {3,1,2}? 淘汰5：{1,2,3}；4F淘汰1 → {4,2,3}；5F淘汰2 → {4,3,5}。
+<strong>缺页=7</strong>（3+1+1+1+1），命中5。∎（OPT无法实现，作评价基准。）</p>
+<p><strong>考题6（FIFO·Belady异常）</strong> 同串、3帧。
+【解】队列演变：1,2,3 → 4挤1 → {2,3,4} → 1挤2 → {3,4,1} → 2挤3 → {4,1,2} → 5挤4 → {1,2,5} → 1H、2H → 3挤1 → {2,5,3} → 4挤2 → {5,3,4} → 5H。
+<strong>缺页=9</strong>。
+【Belady异常】同串改用<strong>4帧</strong>：缺页反而变为 <strong>10</strong>（异常：帧增多缺页增多）——<strong>FIFO专属</strong>，LRU/OPT无此现象。∎</p>
+<p><strong>考题7（LRU·堆栈法演算）</strong> 同串、3帧。LRU淘汰"最近最久未使用"。
+【解】用栈（栈顶=最近）：1F[1]；2F[2,1]；3F[3,2,1]；4F挤1→[4,3,2]；1F挤2→[1,4,3]；2F挤3→[2,1,4]；5F挤4→[5,2,1]；1H；2H；3F挤5→[3,2,1]；4F挤1→[4,3,2]；5F挤2→[5,4,3]。
+<strong>缺页=10</strong>。∎
+（LRU是堆栈算法（栈内容包含关系），无Belady异常——这就是它优于FIFO的理论原因。）</p>
+<p><strong>考题8（Clock改进时钟·逐位演算）</strong> 同串、3帧、访问位初0、指针从0开始；装入/命中置访问位1；淘汰时扫到访问位0的帧。求缺页数。
+【解】指针逐页推进（装入或命中均置1；淘汰后指针指向下一帧）：
+1F(f0=1,ref1)、2F(f1=2,ref1)、3F(f2=3,ref1)，指针0；
+4：指针扫三帧都ref1→清0回指f0，ref0=0 → 淘汰f0装4(ref1)，指针1；{4,2,3}
+1：f1 ref0 → 淘汰f1装1，指针2；{4,1,3}
+2：f2 ref0 → 淘汰f2装2，指针0；{4,1,2}
+5：扫一圈全1清0 → 回f0 ref0 → 淘汰f0装5，指针1；{5,1,2}
+1H（f1 ref置1）、2H（f2 ref置1）；
+3：f0 ref0 → 淘汰f0装3，指针1；{3,1,2}
+4：f1 ref0 → 淘汰f1装4，指针2；{3,4,2}
+5：f2 ref0 → 淘汰f2装5，指针0；{3,4,5}
+<strong>缺页=10</strong>。∎
+（Clock是FIFO的改良（给第二次机会），本串下与LRU同为10；改进Clock再引入修改位：优先淘汰（未访问且未修改）页。）</p>
+<h2>七、考题补遗（2题）</h2>
+<p><strong>题9（段式与段页式访存次数）</strong> 不采用快表时：段式、页式、段页式各需几次访存？
+【答】页式2次（页表+数据）；段式2次（段表+数据）；<strong>段页式3次</strong>（段表→页表→数据）。快表命中均可降为1次。∎</p>
+<p><strong>题10（页表项位数计算）</strong> 32位系统、页大小4KB、物理内存4GB。页表项至少多少位？
+【解】页内偏移12位 → 物理页框号=32−12=<strong>20位</strong>；页表项除页框号还需存取控制位、修改位等（考试答"至少20位"）。单级页表共 2²⁰ 项 → 占 2²⁰×4B=<strong>4MB</strong>——这正是引入二级页表的原因。∎</p>
+<h2>八、本章必会清单</h2>
+<ol>
+<li>三种装入方式与动态重定位（配合紧凑/交换）；</li>
+<li>两类碎片对应表（页式/固定分区=内部；段式/动态分区=外部；紧凑解决外部碎片）；</li>
+<li>动态分区四算法同题演算（最佳产生最多碎屑）；</li>
+<li>地址变换：除法拆分=二进制拆位；二级页表10-10-12；无TLB二级页表3次访存；</li>
+<li>EAT公式（串行/并行两版）；</li>
+<li>缺页中断是内中断（故障）、一条指令可多次缺页；</li>
+<li>OPT=7/FIFO=9(LRU=10)/LRU=10/Clock=10 的逐页模拟全过程；Belady异常仅FIFO；</li>
+<li>抖动原因=帧数&lt;工作集。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第4/4批·收官）：<strong>文件管理与I/O</strong>——文件逻辑结构与物理结构（FAT/索引结点/UNIX混合索引计算）、目录（硬链接vs软链接）、位示图换算、磁盘调度（SSTF/SCAN/C-SCAN演算）、I/O四种控制方式、缓冲区单/双缓冲公式、SPOOLing。说"继续"交付收官。</p>
+</blockquote></div></body></html>

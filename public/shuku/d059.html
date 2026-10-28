@@ -1,0 +1,171 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408操作系统精讲_同步互斥与死锁 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 操作系统精讲 · 同步互斥与死锁（PV推演 + 银行家全套演算）</h1>
+<blockquote>
+<p>OS精讲第2批。本章是408大题第一高产田：<strong>"用信号量写同步代码"每年必考</strong>，银行家算法隔年出。本册给：PV原语的精确定义、四大经典模型的完整代码推演、银行家算法四问全套演算。</p>
+</blockquote>
+<hr />
+<h1>同步与互斥</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 临界资源与临界区</strong>：一段时间内只允许一个进程使用的资源=临界资源；进程中访问临界资源的那段代码=临界区。
+【临界区四部分】进入区（P/检查并上锁）→ 临界区 → 退出区（V/解锁）→ 其余部分。
+<strong>D2 同步与互斥</strong>：
+- <strong>互斥</strong>（间接制约）：多个进程因争用同一临界资源而互相排斥；
+- <strong>同步</strong>（直接制约）：协作进程按一定次序推进（"我等你做完事A再做B"）。
+<strong>D3 临界区互斥四原则</strong>：<strong>空闲让进、忙则等待、有限等待、让权等待</strong>（进不了临界区应释放CPU阻塞自己，防止忙等）。
+【单标志法/皮特森算法的缺陷】单标志违反"空闲让进"；双标志先检查违反"忙则等待"；皮特森算法满足前三条但违反"让权等待"（忙等）。</p>
+<p><strong>D4 信号量的严格定义（记录型）</strong>：</p>
+<pre><code>typedef struct { int value; struct process *L; } semaphore;
+P(S): S.value--;  if (S.value &lt; 0) block(S.L);   /* 自我阻塞进等待队列 */
+V(S): S.value++;  if (S.value &lt;= 0) wakeup(S.L); /* 有等待者才唤醒 */
+</code></pre>
+<p>【数值语义（选择题钉子）】<strong>S&gt;0：还剩S个可用资源；S=0：恰好用完且无人等待；S&lt;0：|S|=正在等待的进程数</strong>。
+【要点】记录型信号量<strong>遵循让权等待</strong>（阻塞而非忙等）；整型信号量 do while 忙等，不满足让权原则；<strong>P、V必须成对出现且是原子操作（原语）</strong>。</p>
+<h2>二、PV使用方法论（写大题的四步）</h2>
+<ol>
+<li><strong>找出临界资源与同步关系</strong>：互斥关系（争用什么）、同步关系（谁等谁的什么结果）；</li>
+<li><strong>设信号量</strong>：互斥→初值1；同步→"资源剩余量"初值=资源初始个数；</li>
+<li><strong>P的位置</strong>：<strong>同步P在前、互斥P在后</strong>（顺序颠倒可能死锁）；<strong>V的位置无死锁风险</strong>（先V哪个都行）；</li>
+<li><strong>检查</strong>：每个P是否有配对V、初值是否正确、缓冲区容量是否体现。</li>
+</ol>
+<h2>三、四大经典模型完整推演</h2>
+<p><strong>模型1 生产者–消费者（缓冲区容量n）★408必考</strong>：</p>
+<pre><code>semaphore mutex = 1, empty = n, full = 0;
+生产者:                    消费者:
+while(1){                  while(1){
+  生产一个产品;              P(full);
+  P(empty);                  P(mutex);
+  P(mutex);                  取产品;
+  放入缓冲区;                V(mutex);
+  V(mutex);                  V(empty);
+  V(full);                   消费;
+}                          }
+</code></pre>
+<p>【两个必考分析】①<strong>P(empty) 与 P(mutex) 颠倒会死锁</strong>：缓冲区满时生产者先拿到 mutex 再在 empty 上阻塞，消费者取产品需先 P(mutex)——被生产者持有 → 互相等待；②<strong>V的顺序可以互换</strong>（V不引起阻塞）。
+【扩展·苹果橘子盘（卷六45已演算）】：plate=1、apple=0、orange=0，父亲P(plate)放苹果V(apple)……</p>
+<p><strong>模型2 读者–写者（读者优先·计数器+互斥）</strong>：</p>
+<pre><code>int count = 0;  semaphore rw = 1, mutex = 1;
+写者: P(rw); 写; V(rw);
+读者: P(mutex);            /* 保护count */
+      if (count == 0) P(rw);   /* 第一个读者锁住写者 */
+      count++;
+      V(mutex);
+      读;
+      P(mutex);
+      count--;
+      if (count == 0) V(rw);   /* 最后一个读者放行写者 */
+      V(mutex);
+</code></pre>
+<p>【分析】读者可无限进入（只要前面有读者在）→ <strong>写者饥饿</strong>——这就是"读者优先"。改进（读写公平/写者优先）：加 <code>semaphore w=1</code>，读者进来前也P(w)退出后V(w)，写者同样P(w)——写者一旦排队，后来的读者被w挡住。∎</p>
+<p><strong>模型3 哲学家进餐（死锁与三种解法）</strong>：
+5支筷子 = 5个信号量 chopstick[5]（初值1）。</p>
+<pre><code>错误写法: 每人 P(chopstick[i]); P(chopstick[(i+1)%5]);  → 5人同时拿起左手筷 → 全部等右手 → 死锁
+</code></pre>
+<p>【三种正确解法】
+①<strong>最多4人同时拿筷子</strong>：加 semaphore room=4，先 P(room)；
+②<strong>奇偶分流</strong>：奇数号哲学家先拿左、偶数号先拿右（破坏"循环等待"）；
+③<strong>一次拿齐</strong>：P(mutex)后同时拿两支（或用AND信号量）。</p>
+<pre><code>解法②（i号哲学家）:
+if (i % 2 == 0) { P(c[i]); P(c[(i+1)%5]); }
+else            { P(c[(i+1)%5]); P(c[i]); }
+吃饭; V(c[i]); V(c[(i+1)%5]);
+</code></pre>
+<p><strong>模型4 吸烟者问题（单向供应）</strong>：供应者每次随机放两种材料到桌上；三个吸烟者各拥有一种材料的无限量。</p>
+<pre><code>semaphore offer1 = 0, offer2 = 0, offer3 = 0, finish = 0;
+供应者: while(1){ 随机选两种放桌上;
+          if (放了1+2) V(offer3);     /* 有1+2 → 拥有3的吸烟者可卷 */
+          else if (放了1+3) V(offer2);
+          else V(offer1);
+          P(finish); }
+吸烟者i: while(1){ P(offer_i); 卷烟并抽掉; V(finish); }
+</code></pre>
+<p>【结构】供应者与每个吸烟者之间是<strong>同步关系</strong>（offerᵢ 初值0），抽完 V(finish) 允许下一轮——"生产一种资源、唤醒对应消费者"的变体。</p>
+<h2>四、考题补遗（2题）</h2>
+<p><strong>题1（信号量数值追踪）</strong> 信号量S初值3，经过5次P和2次V后：S=? 等待进程数？
+【解】S=3−5+2=<strong>0</strong>；S=0 表示资源用完<strong>无等待者</strong>（等待进程数=0）。若初值2：S=−1 → 1个进程等待。∎</p>
+<p><strong>题2（管程概念）</strong> 管程为什么能保证互斥？
+【答】管程把共享数据及操作封装在一起，<strong>每次只允许一个进程在管程内执行</strong>（互斥由编译器自动保证，无需程序员写P/V）；条件变量condition+wait/signal实现同步。∎</p>
+<hr />
+<h1>死锁</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 死锁</strong>：多个进程因竞争资源造成的一种<strong>互相等待</strong>的僵局，若无外力这些进程都无法推进。
+【辨析】死锁=循环等待且都不再前进；<strong>死锁是一种特殊的"饥饿"</strong>？不对——饥饿可以只有一个进程，死锁至少两个且构成环路。
+<strong>D2 必要条件四条（缺一不死锁）</strong>：
+①<strong>互斥</strong>；②<strong>请求并保持</strong>（占有又申请新的）；③<strong>不可剥夺</strong>；④<strong>循环等待</strong>（等待链成环）。
+<strong>D3 处理策略四级</strong>：
+- <strong>预防</strong>（静态，破坏四条件之一）：破坏请求并保持→<strong>静态分配（一次性申请全部）</strong>，代价资源浪费；破坏不可剥夺→<strong>可抢占</strong>；破坏循环等待→<strong>资源编号、顺序申请</strong>。互斥条件一般不破坏（资源本性）。
+- <strong>避免</strong>（动态，<strong>银行家算法</strong>——分配前判断是否进入不安全状态）。
+- <strong>检测+解除</strong>：允许死锁发生，定期用<strong>资源分配图化简</strong>检测，解除方法=<strong>剥夺资源/撤销进程/回滚</strong>。
+- 鸵鸟策略（不管）——Windows/Linux实际采用。</p>
+<p><strong>D4 资源分配图</strong>：请求边 Pi→rj、分配边 rj→Pi；<strong>图不可完全化简 ⇔ 发生死锁（死锁定理）</strong>。</p>
+<h2>二、银行家算法（全套演算·408标准流程）</h2>
+<p><strong>数据</strong>：系统共 A类10、B类5、C类7 个资源；当前状态：
+| 进程 | Allocation(A,B,C) | Max(A,B,C) | Need=Max−Alloc |
+|---|---|---|---|
+| P0 | 0,1,0 | 7,5,3 | <strong>7,4,3</strong> |
+| P1 | 2,0,0 | 3,2,2 | <strong>1,2,2</strong> |
+| P2 | 3,0,2 | 9,0,2 | <strong>6,0,0</strong> |
+| P3 | 2,1,1 | 2,2,2 | <strong>0,1,1</strong> |
+| P4 | 0,0,2 | 4,3,3 | <strong>4,3,1</strong> |
+Available = (3,3,2)。</p>
+<p><strong>问1：T0时刻是否安全？</strong>
+【安全性检查算法】Work=Available；找 Need≤Work 的进程 → 假设其完成并归还（Work+=Alloc）→ 重复。
+| 步 | 选中 | Need | Work（释放后） |
+|---|---|---|---|
+| 1 | P1 | (1,2,2)≤(3,3,2)✓ | 3,3,2 + 2,0,0 = <strong>(5,3,2)</strong> |
+| 2 | P3 | (0,1,1)✓ | (5,3,2)+(2,1,1)=<strong>(7,4,3)</strong> |
+| 3 | P4 | (4,3,1)✓ | (7,4,3)+(0,0,2)=<strong>(7,4,5)</strong> |
+| 4 | P0 | (7,4,3)✓ | (7,4,5)+(0,1,0)=<strong>(7,5,5)</strong> |
+| 5 | P2 | (6,0,0)✓ | (7,5,5)+(3,0,2)=(10,5,7) |
+存在安全序列 <strong>⟨P1,P3,P4,P0,P2⟩</strong> → <strong>安全状态</strong>。∎</p>
+<p><strong>问2：P1请求(1,0,2)，能否分配？</strong>
+①检查请求≤Need：1≤1,0≤2,2≤2 ✓；②请求≤Available：1≤3,0≤3,2≤2 ✓；
+③试探分配：Available=(2,3,0)，P1的Alloc=(3,0,2)，Need=(0,2,0)。
+④安全性：P1(0,2,0)≤(2,3,0)✓→Work=(5,3,2)；P3✓→(7,4,3)；P4✓→(7,4,5)；P0✓→(7,5,5)；P2✓→(10,5,7)。
+<strong>安全（序列⟨P1,P3,P4,P0,P2⟩）→ 可以分配</strong>。∎</p>
+<p><strong>问3：P4请求(3,3,0)，能否分配？</strong>
+请求≤Need（3≤4,3≤3,0≤1）✓；请求≤Available（3≤3,3≤3,0≤2）✓；试探分配：Available=(0,0,2)，P4的Need=(1,0,3)。
+安全性：P0(7,4,3)✗、P1(1,2,2)✗（A类1&gt;0）、P2(6,0,0)✗、P3(0,1,1)✗（B类1&gt;0）、P4(1,0,3)✗（C类3&gt;2）——<strong>找不到安全序列 → 不安全 → 拒绝</strong>（回滚试探分配）。∎</p>
+<p><strong>问4：P0请求(0,2,0)，能否分配？</strong>
+请求≤Need✓；≤Available✓；试探后：Available=(3,1,2)，P0的Need=(7,2,3)。
+安全性：P1(1,2,2)≤(3,1,2)? B类2&gt;1 ✗；P2 ✗；P3(0,1,1)≤(3,1,2)✓ → Work=(5,2,3)；P1✓ → (7,2,3)；P0(7,2,3)✓ → (7,5,3)；P4✓ → (7,5,5)；P2✓ → (10,5,7)。<strong>安全 → 可以分配</strong>。∎
+（题眼：<strong>"能分配"的判定顺序是 请求≤Need → 请求≤Available → 试分配后安全检查，三关全过才真分配。</strong>）</p>
+<h2>三、考题补遗（3题）</h2>
+<p><strong>题1（最少资源数·公式推导）</strong> n个进程，每个最多需要 k 个同类资源。系统不发生死锁至少需要多少个该类资源？
+【解】最坏情形：每个进程都已持有 k−1 个、还差1个 → 共占 n(k−1) 个。此时只要有 <strong>1</strong> 个额外资源即可打破僵局 → 至少 <strong>n(k−1)+1</strong>。
+验证：n=3, k=2 → 3×1+1=4台。∎</p>
+<p><strong>题2（死锁判定·资源分配图）</strong> P1占r1申r2；P2占r2申r1（各1个）。是否死锁？
+【解】分配图存在环 P1→r2→P2→r1→P1，且 r1、r2 均为<strong>单资源类</strong>（环=死锁的充要条件，单资源类时环必死锁）。<strong>死锁</strong>；解除：剥夺/撤销任一进程。∎
+（多资源类时环只是必要条件——每类资源含多个实例时，环路未必死锁。）</p>
+<p><strong>题3（策略辨识）</strong> "资源一次性申请全部"属于哪种策略？"设备申请表按序号递增"？"分配前算安全序列"？
+【答】静态分配=<strong>预防</strong>（破坏请求并保持）；按序申请=<strong>预防</strong>（破坏循环等待）；安全序列=<strong>避免</strong>（银行家）。∎</p>
+<h2>四、本章必会清单</h2>
+<ol>
+<li>PV原语的精确语义与S值含义（&gt;0剩余资源、&lt;0绝对值=等待数）；</li>
+<li>四原则；记录型信号量让权等待 vs 整型忙等；</li>
+<li>生产者消费者的<strong>P序死锁分析</strong>（同步P在前互斥P在后）；</li>
+<li>读者写者的count计数器结构；哲学家三解法；吸烟者的供应者结构；</li>
+<li>死锁四必要条件与四策略对应的破坏点；n(k−1)+1公式；</li>
+<li>银行家四步：请求≤Need→≤Available→试探→安全性检查（四问全套演算已备）；</li>
+<li>单资源类环=死锁充要；多资源类环仅必要。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第3/4批）：<strong>内存管理</strong>——动态分区算法演算、页式地址变换（一级/二级页表+TLB访存时间计算）、虚拟内存四大置换算法逐页模拟（FIFO Belady/LRU/Clock）、抖动与工作集。说"继续"交付。</p>
+</blockquote></div></body></html>

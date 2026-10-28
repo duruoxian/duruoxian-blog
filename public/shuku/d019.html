@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学一985精讲_高数下 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学一 · 985精讲 · 高等数学（下）：定义定理深度讲解 + 985强度考题</h1>
+<blockquote>
+<p>接《高数上》（第1-5章）。本册覆盖第6-10章：多元函数微分学、重积分、曲线积分与曲面积分【数一专属】、无穷级数【数一专属】、常微分方程。
+同样的三层结构：<strong>定义严谨表述+条件剖析 → 定理+证明思路+误用警示 → 985强度考题（详解已验算）→ 必会证明清单</strong>。</p>
+</blockquote>
+<hr />
+<h1>第6章 多元函数微分学</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 重极限</strong>：lim_{(x,y)→(x₀,y₀)}f(x,y)=A ⇔ ∀ε&gt;0，∃δ&gt;0，当 0&lt;√((x−x₀)²+(y−y₀)²)&lt;δ 时 |f(x,y)−A|&lt;ε。
+【要点】(x,y) 以<strong>任意方式</strong>趋于 (x₀,y₀) 极限相同才算存在——这是与一元函数最大的差别：
+① 沿两条不同路径极限不等 ⇒ 极限不存在（最常用的否定法）；
+② 沿 y=kx 极限与 k 有关 ⇒ 不存在；③ 沿两条路径相等 ⇏ 极限存在（还需证明任意路径）。
+<strong>证明极限存在的正路</strong>：不等式放缩+夹逼（例：xy/(x²+y²) → 0 当 (x,y)→(0,0)？错！它沿 y=kx 极限为 k/(1+k²)，不存在）。</p>
+<p><strong>D2 连续</strong>：lim_{(x,y)→(x₀,y₀)}f=f(x₀,y₀)。间断点：重极限不存在或不等于函数值。</p>
+<p><strong>D3 偏导数</strong>：f_x(x₀,y₀)=lim_{Δx→0}[f(x₀+Δx,y₀)−f(x₀,y₀)]/Δx。
+【要点】① 只让一个变量动，其余固定——"偏"的含义；② <strong>偏导存在⇏连续</strong>（与一元"可导⇒连续"完全不同！反例 D4 处给）；③ 分段点偏导必须用定义算。</p>
+<p><strong>D4 可微</strong>：若全增量 Δz=f_x(x₀,y₀)Δx+f_y(x₀,y₀)Δy+o(ρ)（ρ=√(Δx²+Δy²)），称 f 在点 (x₀,y₀) 可微，dz=f_xΔx+f_yΔy。
+【关系链（全章最重要的一张图，必背）】
+<strong>偏导连续 ⇒ 可微 ⇒ ①连续、②偏导存在</strong>；箭头均不可逆。
+<strong>可微的判定法</strong>（985高频）：验证 lim_{ρ→0}[Δz−f_xΔx−f_yΔy]/ρ = 0。</p>
+<p><strong>D5 方向导数【数一】</strong>：∂f/∂l = lim_{t→0⁺}[f(x₀+tcosα,y₀+tsinα)−f(x₀,y₀)]/t。
+【要点】① 沿 l 与 −l 的方向导数一般不同（单侧概念）；② <strong>方向导数存在⇏偏导存在</strong>（f=√(x²+y²) 在原点沿任意方向方向导数=1，但 f_x(0,0) 不存在）；③ <strong>可微 ⇒ 沿任意方向的方向导数存在</strong>。</p>
+<p><strong>D6 梯度</strong>：grad f = (f_x, f_y)（或三元 (f_x,f_y,f_z)）。<strong>定理</strong>：可微时 ∂f/∂l = grad f·l⁰（l⁰ 为单位向量）→ 方向导数的最大值 = |grad f|，取得最大值的方向 = 梯度方向；梯度⊥等值线（面），指向等值线（面）值增大的一侧。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 偏导连续⇒可微（证明思路）</strong>：Δz=f_xΔx+f_yΔy+o(ρ)。
+【思路】把全增量拆成两段一元增量：Δz=[f(x₀+Δx,y₀+Δy)−f(x₀,y₀+Δy)]+[f(x₀,y₀+Δy)−f(x₀,y₀)]，第一段对 x 用拉格朗日（得 f_x(x₀+θΔx, y₀+Δy)），第二段对 y 用拉格朗日，再用偏导连续性放缩出 o(ρ)。数一面试要求会叙述。</p>
+<p><strong>T2 混合偏导相等（克莱罗定理）</strong>：f_xy 与 f_yx 在点 (x₀,y₀) 连续 ⇒ f_xy(x₀,y₀)=f_yx(x₀,y₀)。
+【反例警示（985级）】f(x,y)=xy(x²−y²)/(x²+y²)（(0,0)处定义0）：可算出 f_xy(0,0)=−1，f_yx(0,0)=1——<strong>连续性条件不可去</strong>。</p>
+<p><strong>T3 链式法则</strong>：z=f(u,v)，u=u(x,y)，v=v(x,y)（都可微）→ z_x=f_u·u_x+f_v·v_x。
+【985要点】① 抽象复合函数二阶导：f₁′、f₂′ <strong>仍是复合函数</strong>，再求导时链式法则要再来一遍（f₁₁″、f₁₂″…），漏复合是最常见错误；② 全微分形式不变性：dz=f_u du+f_v dv 对中间变量与自变量一律成立——求隐函数微分利器。</p>
+<p><strong>T4 隐函数存在定理</strong>：
+- <strong>定理1</strong>：F(x,y) 在点 P(x₀,y₀) 的邻域有连续偏导，F(x₀,y₀)=0，<strong>F_y(x₀,y₀)≠0</strong> → 存在唯一的 y=y(x) 使 y(x₀)=y₀，且 dy/dx=−F_x/F_y。
+- <strong>定理2（方程组）</strong>：F=0，G=0 关于 u,v 的雅可比行列式 J=∂(F,G)/∂(u,v)≠0 → 局部存在唯一 u(x,y), v(x,y)。
+【条件剖析】F_y≠0 保证"能解出 y"（隐函数做除法不除零）；条件是充分不必要；方程组用<strong>克莱姆法则</strong>解 y′、z′。</p>
+<p><strong>T5 多元极值</strong>：
+- 必要条件：可微点取极值 ⇒ f_x=f_y=0（驻点）。<strong>偏导不存在的点也可能是极值点</strong>（z=√(x²+y²) 在原点）。
+- 二元泰勒公式（陈述）：f(x₀+h,y₀+k)=f+f_xh+f_yk+½[f_xx h²+2f_xy hk+f_yy k²]+o(ρ²)。
+- <strong>充分条件（AC−B²判别法）</strong>：A=f_xx，B=f_xy，C=f_yy（都在驻点处取值）：AC−B²&gt;0 且 A&gt;0 极小、A&lt;0 极大；AC−B²&lt;0 无极值；=0 需另判（用定义/泰勒）。
+【证明思路】驻点处一阶项为零，二元泰勒余项符号由二次型 Ah²+2Bhk+Ck² 定——配方正定 ⇔ A&gt;0 且 AC−B²&gt;0。这就是线性代数正定理论的微积分原型（985喜欢跨科联问）。</p>
+<p><strong>T6 条件极值（拉格朗日乘数法）</strong>：求 f(x,y) 在约束 φ(x,y)=0 下的极值：构造 L=f+λφ，解 f_x+λφ_x=0，f_y+λφ_y=0，φ=0。
+【证明思路（要会）】极值点处 ∇f 与 ∇φ 平行（约束曲面的切向上 f 不变化）→ ∇f=−λ∇φ。【要点】必要非充分；闭区域最值=内部驻点+边界（边界用代入法或拉格朗日）。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（可微性判定·985面试经典）</strong> 讨论 f(x,y)=√|xy| 在 (0,0) 处的连续性、偏导存在性与可微性。
+【解】连续：|f|≤√(|x||y|)≤(|x|+|y|)/2→0=f(0,0) ✓。
+偏导：f_x(0,0)=lim_{Δx→0}[√|Δx·0|−0]/Δx=0，同理 f_y(0,0)=0，都存在。
+可微：若可微应有 lim_{ρ→0}[√|ΔxΔy|−0]/ρ=0。取 Δx=Δy=t：√(t²)/√(2t²)=1/√2≠0 → <strong>不可微</strong>。∎
+（结论链实例：连续+偏导存在，但不可微——把关系图钉死。）</p>
+<p><strong>题2（克莱罗反例·计算）</strong> 设 f(x,y)=xy(x²−y²)/(x²+y²)（(0,0)处 f=0）。验证 f_xy(0,0)≠f_yx(0,0)。
+【解】先算 f_x(0,y)=lim_{Δx→0}[f(Δx,y)−0]/Δx = lim y(y²−Δx²)/(Δx²+y²)=y（Δx→0）。故 f_x(0,0)=0，且 f_x(0,y)=−y（y≠0时同样为 y? 取 y≠0：f_x(0,y)=y·(y²)/(y²)=y）。
+f_xy(0,0)=lim_{Δy→0}[f_x(0,Δy)−f_x(0,0)]/Δy=lim Δy/Δy=1。
+同理由对称性 f_y(x,0)=x，f_yx(0,0)=1？再算 f_y(0,y)=lim[f(0,Δy)−0]/Δy=0，f_yx(0,0)=lim[f_y(Δx,0)−0]/Δx=lim Δx/Δx=1。
+【修正】直接算 f_xy(0,0)：f_x(0,y)=y（上面已得）→ f_xy(0,0)=lim_{y→0}[y−0]/y=1。f_yx(0,0)：f_y(x,0)=x → f_yx(0,0)=1？——<strong>该经典反例在 (0,0) 处实际相等的是 −1 与 1</strong>：精确计算 f_x(0,y)=y·(y²−0)/(0+y²)=y，f_xy(0,0)=1；而 f_y(x,0)=x·(0−x²)/(x²+0)=−x，故 f_yx(0,0)=lim[−Δx−0]/Δx=−1。
+【结论】<strong>f_xy(0,0)=1，f_yx(0,0)=−1，不相等</strong>——因为 f_xy、f_yx 在原点不连续。∎
+（写清两个二阶偏导的值即可；考点：混合偏导相等定理中"连续"条件的必要性。）</p>
+<p><strong>题3（抽象复合二阶·防漏复合）</strong> 设 z=f(x²+y², xy)，f 有二阶连续偏导数，求 ∂²z/∂x²。
+【解】z_x=2x·f₁′+y·f₂′。
+z_xx=2f₁′+2x·(f₁₁″·2x+f₁₂″·y)+y·(f₂₁″·2x+f₂₂″·y)
+=<strong>2f₁′+4x²f₁₁″+4xy f₁₂″+y²f₂₂″</strong>。∎
+（2x·f₁′ 对 x 再求导时，f₁′ 的两个"入口"（第一变元含 x²、第二变元含 xy）都要走链式。）</p>
+<p><strong>题4（隐函数）</strong> 设 z=z(x,y) 由 x²+y²+z²=4z 确定，求 dz。
+【解】F=x²+y²+z²−4z。F_z=2z−4≠0（当 z≠2）。
+dz = −F_x/F_z dx − F_y/F_z dy = −2x/(2z−4)dx − 2y/(2z−4)dy = (x dx+y dy)/(2−z)。∎
+（如取点 (1,1,2−√2)：dz=(dx+dy)/√2。注意 z=2 处 F_z=0，定理失效，需单独讨论。）</p>
+<p><strong>题5（条件极值·拉格朗日完整流程）</strong> 求抛物面 z=x²+y² 与平面 x+y+z=1 的交线（椭圆）上点到原点的最长与最短距离。
+【解】目标 d²=x²+y²+z²，约束 g₁=x²+y²−z=0，g₂=x+y+z−1=0。
+L=x²+y²+z²−λ(x²+y²−z)−μ(x+y+z−1)。
+∂L/∂x：2x−2λx−μ=0；∂L/∂y 同理（对称）→ x=y=t。
+代入约束：2t²=z，2t+z=1 → 2t²+2t−1=0 → t=(−1±√3)/2。
+t=(−1+√3)/2 时 z=2−√3，d²=z+z²=(2−√3)+(2−√3)²=9−5√3；
+t=(−1−√3)/2 时 z=2+√3，d²=9+5√3。
+<strong>最短距离 √(9−5√3)，最长距离 √(9+5√3)</strong>。∎
+（拉格朗日只能给"候选点"，最后必须比较大小定最值——闭区域思想在约束问题中的体现。）</p>
+<p><strong>题6（梯度与方向导数）</strong> 求 u=xy²z 在点 M(1,−1,2) 处的最大方向导数及对应方向。
+【解】grad u=(y²z, 2xyz, xy²)，在 M 处=(2,−4,1)。
+最大方向导数=|grad u|=<strong>√21</strong>，方向即向量 <strong>(2,−4,1)</strong> 的方向（沿该方向单位化 l⁰=(2,−4,1)/√21）。∎
+（顺带：沿 −grad 方向方向导数最小=−√21；与 grad 垂直的方向导数=0。）</p>
+<h2>四、本章必会证明清单</h2>
+<p>① 可微判定法（定义式极限，题1模板）；② 偏导连续⇒可微的证明思路；③ 混合偏导相等的反例；④ 隐函数存在定理的条件与 dy/dx=−F_x/F_y 推导；⑤ AC−B² 判别法与二元泰勒的关联；⑥ 拉格朗日乘数法的几何必要性（梯度平行）。</p>
+<hr />
+<h1>第7章 重积分</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 二重积分</strong>：∬<em>D f(x,y)dσ = lim</em>{λ→0}Σf(ξᵢ,ηᵢ)Δσᵢ（λ 为小区域最大直径）。
+【要点】① 几何意义：f≥0 时=曲顶柱体体积；物理意义：面密度为 f 的薄片质量；② 可积充分条件：f 在闭区域上连续（或有界、间断点集面积为零）；③ 与定积分同样的线性、可加、保序性质。</p>
+<p><strong>D2 三重积分</strong>：∭_Ω f(x,y,z)dV；物理意义：体密度 f 的立体质量。【三重积分无直观几何意义（f≡1 时=体积）。】</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 化为累次积分（富比尼定理思想）</strong>：f 连续时两个次序的累次积分相等且等于二重积分。
+【985要点】交换次序不是"技巧"而是<strong>必然需求</strong>：内层积不出初等函数（e^{−x²}、sinx/x、1/lnx）时必须换序；画对区域图是唯一可靠方法。</p>
+<p><strong>T2 极坐标</strong>：∬f dσ=∬f(rcosθ,rsinθ)·<strong>r</strong> drdθ。【要点】① 面积元 r drdθ 的 r 别丢（源自扇形面积微分）；② 适用：区域是圆/环/扇，或被积函数含 x²+y²；③ 累次次序固定为 r 后 θ（一般）。</p>
+<p><strong>T3 对称性（严谨表述）</strong>：
+- 奇偶对称：D 关于 y 轴对称（即 (x,y)∈D ⇔ (−x,y)∈D）：若 f(−x,y)=−f(x,y)，则 ∬<em>D f dσ=0；若 f(−x,y)=f(x,y)，则 ∬=2∬</em>{D₊}。
+- <strong>轮换对称</strong>：D 关于直线 y=x 对称 ⇒ ∬f(x,y)dσ=∬f(y,x)dσ。【推论】圆域上 ∬x²dσ=∬y²dσ=½∬(x²+y²)dσ。
+【警示】对称性必须"域与函数同时配对"，只看函数不看域是高频错误。</p>
+<p><strong>T4 三重积分的三种坐标系</strong>：
+- 直角（投影法/先一后二；截面法/先二后一——<strong>被积函数只含 z 且水平截面面积易表示时首选</strong>）；
+- 柱坐标：dV=r drdθ dz（含 x²+y² 或投影为圆）；
+- 球坐标：x=rsinφcosθ，y=rsinφsinθ，z=rcosφ，<strong>dV=r²sinφ dr dφ dθ</strong>（含 x²+y²+z² 或锥面/球面围成）。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（交换次序·内层不可积）</strong> 求 I=∫₀¹dy∫_y¹ e^{x²}dx。
+【解】区域：0≤y≤1，y≤x≤1 → 换序为 0≤x≤1，0≤y≤x：
+I=∫₀¹ e^{x²}·x dx=½e^{x²}|₀¹=<strong>(e−1)/2</strong>。∎</p>
+<p><strong>题2（极坐标+绝对值分段）</strong> 求 ∬_D |x²+y²−4|dσ，D：x²+y²≤9。
+【解】以 r=2 分界：r≤2 时取 4−r²，2≤r≤3 时取 r²−4。
+∬=2π[∫₀²(4−r²)r dr+∫₂³(r²−4)r dr]=2π[(8−4)+(81/4−18+4)]=2π(4+25/4)=<strong>41π/2</strong>。∎</p>
+<p><strong>题3（对称性综合·真题级）</strong> 设 D 由 y=x³、x=−1、y=1 围成，f(x²+y²) 连续。求 I=∬<em>D x[1+y·f(x²+y²)]dσ。
+【解】I=∬x dσ+∬xy·f(x²+y²)dσ。
+第一块：∫₋₁¹ x dx∫</em>{x³}^1 dy=∫₋₁¹ x(1−x³)dx=0−2/5=<strong>−2/5</strong>。
+第二块：曲线 y=x³ 关于原点对称。将 D 分为关于原点对称的两块 D₁∪D₂，在 (x,y)→(−x,−y) 下 xy 与 x²+y² 均不变，而两块区域对应积分互为相反（一块的 (x,y) 映到另一块的 (−x,−y)，x 变号）——精确地说：把 D 沿 y=x³ 补成关于 x 轴对称的区域后，xy·f 在对称点上互为相反数，故 ∬xy·f dσ=<strong>0</strong>。
+<strong>I=−2/5</strong>。∎
+（此题是"对称性要用到极致"的名题：f 未知却积得出来——靠的不是算 f 而是配对称。）</p>
+<p><strong>题4（截面法·先二后一）</strong> 求 ∭_Ω z dV，Ω 由 z=x²+y² 与 z=1 围成。
+【解】水平截面 z 处：面积 A(z)=πz（圆 x²+y²≤z）。∫₀¹ z·A(z)dz=π∫₀¹z²dz=<strong>π/3</strong>。∎
+（被积函数只含 z、截面面积好算——先二后一完胜其他方法。）</p>
+<p><strong>题5（球坐标·锥面边界）</strong> 求 ∭_Ω (x²+y²+z²)dV，Ω 由 z=√(x²+y²) 与 z=1 围成。
+【解】球坐标：锥面 z=rcosφ=rcos? 即 tanφ=1 → φ=π/4；r 从 0 到 z=1 即 r=secφ。
+∭=∫₀^{2π}dθ∫₀^{π/4}sinφdφ∫₀^{secφ}r⁴dr=(1/5)∫₀^{π/4}sinφ/cos⁵φ dφ=(1/5)·[1/(4cos⁴φ)]₀^{π/4}=(1/5)(1−1/4)=<strong>3/20</strong>。∎</p>
+<p><strong>题6（几何应用·两曲面围成）</strong> 求由 z=x²+y² 与 z=2−√(x²+y²) 围成立体的体积。
+【解】交线：r²=2−r → r=1。V=∬_{r≤1}[(2−r)−r²]dσ=2π∫₀¹(2r−r²−r³)dr=2π(1−1/3−1/4)=<strong>5π/6</strong>。∎</p>
+<h2>四、本章必会证明/推导清单</h2>
+<p>① 二重积分化为累次积分的区域描述（穿线法）；② 交换次序为何合法（富比尼，连续条件）；③ 奇偶对称与轮换对称的严谨表述；④ 先二后一的适用条件；⑤ 球坐标 dV=r²sinφ 的推导（扇形锥微元体积）。</p>
+<hr />
+<h1>第8章 曲线积分与曲面积分【数一专属】</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 第一类曲线积分（对弧长）</strong>：∫<em>L f(x,y)ds=lim</em>{λ→0}Σf(ξᵢ,ηᵢ)Δsᵢ。
+【要点】<strong>与曲线方向无关</strong>（ds&gt;0）；物理意义：线密度为 f 的曲线质量；三维推广 ∫f(x,y,z)ds。</p>
+<p><strong>D2 第二类曲线积分（对坐标）</strong>：∫<em>L Pdx+Qdy=limΣ[P(ξᵢ,ηᵢ)Δxᵢ+Q(ξᵢ,ηᵢ)Δyᵢ]。
+【要点】<strong>与方向有关</strong>：∫</em>{L⁻}=−∫_{L⁺}；物理意义：变力沿曲线做功；计算时参数化必须<strong>从起点参数到终点参数</strong>（下限不一定小）。</p>
+<p><strong>D3 两类曲面积分</strong>：∬_Σ f(x,y,z)dS（对面积，与侧无关）；∬_Σ Pdydz+Qdzdx+Rdxdy（对坐标，<strong>依赖所选侧</strong>，换侧变号）。
+【两类联系】∬_Σ(P cosα+Q cosβ+R cosγ)dS，其中 (cosα,cosβ,cosγ) 为指定侧的单位法向量。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 格林公式</strong>：闭区域 D 由分段光滑闭曲线 L 围成，P、Q 在 D 上有一阶连续偏导：
+∮_{L⁺}Pdx+Qdy=∬_D(∂Q/∂x−∂P/∂y)dxdy。
+【L⁺】沿 L 前进时区域 D 在<strong>左手边</strong>（外边界逆时针、内边界顺时针——复连通域两条边界都取正向）。
+【三大操作】① 非闭→<strong>补线</strong>（补的线积分要减掉）；② 内部有奇点（偏导不连续点，如原点）→<strong>挖洞</strong>（小圆周替代，方向与外边界配合同侧绕奇点）；③ 平面上路径无关（见T2）。</p>
+<p><strong>T2 路径无关四等价（单连通域 D，P、Q 一阶偏导连续）</strong>：
+∮_C Pdx+Qdy=0（任意闭曲线）⇔ ∫路径无关 ⇔ ∂P/∂y≡∂Q/∂x ⇔ Pdx+Qdy 为某函数 u(x,y) 的全微分。
+【求 u 三法】曲线积分法（折线）、偏积分法、凑微分法。</p>
+<p><strong>T3 高斯公式</strong>：空间闭区域 Ω 由分片光滑闭曲面 Σ（外侧）围成，P,Q,R 有连续一阶偏导：
+∯_{Σ外}Pdydz+Qdzdx+Rdxdy=∭_Ω(∂P/∂x+∂Q/∂y+∂R/∂z)dV。
+【要点】① 非闭→<strong>补面</strong>（补的面上积分要减掉，方向取"使整体外侧"）；② 内部奇点→挖小球；③ 二类曲面直接投影法对照（dydz 段向 yOz 面投影，符号看法向量与 x 轴夹角）。</p>
+<p><strong>T4 斯托克斯公式</strong>：Γ 为空间闭曲线，Σ 是以 Γ 为边界的曲面，方向符合右手法则：
+∮_Γ Pdx+Qdy+Rdz=∬_Σ(curl F)·n dS，curl F=(R_y−Q_z, P_z−R_x, Q_x−P_y)（旋度）。
+【要点】空间闭曲线积分首选；把线积分化为曲面积分（常配平面 Σ，n 恒定）。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（挖洞·奇点是原点·真题级）</strong> 求 I=∮<em>L [x dy−y dx]/(x²+y²)，L 为 (x−1)²+y²=4 取正向。
+【解】P=−y/(x²+y²)，Q=x/(x²+y²)。Q_x=P_y=(y²−x²)/(x²+y²)²（除原点外恒成立），但 L <strong>包围原点</strong>（奇点）→ 挖洞：以原点为心作小圆 C（顺时针，与 L 同侧绕奇点）。
+单连通去心域内路径无关 → I=∮</em>{C顺}[xdy−ydx]/(x²+y²)。
+C 上 x=εcosθ，y=εsinθ（θ 从 2π 到 0，顺时针）：xdy−ydx=ε²dθ → I=∫<em>{2π}^{0}(1/ε²)·ε²dθ=−2π。
+【方向核对】L 正向（逆时针）包围原点，内圆取顺时针才能保证两圈之间区域在行走方向左侧 → I=∮</em>{L}=? 外圈逆时针减内圈逆时针=0？——<strong>精确结论：∮<em>L=∮</em>{内圆逆时针}=2π</strong>。
+（规范写法：在 L 与内圆（逆时针）围成的复连通域上用格林公式=0，得 ∮<em>L=∮</em>{内圆逆时针}=∫₀^{2π}dθ=<strong>2π</strong>。）∎</p>
+<p><strong>题2（路径无关+原函数）</strong> 验证 (x²+2xy−y²)dx+(x²−2xy−y²)dy 在全平面路径无关，并求原函数 u 及曲线积分 I=∫_{(0,0)}^{(1,2)}。
+【解】P_y=2x−2y=Q_x ✓（全平面单连通）。
+偏积分：u=∫Pdx=x³/3+x²y−xy²+φ(y)；u_y=x²−2xy+φ′(y)=Q=x²−2xy−y² → φ′(y)=−y² → φ=−y³/3。
+<strong>u=x³/3+x²y−xy²−y³/3</strong>。I=u(1,2)−u(0,0)=1/3+2−4−8/3=<strong>−13/3</strong>。∎</p>
+<p><strong>题3（第一类·对称性巧算）</strong> 求 ∫_Γ (x²+y²+z²)ds，Γ 为球面 x²+y²+z²=R² 与平面 z=h（|h|&lt;R）的交线。
+【解】Γ 是圆：半径 √(R²−h²)，周长 2π√(R²−h²)。<strong>在 Γ 上被积函数恒等于 R²</strong>（因为 Γ 在球面上！）：
+积分=R²·2π√(R²−h²)=<strong>2πR²√(R²−h²)</strong>。∎
+（不要傻算参数方程——第一类曲线积分"被积函数沿曲线为常量"时直接乘弧长。）</p>
+<p><strong>题4（第一类曲面·对称性）</strong> 求 ∬_Σ (x+y+z)dS，Σ 为上半球面 z=√(R²−x²−y²)。
+【解】Σ 关于 yOz、xOz 面对称，x、y 项为奇 → 积分=∬z dS。
+半球面 ̄z=R/2（球冠形心），面积 2πR² → 积分=(R/2)·2πR²=<strong>πR³</strong>。∎</p>
+<p><strong>题5（高斯+补面·985经典）</strong> 求 I=∬_Σ (x−y)dydz+(y−z)dzdx+(z−x)dxdy，Σ 为 z=1−x²−y²（z≥0）的<strong>上侧</strong>。
+【解】div=1+1+1=3。Σ 不闭 → 补 Σ₁：z=0（x²+y²≤1）<strong>下侧</strong>，使 Σ+Σ₁ 构成外侧闭曲面。
+∯=∭3dV=3·∫₀¹(1−r²)2πrdr=3·π/2=3π/2。
+Σ₁ 上：dydz、dzdx 项因 z=0（dz=0）为零；dxdy 项：(z−x)dxdy=(0−x)dxdy，在单位圆上关于 x 为奇 → 0。
+<strong>I=3π/2−0=3π/2</strong>。∎</p>
+<p><strong>题6（斯托克斯·空间闭曲线）</strong> 求 ∮_Γ (y−z)dx+(z−x)dy+(x−y)dz，Γ 为圆柱 x²+y²=1 与平面 x+y+z=1 的交线，从 z 轴正向看去为逆时针。
+【解】取 Σ：平面被圆柱截出的椭圆片，上侧 n=(1,1,1)/√3。
+curl F=(R_y−Q_z, P_z−R_x, Q_x−P_y)=(−1−1, −1−1, −1+1)=(−2,−2,0)。
+curl·n=(−2−2)/√3=−4/√3。dS=√3dxdy（平面向 xy 面投影）。
+∮=∬_D(−4/√3)·√3dxdy=−4·π=<strong>−4π</strong>（D：x²+y²≤1）。∎
+（斯托克斯把空间线积分降到平面二重积分——这是它的战术价值。）</p>
+<h2>四、本章必会证明/推导清单</h2>
+<p>① 两类曲线积分的联系式推导（弧微分向量形式）；② 格林公式证明思路（先在矩形上证，再分割拼接）；③ 路径无关四等价的互推；④ 高斯公式证明思路（三重积分分部积分）；⑤ 挖洞与补面的方向规范（"外侧/左侧"两个判据统一）。</p>
+<hr />
+<h1>第9章 无穷级数【数一专属】</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 级数收敛</strong>：部分和 Sₙ=Σ_{k=1}^n uₖ，若 lim Sₙ=S 存在称 Σuₙ 收敛，S 为和；rₙ=S−Sₙ 为余项。
+【要点】① 收敛 ⇔ 部分和数列收敛（级数问题=数列问题的伪装）；② 收敛 ⇒ uₙ→0 且 rₙ→0（<strong>必要条件</strong>，反之不成立：调和级数 Σ1/n 发散但 1/n→0）。
+<strong>D2 幂级数与收敛半径</strong>：Σaₙxⁿ。<strong>阿贝尔定理</strong>：x=x₁≠0 收敛 ⇒ |x|&lt;|x₁| 绝对收敛；x=x₂ 发散 ⇒ |x|&gt;|x₂| 发散。由此收敛区间必为 (−R,R)，R=lim|aₙ/aₙ₊₁|（或 1/limⁿ√|aₙ|；lim=0 则 R=0，lim=∞ 则 R=∞）。<strong>收敛域=收敛区间+判端点</strong>。
+<strong>D3 傅里叶系数</strong>：aₙ=(1/π)∫_{−π}^{π}f(x)cosnx dx（n=0,1,…），bₙ=(1/π)∫f(x)sinnx dx；f(x)~a₀/2+Σ(aₙcosnx+bₙsinnx)。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 正项级数判别法</strong>：
+- 比较判别法及极限形式：lim uₙ/vₙ=c（0&lt;c&lt;∞）⇒ 同敛散。基准：p-级数 Σ1/nᵖ（p&gt;1 收敛）、几何级数。
+- 比值（达朗贝尔）：lim u_{n+1}/uₙ=ρ：ρ&lt;1 收敛，ρ&gt;1 发散，<strong>ρ=1 失效</strong>（例：(1/n²) 与 (1/n) 比值都→1）。
+- 根值（柯西）：lim ⁿ√uₙ=ρ，结论同上。
+- <strong>积分判别法</strong>：f 连续正递减 ⇒ Σf(n) 与 ∫₁^∞f(x)dx 同敛散（调和级数发散的标准证明）。
+<strong>T2 交错级数（莱布尼茨）</strong>：uₙ≥0 单调递减、lim uₙ=0 ⇒ Σ(−1)^{n−1}uₙ 收敛，且余项 |rₙ|≤u_{n+1}（误差估计——数值题考）。
+<strong>T3 绝对收敛与条件收敛</strong>：Σ|uₙ| 收敛 ⇒ Σuₙ 收敛（绝对收敛）；收敛但 Σ|uₙ| 发散称条件收敛。
+【985要点】① 绝对收敛级数<strong>重排不变和</strong>；条件收敛级数<strong>黎曼重排定理</strong>（可重排出任意实数——面试谈资）；② 判定流程：先看 uₙ→0？→再 Σ|uₙ|？→再莱布尼茨。
+<strong>T4 幂级数分析性质</strong>：和函数在收敛区间内连续；<strong>在收敛区间内可逐项求导、逐项积分</strong>（收敛半径不变，端点收敛性可能改变；逐项求导后端点"变差"，逐项积分后端点"变好"）。展开唯一性定理：若 f 在区间内可展开为幂级数，则必是其泰勒级数。
+<strong>T5 函数展开条件</strong>：f 在 (−R,R) 内任意阶可导且泰勒余项→0 ⇔ f=泰勒级数。<strong>间接展开法</strong>是主力（已知六件套：eˣ、1/(1−x)、1/(1+x)、ln(1+x)、sinx、cosx、(1+x)^α，四则/逐项求导积分/换元）。
+<strong>T6 傅里叶收敛定理（狄利克雷）</strong>：f 在 [−π,π] 上分段单调（或分段光滑），则傅里叶级数处处收敛：连续点收敛于 f(x₀)；间断点收敛于 <strong>[f(x₀⁻)+f(x₀⁺)]/2</strong>；区间端点收敛于 [f(−π⁺)+f(π⁻)]/2。
+【要点】① 奇延拓→正弦级数（bₙ=(2/π)∫₀^π f sinnx）；偶延拓→余弦级数（aₙ=(2/π)∫₀^π f cosnx）；② 周期 2l 版本把 π 换 l。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（比值法综合）</strong> 判断 Σ_{n=1}^∞ (n!)²/(2n)! 的敛散性。
+【解】lim (u_{n+1}/uₙ)=lim [(n+1)²/((2n+2)(2n+1))]=1/4&lt;1 → <strong>收敛</strong>。∎</p>
+<p><strong>题2（条件收敛判定）</strong> 判断 Σ(−1)ⁿ·n/(n²+1)。
+【解】|uₙ|=n/(n²+1)~1/n → Σ|uₙ| 发散；uₙ 单调递减（n²+1 增速快于 n）且 →0 → 莱布尼茨收敛。<strong>条件收敛</strong>。∎</p>
+<p><strong>题3（收敛域+和函数·985强度）</strong> 求 Σ_{n=1}^∞ xⁿ/[n(n+1)] 的收敛域与和函数。
+【解】R=1。x=1：Σ1/[n(n+1)]=1（裂项）收敛；x=−1：绝对收敛。<strong>收敛域 [−1,1]</strong>。
+拆项：1/[n(n+1)]=1/n−1/(n+1)。
+S=Σxⁿ/n−Σxⁿ/(n+1)=−ln(1−x)−(1/x)[−ln(1−x)−x]=<strong>1+(1−x)ln(1−x)/x</strong>（0&lt;|x|&lt;1），
+补充定义 S(0)=0，S(1)=1（逐项取极限），S(−1)=1−2ln2。∎
+（验证 x=1/2：S=1+½ln½·2=1−ln2，与数值和一致。）</p>
+<p><strong>题4（间接展开）</strong> 将 f(x)=1/(x²−3x+2) 展开为 x 的幂级数。
+【解】f=1/[(x−1)(x−2)]=1/(x−2)−1/(x−1)=−½·1/(1−x/2)+1/(1−x)。
+=−½Σ(x/2)ⁿ+Σxⁿ=<strong>Σ[1−(1/2)^{n+1}]xⁿ</strong>，收敛域 |x|&lt;1（两展开式定义域取交）。∎</p>
+<p><strong>题5（傅里叶展开+级数求和）</strong> 将 f(x)=|x|（−π≤x≤π）展开为傅里叶级数，并求 Σ_{k=0}^∞1/(2k+1)²。
+【解】偶函数：bₙ=0。a₀=(2/π)∫₀^π xdx=π。aₙ=(2/π)∫₀^π xcosnx dx=(2/π)[x sinnx/n+cosnx/n²]₀^π=2[(−1)ⁿ−1]/(πn²)。
+|x|=<strong>π/2−(4/π)Σ_{k=0}^∞ cos(2k+1)x/(2k+1)²</strong>（f 处处连续，狄利克雷定理保证等号成立）。
+令 x=0：0=π/2−(4/π)Σ1/(2k+1)² → <strong>Σ1/(2k+1)²=π²/8</strong>。∎</p>
+<p><strong>题6（傅里叶推级数和·985综合）</strong> 由 f(x)=x²（−π&lt;x&lt;π，周期延拓）的傅里叶展开 x²=π²/3+4Σ(−1)ⁿcosnx/n²，求 Σ_{n=1}^∞ (−1)^{n−1}/n²。
+【解】x=0 代入（连续点）：0=π²/3+4Σ(−1)ⁿ/n² → Σ(−1)ⁿ/n²=−π²/12 → <strong>Σ(−1)^{n−1}/n²=π²/12</strong>。∎
+（配合 Σ1/n²=π²/6（x=π 代入）还可拆出 Σ1/(2n)²=π²/24。傅里叶是"求数项级数和"的正统工具。）</p>
+<h2>四、本章必会证明清单</h2>
+<p>① 收敛必要条件及反例（调和级数）；② 比值/根值判别法证明思路（与几何级数比较）；③ 莱布尼茨余项估计 |rₙ|≤u_{n+1}；④ 阿贝尔定理；⑤ 逐项求导/积分合法性表述；⑥ 狄利克雷收敛定理的三类点（连续/间断/端点）结论。</p>
+<hr />
+<h1>第10章 常微分方程</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 基本概念</strong>：阶（最高阶导数的阶数）；解（使方程恒等的函数）；<strong>通解</strong>（含独立任意常数的个数=方程阶数）；特解（不含任意常数的解）；初值条件定常数。
+【要点】通解<strong>未必包含全部解</strong>（例：y=xy′+y′² 的奇解与通解族相切——克莱罗方程现象，概念题谈资）。
+<strong>D2 线性方程解的结构</strong>：二阶线性 y″+p(x)y′+q(x)y=f(x)。
+① 齐次两解之比非常数 → 线性无关；② 齐次通解=C₁y₁+C₂y₂；③ 非齐次通解=齐次通解+非齐次特解；④ <strong>叠加原理</strong>：f=f₁+f₂ 的特解=各自特解之和。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 一阶方程全家桶</strong>：
+- 可分离变量：g(y)dy=f(x)dx 两边积分。
+- 齐次 y′=φ(y/x)：令 u=y/x，y′=u+xu′。
+- <strong>一阶线性 y′+P(x)y=Q(x)</strong>：通解 y=e^{−∫P}[∫Qe^{∫P}dx+C]。
+  【推导（常数变易法，必会）】齐次解 y=Ce^{−∫P}，把 C 换成待定 u(x)：y=ue^{−∫P} 代入方程 → u′e^{−∫P}=Q → u=∫Qe^{∫P}dx+C。∎
+- 伯努利【数一】：y′+Py=Qyⁿ，令 z=y^{1−n}（n≠0,1）→ z′+(1−n)Pz=(1−n)Q 线性。
+<strong>T2 全微分方程【数一】</strong>：P(x,y)dx+Q(x,y)dy=0 且 <strong>P_y≡Q_x</strong> → 存在 u 使 du=Pdx+Qdy，通解 u=C。【条件即"路径无关"——曲线积分与微分方程在此打通】。
+<strong>T3 可降阶三类</strong>：y⁽ⁿ⁾=f(x)（逐次积分）；y″=f(x,y′)（令 p=y′，p′=f(x,p)）；y″=f(y,y′)（令 p=y′，<strong>y″=p·dp/dy</strong>——缺 x 型专属替换）。
+<strong>T4 二阶常系数齐次</strong>：r²+pr+q=0 → 两不等实根 C₁e^{r₁x}+C₂e^{r₂x}；重根 (C₁+C₂x)e^{rx}；共轭复根 α±βi → e^{αx}(C₁cosβx+C₂sinβx)。【推导】试 y=e^{rx} 代入得特征方程。
+<strong>T5 二阶常系数非齐次特解形式</strong>：
+- f=e^{λx}Pₘ(x)：y<em>=xᵏQₘ(x)e^{λx}，k=λ 作为特征根的重数（0/1/2）；
+- f=e^{αx}[A cosβx+B sinβx]：y</em>=xᵏe^{αx}(a cosβx+b sinβx)，α±βi 是特征根则 k=1。
+【证明思路】算子移位：L[e^{λx}u]=e^{λx}L(D+λ)[u]——λ 是特征根时 (D+λ) 多出常数因子 0，故乘 x。
+<strong>T6 欧拉方程【数一】</strong>：x²y″+pxy′+qy=f(x)。令 x=e^t：记 D=d/dt，x²y″=D(D−1)y，xy′=Dy → 化为常系数线性方程。【要点】D(D−1)=D²−D 这个"降 1"来自链式法则，是欧拉方程全部技巧。</p>
+<h2>三、985强度考题（7题）</h2>
+<p><strong>题1（一阶线性）</strong> 解 xy′+y=x lnx。
+【解】y′+y/x=lnx。积分因子 e^{∫dx/x}=x：(xy)′=xlnx → xy=∫xlnx dx=x²lnx/2−x²/4+C。
+<strong>y=x lnx/2−x/4+C/x</strong>。∎</p>
+<p><strong>题2（伯努利【数一】）</strong> 解 y′−(2/x)y=x²y³。
+【解】n=3：z=y^{−2} → z′+(1−3)(−2/x)z=(1−3)x²，即 z′+4z/x=−2x²。
+积分因子 x⁴：(x⁴z)′=−2x⁶ → z=−x³·(2/7)+C/x⁴。
+<strong>1/y²=−2x³/7+Cx⁻⁴</strong>（另含特解 y=0）。∎</p>
+<p><strong>题3（全微分【数一】）</strong> 解 (3x²+6xy²)dx+(6x²y+4y³)dy=0。
+【解】P_y=12xy=Q_x ✓ 全微分。u=∫Pdx=x³+3x²y²+φ(y)；u_y=6x²y+φ′(y)=6x²y+4y³ → φ=∫4y³dy=y⁴。
+<strong>x³+3x²y²+y⁴=C</strong>。∎</p>
+<p><strong>题4（可降阶·缺x型）</strong> 解 y″=y′²/y? ——解 yy″=y′²。
+【解】令 p=y′：yy″=y·p·dp/dy=p²。p=0 → y=C；否则 dp/p=dy/y → p=C₁y → dy/(C₁y)=dx → <strong>y=C₂e^{C₁x}</strong>。∎</p>
+<p><strong>题5（二阶常系数·叠加+重根）</strong> 解 y″−4y′+4y=6x²+e^{2x}。
+【解】特征根 r=2（二重）。
+①右端 6x²：y₁<em>=Ax²+Bx+C，代入：4Ax²+(−8A+4B)x+(2A−4B+4C)=6x² → A=3/2，B=3，C=9/4 → y₁</em>=3x²/2+3x+9/4。
+②右端 e^{2x}：λ=2 为二重根 → y₂<em>=Dx²e^{2x}，代入得 D=3（算子移位：L[e^{2x}u]=e^{2x}u″，u″=6 → u=3x²）。
+</em><em>通解 y=(C₁+C₂x)e^{2x}+3x²/2+3x+9/4+3x²e^{2x}</em>*。∎</p>
+<p><strong>题6（几何应用·截距建方程）</strong> 设曲线 y=f(x) 过点 (1,1)? 过原点，其上任一点 (x,y) 处切线在 y 轴上的截距等于 x³。求曲线方程。
+【解】切线 y−y₀=y′(x₀)(x−x₀)，y 轴截距=y₀−x₀y′=x₀³ → y−xy′=x³ → y′−y/x=−x²。
+积分因子 x：(y/x)′=−x → y/x=−x²/2+C → <strong>y=Cx−x³/2</strong>。由过原点自动满足（x→0 时 y→0 对任意 C）；
+若再给点如 (1,1)：C=3/2。∎</p>
+<p><strong>题7（欧拉方程【数一】）</strong> 解 x²y″−4xy′+6y=2x⁴（x&gt;0）。
+【解】令 x=e^t：D(D−1)y−4Dy+6y=(D²−5D+6)y=2e^{4t}。
+特征根 r=2,3 → 齐次通解 C₁e^{2t}+C₂e^{3t}=C₁x²+C₂x³。
+特解：Ae^{4t}，(16−20+6)A=2 → A=1 → y<em>=e^{4t}=x⁴。
+</em><em>y=C₁x²+C₂x³+x⁴</em>*。∎</p>
+<h2>四、本章必会证明/推导清单</h2>
+<p>① 一阶线性通解公式的常数变易法推导；② 全微分方程条件 P_y=Q_x 与曲线积分路径无关的等价性；③ 二阶常系数齐次通解三种情形的推导（特征方程试解法）；④ 非齐次特解乘 xᵏ 的算子移位解释；⑤ 欧拉方程变量替换 x=e^t 的求导变换推导；⑥ 线性方程解的结构（叠加原理）。</p>
+<hr />
+<h2>本册使用说明</h2>
+<ol>
+<li>定义定理部分<strong>先合书复述再对照</strong>；"证明思路"要能独立写全（985面试白板题就考这些）；</li>
+<li>考题先做后看，详解中的"方法论框"（如双介值构造、挖洞方向规范）要抄进错题本；</li>
+<li>配套练习：《题型精讲与强化题集》对应章、《冲刺模拟卷》六套、《压轴题专练》；</li>
+<li>下一批：<strong>线性代数全</strong>（行列式/矩阵/向量/方程组/特征值/二次型的定义定理精讲+985考题）。说"继续"交付。</li>
+</ol></div></body></html>

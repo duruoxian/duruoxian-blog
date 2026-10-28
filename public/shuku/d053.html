@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408全真模拟卷7 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 全真模拟卷（自编·第七套）</h1>
+<blockquote>
+<p>结构同真题：40×2' 选择 + 7道综合题共70分 = 150分，180分钟。答案解析在卷末（选择题答案随题给出）。</p>
+</blockquote>
+<h1>一、单项选择题（每题2分）</h1>
+<h2>数据结构（1~11）</h2>
+<p><strong>1.</strong> 若线性表最常用的操作是<strong>存取第 i 个元素及其前驱的值</strong>，则宜采用：
+A. <strong>顺序表</strong>　B. 带头结点单链表　C. 循环单链表　D. 双链表</p>
+<blockquote>
+<p><strong>A</strong>。随机访问是顺序表的独门优势，链表按位存取 O(n)。</p>
+</blockquote>
+<p><strong>2.</strong> 中缀表达式 A+B<em>C 的后缀表达式为：
+A. </em><em>ABC</em>+*<em>　B. AB+C</em>　C. ABC+<em>　D. AB</em>C+</p>
+<blockquote>
+<p><strong>A</strong>。乘法优先级高：先 B C *，再 A +。</p>
+</blockquote>
+<p><strong>3.</strong> 循环队列用数组 A[0..5]（容量6）实现，front=3、rear=0（牺牲单元法），队列中元素个数为：
+A. 2　B. <strong>3</strong>　C. 4　D. 6</p>
+<blockquote>
+<p><strong>B</strong>。(rear−front+M) mod M = (0−3+6) mod 6 = 3。</p>
+</blockquote>
+<p><strong>4.</strong> n=100 的完全二叉树的树高（根为第1层）为：
+A. 6　B. <strong>7</strong>　C. 8　D. 50</p>
+<blockquote>
+<p><strong>B</strong>。⌈log₂(n+1)⌉ = ⌈log₂101⌉ = 7（2⁶=64 &lt; 101 ≤ 128=2⁷）。</p>
+</blockquote>
+<p><strong>5.</strong> 森林的<strong>后根</strong>遍历序列对应其二叉树表示的：
+A. 先序序列　B. <strong>中序序列</strong>　C. 后序序列　D. 层次序列</p>
+<blockquote>
+<p><strong>B</strong>。树的先根→二叉树先序；树的后根→二叉树<strong>中序</strong>（森林同理）。</p>
+</blockquote>
+<p><strong>6.</strong> 用邻接表存储含 n 个顶点、e 条边的<strong>无向图</strong>，边表结点总数为：
+A. e　B. <strong>2e</strong>　C. n+e　D. e²</p>
+<blockquote>
+<p><strong>B</strong>。每条边在两个端点的边表中各出现一次。</p>
+</blockquote>
+<p><strong>7.</strong> 在 AOE 网中，关键活动的特征是：
+A. 最早开始时间最大　B. <strong>最早开始时间等于最迟开始时间（时间余量为0）</strong>　C. 一定是入度为0的顶点发出的活动　D. 工期一定最短</p>
+<blockquote>
+<p><strong>B</strong>。e=l 的活动为关键活动，其延误将推迟整个工程。</p>
+</blockquote>
+<p><strong>8.</strong> 对含 8 个元素的序列做 2 路归并排序，<strong>第一趟</strong>归并后有序段的个数为：
+A. 1　B. 2　C. <strong>4</strong>　D. 8</p>
+<blockquote>
+<p><strong>C</strong>。第一趟两两归并：8→4个长度为2的有序段。</p>
+</blockquote>
+<p><strong>9.</strong> 序列 (90, 70, 60, 40, 50, 30) 满足：
+A. 小根堆　B. <strong>大根堆</strong>　C. 二叉排序树的先序　D. 都不是</p>
+<blockquote>
+<p><strong>B</strong>。90≥(70,60)；70≥(40,50)；60≥(30)。</p>
+</blockquote>
+<p><strong>10.</strong> 以权值 {1,2,3,4} 构造哈夫曼树，其带权路径长度 WPL 为：
+A. 17　B. 18　C. <strong>19</strong>　D. 20</p>
+<blockquote>
+<p><strong>C</strong>。合并：1+2=3；3+3=6；4+6=10。WPL=4×1+3×2+(1+2)×3 = 4+6+9 = 19。</p>
+</blockquote>
+<p><strong>11.</strong> 用链地址法处理冲突的散列表，其平均查找长度：
+A. 与表长成正比　B. <strong>与装填因子α有关</strong>　C. 与关键字个数无关　D. 恒为1</p>
+<blockquote>
+<p><strong>B</strong>。ASL 是 α 的函数，与表长本身无关（这是散列表的核心性质）。</p>
+</blockquote>
+<h2>计算机组成原理（12~22）</h2>
+<p><strong>12.</strong> 16 位补码定点整数的表示范围是：
+A. −32767 ~ 32767　B. <strong>−32768 ~ 32767</strong>　C. −32768 ~ 32768　D. 0 ~ 65535</p>
+<blockquote>
+<p><strong>B</strong>。n=15 数值位：−2¹⁵ ~ 2¹⁵−1。</p>
+</blockquote>
+<p><strong>13.</strong> 超前进位加法器比行波进位加法器快，原因是：
+A. 位数更少　B. <strong>各级进位并行产生，无需逐级等待</strong>　C. 使用补码运算　D. 时钟频率更高</p>
+<blockquote>
+<p><strong>B</strong>。进位生成/传递函数并行算出所有进位。</p>
+</blockquote>
+<p><strong>14.</strong> 下列补码尾数中，<strong>已规格化</strong>的是：
+A. 0.0101　B. <strong>1.0110</strong>　C. 0.1111　D. 1.1111</p>
+<blockquote>
+<p><strong>B</strong>。补码规格化规则：<strong>符号位与最高数值位相反</strong>——正数形如 0.1xx，负数形如 1.0xx。A、C（正数最高数值位为0）、D（负数最高数值位为1）均未规格化。</p>
+</blockquote>
+<p><strong>15.</strong> DRAM 需要定期刷新的根本原因是：
+A. 读出后数据被破坏　B. <strong>存储用电容，电荷会泄漏</strong>　C. 地址线有噪声　D. 电源波动</p>
+<blockquote>
+<p><strong>B</strong>。电容漏电 → 需集中/分散刷新；"读出破坏"是破坏性读出问题，靠读后重写解决。</p>
+</blockquote>
+<p><strong>16.</strong> 2 路组相联 Cache 共 8 行，主存块号 13 应映射到的<strong>组号</strong>是：
+A. 1　B. <strong>1（13 mod 4）</strong>　C. 5　D. 2</p>
+<blockquote>
+<p><strong>B</strong>。8行2路 → 4组；组号 = 13 mod 4 = 1。</p>
+</blockquote>
+<p><strong>17.</strong> 访问 TLB 需 10ns，访问主存需 100ns，TLB 命中率 90%（未命中需先查页表再取数），则有效访存时间约为：
+A. 110ns　B. <strong>120ns</strong>　C. 210ns　D. 100ns</p>
+<blockquote>
+<p><strong>B</strong>。0.9×(10+100) + 0.1×(10+100+100) = 99+21 = 120ns。</p>
+</blockquote>
+<p><strong>18.</strong> 一地址指令中，另一个隐含的操作数通常存放在：
+A. 程序计数器PC　B. 状态寄存器　C. <strong>累加器ACC</strong>　D. 堆栈</p>
+<blockquote>
+<p><strong>C</strong>。一地址指令约定 ACC 为隐含操作数与结果存放处。</p>
+</blockquote>
+<p><strong>19.</strong> 微程序控制器中，一条机器指令对应：
+A. 一条微指令　B. <strong>一段微程序</strong>　C. 一个微命令　D. 一条机器周期</p>
+<blockquote>
+<p><strong>B</strong>。指令→微程序（若干条微指令），微指令→若干微命令。</p>
+</blockquote>
+<p><strong>20.</strong> 中断屏蔽字的作用是：
+A. 永久禁止中断　B. <strong>动态调整中断处理次序（改变响应处理优先级）</strong>　C. 记录中断源　D. 保存断点</p>
+<blockquote>
+<p><strong>B</strong>。屏蔽字让每个中断源可屏蔽部分其他中断源，从而重排处理次序；响应优先级由硬件固定。</p>
+</blockquote>
+<p><strong>21.</strong> DMA 方式传送数据期间，数据传送路径为：
+A. 外设→CPU→主存　B. <strong>外设↔主存（不经过CPU）</strong>　C. 外设→Cache→主存　D. 必须经过CPU寄存器</p>
+<blockquote>
+<p><strong>B</strong>。DMA 控制器直接掌管总线，数据在外设与主存间直达。</p>
+</blockquote>
+<p><strong>22.</strong> 键盘与主机间信息交换宜采用的 I/O 方式是：
+A. DMA　B. 通道　C. <strong>程序中断</strong>　D. 程序查询（CPU循环等待）</p>
+<blockquote>
+<p><strong>C</strong>。键盘数据率低且随机，中断方式兼顾实时与效率；查询方式浪费CPU。</p>
+</blockquote>
+<h2>操作系统（23~32）</h2>
+<p><strong>23.</strong> 下列功能中，<strong>不属于</strong>处理机管理的是：
+A. 进程控制　B. 进程同步　C. <strong>存储保护</strong>　D. 进程调度</p>
+<blockquote>
+<p><strong>C</strong>。存储保护属存储器管理。</p>
+</blockquote>
+<p><strong>24.</strong> 用户程序通过系统调用请求 I/O，执行过程中会发生：
+A. 用户态→用户态　B. <strong>用户态→核心态</strong>　C. 核心态→用户态　D. 不发生态转换</p>
+<blockquote>
+<p><strong>B</strong>。陷入(trap)指令切换到核心态执行内核代码。</p>
+</blockquote>
+<p><strong>25.</strong> 进程切换（保存当前进程上下文、恢复新进程）必定发生在：
+A. 用户态　B. <strong>核心态</strong>　C. 任何态均可　D. 中断关闭时</p>
+<blockquote>
+<p><strong>B</strong>。切换由内核完成，必须处于核心态。</p>
+</blockquote>
+<p><strong>26.</strong> 以"快速响应交互用户"为主要目标的调度算法是：
+A. 先来先服务　B. 短作业优先　C. <strong>时间片轮转</strong>　D. 高响应比优先</p>
+<blockquote>
+<p><strong>C</strong>。RR 面向交互式系统，保证响应时间上限。</p>
+</blockquote>
+<p><strong>27.</strong> 临界区管理四原则中，"让权等待"的含义是：
+A. 等待时占用CPU空转　B. <strong>进程不能进入临界区时应释放CPU并阻塞自己</strong>　C. 临界区尽量短　D. 先到先服务</p>
+<blockquote>
+<p><strong>B</strong>。避免忙等；与"有限时间内可以进入"配合。</p>
+</blockquote>
+<p><strong>28.</strong> 用于实现互斥的信号量 mutex 初值通常为：
+A. 0　B. <strong>1</strong>　C. −1　D. n</p>
+<blockquote>
+<p><strong>B</strong>。1表示临界区空闲；0表示被占；负值绝对值=等待进程数。</p>
+</blockquote>
+<p><strong>29.</strong> 通过"允许高优先级进程剥夺低优先级进程的CPU"来破坏死锁必要条件，破坏的是：
+A. 互斥条件　B. 请求并保持　C. <strong>不可剥夺</strong>　D. 循环等待</p>
+<blockquote>
+<p><strong>C</strong>。可剥夺调度破坏"不可剥夺"条件。</p>
+</blockquote>
+<p><strong>30.</strong> 页大小 2KB，逻辑地址 4500（十进制），页号2对应物理块号5，则物理地址为：
+A. 9404　B. <strong>10644</strong>　C. 4500　D. 11252</p>
+<blockquote>
+<p><strong>B</strong>。4500 = 2×2048+404 → 物理地址 = 5×2048+404 = 10644。</p>
+</blockquote>
+<p><strong>31.</strong> 页式虚拟存储中，"缺页中断"属于：
+A. 外中断　B. <strong>内中断（程序性异常）</strong>　C. 时钟中断　D. I/O中断</p>
+<blockquote>
+<p><strong>B</strong>。缺页由当前指令执行引发，属内中断；且<strong>一条指令执行期间</strong>可产生并处理。</p>
+</blockquote>
+<p><strong>32.</strong> 文件<strong>连续分配</strong>方式的突出优点是：
+A. 文件易于动态增长　B. <strong>支持随机（直接）存取</strong>　C. 无外部碎片　D. 目录简单无需FCB</p>
+<blockquote>
+<p><strong>B</strong>。由起始块号+长度即可直接定位任意块；缺点是不易扩展、有外部碎片。</p>
+</blockquote>
+<h2>计算机网络（33~40）</h2>
+<p><strong>33.</strong> 网络协议三要素中，规定"需要发出何种控制信息、完成何种动作、做出何种应答"的是：
+A. 语法　B. <strong>语义</strong>　C. 时序　D. 结构</p>
+<blockquote>
+<p><strong>B</strong>。语法=格式结构；语义=动作与应答；时序=顺序与速度匹配。</p>
+</blockquote>
+<p><strong>34.</strong> 对实时性要求高（如语音通话）的场景，传统上首选的交换方式是：
+A. <strong>电路交换</strong>　B. 报文交换　C. 分组交换　D. 信元交换</p>
+<blockquote>
+<p><strong>A</strong>。电路交换建立专用通路，通信时延小且稳定。</p>
+</blockquote>
+<p><strong>35.</strong> 采用曼彻斯特编码传输 10Mbps 的数据，其波特率为：
+A. 10Mbaud　B. <strong>20Mbaud</strong>　C. 5Mbaud　D. 40Mbaud</p>
+<blockquote>
+<p><strong>B</strong>。每比特两个信号周期 → 波特率=2×数据率。</p>
+</blockquote>
+<p><strong>36.</strong> 以太网交换机收到帧后查 MAC 表无表项时，将：
+A. 丢弃该帧　B. <strong>向除入端口外的所有端口转发（洪泛）</strong>　C. 只发往网关　D. 返回NAK</p>
+<blockquote>
+<p><strong>B</strong>。洪泛同时完成自学习（记源MAC）；目的站回应后表项补全。</p>
+</blockquote>
+<p><strong>37.</strong> 网络 192.168.1.0/24 不划分子网时，可用主机地址数为：
+A. 256　B. <strong>254</strong>　C. 255　D. 128</p>
+<blockquote>
+<p><strong>B</strong>。8位主机位 → 2⁸−2 = 254（去掉网络地址与广播地址）。</p>
+</blockquote>
+<p><strong>38.</strong> 测试到目标主机连通性所使用的 ping 程序基于的报文是：
+A. TCP SYN　B. <strong>ICMP 回送请求与回送回答</strong>　C. ARP 请求　D. UDP 广播</p>
+<blockquote>
+<p><strong>B</strong>。ping 用 ICMP 类型8/0；traceroute 用 ICMP 超时/终点不可达。</p>
+</blockquote>
+<p><strong>39.</strong> TCP 拥塞控制，初始 ssthresh=8（单位：MSS），cwnd 从1开始慢启动并线性增长（无丢包），则第 6 轮传输结束时 cwnd 为：
+A. 6　B. 8　C. <strong>10</strong>　D. 12</p>
+<blockquote>
+<p><strong>C</strong>。慢启动：轮1=1,2,4,8（轮4达门限）；轮5=9、轮6=10（拥塞避免线性+1）。</p>
+</blockquote>
+<p><strong>40.</strong> 本地域名服务器向根域名服务器查询域名时，通常采用：
+A. <strong>迭代查询</strong>　B. 递归查询　C. 反向查询　D. 组播查询</p>
+<blockquote>
+<p><strong>A</strong>。主机→本地服务器是递归；本地→根/顶级/权限通常是迭代。</p>
+</blockquote>
+<h1>二、综合应用题（共70分）</h1>
+<p><strong>41.</strong>（13分）设计算法判断一个带头结点的单链表（结点值为字符）是否中心对称（如 xyx、xyzyx），要求时间 O(n)。可借助辅助栈，说明思路并写出代码。</p>
+<blockquote>
+<p><strong>答案</strong>：快慢指针找中点，前半入栈，再与后半逐一比较。
+<code>c
+int IsSymmetric(LinkList L) {          // 有头结点
+    LNode *slow = L-&gt;next, *fast = L-&gt;next;
+    char stack[MAXSIZE]; int top = -1;
+    while (fast &amp;&amp; fast-&gt;next) {        // fast走两步、slow走一步
+        stack[++top] = slow-&gt;data;      // 前半部分入栈
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    if (fast != NULL) slow = slow-&gt;next; // 奇数长度时跳过中心结点
+    while (slow != NULL) {               // 后半与栈顶（前半逆序）比较
+        if (stack[top--] != slow-&gt;data) return 0;
+        slow = slow-&gt;next;
+    }
+    return 1;
+}</code>
+时间 O(n)，空间 O(n)。（若要求 O(1) 空间：找中点后逆转后半链再比较，最后还原。）</p>
+</blockquote>
+<p><strong>42.</strong>（10分）对序列 (49, 38, 65, 97, 76, 13, 27) 进行一趟快速排序（以第一个元素 49 为枢轴），写出每一轮交换后的序列与最终结果，并说明枢轴的最终位置及其含义。</p>
+<blockquote>
+<p><strong>答案</strong>（low=0, high=6，枢轴 49，标准"挖坑填数"过程）：
+初始：49, 38, 65, 97, 76, 13, 27
+① high 找到 27&lt;49 → 填入low位：<strong>27</strong>, 38, 65, 97, 76, 13, [ ]
+② low 前进，65&gt;49 → 填入high位：27, 38, [ ], 97, 76, 13, 65
+③ high 前进，13&lt;49 → 填入low位：27, 38, 13, 97, 76, [ ], 65
+④ low 前进至 high 相遇：枢轴 49 填入位置3。
+<strong>一趟结果：(27, 38, 13, 49, 76, 97, 65)</strong>。
+枢轴 49 落在其<strong>最终位置</strong>（第4个）：左侧全部≤49，右侧全部≥49——这正是快排"每趟确定一个元素最终位置"的性质。</p>
+</blockquote>
+<p><strong>43.</strong>（13分）将十进制数 −0.75 表示为 IEEE 754 单精度浮点数（写出三个字段与十六进制机器码），并说明 IEEE 754 中阶码全0、全1的两种特殊含义。</p>
+<blockquote>
+<p><strong>答案</strong>：−0.75 = −(0.11)₂ = −1.1×2⁻¹。
+符号位 = <strong>1</strong>；阶码 = −1+127 = 126 = <strong>0111 1110</strong>；尾数 = <strong>100 0000 0000 0000 0000 0000</strong>（隐含首位1）。
+机器码：1 01111110 10000000000000000000000 = <strong>BF40 0000H</strong>。
+特殊阶码：<strong>全0</strong> 表示非规格化数（含±0，用于极小值渐进下溢）；<strong>全1</strong> 表示无穷大（尾数=0）或 NaN（尾数≠0）。</p>
+</blockquote>
+<p><strong>44.</strong>（10分）某流水线分5段，每段耗时100ns（段间锁存延迟忽略）。(1) 连续执行10条指令的总时间；(2) 与串行执行相比的加速比；(3) 若第3条指令与第4条指令存在"先写后读"数据相关且无转发技术，需要插入几个等待周期？重新计算总时间。</p>
+<blockquote>
+<p><strong>答案</strong>：
+(1) (5+10−1)×100 = <strong>1400ns</strong>。
+(2) 串行 = 10×5×100 = 5000ns；加速比 = 5000/1400 ≈ <strong>3.57</strong>。
+(3) RAW 相关：后一条指令需等前一条写回 → <strong>插入2个等待周期</strong>（第4条在译码后停顿，直至第3条写回）：
+总时间 = 1400 + 2×100 = <strong>1600ns</strong>。（有转发技术时通常无需停顿或仅停1拍——这正是设计转发硬件的意义。）</p>
+</blockquote>
+<p><strong>45.</strong>（8分）某系统有 A、B、C 三类资源各 10、5、7 个，当前分配如下（Allocation / Max）：
+P0: A0 B1 C0 / 7,5,3　P1: 2,0,0 / 3,2,2　P2: 3,0,2 / 9,0,2　P3: 2,1,1 / 2,2,2　P4: 0,0,2 / 4,3,3
+当前 Available = (3,3,2)。用银行家算法判断系统是否处于安全状态；若安全，给出一个安全序列。</p>
+<blockquote>
+<p><strong>答案</strong>：Need = Max−Allocation：P0(7,4,3) P1(1,2,2) P2(6,0,0) P3(0,1,1) P4(4,3,1)。
+Work=(3,3,2)：P1 Need(1,2,2)≤Work → 运行完释放 → Work=(5,3,2)；
+P3 Need(0,1,1)≤ → Work=(7,4,3)；P4 Need(4,3,1)≤ → Work=(7,4,5)；
+P0 Need(7,4,3)≤ → Work=(7,5,5)；P2 Need(6,0,0)≤ → Work=(10,5,7)。
+存在安全序列 <strong>⟨P1, P3, P4, P0, P2⟩</strong> → 系统处于<strong>安全状态</strong>。</p>
+</blockquote>
+<p><strong>46.</strong>（7分）磁盘请求柱号序列：98, 183, 37, 122, 14, 124, 65, 67，磁头当前在 53 号柱面。分别求 <strong>SSTF</strong>（最短寻道时间优先）与 <strong>LOOK</strong>（向柱号增大方向，到最远请求即折返）的寻道序列与总移动道数。</p>
+<blockquote>
+<p><strong>答案</strong>：
+<strong>SSTF</strong>：53→65(12)→67(2)→37(30)→14(23)→98(84)→122(24)→124(2)→183(59)。
+总移动 = 12+2+30+23+84+24+2+59 = <strong>236 道</strong>。
+<strong>LOOK（向大）</strong>：53→65→67→98→122→124→183（最远请求，不扫到199端点）→37→14。
+总移动 = (183−53) + (183−14) = 130 + 169 = <strong>299 道</strong>。
+（注意区分：SCAN 需扫到物理端点才折返；LOOK 到最远请求即返回。）</p>
+</blockquote>
+<p><strong>47.</strong>（9分）某 IP 数据报总长 1500B（含 20B 首部），经过 MTU=576B 的链路传输。求：(1) 每个分片携带的数据长度（要求片偏移为8B的整数倍）；(2) 各分片的片偏移字段值与 MF 标志；(3) 各分片的总长度。</p>
+<blockquote>
+<p><strong>答案</strong>：数据部分 = 1500−20 = 1480B。MTU=576 → 每片最多数据 556B，取 8 的倍数 → <strong>552B</strong>。
+分片：552 + 552 + 376 = 1480 ✓。
+| 分片 | 数据长 | 片总长 | 片偏移(8B单位) | MF |
+|---|---|---|---|---|
+| 1 | 552 | 572 | 0 | 1 |
+| 2 | 552 | 572 | 69（552/8） | 1 |
+| 3 | 376 | 396 | 138（1104/8） | <strong>0</strong> |
+片偏移以 8B 为单位、相对于原数据起点；只有最后一片 MF=0。</p>
+</blockquote>
+<hr />
+<h1>卷七答案速查（选择）</h1>
+<p>1A 2A 3B 4B 5B 6B 7B 8C 9B 10C 11B / 12B 13B 14B 15B 16B 17B 18C 19B 20B 21B 22C / 23C 24B 25B 26C 27B 28B 29C 30B 31B 32B / 33B 34A 35B 36B 37B 38B 39C 40A</p></div></body></html>

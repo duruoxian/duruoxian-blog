@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>AI方向_机器学习基础精讲 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>05_人工智能方向</span></div><div class='main'><h1>AI方向 · 机器学习基础精讲（第2/4批）</h1>
+<blockquote>
+<p>面向复试与读研打底的ML全景：每个算法给<strong>原理直觉+关键公式（推导到你能讲）+复试一句话答法+高频追问</strong>。所有数学只用到你考研学过的内容（第1批九桥映射）。</p>
+</blockquote>
+<hr />
+<h1>一、ML总览（复试开场白必备）</h1>
+<p><strong>学习范式分类</strong>：
+- <strong>监督学习</strong>：有标签（分类：离散标签；回归：连续值）；
+- <strong>无监督学习</strong>：无标签（聚类、降维、密度估计）；
+- <strong>强化学习</strong>：智能体与环境交互，奖励驱动（AlphaGo、机器人）。
+<strong>基本流程（复试口述模板）</strong>：数据收集→特征工程→划分训练/验证/测试→选模型→训练（最小化损失）→调参（验证集/交叉验证）→评估（测试集）→部署。</p>
+<p><strong>过拟合与欠拟合（被问率100%）</strong>：
+- 过拟合：训练误差小、测试误差大（模型记住了噪声）；对策：<strong>正则化、增数据、降模型复杂度、早停、Dropout、交叉验证</strong>；
+- 欠拟合：训练误差也大；对策：加特征、加复杂度、减正则。
+<strong>偏差-方差分解（第1批桥2）</strong>：误差=偏差²+方差+噪声。欠拟合=偏差大；过拟合=方差大。</p>
+<hr />
+<h1>二、监督学习：回归家族</h1>
+<h2>2.1 线性回归（Linear Regression）</h2>
+<p><strong>模型</strong>：ŷ=wᵀx+b；<strong>损失</strong>：MSE=⅟ₙΣ(yᵢ−ŷᵢ)²。
+<strong>解析解（正规方程，推导要点）</strong>：令 ∂L/∂w=0 → <strong>w=(XᵀX)⁻¹Xᵀy</strong>。
+【追问】XᵀX 不可逆怎么办？——特征线性相关或 p&gt;n：<strong>去掉相关特征/正则化（岭回归）/伪逆</strong>。这正是你线代"可逆⇔满秩"的直接应用。
+<strong>复试一句话</strong>：<em>"线性回归用最小二乘拟合超平面，解析解为正规方程；等价于高斯噪声下的极大似然估计。"</em></p>
+<h2>2.2 逻辑回归（Logistic Regression）——名字带"回归"的分类器</h2>
+<p><strong>模型</strong>：P(y=1|x)=σ(wᵀx+b)，σ(z)=1/(1+e⁻ᶻ)（sigmoid，把实数压到(0,1)）。
+<strong>损失</strong>：交叉熵 L=−Σ[y ln p+(1−y)ln(1−p)]（=伯努利的负对数似然，第1批桥2）。
+【关键性质】<strong>sigmoid的导数 σ′=σ(1−σ)</strong>——梯度和前向值共享，反传便宜。
+【对比线性回归】输出经σ映射→概率；损失从MSE换交叉熵（MSE下损失非凸+梯度消失）。
+<strong>复试一句话</strong>：<em>"逻辑回归是线性模型套sigmoid输出概率，用交叉熵（负对数似然）训练，本质是线性分类器（决策边界是超平面）。"</em>
+<strong>高频追问</strong>：为什么不用MSE？——非凸、且在饱和区梯度趋零收敛慢。</p>
+<h2>2.3 正则化：L1 vs L2（必考对比）</h2>
+<p>在损失后加惩罚：L2（岭回归）+λ‖w‖²；L1（Lasso）+λ‖w‖₁。
+| | L2 | L1 |
+|---|---|---|
+| 效果 | 权重整体变小（平滑） | <strong>部分权重精确为0→特征选择</strong> |
+| 几何直觉 | 圆等高线与约束相切（不落在轴上） | 菱形约束尖角易落在坐标轴上 |
+| 先验视角 | 高斯先验 | 拉普拉斯先验 |
+【一句话】<strong>"L1稀疏选特征，L2平滑防过拟合。"</strong>（推导直觉：菱形顶点在轴上，切点常落在顶点→其他系数为0。）</p>
+<hr />
+<h1>三、监督学习：分类全家桶</h1>
+<h2>3.1 KNN（K近邻）——没有训练过程的"懒学习"</h2>
+<p><strong>原理</strong>：找测试样本最近的K个训练样本，投票（分类）/平均（回归）；距离常用欧氏或曼哈顿。
+【要点】①K小→模型复杂易过拟合；K大→平滑易欠拟合（K=N退化为多数类）；②特征要<strong>归一化</strong>（否则量纲大的特征支配距离）；③预测代价高（要遍历全部数据，KD树/球树加速）。
+<strong>复试一句话</strong>：<em>"KNN是惰性学习：无训练、预测时找K近邻投票；K由交叉验证选，特征需归一化。"</em></p>
+<h2>3.2 朴素贝叶斯（第1批桥2的完整体）</h2>
+<p><strong>模型</strong>：P(y|x)∝P(y)ΠP(xⱼ|y)，"朴素"=<strong>条件独立性假设</strong>（给定类别，特征相互独立）。
+<strong>训练</strong>=数频次估计先验与条件概率；<strong>拉普拉斯平滑</strong>防零概率：加1计数。
+<strong>优缺</strong>：快、小数据可用、文本分类经典；独立性假设过强时效果差。
+<strong>复试一句话</strong>：<em>"朴素贝叶斯用贝叶斯公式+条件独立假设做分类，训练就是统计频率，配合拉普拉斯平滑。"</em></p>
+<h2>3.3 决策树（信息增益要会算——复试可能出计算）</h2>
+<p><strong>生长</strong>：每步选使"不纯度下降最多"的特征分裂。
+<strong>不纯度三种</strong>：
+- <strong>信息熵</strong> H(D)=−Σpₖ log₂ pₖ；
+- <strong>信息增益</strong> g(D,A)=H(D)−H(D|A)（ID3用）；
+- <strong>增益率</strong> =信息增益/特征固有值（C4.5，治"偏爱取值多的特征"）；<strong>基尼指数</strong> Gini=1−Σpₖ²（CART）。
+<strong>考题1（信息增益计算·复试级）</strong> 14个样本（9正5负），特征"天气"取值{晴5(2正3负), 阴4(4正0负), 雨5(3正2负)}。求信息增益。
+【解】H(D)=−(9/14)log₂(9/14)−(5/14)log₂(5/14)≈0.940。
+H(D|天气)=(5/14)H(2/5)+(4/14)H(1)+(5/14)H(3/5)
+=(5/14)(0.971)+0+(5/14)(0.971)=0.694。
+增益=0.940−0.694=<strong>0.246</strong>（比特）。∎
+<strong>剪枝</strong>：预剪枝（分裂前验证）/后剪枝（先生长再回剪）——防过拟合。
+<strong>复试一句话</strong>：<em>"决策树递归选信息增益（率）/基尼最大的特征分裂，用剪枝控制复杂度；可解释性强但单树易过拟合。"</em></p>
+<h2>3.4 集成学习：Bagging vs Boosting（必考对比）</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Bagging（代表：随机森林）</th>
+<th>Boosting（代表：GBDT/XGBoost）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构</td>
+<td><strong>并行</strong>：自助采样训练多棵树，投票/平均</td>
+<td><strong>串行</strong>：每棵拟合前面模型的残差（错误）</td>
+</tr>
+<tr>
+<td>目标</td>
+<td><strong>降方差</strong>（对不稳定基学习器有效）</td>
+<td><strong>降偏差</strong>（逐步逼近）</td>
+</tr>
+<tr>
+<td>样本</td>
+<td>Bootstrap有放回采样（约63.2%不同）</td>
+<td>根据前轮错误率调整样本权重/拟合残差</td>
+</tr>
+<tr>
+<td>过拟合</td>
+<td>不易</td>
+<td>深了易（要控制轮数/学习率）</td>
+</tr>
+<tr>
+<td><strong>随机森林双随机</strong>：样本随机（bootstrap）+<strong>特征随机</strong>（每次分裂只考察√p个特征）——去相关，方差降得更狠。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>GBDT直觉</strong>：第m棵树拟合 m−1 轮模型的残差（梯度提升=拟合负梯度）。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>复试一句话</strong>：<em>"Bagging并行降方差（随机森林=双随机化的树），Boosting串行降偏差（GBDT逐轮拟合残差）；XGBoost在GBDT上加二阶泰勒与正则。"</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>3.5 SVM（支持向量机）——复试深水区，讲清三层</h2>
+<p><strong>第一层 线性SVM</strong>：找<strong>间隔最大</strong>的超平面：min ½‖w‖² s.t. yᵢ(wᵀxᵢ+b)≥1。<strong>支持向量=落在间隔边界上的样本</strong>（决定模型，其他样本动一动无所谓）。
+<strong>第二层 软间隔与核技巧</strong>：软间隔（松弛变量，容忍噪声）；<strong>核技巧</strong>：不显式构造高维映射，用 k(xᵢ,xⱼ)=⟨φ(xᵢ),φ(xⱼ)⟩ 直接算高维内积（第1批桥：K半正定=Mercer条件）。<strong>为什么需要核</strong>：低维线性不可分→映射到高维可分，核函数省掉显式映射。
+<strong>第三层 对偶（能讲则加分）</strong>：原问题经<strong>拉格朗日乘数法</strong>（你高数下T6+线代）转为对偶问题，只含内积→给核技巧留了接口。
+<strong>vs 逻辑回归</strong>：两者都是线性分类器；SVM间隔最大只依赖支持向量（小样本强），逻辑回归全局概率输出。
+<strong>复试一句话</strong>：<em>"SVM找最大间隔超平面，解由少数支持向量决定；核技巧通过核函数隐式高维映射解决线性不可分，其合法性由Mercer条件（核矩阵半正定）保证。"</em></p>
+<hr />
+<h1>四、无监督学习</h1>
+<p><strong>4.1 K-means（要会演算）</strong>
+<strong>流程</strong>：①随机选K个中心；②分派每个点到最近中心；③重算中心（均值）；④重复②③至收敛。
+<strong>目标</strong>：最小化簇内平方和 SSE=ΣΣ‖x−μᵢ‖²。
+<strong>缺陷</strong>：K要预设、对初值与离群点敏感、只适合凸形簇（DBSCAN救任意形状）。
+<strong>考题2（K-means一轮演算）</strong> 一维点 {1,2,3,8,9}，K=2，初始中心 μ₁=1，μ₂=8。求两轮迭代结果。
+【解】第一轮分派：{1,2,3}→μ₁，{8,9}→μ₂；更新 μ₁=2，μ₂=8.5。
+第二轮：{1,2,3}与{8,9}不变 → 收敛。最终簇{1,2,3}与{8,9}，中心2与8.5。∎
+<strong>K怎么选</strong>：肘部法（SSE-K曲线拐点）/轮廓系数。</p>
+<p><strong>4.2 降维</strong>：PCA（第1批桥题4已算89.3%例）；t-SNE（可视化，保局部邻域）。
+<strong>4.3 异常检测/聚类评估</strong>：轮廓系数（−1~1，越大越好）、ARI等——概念级了解。</p>
+<hr />
+<h1>五、评估指标全家桶（复试计算题高发区）</h1>
+<p><strong>混淆矩阵四格</strong>：TP（真阳）、FP（假阳）、FN（假阴）、TN（真阴）。
+| 指标 | 公式 | 回答"什么重要" |
+|---|---|---|
+| 精确率 P | TP/(TP+FP) | <strong>报出来的对多少</strong>（垃圾邮件：误杀正常邮件代价大→看P） |
+| 召回率 R | TP/(TP+FN) | <strong>漏掉了多少</strong>（癌症筛查：漏诊代价大→看R） |
+| F1 | 2PR/(P+R) | P与R的调和平均 |
+| <strong>ROC-AUC</strong> | ROC曲线（TPR vs FPR扫阈值）下面积 | 排序能力；0.5=瞎猜，1=完美 |
+【调和平均的意义】惩罚短板：P=1、R=0 → F1=0（算术平均会给0.5的假象）。
+<strong>考题3（指标计算）</strong> 检测器对100样本：实际20正80负；预测"正"的30个里18个真阳；预测"负"的70个里66个真阴。求P、R、F1、准确率。
+【解】TP=18，FP=30−18=12，FN=20−18=2，TN=66。
+P=18/30=<strong>0.6</strong>；R=18/20=<strong>0.9</strong>；F1=2×0.6×0.9/1.5=<strong>0.72</strong>；Acc=(18+66)/100=<strong>84%</strong>。∎
+（陷阱：准确率84%看着高——但若全是"负"的朴素预测也有80%，类别不平衡时准确率会说谎→这就是要P/R/F1/AUC的原因，<strong>标准追问</strong>。）</p>
+<p><strong>交叉验证（K折）</strong>：数据分K份，轮流用K−1份训练1份验证，取平均——小数据下调参更稳。<strong>数据泄露</strong>警告：归一化/特征选择必须在训练折内做（复试爱问"为什么CV里嵌套pipeline"）。</p>
+<hr />
+<h1>六、本章考题补遗（3题）</h1>
+<p><strong>题4（SVM概念链）</strong> 为什么SVM的解只依赖支持向量？为什么核矩阵必须半正定？
+【答】最优超平面由带约束的间隔最大化决定；间隔边界上的样本（支持向量）的拉格朗日乘子&gt;0，其余样本乘子=0——解只由乘子&gt;0的样本线性组合表示。核半正定见第1批题5（Mercer）。∎</p>
+<p><strong>题5（模型选择）</strong> 训练准确率99%、验证准确率70%：什么问题？给出至少四种对策并说明各自代价。
+【答】过拟合（高方差）。对策：①增数据（代价：采集成本）；②正则化L1/L2（欠拟合风险↑）；③降复杂度/剪枝（表达力↓）；④早停/Dropout（第3批；需验证集监控）；⑤特征选择（可能丢有用特征）。∎</p>
+<p><strong>题6（场景选模型·复试压轴）</strong> ①垃圾邮件过滤 ②新闻自动分组（无标签） ③房价预测 ④信用评分需解释为什么拒贷。各选什么？
+【答】①朴素贝叶斯/逻辑回归（文本+概率输出）；②K-means/主题模型（无监督聚类）；③线性回归/GBDT（回归）；④决策树（可解释性：给出分裂路径="因为特征X&gt;阈值"）。∎</p>
+<hr />
+<h1>七、复试一句话答法汇总表（背这段）</h1>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性回归</td>
+<td>最小二乘拟合超平面；正规方程=(XᵀX)⁻¹Xᵀy</td>
+</tr>
+<tr>
+<td>逻辑回归</td>
+<td>线性+sigmoid，交叉熵=负对数似然</td>
+</tr>
+<tr>
+<td>L1/L2</td>
+<td>L1稀疏选特征，L2平滑防过拟合</td>
+</tr>
+<tr>
+<td>KNN</td>
+<td>惰性投票，K交叉验证选，特征要归一化</td>
+</tr>
+<tr>
+<td>朴素贝叶斯</td>
+<td>贝叶斯+条件独立，数频率+拉普拉斯平滑</td>
+</tr>
+<tr>
+<td>决策树</td>
+<td>信息增益/基尼递归分裂，剪枝防过拟合</td>
+</tr>
+<tr>
+<td>随机森林</td>
+<td>Bagging双随机，并行降方差</td>
+</tr>
+<tr>
+<td>GBDT</td>
+<td>Boosting串行拟合残差，降偏差</td>
+</tr>
+<tr>
+<td>SVM</td>
+<td>最大间隔+支持向量；核=隐式高维映射（Mercer半正定）</td>
+</tr>
+<tr>
+<td>K-means</td>
+<td>最近中心分派+均值更新；K用肘部法</td>
+</tr>
+<tr>
+<td>PCA</td>
+<td>协方差最大特征值方向投影</td>
+</tr>
+<tr>
+<td>评估</td>
+<td>癌症看召回、垃圾邮件看精确；不平衡别信准确率，看F1/AUC</td>
+</tr>
+</tbody>
+</table>
+<h2>本章必会清单</h2>
+<ol>
+<li>过拟合定义+五对策+偏差方差分解对应关系；</li>
+<li>正规方程推导与不可逆处理；逻辑回归为何用交叉熵；</li>
+<li>L1/L2几何直觉（菱形顶点）与先验视角；</li>
+<li>信息增益手算（0.246例）；ID3/C4.5/CART三代差异；</li>
+<li>Bagging/Boosting方向（方差/偏差）与随机森林双随机；</li>
+<li>SVM三层：间隔最大化→软间隔→核技巧（Mercer）；</li>
+<li>K-means一轮演算+肘部法；PCA=特征值分解；</li>
+<li>混淆矩阵四指标公式与场景选择；调和平均惩罚短板；K折交叉验证与数据泄露。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第3/4批）：深度学习基础精讲</strong>——感知机→MLP、<strong>反向传播完整推导（四行核心公式）</strong>、激活函数族、CNN（卷积/池化/参数计算）、RNN/LSTM三门结构、<strong>Transformer与注意力机制（自注意力QKV推导）</strong>、优化器（SGD/动量/Adam）、过拟合全家桶（Dropout/BatchNorm）。说"继续"交付。</p>
+</blockquote></div></body></html>

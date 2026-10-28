@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>概率统计_大题套路精讲 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>概率论与数理统计 · 大题套路精讲</h1>
+<blockquote>
+<p>数一概率大题（1-2道，约11-22分）考的就是五个套路。每个套路给"标准解题流程→例题详解→练习（带答案）"。配合《概率统计_知识点与难点》。
+📑 五个套路：01 一维随机变量及其函数｜02 二维随机变量｜03 数字特征｜04 大数定律与中心极限定理｜05 数理统计（估计与检验）</p>
+</blockquote>
+<hr />
+<h2>套路一 一维随机变量及其函数</h2>
+<h3>标准流程</h3>
+<ol>
+<li>求常数：连续型用 ∫f=1；离散型用 Σp=1；</li>
+<li>求分布函数 F(x)：<strong>分段写</strong>（x&lt;左端为0，中间积分，右端为1）；</li>
+<li>求概率：P(a&lt;X≤b)=F(b)-F(a)；连续型单点概率为0；</li>
+<li>函数分布（Y=g(X)）两法：分布函数法（先写 F_Y(y)=P{g(X)≤y} 再求导）／公式法（g 单调时 f_Y(y)=f_X(h(y))|h'(y)|）。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> 设 X 的密度 f(x)=3x²（0≤x&lt;1），否则为0。求 (1) F(x)；(2) P(X&gt;1/2)；(3) Y=X² 的密度。
+(1) F(x)=0（x&lt;0）；x³（0≤x&lt;1）；1（x≥1）。
+(2) 1-F(1/2)=1-1/8=<strong>7/8</strong>。
+(3) F_Y(y)=P(X²≤y)=P(X≤√y)=y^{3/2}（0≤y&lt;1）→ f_Y(y)=<strong>（3/2)√y</strong>（0&lt;y&lt;1）。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>f(x)=ke^{-x}（x&gt;0）：求 k、P(X≤1)、E(X)。→ k=1；1-e^{-1}；1。</li>
+<li>X~U(0,5)，求方程 4t²+4Xt+X+2=0 有实根的概率。→ 判别式 16X²-16(X+2)≥0 → X²-X-2≥0 → X≥2（X≤-1舍）→ P=<strong>3/5</strong>。</li>
+<li>X~N(2,4)? X~N(1,4)，求 P(X≤3) 与 P(|X-1|&lt;1)。→ σ=2：P(X≤3)=P(Z≤1)=0.8413；P(|Z|&lt;0.5)=2Φ(0.5)-1=0.3830。</li>
+<li>证明指数分布无记忆性：P(X&gt;s+t|X&gt;s)=P(X&gt;t)。→ 条件概率展开 = e^{-λt}。∎</li>
+</ol>
+<hr />
+<h2>套路二 二维随机变量</h2>
+<h3>标准流程</h3>
+<ol>
+<li>求常数 ∫∫f=1；边缘密度 f_X=∫f dy；</li>
+<li>独立判定：f(x,y)=f_X·f_Y 处处成立（或 P(AB)=P(A)P(B)）；</li>
+<li>条件密度 f_{X|Y}=f/f_Y（注意 y 使 f_Y&gt;0 的范围）；</li>
+<li>Z=X+Y（连续）：f_Z(z)=∫f(x,z-x)dx（卷积，画图定积分限——<strong>最容易丢分的一步</strong>）；</li>
+<li>M=max(X,Y)、N=min(X,Y)（独立时）：F_M=F²，F_N=1-(1-F)²；一般情形直接按定义算。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> f(x,y)=k(x+y)（0≤x,y≤1），否则0。求 (1) k；(2) 边缘密度与独立性；(3) P(X&lt;1/2, Y&lt;1/2)。
+(1) ∫∫(x+y)=1 → <strong>k=1</strong>。
+(2) f_X=x+1/2，f_Y=y+1/2；乘积≠f → <strong>不独立</strong>。
+(3) ∫₀^{1/2}∫₀^{1/2}(x+y)dxdy = <strong>1/8</strong>。</p>
+<p><strong>例</strong> X,Y 独立同服从 U(0,1)，求 Z=X+Y 的密度。
+f_Z(z)=∫f(x,z-x)dx：0&lt;z&lt;1 时 ∫₀^z dx=z；1≤z&lt;2 时 ∫_{z-1}^1 dx=2-z。
+f_Z(z)=z（0&lt;z&lt;1），2-z（1≤z&lt;2），否则0（三角形分布）。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>离散：P(X=i,Y=j)=k·ij? 设 P(X=i,Y=j)=k(2i+j)，i,j=0,1? 太繁，改：X,Y 独立，P(X=0)=P(X=1)=1/2，Y 同分布，求 Z=X+Y 的分布。→ Z~B(2,1/2)：P(Z=0)=1/4，P(Z=1)=1/2，P(Z=2)=1/4。</li>
+<li>(X,Y) 在由 x轴、y轴、x+y=1 围成的三角形上均匀分布，求 f_X(x)。→ f_X(x)=2x? 密度=2（三角形面积1/2）；f_X(x)=∫₀^{1-x}2dy=<strong>2(1-x)</strong>（0&lt;x&lt;1）。</li>
+<li>X,Y 独立同 N(0,1)，求 P(max(X,Y)&gt;1)。→ 1-P(both≤1)=1-Φ(1)²=1-0.8413²≈<strong>0.2923</strong>。</li>
+<li>上题求 Z=X+Y 的分布。→ Z~N(0,2)。</li>
+</ol>
+<hr />
+<h2>套路三 数字特征</h2>
+<h3>标准流程</h3>
+<ol>
+<li>E 直接算（离散 Σ；连续 ∫）；<strong>先化简再算</strong>（E(aX+b)=aE(X)+b，E(X±Y)=EX±EY 恒成立）；</li>
+<li>D(X)=E(X²)-E²(X)；D(aX+b)=a²DX；D(X±Y)=DX+DY±2Cov（独立时=Cov为0）；</li>
+<li>Cov(X,Y)=E(XY)-EXEY；双线性；ρ=Cov/√(DX·DY)；</li>
+<li>常见分布背表（见《选择填空技巧与易错点》04节）；</li>
+<li>题型：给定 f 求 E、D；二项/泊松应用题；最大最小值的期望。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> X~U(-1,2)，Y=X²，求 E(Y) 与 Cov(X,Y)。
+E(Y)=∫<em>{-1}^2 x²·(1/3)dx = [x³/9]</em>{-1}^2 = 9/9 = <strong>1</strong>。
+E(XY)=E(X³)=∫x³/3 dx = [x⁴/12]_{-1}^2 = 15/12 = 5/4；EX=(−1+2)/2=1/2。
+Cov = 5/4 - 1/2·1 = <strong>3/4</strong>。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>X~P(2)，求 E[(X-1)(X-2)]。→ E(X²-3X+2)=(6-6+2)-? E(X²)=λ+λ²=6 → 6-6+2=<strong>2</strong>。</li>
+<li>X 与 Y 独立同 N(1,4)? X~N(1,1)，Y~N(2,4) 独立，求 D(2X-3Y+1)。→ 4·1+9·4=<strong>40</strong>。</li>
+<li>袋中10球4红，不放回取3个，X为红球数，求E(X)。→ 超几何：E=np=3·4/10=<strong>1.2</strong>（不放回与放回期望相同）。</li>
+<li>X~U(0,1)? 设 X 的密度 f(x)=2x（0&lt;x&lt;1），求 E(X) 与 D(X)。→ E=∫2x²=2/3；E(X²)=∫2x⁴=1/2 → D=1/2-4/9=<strong>1/18</strong>。</li>
+</ol>
+<hr />
+<h2>套路四 大数定律与中心极限定理</h2>
+<h3>标准流程</h3>
+<ol>
+<li>设 X₁,…,Xₙ 独立同分布（EX=μ，DX=σ²），S=ΣXᵢ：
+   S ≈ N(nμ, nσ²)（列维-林德伯格）；
+   标准化：P(a&lt;S&lt;b) = Φ((b-nμ)/√(n)σ) - Φ((a-nμ)/√n σ)；</li>
+<li>二项 B(n,p) 用棣莫弗-拉普拉斯（μ=np，σ²=np(1-p)）；</li>
+<li>答题句式："由列维-林德伯格中心极限定理，(S-nμ)/(√nσ) 近似服从 N(0,1)"。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> 掷骰子100次，记点数之和为S，求 P(320&lt;S&lt;380)。
+μ=3.5×100=350，σ²=(35/12)×100≈291.67，σ≈17.08。
+P = Φ(30/17.08)-Φ(-30/17.08) = 2Φ(1.76)-1 ≈ 2×0.9608-1 = <strong>0.9216</strong>。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>某厂产品合格率0.9? 独立生产100件，合格数X~B(100,0.9)，求 P(85≤X≤95)。→ μ=90，σ=3 → P(|X-90|≤5)=2Φ(5/3)-1=2Φ(1.67)-1≈<strong>0.905</strong>。</li>
+<li>用中心极限定理估计：需多少个部件（每个寿命均值1000h，标准差100h）串联? 改：需要至少 n 个部件才使总寿命超过 100 个? 简单版：每袋糖重 X~N(100,4)（g），100袋总重超过10050g的概率? μ=10000，σ=√(100·4)=20 → P(S&gt;10050)=1-Φ(2.5)=<strong>0.0062</strong>。</li>
+<li>说明为什么可用正态近似：条件是独立同分布且方差有限（n 大时）。陈述即可。</li>
+</ol>
+<hr />
+<h2>套路五 数理统计</h2>
+<h3>标准流程</h3>
+<ol>
+<li><strong>抽样分布三件套</strong>（正态总体）：
+   X̄~N(μ,σ²/n)；(n-1)S²/σ²~χ²(n-1)；X̄⊥S²；√n(X̄-μ)/S~t(n-1)；</li>
+<li>矩估计：令 E(X)=X̄（一阶）；</li>
+<li>最大似然：L(θ)=∏f(xᵢ;θ) → lnL → 求导=0；<strong>均匀分布 U(0,θ) 的 MLE= max xᵢ</strong>（导数法失效，用"L 随 θ 增大而减小、θ≥max xᵢ"论证）；</li>
+<li>区间估计：σ²已知 μ∈X̄±z_{α/2}·σ/√n；σ²未知用 t 分位数；σ²的区间用 χ²；</li>
+<li>假设检验【数一】：写 H₀/H₁ → 选统计量 → 定拒绝域 → 计算 → 结论（两类错误概念）。</li>
+</ol>
+<h3>例题</h3>
+<p><strong>例</strong> X₁,…,Xₙ 来自 U(0,θ)。求 θ 的矩估计与最大似然估计。
+矩估计：EX=θ/2=X̄ → <strong>θ̂₁=2X̄</strong>。
+MLE：L(θ)=θ^{-n}（θ≥max xᵢ 时；否则为0），L 关于 θ 递减 → 取最小允许值 <strong>θ̂₂=max(x₁,…,xₙ)</strong>。</p>
+<p><strong>例</strong> 总体 X~N(μ,σ²)，n=9，X̄=10，S=3。求 μ 的95%置信区间（t₀.₀₂₅(8)=2.306）。
+10 ± 2.306×3/3 = 10±2.306 → <strong>(7.69, 12.31)</strong>。</p>
+<h3>练习（带答案）</h3>
+<ol>
+<li>X₁,…,Xₙ 来自 N(μ,σ²)，证明 E(S²)=σ²。→ (n-1)S²/σ²~χ²(n-1)，E(χ²(n-1))=n-1 → E(S²)=σ²。∎</li>
+<li>X~E(λ)（指数），求 λ 的矩估计与MLE。→ 均为 <strong>1/X̄</strong>。</li>
+<li>n=25，X̄=150，σ=5（已知），求 μ 的95%区间（z_{0.025}=1.96）。→ 150±1.96×1=<strong>(148.04, 151.96)</strong>。</li>
+<li>检验 H₀:μ=100（σ²=25 已知，n=16，X̄=102.5，z_{0.025}=1.96），是否拒绝？→ z=(102.5-100)/(5/4)=2&gt;1.96 → <strong>拒绝 H₀</strong>。</li>
+</ol>
+<hr />
+<h2>大题答题规范</h2>
+<ol>
+<li>定义新记号要声明（"记 X̄=…"）；</li>
+<li>求密度/分布函数<strong>分段写全</strong>（含端点外的0），漏段直接扣分；</li>
+<li>卷积积分画图定限，答案后写"（x&lt;0及x&gt;2时 f_Z=0）"补全；</li>
+<li>统计题结论句完整："由于…落在拒绝域内，故在显著性水平0.05下拒绝H₀"。</li>
+</ol></div></body></html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学公式大全 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学一 · 公式大全（按章全套，含使用条件）</h1>
+<blockquote>
+<p>原《公式速查》的完整版：数一全范围公式按章整理，<strong>标出使用条件</strong>（公式错用多半是条件不满足）。打印随身，每周默写一章。
+配套：《公式速查》（速记版）、《知识点与难点》三册（推导与例题）。</p>
+</blockquote>
+<hr />
+<h2>01 极限与连续</h2>
+<p><strong>等价无穷小（x→0）全表</strong>
+- sinx~x；tanx~x；arcsinx~x；arctanx~x；1−cosx~x²/2
+- eˣ−1~x；ln(1+x)~x；aˣ−1~x·lna；(1+x)^α−1~αx
+- <strong>二阶及以上</strong>：tanx−x~x³/3；x−sinx~x³/6；tanx−sinx~x³/2；arcsinx−x~x³/6；x−arctanx~x³/3；x−ln(1+x)~x²/2；eˣ−1−x~x²/2；1−cosx−x²/2~x⁴/24
+- 使用条件：<strong>只替换乘除因子整体</strong>；加减项需保证展开精度（或用泰勒）。</p>
+<p><strong>两个重要极限</strong>：lim_{x→0}(sinx/x)=1；lim_{x→∞}(1+1/x)ˣ=e。
+<strong>1^∞型</strong>：lim u^v = e^{lim v(u−1)}（当 u→1, v→∞）。</p>
+<p><strong>泰勒公式（麦克劳林）全套（x→0）</strong>
+- eˣ = 1+x+x²/2+x³/6+x⁴/24+…+xⁿ/n!
+- sinx = x−x³/6+x⁵/120−…；cosx = 1−x²/2+x⁴/24−x⁶/720+…
+- ln(1+x) = x−x²/2+x³/3−x⁴/4+…；(1+x)^α = 1+αx+α(α−1)x²/2+…
+- 1/(1−x) = 1+x+x²+…；arctanx = x−x³/3+x⁵/5−…
+- 带拉格朗日余项：f(x)=Σf⁽ᵏ⁾(x₀)(x−x₀)ᵏ/k! + f⁽ⁿ⁺¹⁾(ξ)(x−x₀)^{n+1}/(n+1)!（ξ介于x与x₀之间）</p>
+<p><strong>洛必达条件</strong>：0/0 或 ∞/∞；导数比极限存在（或∞）；<strong>失效时</strong>改用泰勒/夹逼。
+<strong>夹逼</strong>：n项和常用；<strong>定积分定义</strong>：lim (1/n)Σf(i/n) = ∫₀¹f(x)dx。
+<strong>渐近线</strong>：垂直x=c（lim_{x→c}y=∞）；水平y=A（lim_{x→∞}y=A）；斜y=kx+b（k=lim y/x，b=lim(y−kx)，两者均存在才谈斜渐近）。</p>
+<hr />
+<h2>02 导数与微分</h2>
+<p><strong>基本导数表</strong>：(xᵃ)'=ax^{a−1}；(aˣ)'=aˣlna；(logₐx)'=1/(xlna)；(tanx)'=sec²x；(cotx)'=−csc²x；(secx)'=secx·tanx；(cscx)'=−cscx·cotx；(arcsinx)'=1/√(1−x²)；(arctanx)'=1/(1+x²)。</p>
+<p><strong>法则</strong>：(uv)'=u'v+uv'；(u/v)'=(u'v−uv')/v²；复合链式；反函数 dy/dx=1/(dx/dy)。</p>
+<p><strong>参数方程</strong>：dy/dx=(dy/dt)/(dx/dt)；<strong>d²y/dx² = d(dy/dx)/dt ÷ (dx/dt)</strong>（分母是dx/dt，不是再对x求导）。</p>
+<p><strong>高阶导公式</strong>：
+- (e^{ax})⁽ⁿ⁾=aⁿe^{ax}；[sin(ax+b)]⁽ⁿ⁾=aⁿsin(ax+b+nπ/2)
+- [ln(1+x)]⁽ⁿ⁾=(−1)^{n−1}(n−1)!/(1+x)ⁿ；[1/(x+a)]⁽ⁿ⁾=(−1)ⁿn!/(x+a)^{n+1}
+- 莱布尼茨：(uv)⁽ⁿ⁾=ΣC(n,k)u⁽ⁿ⁻ᵏ⁾v⁽ᵏ⁾
+- 泰勒系数：f⁽ⁿ⁾(x₀)=n!·[xⁿ系数]</p>
+<p><strong>微分</strong>：dy=f'(x)dx；可微⇔可导（一元）。</p>
+<hr />
+<h2>03 中值定理（条件+结论并记）</h2>
+<table>
+<thead>
+<tr>
+<th>定理</th>
+<th>条件</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>罗尔</td>
+<td>[a,b]连续，(a,b)可导，f(a)=f(b)</td>
+<td>∃ξ：f'(ξ)=0</td>
+</tr>
+<tr>
+<td>拉格朗日</td>
+<td>[a,b]连续，(a,b)可导</td>
+<td>∃ξ：f(b)−f(a)=f'(ξ)(b−a)</td>
+</tr>
+<tr>
+<td>柯西</td>
+<td>加 g'(x)≠0</td>
+<td>[f(b)−f(a)]/[g(b)−g(a)]=f'(ξ)/g'(ξ)</td>
+</tr>
+<tr>
+<td>泰勒</td>
+<td>n阶可导</td>
+<td>f(x)=泰勒多项+f⁽ⁿ⁺¹⁾(ξ)(x−x₀)^{n+1}/(n+1)!</td>
+</tr>
+<tr>
+<td>积分中值</td>
+<td>f连续</td>
+<td>∫ₐᵇf=f(ξ)(b−a)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>构造辅助函数口诀</strong>：ξf'+f→xf；f'+λf→e^{λx}f；f'g+fg'→fg；f'g−fg'→f/g；ξf'−f→f/x。</p>
+<hr />
+<h2>04 不定积分（基本积分表）</h2>
+<ul>
+<li>∫xᵃdx=x^{a+1}/(a+1)+C（a≠−1）；∫dx/x=ln|x|+C</li>
+<li>∫eˣdx=eˣ；∫aˣdx=aˣ/lna；∫sinx dx=−cosx；∫cosx dx=sinx</li>
+<li>∫tanx dx=−ln|cosx|；∫cotx dx=ln|sinx|；∫secx dx=ln|secx+tanx|；∫cscx dx=ln|cscx−cotx|</li>
+<li>∫dx/(a²+x²)=(1/a)arctan(x/a)；∫dx/√(a²−x²)=arcsin(x/a)</li>
+<li>∫dx/√(x²±a²)=ln|x+√(x²±a²)|；∫dx/(x²−a²)=(1/2a)ln|(x−a)/(x+a)|</li>
+<li>∫√(a²−x²)dx=(x/2)√(a²−x²)+(a²/2)arcsin(x/a)</li>
+</ul>
+<p><strong>换元</strong>：√(a²−x²)→x=asint；√(a²+x²)→x=atant；√(x²−a²)→x=asect。
+<strong>分部</strong>：∫u dv=uv−∫v du（u取"反对幂指三"中靠前者）。
+<strong>区间再现</strong>：∫ₐᵇf(x)dx=∫ₐᵇf(a+b−x)dx。</p>
+<hr />
+<h2>05 定积分与反常积分</h2>
+<p><strong>性质</strong>：奇偶对称（对称区间）；周期函数∫₀^{nT}=n∫₀^T；∫₀^π x f(sinx)dx=(π/2)∫₀^π f(sinx)dx。</p>
+<p><strong>华里士公式</strong>：∫₀^{π/2}sinⁿx dx=∫₀^{π/2}cosⁿx dx = (n−1)!!/n!!·(π/2)（n偶）或 (n−1)!!/n!!（n奇）。</p>
+<p><strong>几何应用</strong>：
+- 面积（直角/参数/极坐标 S=½∫r²dθ）
+- 旋转体：绕x轴 V=π∫y²dx；绕y轴 V=2π∫x|y|dx（柱壳）
+- 弧长：∫√(1+y'²)dx；参数∫√(x'²+y'²)dt；极坐标∫√(r²+r'²)dθ
+- 旋转曲面面积：S=2π∫|y|√(1+y'²)dx</p>
+<p><strong>反常积分判敛</strong>：∫₁^∞ dx/xᵖ（p&gt;1收）；∫₀¹ dx/xᵖ（p&lt;1收）；比较判别法与极限形式。</p>
+<hr />
+<h2>06 多元函数微分学</h2>
+<ul>
+<li>可微⇒连续、偏导存在；偏导连续⇒可微；dz=fₓdx+f_ydy。</li>
+<li>隐函数：F=0 → ∂z/∂x=−Fₓ/F_z。</li>
+<li>极值判别：AC−B²&gt;0 且 A&gt;0极小/A&lt;0极大；AC−B²&lt;0非极值；=0另判。</li>
+<li>条件极值：拉格朗日 L=f+λφ。</li>
+<li>【数一】方向导数（沿l方向单位向量）：∂u/∂l=grad u·l⁰；<strong>最大方向导数=|grad u|</strong>。</li>
+<li>【数一】曲面F=0在点切平面：Fₓ(x−x₀)+F_y(y−y₀)+F_z(z−z₀)=0；法线方向向量=(Fₓ,F_y,F_z)。</li>
+</ul>
+<hr />
+<h2>07 重积分</h2>
+<ul>
+<li>二重：直角/极坐标（dσ=r drdθ）；对称性删项；<strong>轮换对称</strong>：∬f(x,y)=∬f(y,x)（域对称于y=x时）。</li>
+<li>三重：先二后一（f只含z）；柱坐标 dV=r dzdrdθ；球坐标 dV=r²sinφ drdφdθ。</li>
+<li>形心：x̄=∬x dσ / 面积（记住形心可反求积分）。</li>
+</ul>
+<hr />
+<h2>08 曲线曲面积分【数一】</h2>
+<ul>
+<li>第一类曲线：∫_L f ds，ds=√(x'²+y'²)dt；圆上用 x²+y²=R² 替换。</li>
+<li>第二类曲线：∫Pdx+Qdy；<strong>格林</strong>：∮=∬(∂Q/∂x−∂P/∂y)dxdy（<strong>闭曲线取正向</strong>）；非闭补线；奇点挖洞。</li>
+<li>路径无关四等价（单连通域内 P_y=Q_x 连续）。</li>
+<li>第一类曲面：∬f dS，dS=√(1+zₓ²+z_y²)dxdy。</li>
+<li>第二类曲面：<strong>高斯</strong>：∯=∭(∂P/∂x+∂Q/∂y+∂R/∂z)dV（<strong>外侧</strong>）；非闭补面。</li>
+<li><strong>斯托克斯</strong>：∮_L Pdx+Qdy+Rdz=∬(∂R/∂y−∂Q/∂z)dydz+(∂P/∂z−∂R/∂x)dzdx+(∂Q/∂x−∂P/∂y)dxdy（右手法则定向）。</li>
+<li>散度 div F=∂P/∂x+∂Q/∂y+∂R/∂z；旋度 rot F=(∂R/∂y−∂Q/∂z, ∂P/∂z−∂R/∂x, ∂Q/∂x−∂P/∂y)。</li>
+</ul>
+<hr />
+<h2>09 无穷级数【数一】</h2>
+<p><strong>判敛</strong>：正项——比较（p-级数：Σ1/nᵖ，p&gt;1收）、比值 lim a_{n+1}/aₙ=ρ（ρ&lt;1收）、根值；交错——莱布尼茨（单调减趋于0）；绝对收敛⇒收敛。
+<strong>几何级数</strong>：Σxⁿ=1/(1−x)（|x|&lt;1）；<strong>p级数</strong>：Σ1/n²=π²/6；Σ(−1)^{n−1}/n=ln2。
+<strong>和函数</strong>：Σnxⁿ⁻¹=1/(1−x)²；Σxⁿ/n=−ln(1−x)（[−1,1)）；Σn(n+1)xⁿ=2x/(1−x)³。
+<strong>展开式</strong>（见01章泰勒全套，收敛域：eˣ、sin、cos全域；ln(1+x)为(−1,1]；1/(1−x)为(−1,1)；arctan为[−1,1]）。
+<strong>傅里叶（周期2π）</strong>：aₙ=(1/π)∫_{−π}^{π}f(x)cosnx dx（n=0,1,…），bₙ=(1/π)∫f sinnx；
+f(x)~a₀/2+Σ(aₙcosnx+bₙsinnx)；<strong>狄利克雷收敛定理</strong>：间断点处收敛于 [f(x₀⁻)+f(x₀⁺)]/2。
+奇函数只有正弦项（bₙ=2/π∫₀^π f sinnx），偶函数只有余弦项。</p>
+<hr />
+<h2>10 常微分方程</h2>
+<ul>
+<li>一阶线性：y'+P(x)y=Q(x) → y=e^{−∫P}[∫Qe^{∫P}dx + C]。</li>
+<li>齐次 y'=φ(y/x)：令 u=y/x。</li>
+<li>伯努利 y'+Py=Qyⁿ：令 z=y^{1−n}【数一】。</li>
+<li>可降阶：y⁽ⁿ⁾=f(x)逐次积分；y''=f(x,y')令 p=y'；y''=f(y,y')令 p=y'，y''=p·dp/dy。</li>
+<li>二阶常系数齐次：r²+pr+q=0 → 两实根 C₁e^{r₁x}+C₂e^{r₂x}；重根 (C₁+C₂x)e^{rx}；共轭 e^{αx}(C₁cosβx+C₂sinβx)。</li>
+<li><strong>非齐次特解形式表</strong>：f=e^{λx}Pₘ(x) → y<em>=xᵏQₘ(x)e^{λx}（k=λ作为特征根的重数0/1/2）；f=e^{αx}(Acosβx+Bsinβx) → y</em>=xᵏe^{αx}(a cosβx+b sinβx)（α±βi是根则k=1）。</li>
+</ul>
+<hr />
+<h2>11 线性代数核心公式</h2>
+<ul>
+<li>|kA|=kⁿ|A|；|AB|=|A||B|；|A⁻¹|=|A|⁻¹；|A<em>|=|A|ⁿ⁻¹；A⁻¹=A</em>/|A|；(A<em>)</em>=|A|ⁿ⁻²A</li>
+<li>r(A+B)≤r(A)+r(B)；r(AB)≤min(r(A),r(B))；AB=O⇒r(A)+r(B)≤n；<strong>r(AᵀA)=r(A)</strong></li>
+<li>r(A*)=n（r=n）、1（r=n−1）、0（r≤n−2）</li>
+<li>特征值：Σλᵢ=tr(A)、Πλᵢ=|A|；f(A)对应f(λ)；A⁻¹→1/λ；A*→|A|/λ；相似→特征多项式相同、迹与行列式相同</li>
+<li>可对角化⇔每个特征值线性无关特征向量个数=重数；<strong>n个互异特征值⇒必可对角化</strong>；实对称必可正交对角化</li>
+<li>正定⇔各阶顺序主子式&gt;0⇔特征值全正⇔正惯性指数=n</li>
+<li>施密特正交化：β₁=α₁；β₂=α₂−[(α₂,β₁)/(β₁,β₁)]β₁</li>
+</ul>
+<hr />
+<h2>12 概率统计核心公式</h2>
+<p><strong>条件概率</strong>：P(A|B)=P(AB)/P(B)；全概率 P(A)=ΣP(Bᵢ)P(A|Bᵢ)；贝叶斯=逆问题。
+<strong>常见分布期望方差</strong>：0-1(p,p(1-p))；B(np,np(1-p))；P(λ,λ)；U(a,b)((a+b)/2,(b-a)²/12)；E(λ)(1/λ,1/λ²)；N(μ,σ²)。
+<strong>数字特征</strong>：D(X)=E(X²)−E²X；Cov(X,Y)=E(XY)−EXEY；ρ=Cov/√(DX DY)；D(X±Y)=DX+DY±2Cov（独立时±2Cov=0）。
+<strong>正态</strong>：P(|X−μ|&lt;σ)≈0.6826、2σ≈0.9544、3σ≈0.9974；标准化 Z=(X−μ)/σ。
+<strong>大数定律/CLT</strong>：独立同分布且方差存在 → (ΣXᵢ−nμ)/(√n σ) →<em> N(0,1)；二项→棣莫弗-拉普拉斯。
+</em><em>抽样分布</em><em>：X̄~N(μ,σ²/n)；(n−1)S²/σ²~χ²(n−1)；√n(X̄−μ)/S~t(n−1)；E(S²)=σ²。
+</em><em>区间估计</em><em>：σ²已知：X̄±z_{α/2}·σ/√n；σ²未知：X̄±t_{α/2}(n−1)·S/√n。
+</em><em>假设检验</em>*：选统计量→定拒绝域→算值→结论；第一类错误=拒真（概率α），第二类=取伪。</p>
+<hr />
+<h2>默写自检清单（每周抽查）</h2>
+<ol>
+<li>等价无穷小8个+高阶6个　2. 泰勒6个展开　3. 华里士公式　4. 三个中值定理条件结论　5. 弧长三种公式　6. 格林/高斯/斯托克斯及定向条件　7. 傅里叶系数公式+收敛定理　8. 二阶常系数特解形式表　9. 线代"秩与伴随"三条　10. 三大抽样分布+置信区间两公式</li>
+</ol></div></body></html>

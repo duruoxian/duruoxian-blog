@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408_算法代码题精练 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 算法代码题精练（15道 C 实现）</h1>
+<blockquote>
+<p>408 综合题第一题几乎必考"设计算法+写代码"。本册 15 道经典题型（与《数据结构_代码题》《综合题精讲》不重复），每题【题】【思路】【代码】【考点】。判分看三样：<strong>思路正确、代码可编译级的完整、复杂度说明</strong>。
+配套：《数据结构_知识点与难点》《综合题精讲》《7套模拟卷》。</p>
+</blockquote>
+<hr />
+<h3>题1 顺序表循环左移 p 位（2010真题模型）</h3>
+<p>【题】将长度 n 的顺序表 R 循环左移 p（0&lt;p&lt;n）位，要求 O(n) 时间、O(1) 空间。
+【思路】三次逆置：逆前 p 个 → 逆后 n−p 个 → 逆全部。</p>
+<pre><code class="language-c">void Reverse(int R[], int l, int r) {
+    int t;
+    while (l &lt; r) { t = R[l]; R[l++] = R[r]; R[r--] = t; }
+}
+void LeftShift(int R[], int n, int p) {
+    p = p % n;
+    Reverse(R, 0, p-1);
+    Reverse(R, p, n-1);
+    Reverse(R, 0, n-1);
+}
+</code></pre>
+<p>【考点】逆置法是 O(1) 空间重排的万能钥匙；p≥n 时取模。</p>
+<h3>题2 寻找主元素（2013真题模型）</h3>
+<p>【题】找出现次数超过 n/2 的元素（不存在返回−1），时间 O(n)、空间 O(1)。
+【思路】摩尔投票：候选计数加减，最后再验一遍。</p>
+<pre><code class="language-c">int Majority(int A[], int n) {
+    int cand = A[0], cnt = 1, i, c = 0;
+    for (i = 1; i &lt; n; i++) {
+        if (A[i] == cand) cnt++;
+        else if (--cnt == 0) { cand = A[i]; cnt = 1; }
+    }
+    if (cnt &gt; 0)
+        for (i = 0; i &lt; n; i++) if (A[i] == cand) c++;
+    return c &gt; n/2 ? cand : -1;
+}
+</code></pre>
+<p>【考点】投票法两阶段（选候选+验证），漏验证是常见扣分点。</p>
+<h3>题3 两递增序列合并为递减（头插法模型）</h3>
+<p>【题】La、Lb 均为递增单链表（带头结点），归并到 Lc 且 Lc <strong>递减</strong>，用原结点，不开新空间。
+【思路】比较两表较小者，<strong>头插</strong>进 Lc ——小的先插到头，最后小的在最后 → 自然递减。</p>
+<pre><code class="language-c">void MergeDec(LinkList La, LinkList Lb, LinkList Lc) {
+    LNode *pa = La-&gt;next, *pb = Lb-&gt;next, *t;
+    Lc-&gt;next = NULL;
+    while (pa &amp;&amp; pb) {
+        if (pa-&gt;data &lt;= pb-&gt;data) { t = pa; pa = pa-&gt;next; }
+        else                      { t = pb; pb = pb-&gt;next; }
+        t-&gt;next = Lc-&gt;next; Lc-&gt;next = t;   // 头插
+    }
+    while (pa) { t = pa; pa = pa-&gt;next; t-&gt;next = Lc-&gt;next; Lc-&gt;next = t; }
+    while (pb) { t = pb; pb = pb-&gt;next; t-&gt;next = Lc-&gt;next; Lc-&gt;next = t; }
+}
+</code></pre>
+<p>【考点】头插法自动逆序——"递增表→递减表"秒变头插题；时间 O(m+n)。</p>
+<h3>题4 单链表原地逆置（迭代+递归双版本）</h3>
+<pre><code class="language-c">/* 迭代：三指针 */
+LNode* Reverse(LinkList L) {          // 无头结点版
+    LNode *pre = NULL, *p = L, *nxt;
+    while (p) { nxt = p-&gt;next; p-&gt;next = pre; pre = p; p = nxt; }
+    return pre;
+}
+/* 递归版 */
+LNode* RevRec(LNode *p) {
+    if (p == NULL || p-&gt;next == NULL) return p;
+    LNode *newHead = RevRec(p-&gt;next);
+    p-&gt;next-&gt;next = p;                // 后继指向自己
+    p-&gt;next = NULL;
+    return newHead;
+}
+</code></pre>
+<p>【考点】递归版"假设后面已逆好"；带伪代码扣分少、缺复杂度说明扣分多。</p>
+<h3>题5 快慢指针找中间结点</h3>
+<pre><code class="language-c">LNode* Middle(LinkList L) {           // 奇数返回正中，偶数返回前一个中间
+    LNode *slow = L, *fast = L;
+    while (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    return slow;
+}
+</code></pre>
+<p>【考点】快慢指针三连用：中点、判环（相遇即有环）、回文判定（配栈）。</p>
+<h3>题6 合法出栈序列判定（栈模拟）</h3>
+<p>【题】给定入栈序列与某出栈序列，判定其是否可能。</p>
+<pre><code class="language-c">int Valid(int push[], int pop[], int n) {
+    int stack[MaxSize], top = -1, i = 0, j = 0, x;
+    for (i = 0; i &lt; n; i++) {
+        stack[++top] = push[i];                 // 依次入栈
+        while (top &gt;= 0 &amp;&amp; stack[top] == pop[j]) // 能弹则弹
+            { top--; j++; }
+    }
+    return j == n;                              // 全部弹出即合法
+}
+</code></pre>
+<p>【考点】模拟贪心：入栈后"能弹就弹"；时间 O(n)。</p>
+<h3>题7 循环队列（牺牲单元法）完整实现</h3>
+<pre><code class="language-c">#define MAXQSIZE 100
+typedef struct { int data[MAXQSIZE]; int front, rear; } SqQueue;
+int QueueEmpty(SqQueue Q){ return Q.front == Q.rear; }
+int QueueFull (SqQueue Q){ return (Q.rear+1) % MAXQSIZE == Q.front; }
+int EnQueue(SqQueue *Q, int x){
+    if (QueueFull(*Q)) return 0;
+    Q-&gt;data[Q-&gt;rear] = x;  Q-&gt;rear = (Q-&gt;rear+1) % MAXQSIZE;  return 1;
+}
+int DeQueue(SqQueue *Q, int *x){
+    if (QueueEmpty(*Q)) return 0;
+    *x = Q-&gt;data[Q-&gt;front];  Q-&gt;front = (Q-&gt;front+1) % MAXQSIZE;  return 1;
+}
+</code></pre>
+<p>【考点】牺牲一单元判满：<code>(rear+1)%M==front</code>；元素数 <code>(rear-front+M)%M</code>。</p>
+<h3>题8 二叉树三件套（高/总结点/叶子）</h3>
+<pre><code class="language-c">int Height(BiTree T){
+    if (!T) return 0;
+    int l = Height(T-&gt;lchild), r = Height(T-&gt;rchild);
+    return (l &gt; r ? l : r) + 1;
+}
+int Count(BiTree T){ return T ? 1 + Count(T-&gt;lchild) + Count(T-&gt;rchild) : 0; }
+int Leaves(BiTree T){
+    if (!T) return 0;
+    if (!T-&gt;lchild &amp;&amp; !T-&gt;rchild) return 1;
+    return Leaves(T-&gt;lchild) + Leaves(T-&gt;rchild);
+}
+</code></pre>
+<p>【考点】递归三行模板："空返回、叶特殊、左右合并"。</p>
+<h3>题9 二叉排序树的非递归插入</h3>
+<pre><code class="language-c">int BSTInsert(BiTree *T, int k) {
+    BiTree p = *T, *pre = NULL, *s;
+    while (p &amp;&amp; p-&gt;data != k) {        // 找插入位置
+        pre = p;
+        p = (k &lt; p-&gt;data) ? p-&gt;lchild : p-&gt;rchild;
+    }
+    if (p) return 0;                   // 已存在
+    s = (BiTNode*)malloc(sizeof(BiTNode));
+    s-&gt;data = k; s-&gt;lchild = s-&gt;rchild = NULL;
+    if (pre == NULL) *T = s;           // 空树
+    else if (k &lt; pre-&gt;data) pre-&gt;lchild = s;
+    else pre-&gt;rchild = s;
+    return 1;
+}
+</code></pre>
+<p>【考点】记 pre 双指针；BST 插入必插在叶子位置。</p>
+<h3>题10 图的拓扑排序（邻接表+栈）</h3>
+<pre><code class="language-c">int TopSort(ALGraph G) {
+    int indeg[MaxV] = {0}, stack[MaxV], top = -1, i, cnt = 0;
+    ArcNode *p;
+    for (i = 0; i &lt; G.vexnum; i++)
+        for (p = G.vertices[i].first; p; p = p-&gt;nextarc)
+            indeg[p-&gt;adjvex]++;
+    for (i = 0; i &lt; G.vexnum; i++)
+        if (indeg[i] == 0) stack[++top] = i;
+    while (top &gt;= 0) {
+        i = stack[top--]; printf(&quot;%d &quot;, i); cnt++;
+        for (p = G.vertices[i].first; p; p = p-&gt;nextarc)
+            if (--indeg[p-&gt;adjvex] == 0) stack[++top] = p-&gt;adjvex;
+    }
+    return cnt &gt;= G.vexnum;            // 有环则输出顶点数 &lt; n
+}
+</code></pre>
+<p>【考点】入度数组+栈；<strong>cnt&lt;n ⇒ 有环</strong>——这句结论必须写。</p>
+<h3>题11 快速选择找第 k 小（快排 partition 应用）</h3>
+<pre><code class="language-c">int QuickSelect(int A[], int low, int high, int k) {   // k从1计
+    int pivot = A[low], l = low, h = high;
+    while (l &lt; h) {
+        while (l &lt; h &amp;&amp; A[h] &gt;= pivot) h--;
+        A[l] = A[h];
+        while (l &lt; h &amp;&amp; A[l] &lt;= pivot) l++;
+        A[h] = A[l];
+    }
+    A[l] = pivot;
+    int rank = l - low + 1;
+    if (rank == k) return A[l];
+    return (rank &gt; k) ? QuickSelect(A, low, l-1, k)
+                      : QuickSelect(A, l+1, high, k-rank);
+}
+</code></pre>
+<p>【考点】partition 是快排核心——写快排=写它；平均 O(n)，只递归一侧。</p>
+<h3>题12 堆的插入（上浮调整）</h3>
+<pre><code class="language-c">void HeapInsert(int H[], int *n, int x) {   // 大根堆，H[1..n]
+    int i = ++(*n);                          // 新元素放末尾
+    while (i &gt; 1 &amp;&amp; H[i/2] &lt; x) {            // 与双亲比较
+        H[i] = H[i/2];                       // 双亲下移
+        i = i/2;
+    }
+    H[i] = x;
+}
+</code></pre>
+<p>【考点】上浮 O(log n)；对照建堆的"下沉"；删除=末尾换顶+下沉。</p>
+<h3>题13 判断二叉树是否二叉排序树（中序递增）</h3>
+<pre><code class="language-c">int pre = INT_MIN, ok = 1;                // pre记录中序前驱
+void Check(BiTree T) {
+    if (!T || !ok) return;
+    Check(T-&gt;lchild);
+    if (T-&gt;data &lt;= pre) ok = 0;           // 中序必须严格递增
+    else pre = T-&gt;data;
+    Check(T-&gt;rchild);
+}
+</code></pre>
+<p>【考点】"BST⇔中序严格递增"；全局前驱变量法优于逐结点判断（后者会重复比较）。</p>
+<h3>题14 邻接矩阵 BFS 最短路径（无权图）</h3>
+<pre><code class="language-c">void BFS_MIN_Dist(MGraph G, int v, int dist[]) {   // dist[i]: v到i最短边数
+    int queue[MaxV], front = 0, rear = 0, i, visited[MaxV] = {0};
+    for (i = 0; i &lt; G.vexnum; i++) dist[i] = INT_MAX;
+    dist[v] = 0; visited[v] = 1;
+    queue[rear++] = v;
+    while (front &lt; rear) {
+        int u = queue[front++];
+        for (i = 0; i &lt; G.vexnum; i++)
+            if (G.edges[u][i] == 1 &amp;&amp; !visited[i]) {
+                visited[i] = 1;
+                dist[i] = dist[u] + 1;     // BFS首达即最短
+                queue[rear++] = i;
+            }
+    }
+}
+</code></pre>
+<p>【考点】<strong>BFS 求无权图单源最短路径</strong>——为什么首达即最短（按层扩展），证明一句话要会写。</p>
+<h3>题15 散列表删除的正确姿势（惰性删除）</h3>
+<p>【题】开放定址法散列表中为什么不能直接物理删除元素？如何实现删除？
+【答】直接删除会<strong>截断探测链</strong>：位于同义词后方的元素将无法被查到（探测遇到空位即判定失败）。做法：</p>
+<pre><code class="language-c">typedef enum { EMPTY, USED, DELETED } SlotState;
+/* 删除：state[i] = DELETED（惰性删除，占据但不存有效值） */
+/* 查找：遇 EMPTY 才停止；遇 DELETED 继续探测 */
+/* 插入：可复用 DELETED 槽位（但查找时须继续确认后方无同义词） */
+</code></pre>
+<p>【考点】删除、查找、插入三者规则不同——是选择题与简答题双料考点。</p>
+<hr />
+<h2>大题代码规范（阅卷习惯）</h2>
+<ol>
+<li>先写<strong>算法思想</strong>（2-3行），再写代码，最后写<strong>时间/空间复杂度</strong>——三段缺一不可；</li>
+<li>伪代码可接受，但变量含义要注释；链表题说明是否有头结点；</li>
+<li>边界条件明写：空表、单结点、p≥n、满/空队；</li>
+<li>允许调用基本操作（如 <code>DestroyList</code>），但核心逻辑必须自己写。</li>
+</ol></div></body></html>

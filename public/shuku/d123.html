@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>AI方向_深度学习基础精讲 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>05_人工智能方向</span></div><div class='main'><h1>AI方向 · 深度学习基础精讲（第3/4批）</h1>
+<blockquote>
+<p>深度学习复试问答的地毯：<strong>反向传播完整推导、CNN参数计算、Transformer自注意力</strong>三大计算点全部展开；每个模块配"复试一句话答法"。数学仍然只用你考研学过的（链式法则、矩阵乘、softmax=归一化指数）。</p>
+</blockquote>
+<hr />
+<h1>一、从感知机到多层网络</h1>
+<p><strong>1.1 感知机（1957）</strong>：y=sign(wᵀx+b)，单层只能分<strong>线性可分</strong>数据（异或都解不了——历史上的"AI寒冬"导火索，复试爱当故事考）。
+<strong>1.2 多层感知机MLP</strong>：线性层叠加<strong>非线性激活</strong>→万能逼近。
+【为什么必须非线性】没有激活函数，多层线性=一层线性：W₂(W₁x)=Wx——深度就白堆了。<strong>"深度学习的深度=非线性变换的层数"</strong>。
+<strong>1.3 激活函数族（必背对比表）</strong>：
+| 激活 | 公式 | 优 / 缺 |
+|---|---|---|
+| Sigmoid | 1/(1+e⁻ˣ) | 输出(0,1)可当概率 / <strong>饱和区梯度≈0</strong>（梯度消失）、非零中心 |
+| Tanh | (eˣ−e⁻ˣ)/(eˣ+e⁻ˣ) | 零中心 / 同样饱和 |
+| <strong>ReLU</strong> | max(0,x) | 计算便宜、正区不饱和 / <strong>神经元死亡</strong>（负区梯度0） |
+| LeakyReLU | max(αx,x) | 治死亡 / 略增计算 |
+| Softmax | e^{zᵢ}/Σe^{zⱼ} | 多分类输出层专用（输出和=1的概率分布） |</p>
+<hr />
+<h1>二、反向传播完整推导（复试王牌：能白板写出就是强信号）</h1>
+<p><strong>记号</strong>：L层网络，zˡ=Wˡaˡ⁻¹+bˡ（预激活），aˡ=σ(zˡ)（激活）；损失L。
+<strong>四个核心量（四行公式）</strong>：
+① 误差信号（输出层）：<strong>δᴸ = ∂L/∂zᴸ = ∂L/∂aᴸ ⊙ σ′(zᴸ)</strong>
+② 误差回传（隐藏层）：<strong>δˡ = (Wˡ⁺¹)ᵀ δˡ⁺¹ ⊙ σ′(zˡ)</strong>
+③ 权重梯度：<strong>∂L/∂Wˡ = δˡ (aˡ⁻¹)ᵀ</strong>
+④ 偏置梯度：<strong>∂L/∂bˡ = δˡ</strong>
+【灵魂】②就是<strong>链式法则穿层</strong>（第1批桥3的两层版推广）；③是"误差×输入"的外积——<strong>转置来自分块矩阵求导的形状对齐</strong>（你线代桥1）。
+<strong>考题1（两层网络反传·手算）</strong> y=σ(w₂h)，h=σ(w₁x)，损失L=½(y−t)²，输入x=1，w₁=w₂=0.5，t=1，y=σ(0.5σ(0.5))=σ(0.2449)=0.5610。求 ∂L/∂w₁、∂L/∂w₂。
+【解】σ(0.2449)=0.5610，σ′(z₂)=0.5610×0.4390=0.2463；σ(0.5)=0.6225，σ′(z₁)=0.6225×0.3775=0.2350。
+∂L/∂y=y−t=−0.4390。
+∂L/∂w₂=∂L/∂y·σ′(z₂)·h=−0.4390×0.2463×0.6225=<strong>−0.0673</strong>。
+∂L/∂w₁=∂L/∂y·σ′(z₂)·w₂·σ′(z₁)·x=−0.4390×0.2463×0.5×0.2350×1=<strong>−0.0127</strong>。
+【观察】越往前的层梯度越小（连乘两个&lt;1的因子）——<strong>梯度消失的现场演示</strong>：这就是sigmoid深网训不动、ReLU上台的原因。∎
+<strong>梯度消失/爆炸</strong>：反传=连乘导数；|导数|&lt;1连乘→消失，&gt;1→爆炸。对策：ReLU、<strong>残差连接</strong>（梯度有"高速公路"直通）、BatchNorm、合理初始化（Xavier/He）。</p>
+<hr />
+<h1>三、CNN 卷积神经网络（计算题主战场：输出尺寸+参数量）</h1>
+<p><strong>3.1 三大件</strong>：
+- <strong>卷积层</strong>：卷积核在输入上滑动做局部加权求和——<strong>局部连接+权值共享</strong>（一个核扫全图）→参数暴降+平移等变；
+- <strong>池化层</strong>：max/avg池化降尺寸、扩大感受野、小平移不变；
+- 全连接层：末端分类。
+<strong>3.2 输出尺寸公式（必背）</strong>：
+<strong>O = ⌊(H − K + 2P)/S⌋ + 1</strong>（H输入、K核、P填充、S步长）。
+<strong>参数量公式</strong>：每层 = (K×K×Cᵢₙ+1)×Cₒᵤₜ（+1是偏置）。
+<strong>考题2（CNN双计算）</strong> 输入224×224×3，卷积核5×5、64个、padding=2、stride=2。求输出尺寸与该层参数量。
+【解】O=(224−5+4)/2+1=111.5→⌊111.5⌋+1=112？——精确：(224−5+2×2)/2+1=(223)/2+1=111+1=<strong>112</strong>（223/2=111.5向下取整111）。
+参数=(5×5×3+1)×64=<strong>4864</strong>。
+对比全连接224×224×3→同样输出通道：参数≈千万级——<strong>权值共享省了三个数量级</strong>。∎
+<strong>3.3 感受野</strong>：层层堆叠，顶层一个像素"看见"底层的范围越来越大（VGG两个3×3=一个5×5感受野、参数更少还多一次非线性——为什么深层用小核）。</p>
+<hr />
+<h1>四、RNN / LSTM（序列建模）</h1>
+<p><strong>4.1 RNN</strong>：hₜ=tanh(W_hh hₜ₋₁+W_xh xₜ+b)，隐状态=记忆。
+<strong>缺陷</strong>：长序列梯度消失→<strong>记不住长依赖</strong>（"cat...was"能接，隔100词接不上）。
+<strong>4.2 LSTM三门一槽（结构会画是加分项）</strong>：
+- <strong>遗忘门</strong> f：丢弃多少旧记忆；
+- <strong>输入门</strong> i：写入多少新信息；
+- 细胞状态 Cₜ=f⊙Cₜ₋₁+i⊙C̃ₜ（<strong>加法更新=梯度的直通车道</strong>，治RNN的连乘消失）；
+- <strong>输出门</strong> o：决定隐状态暴露多少。
+<strong>复试一句话</strong>：<em>"LSTM用门控控制信息的遗忘、写入与输出，细胞状态的加法更新让梯度可以长程传播——解决RNN长依赖。"</em>
+<strong>4.3 GRU</strong>：LSTM简化版（两门、合并细胞与隐状态），效果相当、更快。</p>
+<hr />
+<h1>五、Transformer 与注意力（近年复试第一热词）</h1>
+<p><strong>5.1 自注意力（Scaled Dot-Product Attention）</strong>：
+<strong>Attention(Q,K,V)=softmax(QKᵀ/√dₖ)V</strong>
+- 每个token生成三向量：<strong>Q</strong>（查询：我在找什么）、<strong>K</strong>（键：我有什么）、<strong>V</strong>（值：我的内容）；
+- 注意力权重=Q与K的相似度（点积）softmax归一化，对V加权求和；
+- <strong>除以√dₖ</strong>：点积随维度增大方差变大→softmax饱和→梯度小；缩放稳住分布（复试追问率极高）。
+<strong>5.2 多头注意力</strong>：h组独立QKV并行做注意力再拼接——不同头关注不同模式（语法头/位置头）。
+<strong>5.3 为什么取代RNN</strong>：①<strong>完全并行</strong>（RNN必须逐时间步）；②任意两位置直接相连（路径O(1)，长依赖不再衰减）；③代价O(n²)（序列长度的平方）。
+<strong>5.4 位置编码</strong>：注意力本身无序（打乱输入结果不变）→加位置编码注入顺序信息。
+<strong>考题3（注意力手算·复试级）</strong> Q=[1,0]，K₁=[1,0]，K₂=[0,1]，V₁=[1,0]，V₂=[0,1]，dₖ=2。求注意力输出。
+【解】分数：QK₁ᵀ=1，QK₂ᵀ=0；缩放：1/√2、0。
+softmax(0.707,0)≈(0.67,0.33)。
+输出=0.67×[1,0]+0.33×[0,1]=<strong>[0.67, 0.33]</strong>——查询"像谁"，输出就偏向谁的值：这就是"注意力"的全部直觉。∎
+<strong>5.5 Transformer块</strong>=多头注意力+前馈网络+残差连接+LayerNorm（×N层）；编码器-解码器或仅解码器（GPT系：<strong>自回归，预测下一个词</strong>）。</p>
+<hr />
+<h1>六、优化器与训练技巧</h1>
+<p><strong>6.1 优化器进化线</strong>：
+- <strong>SGD</strong>：w←w−ηg；噪声大但泛化常好；
+- <strong>动量</strong>：累积历史梯度（惯性冲过震荡与浅谷）；
+- <strong>Adam</strong>：动量（一阶）+自适应步长（二阶梯度平方滑动平均）——默认首选，"开箱即用"；调参口诀：<strong>学习率是第一超参</strong>（太大发散、太小慢）。
+<strong>6.2 过拟合全家桶（与ML篇对策呼应）</strong>：
+| 手段 | 机理 | 一句话 |
+|---|---|---|
+| <strong>Dropout</strong> | 训练时随机失活神经元 | 每次训练不同子网→集成视角；测试全开按比例缩放 |
+| <strong>BatchNorm</strong> | 对每个mini-batch标准化 | 稳定分布、允许大学习率、轻微正则 |
+| 数据增强 | 翻转/裁剪/噪声 | 最便宜的"增数据" |
+| 早停 | 验证误差回升即停 | 别训过头 |
+| 权重衰减 | L2正则 | 桥接ML篇2.3 |
+<strong>6.3 损失函数配对</strong>：多分类=<strong>softmax+交叉熵</strong>（数值稳定要log-sum-exp技巧）；回归=MSE；二者都是MLE（桥2）。</p>
+<hr />
+<h1>七、考题补遗（3题）</h1>
+<p><strong>题4（结构对比压轴）</strong> CNN、RNN、Transformer各自适合什么数据？一句话原因。
+【答】<strong>CNN=网格数据（图像）</strong>：局部相关+平移等变；<strong>RNN/LSTM=序列（早期NLP/语音）</strong>：逐步递归带记忆；<strong>Transformer=长序列并行（现代NLP/多模态）</strong>：自注意力任意位置直连+全并行。趋势：Transformer一统（ViT把图像切块当序列）。∎</p>
+<p><strong>题5（残差连接）</strong> ResNet的残差结构为什么能训极深网络？
+【答】y=F(x)+x：梯度对x的路径有一条"+1"直通项（∂y/∂x=∂F/∂x+1）——<strong>梯度永不消失于恒等路径</strong>，深层也可训；且网络只需学"增量"F(x)，比直接学映射容易。∎</p>
+<p><strong>题6（BatchNorm追问）</strong> 训练与推理时BatchNorm行为差异？
+【答】训练用当前batch统计量（均值/方差）并更新滑动平均；<strong>推理用累积的滑动平均</strong>（不再依赖batch大小）——所以BN模型推理时batch可为1。∎</p>
+<hr />
+<h1>八、复试一句话答法汇总表</h1>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>激活函数</td>
+<td>没有非线性多层=一层；ReLU治饱和、Leaky治死亡</td>
+</tr>
+<tr>
+<td>反向传播</td>
+<td>链式法则穿层：δˡ=(Wˡ⁺¹)ᵀδˡ⁺¹⊙σ′，权重梯度=δ(aˡ⁻¹)ᵀ</td>
+</tr>
+<tr>
+<td>梯度消失</td>
+<td>连乘&lt;1的导数；ReLU/残差/BN三药方</td>
+</tr>
+<tr>
+<td>CNN</td>
+<td>局部连接+权值共享；输出O=⌊(H−K+2P)/S⌋+1</td>
+</tr>
+<tr>
+<td>LSTM</td>
+<td>门控+细胞加法更新=长依赖</td>
+</tr>
+<tr>
+<td>注意力</td>
+<td>softmax(QKᵀ/√dₖ)V；Q找K配对、加权V</td>
+</tr>
+<tr>
+<td>多头</td>
+<td>h组QKV并行，各学各的模式</td>
+</tr>
+<tr>
+<td>√dₖ</td>
+<td>防点积方差大→softmax饱和</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>注意力+FFN+残差+LN；全并行、路径O(1)</td>
+</tr>
+<tr>
+<td>Adam</td>
+<td>动量+自适应步长；学习率是第一超参</td>
+</tr>
+<tr>
+<td>Dropout</td>
+<td>训练随机失活=隐式集成；测试全开</td>
+</tr>
+<tr>
+<td>BN</td>
+<td>batch内标准化+滑动平均；训练推理行为不同</td>
+</tr>
+<tr>
+<td>ResNet</td>
+<td>y=F(x)+x：恒等路径保梯度</td>
+</tr>
+</tbody>
+</table>
+<h2>本章必会清单</h2>
+<ol>
+<li>为什么需要激活函数（线性叠加塌缩）；激活函数表；</li>
+<li>反传四公式，能手推两层网络（题1）并解释梯度消失现场；</li>
+<li>CNN输出尺寸与参数量双计算（112/4864例）；小核堆深的理由；</li>
+<li>LSTM三门一槽+加法更新治长依赖；</li>
+<li>自注意力公式、QKV直觉、√dₖ、多头、位置编码、O(n²)代价；</li>
+<li>三大结构适用数据与理由（题4）；</li>
+<li>优化器进化线；过拟合六手段机理；BN训练/推理差异。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第4/4批·系列收官）：AI复试问答100题+Python/NumPy速查+研0暑假学习路线</strong>——把前三册浓缩成100道"考官问-标准答"，加Python从零到能跑模型的速查，以及录取后到入学前的完整规划。说"继续"交付收官。</p>
+</blockquote></div></body></html>

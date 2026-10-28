@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>AI方向_路径规划与数学桥梁 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>05_人工智能方向</span></div><div class='main'><h1>AI方向 · 路径规划与数学桥梁（第1/4批）</h1>
+<blockquote>
+<p><strong>定位声明（先读这段）</strong>：走人工智能方向，<strong>初试科目绝大多数情况下不变</strong>——仍是408+数学一+英语一+政治。本系列服务的三件事：
+① <strong>择校</strong>：知道AI方向的"入口"（学硕/专硕代码、哪些学校有）；
+② <strong>复试</strong>：2028年3-4月复试时答得上机器学习/深度学习的概念题；
+③ <strong>读研打底</strong>：研0暑假到研一用得上的基础。
+<strong>使用纪律</strong>：初试前（现在~2027.12）<strong>不投入时间</strong>，最多当周末休息读物；初试后2028年1月起集中4-6周刷完。你现在的主线仍然是《阶段0清单》。</p>
+</blockquote>
+<hr />
+<h1>一、AI方向在考研中的位置（择校情报）</h1>
+<h2>1. 专业代码地图</h2>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>名称</th>
+<th>层次</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>081200</td>
+<td>计算机科学与技术</td>
+<td>学硕</td>
+<td>最通用的入口：<strong>绝大多数学校的AI实验室/导师挂在计科学硕下招生</strong>，初试=408</td>
+</tr>
+<tr>
+<td>0812Z*</td>
+<td>人工智能（自设二级学科）</td>
+<td>学硕</td>
+<td>部分高校自设（如"人工智能""机器智能"），视学校而定，多为408或自命题</td>
+</tr>
+<tr>
+<td><strong>0854</strong></td>
+<td>电子信息（专业学位大类）</td>
+<td>专硕</td>
+<td>计算机相关专硕都归入0854</td>
+</tr>
+<tr>
+<td><strong>085410</strong></td>
+<td><strong>人工智能</strong></td>
+<td>专硕</td>
+<td>0854下最对口AI的领域；多数学校考408或数一+自命题，<strong>逐校差异大，必须9月核实</strong></td>
+</tr>
+<tr>
+<td>1405</td>
+<td>智能科学与技术</td>
+<td>学硕（交叉学科门类）</td>
+<td>2021年新设的一级学科，部分学校按此招生，考纲因校而异</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论三句话</strong>：
+1. 你按408备考的路线<strong>对AI方向完全适用</strong>——统考408是绝大多数AI学硕/专硕的初试科目；
+2. 个别学校AI学院<strong>自命题</strong>（如"数据结构+机器学习基础"或数学+DS），这类目标一旦锁定，408的底子照样能用大半；
+3. <strong>2027年9月招生目录发布时</strong>，把目标清单里的"AI入口"（学院、代码、科目、名额）逐校核实——这本来就写在你学习计划的硬节点里。</p>
+<h2>2. 川渝目标校的AI入口（概览，2027.9必须核实）</h2>
+<ul>
+<li><strong>电子科技大学（成电）</strong>：计算机学院、信息与通信工程相关学院均有人工智能方向（学硕+085410专硕）；AI科研体量大（视觉、语音）；</li>
+<li><strong>四川大学</strong>：计算机学院含视觉与图像处理等AI强方向；</li>
+<li><strong>重庆大学（你的主攻）</strong>：计算机学院AI相关方向+对应专硕；</li>
+<li><strong>西南交大/西南大学（稳）</strong>：均有AI相关学硕方向/专硕。
+【操作建议】9月核实时同时查：招生学院、专业代码、初试科目、<strong>复试科目</strong>（AI方向复试常含"机器学习/人工智能基础"问答或笔试）、近两年复试线。别用网传数据，用官方目录+学院官网细则。</li>
+</ul>
+<h2>3. AI方向复试的典型构成（2028.3-4要用）</h2>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>内容</th>
+<th>对应本系列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机试</td>
+<td>C/C++算法题（与计科相同）</td>
+<td>《算法代码题精练》+LeetCode热题</td>
+</tr>
+<tr>
+<td>专业面试</td>
+<td>408四科追问 + <strong>ML/DL概念问答</strong>（为什么过拟合、讲讲反向传播/卷积、SVM与逻辑回归区别）</td>
+<td>第2、3、4批</td>
+</tr>
+<tr>
+<td>英语口语</td>
+<td>自我介绍+专业问答（AI话题常考：talk about AI applications）</td>
+<td>第4批复试口语素材</td>
+</tr>
+<tr>
+<td>简历</td>
+<td>本科项目/竞赛（算法实验、数学建模都是素材）</td>
+<td>第4批</td>
+</tr>
+</tbody>
+</table>
+<h2>4. 时间线（钉死，防止本末倒置）</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>AI内容投入</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>现在~2027.12初试</td>
+<td><strong>0</strong>（至多每月1小时翻本系列当科普）</td>
+<td>初试分是一切前提：复试线+30分的安全垫来自现在</td>
+</tr>
+<tr>
+<td>2028.1~2</td>
+<td>每天2-3小时</td>
+<td>刷完本系列4册+复试题</td>
+</tr>
+<tr>
+<td>2028.3~4</td>
+<td>复试冲刺</td>
+<td>机试+面试模拟</td>
+</tr>
+<tr>
+<td>研0暑假</td>
+<td>Python/PyTorch项目</td>
+<td>第4批给的入门路线</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>二、ML数学桥梁：你已经学的数学，在AI里干什么</h1>
+<blockquote>
+<p>这一节把你手上的《数学一985精讲》直接接到机器学习——<strong>考研数学与ML数学是同一套</strong>，只是换了个名字出现。每条给"定理→ML身份"的映射。</p>
+</blockquote>
+<h2>桥1：线性代数 → 机器学习的"语言"</h2>
+<table>
+<thead>
+<tr>
+<th>你学的（985精讲_线代）</th>
+<th>在ML里的身份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩阵乘法 AB、分块</td>
+<td><strong>神经网络前向传播</strong>就是一连串矩阵乘：y=Wx+b；批量处理=把样本按行堆成X，一次算 XW</td>
+</tr>
+<tr>
+<td>转置 Aᵀ</td>
+<td><strong>梯度的形状对齐</strong>：∂L/∂W 的形状由"误差ᵀ×输入"决定——反传代码里全是转置</td>
+</tr>
+<tr>
+<td>线性相关/秩</td>
+<td><strong>特征冗余</strong>：特征矩阵秩&lt;特征数=有特征线性相关，模型不稳定；降维的动机</td>
+</tr>
+<tr>
+<td>特征值与相似对角化</td>
+<td><strong>PCA主成分分析</strong>：协方差矩阵的最大特征值方向=数据方差最大的方向=第一主成分</td>
+</tr>
+<tr>
+<td><strong>正定</strong>（985精讲_线代第6章）</td>
+<td>协方差矩阵必半正定；<strong>核函数有效性判据</strong>（Mercer条件：核矩阵半正定）；牛顿法要求Hessian正定</td>
+</tr>
+<tr>
+<td>SVD（A=UΣVᵀ，与对角化同族）</td>
+<td><strong>推荐系统/LSA降维</strong>：截断SVD=保留最大奇异值=最优低秩近似</td>
+</tr>
+</tbody>
+</table>
+<h2>桥2：概率统计 → 机器学习的"世界观"</h2>
+<table>
+<thead>
+<tr>
+<th>你学的（985精讲_概率）</th>
+<th>在ML里的身份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>条件概率+贝叶斯公式</strong>（第1章T3）</td>
+<td><strong>朴素贝叶斯分类器</strong>全部内容：P(类|特征) ∝ P(特征|类)P(类)；也是"后验=证据更新信念"的ML世界观</td>
+</tr>
+<tr>
+<td>期望（第4章）</td>
+<td><strong>风险函数=损失的期望</strong>：训练=用样本平均损失（经验风险）逼近期望损失</td>
+</tr>
+<tr>
+<td>方差、E(XY)（第4章）</td>
+<td><strong>偏差-方差分解</strong>：模型误差=偏差²+方差+噪声——"过拟合=方差大"的数学出处</td>
+</tr>
+<tr>
+<td><strong>极大似然估计MLE</strong>（第7章题1）</td>
+<td><strong>逻辑回归/神经网络的损失函数就是MLE</strong>：最小化交叉熵 ≡ 最大化似然（你做过的"取对数求导=0"就是推导损失函数）</td>
+</tr>
+<tr>
+<td>正态分布（第2章）</td>
+<td>噪声假设：线性回归的最小二乘 = 高斯噪声下的MLE；权重初始化用N(0, σ²)</td>
+</tr>
+<tr>
+<td>大数定律（第5章）</td>
+<td><strong>为什么"样本越多学得越好"</strong>：经验分布收敛于真实分布——ML可行性的理论根基</td>
+</tr>
+<tr>
+<td>切比雪夫不等式</td>
+<td>泛化界（PAC学习理论）的原型：训练误差与真实误差的偏离有界</td>
+</tr>
+</tbody>
+</table>
+<h2>桥3：微积分与优化 → 机器学习的"发动机"</h2>
+<table>
+<thead>
+<tr>
+<th>你学的（985精讲_高数）</th>
+<th>在ML里的身份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>链式法则</strong>（高数上第2章T2）</td>
+<td><strong>反向传播=链式法则的矩阵版</strong>：复合函数层层求导，一层层往回传——整个深度学习的核心就是一个你早就会的定理</td>
+</tr>
+<tr>
+<td>梯度、方向导数（高数下第6章D5）</td>
+<td><strong>梯度下降</strong>：负梯度方向=函数下降最快的方向（你的"最大方向导数"定理反着用）；学习率=步长</td>
+</tr>
+<tr>
+<td>多元极值条件 AC−B²、驻点</td>
+<td>损失曲面找极小；鞍点（Hessian不定）是高维优化的主要障碍</td>
+</tr>
+<tr>
+<td><strong>凸性、拉格朗日乘数法</strong>（高数下T6）</td>
+<td>SVM对偶问题=拉格朗日+KKT条件；凸损失（逻辑回归）保证局部最优=全局最优</td>
+</tr>
+<tr>
+<td>泰勒展开（高数上T8）</td>
+<td>优化器设计：动量/Adam都是对梯度的一二阶泰勒修正；XGBoost二阶泰勒</td>
+</tr>
+<tr>
+<td>积分（概率密度）</td>
+<td>边缘化/证据下界ELBO（变分推断）——读研进阶会遇到</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话总结</strong>：ML不是新数学，是你正在学的数学换了一身衣服。初试数学140的底子，直接就是研究生阶段ML课的底子——这也是为什么"好好考数学一"本身就是为AI方向做的最好的准备。</p>
+<hr />
+<h1>三、桥接考题（5题·试一试你已经会多少AI）</h1>
+<p><strong>题1（贝叶斯→垃圾邮件）</strong> 某邮箱60%是正常邮件。垃圾邮件中"优惠"出现概率0.3，正常邮件中0.02。收到一封含"优惠"的邮件，是垃圾邮件的概率？
+【解】P(垃圾|优惠)=0.3×0.4/(0.3×0.4+0.02×0.6)=0.12/0.132=<strong>10/11≈90.9%</strong>。
+（这就是朴素贝叶斯分类器的单特征版——你第1章全概率+贝叶斯原题。）∎</p>
+<p><strong>题2（MLE→损失函数）</strong> 样本 (xᵢ,yᵢ)，模型 ŷᵢ=wxᵢ+b，假设 yᵢ~N(wxᵢ+b, σ²) 独立。写出对数似然并说明最大化它等价于什么。
+【解】lnL=−(1/2σ²)Σ(yᵢ−wxᵢ−b)²+C。
+最大化 lnL ⇔ <strong>最小化 Σ(yᵢ−wxᵢ−b)²——最小二乘损失</strong>。
+（结论：<strong>最小二乘=高斯噪声下的MLE</strong>。同理可证：交叉熵=伯努利/多项分布的MLE——两个最重要的损失函数都是你第7章的MLE原题。）∎</p>
+<p><strong>题3（链式法则→两层网络梯度）</strong> 网络 y=σ(w₂h)，h=w₁x（σ为sigmoid）。写出 ∂y/∂w₁。
+【解】∂y/∂w₁=∂y/∂h·∂h/∂w₁=[σ′(w₂h)·w₂]·x。
+σ′=σ(1−σ)。这就是<strong>反向传播</strong>：从输出往回，逐层乘导数。深度网络=这个式子重复一百层。∎</p>
+<p><strong>题4（特征值→PCA）</strong> 三维数据的协方差矩阵最大特征值 λ₁=5，对应特征向量 (1,1,1)/√3；其余 λ₂=0.5，λ₃=0.1。把数据投影到一维，投到哪个方向？丢掉了多少信息（方差占比）？
+【解】投影方向=最大特征值方向 <strong>(1,1,1)/√3</strong>（该方向方差=λ₁=5）。
+保留信息=5/(5+0.5+0.1)=5/5.6≈<strong>89.3%</strong>，丢弃≈10.7%。
+（PCA=协方差矩阵正交对角化取前k个特征向量——你线代第5章的"实对称必可正交对角化"就是它成立的定理。）∎</p>
+<p><strong>题5（正定→核函数）</strong> 为什么核矩阵 K（Kᵢⱼ=k(xᵢ,xⱼ)）必须半正定？
+【答】K 半正定 ⇔ 存在映射 φ 使 Kᵢⱼ=⟨φ(xᵢ),φ(xⱼ)⟩（K=ΦᵀΦ 的Gram矩阵结构）。若不半正定，"核"对应的特征空间不存在，"隐式映射到高维"就是空谈——这是SVM核方法（Mercer定理）的合法性来源；对应你线代第6章"A=CᵀC⇒半正定"的逆命题。∎</p>
+<hr />
+<h1>四、本批必会清单</h1>
+<ol>
+<li>AI方向入口五代码（081200/0812Z*/0854/085410/1405）与"初试基本不变"结论；</li>
+<li>2027年9月核实清单：学院/代码/科目/复试科目/名额/复试线；</li>
+<li>时间线纪律：初试前AI投入=0；</li>
+<li>九桥映射表：链式法则→反向传播、MLE→交叉熵与最小二乘、贝叶斯→朴素贝叶斯、特征值→PCA、正定→核函数、切比雪夫→泛化界；</li>
+<li>五道桥接题全部能独立复现。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第2/4批）：机器学习基础精讲</strong>——监督学习全景（线性回归/逻辑回归+正则化L1L2、决策树与信息增益推导、随机森林/GBDT、SVM对偶直觉、KNN/朴素贝叶斯）、无监督（K-means/层次聚类/降维）、评估指标全家桶（精确率召回率F1 ROC-AUC/交叉验证）+ 过拟合正则化 Bias-Variance——<strong>复试概念问答的地毯式覆盖</strong>，每个算法配"复试一句话答法"。说"继续"交付。</p>
+</blockquote></div></body></html>

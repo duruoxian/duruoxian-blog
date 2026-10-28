@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>离散数学精讲_集合论与关系 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>离散数学精讲 · 集合论与关系（第2/4批）</h1>
+<blockquote>
+<p>接《数理逻辑》。本册是<strong>离散与408联系最紧的一册</strong>：等价关系↔<strong>并查集/连通分量</strong>、传递闭包↔<strong>Warshall/图可达性</strong>、偏序↔<strong>拓扑排序</strong>——三大理论原型全部标注连接点。</p>
+</blockquote>
+<hr />
+<h1>一、集合及其运算</h1>
+<p><strong>D1 集合</strong>：互异对象的无序全体。子集⊆、真子集⊂、相等；空集∅是一切集合的子集；幂集 P(A)=A的全部子集（|A|=n → |P(A)|=2ⁿ）。
+<strong>D2 运算与恒等式</strong>：∪∩−^c（补）、对称差 A⊕B=(A−B)∪(B−A)。
+【核心恒等式（与命题逻辑对偶记忆）】：
+- 德摩根：(A∪B)^c=A^c∩B^c；分配：A∪(B∩C)=(A∪B)∩(A∪C)；吸收：A∪(A∩B)=A。
+【记忆法】把 ∪↔∨、∩↔∧、^c↔¬，命题逻辑的等值式整体平移过来——<strong>集合代数与命题代数同构（布尔代数的两张脸，第4批见）</strong>。</p>
+<p><strong>考题1（对称差演算）</strong> A={1,2,3}，B={2,3,4}。求 A⊕B 与 |P(A∩B)|。
+【解】A⊕B={1,4}；A∩B={2,3} → |P(A∩B)|=2²=<strong>4</strong>。∎</p>
+<hr />
+<h1>二、二元关系：定义、表示、性质</h1>
+<p><strong>D3 二元关系</strong>：A×B 的任意子集 R（A到B）；A上关系 R⊆A×A。表示：关系矩阵 M[R]、关系图。
+<strong>D4 五大性质（判定核心表）</strong>：
+| 性质 | 定义 | 矩阵特征 | 图特征 |
+|---|---|---|---|
+| 自反 | ∀a, aRa | <strong>对角线全1</strong> | 每点有自环 |
+| 反自反 | ∀a, ¬aRa | 对角线全0 | 无自环 |
+| 对称 | aRb→bRa | <strong>对称矩阵</strong> | 边成对出现 |
+| 反对称 | aRb∧bRa→a=b | 对称位置至多一个1（对角除外） | 无双向边（可有自环） |
+| 传递 | aRb∧bRc→aRc | M²的1位置≤M的1位置 | 路径可 shortcuts |
+【两大经典辨析（复试爱问）】
+① <strong>对称与反对称不矛盾，可共存</strong>：A上的恒等关系 I_A（=关系）既对称又反对称；空关系 ∅ 五性质里同时是反自反+对称+反对称+传递（<strong>不是自反</strong>，除非A=∅）；
+② 自反与反自反<strong>互斥</strong>（A非空时）。</p>
+<p><strong>考题2（性质判定）</strong> A={1,2,3}，R={(1,1),(2,2),(3,3),(1,2)}。判定五性质。
+【解】对角全在→自反✓、非反自反；不对称（有(1,2)无(2,1)）；反对称✓（无双向对）；传递✓（(1,1)(1,2)→(1,2)✓，其余平凡）。∎</p>
+<hr />
+<h1>三、关系的运算与闭包</h1>
+<p><strong>T1 逆与合成</strong>：R⁻¹={(b,a)|(a,b)∈R}；<strong>合成 R∘S</strong>（先S后R）：(a,c)∈R∘S ⇔ ∃b: (a,b)∈S∧(b,c)∈R。
+【矩阵版】M[R∘S]=M[S]·M[R]（矩阵乘法，布尔化）——<strong>关系合成=布尔矩阵乘</strong>。
+<strong>T2 幂与传递</strong>：Rⁿ=R∘R∘…∘R；<strong>R 传递 ⇔ R²⊆R</strong>。
+<strong>T3 三大闭包（加最少的对，补齐性质）</strong>：
+- 自反闭包 <strong>r(R)=R∪I_A</strong>；
+- 对称闭包 <strong>s(R)=R∪R⁻¹</strong>；
+- 传递闭包 <strong>t(R)=R∪R²∪…∪Rⁿ</strong>（n=|A|；矩阵上即布尔矩阵自乘累加）。
+【408连接·重要】<strong>传递闭包=图的可达性</strong>：M[t(R)] 的 (i,j)=1 ⇔ 图中 i 可达 j——<strong>Warshall算法就是求传递闭包的经典算法</strong>（408考纲"求传递闭包"的直接理论出处）；DS里的"判断连通"本质就是求 t(R∪R⁻¹)。</p>
+<p><strong>考题3（闭包演算）</strong> A={1,2,3}，R={(1,2),(2,3)}。求 r、s、t(R)。
+【解】r(R)=R∪{(1,1),(2,2),(3,3)}；s(R)=R∪{(2,1),(3,2)}。
+t(R)：R²={(1,3)}（1→2→3）；R³=∅ → t(R)=R∪R²={<strong><em>*(1,2),(2,3),(1,3)</em>*}</strong>（即"补齐所有可达路径"）。∎
+（矩阵视角：M+M² 的布尔和——正是Warshall在做的事。）</p>
+<hr />
+<h1>四、等价关系与划分（本册核心★）</h1>
+<p><strong>D5 等价关系</strong>：自反+对称+传递（记RST）。例：模k同余、同一班级。
+<strong>D6 等价类与商集</strong>：[a]ᵣ={x|xRa}；商集 A/R={全部互异等价类}。
+<strong>T4 等价类三性质</strong>：①a∈[a]；②[a]=[b] ⇔ aRb；③任意两类要么相等要么<strong>不相交</strong>。
+<strong>T5 核心定理：A上的等价关系 ↔ A的划分，一一对应</strong>：
+- 等价关系 → 划分：商集就是划分（互不相交、并回A）；
+- 划分 → 等价关系："同属一块"。
+【408连接·理论原型】<strong>并查集=维护等价关系的动态数据结构</strong>（合并=并两块、查找=问是否同类）；<strong>无向图的连通关系是等价关系，连通分量=划分的块</strong>——DS里"求连通分量个数"在数学上就是"求商集基数"。【AI连接】等价类思想=聚类（第2册ML：K-means就是在学一个划分）。</p>
+<p><strong>考题4（等价类与商集）</strong> A={0,1,2,3,4,5,6}，R为"模3同余"。求划分。
+【解】[0]={0,3,6}，[1]={1,4}，[2]={2,5}。
+商集={{0,3,6},{1,4},{2,5}}——3块互不相交并回A ✓。∎</p>
+<hr />
+<h1>五、偏序关系与哈斯图（计算题主战场）</h1>
+<p><strong>D7 偏序</strong>：自反+反对称+传递（记RAT）；全序（线序）：任意两元素可比；拟序：反自反+传递。
+<strong>D8 哈斯图</strong>：去掉自环、去掉传递边、箭头向上省略——只剩"覆盖关系"。
+<strong>D9 六个元（最大陷阱区，"存在"vs"所有"）</strong>：
+| 概念 | 定义 | 关键 |
+|---|---|---|
+| 极大元 | 没有元素严格大于它 | <strong>只要求局部</strong>，可多个 |
+| 最大元 | 所有元素都≤它 | <strong>必须与全部可比</strong>，至多一个 |
+| 极小元/最小元 | 对称 | 同上 |
+| 上界 | 子集所有元素≤它 | 对子集B而言，可多个 |
+| <strong>上确界（最小上界）</strong> | 上界中最小者 | lub |
+| 下界/下确界 | 对称 | glb |
+【口诀】<strong>"极大看局部、最大看全局；上界在上方、确界是其中最小"</strong>。极大元不必唯一；最大元若存在必唯一。</p>
+<p><strong>考题5（哈斯图全套演算）</strong> A={1,2,3,4,6,12}，R为整除关系。①画哈斯图；②求子集B={2,3,4}的极大元、最大元、上界、上确界。
+【解】①覆盖关系：1覆盖于底；2、3在1上；4、6在2/3上（4被2整除、6被2和3整除）；12在4、6上。
+②B={2,3,4}：极大元：3、4（3与4不可比，谁也不"大"于谁）→ <strong>极大元{3,4}，无最大元</strong>（3、4不可比）；
+上界：<strong>12</strong>（2|12,3|12,4|12；6不是——4∤6）→ 上确界=<strong>12</strong>。
+【追问】A全体的最大元=12（与所有元素可比且被整除）✓；最小元=1。∎</p>
+<p><strong>【408连接·精彩处】拓扑排序=偏序的线性扩展</strong>：AOV网（DAG）上的"可达序"本质是<strong>偏序关系</strong>，拓扑序列=把偏序补成全序的方式——"拓扑序不唯一"的数学原因：<strong>偏序中不可比的元素可任意排列</strong>。DS精讲_图册的拓扑排序在此找到了理论户口。</p>
+<hr />
+<h1>六、函数与基数（概念级）</h1>
+<p><strong>D10 函数</strong>：满足"每输入恰一输出"的二元关系。单射（左逆存在）、满射、双射（可逆）。
+<strong>T6 计数</strong>：|A|=m,|B|=n：单射数 P(n,m)（n≥m）；函数总数 nᵐ；双射 n!（m=n）。
+<strong>D11 基数</strong>：|A|=|B| ⇔ 存在双射。可数集（|A|≤|ℵ₀|）：自然数、整数、<strong>有理数</strong>都可数；实数<strong>不可数</strong>（康托对角线法）；|P(N)|&gt;|N|（无最大基数）。
+【一句话】"整数和自然数一样多、有理数也一样多，但实数严格更多"——对角线法是复试谈资级经典。</p>
+<p><strong>考题6（计数）</strong> A={1,2,3}到B={a,b,c,d}的单射个数？双射呢？
+【解】单射=P(4,3)=4×3×2=<strong>24</strong>；双射不存在（|A|≠|B|，答<strong>0</strong>）。∎</p>
+<hr />
+<h1>七、本册必会清单</h1>
+<ol>
+<li>集合恒等式与命题逻辑对偶平移；幂集2ⁿ；</li>
+<li>五性质判定（矩阵/图特征）；对称与反对称可共存（I_A例）；空关系四性质；</li>
+<li>合成=布尔矩阵乘；R传递⇔R²⊆R；</li>
+<li>三闭包公式（r=R∪I_A、s=R∪R⁻¹、t=R∪…∪Rⁿ）；<strong>t(R)↔可达性↔Warshall</strong>；</li>
+<li>等价类三性质；<strong>等价关系↔划分一一对应</strong>；↔并查集/连通分量/聚类；</li>
+<li>哈斯图画法；<strong>极大≠最大</strong>（局部vs全局）；上界/上确界求法（整除例12）；</li>
+<li><strong>拓扑排序=偏序的线性扩展</strong>，不唯一的原因=不可比元素；</li>
+<li>单射/双射计数；可数集与对角线法（谈资）。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第3/4批）：图论</strong>——握手定理推广、<strong>欧拉图（一笔画判定）与哈密顿图（充分条件）</strong>、最短路/生成树的理论面、<strong>平面图欧拉公式与K₃,₃/K₅不可平面</strong>、图着色与四色定理、匹配入门——与《数据结构精讲_图》互补：那边管"算法怎么跑"，这边管"图有什么性质"。说"继续"交付。</p>
+</blockquote></div></body></html>

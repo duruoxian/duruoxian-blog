@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>高数_题型精讲与强化题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>高数 · 题型精讲与强化题集（全）</h1>
+<blockquote>
+<p>用法：跟完《高数_知识点与难点》第一轮后，按本章逐章过"题型清单→例题精讲→强化练习"。例题详解给全步骤；练习只给答案与关键步骤，<strong>先做后看</strong>。难度对标真题解答题中档偏上。
+📑 10章：01 极限连续｜02 导数微分｜03 中值定理与导数应用｜04 不定积分｜05 定积分与反常积分｜06 多元微分｜07 重积分｜08 曲线曲面积分【数一】｜09 无穷级数【数一】｜10 常微分方程</p>
+</blockquote>
+<hr />
+<h2>01 极限与连续</h2>
+<h3>题型清单</h3>
+<ol>
+<li>计算型极限：等价替换→洛必达→泰勒（三板斧按此顺序尝试）；</li>
+<li>∞-∞ 型：通分或提最高次幂；1^∞ / 0^0 / ∞^0 型：统一取对数 e^{lim v·ln u}；</li>
+<li>数列极限：夹逼、单调有界、<strong>定积分定义</strong>（识别 1/n·Σf(i/n)）、递推数列（先证收敛再解方程）；</li>
+<li>无穷小阶的比较与<strong>阶数</strong>求法（泰勒展开看首项）；</li>
+<li>渐近线：垂直（无定义点）、水平（x→∞）、斜（k=lim y/x，b=lim(y-kx)）；</li>
+<li>间断点分类：找无定义点→左右极限→分类；</li>
+<li>已知极限反求参数 a,b（"分母极限不为零⇒分子极限为零"是常用结论）。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> 求 lim_{x→0} (1/x² - cot²x)。
+通分：原式 = [sin²x - x²cos²x]/(x²sin²x) = [(sinx - xcosx)(sinx + xcosx)]/(x²sin²x)。
+泰勒：sinx - xcosx = (x - x³/6) - x(1 - x²/2) = x³/3 + o(x³)；sinx + xcosx ≈ 2x。
+分子 ≈ (x³/3)(2x) = 2x⁴/3，分母 ≈ x⁴，<strong>极限 = 2/3</strong>。</p>
+<p><strong>例2</strong> 求 lim_{n→∞} Σ_{k=1}^n 1/√(n²+k)。
+夹逼：n/√(n²+n) ≤ Σ ≤ n/√(n²+1)，两端均→1，<strong>极限=1</strong>。
+（若改成 Σ 1/√(n²+kn)，则提 1/n 后是定积分定义：∫₀¹ dx/√(1+kx)。）</p>
+<p><strong>例3</strong> 讨论 f(x) = e^{1/x}/(1+e^{1/x}) 在 x=0 处。
+x→0⁺：e^{1/x}→+∞，f→1；x→0⁻：e^{1/x}→0，f→0。左右极限存在但不相等 → <strong>跳跃间断点（第一类）</strong>。
+（对比：加常数 e^{-1/x} 的版本会出现左右极限不同的"单侧无穷"，注意分子分母同除最大项。）</p>
+<h3>强化练习（答案见底部）</h3>
+<ol>
+<li>求 lim_{x→0} (e^x - e^{-x} - 2x)/(x - sinx)。</li>
+<li>求 lim_{n→∞} [(n+1)ⁿ⁺¹/nⁿ]·1/(n+2)? 提示：改写为 (1+1/n)ⁿ·(n+1)/(n+2)。</li>
+<li>求 lim_{x→0⁺} x^{sinx}。</li>
+<li>求曲线 y = x ln(1+1/x) 的斜渐近线。</li>
+<li>设 lim_{x→0} (1 + ax)²⁰⁰? 已知 lim_{x→0} [ (1+ax)⁵⁰ - 1 ]/x = 200，求 a。</li>
+</ol>
+<blockquote>
+<p>答案：1. 泰勒：分子=2x+x³+2x³/6…-2x=x³(1+1/3)=4x³/3? 精确：e^x-e^{-x}=2x+x³/3+o(x³)→分子x³/3；分母 x-sinx=x³/6 → <strong>2</strong>。
+2. <strong>e</strong>。
+3. e^{lim sinx·lnx}=e^0=<strong>1</strong>。
+4. y = x ln(1+1/x) = x[ln(x+1)-lnx]→1，斜渐近 <strong>y=x+0? b=lim(y-x)=lim x[ln((x+1)/x)]-x=lim x[ln(1+1/x)-1]→ -? 计算：x ln(1+1/x)→1，故 y-x→1-x→-∞？不对——直接算 lim_{x→+∞}(y-x)=lim x[ln(1+1/x)-1]=lim x[1/x - 1/(2x²)-1]=lim(1 - 1/(2x) - x)→-∞，无斜渐近，只有水平渐近 y=1。</strong>答案：仅水平渐近 y=1<strong>。
+5. (1+ax)⁵⁰-1 ~ 50ax → 50a = 200 → </strong>a=4**。</p>
+</blockquote>
+<hr />
+<h2>02 导数与微分</h2>
+<h3>题型清单</h3>
+<ol>
+<li>用定义证可导/求导（分段点必用定义）；f'(x₀) 的八种极限变形；</li>
+<li>复合、隐函数、参数方程、对数求导（幂指函数）；</li>
+<li>高阶导：莱布尼茨公式、泰勒系数法（f⁽ⁿ⁾(0)=n!·系数）、常用n阶导公式；</li>
+<li>切线法线（隐函数/参数方程的切线）；</li>
+<li>相关变化率（对时间求导建立关系式）；</li>
+<li>微分与可微判别：lim Δy - f'(x₀)Δx = 0。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> 曲线 {x = ln(1+t²), y = t - arctan t}，求 t=1 处的一阶、二阶导。
+dx/dt = 2t/(1+t²)，dy/dt = t²/(1+t²)，dy/dx = t/2，t=1 时 <strong>=1/2</strong>；
+d²y/dx² = [d(dy/dx)/dt]/(dx/dt) = (1/2)·(1+t²)/(2t)，t=1 时 <strong>=1/2</strong>。</p>
+<p><strong>例2</strong> 曲线 x³ + y³ - 3xy = 0 上点 (3/2, 3/2) 处的切线斜率。
+两边对x求导：3x² + 3y²y' - 3y - 3xy' = 0 → y' = (y - x²)/(y² - x)。
+代入 (3/2,3/2)：y' = (3/2 - 9/4)/(9/4 - 3/2) = (-3/4)/(3/4) = <strong>-1</strong>。</p>
+<p><strong>例3</strong> 求 y = 1/(x²-3x+2) 的 n 阶导数。
+部分分式：y = 1/(x-2) - 1/(x-1)（注意符号：1/((x-1)(x-2)) = 1/(x-2) - 1/(x-1)）。
+y⁽ⁿ⁾ = (-1)ⁿn![1/(x-2)^{n+1} - 1/(x-1)^{n+1}]。</p>
+<h3>强化练习</h3>
+<ol>
+<li>f(x)=x|x(x-2)|? 设 f(x)=(x-2)|x|? 求 f(x)=(x²-2x)|x| 在 x=0 处的导数。</li>
+<li>y = x^sinx（x&gt;0），求 dy/dx。</li>
+<li>已知 y = e^x sinx，求 y⁽ⁿ⁾。</li>
+<li>设 f(x) 二阶可导，y = f(lnx)，求 y''。</li>
+<li>水注入圆锥形水池（顶朝下），求水面上升速度与水深关系（池深H、底半径R，注水速率q）。</li>
+</ol>
+<blockquote>
+<p>答案：1. x&gt;0时 f=x²-2x，f'(0+)=2? f'(0+) = lim(x²-2x)/x = lim(x-2) = -2；x&lt;0时 f=2x-x²，f'(0-)=2。左右不等 → <strong>x=0处不可导</strong>。
+2. y' = x^sinx(cosx·lnx + sinx/x)。
+3. y⁽ⁿ⁾ = (√2)ⁿ e^x sin(x + nπ/4)。
+4. y'' = [f''(lnx) - f'(lnx)]/x²。
+5. V=(πR²/H²)h³，dV/dt=q → dh/dt = qH²/(3πR²h²)（<strong>h越小升得越快</strong>）。</p>
+</blockquote>
+<hr />
+<h2>03 微分中值定理与导数应用</h2>
+<h3>题型清单</h3>
+<ol>
+<li><strong>构造辅助函数</strong>证明 ξ 等式（口诀）：
+   - f(ξ)+ξf'(ξ) → F=xf(x)；f'(ξ)+λf(ξ) → F=e^{λx}f(x)；
+   - f'(ξ)g(ξ)+f(ξ)g'(ξ) → F=f·g；f'g-fg' → F=f/g；
+   - ξf'(ξ)-f(ξ) → F=f(x)/x；含 f''：两次罗尔/拉格朗日+柯西。</li>
+<li>不等式证明：单调性法（构造F看F'）、最值法、凹凸性法、拉格朗日/泰勒放缩；</li>
+<li>方程根个数：F' 定调 → F 端点行为 → 每个单调区间至多一零点；</li>
+<li>极值判别（一阶/二阶充分条件、不可导点）、最值（闭区间三处比较：驻点+不可导点+端点）；</li>
+<li>凹凸、拐点（拐点必在f''变号处，f''=0不一定是拐点）；</li>
+<li>泰勒公式：展开点/展开阶数的选取（含 f''≥m≥M 夹逼型证明）。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> f 在 [0,1] 连续、(0,1) 可导，f(0)=0，f(1)=1。证明存在 ξ∈(0,1) 使 f'(ξ)=2ξ。
+令 F(x)=f(x)-x²，则 F(0)=0，F(1)=f(1)-1=0。罗尔定理 → 存在 ξ：F'(ξ)=f'(ξ)-2ξ=0。∎</p>
+<p><strong>例2</strong> 证明 x&gt;0 时 ln(1+x) &gt; x/(1+x)。
+令 g(x)=ln(1+x) - x/(1+x)，g(0)=0，g'(x)=1/(1+x) - 1/(1+x)² = x/(1+x)² &gt; 0（x&gt;0）→ g递增 → g(x)&gt;g(0)=0。∎</p>
+<p><strong>例3</strong> 讨论方程 ln x = x/2 - 1 的根的个数。
+令 h(x)=lnx - x/2 + 1。h'(x)=1/x - 1/2=0 得 x=2（唯一驻点，h''&lt;0 为最大值）。
+x→0⁺ 时 h→-∞；h(1)=1/2&gt;0 → 在(0,1)有一根；h(2)=ln2-1+1&gt;0；h(e²)=3-e²/2&lt;0 → 在(2,e²)有一根；h&gt;2后单调减 → <strong>恰有两个根</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>f 在[a,b]连续，(a,b)可导，证明存在 ξ 使 f(b)-f(a)=ξ? 证明：存在 ξ∈(a,b) 使 [f(b)-f(a)]·b/(b²-a²) = f'(ξ)/2ξ? 提示：对 f(x) 与 x² 用柯西中值定理（结论：f(b)-f(a) = (b²-a²)f'(ξ)/(2ξ)）。</li>
+<li>证明：x&gt;0 时 e^x &gt; 1 + x + x²/2。</li>
+<li>求 f(x)=x²e^{-x} 的最大值。</li>
+<li>方程 e^x = ax² (a&gt;0) 有几个根？（按 a 分类）</li>
+<li>设 f''&gt;0，证明 f(a+h)+f(a-h) ≥ 2f(a)。</li>
+</ol>
+<blockquote>
+<p>答案：1. 柯西：[f(b)-f(a)]/(b²-a²) = f'(ξ)/(2ξ)。
+2. 令 g=e^x-1-x-x²/2，g(0)=0，g'=e^x-1-x&gt;0（再用一次同样方法或凸性）→ g&gt;0。
+3. f'=xe^{-x}(2-x)：极大值 f(2)=4e^{-2}，且为 [0,+∞) 最大值（f(0)=0，x→∞→0）。
+4. 化为 e^x/x² = a。令 g=e^x/x²：g'=e^x(x-2)/x³。x&lt;0 时 g'&gt;0 且 g 从 0 增到 +∞ → 任何 a&gt;0 有<strong>一个负根</strong>。x&gt;0 时 g 在 x=2 取最小值 g(2)=e²/4：<strong>0&lt;a<e²/4 时共 1 个根（负）；a=e²/4 时 2 个根（负根 + 相切根 x=2）；a>e²/4 时 3 个根（一负两正）</strong>。
+5. 令 F(t)=f(a+t)+f(a-t)：F'=f'(a+t)-f'(a-t)，由 f''&gt;0 知 f' 递增，t&gt;0 时 F'&gt;0 → F(t)≥F(0)=2f(a)。∎</p>
+</blockquote>
+<hr />
+<h2>04 不定积分</h2>
+<h3>题型清单</h3>
+<ol>
+<li>凑微分（背熟：x dx→d(x²/2)；dx/√x→2d√x；e^x dx→d e^x；dx/x→d lnx；sinx dx→-d cosx）；</li>
+<li>第二类换元：三角代换（√(a²-x²)→x=asint；√(a²+x²)→x=atant；√(x²-a²)→x=asect）、根式代换 t=ⁿ√(ax+b)、负幂代换；</li>
+<li>分部积分（u 选取口诀"反对幂指三"从后往前取 u）；</li>
+<li>有理函数拆项（真分式→部分分式）；三角有理式（万能代换或恒等变形）；</li>
+<li>抽象函数积分（f'(x)→∫f'(x)dx=f(x)+C；f'与f混在一起的先凑）；</li>
+<li>分段函数积分：分段求+连续性定 C。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> ∫ dx/(1+sinx)。
+分子分母同乘 (1-sinx)：∫(1-sinx)/cos²x dx = tanx - secx + C。</p>
+<p><strong>例2</strong> ∫ x·arctanx dx。
+分部：u=arctanx, v=x²/2 → (x²/2)arctanx - (1/2)∫x²/(1+x²)dx = (x²/2)arctanx - x/2 + C。</p>
+<p><strong>例3</strong> ∫ √(e^x - 1) dx。
+令 t=√(e^x-1)：x=ln(1+t²)，dx=2t/(1+t²)dt → ∫2t²/(1+t²)dt = 2t - 2arctant + C
+= <strong>2√(e^x-1) - 2arctan√(e^x-1) + C</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>∫ dx/(x²√(x²+1))。</li>
+<li>∫ ln²x dx。</li>
+<li>∫ (arcsinx)²? ∫ x(arcsinx)²dx? 简化：∫ (arcsinx)² dx。</li>
+<li>∫ dx/(1+cosx)。</li>
+<li>设 f'(lnx) = 1+x? 设 f'(e^x)? 求：f'(lnx)=1+x（x&gt;0），求 f(x)。</li>
+</ol>
+<blockquote>
+<p>答案：1. x=arctan? 用 x=tant：∫cos²t/(sin²t·cos³t)? 直接：∫dx/(x²√(x²+1)) = ∫dt/(tan²t·sect)·sec²t = ∫cost/sin²t dt = -1/sint + C = <strong>-√(x²+1)/x + C</strong>。
+2. x ln²x - 2x ln x + 2x + C。
+3. x(arcsinx)² + 2√(1-x²)arcsinx - 2x + C（u=arcsin², v=x；再对 ∫2x arcsinx/√(1-x²)dx 再分部）。
+4. ∫ dx/(2cos²(x/2)) = <strong>tan(x/2) + C</strong>。
+5. 令 t=lnx → f'(t) = 1+e^t → f = x + e^x + C。</p>
+</blockquote>
+<hr />
+<h2>05 定积分与反常积分</h2>
+<h3>题型清单</h3>
+<ol>
+<li>计算利器：对称性（奇偶）、周期性、<strong>区间再现公式</strong>（∫₀^a f(x)dx = ∫₀^a f(a-x)dx）、华里士公式；</li>
+<li>变限积分：求导（含 x-t 混合型先拆：∫₀^x (x-t)f(t)dt = x∫₀^x f - ∫₀^x t f）、奇偶性、极限；</li>
+<li>分段与绝对值积分、周期函数 ∫₀^{nT}；</li>
+<li>反常积分计算与<strong>判敛</strong>（比较判别法：1/xᵖ 在 ∞ 处 p&gt;1 收敛；1/(x-a)ᵖ 在 a 处 p&lt;1 收敛）；</li>
+<li>几何应用：面积（交点先求）、旋转体（绕x轴 π∫y²dx；绕y轴 2π∫x|y|dx 柱壳法）、弧长（√(1+y'²)）、旋转曲面面积（2π∫|y|ds）【数一】；</li>
+<li>物理应用【数一】：功、压力、引力、质心。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> I = ∫₀^{2π} √(1+cosx) dx。
+√(1+cosx) = √2·|cos(x/2)|。换元 u=x/2：I = 2√2∫₀^π |cosu|du = 2√2·2 = <strong>4√2</strong>。</p>
+<p><strong>例2</strong> 设 F(x) = ∫₀^x (x-t)f(t)dt，f 连续，求 F''(x)。
+先拆：F(x) = x∫₀^x f(t)dt - ∫₀^x t f(t)dt → F'(x) = ∫₀^x f(t)dt → <strong>F''(x) = f(x)</strong>。</p>
+<p><strong>例3</strong> y=sinx（0≤x≤π）与 x 轴围成图形绕 x 轴旋转的体积。
+V = π∫₀^π sin²x dx = π·(π/2) = <strong>π²/2</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>∫₀^π x·sin³x? ∫₀^π x sin³x dx。</li>
+<li>求 lim_{x→0} [∫₀^x (e^{t²}-1)dt]/x³。</li>
+<li>判敛：∫₁^∞ dx/(x√(1+x²))? 与 ∫₀^1 dx/√(1-x²)。</li>
+<li>曲线 y=x² 与 y=2x 围成图形绕 y 轴旋转的体积。</li>
+<li>∫₀^{+∞} xe^{-x²}? 计算 ∫₀^{+∞} x e^{-x²} dx。</li>
+</ol>
+<blockquote>
+<p>答案：1. 华里士间接：∫₀^π x sin³x dx = (π/2)∫₀^π sin³x dx = (π/2)(2/3) = <strong>π/3</strong>。
+2. 洛必达：(e^{x²}-1)/(3x²) → <strong>1/3</strong>。
+3. 第一个：1/(x√(1+x²)) &lt; 1/x²? ×? 比较 1/x^{3/2}? √(1+x²)&gt;x → 被积函数&lt;1/x² → <strong>收敛</strong>。第二个 x=1 处 1/√(1-x²) ~ 1/√(2(1-x))，p=1/2&lt;1 → <strong>收敛</strong>。
+4. 柱壳法：V = 2π∫₀² x(2x-x²)dx = 2π(16/3-4) = <strong>8π/3</strong>。
+5. [-e^{-x²}/2]₀^∞ = <strong>1/2</strong>。</p>
+</blockquote>
+<hr />
+<h2>06 多元函数微分学</h2>
+<h3>题型清单</h3>
+<ol>
+<li>二元极限：沿不同路径极限不同⇒不存在；夹逼判存在；</li>
+<li>连续/偏导/可微三角关系：可微⇒连续且偏导存在；偏导连续⇒可微；<strong>偏导存在⇏连续</strong>（反例 xy/(x²+y²)）；</li>
+<li>链式法则（抽象复合：f₁ f₂ 编号要画树状图）；</li>
+<li>隐函数求导：一个方程（公式法/直接法）、方程组（两个方程两个隐函数）；</li>
+<li>极值：A=f_xx, B=f_xy, C=f_yy，AC-B² 判别；条件极值——<strong>拉格朗日乘数法</strong>（乘数的意义）；</li>
+<li>【数一】方向导数与梯度：最大方向导数=|grad u|；切平面与法线。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> u = ln(x²+y²+z²) 在 M(1,2,-2) 处的最大方向导数。
+grad u = 2(x,y,z)/(x²+y²+z²)，在 M 处 = (2/9, 4/9, -4/9)，|grad| = 2·3/9 = <strong>2/3</strong>。</p>
+<p><strong>例2</strong> 求 f(x,y)=x³-y³+3x²+3y²-9x 的极值。
+f_x=3x²+6x-9=0 → x=1,-3；f_y=-3y²+6y=0 → y=0,2。四个驻点。
+A=6x+6, B=0, C=-6y+6：
+(1,0)：AC=72&gt;0，A&gt;0 → 极小值 <strong>f(1,0)=-5</strong>；
+(-3,2)：AC=72&gt;0，A&lt;0 → 极大值 <strong>f(-3,2)=31</strong>；其余两点 AC&lt;0 非极值。</p>
+<p><strong>例3</strong> 求 z=xy 在约束 x+y=1 下的最值。
+代入法：z=x(1-x) 在 x=1/2 取最大值 <strong>1/4</strong>（拉格朗日：L=xy+λ(x+y-1) 得 x=y=1/2，λ=-1/2）。</p>
+<h3>强化练习</h3>
+<ol>
+<li>设 z=f(xy, x/y)，f 二阶连续可偏导，求 z_xx? 求 ∂z/∂x 与 ∂²z/∂x²。</li>
+<li>设 z=z(x,y) 由 x²+y²+z²=1 确定（z&gt;0），求 dz。</li>
+<li>求函数 u=xy 在附加条件 x+y=1（x,y&gt;0）下的最大值。</li>
+<li>求曲面 z = x² + y² 在点 (1,1,2) 处的切平面方程。</li>
+<li>证明：f(x,y)=x²+y² 在 x+y=1 上 x=y=1/2 处取最小值（用拉格朗日乘数法）。</li>
+</ol>
+<blockquote>
+<p>答案：1. zₓ = y f₁ + f₂；z_xx = y²f₁₁ + 2y f₁₂ + f₂₂（注意 f₂ 的两个偏导同样经过链）。
+2. dz = -(x dx + y dy)/z。
+3. 由对称性/AM-GM：最大值 <strong>1/4</strong>（x=y=1/2）。
+4. F=x²+y²-z：n=(2,2,-1)，切平面 2(x-1)+2(y-1)-(z-2)=0 → <strong>2x+2y-z-2=0</strong>。
+5. L=x²+y²+λ(x+y-1)：2x+λ=0，2y+λ=0 → x=y=1/2，最小值 1/2（比较边界 x→0 时值→1）。∎</p>
+</blockquote>
+<hr />
+<h2>07 重积分</h2>
+<h3>题型清单</h3>
+<ol>
+<li>二重积分直角坐标：<strong>先画域再定限</strong>；内层无初等原函数（e^{-y²}, sinx/x, 1/lnx）→ <strong>换序</strong>；</li>
+<li>极坐标：域为圆/环/扇形优先；r² 在面积元里别丢；</li>
+<li>对称性：域对称+函数奇偶 → 删项；<strong>轮换对称性</strong> ∬f(x,y)=∬f(y,x)（如∬(x²-y²) over 对称圆域=0? over x²+y²≤1：∬x²dσ=∬y²dσ → ∬(x²-y²)=0）；</li>
+<li>三重积分：先二后一（被积函数只含z、截面简单时首选）、柱坐标（含x²+y²）、球坐标（含x²+y²+z² 或锥面域）【数一/数三】；</li>
+<li>几何应用：体积、曲面面积、质心（形心公式：∬x dσ = x̄·Area）。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> ∬_D (x+y)dσ，D: x²+y²≤2y。
+域是以(0,1)为心的单位圆，面积π，形心(0,1) → ∬x=0，∬y=π → <strong>积分值=π</strong>。</p>
+<p><strong>例2</strong> ∭_Ω z dV，Ω: x²+y²+z²≤1，z≥0。
+球坐标：= ∫₀^{2π}dθ∫₀^{π/2}cosφsinφ dφ∫₀¹r³dr = 2π·(1/2)·(1/4) = <strong>π/4</strong>。</p>
+<p><strong>例3</strong> 交换次序并计算 I = ∫₀¹dx ∫_{x²}^1 x e^{-y²} dy。
+域：x²≤y≤1, 0≤x≤1 → 换序 y∈[0,1], 0≤x≤√y：
+I = ∫₀¹ e^{-y²}(y/2)dy = (1-e^{-1})/<strong>4</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>∬_D |x| dσ? 计算 ∬_D (|x|+y)dσ，D: x²+y²≤1。</li>
+<li>∬_D x dσ，D 由 y=x, y=0, x=1 围成。</li>
+<li>∭_Ω (x²+y²)dV? 计算 ∭_Ω (x+y+z)²dV? 简化：Ω: x²+y²+z²≤1（球），求 ∭_Ω (x+y+z)² dV。</li>
+<li>计算 ∬_D y dσ，D: x²+y²≤2x。</li>
+<li>求由 z=x²+y² 与 z=1 围成的立体体积。</li>
+</ol>
+<blockquote>
+<p>答案：1. ∬|x| = 4∫₀¹∫₀^{√(1-x²)}? 极坐标右半×2：2∫_{-π/2}^{π/2}cosθdθ∫₀¹r²dr = 2·2·(1/3)=4/3；∬y=0 → <strong>4/3</strong>。
+2. ∫₀¹dx∫₀^x y? 注意被积函数是x：∫₀¹ x·x dx = <strong>1/3</strong>。
+3. 展开 = ∭(x²+y²+z²) + 2∭(xy+yz+zx)。由奇对称性三个交叉项均为0 → = ∭r²dV = ∫₀^{2π}∫₀^π∫₀¹ r⁴sinφ drdφdθ = 2π·2·(1/5) = <strong>4π/5</strong>。
+4. 圆域 (1,0) r=1：∬y=0（对称于x轴），∬x = x̄·面积 = 1·π = <strong>π</strong>。
+5. V = ∭(1-x²-y²)dσ over x²+y²≤1 = π - π/2 = <strong>π/2</strong>。</p>
+</blockquote>
+<hr />
+<h2>08 曲线积分与曲面积分【数一】</h2>
+<h3>题型清单</h3>
+<ol>
+<li>第一类曲线积分（对弧长 ds）：参数化 ds=√(x'²+y'²)dt；对称性；L 上 x²+y²=R² 时 ∮f(x)ds 可用 x²+y² 替换；</li>
+<li>第二类曲线积分（对坐标）：<strong>格林公式</strong>（闭曲线正向；非闭→补线；内部有奇点→挖洞）；</li>
+<li>路径无关四等价（P_y=Q_x 单连通域）→ 改走折线/求原函数 u；</li>
+<li>第一类曲面积分（对面积 dS）：投影公式 dS=√(1+z_x²+z_y²)dxdy；</li>
+<li>第二类曲面积分：<strong>高斯公式</strong>（闭曲面外侧；非闭→补面；方向别忘）；斯托克斯公式；</li>
+<li>散度 div F、旋度 rot F 直接计算。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> I = ∮_L (x²+y)dx - (x - y²)dy，L: x²+y²=1 取正向。
+格林：∂Q/∂x - ∂P/∂y = (-1)-(1) = -2 → I = -2·面积 = <strong>-2π</strong>。</p>
+<p><strong>例2</strong> I = ∬_Σ (xdydz + ydzdx + zdxdy)，Σ: 球面 x²+y²+z²=R² 外侧。
+高斯：div=(1+1+1)=3 → I = 3·(4/3)πR³ = <strong>4πR³</strong>。</p>
+<p><strong>例3</strong> ∮_L x² ds，L: x²+y²=1。
+对称性：∮x²ds = ∮y²ds = (1/2)∮(x²+y²)ds = (1/2)∮1·ds = <strong>π</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>计算 ∫_L y ds? 计算 ∫_L (x+y)ds，L: 从(0,0)到(1,1)的直线段 y=x。</li>
+<li>计算 ∫_L 2xy dx + x²dy，L: y=x² 从 (0,0) 到 (1,1)。判断与路径是否无关。</li>
+<li>用高斯公式计算 ∬_Σ xdydz + ydzdx + zdxdy，Σ: z=1-x²-y²（z≥0）上侧。</li>
+<li>求 div F：F = (xy, yz, zx)。</li>
+<li>计算 ∮_L (e^x sin y - y)dx + (e^x cos y - 1)dy? 其中 L: x²+y²=1 正向。（提示：格林+注意∂Q/∂x-∂P/∂y=e^xcosy-e^xcosy+? P=e^xsiny-y→∂P/∂y=e^xcosy-1；Q=e^xcosy-1→∂Q/∂x=e^xcosy；差=1 → I=π。）</li>
+</ol>
+<blockquote>
+<p>答案：1. ∫₀^{√2}（? 参数化 x=t,y=t,ds=√2dt）= √2∫₀¹2t dt = <strong>√2</strong>。
+2. 沿 y=x² 直接算 = ∫₀¹(2x³+2x³)dx? 2xy dx = 2x·x²dx=2x³dx；x²dy=2x³dx → 共4/4=1；而 P_y=2x=Q_x 处处成立 → <strong>路径无关，值=1</strong>（改走折线验证：(0,0)→(1,0)：dy=0, 2xy=0 → 0；(1,0)→(1,1)：dx=0，x²dy=∫₀¹1dy=1）。
+3. 补 z=0 圆盘下侧? 整体：Ω为抛物面下方? 取 Ω: z≤1-x²-y², z≥0? 用补面法：补 Σ₁: z=0（x²+y²≤1）下侧? 设 Σ=抛物面上侧+补底面下侧=外侧闭曲面：I_总=∭3dV=3∫₀¹(1-r²)2πr? =3·(π/2)=3π/2；底面上 xdydz+ydzdx=0? 底面上 z=0，dz=0 前两项为0，zdxdy=0 → I_底=0 → <strong>I=3π/2</strong>。
+4. <strong>x+y+z</strong>。
+5. ∂Q/∂x - ∂P/∂y = e^xcosy - (e^xcosy - 1) = 1 → I = <strong>π</strong>。</p>
+</blockquote>
+<hr />
+<h2>09 无穷级数【数一】</h2>
+<h3>题型清单</h3>
+<ol>
+<li>正项级数：比值/根值（失效用比较）、与 p-级数比较、<strong>积分判别法</strong>；</li>
+<li>交错级数：莱布尼茨；绝对收敛⇒收敛；条件收敛判定；</li>
+<li>幂级数：收敛半径 R=lim|aₙ/aₙ₊₁|、收敛域（端点单独判）、<strong>和函数</strong>（逐项求导/积分，注意 x=0 与端点补充）、<strong>函数展开</strong>（间接法为主）；</li>
+<li>傅里叶级数：系数公式（a₀ 特殊：2倍平均）、狄利克雷收敛定理（间断点收敛于左右极限平均值）、奇延拓偶延拓。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> 求 Σ n(n+1)xⁿ 的和函数。
+由 (1/(1−x))'' = 2/(1−x)³ 得 Σn(n−1)xⁿ = 2x²/(1−x)³，又 Σnxⁿ = x/(1−x)²。
+n(n+1) = n(n−1) + 2n，故
+Σ n(n+1)xⁿ = 2x²/(1−x)³ + 2x/(1−x)² = [2x² + 2x(1−x)]/(1−x)³ = <strong>2x/(1−x)³</strong>，|x|&lt;1。
+（验证：x=1/2 时和=8；逐项 1+1.5+1.5+1.25+… 收敛于 8 ✓。）</p>
+<p><strong>例2</strong> 将 f(x)=1/(2+x) 展开为 x 的幂级数。
+= (1/2)·1/(1+x/2) = <strong>Σ (-1)ⁿ xⁿ/2^{n+1}</strong>，收敛域 |x/2|&lt;1 即 -2&lt;x&lt;2。</p>
+<p><strong>例3</strong> 把 f(x)=x²（-π&lt;x&lt;π）展开为傅里叶级数，并求 Σ1/n²。
+a₀=(2/π)∫₀^π x²dx=2π²/3；aₙ=(2/π)∫₀^π x²cosnx dx = 4(-1)ⁿ/n²；bₙ=0。
+x² = π²/3 + 4Σ_{n=1}^∞ (-1)ⁿcosnx/n²。令 x=π（延拓后连续）：π² = π²/3 + 4Σ1/n² → <strong>Σ1/n²=π²/6</strong>。</p>
+<h3>强化练习</h3>
+<ol>
+<li>判断 Σ (n+1)/(n³+1)? 判断 Σ ln(1+1/n²)? 与 Σ 1/n² 比较的收敛性。</li>
+<li>判断 Σ (-1)ⁿ·n/(n+1) 的敛散性。</li>
+<li>求 Σ xⁿ/n! 的和函数及 Σ_{n=0}^∞ (n+1)/n! ? 计算 Σ_{n=0}^∞ (n+1)/2ⁿ? 两个都要：Σ(n+1)/n! 与 Σ xⁿ/n。</li>
+<li>求 Σ n x^{n-1} 的和函数并计算 Σ n/2ⁿ。</li>
+<li>将 f(x)=x（-π&lt;x&lt;π）展开为傅里叶级数。</li>
+</ol>
+<blockquote>
+<p>答案：1. ln(1+1/n²) ≤ 1/n²，与收敛级数比较 → <strong>收敛</strong>。
+2. 一般项 n/(n+1)→1≠0 → <strong>发散</strong>。
+3. Σxⁿ/n! = e^x；Σ(n+1)/n! = Σ n/n! + Σ1/n! = e + e = <strong>2e</strong>；Σ xⁿ/n = -ln(1-x)（|x|&lt;1，x=-1 处也收敛 → 域[-1,1)）。
+4. Σn x^{n-1} = 1/(1-x)²；Σ n/2ⁿ = <strong>2</strong>（= (1/2)·1/(1/2)²）。
+5. x = 2Σ(-1)^{n+1}sin(nx)/n（奇函数，bₙ=2(-1)^{n+1}/n）。</p>
+</blockquote>
+<hr />
+<h2>10 常微分方程</h2>
+<h3>题型清单</h3>
+<ol>
+<li>一阶：可分离变量、齐次（y/x=u）、一阶线性（公式 y'+P(x)y=Q(x)）、<strong>伯努利</strong>【数一】、全微分方程【数一】；</li>
+<li>可降阶：y⁽ⁿ⁾=f(x)；y''=f(x,y')（令p=y'）；y''=f(y,y')（令p=y'，y''=p dp/dy）；</li>
+<li>二阶常系数齐次：特征方程三种情形；</li>
+<li>二阶常系数非齐次：f(x)=Pₘ(x)e^{λx} 或 e^{αx}(Acosβx+Bsinβx)，特解形式按 λ 是否特征根乘 x/x²；</li>
+<li>高阶线性方程解的结构（齐次通解+非齐次特解；叠加原理）；</li>
+<li>应用：几何（切线截距、曲率）、变化率（冷却/衰减/人口）、受力平衡。</li>
+</ol>
+<h3>例题精讲</h3>
+<p><strong>例1</strong> 解 y' + y tanx = cos²x。
+一阶线性，IF=secx：(y·secx)' = cosx → y·secx = sinx + C → <strong>y = sinx cosx + C cosx</strong>。</p>
+<p><strong>例2</strong> 解 y'' - 2y' - 3y = 3x + 1。
+特征根 3, -1。设 y<em>=Ax+B：-3(Ax+B)-2A = 3x+1 → A=-1，-3B+2=1 → B=1/3。
+通解 </em><em>y = C₁e^{3x} + C₂e^{-x} - x + 1/3</em>*。</p>
+<p><strong>例3</strong> 解 y'' + 4y = 8x，y(0)=0? 求 y''+4y=8x 的通解。
+特征根 ±2i。y<em>=2x（4·2x=8x ✓）。</em><em>y = C₁cos2x + C₂sin2x + 2x</em>*。</p>
+<h3>强化练习</h3>
+<ol>
+<li>解 y' = y·cotx。</li>
+<li>解 y' + 2y = e^{-x}。</li>
+<li>解 y'' = (y')²? 解 y''=1+(y')²。</li>
+<li>解 y'' - 4y = e^{2x}。</li>
+<li>设曲线 y=f(x) 过原点且其上任一点 (x,y) 处切线斜率为 2x+y? 解方程 y'=2x+y，y(0)=0。</li>
+</ol>
+<blockquote>
+<p>答案：1. <strong>y = C sinx</strong>。
+2. IF=e^{2x}：(ye^{2x})'=e^x → <strong>y = e^{-x} + Ce^{-2x}</strong>。
+3. p=y'，dp/dx=1+p² → p=tan(x+C₁) → <strong>y = -ln|cos(x+C₁)| + C₂</strong>。
+4. 特征根 ±2 → e^{2x}对应重根：y<em> = Axe^{2x}，代入得 A=1/4 → </em><em>y = C₁e^{2x} + C₂e^{-2x} + (x/4)e^{2x}</em><em>。
+5. y' - y = 2x：y</em> = -2x-2（代入：-2-(−2x−2)=2x ✓）→ y=Ce^x-2x-2；y(0)=0 → C=2 → <strong>y = 2e^x - 2x - 2</strong>。</p>
+</blockquote>
+<hr />
+<h2>冲刺用法</h2>
+<ol>
+<li>每章先默写"题型清单"，写不出的条目回《知识点与难点》补；</li>
+<li>例题遮住详解重做，练习限时（每题≤12分钟）；</li>
+<li>错题标注"概念/计算/思路"三类，思路类错题抄到错题本并隔周重做。</li>
+</ol></div></body></html>

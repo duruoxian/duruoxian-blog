@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计组精讲_存储系统 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机组成原理精讲 · 存储系统（Cache三映射计算 + 主存扩展演算）</h1>
+<blockquote>
+<p>计组精讲第2批。存储系统是计组计算题的绝对主战场：<strong>Cache地址划分、平均访存时间、芯片扩展、多体交叉</strong>——本册每类给推导模板与验算。</p>
+</blockquote>
+<hr />
+<h2>一、层次结构精讲</h2>
+<p><strong>H1 三级存储层次</strong>：<strong>Cache–主存</strong>（解决速度匹配，由硬件自动完成，对程序员透明）+ <strong>主存–辅存</strong>（解决容量，由硬件+OS共同完成，发展为虚拟存储）。
+【理论根基】<strong>局部性原理</strong>——时间局部性+空间局部性：整个层次体系能成立的唯一原因（第7章OS题9、第5章数学题4呼应）。
+<strong>H2 三层次参数金字塔</strong>：速度：寄存器&gt;Cache(SRAM)&gt;主存(DRAM)&gt;辅存(Flash/磁盘)；位价相反；容量相反。
+【要点】层次间"数据流向"：Cache↔主存以<strong>块</strong>为单位（几十字节），主存↔辅存以<strong>页</strong>为单位（几KB）——块小页大，因为速度差不同。</p>
+<h2>二、主存精讲</h2>
+<p><strong>M1 SRAM vs DRAM（必背对比表）</strong>：
+| | SRAM | DRAM |
+|---|---|---|
+| 存储原理 | <strong>触发器</strong> | <strong>电容存储电荷</strong> |
+| 刷新 | 不需要 | 需要（电荷泄漏） |
+| 运行 | 快 | 慢 |
+| 集成度/位价 | 低/贵 | 高/便宜 |
+| 用途 | <strong>Cache</strong> | <strong>主存</strong> |
+<strong>M2 DRAM刷新</strong>：集中刷新（死时间）、分散刷新（无死时间但存取周期加倍）、<strong>异步刷新</strong>（2ms内分散刷完，每行间隔2ms/行数）——现代主流。
+<strong>M3 ROM族</strong>：MROM→PROM→EPROM→<strong>EEPROM（按字节电擦除，BIOS）</strong>→<strong>Flash（按块擦除，SSD/U盘）</strong>。Flash读快写慢（写前擦除）、块擦写次数有限→磨损均衡。</p>
+<p><strong>M4 主存芯片扩展（三步模板）</strong>：
+① 位扩展：位数不够→多片并联（地址、片选共用）；
+② 字扩展：字数不够→<strong>高位地址经译码器产生片选</strong>；
+③ 字位同时扩展：芯片数 = 总容量/(单片容量)。
+【地址划分】片内地址=⌊log₂(每片字数)⌋位，片选=剩余高位（经译码器）。</p>
+<p><strong>考题1（芯片扩展）</strong> 用 4K×4位 的SRAM芯片组成 16K×8位 的存储器，需要多少片？地址线、片选如何安排？
+【解】芯片数=(16K×8)/(4K×4)=<strong>8片</strong>。
+位扩展：每2片并联构成4K×8（一组）；字扩展：4组 → 2-4译码器对高2位地址译码产生4个片选。
+地址14位：<strong>高2位=组选（译码），低12位=片内地址</strong>。∎</p>
+<p><strong>M5 多体交叉存储器</strong>：
+- <strong>高位交叉（顺序编址）</strong>：高位选体——体间顺序扩展，<strong>无并行效果</strong>；
+- <strong>低位交叉（各体轮流编址）</strong>：低位选体——<strong>流水线存取</strong>：连续访问m个字，时间=T+(m−1)×r（r=总线传送周期，T=存取周期，r=T/分体数）。
+【推导】第 i 个字在体 i mod 4：访问体0的同时，体1已在传送——四体流水使带宽×4（理想）。</p>
+<p><strong>考题2（多体交叉计算）</strong> 四体低位交叉，存取周期1μs，总线传送周期0.25μs。连续读取16个字的总时间？高位交叉呢？
+【解】低位交叉：T+(m−1)r=1+15×0.25=<strong>4.75μs</strong>；
+高位交叉（同一体内连续）：16×1=<strong>16μs</strong>。∎
+（注意：4个字恰好跨4体需 1+3×0.25=1.75μs；"体数≥一次读取字数"才能满流水。）</p>
+<h2>三、Cache 精讲（重中之重）</h2>
+<p><strong>C1 工作原理</strong>：主存块调入Cache，CPU访存先查Cache（并行比较标记）→命中直接取、缺失则调块+替换。
+<strong>C2 命中率与平均访存时间（两版公式）</strong>：
+- Cache与主存<strong>同时访问</strong>（并行）：EAT = h·t_c + (1−h)·t_m；
+- <strong>先Cache后主存</strong>（串行）：EAT = h·t_c + (1−h)(t_c+t_m)。
+<strong>考题3（EAT双版计算）</strong> Cache存取40ns，主存200ns，命中率90%。求串行与并行两版的平均访存时间。
+【解】并行：0.9×40+0.1×200=36+20=<strong>56ns</strong>；
+串行：0.9×40+0.1×(40+200)=36+24=<strong>60ns</strong>。∎
+（题干说"同时访问/先查Cache再查主存"决定用哪个公式——408审题陷阱。）</p>
+<p><strong>C3 三种映射（地址划分是全部计算的核心）</strong>：
+设主存地址 n 位，块大小 2^b B（块内偏移 b 位），Cache 行数 2^c：
+| 映射 | 主存地址划分 | 特点 |
+|---|---|---|
+| 直接映射 | <strong>标记 | 行号(c位) | 块内(b位)</strong> | 行号=块号 mod 行数；一行只容一块→<strong>冲突颠簸</strong>；硬件最简 |
+| 全相联 | <strong>标记(n−b位) | 块内(b位)</strong> | 任意放→命中率高、比较电路庞大 |
+| <strong>组相联（2路等）</strong> | <strong>标记 | 组号(g位) | 块内(b位)</strong> | 组间直接、组内全相联；折中 |</p>
+<p><strong>考题4（三映射地址划分·必考演算）</strong> 主存地址16位，块大小16B，Cache 64行。①直接映射下主存地址 0x2C45 的标记、行号、块内偏移？②改为2路组相联呢？③直接映射下访问地址序列 0,16,32,0,16（十进制字节地址）的命中情况？
+【解】块内偏移=log₂16=<strong>4位</strong>。
+①直接映射：行数64=2⁶ → 行号6位；标记=16−6−4=<strong>6位</strong>。
+0x2C45=0010 1100 0100 0101₂：偏移=0101=<strong>5</strong>；行号=000100=<strong>4</strong>；标记=001011=<strong>11</strong>。
+②2路组相联：组数=64/2=32=2⁵ → 组号5位；标记=16−4−5=<strong>7位</strong>。0x2C45：组号=00100=<strong>4</strong>，标记=0010110=<strong>0x16</strong>，偏移5。
+③直接映射4行、块16B：地址0、16、32的行号均为<strong>0</strong>（0÷16 mod 4），16→行0，32→行0：
+0M（装0块）、16M（同块，命中！）？——0、16同属块0（16/16=1? <strong>16号块=1</strong>，0号块=0！）修正：块号=地址/16：0→块0行0，16→块1行1，32→块2行2，0→块0命中，16→块1命中。<strong>命中2/5</strong>。
+【颠簸演示】改序列 0,64,128,0,64（块0、4、8均映射行0）：0M、64M、128M、0M、64M → <strong>命中0/5</strong>——直接映射的冲突颠簸（同行互相挤）。∎
+（映射题万能流程：①偏移位数=块大小幂；②行号/组号位数=Cache规模幂；③剩余=标记；④把地址写成二进制切段。）</p>
+<p><strong>C4 替换算法</strong>：直接映射无需替换（位置固定）；全相联/组相联满时替换——<strong>LRU</strong>（计数器/栈，堆栈算法）、FIFO、LFU、随机。LRU硬件实现：每行计数器或栈表。
+<strong>C5 写策略</strong>：
+- <strong>写命中</strong>：<strong>全写法</strong>（同时写Cache与主存，配写缓冲）——实现简单但写主存频繁；<strong>回写法</strong>（只写Cache置<strong>脏位</strong>，换出时写回）——快但有一致性风险；
+- <strong>写不命中</strong>：写分配（调入块，配回写法）/非写分配（直接写主存，配全写法）。
+【配对】<strong>全写↔非写分配；回写↔写分配</strong>（主流组合）。
+<strong>C6 多级Cache</strong>：L1/L2/L3——局部性+层次思想的再应用；缺失开销逐级增大。</p>
+<h2>四、虚拟存储（与Cache类比）</h2>
+<p><strong>V1 页式虚拟存储</strong>：虚页号→查页表→实页框号（与Cache组相联思想同构：<strong>TLB=页表的Cache</strong>）。
+<strong>V2 段式/段页式</strong>：段=程序逻辑单位（二维、便于共享保护）；段页式=先分段再分页（三次访存，快表救场）。
+<strong>V3 与Cache的类比表（985面试）</strong>：块↔页、Cache行↔页框、标记↔虚页号、命中↔不在缺页、<strong>缺失处理：Cache由硬件、缺页由OS（内中断）</strong>——"硬件透明 vs 软件介入"是两级的本质区别。</p>
+<hr />
+<h2>本章考题补遗（2题）</h2>
+<p><strong>题5（程序局部性·985面试）</strong> 遍历1000×1000的int数组（行优先存储，块大小可容多行片段），为什么 <code>for i: for j: a[i][j]</code> 比 <code>for j: for i: a[j][i]</code> 快得多？
+【答】行优先存储下，a[i][j] 内层 j 连续增长 → <strong>空间局部性</strong>：一次调块（如64B=16个int）命中16次。反序后每步跳过4KB（一行），<strong>每次访问都换块</strong> → 缺失率从1/16升到100%，Cache/TLB全废。∎
+（结论：<strong>遍历顺序要与存储顺序一致</strong>——这就是"写代码照顾Cache"的原理。）</p>
+<p><strong>题6（Cache容量/位数综合）</strong> 32位地址、块64B、2路组相联、数据区512KB。求Cache总位数（含标记与有效位）。
+【解】数据512KB → 行数=512KB/64B=8192=2¹³行 → 组数=2¹²组 → 组号12位；块内6位；标记=32−6−12=<strong>14位</strong>。
+每行：数据 64×8=512bit + 标记14 + 有效1 + （脏位1，回写法）= 528bit。
+总位数=8192×528≈<strong>4.32Mbit≈540KB</strong>（数据512KB+元数据开销约5.5%）。∎
+（Cache总容量的"位"级计算——408真题标准考法：数据+标记+有效位+脏位逐项加。）</p>
+<h2>五、本章必会清单</h2>
+<ol>
+<li>三级层次与局部性原理；Cache块小、页大的原因；</li>
+<li>SRAM/DRAM对比表；DRAM三种刷新方式；Flash特性（块擦除、磨损均衡）；</li>
+<li>芯片扩展三步（位并、字译码）与地址划分；</li>
+<li>低位交叉流水线 T+(m−1)r vs 高位交叉；</li>
+<li>Cache三映射地址划分万能流程（偏移→行/组→标记）；颠簸演示；</li>
+<li>EAT两版公式（并行/串行）；</li>
+<li>写策略配对（全写↔非写分配、回写↔写分配）；脏位；</li>
+<li>Cache总位数计算（数据+标记+有效+脏）；</li>
+<li>虚拟存储与Cache的类比及"缺失由谁处理"的本质区别。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（第3/4批）：<strong>指令系统+CPU</strong>——指令格式（扩展操作码设计题）、寻址方式（EA计算与有效访存次数）、CISC/RISC、数据通路（单总线/专用通路）、控制器（硬布线vs微程序）、<strong>指令流水线（五段时空图、冒险三类与处理、加速比计算）</strong>。说"继续"交付。</p>
+</blockquote></div></body></html>

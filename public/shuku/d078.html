@@ -1,0 +1,649 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408选择题题库_计算机组成 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 选择题题库 · 计算机组成原理（120题分章带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成。计组在 408 选择题里约占 22 分（11 题），且大题常考"存储扩展、Cache 计算、流水线、DMA"——本册按章节刷透。
+难度：★基础 ★★中等 ★★★难点。<strong>先遮住答案做</strong>；详解重点讲"错误选项为什么错"。
+配合《计组_知识点与难点》《408计组精讲》四册使用；题号 CN+序号。</p>
+</blockquote>
+<h2>§1 系统概述（CN1–CN15）</h2>
+<p><strong>CN1.</strong>★ 冯·诺依曼机的核心思想：
+A. 采用十进制 B. 存储程序、程序控制 C. 使用晶体管 D. 并行计算</p>
+<blockquote>
+<p><strong>B</strong>。程序（指令+数据）预先存入存储器，机器按地址自动逐条执行。
+A 错：冯·诺依曼机是二进制；C 是硬件代次；D 是体系结构方向而非其核心思想。</p>
+</blockquote>
+<p><strong>CN2.</strong>★ 冯·诺依曼机中，区分"指令"和"数据"的依据：
+A. 编码形式不同 B. 所处阶段/取出方式不同（按指令周期还是数据访问） C. 长度不同 D. 无法区分</p>
+<blockquote>
+<p><strong>B</strong>。二者都以二进制存在同一存储器里，取指阶段取出的是指令，执行阶段访问的是数据。
+A 错：编码形式完全可以相同。</p>
+</blockquote>
+<p><strong>CN3.</strong>★ "主存—辅存"层次主要解决：
+A. 速度 B. 容量 C. 成本功耗 D. 兼容性</p>
+<blockquote>
+<p><strong>B</strong>。辅存便宜且大。解决<strong>速度</strong>的是"Cache—主存"层次。</p>
+</blockquote>
+<p><strong>CN4.</strong>★ "Cache—主存"层次主要解决：
+A. 速度匹配 B. 容量 C. 价格 D. 功耗</p>
+<blockquote>
+<p><strong>A</strong>。Cache 快，弥补 CPU 与主存的速度差。</p>
+</blockquote>
+<p><strong>CN5.</strong>★ 把汇编语言源程序翻译成机器语言的系统程序：
+A. 编译程序 B. 汇编程序 C. 解释程序 D. 连接程序</p>
+<blockquote>
+<p><strong>B</strong>。A 处理高级语言；C 是边翻译边执行。</p>
+</blockquote>
+<p><strong>CN6.</strong>★★ 下列属于 RISC 特征的：
+A. 指令长度可变 B. 只有 Load/Store 指令访存 C. 指令多而复杂 D. 微程序控制为主</p>
+<blockquote>
+<p><strong>B</strong>。RISC 定长指令、少指令、Load/Store 架构、硬布线/流水优先。
+A、C 是 CISC 特征；D RISC 多用硬布线。</p>
+</blockquote>
+<p><strong>CN7.</strong>★ 机器字长通常指：
+A. 存储单元数 B. CPU 一次能处理的二进制位数 C. 主存容量 D. 总线根数</p>
+<blockquote>
+<p><strong>B</strong>。一般等于内部寄存器/运算器的位数。</p>
+</blockquote>
+<p><strong>CN8.</strong>★★ 主频 2 GHz、平均 CPI=2.5 的机器，运算速度约：
+A. 800 MIPS B. 5000 MIPS C. 400 MIPS D. 2.5 MIPS</p>
+<blockquote>
+<p><strong>A</strong>。MIPS = 主频(MHz)/CPI = 2000/2.5 = 800。</p>
+</blockquote>
+<p><strong>CN9.</strong>★★ 程序 CPU 执行时间 = ：
+A. 指令数 × CPI × 时钟周期 B. 指令数 × 主频 C. CPI/主频 D. 时钟周期²</p>
+<blockquote>
+<p><strong>A</strong>。三大要素：指令条数、CPI、时钟周期。B、C 量纲都不对。</p>
+</blockquote>
+<p><strong>CN10.</strong>★ MAR 的位数决定：
+A. 存储字长 B. 寻址范围（可寻址单元数） C. 主存速度 D. 指令字长</p>
+<blockquote>
+<p><strong>B</strong>。MAR 10 位 ⇒ 2¹⁰=1024 个地址。MDR 位数才决定存储字长（A）。</p>
+</blockquote>
+<p><strong>CN11.</strong>★ 完整计算机系统的层次中，最底层是：
+A. 高级语言 B. 汇编语言 C. 微程序/硬件逻辑 D. 操作系统</p>
+<blockquote>
+<p><strong>C</strong>。微程序层（或硬联逻辑）在最底，向上依次机器语言、OS、汇编、高级语言。</p>
+</blockquote>
+<p><strong>CN12.</strong>★ 控制器的主要功能：
+A. 算术逻辑运算 B. 取指令、分析指令、发出微操作命令 C. 存储数据 D. 输入输出</p>
+<blockquote>
+<p><strong>B</strong>。A 是运算器（ALU）；C 是存储器。</p>
+</blockquote>
+<p><strong>CN13.</strong>★ 大小关系正确的是：
+A. 指令周期≥机器周期≥时钟周期 B. 相反 C. 相等 D. 无关</p>
+<blockquote>
+<p><strong>A</strong>。指令周期含若干机器周期（CPU 周期），机器周期含若干时钟周期（节拍）。</p>
+</blockquote>
+<p><strong>CN14.</strong>★ "同一功能既可用硬件也可用软件实现"说明：
+A. 软硬件逻辑功能等价 B. 硬件多余 C. 软件多余 D. 成本相同</p>
+<blockquote>
+<p><strong>A</strong>。等价但性能价格不同，这正是软硬件界面可移动的原因。</p>
+</blockquote>
+<p><strong>CN15.</strong>★★ 存放当前正在执行<strong>指令</strong>的寄存器：
+A. PC B. IR C. ACC D. PSW</p>
+<blockquote>
+<p><strong>B</strong>（IR）。A 是 PC——存<strong>下一条</strong>指令地址，最容易混的两个寄存器。</p>
+</blockquote>
+<h2>§2 数据的表示与运算（CN16–CN40）</h2>
+<p><strong>CN16.</strong>★ 8 位原码的表示范围：
+A. −128~127 B. −127~127 C. −127~128 D. 0~255</p>
+<blockquote>
+<p><strong>B</strong>。原码两个 0（+0、−0）占用编码，故只有 ±127。
+A 是<strong>补码</strong>范围；C 不存在这种范围。</p>
+</blockquote>
+<p><strong>CN17.</strong>★ 8 位补码 10000000 表示：
+A. −0 B. −127 C. −128 D. +128</p>
+<blockquote>
+<p><strong>C</strong>。补码没有 −0，多出的 10000000 表示 −2⁷。原码、反码中 10000000 是 −0。</p>
+</blockquote>
+<p><strong>CN18.</strong>★ 补码 11101100 的真值：
+A. −20 B. −19 C. 236 D. −108</p>
+<blockquote>
+<p><strong>A</strong>。取反加一得 00010100 = 20 ⇒ 真值 −20。
+D 是把 11101100 当无符号 236 再减 256 的错算法？236−256=−20 其实对——但 236 本身是干扰项；按定义做最稳。</p>
+</blockquote>
+<p><strong>CN19.</strong>★ 十进制 −0.6875 的二进制：
+A. −0.1011 B. −0.1101 C. −0.1010 D. −0.0111</p>
+<blockquote>
+<p><strong>A</strong>。0.6875 = 0.5+0.125+0.0625 = 2⁻¹+2⁻³+2⁻⁴ = 0.1011。
+B 是 0.8125，C 是 0.625，D 是 0.4375——都是"试出来的坑"。</p>
+</blockquote>
+<p><strong>CN20.</strong>★ IEEE 754 单精度的位分配：
+A. 1+8+23 B. 1+11+52 C. 1+7+24 D. 8+8+16</p>
+<blockquote>
+<p><strong>A</strong>。单精度 32 位：1 符号+8 阶码+23 尾数；B 是双精度 64 位。</p>
+</blockquote>
+<p><strong>CN21.</strong>★★ 用 IEEE 754 单精度表示 1.5：
+A. 阶码 127，尾数 100…0 B. 阶码 0，尾数 1 C. 阶码 128 D. 无法表示</p>
+<blockquote>
+<p><strong>A</strong>。1.5=1.1₂×2⁰：符号 0，阶码 0+127=127，尾数 .1 后补零。
+B 忘了偏置；C 多加了 1。</p>
+</blockquote>
+<p><strong>CN22.</strong>★★ IEEE 754 中阶码全 1、尾数非 0 表示：
+A. 0 B. 无穷大 C. NaN D. 最小正规数</p>
+<blockquote>
+<p><strong>C</strong>。全 1+尾数 0 才是 ±∞；全 0 阶码表示非规格化小数/±0。</p>
+</blockquote>
+<p><strong>CN23.</strong>★ 原码浮点数规格化后尾数满足：
+A. 1/2≤|M|&lt;1 B. |M|&lt;1/2 C. |M|≥1 D. 任意</p>
+<blockquote>
+<p><strong>A</strong>。最高数值位必须为 1（形如 0.1×× 或 1.0××的补码变形）。</p>
+</blockquote>
+<p><strong>CN24.</strong>★★ 为 8 位数据配汉明码，需要校验位：
+A. 3 B. 4 C. 5 D. 8</p>
+<blockquote>
+<p><strong>B</strong>。2ᵏ ≥ n+k+1：k=4 时 16 ≥ 8+4+1=13 ✓（k=3 时 8&lt;12 不够）。</p>
+</blockquote>
+<p><strong>CN25.</strong>★ 奇偶校验能检测：
+A. 所有错 B. 任何奇数位错 C. 任何偶数位错 D. 定位错误</p>
+<blockquote>
+<p><strong>B</strong>。偶数个错恰好抵消；且奇偶校验<strong>无纠错能力</strong>（D 错）。</p>
+</blockquote>
+<p><strong>CN26.</strong>★★ 生成多项式 G(x)=x³+x+1（码 1011），CRC 校验位位数：
+A. 3 B. 4 C. 1 D. 与数据有关</p>
+<blockquote>
+<p><strong>A</strong>。最高次幂 3 ⇒ 校验位 3 位（余数位数）。</p>
+</blockquote>
+<p><strong>CN27.</strong>★ 补码加法的正确表达：
+A. [x+y]补=[x]补+[y]补（mod 2ⁿ） B. [x+y]补=[x]补−[y]补 C. 需先转原码再算 D. 结果要加符号修正</p>
+<blockquote>
+<p><strong>A</strong>。补码加减一体化，减法转化为加负数补码。</p>
+</blockquote>
+<p><strong>CN28.</strong>★★ 双符号位补码运算结果为 10，表示：
+A. 正确正数 B. 正溢出 C. 负溢出 D. 结果为 0</p>
+<blockquote>
+<p><strong>C</strong>。符号位 10：原意为负但符号异常 ⇒ 负溢出；01 是正溢出；00/11 正常。</p>
+</blockquote>
+<p><strong>CN29.</strong>★★ 8 位补码 x=10000000（−128），x+x 的结果：
+A. 0，无溢出 B. 溢出 C. −256 D. +256</p>
+<blockquote>
+<p><strong>B</strong>。−128+(−128)=−256 超出补码范围 ⇒ 溢出（双符号位下可见 10）。
+A 是把溢出位丢掉后的"假结果"；±256 都不在 8 位表示范围内。</p>
+</blockquote>
+<p><strong>CN30.</strong>★ 移码常用于表示浮点数的：
+A. 尾数 B. 阶码 C. 符号 D. 舍入位</p>
+<blockquote>
+<p><strong>B</strong>。移码=补码符号取反，无符号比较大小即可比阶码高低，方便浮点比较与对阶。</p>
+</blockquote>
+<p><strong>CN31.</strong>★ 补码算术右移规则：
+A. 高位补 0 B. 符号位不变并复制进高位 C. 高位补 1 D. 循环</p>
+<blockquote>
+<p><strong>B</strong>。算术右移保持符号（除 2 的效果）；A 是逻辑右移。</p>
+</blockquote>
+<p><strong>CN32.</strong>★ 逻辑左移一位相当于：
+A. 乘 2（无符号意义下） B. 除 2 C. 取反 D. 不变</p>
+<blockquote>
+<p><strong>A</strong>。左移×2（低位补 0），右移÷2。</p>
+</blockquote>
+<p><strong>CN33.</strong>★ 原码一位乘中，符号位如何处理：
+A. 参加运算 B. 单独异或处理，数值部分绝对值相乘 C. 恒正 D. 取反</p>
+<blockquote>
+<p><strong>B</strong>。原码的符号与数值是"分家"的。</p>
+</blockquote>
+<p><strong>CN34.</strong>★★ 补码一位乘（Booth 算法）的判断依据：
+A. 只看当前位 B. 附加位 Yₙ₊₁ 与 Yₙ 的差值 C. 符号位 D. 进位</p>
+<blockquote>
+<p><strong>B</strong>。00/11 移位；01 加 [x]补；10 加 [−x]补。</p>
+</blockquote>
+<p><strong>CN35.</strong>★ 行波进位加法器速度慢的原因：
+A. 位太少 B. 进位逐级串行传播 C. 时钟慢 D. 寄存器多</p>
+<blockquote>
+<p><strong>B</strong>。高位要等低位进位。改进=先行进位（CLA）并行算进位。</p>
+</blockquote>
+<p><strong>CN36.</strong>★ 先行进位（CLA）提高速度的关键：
+A. 减少位数 B. 用 G（进位生成）、P（进位传递）并行算出各位进位 C. 提高主频 D. 用补码</p>
+<blockquote>
+<p><strong>B</strong>。进位不再逐级等待。</p>
+</blockquote>
+<p><strong>CN37.</strong>★★ 浮点加减法的第一个步骤：
+A. 尾数相加 B. 对阶（小阶向大阶对齐） C. 规格化 D. 舍入</p>
+<blockquote>
+<p><strong>B</strong>。对齐阶码才能加减尾数；对阶时小阶尾数<strong>右移</strong>（损失精度，左移会丢高位）。</p>
+</blockquote>
+<p><strong>CN38.</strong>★★ 浮点运算中"尾数溢出"怎么办：
+A. 报错终止 B. 右规（尾数右移 1 位，阶码加 1） C. 左规 D. 忽略</p>
+<blockquote>
+<p><strong>B</strong>。尾数溢出可补救；<strong>阶码溢出</strong>（上溢）才是真正的浮点溢出。</p>
+</blockquote>
+<p><strong>CN39.</strong>★★ 浮点结果尾数出现 0.011×…（原码）时需要：
+A. 右规 B. 左规（尾数左移，阶码减 1） C. 舍入即可 D. 不处理</p>
+<blockquote>
+<p><strong>B</strong>。最高数值位为 0 说明未规格化，左移直到 0.1××。</p>
+</blockquote>
+<p><strong>CN40.</strong>★★★ IEEE 754 舍入模式中默认的是：
+A. 向 0 舍入 B. 向上舍入 C. 向偶数舍入（就近舍入） D. 随机</p>
+<blockquote>
+<p><strong>C</strong>。向最近偶数舍入，统计上无偏。</p>
+</blockquote>
+<h2>§3 存储系统（CN41–CN70）</h2>
+<p><strong>CN41.</strong>★ 存储层次按速度从快到慢：
+A. 主存&gt;Cache&gt;寄存器 B. 寄存器&gt;Cache&gt;主存&gt;辅存 C. 辅存&gt;主存&gt;Cache D. Cache&gt;寄存器&gt;主存</p>
+<blockquote>
+<p><strong>B</strong>。速度与容量成反比、与价格成正比。</p>
+</blockquote>
+<p><strong>CN42.</strong>★ SRAM 存储信息的原理：
+A. 电容电荷 B. 触发器（双稳态） C. 磁化方向 D. 熔丝</p>
+<blockquote>
+<p><strong>B</strong>。A 是 DRAM（需刷新）；C 是磁存储；D 是 PROM。</p>
+</blockquote>
+<p><strong>CN43.</strong>★★ DRAM 刷新的单位：
+A. 位 B. 字节 C. 行 D. 整片</p>
+<blockquote>
+<p><strong>C</strong>。按行刷新，常见集中/分散/异步三种方式。</p>
+</blockquote>
+<p><strong>CN44.</strong>★★ DRAM 采用地址复用的目的：
+A. 提速 B. 减少地址引脚/芯片引脚数 C. 增容 D. 省电</p>
+<blockquote>
+<p><strong>B</strong>。行地址 RAS 与列地址 CAS 分两次送。这也是 DRAM 破坏性读出、需再生之外的重要特征。</p>
+</blockquote>
+<p><strong>CN45.</strong>★ 存储周期与存取时间的关系：
+A. 相等 B. 周期≥存取时间（含恢复/预充电） C. 周期&lt;存取时间 D. 无关</p>
+<blockquote>
+<p><strong>B</strong>。周期=存取+恢复期。</p>
+</blockquote>
+<p><strong>CN46.</strong>★★ 用 8K×8 芯片组成 8K×32 存储器，需要：
+A. 2 片 B. 4 片 C. 8 片 D. 16 片</p>
+<blockquote>
+<p><strong>B</strong>。字数不变、位数×4 ⇒ 4 片<strong>位扩展</strong>。</p>
+</blockquote>
+<p><strong>CN47.</strong>★★ 用 4K×4 芯片组成 16K×8 存储器，需要：
+A. 4 片 B. 8 片 C. 2 片 D. 16 片</p>
+<blockquote>
+<p><strong>B</strong>。位扩 2 片成 4K×8 一组，字扩 4 组 ⇒ 8 片（需 2 位片选译码）。</p>
+</blockquote>
+<p><strong>CN48.</strong>★ 下列属<strong>易失性</strong>存储器的是：
+A. SRAM B. EPROM C. Flash D. 磁盘</p>
+<blockquote>
+<p><strong>A</strong>。SRAM/DRAM 断电即失；ROM 族与磁盘都是非易失。</p>
+</blockquote>
+<p><strong>CN49.</strong>★ 固态硬盘（SSD）的存储介质：
+A. 磁介质 B. Flash 闪存 C. 光盘 D. DRAM</p>
+<blockquote>
+<p><strong>B</strong>。按块擦写、有磨损寿命，靠磨损均衡与预留空间延长寿命。</p>
+</blockquote>
+<p><strong>CN50.</strong>★ 程序访问的局部性分两种：
+A. 时间局部性与空间局部性 B. 空间局部性与逻辑局部性 C. 高频与低频 D. 内部与外部</p>
+<blockquote>
+<p><strong>A</strong>。刚访问的项很快再被访问（循环）；附近地址将被访问（数组顺序）。</p>
+</blockquote>
+<p><strong>CN51.</strong>★★ 直接映射下，主存块与 Cache 行的关系：
+A. 任意放 B. 主存块号 mod Cache 行数=行号 C. 完全随缘 D. 按大小排序</p>
+<blockquote>
+<p><strong>B</strong>。一行只对应若干固定块，冲突率高但硬件简单。</p>
+</blockquote>
+<p><strong>CN52.</strong>★★ 直接映射主存地址的划分：
+A. 标记+行号+块内偏移 B. 标记+组号+块内偏移 C. 全是块内偏移 D. 标记+页号</p>
+<blockquote>
+<p><strong>A</strong>。B 是组相联的划分；D 是页式虚存。</p>
+</blockquote>
+<p><strong>CN53.</strong>★★ 2 路组相联的含义：
+A. 每组 1 行 B. 每组 2 行，组间直接映射、组内全相联 C. 整个 Cache 全相联 D. 2 个 Cache</p>
+<blockquote>
+<p><strong>B</strong>。折中方案：比直接映射冲突少，比全相联比较器少。</p>
+</blockquote>
+<p><strong>CN54.</strong>★★ 全相联映射的缺点：
+A. 冲突率高 B. 标记比较电路复杂（需比较所有行） C. 容量小 D. 不能写入</p>
+<blockquote>
+<p><strong>B</strong>。每行都要参与标记比较，硬件开销大；其优点恰是冲突率最低。</p>
+</blockquote>
+<p><strong>CN55.</strong>★ 程序访问 1000 次，950 次命中 Cache，命中率：
+A. 0.95 B. 0.05 C. 950 D. 1.05</p>
+<blockquote>
+<p><strong>A</strong>。h=命中次数/总次数=0.95；B 是缺失率。</p>
+</blockquote>
+<p><strong>CN56.</strong>★★ Cache 命中率 h=0.95，Cache 存取 5ns，主存 50ns，平均访问时间：
+A. 7.25ns B. 5ns C. 27.5ns D. 52.5ns</p>
+<blockquote>
+<p><strong>A</strong>。h·tc+(1−h)·tm = 0.95×5+0.05×50 = 4.75+2.5 = 7.25ns。
+（若题目说明"缺失时先访问 Cache 再访存"，则 h·tc+(1−h)(tc+tm)=7.5ns，看清口径。）</p>
+</blockquote>
+<p><strong>CN57.</strong>★★ 回写法（写回法）Cache 需要的附加位：
+A. 有效位 B. 脏位（修改位） C. 校验位 D. 保护位</p>
+<blockquote>
+<p><strong>B</strong>。标记该块是否被改过，换出时才写回主存。
+两种策略都需有效位（A）；全写法不需要脏位。</p>
+</blockquote>
+<p><strong>CN58.</strong>★ LRU 替换算法的思想：
+A. 随机 B. 最久未使用的先换出 C. 最先进入的先换出 D. 使用次数最少</p>
+<blockquote>
+<p><strong>B</strong>。D 是 LFU（频率）；C 是 FIFO。</p>
+</blockquote>
+<p><strong>CN59.</strong>★★ 主存地址 32 位，块大小 16B，4K 行直接映射 Cache：标记位宽：
+A. 12 B. 16 C. 20 D. 24</p>
+<blockquote>
+<p><strong>B</strong>。块内 4 位，行号 12 位，标记=32−4−12=<strong>16 位</strong>。</p>
+</blockquote>
+<p><strong>CN60.</strong>★★ 低位交叉编址多体存储器，m 体、每体存取周期 T、总线周期 τ，连续读 m 个字耗时：
+A. mT B. T+(m−1)τ C. mτ D. T</p>
+<blockquote>
+<p><strong>B</strong>。流水化：第 i 体与第 i+1 次访问重叠。
+A 是高位交叉（顺序）编址的耗时。</p>
+</blockquote>
+<p><strong>CN61.</strong>★ 高位交叉编址的特点：
+A. 顺序编址、利于扩充容量 B. 利于流水并行 C. 体号在低位 D. 带宽×m</p>
+<blockquote>
+<p><strong>A</strong>。低位交叉才具有并行带宽优势（C 错：低位交叉体号在低位）。</p>
+</blockquote>
+<p><strong>CN62.</strong>★ TLB 的本质：
+A. 页表的 Cache B. 数据 Cache C. 指令寄存器 D. 磁盘缓存</p>
+<blockquote>
+<p><strong>A</strong>。缓存最近使用的页表项，加速虚实地址转换。</p>
+</blockquote>
+<p><strong>CN63.</strong>★★ 页式虚拟存储中，"内碎片"出现在：
+A. 段式 B. 页式（最后一页装不满） C. 段页式段间 D. 无碎片</p>
+<blockquote>
+<p><strong>B</strong>。页大小固定，程序最后一页平均浪费半页；段式的碎片在外部（不连续小空洞）。</p>
+</blockquote>
+<p><strong>CN64.</strong>★★ 多级页表的主要目的：
+A. 加快查表 B. 减少页表本身占用的连续内存 C. 增大页 D. 消除碎片</p>
+<blockquote>
+<p><strong>B</strong>。顶级页表常驻+按需建立次级页表。
+加快查表靠 TLB（A）。</p>
+</blockquote>
+<p><strong>CN65.</strong>★★ 磁盘访问时间的三部分：
+A. 寻道+旋转延迟+传输 B. 查询+排队+传输 C. 读+写+校验 D. 启动+停止+等待</p>
+<blockquote>
+<p><strong>A</strong>。寻道最长且最不确定，是优化重点。</p>
+</blockquote>
+<p><strong>CN66.</strong>★★ 磁盘 8 面、每面 200 道、每道 20 扇区、每扇区 512B，总容量：
+A. 16.4MB B. 8.192MB C. 1.6MB D. 32MB</p>
+<blockquote>
+<p><strong>A</strong>。8×200×20×512 = 16384000 B ≈ 15.625 MiB（约 16.4 MB 十进制）。</p>
+</blockquote>
+<p><strong>CN67.</strong>★★ RAID 1 的特征：
+A. 条带化无冗余 B. 镜像（双份存储） C. 分布式校验 D. 只读</p>
+<blockquote>
+<p><strong>B</strong>。A 是 RAID 0；C 是 RAID 5。</p>
+</blockquote>
+<p><strong>CN68.</strong>★ RAID 5 至少需要几块盘：
+A. 2 B. 3 C. 4 D. 5</p>
+<blockquote>
+<p><strong>B</strong>。3 块起（2 数据+1 分布校验），允许坏 1 块。</p>
+</blockquote>
+<p><strong>CN69.</strong>★★ Cache 与主存的地址映射由什么完成：
+A. 操作系统 B. 硬件自动 C. 编译器 D. 用户程序</p>
+<blockquote>
+<p><strong>B</strong>。Cache 全硬件管理、对程序员透明；<strong>虚存</strong>的页映射才由 OS+硬件共同完成——两者最容易混。</p>
+</blockquote>
+<p><strong>CN70.</strong>★★ "Cache 对程序员透明"的含义：
+A. 看不见也不用管 B. 可以编程控制 C. 不存在 D. 必须手动刷新</p>
+<blockquote>
+<p><strong>A</strong>。地址都指向主存，Cache 的命中与否完全由硬件处理。</p>
+</blockquote>
+<h2>§4 指令系统（CN71–CN85）</h2>
+<p><strong>CN71.</strong>★ 一地址指令中另一个操作数通常隐含在：
+A. 栈顶 B. ACC（累加器） C. PC D. MAR</p>
+<blockquote>
+<p><strong>B</strong>。如 ADD A：ACC←ACC+(A)。
+A 是零地址（堆栈型）指令的特征。</p>
+</blockquote>
+<p><strong>CN72.</strong>★ 零地址运算指令的操作数来自：
+A. 寄存器 B. 堆栈 C. 主存固定单元 D. 指令内</p>
+<blockquote>
+<p><strong>B</strong>。后缀表达式与栈式计算机的经典搭配。</p>
+</blockquote>
+<p><strong>CN73.</strong>★ 取操作数<strong>不需访存</strong>的寻址方式：
+A. 直接 B. 间接 C. 立即 D. 寄存器间接</p>
+<blockquote>
+<p><strong>C</strong>。操作数在指令码中（立即数），取指时一并取出。
+D 错：寄存器间接 EA 在寄存器，<strong>取操作数</strong>仍要访存一次。</p>
+</blockquote>
+<p><strong>CN74.</strong>★ 直接寻址 EA=：
+A. A（指令中地址码） B. (A) C. (PC)+A D. (R)+A</p>
+<blockquote>
+<p><strong>A</strong>。访存 1 次取操作数；B 是间接寻址（访存 2 次）。</p>
+</blockquote>
+<p><strong>CN75.</strong>★★ 寄存器间接寻址访存次数（取操作数）：
+A. 0 B. 1 C. 2 D. 3</p>
+<blockquote>
+<p><strong>B</strong>。寄存器给地址，再访存一次拿数；普通寄存器寻址是 0 次。</p>
+</blockquote>
+<p><strong>CN76.</strong>★★ 变址寻址 EA=(IX)+A 的典型用途：
+A. 程序在内存中浮动 B. 数组/循环处理 C. 保存返回地址 D. 系统保护</p>
+<blockquote>
+<p><strong>B</strong>。A 固定、IX 变化遍历数组。
+A、D 是基址寻址的用途——"基址面向系统，变址面向用户"。</p>
+</blockquote>
+<p><strong>CN77.</strong>★★ 相对寻址 EA=(PC)+A 的主要好处：
+A. 扩大寻址范围 B. 程序整体搬移后转移目标仍正确 C. 加快运算 D. 减少指令长度</p>
+<blockquote>
+<p><strong>B</strong>。目标地址随 PC 浮动，便于程序重定位，常用于转移指令。</p>
+</blockquote>
+<p><strong>CN78.</strong>★ SP 是什么寻址方式的关键寄存器：
+A. 基址 B. 变址 C. 堆栈 D. 页式</p>
+<blockquote>
+<p><strong>C</strong>。堆栈寻址（隐含使用 SP）。</p>
+</blockquote>
+<p><strong>CN79.</strong>★★ 扩展操作码：指令字 16 位，4 位基本操作码，三地址指令 15 条（地址各 4 位）。剩余编码 1111 可扩展出多少条二地址指令（操作码 8 位）：
+A. 16 B. 15 C. 255 D. 240</p>
+<blockquote>
+<p><strong>A</strong>。1111 + 4 位自由 ⇒ 2⁴=16 条（留 1111 1111 还可继续扩展）。</p>
+</blockquote>
+<p><strong>CN80.</strong>★★ 若上题还想留出扩展空间（1111 1111 不用），二地址指令最多：
+A. 16 B. 15 C. 14 D. 8</p>
+<blockquote>
+<p><strong>B</strong>。15 条可用，留 1 个码继续向下扩展一地址/零地址。</p>
+</blockquote>
+<p><strong>CN81.</strong>★★ RISC 机器的寄存器数量特点：
+A. 少 B. 多（几十上百个通用寄存器） C. 只有 ACC D. 只用栈</p>
+<blockquote>
+<p><strong>B</strong>。减少访存，配合流水线。</p>
+</blockquote>
+<p><strong>CN82.</strong>★ CISC 与 RISC 的指令长度：
+A. 都定长 B. CISC 可变长，RISC 定长 C. 相反 D. 都可变</p>
+<blockquote>
+<p><strong>B</strong>。定长利于取指与流水。</p>
+</blockquote>
+<p><strong>CN83.</strong>★★ 指令寻址（下一条指令地址）的两种基本方式：
+A. 顺序寻址与跳跃寻址 B. 直接与间接 C. 立即与寄存器 D. 页式与段式</p>
+<blockquote>
+<p><strong>A</strong>。顺序=PC+1；跳跃=转移指令改 PC。</p>
+</blockquote>
+<p><strong>CN84.</strong>★★ 指令中地址码字段给出的都是"地址"吗：
+A. 是 B. 不一定（可以是寄存器号、立即数、偏移量等） C. 只能是主存地址 D. 只能是偏移</p>
+<blockquote>
+<p><strong>B</strong>。地址码的含义由寻址方式特征位决定。</p>
+</blockquote>
+<p><strong>CN85.</strong>★★ 一条指令的执行必经的周期：
+A. 取指、间址、执行、中断 B. 只有取指与执行 C. 取指、间址 D. 执行、中断</p>
+<blockquote>
+<p><strong>B</strong>。间址与中断周期不一定存在；取指+执行必经。</p>
+</blockquote>
+<h2>§5 CPU（CN86–CN105）</h2>
+<p><strong>CN86.</strong>★ 控制器中存放"下一条指令地址"的寄存器：
+A. IR B. PC C. MAR D. ACC</p>
+<blockquote>
+<p><strong>B</strong>。A 存当前指令本身。</p>
+</blockquote>
+<p><strong>CN87.</strong>★★ 取指周期的微操作序列（正确顺序）：
+A. PC→MAR→存储器→MDR→IR，同时 PC+1 B. IR→PC→MDR C. MDR→MAR→IR D. PC→MDR</p>
+<blockquote>
+<p><strong>A</strong>。经典五步：(PC)→MAR、1→R、M(MAR)→MDR、(MDR)→IR、(PC)+1→PC。</p>
+</blockquote>
+<p><strong>CN88.</strong>★★ 间址周期的标志：
+A. 多一次访存取有效地址 B. 不访存 C. 中断 D. 跳过取指</p>
+<blockquote>
+<p><strong>A</strong>。第一次访存取的是"地址的地址"。</p>
+</blockquote>
+<p><strong>CN89.</strong>★★ 中断周期 CPU 做的关键动作：
+A. 保存断点（PC）并入栈/写入指定单元 B. 清空 Cache C. 重启 D. 直接跳用户程序</p>
+<blockquote>
+<p><strong>A</strong>。断点=PC 值；现场=寄存器内容由服务程序保存。</p>
+</blockquote>
+<p><strong>CN90.</strong>★ 微程序控制器中，微指令存放在：
+A. 主存 B. 控制存储器（CM，ROM） C. Cache D. 磁盘</p>
+<blockquote>
+<p><strong>B</strong>。CM 在 CPU 内部，存放全部微指令。</p>
+</blockquote>
+<p><strong>CN91.</strong>★★ 水平型微指令的特点：
+A. 一条微指令定义多个并行微命令，字长长、速度快 B. 类似机器指令、需译码 C. 只有一条微命令 D. 不可编程</p>
+<blockquote>
+<p><strong>A</strong>。B、C 是垂直型的特征（编码短、需译码、并行能力弱）。</p>
+</blockquote>
+<p><strong>CN92.</strong>★ 与微程序控制器相比，硬布线控制器的特点：
+A. 速度慢但灵活 B. 速度快但修改难 C. 都慢 D. 都灵活</p>
+<blockquote>
+<p><strong>B</strong>。组合逻辑直接产生控制信号；改指令集要改电路。</p>
+</blockquote>
+<p><strong>CN93.</strong>★★ 5 段流水线执行 n 条指令，总时间：
+A. 5nΔt B. (5+n−1)Δt C. nΔt D. (5n−1)Δt</p>
+<blockquote>
+<p><strong>B</strong>。第一条流完 5Δt，之后每 Δt 出一条。</p>
+</blockquote>
+<p><strong>CN94.</strong>★★ 上题中流水线的加速比（相对串行 5nΔt）：
+A. 5n/(5+n−1) B. 5 C. n D. 恒为 1</p>
+<blockquote>
+<p><strong>A</strong>。n→∞ 时趋近 5（=段数）。</p>
+</blockquote>
+<p><strong>CN95.</strong>★★ 流水线"结构冒险（冲突）"指：
+A. 资源争用（如取指与取数同时访存） B. 数据依赖 C. 分支跳转 D. 中断</p>
+<blockquote>
+<p><strong>A</strong>。解决：停顿、指令/数据 Cache 分离。
+B 是数据冒险（转发/停顿解决）；C 是控制冒险（分支预测）。</p>
+</blockquote>
+<p><strong>CN96.</strong>★★ 解决数据冒险最常用的硬件手段：
+A. 分支预测 B. 转发（旁路） C. 增大 Cache D. 精简指令</p>
+<blockquote>
+<p><strong>B</strong>。把上一级结果直接送下一级输入，避免等写回。</p>
+</blockquote>
+<p><strong>CN97.</strong>★ 控制冒险由什么引起：
+A. 转移指令改变 PC B. 寄存器冲突 C. Cache 缺失 D. 中断</p>
+<blockquote>
+<p><strong>A</strong>。分支方向未知导致取指停顿——靠分支预测缓解。</p>
+</blockquote>
+<p><strong>CN98.</strong>★★ 动态分支预测的依据：
+A. 编译时已知 B. 运行时分支历史（如 BHT/两级预测器） C. 随机数 D. 固定猜不跳</p>
+<blockquote>
+<p><strong>B</strong>。静态预测（猜不跳/向后跳）不依赖历史，动态预测随执行学习。</p>
+</blockquote>
+<p><strong>CN99.</strong>★★ 用户<strong>不可见</strong>（不能被程序直接访问）的寄存器：
+A. PC B. ACC C. PSW D. MAR、MDR</p>
+<blockquote>
+<p><strong>D</strong>。MAR/MDR 是 CPU 内部工作寄存器，完全对用户透明。
+PC 汇编层面可见（转移改变它）；PSW 某些位可见。</p>
+</blockquote>
+<p><strong>CN100.</strong>★★ 中断隐指令完成的任务：
+A. 关中断、保存断点、引出中断服务程序 B. 保存所有通用寄存器 C. 执行服务程序主体 D. 恢复现场</p>
+<blockquote>
+<p><strong>A</strong>。隐指令由硬件在中断周期自动完成；B、D 由服务程序（软件）做。</p>
+</blockquote>
+<p><strong>CN101.</strong>★★ 中断"响应优先级"由谁决定：
+A. 硬件排队逻辑（固定） B. 屏蔽字 C. 程序 D. 随机</p>
+<blockquote>
+<p><strong>A</strong>。屏蔽字改变的是<strong>处理优先级</strong>（可嵌套次序）——两者必须分清。</p>
+</blockquote>
+<p><strong>CN102.</strong>★★★ 实现中断嵌套（多重中断）的前提：
+A. 服务程序中提前开中断+设置屏蔽字 B. 不关中断 C. 只有一级中断 D. DMA 参与</p>
+<blockquote>
+<p><strong>A</strong>。开中断让更高级中断能打断当前服务；屏蔽字抬高自身处理优先级。</p>
+</blockquote>
+<p><strong>CN103.</strong>★ 一条指令的全部微操作按时间顺序排列成：
+A. 微程序 B. 操作时间表/指令流程 C. 中断向量 D. 页表</p>
+<blockquote>
+<p><strong>B</strong>。微程序是微指令的序列（控制器视角），操作时间表是设计文档视角。</p>
+</blockquote>
+<p><strong>CN104.</strong>★ 组合逻辑电路的输出：
+A. 只取决于当前输入 B. 与过去状态有关 C. 必须有时钟 D. 必有反馈</p>
+<blockquote>
+<p><strong>A</strong>。与历史有关的（B）是时序逻辑（触发器类）。</p>
+</blockquote>
+<p><strong>CN105.</strong>★★ CPU 响应中断的时间：
+A. 任意时刻 B. 指令执行结束时（特定查询点） C. 时钟上升沿 D. 开机时</p>
+<blockquote>
+<p><strong>B</strong>。每条指令执行完才查询中断请求（保证指令完整性）。</p>
+</blockquote>
+<h2>§6 总线与 I/O（CN106–CN120）</h2>
+<p><strong>CN106.</strong>★ 系统总线按功能分三类：
+A. 数据、地址、控制 B. 内部、外部、系统 C. 并行、串行、无线 D. 同步、异步</p>
+<blockquote>
+<p><strong>A</strong>。D 是通信方式分类；B 是总线范围分类。</p>
+</blockquote>
+<p><strong>CN107.</strong>★ 地址总线的方向与作用：
+A. 双向传数据 B. 单向（CPU→存储器/IO），传地址 C. 双向传地址 D. 传控制信号</p>
+<blockquote>
+<p><strong>B</strong>。数据总线才是双向的。</p>
+</blockquote>
+<p><strong>CN108.</strong>★★ 总线工作频率 133MHz、数据线 32 根，总线带宽：
+A. 532 MB/s B. 133 MB/s C. 1.06 GB/s D. 32 MB/s</p>
+<blockquote>
+<p><strong>A</strong>。带宽=频率×每次传输字节数=133M×4B=532MB/s（若每周期传一次）。</p>
+</blockquote>
+<p><strong>CN109.</strong>★ 同步通信的特点：
+A. 统一时钟定时、速度快、须照顾最慢设备 B. 握手信号灵活 C. 无时钟 D. 只能异步</p>
+<blockquote>
+<p><strong>A</strong>。B 是异步通信（握手）；同步总线设计时钟必须按最慢设备——这也是它的缺点。</p>
+</blockquote>
+<p><strong>CN110.</strong>★★ 异步通信用"握手"确认，全互锁的含义：
+A. 请求与回答都等待对方确认 B. 单向确认 C. 定时发 D. 分离事务</p>
+<blockquote>
+<p><strong>A</strong>。不互锁/半互锁/全互锁三级，全互锁最可靠最慢。</p>
+</blockquote>
+<p><strong>CN111.</strong>★ 三种集中式总线仲裁中，优先级固定且离控制器近者优：
+A. 计数器定时查询 B. 链式查询 C. 独立请求 D. 分布式</p>
+<blockquote>
+<p><strong>B</strong>。BG 链依次传递，靠前先得；C 优先级可编程、速度最快、线最多。</p>
+</blockquote>
+<p><strong>CN112.</strong>★★ 链式查询的主要缺点：
+A. 优先级不能改且对故障敏感（一处坏全线瘫） B. 太快 C. 线太多 D. 不能仲裁</p>
+<blockquote>
+<p><strong>A</strong>。C 错——链式查询恰恰线最少（3 根：BR/BG/BS）。</p>
+</blockquote>
+<p><strong>CN113.</strong>★ I/O 端口"统一编址"的特点：
+A. 占用存储空间，访存指令即可访问 IO B. 专用 IN/OUT 指令 C. 地址不占内存空间 D. 速度更快</p>
+<blockquote>
+<p><strong>A</strong>。B 是独立编址特征；独立编址不占内存空间（C 是独立编址的优点）。</p>
+</blockquote>
+<p><strong>CN114.</strong>★★ 程序查询方式的最大缺点：
+A. CPU 与外设串行等待（忙等） B. 需要中断控制器 C. 需要 DMA D. 硬件贵</p>
+<blockquote>
+<p><strong>A</strong>。CPU 反复查状态，效率最低。</p>
+</blockquote>
+<p><strong>CN115.</strong>★★ 中断方式下，数据传送的单位与 CPU 介入粒度：
+A. 按块，CPU 全程 B. 按字节/字，每次传送 CPU 执行一次中断处理 C. 按块，CPU 只在首尾 D. CPU 完全不参与</p>
+<blockquote>
+<p><strong>B</strong>。D 是 DMA 的特征；C 也是 DMA（开始与结束才需要 CPU）。</p>
+</blockquote>
+<p><strong>CN116.</strong>★★ DMA 与 CPU 交换总线占用权的三种方式中最常用的是：
+A. 停止 CPU 访存 B. 周期挪用（周期窃取） C. 交替访问 D. 轮询</p>
+<blockquote>
+<p><strong>B</strong>。DMA 需要时"偷"一个存储周期，CPU 让出总线一个周期，效率与公平折中。</p>
+</blockquote>
+<p><strong>CN117.</strong>★★ DMA 传送<strong>结束后</strong>通知 CPU 采用：
+A. DMA 自行处理一切 B. 中断（报告完成，做善后处理） C. 轮询 D. 关机</p>
+<blockquote>
+<p><strong>B</strong>。DMA 只管成块数据搬运，前处理/后处理仍靠中断程序。</p>
+</blockquote>
+<p><strong>CN118.</strong>★★ 中断服务程序入口地址的获取方式：
+A. 向量中断（中断向量表按类型号索引） B. 固定一个入口 C. 由外设直接给出指令 D. 随机跳转</p>
+<blockquote>
+<p><strong>A</strong>。非向量法才用软件查询识别设备。</p>
+</blockquote>
+<p><strong>CN119.</strong>★ 不可屏蔽中断（NMI）的用途：
+A. 普通键盘 B. 掉电等紧急事件 C. 打印机 D. 鼠标</p>
+<blockquote>
+<p><strong>B</strong>。NMI 不受 IF 屏蔽位影响，用于必须立即处理的灾难性事件。</p>
+</blockquote>
+<p><strong>CN120.</strong>★★ 键盘输入通常采用：
+A. 程序查询 B. 中断方式 C. DMA D. 通道</p>
+<blockquote>
+<p><strong>B</strong>。按键随机、数据量小，中断最合适；磁盘块传输才用 DMA。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：CN1–CN120。使用节奏：§1–§2 一天（数据表示计算题必须动笔）、§3 一天半（Cache 三种映射+平均访问时间+地址划分是大题粮仓）、§4–§5 一天半（寻址方式对号入座、流水线三冲突）、§6 一天（中断三问：响应时间、嵌套条件、DMA 与中断分工）。错题标回《计组_知识点与难点》对应章节。</p></div></body></html>

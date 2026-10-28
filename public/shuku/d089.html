@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>计组_考题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>计算机组成原理 · 考题集（408·自编带详解）</h1>
+<blockquote>
+<p>题型对标408：单选2分/题 + 综合应用题。<strong>共55题：单选30 + 综合25</strong>（三轮递进，难度逐轮上升）。答案紧跟题后，先做后看。</p>
+<p>📑 <strong>本文件结构</strong>：一、单项选择题（12题）｜二、综合计算题（8题）｜第二轮（C13–C20 选择 / A9–A15 综合）｜第三轮（C21–C30 选择 / A16–A25 综合）｜大题板书精讲（408真题风格·8道）｜选择题答案速查</p>
+</blockquote>
+<h2>一、单项选择题（12题）</h2>
+<p><strong>C1.</strong> 某机主频2GHz，平均CPI=2.5，则MIPS为：
+A. 500 B. 800 C. 1000 D. 1250</p>
+<blockquote>
+<p>MIPS = 2000MHz/(2.5×10⁶? ) = 2×10⁹/(2.5)条/秒 = 8×10⁸条/秒 = <strong>B. 800 MIPS</strong>。</p>
+</blockquote>
+<p><strong>C2.</strong> 8位补码可表示的整数范围：
+A. −127~127 B. −128~127 C. −128~128 D. −255~255</p>
+<blockquote>
+<p><strong>B</strong>。补码多表示一个最小负数 −2⁷=−128。</p>
+</blockquote>
+<p><strong>C3.</strong> 两补码数相加，采用双符号位，结果符号位为10表示：
+A. 正溢出 B. 负溢出 C. 正确（负数） D. 错误</p>
+<blockquote>
+<p><strong>B</strong>。双符号位01=正溢出，10=负溢出；最高符号位是真符号。</p>
+</blockquote>
+<p><strong>C4.</strong> 海明码信息位 n=8 时，至少需要校验位：
+A. 3 B. 4 C. 5 D. 6</p>
+<blockquote>
+<p>2ᵏ≥8+k+1：k=4 → 16≥13 ✓；k=3 → 8&lt;12 ✗。选 <strong>B</strong>。</p>
+</blockquote>
+<p><strong>C5.</strong> float（IEEE754）中，阶码字段全0且尾数字段全0，表示：
+A. 0 B. 无穷大 C. NaN D. 最小规格化数</p>
+<blockquote>
+<p><strong>A</strong>。E全0且M全0=±0；E全0且M≠0=非规格化数；E全1、M=0=±∞；E全1、M≠0=NaN。</p>
+</blockquote>
+<p><strong>C6.</strong> 某机主存4GB按字节编址，Cache数据区32KB，块大小64B，2路组相联，标记字段位数为：
+A. 15 B. 16 C. 17 D. 18</p>
+<blockquote>
+<p>块内6位；32KB/64B=512块→256组→组号8位；主存32位（4GB）；标记=32−8−6=<strong>D. 18位</strong>。</p>
+</blockquote>
+<p><strong>C7.</strong> 低位交叉存储器4体，存取周期T=50ns，总线传送周期τ=12.5ns，连续读取4个字的时间约为：
+A. 200ns B. 87.5ns C. 50ns D. 100ns</p>
+<blockquote>
+<p>T+(m−1)τ = 50+3×12.5 = <strong>B. 87.5ns</strong>。</p>
+</blockquote>
+<p><strong>C8.</strong> 采用变址寻址，指令中地址码A=100H，变址寄存器IX内容=0400H，操作数有效地址为：
+A. 100H B. 0400H C. 0500H D. 由主存单元100H内容决定</p>
+<blockquote>
+<p><strong>C</strong>。变址：EA=(IX)+A=0500H。（若是间接寻址才取主存内容）</p>
+</blockquote>
+<p><strong>C9.</strong> 相对寻址的转移指令占2个字节，存于地址1000H处，位移量A=−2（补码），取指后转移目标地址为：
+A. 0FFEH B. 1000H C. 1002H D. 0FFCH</p>
+<blockquote>
+<p>取指后PC=1000H+2=1002H；目标=PC+A=1002H−2=<strong>B. 1000H</strong>。（相对寻址基准是"下一条指令地址"）</p>
+</blockquote>
+<p><strong>C10.</strong> 五段流水线（IF ID EX MEM WB）各1拍，连续执行10条指令（无冒险），第5条指令执行完是在第几拍：
+A. 5 B. 8 C. 9 D. 10</p>
+<blockquote>
+<p>第n条完成于第 n+k−1 拍 = 5+5−1 = <strong>C. 9拍</strong>。</p>
+</blockquote>
+<p><strong>C11.</strong> 下列关于中断的说法正确的是：
+A. DMA结束不需要中断 B. 自陷是外部中断 C. 缺页属于故障（内中断） D. NMI可被屏蔽</p>
+<blockquote>
+<p><strong>C</strong>。缺页是内部异常中的"故障"；DMA结束需中断告知；自陷是内部异常；NMI不可屏蔽。</p>
+</blockquote>
+<p><strong>C12.</strong> 32位数据总线、100MHz、每个时钟周期传送一次数据，总线带宽为：
+A. 100MB/s B. 200MB/s C. 400MB/s D. 800MB/s</p>
+<blockquote>
+<p>4B×100M=<strong>C. 400MB/s</strong>。（若为DDR每周期2次则800）</p>
+</blockquote>
+<h2>二、综合计算题（8题）</h2>
+<p><strong>A1.</strong>★★ 求十进制数 −96.75 的 IEEE754 单精度表示。</p>
+<blockquote>
+<p>96.75 = 1100000.11B = 1.10000011×2⁶。S=1；E=6+127=133=10000101；M=10000011000000000000000。
+<strong>结果：1 10000101 10000011000000000000000</strong>。</p>
+</blockquote>
+<p><strong>A2.</strong>★★ 已知IEEE754单精度编码 0x428C8000，求真值。</p>
+<blockquote>
+<p>0x428C8000 = 0100 0010 1000 1100 1000 …0：S=0；E=10000101=133 → e=6；M=0001100…→尾数=1.0001100₂=1+0.09375=1.09375? 精确：0.0001100₂=1/16+1/32+1/64=0.09375。
+真值 = +1.09375×2⁶ = <strong>70</strong>。</p>
+</blockquote>
+<p><strong>A3.</strong>★★ 主存按字节编址，容量1MB；Cache 4KB，块大小16B，直接映射。求主存地址各字段位数；主存地址 8A657H 映射到Cache哪一行？</p>
+<blockquote>
+<p>块内4位；Cache行数=4KB/16B=256行→行号8位；主存20位；标记=20−8−4=8位。
+8A657H=1000 1010 0110 0101 0111：块内=0111；行号=10 0110 01（取中间8位）=269? 精确拆分：低4位=7；中间8位=0A65H的低段…按位拆：20位地址 10001010011001010111 → 标记[19:12]=10001010=8AH，行号[11:4]=01100101=65H=101行，块内[3:0]=0111。
+<strong>映射到第 101 行（0x65）</strong>。</p>
+</blockquote>
+<p><strong>A4.</strong>★★★ Cache采用LRU，2路组相联，共4组（8行），块大小1字。访问主存块地址序列：0,1,2,4,2,0,3,5。写出每组内容变化并求命中率。</p>
+<blockquote>
+<p>组号=块地址 mod 4：0→组0，1→组1，2→组2，4→组0，3→组3，5→组1。
+组0：0【缺】→ {0}；4【缺】→ {0,4}；0【命中】→ LRU换序 {4,0}。
+组1：1【缺】→ {1}；5【缺】→ {1,5}。
+组2：2【缺，缺两次】→ 第一次缺、第5次访问2【命中】。
+组3：3【缺】。
+访问8次：缺 0,1,2,4,3,5 共6次，命中 2次（第5次访问2、第6次访问0）→ <strong>命中率 2/8=25%</strong>。</p>
+</blockquote>
+<p><strong>A5.</strong>★★ 用64K×8位的SRAM芯片设计 256K×16位存储器，需要多少片？写出字/位扩展方案与片选逻辑（高位地址如何接）。</p>
+<blockquote>
+<p>位扩：2片并成64K×16；字扩：256K/64K=4组 → 共 <strong>8片</strong>。
+地址16位→18位：低16位接芯片地址，高2位A17A16接2:4译码器产生4个片选（每组1个），组内两片共享片选（位扩共用）。</p>
+</blockquote>
+<p><strong>A6.</strong>★★★ 五段流水线（IF ID EX MEM WB 各1拍）执行：</p>
+<pre><code>I1: add R1,R2,R3
+I2: sub R4,R1,R5
+I3: and R6,R1,R7
+I4: or  R8,R1,R9
+</code></pre>
+<p>(1) 无转发机制需插几个气泡？(2) 有转发（EX→EX）呢？</p>
+<blockquote>
+<p>(1) I1 的 R1 第5拍（WB）才写回；I2 的 ID 原在第3拍 → 按“WB前半写、ID后半读”口径推迟到第5拍 ⇒ <strong>停2拍</strong>；I3 顺延到第6拍读 ⇒ <strong>停1拍</strong>；I4 停0拍。<strong>共3个气泡</strong>。
+(2) 有 EX→EX 转发：I2 第4拍直接取 I1 第3拍的结果，<strong>全部0个气泡</strong>。</p>
+</blockquote>
+<p><strong>A7.</strong>★★ 中断系统4级：D&gt;A&gt;C&gt;B？设实际优先级 D&gt;A&gt;C&gt;B，写出各级中断服务程序的屏蔽字（1=屏蔽）。</p>
+<blockquote>
+<p>规则：屏蔽自身及更低者，放行更高者。
+D级（最高）：1111（屏蔽D,A,C,B? 自身D置1，其余更低全1 → D:1111）
+A级：1101（屏蔽A及更低C,B，放行D → A=1,D=0,C=1,B=1 → 位序D A C B：<strong>1101</strong>）
+C级：1100? 位序D A C B：放行D,A，屏蔽C,B → <strong>0011</strong>? 按位序（D,A,C,B）：C级屏蔽字 = D:0, A:0, C:1, B:1 → <strong>0011</strong>
+B级：D:0,A:0,C:0,B:1 → <strong>0001</strong>
+<strong>答案：D=1111，A=0111，C=0011，B=0001（位序D,A,C,B）</strong>。</p>
+</blockquote>
+<p><strong>A8.</strong>★★ 磁盘? 不属计组。改：某总线时钟100MHz，每个总线事务传输32位数据需2个时钟周期，求最大带宽；若改为64位总线每周期传1次呢？</p>
+<blockquote>
+<p>每2拍传4B → 4B×50M次/秒=<strong>200MB/s</strong>；64位每周期1次：8B×100M=<strong>800MB/s</strong>。</p>
+</blockquote>
+<hr />
+<h3>本集命题对照</h3>
+<ul>
+<li>C1/C10/A6→性能与流水线；C2/C3/C5/A1/A2→数据表示；C4→校验；C6/C7/A3/A4/A5→存储系统（408最爱）；C8/C9→寻址；C11/A7→中断；C12/A8→总线。</li>
+<li>每题错题号标到《计组_知识点与难点》对应章节标题旁。</li>
+</ul>
+<h2>第二轮（C13–C20 选择 / A9–A15 综合）</h2>
+<h3>选择题（8题）</h3>
+<p><strong>C13.</strong> 高级语言程序到可在机器上执行的代码，"编译"与"解释"的区别：
+A. 无区别 B. 编译整体翻译生成目标代码，解释逐条翻译执行 C. 解释更快 D. 编译不需要词法分析</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C14.</strong> 补码 0.1011（定点小数）表示的真值是：
+A. 11/16 B. −11/16 C. 5/16 D. −5/16</p>
+<blockquote>
+<p><strong>A</strong>。符号0为正：0.1011₂=11/16。</p>
+</blockquote>
+<p><strong>C15.</strong> ASCII 码大小关系正确的是：
+A. 数字&lt;大写字母&lt;小写字母 B. 大写&lt;数字&lt;小写 C. 小写&lt;大写&lt;数字 D. 三者相同区间</p>
+<blockquote>
+<p><strong>A</strong>。"0"=48，"A"=65，"a"=97。</p>
+</blockquote>
+<p><strong>C16.</strong> 直接映射 Cache 命中率通常低于全相联的原因：
+A. 容量小 B. 块太小 C. 多个主存块只能固定映射到同一行，冲突率高 D. 替换算法差</p>
+<blockquote>
+<p><strong>C</strong>。</p>
+</blockquote>
+<p><strong>C17.</strong> 指令周期、机器周期（CPU周期）、时钟周期的包含关系：
+A. 指令周期≥机器周期≥时钟周期 B. 相反 C. 相等 D. 无关</p>
+<blockquote>
+<p><strong>A</strong>。一条指令含若干机器周期，一个机器周期含若干时钟周期。</p>
+</blockquote>
+<p><strong>C18.</strong> 微程序控制器中，一条机器指令对应：
+A. 一条微指令 B. 一段微程序 C. 一个微命令 D. 一条机器周期</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C19.</strong> 地址总线与数据总线复用的主要目的：
+A. 提高速度 B. 减少芯片引脚数 C. 增大寻址空间 D. 提高可靠性</p>
+<blockquote>
+<p><strong>B</strong>（分时复用）。</p>
+</blockquote>
+<p><strong>C20.</strong> 中断隐指令（硬件自动完成）包含的操作：
+A. 关中断、保存断点、引出中断服务程序 B. 保存现场、开中断 C. 执行服务程序 D. 恢复现场</p>
+<blockquote>
+<p><strong>A</strong>。保存现场/恢复现场由服务程序（软件）完成。</p>
+</blockquote>
+<h3>综合题（7题）</h3>
+<p><strong>A9.</strong>★★ x=−0.1011（补码），求 [x]补、[−x]补、[x/2]补。</p>
+<blockquote>
+<p>[x]补=1.0101；[−x]补=连同符号取反加1=0.1011；算术右移：[x/2]补=<strong>1.10101</strong>（符号不变，补符号位）。</p>
+</blockquote>
+<p><strong>A10.</strong>★★★ 求 −512.5 的 IEEE754 双精度表示。</p>
+<blockquote>
+<p>512.5=1000000000.1₂=1.0000000001×2⁹；E=9+1023=1032=10000001000（11位）；M=0000000001后补0至52位。
+<strong>1 10000001000 0000000001000…0</strong>（S=1, E=1032, M=2⁴³/2⁵²? M字面=0000000001后52位对齐）。写全：符号1，阶码10000001000，尾数0000000001000000000000000000000000000000000000000000。</p>
+</blockquote>
+<p><strong>A11.</strong>★★ 用 16K×8 位芯片构成 64K×16 位存储器：需要几片？给出分组与片选逻辑。</p>
+<blockquote>
+<p>位扩2片/组、字扩4组 → <strong>8片</strong>。芯片地址线14位接CPU低14位；高2位 A15A14 经2:4译码器产生4个组片选：00选第1组（0~16K），01第2组，10第3组，11第4组；组内两片共用片选、分别接低8位/高8位数据。</p>
+</blockquote>
+<p><strong>A12.</strong>★★★ 直接映射 Cache：64行，块大小32B，主存按字节编址32位。主存地址 0x12345678 映射到哪一行？块内偏移、标记各为多少？</p>
+<blockquote>
+<p>块内5位；行号6位；标记=32−6−5=21位。
+地址=305419896：块内=低5位=24（0x18）；行号=(地址&gt;&gt;5)&amp;63=<strong>51</strong>；标记=地址&gt;&gt;11=<strong>149131</strong>。</p>
+</blockquote>
+<p><strong>A13.</strong>★★ 五段流水线（IF ID EX MEM WB）各1拍，分支指令在 EX 段末解析。程序共8条指令，第4条为"转移成功"的分支。求总拍数。</p>
+<blockquote>
+<p>理想 8+5−1=12拍；转移成功导致其后的2条作废，额外+2拍 → <strong>14拍</strong>。</p>
+</blockquote>
+<p><strong>A14.</strong>★★★ 某设备数据率 1MB/s，每次中断传送4字节，每次中断服务（含断点现场处理）耗时20μs，CPU主频足够。问中断方式下CPU用于该设备的时间占比？说明结论。</p>
+<blockquote>
+<p>中断频率 = 1MB/s ÷ 4B = 250,000 次/秒；CPU占用 = 250000×20μs = 5秒/秒 = <strong>500%，超过100%，根本不可行</strong> ⇒ 高速块设备必须采用 <strong>DMA 方式</strong>（CPU只在预处理/后处理介入）。</p>
+</blockquote>
+<p><strong>A15.</strong>★★ 比较 CPU 在程序查询、中断、DMA 三种方式下的利用率并排序，说明各自适用设备。</p>
+<blockquote>
+<p>利用率：<strong>DMA &gt; 中断 &gt; 程序查询</strong>。程序查询全程忙等（低速设备，如键盘）; 中断每传一字打断一次（中速，如打印机）; DMA 仅首尾介入（高速块设备，如磁盘）。</p>
+</blockquote>
+<h2>第三轮（C21–C30 选择 / A16–A25 综合）</h2>
+<h3>选择题（10题）</h3>
+<p><strong>C21.</strong> 补码一位乘法（Booth算法）中，符号位：
+A. 不参加运算 B. 参加运算 C. 恒为0 D. 单独处理后再拼接</p>
+<blockquote>
+<p><strong>B</strong>（Booth法符号位直接参与乘法）。</p>
+</blockquote>
+<p><strong>C22.</strong> 定点小数补码 [x]补=1.0000 表示的真值：
+A. 0 B. −1 C. −0 D. 溢出</p>
+<blockquote>
+<p><strong>B</strong>。补码比原码多表示 −1（1.0000 是最小负数）。</p>
+</blockquote>
+<p><strong>C23.</strong> 浮点加减法"对阶"的原则：
+A. 大阶向小阶对齐 B. <strong>小阶向大阶对齐</strong>（尾数右移） C. 双向移动 D. 无需对阶</p>
+<blockquote>
+<p><strong>B</strong>。小阶右移损失精度小。</p>
+</blockquote>
+<p><strong>C24.</strong> 写回法（write back）Cache 通常配合：
+A. 写直达 B. <strong>写分配法</strong> C. 非写分配 D. 无需配合</p>
+<blockquote>
+<p><strong>B</strong>。写不命中时先调块入Cache再写（配写回）；写直达常配非写分配。</p>
+</blockquote>
+<p><strong>C25.</strong> 页式虚拟存储中，页表通常存放在：
+A. 寄存器 B. <strong>主存</strong>（TLB缓存其部分表项） C. 磁盘 D. Cache</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C26.</strong> 采用相对寻址的转移指令，其可转移范围取决于：
+A. 指令长度 B. <strong>位移量字段的位数</strong>（及其编码） C. PC位数 D. 数据总线宽度</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C27.</strong> 水平型微指令的特点：
+A. 一条微指令定义的微命令少，码长短 B. <strong>并行能力强、一条微指令可同时定义多个微命令</strong> C. 类似机器指令 D. 只能垂直扩展</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C28.</strong> DMA 数据传送阶段：
+A. 每传一字中断一次 B. <strong>由DMA硬件控制，CPU不干预</strong> C. CPU逐字查询 D. 由程序完成</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C29.</strong> CPU 响应中断后，确定中断服务程序入口地址的是：
+A. 程序计数器PC B. <strong>中断向量表/向量地址</strong> C. 栈顶 D. 数据总线</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C30.</strong> 总线"突发传输"（burst）的含义：
+A. 速率不稳定 B. <strong>一次寻址后连续传送多个数据</strong>（地址只给一次） C. 双倍速率 D. 无应答传输</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<h3>综合题（10题）</h3>
+<p><strong>A16.</strong>★ 已知 [x]补=1.0110、[y]移=1.0110（各为1位符号+4位，定点小数）。求真值 x、y。</p>
+<blockquote>
+<p>x：符号1为负，数值取反+1：0.0110→0.1010 ⇒ <strong>x=−10/16=−5/8</strong>。
+y：移码=补码符号取反 ⇒ [y]补=0.0110 ⇒ <strong>y=+6/16=3/8</strong>。</p>
+</blockquote>
+<p><strong>A17.</strong>★★ 写出信息位 1010（n=4）的海明码（偶校验，校验位在 1,2,4 位）。</p>
+<blockquote>
+<p>校验位 p1 管 1,3,5,7 位；p2 管 2,3,6,7；p4 管 4,5,6,7。信息放 3,5,6,7 位：1,0,1,0。
+p1：b3⊕b5⊕b7=1⊕0⊕0=<strong>1</strong>；p2：b3⊕b6⊕b7=1⊕1⊕0=<strong>0</strong>；p4：b5⊕b6⊕b7=0⊕1⊕0=<strong>1</strong>。
+<strong>海明码（位1→7）：1 0 1 1 0 1 0</strong>。</p>
+</blockquote>
+<p><strong>A18.</strong>★★ 求 −2.5 的 IEEE754 双精度表示。</p>
+<blockquote>
+<p>2.5=10.1₂=1.01×2¹；S=1；E=1+1023=1024=10000000000（11位）；M=01000…0。
+<strong>1 10000000000 0100000…0（共64位）</strong>。</p>
+</blockquote>
+<p><strong>A19.</strong>★★ 2路组相联 Cache 共4组、块大小8B。访问块地址序列 0,1,0,2,1,3，求命中率（LRU）。</p>
+<blockquote>
+<p>组号=块%4：0→组0【缺】，1→组1【缺】，0→组0【<strong>命中</strong>】，2→组2【缺】，1→组1【<strong>命中</strong>】，3→组3【缺】。
+命中率 = <strong>2/6=1/3</strong>。</p>
+</blockquote>
+<p><strong>A20.</strong>★★ 五段流水线（含转发）执行：</p>
+<pre><code>I1: lw  R1, 0(R2)
+I2: add R3, R1, R4
+I3: sub R5, R3, R6
+I4: or  R7, R5, R8
+I5: and R9, R7, R1
+I6: xor R10, R9, R2
+</code></pre>
+<p>求总拍数。</p>
+<blockquote>
+<p>I2 依赖 I1 的 load 结果（MEM后才有数据）→ load-use 冒险，即使有转发也需<strong>停1拍</strong>；其余依赖可转发。总拍数 = 6+5−1+1 = <strong>11拍</strong>。</p>
+</blockquote>
+<p><strong>A21.</strong>★★★ 磁盘数据率 4MB/s，DMA 每次传送 8KB，DMA 预处理+后处理共需 1000 个时钟周期，CPU 主频 100MHz。求 DMA 方式下 CPU 为该设备耗费的时间占比。</p>
+<blockquote>
+<p>每秒传送次数 = 4MB/8KB = 512 次；CPU周期占用 = 512×1000 = 5.12×10⁵ /秒；
+占比 = 5.12×10⁵/10⁸ = <strong>0.512%</strong>（对比中断方式的数百%，体现 DMA 优势）。</p>
+</blockquote>
+<p><strong>A22.</strong>★★ 虚地址 24 位、页 4KB；TLB 共 16 项、2路组相联。虚地址 0x3ABCD 的虚页号、页内偏移、TLB 组号各是多少？</p>
+<blockquote>
+<p>页内偏移12位=<strong>0xBCD</strong>；虚页号=0x3A；TLB组数=8 → 组号=0x3A mod 8 = 58 mod 8 = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>A23.</strong>★★ 求真值：[x₁]补=0.1110、[x₂]补=1.0011，并求 x₁−x₂ 的补码结果（判溢出）。</p>
+<blockquote>
+<p>x₁=14/16，x₂=−13/16；x₁−x₂=27/16 溢出（超出(−1,1)）。
+计算：[x₂]补→[−x₂]补=0.1101；[x₁]补+[−x₂]补=0.1110+0.1101=<strong>1.1011（双符号判断：两正数得负→正溢出）</strong>。</p>
+</blockquote>
+<p><strong>A24.</strong>★★ 磁盘组：4盘片（8记录面），每面1000磁道，每道200扇区，每扇区512B。求总容量；按 CHTS→LBA 规则（柱面优先）求 (C=2, H=3, S=5) 的 LBA（S从1计）。</p>
+<blockquote>
+<p>容量 = 8×1000×200×512B = <strong>819,200,000B ≈ 819.2MB（十进制）</strong>。
+LBA=((C×面数)+H)×每道扇区+(S−1) = ((2×8)+3)×200+4 = <strong>3804</strong>。</p>
+</blockquote>
+<p><strong>A25.</strong>★ 简答：中断服务程序执行前为何必须先"关中断"？何时再"开中断"？</p>
+<blockquote>
+<p>保存断点与现场的过程必须原子完成，若被新中断打断会丢失现场；故响应后立即关中断，<strong>现场保存完毕（若是多重中断则保存后开中断允许更高级打断）</strong>、服务结束时恢复现场后开中断返回。</p>
+</blockquote>
+<h2>大题板书精讲（408真题风格·8道）</h2>
+<p><strong>B1.</strong>★★★ 海明码完整链路：信息位 1010 编码 → 传输第5位翻转 → 接收端定位并纠正。</p>
+<blockquote>
+<p>发送端（k=3，校验位在1,2,4位）：码字 <strong>1011010</strong>（见计组考题集A17）。
+设传输后收到 <strong>1001010</strong>（第3位由1→0）。
+接收端校验：s₁=b1⊕b3⊕b5⊕b7=1⊕0⊕0⊕0=<strong>1</strong>；s₂=b2⊕b3⊕b6⊕b7=0⊕0⊕1⊕0=<strong>1</strong>；s₄=b4⊕b5⊕b6⊕b7=1⊕0⊕1⊕0=<strong>0</strong>。
+故障字 (s₄s₂s₁)=<strong>011₂=3</strong> ⇒ <strong>第3位错</strong>，翻转恢复 <strong>1011010</strong> → 信息位(3,5,6,7)=<strong>1010</strong> ✓。</p>
+</blockquote>
+<p><strong>B2.</strong>★★ 求 −77.75 的 IEEE754 双精度表示。</p>
+<blockquote>
+<p>77.75 = 1001101.11₂ = 1.00110111×2⁶。
+S=1；E=6+1023=1029=<strong>10000000101</strong>（11位）；M=00110111 后补0至52位。
+<strong>编码：1 10000000101 0011011100…0（共64位）</strong>。
+验算：1.00110111₂ = 1+0.25+0.03125+0.015625+0.0078125? 直接验证 1.00110111×64 = 77.75 ✓。</p>
+</blockquote>
+<p><strong>B3.</strong>★★★ 虚存-Cache 综合三查：虚地址16位、页4KB；TLB 共4组、2路组相联；页式虚存，页表部分：页2→页框7（有效）；Cache 直接映射64行、块16B。求虚地址 0x2F6A 的物理地址与 Cache 行号。</p>
+<blockquote>
+<p>①虚页号=0x2F6A&gt;&gt;12=<strong>2</strong>；页内偏移=<strong>0xF6A</strong>。
+②TLB组号=2 mod 4=<strong>2</strong>（假设TLB命中且页2→页框7）。
+③物理地址=页框7×4KB+0xF6A=<strong>0x7F6A</strong>。
+④Cache：块号=0x7F6A&gt;&gt;4=2038；行号=2038 mod 64=<strong>54</strong>；标记=32618&gt;&gt;10=<strong>31</strong>。</p>
+</blockquote>
+<p><strong>B4.</strong>★★ 用 16K×4 位的芯片构成 64K×8 位的存储器。求芯片数、分组与连接说明。</p>
+<blockquote>
+<p>位扩：2片并成16K×8；字扩：64K/16K=4组 ⇒ <strong>共8片</strong>。
+CPU地址16位：低14位接所有芯片的地址端；高2位 A15A14 → 2:4译码器产生4个组片选。
+数据：每组两片分别接数据总线低4位与高4位。
+地址范围：组1：0000H~3FFFH；组2：4000H~7FFFH；组3：8000H~BFFFH；组4：C000H~FFFFH。</p>
+</blockquote>
+<p><strong>B5.</strong>★★ 五段流水线（IF ID EX MEM WB 各1拍）连续执行7条指令，其中第3条为<strong>转移成功</strong>的分支指令（在EX段末解析，其后2条作废）。求总拍数并画时空表。</p>
+<blockquote>
+<p>理想：7+5−1=11拍；分支成功作废2条指令的已用时序 ⇒ +2拍 ⇒ <strong>13拍</strong>。
+时空表要点：第3条在EX（第5拍）解析出转移；第4、5条已进入流水线的部分作废（标×）；第6、7条（即新目标及其后）从第6拍起重新取指 → 尾部顺延2拍。</p>
+</blockquote>
+<p><strong>B6.</strong>★★ 总线带宽与 DMA 占比综合：总线宽32位、频率133MHz；某磁盘数据率66MB/s，DMA每次传送8KB，预处理+后处理共500个时钟周期（CPU主频200MHz）。求总线带宽与DMA方式下CPU占用率。</p>
+<blockquote>
+<p>带宽 = 4B×133M = <strong>532MB/s</strong>。
+DMA次数 = 66MB/8KB = 8448次/s；每次CPU耗时 = 500/200MHz = 2.5μs。
+占用率 = 8448×2.5μs ≈ <strong>2.1%</strong>（对比中断方式的不可行，体现DMA优势）。</p>
+</blockquote>
+<p><strong>B7.</strong>★★ 磁盘：12000转/分，平均寻道6ms，每道125个扇区、每扇区512B。求读一个扇区、读一整道的平均时间与持续数据率。</p>
+<blockquote>
+<p>平均旋转延迟 = 60000ms/12000/2 = <strong>2.5ms</strong>；单扇区传输 = 60000/12000/125 = <strong>0.04ms</strong>。
+读一个扇区 = 6+2.5+0.04 ≈ <strong>8.54ms</strong>。
+读一整道 = 6+2.5+125×0.04=5ms ⇒ <strong>13.5ms</strong>。
+持续数据率 = 125×512B/6ms ≈ <strong>10.7MB/s</strong>。</p>
+</blockquote>
+<p><strong>B8.</strong>★ 简述CPU响应中断的条件与处理流程，并说明多重中断与单重中断在"开中断时机"上的差异。</p>
+<blockquote>
+<p>响应条件：①有中断请求且未被屏蔽；②CPU允许中断（EINT=1）；③<strong>一条指令执行完毕</strong>。
+流程：关中断→保存断点（PC、PSW）→引出服务程序→（多重中断此时开中断，允许更高级打断）→执行服务→恢复现场→开中断→返回断点。
+差异：<strong>单重中断全程关中断直到服务结束；多重中断在保存完现场/屏蔽字后即开中断</strong>，允许优先级更高的中断嵌套。</p>
+</blockquote>
+<h2>选择题答案速查</h2>
+<blockquote>
+<p>快速对答案用；解析见各题。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>题号</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1~10</td>
+<td>B B B B A D B C B C</td>
+</tr>
+<tr>
+<td>11~20</td>
+<td>C C B A A C A B B A</td>
+</tr>
+<tr>
+<td>21~30</td>
+<td>B B B B B B B B B B</td>
+</tr>
+</tbody>
+</table></div></body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408全真模拟卷6 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 全真模拟卷（自编·第六套）</h1>
+<blockquote>
+<p>结构同真题：40×2' 选择 + 7道综合题共70分 = 150分，180分钟。答案解析在卷末（选择题答案随题给出）。</p>
+</blockquote>
+<h1>一、单项选择题（每题2分）</h1>
+<h2>数据结构（1~11）</h2>
+<p><strong>1.</strong> 在带头结点的双向链表中，在 p 所指结点之后插入 s 结点（s-&gt;next 已置为 p-&gt;next），下列哪条语句<strong>必须最后</strong>执行：
+A. s-&gt;prior=p　B. p-&gt;next-&gt;prior=s　C. <strong>p-&gt;next=s</strong>　D. s-&gt;next=p-&gt;next</p>
+<blockquote>
+<p><strong>C</strong>。p-&gt;next 一旦修改，原后继结点就"丢"了，故必须在借用完 p-&gt;next 的语句之后执行。</p>
+</blockquote>
+<p><strong>2.</strong> 入栈序列为 1,2,3,4,5，下列<strong>不可能</strong>的出栈序列是：
+A. 4,3,2,1,5　B. 3,5,4,2,1　C. <strong>5,4,1,3,2</strong>　D. 2,3,4,5,1</p>
+<blockquote>
+<p><strong>C</strong>。弹出5、4后栈顶必为3，不可能先出1（模拟法逐一排除）。</p>
+</blockquote>
+<p><strong>3.</strong> 用单链表作队列的存储结构，为使出队、入队均为 O(1)，需要保存：
+A. 仅头指针　B. 仅尾指针　C. <strong>头指针和尾指针</strong>　D. 头结点数据域存队长即可</p>
+<blockquote>
+<p><strong>C</strong>。出队在头、入队在尾，两端都要 O(1) 定位。</p>
+</blockquote>
+<p><strong>4.</strong> KMP 算法相比朴素模式匹配算法的主要改进是：
+A. 匹配更快需要更多空间　B. <strong>主串指针不回溯</strong>　C. 模式串可以任意缩短　D. 无需预处理模式串</p>
+<blockquote>
+<p><strong>B</strong>。KMP 利用 next 数组只回退模式串指针，主串指针从不回溯；预处理 O(m)。</p>
+</blockquote>
+<p><strong>5.</strong> 一棵树有 2 个度为 3 的结点、1 个度为 2 的结点、2 个度为 1 的结点，则叶子结点数为：
+A. 4　B. 5　C. <strong>6</strong>　D. 7</p>
+<blockquote>
+<p><strong>C</strong>。n₀ = 1 + Σ(i-1)·nᵢ = 1 + 1×1 + 2×2 = 6。</p>
+</blockquote>
+<p><strong>6.</strong> 已知二叉树先序序列 ABDEC、中序序列 DBEAC，其后序序列为：
+A. <strong>DEBCA</strong>　B. DBECA　C. EDBCA　D. DEABC</p>
+<blockquote>
+<p><strong>A</strong>。根A→左子树{D,B,E}（先序BDE/中序DBE：根B、左D右E）→右子树{C}→后序 DEBCA。</p>
+</blockquote>
+<p><strong>7.</strong> n 个顶点的<strong>强连通</strong>有向图至少有多少条边：
+A. n−1　B. <strong>n</strong>　C. n(n−1)/2　D. n²</p>
+<blockquote>
+<p><strong>B</strong>。n个顶点构成一个有向环即可强连通，恰 n 条边。</p>
+</blockquote>
+<p><strong>8.</strong> 关于 Dijkstra 算法，正确的是：
+A. 可处理带负权边的图　B. <strong>按路径长度递增次序依次确定各顶点最短路径</strong>　C. 适用于求多源最短路径　D. 时间复杂度与存储结构无关</p>
+<blockquote>
+<p><strong>B</strong>。Dijkstra 贪心逐点确定，不能处理负权边；多源用 Floyd。</p>
+</blockquote>
+<p><strong>9.</strong> 序列基本有序（接近正序）时，效率最高的排序算法是：
+A. 快速排序　B. <strong>直接插入排序</strong>　C. 简单选择排序　D. 堆排序</p>
+<blockquote>
+<p><strong>B</strong>。基本有序时直接插入/冒泡近似 O(n)；快排反而退化为 O(n²)。</p>
+</blockquote>
+<p><strong>10.</strong> 3 阶 B 树中，除根结点外，任一结点<strong>至少</strong>含有的关键字个数为：
+A. 0　B. <strong>1</strong>　C. 2　D. 3</p>
+<blockquote>
+<p><strong>B</strong>。⌈m/2⌉−1 = ⌈3/2⌉−1 = 1（根至少1个关键字、至少2棵子树）。</p>
+</blockquote>
+<p><strong>11.</strong> 散列表表长7（地址0~6），散列函数 H(k)=k mod 7，线性探测。依次插入 15、22、29 后，29 的存放地址是：
+A. 1　B. 2　C. <strong>3</strong>　D. 4</p>
+<blockquote>
+<p><strong>C</strong>。15→1；22 冲突→2；29 冲突（1、2被占）→3。</p>
+</blockquote>
+<h2>计算机组成原理（12~22）</h2>
+<p><strong>12.</strong> 8位补码 1000 0000 表示的十进制数是：
+A. 0　B. −127　C. <strong>−128</strong>　D. 128</p>
+<blockquote>
+<p><strong>C</strong>。补码多表示一个最小负数 −2⁷。</p>
+</blockquote>
+<p><strong>13.</strong> 定点小数 [x]补 = 1.0110，则 x = ?
+A. −0.0110　B. <strong>−0.1010</strong>　C. −0.0101　D. 0.1010</p>
+<blockquote>
+<p><strong>B</strong>。负数：取反加一还原数值位 0.0110→0.1010，符号为负。</p>
+</blockquote>
+<p><strong>14.</strong> IEEE 754 单精度数 1.5×2³，其<strong>阶码字段</strong>（含偏置127）的值为：
+A. 3　B. 127　C. <strong>130</strong>　D. 131</p>
+<blockquote>
+<p><strong>C</strong>。阶码真值3 + 127 = 130（二进制 1000 0010）。</p>
+</blockquote>
+<p><strong>15.</strong> 信息位 n=8 的海明码，至少需要的校验位数 k 为：
+A. 3　B. <strong>4</strong>　C. 5　D. 8</p>
+<blockquote>
+<p><strong>B</strong>。2^k ≥ n+k+1：16 ≥ 8+4+1=13 ✓。</p>
+</blockquote>
+<p><strong>16.</strong> Cache 有 16 行、块大小 8B，主存容量 4096B，直接映射下主存地址的<strong>标记字段</strong>位数为：
+A. 4　B. <strong>5</strong>　C. 7　D. 9</p>
+<blockquote>
+<p><strong>B</strong>。主存块数=512=2⁹，行号4位，块内3位 → 标记=9−4=5位。</p>
+</blockquote>
+<p><strong>17.</strong> 虚拟地址 16 位、页大小 4KB，则虚页总数为：
+A. 4　B. 12　C. <strong>16（即2⁴）</strong>　D. 4096</p>
+<blockquote>
+<p><strong>C</strong>。页内偏移12位，页号4位 → 2⁴=16个虚页。</p>
+</blockquote>
+<p><strong>18.</strong> 转移指令位于地址 2000H，指令长 2B，相对寻址偏移量为 −4H，则转移目标地址为：
+A. 1FFCH　B. <strong>1FFEH</strong>　C. 2002H　D. 2004H</p>
+<blockquote>
+<p><strong>B</strong>。指令取出后 PC=2002H，目标 = PC + 偏移 = 2002H + (−4H) = 1FFEH。</p>
+</blockquote>
+<p><strong>19.</strong> 下列<strong>不属于</strong> RISC 特征的是：
+A. 指令定长、格式少　B. 只有 Load/Store 指令访存　C. <strong>寻址方式丰富、指令系统庞大</strong>　D. 设置大量通用寄存器</p>
+<blockquote>
+<p><strong>C</strong>。这是 CISC 特征。</p>
+</blockquote>
+<p><strong>20.</strong> 5 段指令流水线，每段耗时 1ns，连续执行 12 条指令的总时间为：
+A. 12ns　B. 15ns　C. <strong>16ns</strong>　D. 17ns</p>
+<blockquote>
+<p><strong>C</strong>。(k+n−1)Δt = (5+12−1)×1 = 16ns。</p>
+</blockquote>
+<p><strong>21.</strong> CPU 响应（可屏蔽）中断请求的时间通常是：
+A. 任一机器周期结束　B. <strong>一条指令执行周期结束</strong>　C. 取指周期结束　D. 随时</p>
+<blockquote>
+<p><strong>B</strong>。中断采样在每条指令执行末进行，保证指令原子性。</p>
+</blockquote>
+<p><strong>22.</strong> 同步总线，数据线 32 位，工作频率 100MHz，每个时钟周期传送一次数据，总线带宽为：
+A. 100MB/s　B. <strong>400MB/s</strong>　C. 800MB/s　D. 3200MB/s</p>
+<blockquote>
+<p><strong>B</strong>。4B × 100M = 400MB/s。</p>
+</blockquote>
+<h2>操作系统（23~32）</h2>
+<p><strong>23.</strong> 进程从"运行态"转为"阻塞态"的原因是：
+A. 时间片用完　B. 被高优先级进程抢占　C. <strong>等待某事件（如I/O完成）而主动让出CPU</strong>　D. 所等待的事件已发生</p>
+<blockquote>
+<p><strong>C</strong>。时间片到/抢占是运行→就绪；事件发生是阻塞→就绪。</p>
+</blockquote>
+<p><strong>24.</strong> 同一进程内的多个线程<strong>不共享</strong>的资源是：
+A. 地址空间　B. 全局变量　C. <strong>栈与寄存器组</strong>　D. 打开的文件</p>
+<blockquote>
+<p><strong>C</strong>。栈和寄存器（含PC）是线程私有。</p>
+</blockquote>
+<p><strong>25.</strong> 时间片轮转调度中，若时间片设置过大，算法将退化为：
+A. 短作业优先　B. 优先级调度　C. <strong>先来先服务</strong>　D. 多级反馈队列</p>
+<blockquote>
+<p><strong>C</strong>。时间片≥所有进程运行时间时，等效FCFS。</p>
+</blockquote>
+<p><strong>26.</strong> 信号量 S 初值为3，进程执行了 5 次 P(S) 和 2 次 V(S)，则 S 的值为：
+A. 2　B. 1　C. <strong>0</strong>　D. −2</p>
+<blockquote>
+<p><strong>C</strong>。3−5+2=0；此时等待进程数为 0（S&lt;0 才有等待者）。</p>
+</blockquote>
+<p><strong>27.</strong> 3 个进程，每个进程最多需要 2 台打印机，系统<strong>不发生死锁</strong>至少需要打印机台数为：
+A. 3　B. <strong>4</strong>　C. 5　D. 6</p>
+<blockquote>
+<p><strong>B</strong>。n(k−1)+1 = 3×1+1 = 4（最坏每进程持有1台时仍剩1台可分配）。</p>
+</blockquote>
+<p><strong>28.</strong> 银行家算法在死锁处理策略中属于：
+A. 死锁预防　B. <strong>死锁避免</strong>　C. 死锁检测与解除　D. 鸵鸟策略</p>
+<blockquote>
+<p><strong>B</strong>。分配前判断是否处于安全状态，是典型的"避免"。</p>
+</blockquote>
+<p><strong>29.</strong> 页大小 1KB，逻辑地址 2500（十进制），页号2对应物理块号7，则物理地址为：
+A. 7156　B. <strong>7620</strong>　C. 2500　D. 904</p>
+<blockquote>
+<p><strong>B</strong>。2500=2×1024+452 → 物理地址 = 7×1024+452 = 7620。</p>
+</blockquote>
+<p><strong>30.</strong> 访问序列 1,2,3,4,1,2,5,1,2,3,4,5，分配3个物理块，<strong>FIFO</strong> 置换的缺页次数为：
+A. 7　B. 8　C. <strong>9</strong>　D. 10</p>
+<blockquote>
+<p><strong>C</strong>。逐页模拟：缺页9次；该序列下FIFO还有Belady现象（4块时缺10次）。</p>
+</blockquote>
+<p><strong>31.</strong> UNIX 混合索引：块大小 4KB、地址项 4B，则<strong>一次间接地址</strong>可表示的文件大小上限为：
+A. 4KB　B. <strong>4MB</strong>　C. 4GB　D. 1KB</p>
+<blockquote>
+<p><strong>B</strong>。一次间接块含 1024 个地址 → 1024×4KB = 4MB。</p>
+</blockquote>
+<p><strong>32.</strong> 磁盘转速 6000 转/分钟，其平均旋转延迟约为：
+A. 2.5ms　B. <strong>5ms</strong>　C. 10ms　D. 20ms</p>
+<blockquote>
+<p><strong>B</strong>。转一圈 10ms，平均半圈 5ms。</p>
+</blockquote>
+<h2>计算机网络（33~40）</h2>
+<p><strong>33.</strong> OSI 参考模型中，负责数据加密/压缩与语法表示转换的是：
+A. 应用层　B. 会话层　C. <strong>表示层</strong>　D. 传输层</p>
+<blockquote>
+<p><strong>C</strong>。表示层：语法表示、加密压缩。</p>
+</blockquote>
+<p><strong>34.</strong> 在 100Mbps 链路上发送一个 1000B 的分组，发送时延为：
+A. 8μs　B. <strong>80μs</strong>　C. 100μs　D. 10ms</p>
+<blockquote>
+<p><strong>B</strong>。8000bit / 10⁸bps = 80μs。</p>
+</blockquote>
+<p><strong>35.</strong> 序号字段 3 位，GBN 协议发送窗口的最大尺寸为：
+A. 3　B. 4　C. <strong>7</strong>　D. 8</p>
+<blockquote>
+<p><strong>C</strong>。W ≤ 2ⁿ−1 = 7。</p>
+</blockquote>
+<p><strong>36.</strong> 以太网规定最小帧长 64B，其目的是：
+A. 提高传输效率　B. <strong>保证发送站在发送完成前能检测到冲突（争用期）</strong>　C. 与MAC地址对齐　D. 便于差错校验</p>
+<blockquote>
+<p><strong>B</strong>。64B=512bit ≥ 2τ×带宽。</p>
+</blockquote>
+<p><strong>37.</strong> 子网掩码为 255.255.255.192，每个子网的可用主机数为：
+A. 64　B. <strong>62</strong>　C. 30　D. 126</p>
+<blockquote>
+<p><strong>B</strong>。/26 → 主机位6位 → 2⁶−2=62。</p>
+</blockquote>
+<p><strong>38.</strong> RIP 协议中，"不可达"的跳数表示为：
+A. 15　B. <strong>16</strong>　C. 255　D. ∞（无定义值）</p>
+<blockquote>
+<p><strong>B</strong>。最大合法跳数15，16=不可达（限制计数到无穷）。</p>
+</blockquote>
+<p><strong>39.</strong> TCP 三次握手中，第三次握手报文的标志与序号为：
+A. SYN=1, seq=x　B. SYN=1, ACK=1, seq=y, ack=x+1　C. <strong>ACK=1, seq=x+1, ack=y+1</strong>　D. FIN=1, seq=x</p>
+<blockquote>
+<p><strong>C</strong>。第三次握手只置 ACK=1，消耗序号：seq=x+1，确认号 ack=y+1。</p>
+</blockquote>
+<p><strong>40.</strong> 用户代理（如Outlook）向邮件服务器<strong>发送</strong>邮件使用的协议是：
+A. POP3　B. IMAP　C. <strong>SMTP</strong>　D. SNMP</p>
+<blockquote>
+<p><strong>C</strong>。"推"用SMTP；收信才用POP3/IMAP。</p>
+</blockquote>
+<h1>二、综合应用题（共70分）</h1>
+<p><strong>41.</strong>（13分）已知带头结点的单链表 L，结点值为整数（|值|≤n，n为给定正整数），设计一个时间复杂度尽可能高效的算法，删除链表中绝对值相等的冗余结点（每个绝对值只保留首次出现的结点），并说明算法的时间与空间复杂度。</p>
+<blockquote>
+<p><strong>答案</strong>：空间换时间。设辅助标记数组 flag[0..n] 初始化为0。
+<code>c
+void RemoveDup(LinkList L, int n) {
+    int *flag = (int*)calloc(n+1, sizeof(int));
+    LNode *p = L-&gt;next, *pre = L;
+    while (p != NULL) {
+        int v = abs(p-&gt;data);
+        if (flag[v] == 0) { flag[v] = 1; pre = p; p = p-&gt;next; }
+        else { pre-&gt;next = p-&gt;next; free(p); p = pre-&gt;next; }
+    }
+    free(flag);
+}</code>
+时间 O(m)（m为表长），空间 O(n)。若不用辅助数组，双循环 O(m²) 时间 O(1) 空间，效率低——本题按"尽可能高效"给 O(n) 版本满分。</p>
+</blockquote>
+<p><strong>42.</strong>（10分）将关键字 50,30,70,20,40,80 依次插入初始为空的 AVL 树，再插入 10。画出插入 10 后失衡的最小子树的旋转过程，给出最终树形，并指出旋转类型。</p>
+<blockquote>
+<p><strong>答案</strong>：插入前6个关键字后树为：根50，左30（左20右40），右70（右80）。
+插入10：沿 50→30→20→10 路径，结点30的平衡因子变为2（左子树高2、右子树高0），是<strong>最小失衡子树</strong>的根。
+插入位置在 30 的左孩子的左子树 → <strong>LL型，对30进行右旋</strong>：20 升为该子树根，左孩子10、右孩子30。
+最终树形：根50；左子树20（左10、右30）；右子树70（右80）。全树平衡，高度3。</p>
+</blockquote>
+<p><strong>43.</strong>（13分）某页式虚拟存储系统：虚拟地址24位，物理内存64MB，页大小4KB。求：
+(1) 虚页号与页内偏移各多少位；
+(2) 物理地址位数与页表项中页框号至少多少位；
+(3) 若单级页表每项占4B，页表最大占多少存储空间；
+(4) 虚地址 5000（十进制），已知虚页1存放在物理块3，求物理地址。</p>
+<blockquote>
+<p><strong>答案</strong>：
+(1) 页内偏移 = 12位（4KB=2¹²）；虚页号 = 24−12 = 12位。
+(2) 物理地址 = 26位（64MB=2²⁶）；页框号 = 26−12 = 14位（页表项还需存取控制等标志位，题问"至少"为14位）。
+(3) 页表项数 = 2¹²，页表大小 = 2¹²×4B = 16KB。
+(4) 5000 = 1×4096 + 904 → 页号1、页内偏移904；物理地址 = 3×4096+904 = <strong>13192</strong>。</p>
+</blockquote>
+<p><strong>44.</strong>（10分）某计算机 Cache 共 4 行，块大小 16B，采用直接映射。CPU 依次访问主存地址（十进制）：0, 4, 8, 16, 132, 8, 4。求每次访问后 Cache 的命中情况（命中/缺失），并给出总命中次数与命中率。</p>
+<blockquote>
+<p><strong>答案</strong>：块大小16B → 块号=⌊地址/16⌋；行号=块号 mod 4。
+- 0：块0→行0，<strong>缺失</strong>（装入块0）
+- 4：块0→行0，<strong>命中</strong>
+- 8：块0→行0，<strong>命中</strong>
+- 16：块1→行1，<strong>缺失</strong>
+- 132：块8→行0（8 mod 4=0），<strong>缺失</strong>（换出块0）
+- 8：块0→行0，<strong>缺失</strong>（重新装入）
+- 4：块0→行0，<strong>缺失</strong>
+总命中 <strong>2次</strong>，命中率 2/7 ≈ 28.6%。（本题体现直接映射的"颠簸"现象：行0被块0、块8反复抢占。）</p>
+</blockquote>
+<p><strong>45.</strong>（8分）桌上有一个盘子，每次只能放一个水果。父亲专放苹果，母亲专放橘子；女儿只吃苹果，儿子只吃橘子。盘满时不能放，盘空时不能取。试用信号量机制实现父亲、母亲、女儿、儿子四个进程的同步，给出伪代码并说明每个信号量的意义与初值。</p>
+<blockquote>
+<p><strong>答案</strong>：
+<code>semaphore plate = 1;   // 盘子空位（互斥+容量）
+semaphore apple = 0;   // 盘中苹果数
+semaphore orange = 0;  // 盘中橘子数
+父亲: while(true){ 准备苹果; P(plate); 放苹果; V(apple); }
+母亲: while(true){ 准备橘子; P(plate); 放橘子; V(orange); }
+女儿: while(true){ P(apple); 取苹果; V(plate); 吃苹果; }
+儿子: while(true){ P(orange); 取橘子; V(plate); 吃橘子; }</code>
+plate 初值1保证盘中最多一个水果；apple/orange 初值0表示 initially 无水果。因为 plate 已保证互斥放取，无需额外 mutex。</p>
+</blockquote>
+<p><strong>46.</strong>（7分）某系统访问页面序列为 4,3,2,1,4,3,5,4,3,2,1,5，分配3个物理块。计算 <strong>LRU</strong> 置换算法的缺页次数，并写出每次淘汰的页面。</p>
+<blockquote>
+<p><strong>答案</strong>：逐页模拟（栈式）：
+4F、3F、2F、1F(淘汰4)、4F(淘汰3)、3F(淘汰2)、5F(淘汰1)、4H、3H、2F(淘汰5)、1F(淘汰4)、5F(淘汰3)。
+缺页 <strong>10次</strong>，命中2次。淘汰序列：4,3,2,1,5,4,3。（LRU 是堆栈类算法，无Belady异常。）</p>
+</blockquote>
+<p><strong>47.</strong>（9分）某单位分得网络 192.168.60.0/24，需划分为4个大小相等的子网。写出：(1) 每个子网的子网掩码；(2) 各子网的网络地址与可用主机地址范围；(3) 每个子网的可用主机数。</p>
+<blockquote>
+<p><strong>答案</strong>：4个子网 → 借2位 → /26，掩码 <strong>255.255.255.192</strong>。
+| 子网 | 网络地址 | 可用主机范围 | 广播地址 |
+|---|---|---|---|
+| 1 | 192.168.60.0/26 | .1 ~ .62 | .63 |
+| 2 | 192.168.60.64/26 | .65 ~ .126 | .127 |
+| 3 | 192.168.60.128/26 | .129 ~ .190 | .191 |
+| 4 | 192.168.60.192/26 | .193 ~ .254 | .255 |
+每子网可用主机 2⁶−2 = <strong>62</strong> 台。</p>
+</blockquote>
+<hr />
+<h1>卷六答案速查（选择）</h1>
+<p>1C 2C 3C 4B 5C 6A 7B 8B 9B 10B 11C / 12C 13B 14C 15B 16B 17C 18B 19C 20C 21B 22B / 23C 24C 25C 26C 27B 28B 29B 30C 31B 32B / 33C 34B 35C 36B 37B 38B 39C 40C</p></div></body></html>

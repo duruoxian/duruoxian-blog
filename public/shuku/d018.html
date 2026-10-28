@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学一985精讲_高数上 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学一 · 985精讲 · 高等数学（上）：定义定理深度讲解 + 985强度考题</h1>
+<blockquote>
+<p><strong>本系列定位</strong>：目标985（成电/川大冲、重大主攻），数学要从"会做题"升级到"懂定理"。本册逐章给出：<strong>定义的严谨表述</strong>（含条件剖析与反例）、<strong>定理的完整陈述+证明思路</strong>（985面试和大题证明题都从这里出）、<strong>985强度考题</strong>（比真题略难，带详解）。
+<strong>系列批次</strong>：①高数上（第1-5章）✅本册 ②高数下（第6-10章）③线性代数全 ④概率统计全。
+配套：《高数_知识点与难点》（速记版）、《题型精讲与强化题集》（套路版）、《压轴题专练》、《公式大全》。</p>
+</blockquote>
+<hr />
+<h1>第1章 函数 · 极限 · 连续</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 函数有界性</strong>：∃M&gt;0，∀x∈X，|f(x)|≤M，则 f 在 X 上有界。
+【剖析】有界是对<strong>指定区间</strong>而言：sin(1/x) 在 (0,1] 内无界（x→0⁺时振荡无界），但在 [0.1,1] 上有界。"有界"="既有上界又有下界"，二者缺一不可。</p>
+<p><strong>D2 极限的 ε-δ 定义（函数）</strong>：lim_{x→x₀}f(x)=A ⇔ ∀ε&gt;0，∃δ&gt;0，当 0&lt;|x−x₀|&lt;δ 时，|f(x)−A|&lt;ε。
+【要点】① 0&lt;|x−x₀| 表示<strong>不考虑 x₀ 点本身</strong>（极限与该点函数值无关——这正是间断点能存在的逻辑）；② ε 给定在先、δ 寻找在后（δ 依赖 ε，记 δ(ε)）；③ 数列版用 ε-N：∀ε&gt;0，∃N，当 n&gt;N 时 |xₙ−A|&lt;ε。
+【考研用法】直接考 ε-δ 证明较少，但"用定义证明极限"是985复试笔面常客；选择题爱考定义的正反表述。</p>
+<p><strong>D3 无穷小与无穷大</strong>：lim f(x)=0 称无穷小；lim f(x)=∞ 称无穷大。
+【要点】① 无穷小是<strong>变量</strong>，不是很小的数（0是唯一作为常数的无穷小）；② 无穷大与无界的关系：<strong>无穷大必无界，无界未必无穷大</strong>（反例：1,0,3,0,5,0,… 无界但极限不为∞）；③ 无穷大的倒数是无穷小（分母不为零时）；④ 同一过程下：有界×无穷小=无穷小。</p>
+<p><strong>D4 无穷小的阶</strong>：设 α,β 是同一过程的无穷小且 α≠0：若 lim β/α=0，β 是 α 的高阶无穷小，记 β=o(α)；若 lim β/α=C≠0，同阶；若 lim β/α=1，等价，记 β~α；若 lim β/αᵏ=C≠0，β 是 α 的 k 阶无穷小。
+【要点】o(α) 的运算：o(α)+o(α)=o(α)；o(α)·k=k·o(α)；o(α)·β=o(αβ)。<strong>加减运算中低阶吸收高阶</strong>：α+o(α)~α。</p>
+<p><strong>D5 一致连续【数一考纲】</strong>：f 在区间 I 上一致连续 ⇔ ∀ε&gt;0，∃δ&gt;0（<strong>δ 只依赖 ε，与 x 的位置无关</strong>），∀x₁,x₂∈I，|x₁−x₂|&lt;δ ⇒ |f(x₁)−f(x₂)|&lt;ε。
+【要点】与"连续"的区别：连续的 δ 可以随点变化（每点一个δ），一致连续是一个 δ 管全区间的所有点。<strong>康托定理</strong>：闭区间 [a,b] 上的连续函数必一致连续。反例：f(x)=1/x 在 (0,1] 连续但不一致连续。</p>
+<p><strong>D6 间断点分类</strong>：x₀ 为间断点：左右极限都存在 → <strong>第一类</strong>（相等=可去；不等=跳跃）；至少一个不存在 → <strong>第二类</strong>（无穷型/振荡型）。
+【要点】可去间断点：极限存在但 ≠f(x₀) 或 f(x₀) 无定义——"改变/补充一个点的定义即可修复"；振荡型典型：sin(1/x) 在 x=0。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 极限四则运算法则</strong>：若 lim f=A，lim g=B（都存在），则 lim(f±g)=A±B，lim(fg)=AB，lim(f/g)=A/B（B≠0）。
+【条件剖析】<strong>前提是两个极限都存在（商还需分母极限非零）</strong>。反例：lim(x→0) (x+x sin(1/x))/x 若拆成两项，sin(1/x) 极限不存在，但整体=1+0=1 存在——<strong>"极限不存在"不能推出"和不存在"</strong>。</p>
+<p><strong>T2 局部保号性</strong>：若 lim_{x→x₀}f(x)=A&gt;0，则存在 x₀ 的去心邻域，使该邻域内 f(x)&gt;0。
+【推论】若在去心邻域内 f(x)≥0 且极限存在，则 A≥0（<strong>等号会退化</strong>：f(x)=x²≥0 但 lim_{x→0}x²=0——严格不等号过极限后变"≥"）。</p>
+<p><strong>T3 夹逼准则</strong>：若 yₙ≤xₙ≤zₙ 且 lim yₙ=lim zₙ=a，则 lim xₙ=a（数列与函数版皆成立）。
+【证明思路】由 ε 定义：∀ε，zₙ<a+ε 且 yₙ>a−ε（n 充分大），夹出 |xₙ−a|&lt;ε。
+【使用信号】n 项和每项结构相同但无法求和；含 sin(1/n)、ⁿ√ 等难处理因子。</p>
+<p><strong>T4 单调有界准则</strong>：单调递增有上界（或递减有下界）的数列必收敛。
+【证明思路】确界原理：有上界的单调增数列的上确界就是极限。<strong>使用模板</strong>：①证有界（数学归纳/放缩）→②证单调（作差/作商/归纳）→③设极限L代入递推式解方程（<strong>注意：只有证明收敛后才能代</strong>，否则会解出假极限）。</p>
+<p><strong>T5 两个重要极限（含证明思路）</strong>：
+- lim_{x→0} sinx/x = 1【证明：单位圆夹逼——sinx&lt;x&lt;tanx (0&lt;x&lt;π/2)，三边同除 sinx 取倒数极限】
+- lim_{x→∞}(1+1/x)ˣ=e【证明：lim (1+1/n)ⁿ 单调有界（二项式展开证增、&lt;3证界），再用夹逼过渡到实数 x】</p>
+<p><strong>T6 等价无穷小替换定理</strong>：α~α′，β~β′，且 lim α′β′/β 存在（或为∞），则 lim αβ=lim α′β′。
+【条件剖析】<strong>只能整体替换乘除因子</strong>！加减慎用的原因：α+β 中分别替换后可能丢失主部。安全做法：加减时用泰勒展开到"足够阶"。推论：α~α′ ⇒ α=α′+o(α′)。</p>
+<p><strong>T7 洛必达法则</strong>：设 ①lim f=lim g=0（或∞）；②在去心邻域内可导且 g′≠0；③lim f′/g′ 存在（或∞）。则 lim f/g=lim f′/g′。
+【条件剖析】三条缺一不可。<strong>典型误用</strong>：条件③不满足时不能反推原极限不存在（例：lim(x→∞)(x+sinx)/x，导数比=(1+cosx)/1 振荡不存在，但原极限=1）；数列极限不能直接用（先转函数极限）；每次使用前必须验证仍是 0/0 或 ∞/∞。</p>
+<p><strong>T8 泰勒定理</strong>：
+- <strong>带皮亚诺余项</strong>（局部）：f 在 x₀ 处 n 阶可导 → f(x)=Σ_{k=0}^n f^{(k)}(x₀)/k!·(x−x₀)ᵏ + o((x−x₀)ⁿ)。用于求极限、比较阶。
+- <strong>带拉格朗日余项</strong>（全局）：f 在含 x₀ 的区间内 n+1 阶可导 → 余项 = f^{(n+1)}(ξ)/(n+1)!·(x−x₀)^{n+1}，ξ 介于 x 与 x₀。用于证明不等式、中值问题、估计误差。
+【辨析】皮亚诺余项只保证 x→x₀ 时成立（局部性质）；拉格朗日余项对区间上<strong>每个 x</strong> 都成立（全局）。求极限用皮亚诺，证不等式用拉格朗日——<strong>用错余项是985层面典型失分点</strong>。</p>
+<p><strong>T9 闭区间连续函数四大定理</strong>（[a,b] 上连续 ⇒）：
+① <strong>有界性定理</strong>；② <strong>最值定理</strong>（必取得最大最小值）；③ <strong>介值定理</strong>（可取到介于 m 与 M 之间的一切值）；④ <strong>零点定理</strong>（f(a)·f(b)&lt;0 ⇒ ∃ξ∈(a,b)，f(ξ)=0）。
+【证明思路链】有界性←反证法+致密性（或区间套）；最值←有界性+上确界可达；介值←零点定理平移。<strong>985面试高频问</strong>："零点定理怎么证？"——用介值定理（f(a)f(b)&lt;0 时 0 介于 f(a),f(b) 之间）。</p>
+<h2>三、985强度考题（7题）</h2>
+<p><strong>题1（ε-N定义证明）</strong> 用定义证明 lim_{n→∞}(√(n²+n)−n)=1/2。
+【证】√(n²+n)−n = n/(√(n²+n)+n) = 1/(√(1+1/n)+1)。
+|式−1/2| = (√(1+1/n)−1)/(2(√(1+1/n)+1)) = (1/n)/(2(√(1+1/n)+1)²) ≤ 1/(8n)（因 (√(1+1/n)+1)²&gt;4）。
+∀ε&gt;0，取 N=⌈1/(8ε)⌉+1，n&gt;N 时 |式−1/2|&lt;ε。∎
+（技巧：先有理化化简，再把绝对值<strong>适当放大</strong>成 1/(8n)——放大要保证方向正确。）</p>
+<p><strong>题2（复合指数极限·985强度）</strong> 求 lim_{x→0} [(eˣ+e^{2x}+…+e^{nx})/n]^{1/x}（n为固定正整数）。
+【解】e^{kx}=1+kx+O(x²)，求和：Σ_{k=1}^n e^{kx} = n + x·n(n+1)/2 + O(x²)。
+底数 = 1 + (n+1)x/2 + O(x²)，故原式 = e^{lim (n+1)x/(2x)} = <strong>e^{(n+1)/2}</strong>。
+（坑：对 ln(和式) 逐项泰勒时必须展开到 x 的一次项整体；此项数与 n 有关，若 n→∞ 则不能这样做——那是另一类问题。）</p>
+<p><strong>题3（夹逼+定积分定义双用）</strong> 求 lim_{n→∞} Σ_{k=1}^n 1/√(n²+k²)。
+【解】提出 1/n：Σ = (1/n)Σ_{k=1}^n 1/√(1+(k/n)²) → ∫₀¹ dx/√(1+x²) = ln(1+√2)。
+（识别信号：Σ f(k/n)·(1/n)。同时可用夹逼验证：n/√(n²+n²) ≤ Σ ≤ n/√(n²+1)。）</p>
+<p><strong>题4（夹逼·精细放缩）</strong> 求 lim_{n→∞} Σ_{k=1}^n k/(n²+k)。
+【解】k/(n²+n) ≤ k/(n²+k) ≤ k/(n²+0)。Σk=n(n+1)/2：
+下界 = [n(n+1)/2]/(n²+n) = 1/2；上界 = [n(n+1)/2]/(n²+1) → 1/2。由夹逼，极限=<strong>1/2</strong>。
+（此题不能直接用定积分定义——分母的 k 是一次项不是 n² 量级匹配，夹逼是正解。）</p>
+<p><strong>题5（单调有界·牛顿迭代模型）</strong> 设 x₁&gt;0，x_{n+1}=(xₙ+a/xₙ)/2（a&gt;0）。证明 {xₙ} 收敛并求极限。
+【证】①（有界下界）由均值不等式：x_{n+1}=(xₙ+a/xₙ)/2 ≥ √(xₙ·a/xₙ)=√a（n≥1）。
+②（单调）x_{n+1}−xₙ=(a−xₙ²)/(2xₙ)≤0（因 n≥1 时 xₙ≥√a）→ 递减有下界 → 收敛。
+③设极限为 L：L=(L+a/L)/2 → L²=a → <strong>L=√a</strong>。∎</p>
+<p><strong>题6（间断点全分类·真题级）</strong> 讨论 f(x)=1/(1−e^{x/(1−x)}) 的间断点。
+【解】无定义点：x=1（分母1−x=0）与 x=0（e⁰=1 使 1−e⁰=0）。
+x=0：x/(1−x)→0，e^{…}→1，分母→0⁺？分母=1−1=0，需看阶：x/(1−x)~x，e^u−1~u~x，分母~−x → f~1/(−x)→∞。<strong>x=0 为无穷间断点（第二类）</strong>。
+x=1：x→1⁻ 时 x/(1−x)→+∞，e^u→∞，分母→−∞，f→0；x→1⁺ 时 x/(1−x)→−∞，e^u→0，分母→1，f→1。左右极限存在不等 → <strong>x=1 为跳跃间断点（第一类）</strong>。∎</p>
+<p><strong>题7（一致连续概念辨析·985面试）</strong> 证明 f(x)=x² 在 [0,1] 上一致连续，并说明 f(x)=1/x 在 (0,1] 上为什么不是一致连续。
+【证】|x₁²−x₂²|=|x₁+x₂||x₁−x₂|≤2|x₁−x₂|。∀ε&gt;0 取 δ=ε/2（与点无关），则 |x₁−x₂|&lt;δ ⇒ |f(x₁)−f(x₂)|≤2δ=ε。∎
+(0,1]：取 ε₀=1，∀δ&gt;0，取 x₁=δ/2? 反例构造——取 x₁=1/n, x₂=1/(n+1)，|x₁−x₂|→0 但 |f(x₁)−f(x₂)|=1&gt;ε₀。故不一致连续。∎
+（本质：连续的 δ 可逐点选取；一致连续要求"全场通用 δ"。闭区间连续⇒一致连续（康托定理）。）</p>
+<h2>四、本章必会证明清单（985面试+大题）</h2>
+<p>① sinx/x→1 的夹逼证明；② (1+1/n)ⁿ 单调有界；③ 夹逼、单调有界准则的应用范式；④ 无界≠无穷大的反例；⑤ 连续函数零点/介值定理的应用构造（把"存在f(ξ)=k"凑成"存在零点"：移项构造 g(x)=f(x)−k）。</p>
+<hr />
+<h1>第2章 导数与微分</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 导数定义</strong>：f′(x₀)=lim_{h→0}[f(x₀+h)−f(x₀)]/h（h→0⁺/0⁻ 为单侧导数）。
+【等价变形】f′(x₀)=lim_{x→x₀}[f(x)−f(x₀)]/(x−x₀)。<strong>判断某极限式是否等于 f′(x₀)</strong>：看能否凑成上述标准结构（分子是"增量"，分母是"自变量增量"）。
+【要点】① f′(x₀) 存在 ⇔ 左右导数存在且相等；② f′(x₀) 存在不能保证 f′ 在邻域存在（f′(x₀) 是一个数，不是函数）；③ <strong>导函数未必连续，但导函数不能有第一类间断</strong>（达布定理：导函数具有介值性——选择题高频）。</p>
+<p><strong>D2 微分</strong>：若 Δy=A·Δx+o(Δx)（A 与 Δx 无关），称 f 在 x₀ 可微，dy=A·Δx。
+【定理链】一元函数：<strong>可微 ⇔ 可导</strong>，且 A=f′(x₀)；可微⇒连续；可导⇒连续；<strong>连续⇏可导</strong>（反例 |x| 在 0 连续不可导；x^{1/3} 在 0 连续、切线垂直、导数不存在(为∞)）。</p>
+<p><strong>D3 高阶导数</strong>：f⁽ⁿ⁾(x)=(f⁽ⁿ⁻¹⁾)′。分段函数在分段点的高阶导数必须<strong>逐阶用定义</strong>验证。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 可导⇒连续</strong>：【证】f(x)−f(x₀)=[(f(x)−f(x₀))/(x−x₀)]·(x−x₀) → f′(x₀)·0=0。【逆否警示】不连续⇒不可导；但连续⇏可导。
+<strong>T2 四则与复合（链式）</strong>：条件是各自可导。链式=(外层导)·(内层导)，层层剥洋葱；漏层是计算题主要扣分点。
+<strong>T3 反函数求导定理</strong>：若 f 单调连续可导且 f′≠0，则反函数可导且 (f⁻¹)′=1/f′。例：arcsin′x=1/√(1−x²)（由 sin y=x 推出）。
+<strong>T4 参数方程求导</strong>：dy/dx=(y′ₜ)/(x′ₜ)；<strong>d²y/dx² = d(dy/dx)/dt ÷ (dx/dt)</strong>——二阶是"一阶导对 t 再求导后除以 dx/dt"，直接对 x 求导是经典错误。
+<strong>T5 莱布尼茨公式</strong>：(uv)⁽ⁿ⁾=ΣC(n,k)u⁽ⁿ⁻ᵏ⁾v⁽ᵏ⁾。【证明思路】数学归纳法+组合恒等式 C(n,k)+C(n,k−1)=C(n+1,k)。
+<strong>T6 常用 n 阶导公式（必须默写）</strong>：(e^{ax})⁽ⁿ⁾=aⁿe^{ax}；[sin(ax+b)]⁽ⁿ⁾=aⁿsin(ax+b+nπ/2)；[ln(1+x)]⁽ⁿ⁾=(−1)^{n−1}(n−1)!/(1+x)ⁿ；[1/(x+a)]⁽ⁿ⁾=(−1)ⁿn!/(x+a)^{n+1}。
+【推导思路】①部分分式化成 1/(x+a) 型；②泰勒系数法：f⁽ⁿ⁾(0)=n!×(xⁿ展开系数)。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（定义应用·无导数条件）</strong> 设 φ(x) 在 x=a 处连续，f(x)=(x−a)φ(x)。证明 f′(a)=φ(a)。
+【证】f′(a)=lim_{x→a}[f(x)−f(a)]/(x−a)=lim_{x→a}(x−a)φ(x)/(x−a)=lim_{x→a}φ(x)=φ(a)。∎
+（警示：若错用乘积求导公式得 f′(a)=φ(a)+(a−a)φ′(a)，就默认了 φ 可导——<strong>题目只给连续</strong>！这题专治"公式依赖症"。）</p>
+<p><strong>题2（分段函数高阶可导性·经典）</strong> 设 f(x)=xⁿsin(1/x)（x≠0），f(0)=0。问 n 取何值时：①f 在 0 连续；②f 在 0 可导；③f′ 在 0 连续？
+【解】①|f(x)|≤|x|ⁿ→0（n≥1）恒连续。
+②f′(0)=lim x^{n−1}sin(1/x)：存在⇔n−1&gt;0，即 <strong>n≥2</strong>。
+③x≠0 时 f′(x)=nx^{n−1}sin(1/x)−x^{n−2}cos(1/x)。第二项 x^{n−2}cos(1/x)→0 ⇔ n−2&gt;0，即 <strong>n≥3</strong> 时 f′ 连续（n=2 时第二项=cos(1/x) 振荡）。∎</p>
+<p><strong>题3（n阶导数在定点）</strong> 设 f(x)=1/(x²+3x+2)，求 f⁽ⁿ⁾(0)。
+【解】部分分式：f=1/(x+1)−1/(x+2)。f⁽ⁿ⁾(x)=(−1)ⁿn![1/(x+1)^{n+1}−1/(x+2)^{n+1}]。
+f⁽ⁿ⁾(0)=(−1)ⁿn![1−1/2^{n+1}]。∎
+（另一路：泰勒展开 1/(x+1)=1−x+x²−…，比较系数得同结论——两种方法都要会。）</p>
+<p><strong>题4（参数方程二阶导）</strong> {x=ln(1+t²), y=arctan t}，求 t=1 处的 dy/dx 与 d²y/dx²。
+【解】dx/dt=2t/(1+t²)，dy/dt=1/(1+t²)，dy/dx=1/(2t)，t=1 时 =1/2。
+d²y/dx²=[d/dt(1/(2t))]÷(2t/(1+t²))=[−1/(2t²)]·(1+t²)/(2t)=−(1+t²)/(4t³)，t=1 时 =−1/2。∎</p>
+<p><strong>题5（函数方程+导数定义·985面试经典）</strong> 设 f 在 R 上有定义，对任意 x,y 有 f(x+y)=f(x)f(y)，且 f′(0)=1。求 f。
+【解】令 y=0：f(x)=f(x)f(0)→f(0)=1（因 f′(0)=1 存在，f 不恒为0）。
+f′(x)=lim_{h→0}[f(x+h)−f(x)]/h=lim f(x)[f(h)−1]/h=f(x)·lim_{h→0}[f(h)−f(0)]/h=f(x)f′(0)=f(x)。
+解 f′=f，f(0)=1 → <strong>f(x)=eˣ</strong>。∎</p>
+<p><strong>题6（导数极限定理·高频概念题）</strong> 设 f 在 x₀ 的某邻域连续，lim_{x→x₀}f′(x)=A 存在，问 f′(x₀) 是否存在？等于什么？
+【答】存在且 f′(x₀)=A（用导数定义+洛必达：f′(x₀)=lim[f(x)−f(x₀)]/(x−x₀)=lim f′(x)=A，属"导数极限定理"）。
+【推论警示】若 lim f′(x)=∞，则 f 在 x₀ 不可导（如 f(x)=|x|，x≠0 时 f′=±1，x→0⁻/0⁺ 极限为±1 不相等→跳，不可导；而 f(x)=x^{2/3}，f′→∞ → 不可导）。<strong>导函数的间断只能是第二类</strong>。∎</p>
+<h2>四、本章必会证明清单</h2>
+<p>① 可导⇒连续（乘积极限证法）；② 导数极限定理及其推论；③ xⁿsin(1/x) 系列的可导性分层结论；④ 达布定理表述（导函数无第一类间断）；⑤ 用定义求分段点导数的完整书写规范（先写定义、再拆左右）。</p>
+<hr />
+<h1>第3章 微分中值定理与导数应用（数一大题核心章）</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 极值</strong>：若在 x₀ 的某邻域内恒有 f(x)≤f(x₀)，称 f(x₀) 为极大值。
+【要点】①极值是<strong>局部概念</strong>（邻域内比较），最值是全局概念；②极值必在<strong>内部</strong>取得（端点不算极值点）；③"取得极值"与"f′=0"无必然关系：f′=0 是可导点取极值的必要条件（费马）；<strong>不可导点也可以取极值</strong>（|x| 在 0）。</p>
+<p><strong>D2 拐点</strong>：连续曲线上凹凸性改变的点 (x₀, f(x₀))。【要点】拐点是<strong>曲线上的点</strong>，答题写坐标；f″=0 且两侧变号才是拐点；<strong>不可导点也可能是拐点</strong>（如 y=x^{1/3} 在 x=0：y″=−2/(9x^{5/3})，x&lt;0 时 y″&gt;0（凹）、x&gt;0 时 y″&lt;0（凸）→ 凹凸变号，是拐点且该点不可导）。</p>
+<p><strong>D3 凹凸性（同济定义）</strong>：f 在 I 上连续，若对 I 上任意两点 x₁≠x₂，恒有 f((x₁+x₂)/2)&lt;[f(x₁)+f(x₂)]/2，称凹（向上凹）。
+【等价刻画】凹函数：割线在曲线上方；切线在曲线下方（若可导）；f′ 单调增。</p>
+<h2>二、定理精讲（含证明思路——985必背）</h2>
+<p><strong>T1 费马引理</strong>：f 在 x₀ 可导且在 x₀ 取极值 ⇒ f′(x₀)=0。
+【证】设极大：对 h&gt;0 小，[f(x₀+h)−f(x₀)]/h≤0 → 右导数≤0；对 h&lt;0，[f(x₀+h)−f(x₀)]/h≥0 → 左导数≥0。f′(x₀) 存在 → 左=右=0。∎</p>
+<p><strong>T2 罗尔定理</strong>：[a,b] 连续、(a,b) 可导、f(a)=f(b) ⇒ ∃ξ∈(a,b)：f′(ξ)=0。
+【证明思路（必会）】闭区间连续→取得最值 m,M。若 m=M，f 常数，f′≡0；否则 m,M 至少一个在内部取得（因端点值相等），内部最值点由费马引理得 f′=0。∎</p>
+<p><strong>T3 拉格朗日中值定理</strong>：[a,b] 连续、(a,b) 可导 ⇒ ∃ξ∈(a,b)：f(b)−f(a)=f′(ξ)(b−a)。
+【证明思路（必会）】构造 φ(x)=f(x)−f(a)−<a href="x−a">(f(b)−f(a))/(b−a)</a>，验证 φ(a)=φ(b)=0，对 φ 用罗尔定理，φ′(ξ)=0 即结论。∎（几何：曲线上必有一点切线平行于端点连线。）</p>
+<p><strong>T4 柯西中值定理</strong>：[a,b] 连续、(a,b) 内 f′,g′ 都存在且 g′(x)≠0 ⇒ ∃ξ：[f(b)−f(a)]/[g(b)−g(a)]=f′(ξ)/g′(ξ)。
+【证明思路】构造 ψ(x)=f(x)−f(a)−[(f(b)−f(a))/(g(b)−g(a))][g(x)−g(a)]，用罗尔。<strong>注意</strong>：对 f、g 分别用拉格朗日再相除是<strong>错误的</strong>（两个 ξ 未必相同）——这是最经典的错证，985面试爱问。</p>
+<p><strong>T5 泰勒定理（拉格朗日余项）</strong>：f 在含 x₀ 的区间内 n+1 阶可导 → 对该区间内任意 x，∃ξ（介于 x,x₀）：f(x)=Σ_{k=0}^n f^{(k)}(x₀)/k!(x−x₀)ᵏ + f^{(n+1)}(ξ)/(n+1)!(x−x₀)^{n+1}。
+【证明思路】视 x 固定，构造辅助函数 R(t)=f(x)−[泰勒多项式在 t 处的值]−K(t−x₀)^{n+1}（K 由 t=x₀? 反解），反复用罗尔 n+1 次（每次 R 的导数在 x₀ 与 ξ 之间有零点）。数一要会叙述思路。</p>
+<p><strong>T6 单调性判别</strong>：(a,b) 内 f′&gt;0 ⇒ 严格递增。【逆否警示】严格增推不出 f′&gt;0（x³ 在 x=0 处 f′=0）；f′≥0 且<strong>使 f′=0 的点不构成区间</strong> ⇒ 严格增。</p>
+<p><strong>T7 极值判别</strong>：
+- 第一充分条件：f′ 在 x₀ 两侧变号（正变负=极大）。
+- 第二充分条件：f′(x₀)=0 且 f″(x₀)≠0（f″&lt;0 极大）。【证明思路：泰勒 f(x)−f(x₀)=½f″(x₀)(x−x₀)²+o((x−x₀)²)】
+- 第三情形：f′(x₀)=f″(x₀)=…=f^{(n−1)}(x₀)=0，f⁽ⁿ⁾(x₀)≠0：n 奇→极值（f⁽ⁿ⁾&lt;0极大）；n 偶→不是极值但可能是拐点。<strong>用泰勒展开统一处理</strong>，不必死记。</p>
+<p><strong>T8 渐近线</strong>：垂直（lim_{x→c}y=∞）；水平（lim_{x→∞}y=A）；斜（k=lim y/x，b=lim(y−kx) 都存在）。同一方向水平与斜渐近不能共存。</p>
+<h2>三、985强度考题（7题）</h2>
+<p><strong>题1（双介值·构造两次中值·985经典）</strong> 设 f 在 [a,b] 连续、(a,b) 可导，f(a)=f(b)=1。证明存在 ξ,η∈(a,b) 使 e^{η−ξ}[f′(η)+f(η)]=1。
+【证】对 g(x)=eˣf(x) 用拉格朗日：∃η∈(a,b)，[eᵇf(b)−eᵃf(a)]/(b−a)=e^η[f(η)+f′(η)]，即 (eᵇ−eᵃ)/(b−a)=e^η[f(η)+f′(η)]。
+再对 eˣ 用拉格朗日：∃ξ∈(a,b)，(eᵇ−eᵃ)/(b−a)=e^ξ。
+两式相除：e^η[f(η)+f′(η)]=e^ξ，即 e^{η−ξ}[f′(η)+f(η)]=1。∎
+（方法论：看到 e^{…}f+e^{…}f′ 就想到 (eˣf)′=eˣ(f+f′)；两个中值=先用一个定理再用另一个，ξ 与 η 出自不同函数。）</p>
+<p><strong>题2（二次拉格朗日+导函数介值）</strong> 设 f 在 [a,b] 连续，(a,b) 二阶可导，f(a)=f(b)=0，且存在 c∈(a,b) 使 f(c)&gt;0。证明 ∃ξ∈(a,b)：f″(ξ)&lt;0。
+【证】f(c)&gt;0&gt;0=f(a)，对 [a,c] 用拉格朗日：∃x₁∈(a,c)，f′(x₁)=f(c)/(c−a)&gt;0；
+对 [c,b]：∃x₂∈(c,b)，f′(x₂)=(0−f(c))/(b−c)&lt;0。
+对 f′ 在 [x₁,x₂] 用拉格朗日：∃ξ∈(x₁,x₂)，f″(ξ)=[f′(x₂)−f′(x₁)]/(x₂−x₁)&lt;0。∎</p>
+<p><strong>题3（不等式·拉格朗日标准款）</strong> 证明：当 0&lt;a&lt;b 时，(b−a)/b &lt; ln(b/a) &lt; (b−a)/a。
+【证】对 ln x 在 [a,b] 用拉格朗日：ln b−ln a=ln(b/a)=(1/ξ)(b−a)，a&lt;ξ&lt;b。
+由 1/b&lt;1/ξ&lt;1/a 立得。∎（同类：|arctan a−arctan b|≤|a−b|，由 |arctan′|=1/(1+x²)≤1。）</p>
+<p><strong>题4（积分中值定理推广·数一要会）</strong> 设 f 在 [a,b] 连续，g 在 [a,b] 可积且不变号（g≥0，不恒为0）。证明 ∃ξ∈[a,b]：∫ₐᵇf(x)g(x)dx=f(ξ)∫ₐᵇg(x)dx。
+【证】m≤f≤M → m∫g≤∫fg≤M∫g（g≥0）。记 μ=∫fg/∫g，则 m≤μ≤M。由介值定理，∃ξ：f(ξ)=μ。∎
+（意义：加权版的"平均值点"；无条件版本 g≡1 即普通积分中值定理。）</p>
+<p><strong>题5（泰勒定理论证·极值第三判别）</strong> 设 f′(x₀)=f″(x₀)=…=f^{(n−1)}(x₀)=0，f⁽ⁿ⁾(x₀)≠0。证明：n 为奇数时 x₀ 是极值点（f⁽ⁿ⁾(x₀)&lt;0 为极大）；n 为偶数时不是极值点。
+【证】带皮亚诺余项展开：
+f(x)−f(x₀)=f⁽ⁿ⁾(x₀)/n!·(x−x₀)ⁿ+o((x−x₀)ⁿ)。
+当 x→x₀，右端符号由第一项决定（高阶项可忽略）。n 奇：(x−x₀)ⁿ 两侧变号→f(x)−f(x₀) 变号→极值；n 偶：恒同号→x₀ 非极值。∎
+（此定理把"第二充分条件不够用时怎么办"统一解决——985层面用泰勒统一处理一切局部问题。）</p>
+<p><strong>题6（方程根个数·规范流程）</strong> 讨论方程 ln x = ax（a&gt;0）的实根个数。
+【解】等价 ax−lnx=0，令 h(x)=ax−lnx。h′=a−1/x，驻点 x=1/a。
+x→0⁺：−lnx→∞，h→∞? h=ax−lnx→+∞。h(1/a)=1−ln(1/a)=1+ln a。
+①1+ln a&lt;0（a&lt;e^{−1}）：h(1/a)&lt;0 且两侧→+∞ → 两个根；
+②a=e^{−1}：h(1/a)=0 且为最小值 → 恰一根（相切）；
+③a&gt;e^{−1}：h&gt;0 恒成立 → 无根。∎
+（流程：构造F→F′定单调区间→端点/极限行为→按参数分类数根。）</p>
+<p><strong>题7（凹凸性应用·切线与曲线位置）</strong> 设 f″&gt;0 在 (a,b) 恒成立，x₀∈(a,b)。证明对任意 x∈(a,b)，x≠x₀：f(x)&gt;f(x₀)+f′(x₀)(x−x₀)（曲线在切线上方）。
+【证】f(x)−f(x₀)−f′(x₀)(x−x₀) 用拉格朗日两次：
+=f′(ξ)(x−x₀)−f′(x₀)(x−x₀)=<a href="x−x₀">f′(ξ)−f′(x₀)</a>，ξ 在 x₀ 与 x 之间。
+f″&gt;0 ⇒ f′ 严格增：x&gt;x₀ 时 f′(ξ)&gt;f′(x₀) 且 x−x₀&gt;0 → 乘积&gt;0；x<x₀ 时两者同负 → 乘积仍>0。∎
+（推论：凸函数切线不等式是 Jensen 不等式的二元特例，985面试常问。）</p>
+<h2>四、本章必会证明清单（985高频Top榜）</h2>
+<p>① 费马引理；② 罗尔（最值+费马）；③ 拉格朗日（构造法）；④ 柯西（构造法，并指出"分别用拉格朗日相除"错在哪）；⑤ 泰勒定理思路（n次罗尔）；⑥ 积分中值推广；⑦ 双介值构造范式（题1模板）；⑧ 曲线在切线上方（凹函数切线不等式）。</p>
+<hr />
+<h1>第4章 不定积分</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 原函数</strong>：区间 I 上 ∀x，F′(x)=f(x)，称 F 为 f 在 I 上的原函数。
+【存在性定理】<strong>连续函数必有原函数</strong>（变上限积分 Φ(x)=∫ₐˣf(t)dt 就是其一——证明在第5章变限求导定理）。
+【补充结论（选择题）】含<strong>第一类间断点（跳跃）的函数在该点的邻域内不存在原函数</strong>（原函数必连续？不对——原函数可导必连续，若 f 有跳跃间断点而 F′=f，则 F′ 也有跳跃间断点，与"导函数无第一类间断"矛盾）；含第二类间断点则可能有原函数（例：f(x)=2x sin(1/x)−cos(1/x)（x≠0），f(0)=0，有跳跃？不——此 f 在 0 是振荡第二类间断，但 F(x)=x²sin(1/x)（F(0)=0）就是其原函数）。</p>
+<p><strong>D2 不定积分</strong>：∫f(x)dx=F(x)+C（全体原函数）。任意两个原函数相差常数。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 基本积分表</strong>：由基本导数表逐条反推（默写清单见《公式大全》04节）。特别强调容易错的四条：∫tanx dx=−ln|cosx|；∫cotx dx=ln|sinx|；∫secx dx=ln|secx+tanx|；∫dx/(a²+x²)=(1/a)arctan(x/a)。</p>
+<p><strong>T2 第一换元（凑微分）</strong>：∫f[φ(x)]φ′(x)dx=∫f(u)du（u=φ(x)）。【条件】只要求 φ 可微——本质是链式法则的逆。</p>
+<p><strong>T3 第二换元</strong>：∫f(x)dx=∫f[ψ(t)]ψ′(t)dt（x=ψ(t)）。【条件】ψ 单调可微、ψ′≠0，且反函数 t=ψ⁻¹(x) 存在——<strong>单调性保证换回变量时不出多值</strong>。三类三角代换的适用形状：√(a²−x²)、√(a²+x²)、√(x²−a²)。</p>
+<p><strong>T4 分部积分</strong>：∫u dv=uv−∫v du。【u 的选取口诀】"反对幂指三"从后往前选 u。<strong>循环型</strong>（∫eˣsinx、∫sin(lnx)）分部两次后移项解方程；<strong>降幂型</strong>（∫xⁿeˣ、∫xⁿlnx）逐次降低 u 的复杂度。</p>
+<p><strong>T5 有理函数积分定理</strong>：真分式可唯一分解为部分分式之和（分母在实数域上分解为一次因式与二次质因式），每一类对应基本积分模式。
+【要点】假分式先多项式除法；重因式 (x−a)^k 产生 k 项 A₁/(x−a)+…+A_k/(x−a)^k；定系数用赋值法+比较系数法联用最快。</p>
+<h2>三、985强度考题（6题）</h2>
+<p><strong>题1（凑微分+分部组合）</strong> 求 ∫ x eˣ/(1+x)² dx。
+【解】注意到 [eˣ/(1+x)]′ = eˣ/(1+x) − eˣ/(1+x)² = x eˣ/(1+x)²。
+故原式 = <strong>eˣ/(1+x)+C</strong>。∎
+（985信号：分子分母结构提示"某函数的导数"——把被积函数凑成 d[某式]。）</p>
+<p><strong>题2（第二换元·根式）</strong> 求 ∫ √((1−x)/(1+x)) dx。
+【解】令 x=cos t（0&lt;t&lt;π）：√((1−cost)/(1+cost))=tan(t/2)，dx=−sin t dt。
+原式=−∫tan(t/2)·sin t dt=−∫tan(t/2)·2sin(t/2)cos(t/2)dt=−2∫sin²(t/2)dt=−∫(1−cos t)dt=−t+sin t+C
+= <strong>−arccos x+√(1−x²)+C</strong>。∎</p>
+<p><strong>题3（分部循环型）</strong> 求 ∫ sin(ln x) dx。
+【解】分部两次：I=∫sin(lnx)dx = x sin(lnx) − ∫cos(lnx)dx = x sin(lnx) − x cos(lnx) − I。
+移项：<strong>I=(x/2)[sin(lnx)−cos(lnx)]+C</strong>。∎</p>
+<p><strong>题4（万能代换）</strong> 求 ∫ dx/(1+sinx+cosx)。
+【解】令 t=tan(x/2)：sinx=2t/(1+t²)，cosx=(1−t²)/(1+t²)，dx=2dt/(1+t²)。
+分母=1+2t/(1+t²)+(1−t²)/(1+t²)=2(1+t)/(1+t²)。
+原式=∫dt/(1+t)=ln|1+t|+C=<strong>ln|1+tan(x/2)|+C</strong>。∎
+（亦可用 1+cosx=2cos²(x/2) 凑半角更快——一题多解是985训练目标。）</p>
+<p><strong>题5（分部+换元混合·985强度）</strong> 求 ∫ arctanx/(x²(1+x²)) dx。
+【解】令 t=arctanx（x=tant，dx=sec²t dt，1+x²=sec²t，1/x²=cot²t）：
+原式=∫ t·cot²t dt=∫t(csc²t−1)dt=−tcott+∫cott dt−t²/2
+=−t·cott+ln|sint|−t²/2+C = <strong>−(arctanx)/x + ln|x/√(1+x²)| − (arctanx)²/2 + C</strong>。∎</p>
+<p><strong>题6（概念题·原函数存在性）</strong> 判断下列函数是否有原函数：①f(x)=|x|；②含跳跃间断点的函数（如符号函数 sgn x）。
+【答】①有，F(x)=x|x|/2（验证 F′=|x|——|x| 连续故有原函数，分段求导再拼）；②无——sgn x 有跳跃间断点，若 F′=sgn x，则导函数有第一类间断，违反达布定理（导函数的介值性）。∎
+（结论记忆：<strong>连续⇒有原函数；有跳跃间断⇒无原函数；振荡间断⇒可能有</strong>。）</p>
+<h2>四、本章必会证明/推导清单</h2>
+<p>① 由求导表反推积分表（任抽3条现场推）；② 循环型分部的移项解方程范式；③ 部分分式分解的定系数流程；④ 三类三角代换的选择依据与回代几何（辅助三角形）。</p>
+<hr />
+<h1>第5章 定积分</h1>
+<h2>一、定义精讲</h2>
+<p><strong>D1 定积分定义</strong>：∫ₐᵇf(x)dx = lim_{λ→0} Σᵢ f(ξᵢ)Δxᵢ（λ=max Δxᵢ；分割任意、ξᵢ 任意取，极限存在且相同才可积）。
+【要点】①定义与分割、取点方式无关——<strong>数列和式极限题的原理</strong>：取等分+右端点即 Σf(a+i(b−a)/n)·(b−a)/n；②<strong>导数定义是"差商极限"，积分定义是"和式极限"</strong>——一元微积分两大极限模型；③∫ₐᵇ=−∫ᵇₐ，∫ₐₐ=0。</p>
+<p><strong>D2 变上限积分函数</strong>：Φ(x)=∫ₐˣ f(t)dt。【要点】f 可积则 Φ 连续；f 连续则 Φ 可导（见T3）——<strong>变限积分是连接积分学与微分学的桥梁</strong>，也是"抽象函数+极限+方程"综合题的枢纽。</p>
+<p><strong>D3 反常积分</strong>：
+- 无穷限：∫ₐ^∞f=lim_{t→+∞}∫ₐᵗf；
+- 瑕积分：f 在 (a,b] 连续、a 为瑕点：∫ₐᵇf=lim_{ε→0⁺}∫_{a+ε}ᵇ f。
+【要点】反常积分必须<strong>先判敛再计算</strong>；瑕点藏在区间内部（如 ∫₀²dx/x² 的 x=0? 内部x=1无问题、x=0处）要拆开分别判敛——有一个发散即发散。</p>
+<h2>二、定理精讲</h2>
+<p><strong>T1 可积的充分条件</strong>：①[a,b] 连续；②[a,b] 单调；③[a,b] 有界且只有有限个间断点 ⇒ 可积。
+<strong>T2 定积分性质</strong>：线性；区间可加；<strong>保序性</strong>（f≤g ⇒ ∫f≤∫g）；绝对值性质 |∫f|≤∫|f|；估值定理 m(b−a)≤∫ₐᵇf≤M(b−a)。
+<strong>T3 积分中值定理及推广</strong>：f 连续 ⇒ ∃ξ∈[a,b]：∫ₐᵇf=f(ξ)(b−a)；推广（f 连续、g≥0 可积）：∫ₐᵇfg=f(ξ)∫ₐᵇg（证明见第3章题4）。
+<strong>T4 变限积分求导定理（微积分基本定理）</strong>：f 在 [a,b] 连续 ⇒ Φ(x)=∫ₐˣf(t)dt 在 [a,b] 可导且 Φ′(x)=f(x)。
+【推论1】连续函数必有原函数。【推论2】链式：d/dx ∫_{φ(x)}^{ψ(x)} f(t)dt = f(ψ)ψ′−f(φ)φ′。【推论3】被积函数含 x 时<strong>先拆出再求导</strong>：∫₀ˣ(x−t)f(t)dt = x∫₀ˣf −∫₀ˣtf。
+<strong>T5 牛顿–莱布尼茨公式</strong>：f 在 [a,b] 连续，F′=f ⇒ ∫ₐᵇf=F(b)−F(a)。【条件】f 可积+F 是原函数即可（f 有跳跃间断时 N-L 对分段原函数仍可用，但要保证 F 连续）。
+<strong>T6 换元与分部（定积分版）</strong>：换元必换限；分部时已积出的部分带限。
+<strong>T7 对称性与周期性公式（证明思路要会）</strong>：
+- 奇偶：∫₋ₐᵃf=0（奇）/2∫₀ᵃ（偶）——<strong>拆区间+换元证明</strong>；
+- ∫₀^π xf(sinx)dx=(π/2)∫₀^π f(sinx)dx【区间再现 x→π−x 证明】；
+- 周期：∫ₐ^{a+T}=∫₀^T（平移证明）；
+- 华里士公式（递推证明）。</p>
+<p><strong>T8 反常积分敛散判别</strong>：
+- 无穷限：比较判别法——0<f≤C/xᵖ，p>1 收敛；f≥C/xᵖ，p≤1 发散；极限形式 lim xᵖf=c（0&lt;c&lt;∞）同 p 判。
+- 瑕积分：∫₀¹ 1/xᵖ 型 p&lt;1 收敛、p≥1 发散；lim xᵖf=c（0&lt;c&lt;∞）同判。
+【记忆】"<strong>无穷限看 p&gt;1，瑕点看 p&lt;1</strong>"（方向相反）。</p>
+<h2>三、985强度考题（7题）</h2>
+<p><strong>题1（定积分定义·标准识别）</strong> 求 lim_{n→∞} Σ_{k=1}^n n/(n²+k²)。
+【解】=(1/n)Σ 1/(1+(k/n)²) → ∫₀¹dx/(1+x²)=<strong>π/4</strong>。∎</p>
+<p><strong>题2（区间再现·对称结构·985经典）</strong> 求 I=∫₀^π x·sinx/(1+cos²x) dx。
+【解】令 x=π−u：I=∫₀^π (π−u)sinu/(1+cos²u)du。两式相加：
+2I=π∫₀^π sinx/(1+cos²x)dx = π[−arctan(cosx)]₀^π = π(π/4+π/4)=π²/2 → <strong>I=π²/4</strong>。∎
+（识别信号：f(x) 与 f(π−x) 中难处理部分相同，且出现 x 乘"对称函数"。）</p>
+<p><strong>题3（变限积分+泰勒/洛必达）</strong> 设 g(t)=eᵗ−1，F(x)=∫₀ˣ(x−t)g(t)dt。求 lim_{x→0}F(x)/x³。
+【解】F=x∫₀ˣg(t)dt−∫₀ˣtg(t)dt。g(t)~t，F=x·x²/2−x³/3+o(x³)=x³/6+o(x³)。
+极限=<strong>1/6</strong>。（亦可洛必达三次：F′=∫₀ˣg=x²/2+o(x²)，F′′=g(x)~x，F′″→1。）</p>
+<p><strong>题4（含绝对值/分段）</strong> 求 ∫₀^{2π}√(1−sin²x)dx。
+【解】√(1−sin²x)=|cosx|，分段：∫₀^{2π}|cosx|dx=4∫₀^{π/2}cosx dx=<strong>4</strong>。∎
+（|内层|出现=必分段；先去绝对值再积。）</p>
+<p><strong>题5（反常积分判敛·含参分类）</strong> 讨论 p 取何值时 ∫ₑ^∞ dx/(x(lnx)ᵖ) 收敛。
+【解】令 u=lnx，dx/x=du：积分=∫₁^∞ du/uᵖ。p&gt;1 收敛（此时=1/(p−1)），p≤1 发散。∎
+（配套结论：∫₂^∞ dx/(xᵖlnx)：p&gt;1 时收敛（被 1/x^{(p+1)/2} 压制），p=1 时同上发散，p&lt;1 发散。）</p>
+<p><strong>题6（摆线几何全家桶·985综合题）</strong> 摆线 x=a(t−sint)，y=a(1−cost)（0≤t≤2π）。求一拱与 x 轴围成图形的面积、拱长、绕 x 轴旋转体体积。
+【解】①面积 A=∫ydx=∫₀^{2π}a(1−cost)·a(1−cost)dt=a²∫(1−2cost+cos²t)dt=a²(2π+π)=<strong>3πa²</strong>。
+②弧长 s=∫√(x′²+y′²)dt=∫₀^{2π}a√(2−2cost)dt=2a∫₀^{2π}sin(t/2)dt=2a·4=<strong>8a</strong>。
+③体积 V=π∫y²dx=πa³∫₀^{2π}(1−cost)³dt=πa³(2π+3π)=<strong>5π²a³</strong>。∎
+（∫₀^{2π}cos t dt=0、∫cos²=π、∫cos³=0——三角积分三大结论直接调用。）</p>
+<p><strong>题7（综合·积分不等式·985强度）</strong> 设 f 在 [0,1] 连续且单调递减。证明：(1/n)Σ_{k=1}^n f(k/n) ≤ ∫₀¹f(x)dx。
+【证】f 递减 ⇒ 在 [(k−1)/n, k/n] 上 f(x)≥f(k/n)，积分：∫_{(k−1)/n}^{k/n}f(x)dx ≥ f(k/n)/n。
+对 k 求和即得 ∫₀¹f ≥ (1/n)Σf(k/n)。∎
+（这类"积分与黎曼和比较"是数一证明题小众高频点：核心=单调性给出逐段不等式。）</p>
+<h2>四、本章必会证明/推导清单</h2>
+<p>① 变限求导定理的证明（用连续性：|∫_{x}^{x+h}f|≤M|h|→0）；② N-L 公式推导（Φ(b)−Φ(a) 与 F−Φ 都是 f 的原函数→相差常数C，代 a 定 C）；③ 奇偶/周期公式证明（拆区间+换元）；④ 华里士递推；⑤ 积分与黎曼和的比较不等式（题7模板）。</p>
+<hr />
+<h2>本册使用说明</h2>
+<ol>
+<li><strong>第一遍</strong>：只读"定义精讲+定理精讲"，每条定理合书复述表述与条件；</li>
+<li><strong>第二遍</strong>：做考题，先遮详解；证明题独立写满过程再对；</li>
+<li><strong>第三遍</strong>（考前）：只看每章"必会证明清单"，逐条默证；</li>
+<li>下一批预告：<strong>高数下</strong>（多元微分、重积分、曲线曲面积分、级数、微分方程）——说"继续"交付。</li>
+</ol></div></body></html>

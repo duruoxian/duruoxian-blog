@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408操作系统精讲_文件与IO · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 操作系统精讲 · 文件管理与I/O（索引计算 + 调度演算）· 系列收官</h1>
+<blockquote>
+<p>OS精讲第4批（收官）。文件管理的计算（<strong>UNIX混合索引、FAT体积、位示图换算</strong>）与I/O的演算（<strong>磁盘调度、缓冲公式</strong>）是408标准题型，本册全部给全过程。</p>
+</blockquote>
+<hr />
+<h1>第4章 文件管理</h1>
+<h2>一、文件的逻辑结构与物理结构精讲</h2>
+<p><strong>L1 逻辑结构</strong>：顺序文件（批量存取高效、随机查找慢）、索引文件（变长记录+索引表）、索引顺序文件（分块索引，查找效率 log 型提升）。</p>
+<p><strong>L2 物理结构（文件在磁盘上怎么放）</strong>：
+| 结构 | 原理 | 随机存取 | 扩展 | 碎片 |
+|---|---|---|---|---|
+| 连续分配 | 起始块+长度 | <strong>O(1) 直接算</strong> | 难（需搬移） | 外部碎片 |
+| 隐式链接 | 每块含下一块指针 | O(n) 逐块读 | 易 | 无（块级） |
+| <strong>显式链接FAT</strong> | <strong>FAT表常驻内存</strong>，表项=下一块号 | <strong>O(1)查内存表</strong> | 易 | 无 |
+| 索引分配 | 索引块集中放块号 | O(1)（查索引块） | 大文件需多级/链接索引块 | 索引块开销 |</p>
+<p><strong>FAT体积计算模板</strong>：磁盘容量÷块大小=块数 n → FAT表项 ⌈log₂n⌉ 位（标记下一块号）→ FAT总大小 = n×表项位数。</p>
+<p><strong>考题1（FAT体积）</strong> 磁盘容量512GB，块大小4KB。求FAT表项最少位数与FAT总大小。
+【解】块数=512GB/4KB=2³⁷/2¹²=2²⁵=33,554,432个 → 表项至少 <strong>25位</strong>（标记下一块号）；实际按字节对齐常取4B。
+FAT总大小=2²⁵×25bit≈100MB（取4B/项则为 <strong>128MB</strong>）。
+【要点】FAT开机调入内存常驻——<strong>查FAT不需要额外访存磁盘</strong>，这是显式链接相对隐式链接的最大优势。∎</p>
+<p><strong>L3 索引结点（inode）与UNIX混合索引</strong>：
+FCB瘦身：只留文件名+inode号 → inode存元数据+磁盘地址块。<strong>UNIX混合索引</strong>：直接地址（如10/12个）+一次间接+二次间接+三次间接。
+【推导】块4KB、地址项4B → 每个间接块装 4096/4=1024 个地址。</p>
+<p><strong>考题2（混合索引·最大文件与访存次数）</strong> inode含10个直接地址块、一次/二次/三次间接各1个。求最大文件大小；访问文件偏移 X=26MB+520B 处的字节需要几次访存磁盘？
+【解】最大文件 = 10×4KB + 1024×4KB + 1024²×4KB + 1024³×4KB
+= <strong>40KB + 4MB + 4GB + 4TB</strong>。
+偏移X：逻辑块号 = X/4KB = 6656 + 0.127 → 块号6656（块内偏移520）。
+块号6656 ≥ 10+1024=1034 → <strong>二次间接</strong>：二级索引号 = (6656−1034)÷1024 = <strong>5</strong>，二级内偏移 = (6656−1034) mod 1024 = <strong>244</strong>。
+访存：读二次间接块 → 读二级指向的间接块 → 读数据块 = <strong>3次访存磁盘</strong>（inode已调入内存）。∎
+（访存次数口诀：直接0次额外、一次间接+1、二次间接+2、三次间接+3——<strong>前提inode已在内存</strong>。）</p>
+<h2>二、目录与链接</h2>
+<p><strong>D1 FCB与索引结点</strong>：目录=FCB的有序集合；inode瘦身使目录项变小→检索更快。
+<strong>D2 硬链接 vs 软（符号）链接</strong>：
+- <strong>硬链接</strong>：多个目录项指向<strong>同一inode</strong>，引用计数+1；删除原文件→计数−1，<strong>减到0才真删</strong>；改名/移动后硬链接依然有效；
+- <strong>软链接</strong>：独立的新文件，内容是<strong>路径字符串</strong>；原文件删除/改名 → 软链接<strong>悬空失效</strong>；可跨文件系统。</p>
+<p><strong>考题3（链接辨析）</strong> 文件F建立硬链接H和软链接S后删除F。访问H、S各如何？两个链接各占多少inode？
+【解】H：inode引用计数从2→1，<strong>访问H仍正常</strong>（数据未删）；S：指向的路径不存在 → <strong>访问S失效</strong>。H与F共享inode（不占新inode）；<strong>S占独立inode</strong>（存路径字符串）。∎</p>
+<h2>三、位示图（盘块管理计算模板）</h2>
+<p><strong>B1 换算公式（0基编号）</strong>：盘块号 b → 字号 ⌊b/字长⌋，位号 b mod 字长；反向：盘块号 = 字号×字长+位号。
+<strong>考题4</strong> 位示图每字32位。①盘块号1000在哪个字号哪一位？②字号28、位17对应盘块号？
+【解】①1000÷32=31余8 → <strong>字31位8</strong>。②28×32+17=<strong>913</strong>。∎
+（看清题目是"从0编号"还是"从1编号"——从1编号时整体±1，408高频陷阱。）</p>
+<hr />
+<h1>第5章 输入/输出管理</h1>
+<h2>一、I/O软件层次（自上而下）</h2>
+<p>用户层I/O软件 → <strong>设备独立性软件</strong>（命名映射、保护、缓冲、分配）→ <strong>设备驱动程序</strong>（把抽象命令转为设备操作）→ <strong>中断处理程序</strong> → 硬件。
+【要点】驱动程序之上是"与硬件无关"的；<strong>read()系统调用产生两次数据拷贝</strong>（设备→内核缓冲→用户区）。</p>
+<h2>二、I/O控制方式（CPU介入程度递减）</h2>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>数据流</th>
+<th>CPU介入</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>程序直接控制</td>
+<td>外设→CPU→内存</td>
+<td><strong>全程轮询忙等</strong></td>
+<td>早期低速</td>
+</tr>
+<tr>
+<td>中断</td>
+<td>每个字经CPU</td>
+<td><strong>每字中断一次</strong></td>
+<td>键盘等低速</td>
+</tr>
+<tr>
+<td>DMA</td>
+<td>外设↔内存（块级直达）</td>
+<td>仅预处理/后处理（块结束中断）</td>
+<td>磁盘等块设备</td>
+</tr>
+<tr>
+<td>通道</td>
+<td>一组数据块，通道程序</td>
+<td>仅启动/结束</td>
+<td>大型机</td>
+</tr>
+<tr>
+<td>【要点】DMA结束时<strong>以中断通知CPU</strong>做后处理；通道是"弱CPU"，有自己的指令系统。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>三、缓冲区（公式推导）</h2>
+<p><strong>B1 单缓冲</strong>：每块耗时 <strong>max(C,T)+M</strong>。
+【推导】设备输入缓冲(T)与CPU从缓冲搬用户区并处理(M+C)：输入块i+1可与"搬移+处理块i"并行 → 稳态周期=max(T, M+C)+M = max(C,T)+M。∎
+<strong>B2 双缓冲</strong>：每块耗时 <strong>max(C+M, T)</strong>。
+【推导】两个缓冲交替，设备输入下一块可与"搬移+处理当前块"完全并行 → 周期=max(T, M+C)。
+<strong>B3 循环缓冲n个</strong>：类比生产者消费者；<strong>缓冲池</strong>=系统公用（输入/输出/空闲队列）。</p>
+<p><strong>考题5（缓冲计算）</strong> 块输入T=100μs，缓冲→用户区搬移M=10μs，处理C=50μs。求单缓冲、双缓冲下处理4块的总时间。
+【解】单缓冲：首块 T+M+C=160μs；后续每块 max(C,T)+M=110μs → 总=160+3×110=<strong>490μs</strong>。
+双缓冲：首块 T+M+C=160μs；后续每块 max(C+M,T)=max(60,100)=100μs → 总=160+3×100=<strong>460μs</strong>。∎
+（若C&gt;T很多（处理是瓶颈），双缓冲收益消失——瓶颈转移给了CPU。）</p>
+<h2>四、SPOOLing（假脱机）</h2>
+<p><strong>结构</strong>：磁盘上的<strong>输入井/输出井</strong>+输入/输出缓冲区+预输入程序/井管理程序/缓输出程序。
+<strong>意义</strong>：用共享设备（磁盘井）模拟独占设备（打印机）→ <strong>把独占设备改造为共享设备</strong>；用户进程的打印请求排队进输出井，缓输出程序依次打印。
+【要点】SPOOLing必须<strong>有磁盘</strong>作井；提高了设备利用率与进程推进速度。</p>
+<h2>五、磁盘（调度演算）</h2>
+<p><strong>K1 磁盘时间</strong> = <strong>寻道时间 + 旋转延迟（平均半圈）+ 传输时间</strong>。
+<strong>考题6</strong> 转速7200rpm，每道63扇区（512B/扇区），寻道8ms。读一个扇区总时间？
+【解】旋转一圈=60/7200=8.33ms → 平均旋转延迟=4.17ms；传输=8.33/63≈0.13ms。
+总=8+4.17+0.13≈<strong>12.3ms</strong>。∎</p>
+<p><strong>K2 磁盘调度演算</strong>：请求柱号 98,183,37,122,14,124,65,67，磁头在53。
+| 算法 | 服务序列 | 总移动道数 |
+|---|---|---|
+| FCFS | 98,183,37,122,14,124,65,67 | 45+85+146+85+108+110+59+2=<strong>640</strong> |
+| SSTF | 65,67,37,14,98,122,124,183 | <strong>236</strong> |
+| SCAN（向大，扫到199端折返） | 65,67,98,122,124,183,<strong>199</strong>,14? ——折返后14,37 | (199−53)+(199−14)=<strong>331</strong> |
+| LOOK（向大，到最远请求183即折返） | 65,67,98,122,124,183,37,14 | (183−53)+(183−14)=<strong>299</strong> |
+【辨析】SCAN扫到<strong>物理端点</strong>；LOOK到<strong>最远请求</strong>即折返；C-SCAN单向服务+快速返回起点（对称扫描，等待时间更均匀）。
+【调度目标】寻道时间通常占比最大——<strong>减少总寻道距离是调度核心</strong>；SSTF可能饥饿（远端请求无限延后），SCAN/C-SCAN无饥饿。</p>
+<h2>六、本章考题补遗（2题）</h2>
+<p><strong>题7（设备独立性）</strong> 什么是设备独立性？带来什么好处？
+【答】应用程序独立于具体物理设备（用逻辑设备名申请）。好处：①设备分配灵活（可换同类设备）；②易于实现I/O重定向；③提高系统可靠性与适应性。∎</p>
+<p><strong>题8（SSD与传统磁盘）</strong> 固态硬盘（闪存）为什么没有寻道与旋转延迟？磨损均衡解决什么问题？
+【答】闪存是纯电子存储，无机械运动 → 随机访问快（无寻道/旋转）。但闪存块<strong>擦写次数有限</strong>且必须<strong>整块擦除</strong>→ 磨损均衡算法把擦写摊到所有块上，延长寿命；SSD上"随机读写"反而优于顺序覆盖写（无需先擦除的优化由FTL层处理）。∎
+（SSD特性是近年408新考点：<strong>读快写慢于读、写前擦除、磨损均衡</strong>。）</p>
+<h2>七、本章必会清单</h2>
+<ol>
+<li>FAT表项位数=⌈log₂块数⌉、FAT常驻内存免访盘；</li>
+<li>UNIX混合索引：最大文件=直接+各级间接之和；访存次数=额外间接层数（inode在内存前提）；</li>
+<li>硬链接共享inode计数减到0才删；软链接存路径、原删即失效；</li>
+<li>位示图换算（0基/1基陷阱）；</li>
+<li>磁盘时间三段；7200rpm平均旋转延迟≈4.17ms；</li>
+<li>磁盘调度四算法演算（FCFS 640/SSTF 236/SCAN 331/LOOK 299）与饥饿特性；</li>
+<li>缓冲公式：单缓冲 max(C,T)+M、双缓冲 max(C+M,T)、n块总时=首块+（n−1）×稳态；</li>
+<li>四种I/O控制方式的CPU介入程度阶梯；SPOOLing用磁盘井改造独占设备。</li>
+</ol>
+<hr />
+<h2>✅ 操作系统精讲系列收官（4册）</h2>
+<blockquote>
+<p>概述与进程线程（9页）→ 同步互斥与死锁（10页）→ 内存管理（9页）→ 文件与I/O（本册）。合计<strong>37页、19道985强度演算题、31条必会清单</strong>。
+至此<strong>四大科目精讲层全部建成</strong>：数学4册+数据结构4册+计网4册+OS4册=<strong>16册精讲</strong>，全部"原理讲到为什么+考题验算"。
+资料宇宙最终形态（84+册PDF）：每科都是"精讲层（懂）→ 题集/模拟（练）→ 背诵手册/陷阱清单（背）"三层闭合。剩下的，只有你的16个月。</p>
+</blockquote></div></body></html>

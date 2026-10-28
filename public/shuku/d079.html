@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408选择题题库_计算机网络 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 选择题题库 · 计算机网络（80题分章带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成。计网在 408 选择题里约占 17 分（8-9 题），大题爱考"子网划分、TCP 握手、拥塞窗口、滑动窗口"——本册按章节刷透。
+难度：★基础 ★★中等 ★★★难点。<strong>先遮住答案做</strong>；详解重点讲"错误选项为什么错"。
+配合《计算机网络_知识点与难点》《408计网精讲》四册使用；题号 NET+序号。</p>
+</blockquote>
+<h2>§1 体系结构与物理层（NET1–NET18）</h2>
+<p><strong>NET1.</strong>★ 五层体系结构自上而下：
+A. 物理→链路→网络→传输→应用 B. 应用→传输→网络→链路→物理 C. 应用→物理→传输 D. 传输→应用→网络</p>
+<blockquote>
+<p><strong>B</strong>。OSI 七层的精简版（会话/表示并入应用）。发送端自上而下封装，接收端反之。</p>
+</blockquote>
+<p><strong>NET2.</strong>★ 网络协议三要素：
+A. 语法、语义、同步（时序） B. 硬件、软件、固件 C. 速度、安全、稳定 D. IP、端口、MAC</p>
+<blockquote>
+<p><strong>A</strong>。语法=格式结构；语义=动作含义；同步=事件实现顺序。</p>
+</blockquote>
+<p><strong>NET3.</strong>★ 各层传输的数据单元（PDU）自物理层向上：
+A. 比特、帧、分组、报文段、报文 B. 帧、比特 C. 报文、报文段 D. 包、段、位</p>
+<blockquote>
+<p><strong>A</strong>。物理层比特、链路层帧、网络层分组（IP数据报）、传输层报文段、应用层报文/消息。</p>
+</blockquote>
+<p><strong>NET4.</strong>★ 奈奎斯特定理（无噪声）极限数据率：
+A. Wlog₂(1+S/N) B. 2Wlog₂V（V为码元离散电平数） C. W/V D. 2W/V</p>
+<blockquote>
+<p><strong>B</strong>。A 是香农公式（有噪声）。</p>
+</blockquote>
+<p><strong>NET5.</strong>★★ 带宽 4kHz，码元 16 种（离散电平），无噪声极限速率：
+A. 32kb/s B. 16kb/s C. 8kb/s D. 64kb/s</p>
+<blockquote>
+<p><strong>A</strong>。2×4000×log₂16 = 2×4000×4 = 32000 b/s。
+B 忘了乘 2；C 只算一个码元。</p>
+</blockquote>
+<p><strong>NET6.</strong>★★ 信噪比 30dB，对应的 S/N：
+A. 1000 B. 30 C. 100 D. 10</p>
+<blockquote>
+<p><strong>A</strong>。dB=10lg(S/N) ⇒ S/N=10^{30/10}=1000。</p>
+</blockquote>
+<p><strong>NET7.</strong>★ 波特率与比特率的关系：
+A. 相等 B. 比特率=波特率×log₂（每码元比特数） C. 无关 D. 波特率恒更大</p>
+<blockquote>
+<p><strong>B</strong>。1 码元携带 log₂V 比特。</p>
+</blockquote>
+<p><strong>NET8.</strong>★ 曼彻斯特编码（以太网 10Mb/s）的编码效率：
+A. 100% B. 50% C. 80% D. 25%</p>
+<blockquote>
+<p><strong>B</strong>。每个码元中间必跳变一次（同时当时钟），波特率是比特率 2 倍。</p>
+</blockquote>
+<p><strong>NET9.</strong>★ 物理层接口四特性：
+A. 机械、电气、功能、规程 B. 软硬件 C. 语法语义同步 D. 速率距离</p>
+<blockquote>
+<p><strong>A</strong>。D 是协议三要素的另一种表述（应用层概念）。</p>
+</blockquote>
+<p><strong>NET10.</strong>★ 中继器/集线器工作在：
+A. 物理层 B. 链路层 C. 网络层 D. 传输层</p>
+<blockquote>
+<p><strong>A</strong>。仅放大转发信号；网桥/交换机在 B 层（按 MAC 转发），路由器在 C 层。</p>
+</blockquote>
+<p><strong>NET11.</strong>★ 时延四部分：
+A. 发送、传播、处理、排队 B. 上传下载 C. 无线有线 D. 无排队时延</p>
+<blockquote>
+<p><strong>A</strong>。处理与排队发生在路由器，发送与传播发生在链路。</p>
+</blockquote>
+<p><strong>NET12.</strong>★★ 100Mb/s 链路发送 1000B 分组，发送时延：
+A. 80μs B. 8μs C. 80ms D. 100μs</p>
+<blockquote>
+<p><strong>A</strong>。1000×8/10⁸ = 8×10⁻⁵ s = 80μs（1Mb/s 下才是 8ms）。</p>
+</blockquote>
+<p><strong>NET13.</strong>★★ 链路速率 1Mb/s、距离 1000km、传播速率 2×10⁸m/s。发送 1000B 分组，总时延（忽略处理排队）：
+A. 13ms B. 8ms C. 5ms D. 21ms</p>
+<blockquote>
+<p><strong>A</strong>。发送 8ms + 传播 10⁶/(2×10⁸)=5ms ⇒ 13ms。"速率决定发送时延，距离决定传播时延"。</p>
+</blockquote>
+<p><strong>NET14.</strong>★ 静态信道划分技术<strong>不包括</strong>：
+A. FDM B. TDM C. WDM D. CSMA/CD</p>
+<blockquote>
+<p><strong>D</strong>。CSMA/CD 是动态随机接入（争用）协议。</p>
+</blockquote>
+<p><strong>NET15.</strong>★ CDMA 正交码片的核心性质：
+A. 不同站码片序列规格化内积为 0 B. 完全相同 C. 长度为 1 D. 加密</p>
+<blockquote>
+<p><strong>A</strong>。叠加信号用内积分离出各站比特。</p>
+</blockquote>
+<p><strong>NET16.</strong>★ 电路交换的特点：
+A. 通信前建立专用通路、实时性强、线路利用率低 B. 存储转发 C. 适合突发数据 D. 无需建立连接</p>
+<blockquote>
+<p><strong>A</strong>。B、C 恰是分组交换的特征。</p>
+</blockquote>
+<p><strong>NET17.</strong>★ 报文交换与分组交换的主要区别：
+A. 分组有上限长度、按包存储转发 B. 报文更快 C. 无区别 D. 分组不用缓存</p>
+<blockquote>
+<p><strong>A</strong>。分组=切分的报文，排队时延小、利于重传与流水。</p>
+</blockquote>
+<p><strong>NET18.</strong>★★ 电路交换、报文交换、分组交换中，"持续大量实时数据"最适合：
+A. 电路交换 B. 报文 C. 分组 D. 都一样</p>
+<blockquote>
+<p><strong>A</strong>。独占通路无排队抖动；突发小数据适合分组。</p>
+</blockquote>
+<h2>§2 数据链路层（NET19–NET34）</h2>
+<p><strong>NET19.</strong>★ 解决"帧定界中数据出现控制字符"问题的方法：
+A. 字节填充（转义字符） B. 删除 C. 报错 D. 不定界</p>
+<blockquote>
+<p><strong>A</strong>。SOH/EOT 类控制字符前插入 ESC，接收端剥掉。比特填充（01111110 帧界）同理：连续 5 个 1 后插 0。</p>
+</blockquote>
+<p><strong>NET20.</strong>★★ CRC 校验：信息位 101001，生成多项式 G=1101，FCS：
+A. 001 B. 110 C. 000 D. 111</p>
+<blockquote>
+<p><strong>A</strong>。101001000 ÷ 1101（模 2 除）余数 <strong>001</strong>，发送 101001001。步骤：逐位上商，异或除数，最后余 3 位。</p>
+</blockquote>
+<p><strong>NET21.</strong>★★ CRC 的检错能力：
+A. 可纠错 B. 只检不纠（配合重传机制） C. 完全可靠 D. 检不出连续错</p>
+<blockquote>
+<p><strong>B</strong>。检错码本身无纠错；链路层靠"丢弃+重传"补可靠性（或不重传交上层）。</p>
+</blockquote>
+<p><strong>NET22.</strong>★★ 以太网 CSMA/CD 争用期 51.2μs、速率 10Mb/s，最小帧长：
+A. 64B B. 128B C. 32B D. 1500B</p>
+<blockquote>
+<p><strong>A</strong>。10⁷×51.2×10⁻⁶ = 512 bit = 64B。发不完 64B 就可能检测不到碰撞。</p>
+</blockquote>
+<p><strong>NET23.</strong>★★ CSMA/CD 检测到碰撞后：
+A. 立即重发 B. 二进制指数退避：第 i 次碰撞后从 {0..2^{min(i,10)}−1} 随机选 k，等 k×2τ C. 固定等 1s D. 放弃</p>
+<blockquote>
+<p><strong>B</strong>。随机化错开重发；16 次失败放弃并报告。</p>
+</blockquote>
+<p><strong>NET24.</strong>★ 以太网 MAC 地址长度：
+A. 32 位 B. 48 位 C. 64 位 D. 16 位</p>
+<blockquote>
+<p><strong>B</strong>。6 字节，前 3 字节厂商标识（OUI）。32 位是 IPv4 地址。</p>
+</blockquote>
+<p><strong>NET25.</strong>★★ 以太网 V2 帧中数据字段长度范围：
+A. 46~1500 B B. 0~1500 C. 64~1518 D. 任意</p>
+<blockquote>
+<p><strong>A</strong>。不足 46B 需填充；1500 是 MTU。帧总长 64~1518B。</p>
+</blockquote>
+<p><strong>NET26.</strong>★ 网桥/以太网交换机的自学习依据：
+A. 源 MAC 地址登记进转发表（帧进入的端口） B. 目的 MAC C. IP 地址 D. 端口号</p>
+<blockquote>
+<p><strong>A</strong>。源地址=发信人位置；转发时才查目的地址。</p>
+</blockquote>
+<p><strong>NET27.</strong>★★ 交换机与集线器的本质区别：
+A. 交换机按 MAC 转发、各端口独享带宽、隔离冲突域 B. 交换机更便宜 C. 无区别 D. 集线器更智能</p>
+<blockquote>
+<p><strong>A</strong>。集线器=物理层广播总线，共享带宽。两者都<strong>不隔离广播域</strong>（VLAN 才隔离）。</p>
+</blockquote>
+<p><strong>NET28.</strong>★★ VLAN 的作用：
+A. 在交换机上划分广播域（逻辑隔离） B. 提高带宽 C. 加密 D. 路由</p>
+<blockquote>
+<p><strong>A</strong>。802.1Q 在帧中插入 4B 标签；VLAN 间通信需三层设备。</p>
+</blockquote>
+<p><strong>NET29.</strong>★ PPP 协议不使用序号和确认的原因：
+A. 数据信息部分误码率低，可靠性交上层 B. 太慢 C. 不需要 D. 硬件不支持</p>
+<blockquote>
+<p><strong>A</strong>。PPP 用于点对点直连，仅做差错检测丢弃坏帧。</p>
+</blockquote>
+<p><strong>NET30.</strong>★ PPP 协议的组成：
+A. 封装 framing、LCP（链路控制）、NCP（网络控制） B. TCP+IP C. MAC+LLC D. ARP+RARP</p>
+<blockquote>
+<p><strong>A</strong>。LCP 建立配置链路，NCP（如 IPCP）协商网络层参数。</p>
+</blockquote>
+<p><strong>NET31.</strong>★★ 停止-等待协议信道利用率公式（Td 为发送时延，RTT 为往返，Ta 为确认发送时延）：
+A. U = Td/(Td+RTT+Ta) B. U = RTT/Td C. U = Td/RTT D. 恒为 1</p>
+<blockquote>
+<p><strong>A</strong>。一个周期 = 发送+传播往返+确认；Td 占比即利用率。</p>
+</blockquote>
+<p><strong>NET32.</strong>★★ 停等协议中 Td=1ms、RTT=20ms、Ta 忽略，利用率：
+A. 4.76% B. 50% C. 95% D. 100%</p>
+<blockquote>
+<p><strong>A</strong>。U=1/(1+20)=4.76%。长肥管道（RTT 大）利用率极低 ⇒ 需要流水线式滑动窗口。</p>
+</blockquote>
+<p><strong>NET33.</strong>★★ GBN（回退 N）发送窗口上限：
+A. 2ⁿ−1 B. 2ⁿ C. 2^{n−1} D. 无限制</p>
+<blockquote>
+<p><strong>A</strong>。SR 是 2^{n−1}（两窗口错开防旧帧误认）；GBN 接收窗口恒为 1。</p>
+</blockquote>
+<p><strong>NET34.</strong>★★ SR（选择重传）与 GBN 的关键区别：
+A. SR 只重传真正出错的帧（接收窗口&gt;1 缓存乱序帧） B. SR 更简单 C. GBN 更快 D. 无区别</p>
+<blockquote>
+<p><strong>A</strong>。GBN 出错就把错帧之后全部重发。</p>
+</blockquote>
+<h2>§3 网络层（NET35–NET54）</h2>
+<p><strong>NET35.</strong>★ IP 地址 128.11.3.31 属于：
+A. A 类 B. B 类 C. C 类 D. D 类</p>
+<blockquote>
+<p><strong>B</strong>。首字节 128~191 是 B 类（10 开头）。A：1~126；C：192~223。</p>
+</blockquote>
+<p><strong>NET36.</strong>★ 下列是私有地址的：
+A. 172.16.1.1 B. 172.32.1.1 C. 11.0.0.1 D. 169.254.1.1</p>
+<blockquote>
+<p><strong>A</strong>。私有段：10/8、172.16~172.31（/12）、192.168/16。172.32 已出 /12 范围。
+D 是链路本地自动配置地址。</p>
+</blockquote>
+<p><strong>NET37.</strong>★★ /26 掩码的子网中每个可用主机数：
+A. 62 B. 64 C. 126 D. 30</p>
+<blockquote>
+<p><strong>A</strong>。主机位 6 位：2⁶−2 = 62（去掉网络地址与广播地址）。</p>
+</blockquote>
+<p><strong>NET38.</strong>★★ 192.168.1.0/26 的第 2 个子网（192.168.1.64/26）的可用地址范围：
+A. 192.168.1.65~126 B. 64~127 全部 C. 65~127 D. 64~126</p>
+<blockquote>
+<p><strong>A</strong>。64 是网络地址、127 是广播地址，可用 65~126 共 62 个。</p>
+</blockquote>
+<p><strong>NET39.</strong>★★ 要划分至少 200 个可用主机地址的子网，主机位最少：
+A. 8 B. 7 C. 6 D. 9</p>
+<blockquote>
+<p><strong>A</strong>。2⁸−2=254≥200；2⁷−2=126 不够 ⇒ 8 位。</p>
+</blockquote>
+<p><strong>NET40.</strong>★★ 路由器查表转发遵循：
+A. 最长前缀匹配 B. 先到先得 C. 最短掩码 D. 随机</p>
+<blockquote>
+<p><strong>A</strong>。多表项都能匹配时选前缀最具体的。</p>
+</blockquote>
+<p><strong>NET41.</strong>★ ARP 协议的功能：
+A. IP 地址→MAC 地址 B. MAC→IP C. 域名→IP D. 端口→进程</p>
+<blockquote>
+<p><strong>A</strong>。B 是 RARP 的历史任务（现在由 DHCP 承担）；C 是 DNS；D 不存在。</p>
+</blockquote>
+<p><strong>NET42.</strong>★★ 主机要发给<strong>不同网段</strong>的 IP，ARP 查询的是：
+A. 目的主机的 MAC B. 默认网关的 MAC C. 广播 MAC D. DNS 的 MAC</p>
+<blockquote>
+<p><strong>B</strong>。跨网段先把帧发给路由器（网关），目的 MAC=网关，目的 IP 仍是终点。</p>
+</blockquote>
+<p><strong>NET43.</strong>★ ICMP 的典型应用：
+A. ping 与 traceroute B. 传文件 C. 发邮件 D. 解析域名</p>
+<blockquote>
+<p><strong>A</strong>。ping 用回送请求/应答（类型 8/0）；traceroute 用 TTL 超时报文（类型 11）。</p>
+</blockquote>
+<p><strong>NET44.</strong>★ IP 首部中防止数据报无限循环的字段：
+A. TTL B. 校验和 C. 协议 D. 标识</p>
+<blockquote>
+<p><strong>A</strong>。每过一个路由器减 1，减到 0 丢弃并回 ICMP 超时。</p>
+</blockquote>
+<p><strong>NET45.</strong>★★ IPv4 首部固定部分长度：
+A. 20B B. 40B C. 60B D. 64B</p>
+<blockquote>
+<p><strong>A</strong>。首部 20~60B（选项最多 40B）；C 是 TCP 首部上限。</p>
+</blockquote>
+<p><strong>NET46.</strong>★★★ 4000B 的 IP 数据报（含 20B 首部）过 MTU=1500 的链路，分片情况：
+A. 3 片：1480+1480+1020 数据，片偏移 0/185/370 B. 2 片 C. 4 片 D. 3 片：偏移 0/1480/2960</p>
+<blockquote>
+<p><strong>A</strong>。数据 3980B：每片数据 ≤1500−20=1480。片偏移以 8B 为单位：0、1480/8=185、2960/8=370。
+D 忘了除 8；C 是误算成每片 1000。</p>
+</blockquote>
+<p><strong>NET47.</strong>★★ 分片重组的位置：
+A. 终点主机 B. 每个路由器 C. 首跳路由器 D. DNS</p>
+<blockquote>
+<p><strong>A</strong>。IPv4 各片独立路由，只在最终目的地重组（IPv6 更进一步：源点分片）。</p>
+</blockquote>
+<p><strong>NET48.</strong>★ IPv6 地址长度：
+A. 64 位 B. 128 位 C. 32 位 D. 48 位</p>
+<blockquote>
+<p><strong>B</strong>。IPv4 是 32 位。过渡技术：双协议栈与隧道。</p>
+</blockquote>
+<p><strong>NET49.</strong>★ RIP 协议的特征：
+A. 距离向量、以跳数为度量、最大 15 跳、周期广播、基于 UDP B. 链路状态 C. 路径向量 TCP D. 无算法</p>
+<blockquote>
+<p><strong>A</strong>。B 是 OSPF（IP 直传，协议号 89）；C 是 BGP（TCP 179）。</p>
+</blockquote>
+<p><strong>NET50.</strong>★★ "坏消息传播得慢"（计数到无穷）是哪个协议的问题：
+A. RIP B. OSPF C. BGP D. DHCP</p>
+<blockquote>
+<p><strong>A</strong>。距离向量只听邻居的间接信息，收敛慢。OSPF 每路由器有全网拓扑图，收敛快。</p>
+</blockquote>
+<p><strong>NET51.</strong>★★ OSPF 计算最短路径的算法：
+A. Dijkstra B. Bellman-Ford C. 排序 D. 贪心装填</p>
+<blockquote>
+<p><strong>A</strong>。链路状态协议：洪泛链路状态通告 → 每路由器本地跑 Dijkstra。
+B 是 RIP（距离向量）的迭代原理。</p>
+</blockquote>
+<p><strong>NET52.</strong>★ 路由表中 0.0.0.0/0 表示：
+A. 默认路由（都不匹配时走它） B. 无效 C. 本机 D. 广播</p>
+<blockquote>
+<p><strong>A</strong>。通常指向 ISP 出口。</p>
+</blockquote>
+<p><strong>NET53.</strong>★★ 路由器收到分组，目的地址不在任何表项且无默认路由：
+A. 丢弃并回 ICMP 终点不可达 B. 广播 C. 保存等待 D. 回源重试</p>
+<blockquote>
+<p><strong>A</strong>。ICMP 类型 3。</p>
+</blockquote>
+<p><strong>NET54.</strong>★ 直接交付与间接交付的判据：
+A. 目的 IP 与发送接口是否在同一网络（子网） B. TTL C. 端口 D. MAC 相同</p>
+<blockquote>
+<p><strong>A</strong>。同网直接 ARP 发给目的主机；异网发给网关。</p>
+</blockquote>
+<h2>§4 传输层（NET55–NET68）</h2>
+<p><strong>NET55.</strong>★ 端口号的位长与熟知端口范围：
+A. 16 位；0~1023 B. 8 位；1~255 C. 32 位 D. 16 位；1024~65535</p>
+<blockquote>
+<p><strong>A</strong>。1024~49151 是登记端口，49152+ 是短暂端口。</p>
+</blockquote>
+<p><strong>NET56.</strong>★ "套接字（Socket）"的组成：
+A. IP 地址+端口号 B. MAC+IP C. 域名+端口 D. 用户名</p>
+<blockquote>
+<p><strong>A</strong>。如 192.168.1.5:80。</p>
+</blockquote>
+<p><strong>NET57.</strong>★ UDP 的特点<strong>不包括</strong>：
+A. 面向报文、首部 8B、支持一对多 B. 可靠交付 C. 无拥塞控制（适合实时） D. 开销小</p>
+<blockquote>
+<p><strong>B</strong>。UDP 尽最大努力交付，不保证可靠。</p>
+</blockquote>
+<p><strong>NET58.</strong>★ TCP 的连接是：
+A. 点对点（每连接两方） B. 一对多 C. 多对多 D. 广播</p>
+<blockquote>
+<p><strong>A</strong>。"点对点、面向字节流、可靠、全双工、面向连接"五连背。</p>
+</blockquote>
+<p><strong>NET59.</strong>★★ TCP 确认号 ack 的含义：
+A. 期望收到的下一个字节的序号 B. 已收到的最后一个字节 C. 随机 D. 窗口大小</p>
+<blockquote>
+<p><strong>A</strong>。累计确认：ack=1005 表示前 1004 字节全收到。</p>
+</blockquote>
+<p><strong>NET60.</strong>★★ TCP 三次握手中第二次报文：
+A. SYN=1，ACK=1，seq=y，ack=x+1 B. 仅 SYN C. 仅 ACK D. FIN</p>
+<blockquote>
+<p><strong>A</strong>。第一次 SYN=1 seq=x；第三次 ACK=1 seq=x+1, ack=y+1。</p>
+</blockquote>
+<p><strong>NET61.</strong>★★★ 握手为什么必须三次：
+A. 防止失效的连接请求突然到达造成资源浪费/错连 B. 快 C.  tradition D. 负载均衡</p>
+<blockquote>
+<p><strong>A</strong>。两次握手时，滞留的旧 SYN 会让服务器单方建立连接等数据。</p>
+</blockquote>
+<p><strong>NET62.</strong>★★ 四次挥手中 TIME_WAIT 持续 2MSL 的原因：
+A. 保证最后 ACK 能重传到达 + 让本连接旧报文在网络中消亡 B. 节约端口 C. 惯例 D. 等新连接</p>
+<blockquote>
+<p><strong>A</strong>。若对方没收到 ACK 会重发 FIN，主动方还须能应答。</p>
+</blockquote>
+<p><strong>NET63.</strong>★ TCP 流量控制由谁主导：
+A. 接收方（rwnd 通告） B. 发送方 C. 路由器 D. DNS</p>
+<blockquote>
+<p><strong>A</strong>。接收窗口放在 TCP 首部；拥塞控制才是网络全局视角。</p>
+</blockquote>
+<p><strong>NET64.</strong>★★★ 拥塞控制四个算法的正确顺序起点：
+A. 慢开始（指数增）→拥塞避免（线性增）→超时则 ssthresh 减半重慢开始；快重传+快恢复 B. 一开始就线性 C. 只有快重传 D. 无拥塞控制</p>
+<blockquote>
+<p><strong>A</strong>。cwnd 每轮×2 直达 ssthresh，之后 +1；超时：ssthresh=cwnd/2，cwnd=1。</p>
+</blockquote>
+<p><strong>NET65.</strong>★★ 慢开始 ssthresh=16，拥塞窗口从 1 增长到恰好达到 16 需要几轮：
+A. 4 B. 5 C. 16 D. 8</p>
+<blockquote>
+<p><strong>A</strong>。1→2→4→8→16，共 4 轮。</p>
+</blockquote>
+<p><strong>NET66.</strong>★★ 快重传的触发条件：
+A. 收到 3 个重复 ACK B. 超时 C. SYN D. FIN</p>
+<blockquote>
+<p><strong>A</strong>。立即重传丢失报文，进入快恢复（ssthresh=cwnd/2，cwnd=ssthresh 线性增）。</p>
+</blockquote>
+<p><strong>NET67.</strong>★★ 发送窗口的实际大小：
+A. min(rwnd, cwnd) B. rwnd+cwnd C. max D. 固定 64KB</p>
+<blockquote>
+<p><strong>A</strong>。取流量控制与拥塞控制窗口较小者。</p>
+</blockquote>
+<p><strong>NET68.</strong>★ UDP 校验和覆盖：
+A. 首部+数据+伪首部（伪首部不传输） B. 仅数据 C. 仅首部 D. 不校验</p>
+<blockquote>
+<p><strong>A</strong>。伪首部含 IP 地址用于核对送达正确主机，只参与计算不上网。</p>
+</blockquote>
+<h2>§5 应用层（NET69–NET80）</h2>
+<p><strong>NET69.</strong>★ DNS 主要使用：
+A. UDP 53 B. TCP 53（所有情况） C. TCP 80 D. UDP 67</p>
+<blockquote>
+<p><strong>A</strong>。常规查询 UDP；区域传送（主从同步）用 TCP 53。</p>
+</blockquote>
+<p><strong>NET70.</strong>★ DNS 解析中，主机→本地域名服务器是：
+A. 递归查询 B. 迭代查询 C. 广播 D. 多播</p>
+<blockquote>
+<p><strong>A</strong>。本地服务器代替主机跑腿（对根/顶级通常是迭代）。</p>
+</blockquote>
+<p><strong>NET71.</strong>★ FTP 的控制连接与数据连接端口：
+A. 21 控制、20 数据（主动模式） B. 都 21 C. 都 80 D. 25、110</p>
+<blockquote>
+<p><strong>A</strong>。控制连接全程保持，数据连接按需建立；被动模式服务器用临时高端口。</p>
+</blockquote>
+<p><strong>NET72.</strong>★ 发送邮件使用：
+A. SMTP B. POP3 C. IMAP D. HTTP（所有情况）</p>
+<blockquote>
+<p><strong>A</strong>。SMTP（25）推信；POP3（110）/IMAP 收信拉取。Web 邮件用 HTTP 例外。</p>
+</blockquote>
+<p><strong>NET73.</strong>★ HTTP/1.1 默认：
+A. 持续连接（keep-alive） B. 每请求新建连接 C. UDP D. 面向报文</p>
+<blockquote>
+<p><strong>A</strong>。1.0 默认非持续；HTTP/1.1 持续连接+流水线。</p>
+</blockquote>
+<p><strong>NET74.</strong>★ HTTP 是无状态协议，维持状态用：
+A. Cookie（浏览器存储，配合服务器会话） B. 端口 C. MAC D. ARP</p>
+<blockquote>
+<p><strong>A</strong>。Session 存服务器，Cookie 存客户端标识。</p>
+</blockquote>
+<p><strong>NET75.</strong>★ HTTPS 的端口与安全层：
+A. 443，TLS/SSL B. 80，IPSec C. 21，SSH D. 110</p>
+<blockquote>
+<p><strong>A</strong>。HTTP over TLS：加密+认证+完整性。</p>
+</blockquote>
+<p><strong>NET76.</strong>★ DHCP 分配地址的四步报文顺序：
+A. Discover、Offer、Request、ACK B. ACK、Request、Offer、Discover C. SYN、ACK D. GET、POST</p>
+<blockquote>
+<p><strong>A</strong>。发现（广播）→提供→请求（广播确认所选）→确认。</p>
+</blockquote>
+<p><strong>NET77.</strong>★ DHCP 报文承载在：
+A. UDP B. TCP C. IP 裸传 D. ICMP</p>
+<blockquote>
+<p><strong>A</strong>。服务器 67、客户端 68 端口。</p>
+</blockquote>
+<p><strong>NET78.</strong>★★ C/S 与 P2P 的比较：
+A. P2P 无固定服务器、自扩展性好（人人既是客户又是服务器） B. P2P 更集中 C. C/S 可扩展性永远更好 D. 无区别</p>
+<blockquote>
+<p><strong>A</strong>。C/S 吞吐受服务器瓶颈限制；P2P 用户越多带宽总量越大。</p>
+</blockquote>
+<p><strong>NET79.</strong>★ 万维网三要素：
+A. URL（定位）、HTTP（协议）、HTML（文档格式） B. TCP/UDP/DNS C. MAC/ARP/IP D. FTP/SMTP/POP</p>
+<blockquote>
+<p><strong>A</strong>。超文本传输协议+统一资源定位+超文本标记语言。</p>
+</blockquote>
+<p><strong>NET80.</strong>★★ Web 代理缓存的作用：
+A. 减少源站访问与时延（条件 GET 验证新鲜度） B. 加密 C. 分配 IP D. 路由</p>
+<blockquote>
+<p><strong>A</strong>。命中缓存直接返回，未命中才回源。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：NET1–NET80。使用节奏：§1–§2 一天（CRC 手算一遍、最小帧长与信道利用率两个公式）、§3 一天半（子网划分计算题必须动笔）、§4 一天（握手挥手画时序图、拥塞窗口算几轮）、§5 半天。错题标回《计算机网络_知识点与难点》对应章节。</p></div></body></html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_选择填空技巧与易错点 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 选择填空技巧与易错点（全）</h1>
+<blockquote>
+<p>数学一卷面：选择10题×5分 + 填空6题×5分 = <strong>80分（超过半卷）</strong>。选择填空的特点是"会做≠做对、做对≠做完"——本章给技巧、结论、易错点三件套。文末20道快练（含答案）。
+配套：《高数/线代/概率统计_知识点与难点》按章易错；《数学冲刺模拟卷》整卷演练。</p>
+</blockquote>
+<hr />
+<h2>01 考场时间策略</h2>
+<ul>
+<li>选择题：<strong>每题≤5分钟</strong>，10题目标45分钟内完成；卡壳先标记跳过。</li>
+<li>填空题：每题≤5分钟；15-16题（第15、16题通常是线代/概率）往往比第13、14题简单，<strong>别按顺序死磕</strong>。</li>
+<li>全卷选择+填空合计<strong>≤75分钟</strong>，为解答题留足70分钟+涂卡检查15分钟。</li>
+<li>选择题答案分布无规律可循，<strong>禁止</strong>按"三长一短选最短"赌博；但可用"选项代入/特值排除"把赌变成算。</li>
+</ul>
+<hr />
+<h2>02 选择题八大技巧</h2>
+<ol>
+<li><strong>特值法</strong>（首选）：含∀x的函数方程、抽象矩阵、抽象概率题，代特殊值/特殊函数/特殊矩阵秒杀。
+   - 例：f(x+y)=f(x)+f(y)（连续）⇒ f(x)=kx（取f(x)=x验证一切选项）。</li>
+<li><strong>排除法</strong>：找反例。说明"不一定成立"只需一个反例（如反例：f(x)=x²在x=0不可导但左右导数存在）。</li>
+<li><strong>图形法</strong>：单调性/凹凸性/交点个数/积分大小比较，先画草图（e^x、lnx、x·sinx 的图要烂熟）。</li>
+<li><strong>逆推法</strong>（由选项推题干）：适用于"求参数使结论成立"的题目。</li>
+<li><strong>对称性妙用</strong>：积分区域对称+被积函数奇偶性，直接删项；轮换对称性（∫∫_D f(x,y)=∫∫_D f(y,x)）常用于二重积分比较。</li>
+<li><strong>极限定性</strong>：选择题里的"渐近线条数""间断点个数"先算极限行为再选。</li>
+<li><strong>量纲/结构检验</strong>：答案含参数时检查量纲一致性、边界行为（x→0、x→∞）。</li>
+<li><strong>二选一时</strong>的判断锚点：多选题不像——数一选择题单选，两个选项犹豫时回代验证最便宜。</li>
+</ol>
+<h2>03 填空题四技巧</h2>
+<ol>
+<li><strong>小题小做</strong>：填空不写过程，能用结论直接写结论（如 arcsin1=π/2、标准结果直接填）。</li>
+<li><strong>赋值代入</strong>：抽象函数的填空（f'(x₀)型极限）用定义变形或取具体函数验证。</li>
+<li><strong>几何意义优先</strong>：定积分填空先想面积（∫₀^{2π}√(1-sin²x)dx 之类分段去绝对值画图）。</li>
+<li><strong>对称轮换</strong>：二重/三重积分填空先查对称性，工作量常减半。</li>
+</ol>
+<hr />
+<h2>04 速算结论库（背熟=白捡20分）</h2>
+<h3>极限与导数</h3>
+<ul>
+<li>lim_{x→0} (a^x - 1)/x = ln a；lim_{n→∞} ⁿ√n = 1；lim_{x→∞} (x+sinx)/x = 1（有界×无穷小）。</li>
+<li>e^x 泰勒：e^x = 1+x+x²/2+x³/6+…；ln(1+x)=x-x²/2+x³/3-…；sinx=x-x³/6+…；cosx=1-x²/2+x⁴/24-…；(1+x)^α=1+αx+α(α-1)x²/2+…</li>
+<li>常用等价（x→0）：tanx-sinx ~ x³/2；x-sinx ~ x³/6；tanx-x ~ x³/3；arcsinx-x ~ x³/6；x-arctanx ~ x³/3；x-ln(1+x) ~ x²/2；e^x-1-x ~ x²/2。</li>
+<li>f⁽ⁿ⁾(x)：e^{ax}→aⁿe^{ax}；sin(ax+b)→aⁿsin(ax+b+nπ/2)；ln(1+x)→(-1)^{n-1}(n-1)!/(1+x)ⁿ；1/(1+x)→(-1)ⁿn!/(1+x)^{n+1}。</li>
+<li>极值判定：f'(x₀)=0 且 f''(x₀)&gt;0 ⇒ 极小；f''(x₀)&lt;0 ⇒ 极大；f''(x₀)=0需另判（如x⁴在0、x³在0不是极值）。</li>
+</ul>
+<h3>积分</h3>
+<ul>
+<li>∫₀^{π/2} sinⁿx dx = ∫₀^{π/2} cosⁿx dx（n偶：= (n-1)!!/n!!·π/2；n奇：= (n-1)!!/n!!）。</li>
+<li>∫₀^a f(x)dx = ∫₀^a f(a-x)dx；∫_{-a}^a 奇函数=0，偶函数=2∫₀^a。</li>
+<li>∫₀^{π} x·sinx dx = π/2·∫₀^π sinx dx = π；∫₀^{π} x f(sinx)dx = (π/2)∫₀^π f(sinx)dx。</li>
+<li>√(1-sin²x)=|cosx|：0~π/2取cosx，π/2~π取-cosx。</li>
+<li>椭圆面积 πab；摆线一拱面积3πa²、一拱长8a（数一记）。</li>
+</ul>
+<h3>级数【数一】</h3>
+<ul>
+<li>p-级数：Σ1/nᵖ，p&gt;1收敛；Σ1/nᵖ⁺ᵃ与Σ1/nⁿᵃ…（只需记p&gt;1）。Σ1/√n发散、Σ1/n²收敛、Σ1/n发散。</li>
+<li>交错p级数 Σ(-1)^{n-1}/nᵖ：p&gt;0收敛，0&lt;p≤1条件收敛。</li>
+<li>常用和：Σ_{n≥1} 1/n² = π²/6；Σ 1/(2n-1)² = π²/8；Σ (-1)^{n-1}/n = ln2；Σ xⁿ = 1/(1-x)（|x|&lt;1）；Σ n xⁿ⁻¹ = 1/(1-x)²；Σ xⁿ/n = -ln(1-x)。</li>
+<li>e^x、sinx、cosx、ln(1+x)、1/(1-x)、1/(1+x) 的麦克劳林展开与<strong>收敛半径</strong>（除ln与1/(1±x)端点要讨论）。</li>
+</ul>
+<h3>线性代数</h3>
+<ul>
+<li>行列式：|kA|=kⁿ|A|；|A*|=|A|ⁿ⁻¹；|A⁻¹|=1/|A|；|AB|=|A||B|（方阵）。</li>
+<li>A⁻¹：二阶"主对角换位、副对角变号/行列式"口诀；伴随A*：第(i,j)元=(-1)^{i+j}M_{ji}。</li>
+<li>秩：r(Aᵀ)=r(A)；r(A+B)≤r(A)+r(B)；r(AB)≤min(r(A),r(B))；AB=O ⇒ r(A)+r(B)≤n。</li>
+<li>特征值：Σλᵢ=tr(A)，Πλᵢ=|A|；f(A)的特征值=f(λ)（多项式）；A⁻¹→1/λ；A*→|A|/λ；P⁻¹AP=B时A与B相似，特征值相同。</li>
+<li>二次型：正定 ⇔ 各阶顺序主子式&gt;0 ⇔ 特征值全&gt;0 ⇔ 正惯性指数=n。</li>
+<li>常见特征值：[[a,b],[b,a]]→a±b；对角a、非对角b的n阶→a+(n-1)b与a-b（n-1重）。</li>
+</ul>
+<h3>概率统计</h3>
+<ul>
+<li>常见分布期望方差（必背）：0-1：p, p(1-p)；B(n,p)：np, np(1-p)；P(λ)：λ, λ；U(a,b)：(a+b)/2, (b-a)²/12；E(λ)：1/λ, 1/λ²；N(μ,σ²)：μ, σ²。</li>
+<li>正态：Φ(0)=0.5；P(|X-μ|&lt;σ)≈0.6826，2σ≈0.9544，3σ≈0.9974。</li>
+<li>独立时：E(XY)=EX·EY，D(X±Y)=DX+DY；不独立：D(X+Y)=DX+DY+2Cov。</li>
+<li>Cov(X,Y)=E(XY)-EX·EY；ρ=Cov/√(DX·DY)；|ρ|≤1；ρ=0⇔不相关（不相关⇏独立，<strong>正态情形下不相关⇔独立</strong>）。</li>
+<li>协方差双线性：Cov(aX+b, cY+d)=ac·Cov(X,Y)；D(aX+b)=a²DX。</li>
+<li>大数定律/中心极限："X₁,…,Xₙ独立同分布、EX=μ、DX=σ²，则(ΣXᵢ-nμ)/(√n·σ) → N(0,1)"（列维-林德伯格）。</li>
+<li>三大抽样分布：χ²(n)=ΣZᵢ²；t(n)=Z/√(χ²/n)；F(n₁,n₂)=(χ²₁/n₁)/(χ²₂/n₂)；1/F(n₁,n₂)~F(n₂,n₁)。</li>
+<li>正态总体样本：X̄~N(μ,σ²/n)；(n-1)S²/σ²~χ²(n-1)；X̄与S²独立；E(S²)=σ²（S²除以n-1）。</li>
+</ul>
+<hr />
+<h2>05 高数易错点清单（按章）</h2>
+<ol>
+<li><strong>极限</strong>：等价替换加减慎用；∞-∞别急着通分，先提无穷大因子；数列极限n→∞与函数极限x→∞的区别（数列取正整数）；1^∞型必须配对数或凑e。</li>
+<li><strong>连续</strong>：分段点必算双侧极限；无穷间断与振荡间断都属于第二类。</li>
+<li><strong>导数</strong>：|f(x)|、f(x)|x-a|在分界点必用定义；复合函数链式法则别漏层；参数方程二阶导= d(dy/dx)/dt ÷ dx/dt（<strong>不是</strong>直接对x再求导）。</li>
+<li><strong>中值定理</strong>：构造辅助函数是解题核心（看到"ξf'(ξ)+f(ξ)"→xF(x)；"f'(ξ)+λf(ξ)"→e^{λx}f(x)；"f''(ξ)…"→两次罗尔/拉格朗日）。</li>
+<li><strong>极值最值</strong>：驻点≠极值点；端点值必须参与最值比较；f'(x)不存在的点也可能是极值点。</li>
+<li><strong>不定积分</strong>：结果要含C；∫f'(x)dx=f(x)+C 而不是 f(x)；分段积分要保证整体连续来定C。</li>
+<li><strong>定积分/反常积分</strong>：被积函数在积分区间内无界的是<strong>反常积分</strong>（如∫_{-1}^1 dx/x²，x=0处发散——千万别当定积分为2）；奇偶性用在<strong>对称区间</strong>。</li>
+<li><strong>多元微分</strong>：fₓ、f_y连续才保证可微；可微⇒偏导存在但反之不成立；链式法则画树状图；隐函数求导注意对谁求导。</li>
+<li><strong>二重积分</strong>：先画区域再定限；交换积分次序是常考手段（内层无初值原函数时必换）；极坐标 r² 出现在面积元里。</li>
+<li><strong>常微分方程</strong>：y''+py'+qy=0 三种判别情形；特解形式与特征根对照表（e^{λx}中λ是单根→乘x，重根→乘x²）；可降阶方程（y''=f(x,y')令p=y'）。</li>
+<li><strong>级数【数一】</strong>：绝对收敛与条件收敛判断先分离符号；幂级数收敛域=收敛半径+端点单独判；傅里叶系数a₀是"2倍平均"，狄利克雷收敛定理端点值=(左极限+右极限)/2。</li>
+<li><strong>曲线曲面积分【数一】</strong>：第一类对弧长、第二类对坐标（方向性！）；格林公式要求<strong>闭曲线正向</strong>、挖洞补线技巧；高斯公式要求<strong>闭曲面外侧</strong>；斯托克斯公式口诀（右手法则）。</li>
+</ol>
+<h2>06 线代易错点清单</h2>
+<ol>
+<li>行列式性质：|A+B|≠|A|+|B|（一般不成立）。</li>
+<li>(AB)⁻¹=B⁻¹A⁻¹；(AB)ᵀ=BᵀAᵀ；(AB)<em>=B</em>A*；kA的逆=A⁻¹/k。</li>
+<li>A²=A（幂等）推不出A=E（A可以是投影矩阵）；A²=O推不出A=O。</li>
+<li>r(A)=n ⇒ A⁻¹存在；r(A)&lt;n ⇒ 齐次方程有非零解。</li>
+<li>非齐次AX=b：解=特解+对应齐次通解；两解之差是齐次解。</li>
+<li>特征向量：<strong>不同特征值</strong>的特征向量线性无关；同一特征值的不同特征向量不一定无关。</li>
+<li>相似与等价：等价只需同型可互化，相似要求同阶且特征多项式相同；相似不一定合同，合同不一定相似；<strong>实对称矩阵</strong>必可正交相似对角化。</li>
+<li>特征值可能是复数/0/负数——"特征值全为正"才谈正定。</li>
+<li>二次型矩阵必须是<strong>对称矩阵</strong>（题目给的A先对称化：取(A+Aᵀ)/2）。</li>
+<li>正交矩阵：QᵀQ=E ⇒ 列向量组标准正交；|Q|=±1；Q的特征值模为1。</li>
+</ol>
+<h2>07 概率易错点清单</h2>
+<ol>
+<li>P(A∪B)=P(A)+P(B)-P(AB)——别漏减；三事件容斥展开。</li>
+<li>条件概率P(A|B)与乘积P(AB)的区别；P(A|B)+P(Ā|B)=1，但P(A|B)+P(A|B̄)≠1（一般）。</li>
+<li>互斥⇒不相关？错！互斥事件若概率均非零则<strong>必不独立</strong>（P(AB)=0≠P(A)P(B)）。</li>
+<li>全概率公式要求完备事件组；贝叶斯公式是"逆概率"——先验与后验。</li>
+<li>连续型随机变量：P(X=a)=0但{X=a}不是不可能事件；F(x)右连续、单调不减。</li>
+<li>密度函数可以大于1（它不是概率）。</li>
+<li>二维：边缘分布推不出联合分布（除非独立）；独立⇒P(X≤a,Y≤b)=F_X·F_Y。</li>
+<li>E(XY)=EX·EY仅在独立（或不相关）时成立；D(X+Y)在独立时=DX+DY。</li>
+<li>最大值最小值分布：P(M≤z)=F(z)ⁿ；P(N≤z)=1-[1-F(z)]ⁿ。</li>
+<li>矩估计=样本矩=总体矩；最大似然：先写似然函数再取对数求导；区间估计的枢轴量选取（σ²已知用Z，未知用t）。</li>
+</ol>
+<hr />
+<h2>08 快练20题（每题目标3分钟内）</h2>
+<ol>
+<li>lim_{x→0} (tanx - x)/x³。</li>
+<li>lim_{x→0} (1/x² - 1/x·sinx)。</li>
+<li>f(x)=x²·sin(1/x)（x≠0），f(0)=0，求f'(0)。</li>
+<li>y=xe^{-x}，求极值。</li>
+<li>求 ∫ dx/(x²+2x+5)。</li>
+<li>求 ∫₀^{π/2} cos⁴x dx。</li>
+<li>判断 ∫₁^{+∞} dx/x^1.5 收敛性。</li>
+<li>设 z=x²y，求全微分dz。</li>
+<li>求 ∬_D (x+y)dσ，D: x²+y²≤1。</li>
+<li>求 y''+y=0 的通解。</li>
+<li>判断级数 Σ (-1)^{n-1}/n² 的收敛类型。</li>
+<li>求 Σ_{n=0}^∞ xⁿ/n! 的和函数。</li>
+<li>A为4阶方阵，|A|=3，求|2A⁻¹-A<em>|（提示：A</em>=|A|A⁻¹）。</li>
+<li>求 [[1,1],[0,1]] 的n次幂。</li>
+<li>已知A~B，A的特征值1,2,3，求|B|。</li>
+<li>向量α=(1,2,3)，求与α正交的单位向量（写一个即可）。</li>
+<li>P(A)=0.5，P(B)=0.4，A与B独立，求P(A∪B)。</li>
+<li>X~B(10, 0.3)，求E(X)与D(X)。</li>
+<li>X~N(2,9)，求P(|X-2|&lt;3)（用2σ原则近似值）。</li>
+<li>X₁,…,Xₙ 来自N(μ,σ²)，S²为样本方差，求E(S²)。</li>
+</ol>
+<blockquote>
+<p>答案
+1. 1/3（tanx-x~x³/3）。
+2. lim (x-sinx)/x²·(1/x)? 注意：1/x²(1 - sinx/x)= (x-sinx)/x³ → 1/6。
+3. f'(0)=lim x²sin(1/x)/x = lim x sin(1/x) = 0。
+4. y'=e^{-x}(1-x)=0 → x=1，y''(1)=-e^{-1}&lt;0 → 极大值 y(1)=e^{-1}。
+5. ∫ dx/((x+1)²+4) = (1/2)arctan((x+1)/2)+C。
+6. (3!!/4!!)·π/2 = (3/(4·2))·π/2 = 3π/16。
+7. p=1.5&gt;1，收敛。
+8. dz = 2xy dx + x² dy。
+9. 由对称性 x、y 单独积分为0 → 0。
+10. y = C₁cosx + C₂sinx。
+11. 绝对收敛（Σ1/n²收敛）。
+12. e^x（-∞&lt;x&lt;+∞）。
+13. |2A⁻¹ - 3A⁻¹| = |-A⁻¹| = (-1)⁴·(1/3) = 1/3。
+14. [[1,n],[0,1]]（二项展开，N=[[0,1],[0,0]]，N²=O）。
+15. |B|=|A|=1·2·3=6。
+16. 如 (1,-2,1)/√6（验证 1-4+3=0）。
+17. 0.5+0.4-0.2 = 0.7。
+18. E=3，D=10×0.3×0.7=2.1。
+19. σ=3，P(|Z|&lt;1)=0.6826。
+20. E(S²)=σ²（样本方差的无偏性，除以n-1的原因）。</p>
+</blockquote></div></body></html>

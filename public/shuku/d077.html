@@ -1,0 +1,678 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408选择题题库_数据结构 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 选择题题库 · 数据结构（120题分章带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成。408 卷选择题 80 分（40×2），数据结构约占选择题 22 分（11 题）——本册按章节刷透。
+难度：★基础 ★★中等 ★★★难点。<strong>先遮住答案做</strong>，每题详解重点讲"错误选项为什么错"。
+配合《数据结构_知识点与难点》《数据结构_考题集》使用；题号 DS+序号。</p>
+</blockquote>
+<h2>§1 绪论与线性表（DS1–DS20）</h2>
+<p><strong>DS1.</strong>★ 语句 <code>i=1; while(i&lt;n) i=i*3;</code> 的时间复杂度：
+A. O(n) B. O(log₂n) C. O(nlogn) D. O(3n)</p>
+<blockquote>
+<p><strong>B</strong>。i 每次×3，执行 ⌈log₃n⌉ 次。对数复杂度不看底数（换底只差常数因子）→ 写成 O(logn)。
+A 错：循环次数远小于 n；D 的 3n 是"乘 3"的误读，不是循环次数。</p>
+</blockquote>
+<p><strong>DS2.</strong>★ 双链表相对单链表的主要优点：
+A. 节省存储 B. 可随机访问 C. 任一结点可 O(1) 找到前驱 D. 插入删除不用改指针</p>
+<blockquote>
+<p><strong>C</strong>。单链表找前驱要从头遍历 O(n)。
+A 错：双链表多一个指针域，<strong>更费</strong>存储；B 错：链表都不能随机访问；D 错：插入删除仍要改指针，只是改法不同。</p>
+</blockquote>
+<p><strong>DS3.</strong>★ 顺序表中第 i 个位置插入元素，平均移动次数：
+A. n B. n/2 C. (n−1)/2 D. (n+1)/2</p>
+<blockquote>
+<p><strong>B</strong>。在位置 i（共 n+1 个可插位置等概率）需移动 n−i+1 个，平均 Σᵢ₌₁^{n+1}(n−i+1)/(n+1) = n/2。
+C 是"删除"的平均移动次数（(n−1)/2），别混。</p>
+</blockquote>
+<p><strong>DS4.</strong>★ 单链表设置头结点的好处：
+A. 节省空间 B. 使首结点插入/删除与其他位置逻辑一致 C. 加快查找 D. 方便随机访问</p>
+<blockquote>
+<p><strong>B</strong>。第一个位置的操作不再特殊化。
+头结点反而<strong>多花</strong>一个结点空间（A 错）；链表不存在加快查找/随机访问（C、D 错）。</p>
+</blockquote>
+<p><strong>DS5.</strong>★ 静态链表的存储结构是：
+A. 指针链 B. 数组+游标（下标） C. 二维数组 D. 栈</p>
+<blockquote>
+<p><strong>B</strong>。用数组元素里的"下标域"代替指针。
+C 的二维数组与静态链表无关；A 错：静态=不用指针。</p>
+</blockquote>
+<p><strong>DS6.</strong>★ 带尾指针 rear 的循环单链表，判空条件：
+A. rear==NULL B. rear-&gt;next==rear C. rear-&gt;next==NULL D. rear-&gt;data==0</p>
+<blockquote>
+<p><strong>B</strong>。空表时尾指针指向自己（唯一的头结点指向自己）。
+C 错：循环链表没有 NULL 尾；A/D 是编造的。</p>
+</blockquote>
+<p><strong>DS7.</strong>★ 顺序表删除第 i 个元素需移动的元素个数：
+A. n−i B. n−i+1 C. i D. n−i−1</p>
+<blockquote>
+<p><strong>A</strong>。第 i+1 到第 n 个元素前移，共 n−i 个。
+B 是"插入"的移动次数（后移腾位），方向别搞反。</p>
+</blockquote>
+<p><strong>DS8.</strong>★ 单链表中删除 p 所指结点的<strong>后继</strong>（q 为后继），正确的操作序列：
+A. p-&gt;next=q-&gt;next; free(q) B. q=p-&gt;next; p-&gt;next=q-&gt;next; free(q) C. free(q); p-&gt;next=q-&gt;next D. q-&gt;next=p-&gt;next; free(p)</p>
+<blockquote>
+<p><strong>B</strong>。先把 q 存下来（A 错：q 还没赋值就用了）；C 错：free 后 q-&gt;next 不能再访问；D 是删除 p 自己的写法且顺序错。</p>
+</blockquote>
+<p><strong>DS9.</strong>★★ 在双向链表中 p 所指结点<strong>之前</strong>插入 s，下列哪步<strong>不需要</strong>：
+A. s-&gt;prior=p-&gt;prior B. p-&gt;prior-&gt;next=s C. s-&gt;next=p D. s-&gt;next=p-&gt;next</p>
+<blockquote>
+<p><strong>D</strong>。s 在 p 前面，s-&gt;next 应指向 p（即 C）。D 是"插到 p 之后"的操作。</p>
+</blockquote>
+<p><strong>DS10.</strong>★ 需要频繁按序号访问元素、很少插删，应选：
+A. 单链表 B. 顺序表 C. 循环链表 D. 双链表</p>
+<blockquote>
+<p><strong>B</strong>。顺序表按位存取 O(1)。
+A/C/D 都是链式，按位访问 O(n)。</p>
+</blockquote>
+<p><strong>DS11.</strong>★ 下列代码的时间复杂度：<code>for(i=1;i&lt;=n;i++) for(j=1;j&lt;=i;j++) x++;</code>
+A. O(n) B. O(nlogn) C. O(n²) D. O(n³)</p>
+<blockquote>
+<p><strong>C</strong>。内层执行 Σi = n(n+1)/2 ≈ n²/2 次。
+B 是"外层对数内层线性"的特征，这里是三角形求和。</p>
+</blockquote>
+<p><strong>DS12.</strong>★★ T(n) = T(n−1) + 1，T(1)=1 的解是：
+A. O(logn) B. O(n) C. O(nlogn) D. O(n²)</p>
+<blockquote>
+<p><strong>B</strong>。每层只做 1 次递归、共递归 n−1 层 ⇒ O(n)。
+A 对应 T(n)=T(n/2)+1；C 对应 T(n)=2T(n/2)+n。</p>
+</blockquote>
+<p><strong>DS13.</strong>★★ 单链表（未知长度）找中间结点的最优方法：
+A. 先遍历求长再走 n/2 步，O(n) 但两趟 B. 快慢指针，一趟 O(n) C. 无法找 D. 二分查找</p>
+<blockquote>
+<p><strong>B</strong>。快指针每次走 2 步、慢指针 1 步，快指针到尾时慢指针在中间。
+A 结果对但"最优"不如一趟；C 错；D 链表不支持二分。</p>
+</blockquote>
+<p><strong>DS14.</strong>★ 关于存储密度，正确的是：
+A. 顺序表=1，链表&lt;1 B. 链表=1，顺序表&lt;1 C. 都等于 1 D. 与元素类型无关地都是 1</p>
+<blockquote>
+<p><strong>A</strong>。顺序表只存数据本身；链表额外存指针，密度 = 数据域/整结点 &lt; 1。
+D 错：恰恰与"数据域大小 vs 指针域大小"有关。</p>
+</blockquote>
+<p><strong>DS15.</strong>★★ 数组 a[n] 循环左移 p 位（0&lt;p&lt;n），要求 O(n) 时间 O(1) 空间，方法：
+A. 逐个前移 n 次 B. 三次逆置（整体、前 p、后 n−p） C. 开辅助数组 D. 排序</p>
+<blockquote>
+<p><strong>B</strong>。逆置 S=reverse(0..n−1) 再 reverse(0..n−1−p)、reverse(n−p..n−1)。
+A 是 O(pn)；C 违反空间约束；D 与题无关。</p>
+</blockquote>
+<p><strong>DS16.</strong>★★ 判断单链表是否有环的标准方法：
+A. 双指针一快一慢（Floyd 判圈） B. 计数结点 C. 排序 D. 哈希存地址也可以但需 O(n) 空间——问"O(1) 空间标准解"是哪个</p>
+<blockquote>
+<p><strong>A</strong>。快慢指针相遇即有环，O(n) 时间 O(1) 空间。
+D 哈希法可行但空间 O(n)，不满足"O(1) 空间"的限定。</p>
+</blockquote>
+<p><strong>DS17.</strong>★ 抽象数据类型（ADT）的三要素：
+A. 数据对象、数据关系、基本操作 B. 输入、输出、算法 C. 存储、检索、排序 D. 时间、空间、复杂度</p>
+<blockquote>
+<p><strong>A</strong>。ADT = 数据对象 + 数据间关系 + 定义在其上的操作集合。</p>
+</blockquote>
+<p><strong>DS18.</strong>★ 下列属于<strong>存储结构</strong>的是：
+A. 线性结构 B. 树形结构 C. 链式存储 D. 图形结构</p>
+<blockquote>
+<p><strong>C</strong>。顺序/链式/索引/散列是存储（物理）结构。
+A/B/D 都是逻辑结构。</p>
+</blockquote>
+<p><strong>DS19.</strong>★ "算法原地工作"指：
+A. 不用任何变量 B. 辅助空间为 O(1) C. 时间 O(1) D. 不修改输入</p>
+<blockquote>
+<p><strong>B</strong>。辅助空间不随问题规模增长。时间复杂度与原地与否无关（C 错）。</p>
+</blockquote>
+<p><strong>DS20.</strong>★★ 删除长度 n 的顺序表中所有值为 x 的元素（保持相对次序），最优时间复杂度：
+A. O(n²) B. O(n) C. O(nlogn) D. O(nlog²n)</p>
+<blockquote>
+<p><strong>B</strong>。双指针一次扫描：读写指针同步前移，遇 x 跳过，一遍完成。
+A 是"每删一个整体移动一次"的朴素做法。</p>
+</blockquote>
+<h2>§2 栈、队列与串（DS21–DS40）</h2>
+<p><strong>DS21.</strong>★★ 入栈序列 1,2,…,n，下列<strong>不可能</strong>的出栈序列：
+A. n,…,2,1 B. 1,2,…,n C. n,1,2,…,n−1 D. 2,1,3,4,…,n</p>
+<blockquote>
+<p><strong>C</strong>。n 先出说明 1…n−1 全在栈内（自顶向下 n−1,…,1），下一个只能出 n−1，不能出 1。
+A 是全进再全出；B 是进一个出一个；D 是进到 2 出 2 出 1 再继续，都合法。</p>
+</blockquote>
+<p><strong>DS22.</strong>★★ n 个不同元素依次进栈，合法出栈序列个数为：
+A. n! B. 2ⁿ C. 卡特兰数 1/(n+1)·C(2n,n) D. n²</p>
+<blockquote>
+<p><strong>C</strong>。n=3 时是 5，n=4 时是 14。
+A 错：出栈顺序受栈约束；B/D 无此结构。</p>
+</blockquote>
+<p><strong>DS23.</strong>★ 循环队列（牺牲一格）数组大小 M，队满条件：
+A. rear==front B. (rear+1)%M==front C. rear−front==M D. front==0</p>
+<blockquote>
+<p><strong>B</strong>。牺牲一格区分"满"与"空"（空是 A：rear==front）。</p>
+</blockquote>
+<p><strong>DS24.</strong>★ 循环队列 M=40，front=30，队中 12 个元素，rear=：
+A. 42 B. 2 C. 18 D. 12</p>
+<blockquote>
+<p><strong>B</strong>。rear=(30+12)%40=2（队列元素个数公式 (rear−front+M)%M 反推）。</p>
+</blockquote>
+<p><strong>DS25.</strong>★★ 共享栈（两栈顶分别设在数组两端），栈满条件：
+A. top1==top2 B. top1+1==top2 C. top1−top2==1 D. 永不满</p>
+<blockquote>
+<p><strong>B</strong>。两个栈顶相邻即满。A 时中间还有空位吗？top1==top2 意味着同一单元——共享栈约定两栈顶之间留空，判满用 B。</p>
+</blockquote>
+<p><strong>DS26.</strong>★ 下列<strong>不适合</strong>用队列的场景：
+A. 二叉树层次遍历 B. 打印任务缓冲 C. 表达式括号匹配 D. CPU 就绪队列调度</p>
+<blockquote>
+<p><strong>C</strong>。括号匹配用<strong>栈</strong>（最近未匹配的左括号优先）。
+A/B/D 都是先进先出场景。</p>
+</blockquote>
+<p><strong>DS27.</strong>★ 中缀式 a+b<em>c 对应的后缀式：
+A. abc</em>+ B. ab+c<em> C. abc+</em> D. +a*bc</p>
+<blockquote>
+<p><strong>A</strong>。先乘后加：b<em>c 先算 ⇒ abc</em>+。
+B 是 (a+b)<em>c；C 是 a</em>(b+c)；D 是前缀式。</p>
+</blockquote>
+<p><strong>DS28.</strong>★ 后缀式 <code>6 3 2 − +</code> 的值：
+A. 5 B. 7 C. 1 D. 11</p>
+<blockquote>
+<p><strong>B</strong>。先 3−2=1，再 6+1=7（栈：压 6,3,2；遇 − 弹 2,3 算 3−2；遇 + 弹 1,6）。</p>
+</blockquote>
+<p><strong>DS29.</strong>★ 中缀转后缀的过程中，栈里存放的是：
+A. 操作数 B. 运算符（含左括号） C. 结果值 D. 变量地址</p>
+<blockquote>
+<p><strong>B</strong>。操作数直接输出，运算符按优先级进出栈。</p>
+</blockquote>
+<p><strong>DS30.</strong>★ 将递归算法改为非递归，一般借助：
+A. 队列 B. 栈 C. 堆 D. 散列表</p>
+<blockquote>
+<p><strong>B</strong>。递归本质是系统栈保存现场，手工模拟即用栈。</p>
+</blockquote>
+<p><strong>DS31.</strong>★★ 输出受限的双端队列（一端只能插入），从输入序列 1,2,3,4 判断哪些输出序列合法——下列工具中：
+A. 只有栈可模拟 B. 只有队列可模拟 C. 双端队列需专门模拟/枚举 D. 无法判断</p>
+<blockquote>
+<p><strong>C</strong>。受限双端队列的合法性需按其结构枚举（408 曾考 4! 序列筛选）。
+A/B 都不完整；D 错——可判断。</p>
+</blockquote>
+<p><strong>DS32.</strong>★ 循环队列 M=8（牺牲一格），front=5，元素个数 3。最多还能入队：
+A. 4 个 B. 3 个 C. 5 个 D. 7 个</p>
+<blockquote>
+<p><strong>A</strong>。最多存 M−1=7 个，已存 3 个 ⇒ 还能进 4 个。</p>
+</blockquote>
+<p><strong>DS33.</strong>★ KMP 算法的时间复杂度：
+A. O(mn) B. O(m+n) C. O(m²) D. O(logn)</p>
+<blockquote>
+<p><strong>B</strong>。主串指针不回溯，模式串指针按 next 跳。
+A 是朴素 BF 的最坏复杂度。</p>
+</blockquote>
+<p><strong>DS34.</strong>★★ 串 S="aaab"（1 起），按"next[1]=0"约定，next 数组：
+A. 0 1 2 3 B. 0 1 2 0 C. 0 0 0 0 D. 1 2 3 0</p>
+<blockquote>
+<p><strong>B</strong>。next[j]=真前缀真后缀最长公共长度+1：j=2 得 1，j=3 得 2，j=4（"aab"）无公共真前缀后缀得 0。
+A 是"aaab"若第四位还是 a 的值；C 忽略了相等前缀；D 把约定弄错。</p>
+</blockquote>
+<p><strong>DS35.</strong>★ KMP 相比 BF 的核心改进：
+A. 主串指针不回溯 B. 模式串更短 C. 排序加速 D. 哈希匹配</p>
+<blockquote>
+<p><strong>A</strong>。失配时主串 i 不动，模式串 j=next[j]。
+模式串长度没变（B）；C、D 是别的算法。</p>
+</blockquote>
+<p><strong>DS36.</strong>★ 空串与空格串：
+A. 相同 B. 空串长度 0，空格串长度≥1 C. 都是长度 0 D. 空格串长度 0</p>
+<blockquote>
+<p><strong>B</strong>。空格串由空格字符组成，是内容为空格的非空串。</p>
+</blockquote>
+<p><strong>DS37.</strong>★ 串"块链存储"的缺点主要是：
+A. 存储密度低 B. 不能读 C. 不能比较 D. 长度固定不能变</p>
+<blockquote>
+<p><strong>A</strong>。每个结点存 1 个字符配 1 个指针，密度极低（存多个字符/结点又带来碎片问题）。</p>
+</blockquote>
+<p><strong>DS38.</strong>★★ 合法出栈序列的判定条件（入栈次序固定）：
+A. 任意 B. 任意时刻已出栈数 ≤ 已入栈数（且总数相等） C. 逆序 D. 无重复</p>
+<blockquote>
+<p><strong>B</strong>。这正是卡特兰计数背后的约束。</p>
+</blockquote>
+<p><strong>DS39.</strong>★★ 判断字符串是否回文，最合适的组合：
+A. 队列 B. 栈（或前半入栈与后半比较） C. 树 D. 图</p>
+<blockquote>
+<p><strong>B</strong>。整个串入栈再出栈即得逆序，与原串比较；或前半入栈与后半一一比对。
+A 队列保序，出队还是原序，没用。</p>
+</blockquote>
+<p><strong>DS40.</strong>★★ 循环队列不牺牲存储单元时，区分队空队满的手段：
+A. 不可能 B. 设 size 计数器或 tag 标志 C. 改用链队 D. 增大数组</p>
+<blockquote>
+<p><strong>B</strong>。记元素个数，或"上次操作是入/出"的 tag。
+A 错：加一个变量就能区分；C 是另一回事；D 不解决判别问题。</p>
+</blockquote>
+<h2>§3 树与二叉树（DS41–DS70）</h2>
+<p><strong>DS41.</strong>★ 二叉树中度为 2 的结点 10 个，叶子结点数：
+A. 9 B. 10 C. 11 D. 12</p>
+<blockquote>
+<p><strong>C</strong>。n₀ = n₂+1 = 11（与 n₁ 无关的恒等式）。</p>
+</blockquote>
+<p><strong>DS42.</strong>★ n 个结点的二叉树高度最小值：
+A. log₂n B. ⌈log₂(n+1)⌉ C. n/2 D. n−1</p>
+<blockquote>
+<p><strong>B</strong>。完全二叉树最矮：2^{h−1}−1 &lt; n ≤ 2^h−1。</p>
+</blockquote>
+<p><strong>DS43.</strong>★★ 完全二叉树 100 个结点，叶子结点数：
+A. 49 B. 50 C. 51 D. 25</p>
+<blockquote>
+<p><strong>B</strong>。n=100 偶数 ⇒ n₁=1（完全二叉树 n₁ 只能 0 或 1）；n₀=n₂+1，n₀+n₂=99 ⇒ n₀=50。
+偶数 n 时 n₀=n/2，奇数 n 时 n₀=(n+1)/2，可当速记。</p>
+</blockquote>
+<p><strong>DS44.</strong>★ 完全二叉树（1 起编号）结点 i 的双亲编号：
+A. i/2 向下取整 B. 2i C. 2i+1 D. i−1</p>
+<blockquote>
+<p><strong>A</strong>。孩子是 2i 与 2i+1，反推双亲 ⌊i/2⌋。</p>
+</blockquote>
+<p><strong>DS45.</strong>★★ 哪两组遍历序列能唯一确定二叉树：
+A. 先序+后序 B. 先序+中序 C. 层序+先序 D. 仅先序</p>
+<blockquote>
+<p><strong>B</strong>。先/后/层序定根，中序分左右。A 错：存在"只有一个孩子"的树无法区分左右（如 1 个结点的子树）。C 同样可能歧义（层序+先序不能总定中序分界）——标准答案只有"先序+中序、后序+中序、层序+中序"这类含中序的组合。</p>
+</blockquote>
+<p><strong>DS46.</strong>★★ 先序 abc、中序 bac，后序为：
+A. bca B. cab C. bac D. abc</p>
+<blockquote>
+<p><strong>A</strong>。根 a；中序中 a 左边只有 b ⇒ 左子树 b，右子树 c；后序=左右根 = b,c,a。</p>
+</blockquote>
+<p><strong>DS47.</strong>★★ 3 个结点的二叉树有几种不同形态：
+A. 3 B. 4 C. 5 D. 6</p>
+<blockquote>
+<p><strong>C</strong>。卡特兰数 C₃=5。</p>
+</blockquote>
+<p><strong>DS48.</strong>★★ n 个结点的二叉树有 n+1 个空指针，中序线索二叉树的线索条数：
+A. n−1 B. n C. n+1 D. 2n</p>
+<blockquote>
+<p><strong>C</strong>。n+1 个空链域全部改造成线索（前驱或后继）。</p>
+</blockquote>
+<p><strong>DS49.</strong>★ 树转二叉树的规则：
+A. 左孩子右兄弟 B. 左兄弟右孩子 C. 随机 D. 按层次</p>
+<blockquote>
+<p><strong>A</strong>。结点的左指针指第一个孩子，右指针指下一个兄弟。</p>
+</blockquote>
+<p><strong>DS50.</strong>★★ 树的先根遍历序列与对应二叉树的哪个遍历相同：
+A. 中序 B. 先序 C. 后序 D. 层序</p>
+<blockquote>
+<p><strong>B</strong>。先根=根+依次先根遍历子树 = 二叉树先序（根、左子树=第一棵子树、右链）。
+树的后根遍历对应二叉树的<strong>中序</strong>——两句话一起背。</p>
+</blockquote>
+<p><strong>DS51.</strong>★ n 个叶结点的哈夫曼树总结点数：
+A. 2n−1 B. 2n C. n−1 D. 2n+1</p>
+<blockquote>
+<p><strong>A</strong>。哈夫曼树没有度 1 结点：n₀=n，n₂=n−1，共 2n−1。</p>
+</blockquote>
+<p><strong>DS52.</strong>★★ 权 {1,2,3,4} 构造哈夫曼树，WPL：
+A. 19 B. 20 C. 18 D. 25</p>
+<blockquote>
+<p><strong>A</strong>。合并 1+2=3，再 3+3=6，再 6+4=10：叶深 1:3, 2:3, 3:2, 4:1 ⇒ WPL=3+6+6+4=19。</p>
+</blockquote>
+<p><strong>DS53.</strong>★ 哈夫曼树中不存在度为什么的结点：
+A. 0 B. 1 C. 2 D. 3</p>
+<blockquote>
+<p><strong>B</strong>。每次合并都是二合一，度 1 结点"浪费路径"必被消除。</p>
+</blockquote>
+<p><strong>DS54.</strong>★★ AVL 树插入新结点后失衡，LL 型（左孩子的左子树）的调整：
+A. 右单旋 B. 左单旋 C. 先左后右双旋 D. 先右后左双旋</p>
+<blockquote>
+<p><strong>A</strong>。LL→右旋；RR→左旋；LR→先左后右；RL→先右后左。</p>
+</blockquote>
+<p><strong>DS55.</strong>★★ 高度为 h 的 AVL 树最少结点数 N(h) 满足：
+A. N(h)=2^{h−1} B. N(h)=N(h−1)+N(h−2)+1 C. N(h)=2N(h−1) D. N(h)=h²</p>
+<blockquote>
+<p><strong>B</strong>。根+左子树最少 N(h−1)+右子树最少 N(h−2)。
+N(1)=1，N(2)=2，N(3)=4，N(4)=7，N(5)=12。</p>
+</blockquote>
+<p><strong>DS56.</strong>★★ 高度为 7 的 AVL 树最少结点数：
+A. 20 B. 33 C. 12 D. 45</p>
+<blockquote>
+<p><strong>B</strong>。N(6)=20，N(7)=N(6)+N(5)+1=20+12+1=33。</p>
+</blockquote>
+<p><strong>DS57.</strong>★ 二叉排序树的中序遍历序列是：
+A. 无序 B. 递增有序 C. 递减有序 D. 先增后减</p>
+<blockquote>
+<p><strong>B</strong>。BST 定义（左&lt;根&lt;右）直接推出中序递增——这也是判 BST 的标准方法。</p>
+</blockquote>
+<p><strong>DS58.</strong>★★ BST 删除一个<strong>左右子树都存在</strong>的结点，标准做法：
+A. 直接删 B. 用其中序前驱（或后继）替代后删前驱/后继 C. 旋转 D. 重建整树</p>
+<blockquote>
+<p><strong>B</strong>。拿左子树最右结点（前驱）或右子树最左结点（后继）的值顶上，再删那个前驱/后继结点。</p>
+</blockquote>
+<p><strong>DS59.</strong>★★ 对 {5,2,7,1} 依次建 BST，成功查找的平均查找长度：
+A. 2 B. 2.5 C. 1.75 D. 3</p>
+<blockquote>
+<p><strong>A</strong>。树：5 为根，2 左、7 右，1 在 2 左。深度 1,2,2,3 ⇒ ASL=(1+2+2+3)/4=2。</p>
+</blockquote>
+<p><strong>DS60.</strong>★★ m 阶 B 树中，根结点至少有几棵子树：
+A. 1 B. 2 C. ⌈m/2⌉ D. m</p>
+<blockquote>
+<p><strong>B</strong>。根最少 2 棵（除非整树只有根）；非根非叶至少 ⌈m/2⌉ 棵。</p>
+</blockquote>
+<p><strong>DS61.</strong>★★ B 树插入关键字导致结点上溢时：
+A. 丢弃 B. 中间关键字上移，结点分裂 C. 整树重建 D. 左右借</p>
+<blockquote>
+<p><strong>B</strong>。分裂取中间上移；"左右借"是<strong>删除</strong>时的处理手段之一。</p>
+</blockquote>
+<p><strong>DS62.</strong>★★ B+ 树中 n 个关键字的结点有几棵子树：
+A. n−1 B. n C. n+1 D. ⌈n/2⌉</p>
+<blockquote>
+<p><strong>B</strong>。B+ 树叶子/内部结点关键字数=子树数（B 树是 n 关键字 n+1 棵子树——差别必考）。</p>
+</blockquote>
+<p><strong>DS63.</strong>★★ B+ 树相比 B 树更适合数据库索引的原因：
+A. 树更矮（阶更大） B. 叶子链表支持范围查询、每次查询到叶深度一致 C. 存储更少 D. 不需要平衡</p>
+<blockquote>
+<p><strong>B</strong>。所有记录都在叶层且叶间链表相连，范围扫描极快；每次查找路径等长。
+A 不算核心区别（两者高度同级）；C、D 错。</p>
+</blockquote>
+<p><strong>DS64.</strong>★ "双亲表示法"存储树，每个结点保存：
+A. 孩子指针 B. 双亲下标 C. 兄弟指针 D. 层号</p>
+<blockquote>
+<p><strong>B</strong>。数组元素 = 数据 + 双亲位置；找孩子要遍历。</p>
+</blockquote>
+<p><strong>DS65.</strong>★ 二叉树先序遍历的非递归实现借助：
+A. 队列 B. 栈 C. 散列表 D. 递归不能改</p>
+<blockquote>
+<p><strong>B</strong>。访问根→右孩子先入栈→左孩子入栈，逐层下降回溯上升。</p>
+</blockquote>
+<p><strong>DS66.</strong>★★ 完全二叉树（n 个结点，1 起编号）中编号 i 的结点有右孩子的条件：
+A. 2i≤n B. 2i+1≤n C. i≤n/2 D. i 为偶数</p>
+<blockquote>
+<p><strong>B</strong>。右孩子编号 2i+1 存在当且仅当 ≤n。
+A 是"有左孩子"的条件；C 是"有孩子（是分支结点）"的等价条件（⇒有左孩子）。</p>
+</blockquote>
+<p><strong>DS67.</strong>★★ 每个结点只有左孩子的二叉树，其先序序列与中序序列的关系：
+A. 相同 B. 互为逆序 C. 无关系 D. 中序是先序的循环移位</p>
+<blockquote>
+<p><strong>B</strong>。左链：先序=自上而下 N L，中序=自下而上 L N ⇒ 互逆。
+同理只有右孩子时先序=中序（A 只在那一种情形才对，本题是左孩子）。</p>
+</blockquote>
+<p><strong>DS68.</strong>★★ 递归中序遍历 n 结点、高 h 的二叉树，栈空间复杂度：
+A. O(1) B. O(n) C. O(h) D. O(nlogn)</p>
+<blockquote>
+<p><strong>C</strong>。递归深度=树高。平衡时 O(logn)，斜树最坏 O(n)（仍是 O(h) 的上界表述）。</p>
+</blockquote>
+<p><strong>DS69.</strong>★ 二叉树层序遍历借助：
+A. 栈 B. 队列 C. 数组 D. 递归</p>
+<blockquote>
+<p><strong>B</strong>。出队访问、孩子依次入队，天然逐层。</p>
+</blockquote>
+<p><strong>DS70.</strong>★★ 树的路径长度（各结点深度之和）达到最小的二叉树是：
+A. 单支树 B. 完全二叉树 C. 满二叉树才可能 D. BST</p>
+<blockquote>
+<p><strong>B</strong>。同样结点数下完全二叉树深度最小、逐层填满 ⇒ 路径长度最小（哈夫曼思想的前奏）。</p>
+</blockquote>
+<h2>§4 图（DS71–DS95）</h2>
+<p><strong>DS71.</strong>★ n 个顶点的无向完全图边数：
+A. n² B. n(n−1) C. n(n−1)/2 D. n−1</p>
+<blockquote>
+<p><strong>C</strong>。每对顶点一条边，C(n,2)。</p>
+</blockquote>
+<p><strong>DS72.</strong>★ n 个顶点的有向完全图弧数：
+A. n(n−1)/2 B. n(n−1) C. n² D. 2n</p>
+<blockquote>
+<p><strong>B</strong>。每对顶点两条方向相反的弧。</p>
+</blockquote>
+<p><strong>DS73.</strong>★★ n 个顶点的无向连通图至少几条边：
+A. n B. n−1 C. n+1 D. n/2</p>
+<blockquote>
+<p><strong>B</strong>。生成树形态，n−1 条边恰好连通。</p>
+</blockquote>
+<p><strong>DS74.</strong>★★ 邻接矩阵存储下图结构，DFS 与 BFS 的时间复杂度：
+A. O(n+e) B. O(n²) C. O(e²) D. O(nloge)</p>
+<blockquote>
+<p><strong>B</strong>。矩阵找邻接点要扫整行，n 个顶点各扫一行。
+A 是<strong>邻接表</strong>存储的复杂度。</p>
+</blockquote>
+<p><strong>DS75.</strong>★ DFS 与 BFS 分别借助：
+A. 队列、栈 B. 栈、队列 C. 都用栈 D. 都用队列</p>
+<blockquote>
+<p><strong>B</strong>。DFS 回溯=栈；BFS 逐层=队列。</p>
+</blockquote>
+<p><strong>DS76.</strong>★★ 生成树的边数与特征：
+A. n 条边且可能有环 B. n−1 条边且无环、连通 C. n+1 条边 D. 边数不定</p>
+<blockquote>
+<p><strong>B</strong>。生成树=包含全部顶点的极小连通子图。</p>
+</blockquote>
+<p><strong>DS77.</strong>★★ Prim 与 Kruskal 的适用场景：
+A. Prim 稠密图 O(n²)，Kruskal 稀疏图 O(eloge) B. 相反 C. 都只适合稠密 D. 都只适合稀疏</p>
+<blockquote>
+<p><strong>A</strong>。Prim 每轮扫顶点相关边；Kruskal 先排序边再并查集。</p>
+</blockquote>
+<p><strong>DS78.</strong>★★★ 关于最小生成树（各边权互不相同）：
+A. 不唯一 B. 唯一，且环上权最大的边必不在树中 C. 权值和可能不同 D. 必含权最小的边但不含权最大的边（对全图而言）</p>
+<blockquote>
+<p><strong>B</strong>。权互异 ⇒ MST 唯一；任何环上权最大的边不在 MST（否则换掉更小）。D 错：MST 可以包含全图权最大的边（如果它是桥）。C 错：MST 权值和总是唯一的。</p>
+</blockquote>
+<p><strong>DS79.</strong>★★ Dijkstra 算法的适用限制：
+A. 不能有负权边 B. 不能有环 C. 只能无向图 D. 只能 5 个顶点</p>
+<blockquote>
+<p><strong>A</strong>。贪心"已确定即最短"被负边破坏。
+有环、有向无向都行。</p>
+</blockquote>
+<p><strong>DS80.</strong>★ 邻接矩阵下 Dijkstra 的时间复杂度：
+A. O(n²) B. O(eloge) C. O(n³) D. O(nloge)</p>
+<blockquote>
+<p><strong>A</strong>。每轮 O(n) 选最小 + 更新，共 n 轮。</p>
+</blockquote>
+<p><strong>DS81.</strong>★★ Floyd 算法：
+A. O(n³)，可处理负权边（不能有负权回路） B. O(n²) 负权随便 C. O(eloge) D. 不能用于有向图</p>
+<blockquote>
+<p><strong>A</strong>。三重循环动态规划；负回路会使"最短路"无意义。
+逐对顶点（all-pairs），与 Dijkstra 的单源相对。</p>
+</blockquote>
+<p><strong>DS82.</strong>★★ AOV 网拓扑排序的做法：
+A. 反复摘除入度为 0 的顶点 B. 反复摘除出度为 0 的顶点 C. 深搜即可随意 D. 按编号排序</p>
+<blockquote>
+<p><strong>A</strong>。入度 0 先输出并删除其出边（B 是逆拓扑的做法）。</p>
+</blockquote>
+<p><strong>DS83.</strong>★★ 拓扑排序输出顶点数少于 n 说明：
+A. 图不连通 B. 图有环 C. 图是完全图 D. 算法出错</p>
+<blockquote>
+<p><strong>B</strong>。剩下的顶点互相构成环，入度永不为 0——拓扑排序因此能判环。</p>
+</blockquote>
+<p><strong>DS84.</strong>★★★ 关于关键路径（AOE 网）：
+A. 关键活动提前完成，工程必定提前 B. 关键路径唯一 C. 缩短任一关键活动一定缩短工期 D. 关键路径可能不唯一，缩短关键活动不一定缩短总工期</p>
+<blockquote>
+<p><strong>D</strong>。多条关键路径并存时，只缩短其中一条不起作用（除非全部公共活动都缩短）。
+A/B/C 都是常见错误表述。</p>
+</blockquote>
+<p><strong>DS85.</strong>★★ 关键活动的特征：
+A. 最早开始时间=最迟开始时间 B. 活动时间最长 C. 入度最大 D. 任意</p>
+<blockquote>
+<p><strong>A</strong>。时间余量为 0 的活动。关键路径由关键活动串成。</p>
+</blockquote>
+<p><strong>DS86.</strong>★★ 无向图 DFS 中遇到"已访问且非双亲"的顶点说明：
+A. 图有环 B. 图连通 C. 算法有 bug D. 完全图</p>
+<blockquote>
+<p><strong>A</strong>。回边意味着环（树的"额外边"）。</p>
+</blockquote>
+<p><strong>DS87.</strong>★★ 同一图的邻接表存储，不同邻接点次序会导致：
+A. DFS/BFS 序列不同 B. 连通性改变 C. 度数改变 D. 无任何影响</p>
+<blockquote>
+<p><strong>A</strong>。邻接表邻接点顺序影响访问次序；邻接矩阵存储时 DFS 序列是唯一的（按下标）。图本身（B/C）不因存储而变。</p>
+</blockquote>
+<p><strong>DS88.</strong>★ 有向图所有顶点入度之和与弧数 E 的关系：
+A. 入度和=出度和=E B. 入度和=2E C. 无关 D. 入度和=nE</p>
+<blockquote>
+<p><strong>A</strong>。每条弧贡献 1 入 1 出，两和都等于 E（握手定理的有向版）。</p>
+</blockquote>
+<p><strong>DS89.</strong>★★★ n 个顶点的无向图，边数至少为多少时<strong>必定</strong>连通：
+A. n−1 B. C(n−1,2)+1 C. n(n−1)/2 D. n</p>
+<blockquote>
+<p><strong>B</strong>。不连通的极端情形是 n−1 个点完全图+1 个孤立点：边数 C(n−1,2)。再多一条边就必须连上孤立点 ⇒ 连通。
+A 只保证"可能连通"。</p>
+</blockquote>
+<p><strong>DS90.</strong>★ 存储有向图（需同时方便求出边与入边）适合：
+A. 邻接多重表 B. 十字链表 C. 邻接矩阵专用 D. 双链表</p>
+<blockquote>
+<p><strong>B</strong>。十字链表=邻接表+逆邻接表合一。
+A 用于无向图。</p>
+</blockquote>
+<p><strong>DS91.</strong>★ 无权图单源最短路径的合适算法：
+A. Dijkstra B. BFS C. Floyd D. Prim</p>
+<blockquote>
+<p><strong>B</strong>。BFS 按层扩散，第一次到达即最短层数。
+A 能做但"杀鸡用牛刀"且复杂；C 是全对；D 是生成树。</p>
+</blockquote>
+<p><strong>DS92.</strong>★★ 同一图的不同最小生成树（权有重复时）：
+A. 权值和不同 B. 权值和相同，树形可能不同 C. 完全相同 D. 不存在</p>
+<blockquote>
+<p><strong>B</strong>。MST 总权值是唯一确定的，边集可能多个。</p>
+</blockquote>
+<p><strong>DS93.</strong>★ 求"从某顶点出发 DFS 得到生成树"的过程叫做：
+A. 最小生成树 B. 深度优先生成树 C. 最短路树 D. 哈夫曼树</p>
+<blockquote>
+<p><strong>B</strong>。DFS/BFS 各自产生生成树/森林，与"最小"无关（那是 MST）。</p>
+</blockquote>
+<p><strong>DS94.</strong>★★ 得到逆拓扑序列的方法：
+A. DFS 完成时记录顶点，最后逆置 B. BFS C. 按入度排序 D. 不能得到</p>
+<blockquote>
+<p><strong>A</strong>。DFS 退栈序天然是"子先父后"，逆置即拓扑序（或说退出序的逆=拓扑序）。有向无环图才有效。</p>
+</blockquote>
+<p><strong>DS95.</strong>★★ 树中若度为 i 的结点有 nᵢ 个（i=1..k），叶子数 n₀ = ：
+A. n₁+n₂ B. 1+Σ(i−1)nᵢ C. Σnᵢ−1 D. 2n₁</p>
+<blockquote>
+<p><strong>B</strong>。边数 = n−1 = Σi·nᵢ ⇒ n₀+n₁+⋯ = 1+Σi·nᵢ ⇒ n₀ = 1+Σ_{i≥2}(i−1)nᵢ。</p>
+</blockquote>
+<h2>§5 查找（DS96–DS110）</h2>
+<p><strong>DS96.</strong>★ n 个元素顺序查找（等概率），成功的平均查找长度：
+A. n/2 B. (n+1)/2 C. log₂n D. n</p>
+<blockquote>
+<p><strong>B</strong>。Σi/n = (n+1)/2。</p>
+</blockquote>
+<p><strong>DS97.</strong>★★ 有序表 127 个元素折半查找，最大比较次数：
+A. 6 B. 7 C. 8 D. 10</p>
+<blockquote>
+<p><strong>B</strong>。⌈log₂(127+1)⌉=⌈log₂128⌉=7（判定树高 7）。</p>
+</blockquote>
+<p><strong>DS98.</strong>★★ 15 个元素折半查找，等概率成功 ASL：
+A. 4 B. 49/15≈3.27 C. 3 D. 2.5</p>
+<blockquote>
+<p><strong>B</strong>。判定树满 4 层：1+2+4+8 个结点深度 1,2,3,4 ⇒ (1·1+2·2+3·4+4·8)/15 = 49/15。</p>
+</blockquote>
+<p><strong>DS99.</strong>★ 折半查找的适用条件：
+A. 任何线性表 B. 顺序存储的有序表 C. 链式有序表 D. 哈希表</p>
+<blockquote>
+<p><strong>B</strong>。要 O(1) 取中点（顺序存储）+有序。
+C 链表找中点 O(n)，退化为顺序查找。</p>
+</blockquote>
+<p><strong>DS100.</strong>★★ 1000 个元素分 20 块、每块 50，分块查找（顺序查索引+顺序查块内）ASL：
+A. 36 B. 30 C. 25 D. 51</p>
+<blockquote>
+<p><strong>A</strong>。(20+1)/2 + (50+1)/2 = 10.5+25.5 = 36。</p>
+</blockquote>
+<p><strong>DS101.</strong>★★ 散列表装填因子 α 的定义：
+A. 表长/元素数 B. 元素数/表长 C. 冲突次数 D. 链长</p>
+<blockquote>
+<p><strong>B</strong>。α=n/m。散列表查找效率主要取决于 α，与 n 本身无直接关系。</p>
+</blockquote>
+<p><strong>DS102.</strong>★★ 开放定址法处理冲突的散列表，删除元素应：
+A. 直接置空 B. 打删除标记（惰性删除） C. 后续元素前移 D. 不能删除</p>
+<blockquote>
+<p><strong>B</strong>。物理置空会截断探测链；也不能整体前移（C 会破坏其他键的探测路径）。
+链地址法才能直接摘链。</p>
+</blockquote>
+<p><strong>DS103.</strong>★★ 线性探测法的主要缺陷：
+A. 太快 B. 堆积（聚集）——非同义词争夺同一探测序列 C. 占内存 D. 只能存整数</p>
+<blockquote>
+<p><strong>B</strong>。冲突元素"占用别人的家"，后续键被迫连片探测。</p>
+</blockquote>
+<p><strong>DS104.</strong>★ H(k)=k mod 13，插入 12 与 25：
+A. 不冲突 B. 冲突（12≡25 mod 13） C. 只有一个能存 D. 表溢出</p>
+<blockquote>
+<p><strong>B</strong>。25−12=13 ⇒ 同一初始地址 12，是<strong>同义词冲突</strong>。</p>
+</blockquote>
+<p><strong>DS105.</strong>★★ B 树查找失败时终止于：
+A. 根 B. 失败（外部/叶子空位）结点 C. 任意结点 D. 重头再来</p>
+<blockquote>
+<p><strong>B</strong>。走到叶层的空指针处，查找路径长度=树高，失败也如此。</p>
+</blockquote>
+<p><strong>DS106.</strong>★ 二叉排序树查找的最坏时间复杂度：
+A. O(1) B. O(logn) C. O(n) D. O(nlogn)</p>
+<blockquote>
+<p><strong>C</strong>。退化成单支树（按有序序插入）时高=n。</p>
+</blockquote>
+<p><strong>DS107.</strong>★★ AVL 树删除结点可能引起：
+A. 至多一次旋转 B. 多次旋转（可一路旋转到根） C. 必须重建 D. 无影响</p>
+<blockquote>
+<p><strong>B</strong>。删除不同于插入：失衡可能沿祖先链向上传播。</p>
+</blockquote>
+<p><strong>DS108.</strong>★★ 散列表平均查找长度：
+A. 与元素个数 n 成正比 B. 与装填因子 α 有关，几乎与 n 无关 C. 与表长成反比 D. 恒为 1</p>
+<blockquote>
+<p><strong>B</strong>。这是散列相对其他查找结构的本质优势。
+A 是顺序/折半的特征。</p>
+</blockquote>
+<p><strong>DS109.</strong>★★ 折半查找<strong>失败</strong>时最多比较次数：
+A. ⌈log₂(n+1)⌉ B. n C. n/2 D. log₂n−1</p>
+<blockquote>
+<p><strong>A</strong>。失败都终止在判定树的外部结点层，深度=⌈log₂(n+1)⌉。</p>
+</blockquote>
+<p><strong>DS110.</strong>★★ 顺序表插入/删除平均移动 vs 单链表：
+A. 顺序表 O(n)，链表定位 O(n) 但插删本身 O(1) B. 都是 O(1) C. 顺序表 O(1) D. 链表 O(n²)</p>
+<blockquote>
+<p><strong>A</strong>。链表的 O(n) 在"找位置"，找到后只改指针；顺序表的 O(n) 在"搬元素"。</p>
+</blockquote>
+<h2>§6 排序（DS111–DS120）</h2>
+<p><strong>DS111.</strong>★★ 下列全部<strong>稳定</strong>的排序：
+A. 快排、堆排、希尔 B. 直接插入、冒泡、归并、基数 C. 选择、快排、归并 D. 堆排、基数、冒泡</p>
+<blockquote>
+<p><strong>B</strong>。四大稳定户。
+A 中三个全不稳定；C 选择/快排不稳定；D 堆排不稳定。</p>
+</blockquote>
+<p><strong>DS112.</strong>★★ 快速排序每一趟（一次划分）能保证：
+A. 全局有序 B. 一个元素（枢轴）到达最终位置 C. 一半有序 D. 无任何保证</p>
+<blockquote>
+<p><strong>B</strong>。枢轴左边都 ≤ 它、右边都 ≥ 它，位置即最终位置。</p>
+</blockquote>
+<p><strong>DS113.</strong>★★ 快速排序最坏情况（O(n²)）发生在：
+A. 完全随机 B. 序列基本有序或逆序（划分极不平衡） C. 元素全相同且取到好枢轴 D. n 很小</p>
+<blockquote>
+<p><strong>B</strong>。每次只划分出 1 与 n−1 两段 ⇒ 递归深度 n。
+C 若随机枢轴则期望仍 O(nlogn)（三路划分可处理重复）。</p>
+</blockquote>
+<p><strong>DS114.</strong>★★ 堆排序建初堆的时间复杂度：
+A. O(nlogn) B. O(n) C. O(n²) D. O(logn)</p>
+<blockquote>
+<p><strong>B</strong>。自底向上 siftDown 的总代价 O(n)（各层结点数×下沉代价求和）。逐个插入建堆才是 O(nlogn)。</p>
+</blockquote>
+<p><strong>DS115.</strong>★★ 下列序列中是<strong>大根堆</strong>的：
+A. (90,70,60,40,30,20) B. (20,30,40,60,70,90) C. (90,40,70,30,60,20) D. (1,2,3,4,5)</p>
+<blockquote>
+<p><strong>A</strong>。逐个验证 i≤⌊n/2⌋：90≥70,60；70≥40,30；60≥20 ✓。
+C 中 90≥40,70 ✓ 但 70≥30? 位置2=40 孩子位置4=30,位置5=60：40&lt;60 ✗ 非堆；B 是小根堆；D 是小根堆。</p>
+</blockquote>
+<p><strong>DS116.</strong>★★ n 个元素 2 路归并排序的趟数：
+A. n−1 B. ⌈log₂n⌉ C. n/2 D. n²</p>
+<blockquote>
+<p><strong>B</strong>。每趟有序段长翻倍。</p>
+</blockquote>
+<p><strong>DS117.</strong>★★ 基数排序的时间复杂度（d 位关键字，基数 r，n 个元素）：
+A. O(nlogn) B. O(d(n+r)) C. O(n²) D. O(dn²)</p>
+<blockquote>
+<p><strong>B</strong>。d 趟"分配+收集"，每趟 O(n+r)。</p>
+</blockquote>
+<p><strong>DS118.</strong>★★ 冒泡排序在输入已有序时的比较次数与时间复杂度：
+A. n−1 次，O(n)（带提前退出标志） B. n(n−1)/2，O(n²) C. logn 次 D. 无法结束</p>
+<blockquote>
+<p><strong>A</strong>。一趟无交换即停；不带提前退出才退化成 B。</p>
+</blockquote>
+<p><strong>DS119.</strong>★★ 简单选择排序的比较次数与初始序列的关系：
+A. 与初始状态有关 B. 恒为 n(n−1)/2 C. 有序时为 0 D. 逆序时最少</p>
+<blockquote>
+<p><strong>B</strong>。每趟都要在剩余元素里选最值，比较次数与数据分布无关（移动次数才与初始有关）。</p>
+</blockquote>
+<p><strong>DS120.</strong>★★★ 外部排序中，k 路归并配合败者树，每次选最小记录的比较次数：
+A. k−1 次 B. ⌈log₂k⌉ 次 C. k 次 D. 1 次</p>
+<blockquote>
+<p><strong>B</strong>。败者树（树形选择）把 k 路选最小从 k−1 次比较降到 ⌈log₂k⌉ 次。
+A 是无树形结构的线性比较。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：DS1–DS120。使用节奏：§1–§2 一天、§3 一天半、§4 一天半、§5–§6 一天。错题按章节标回《数据结构_考题集》旁；B树/B+树、关键路径、散列表三块是近年高频，★题全做。</p></div></body></html>

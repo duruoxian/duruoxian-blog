@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_级数专项 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 级数专项（100题带详解）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，数一专属章节（数二不考），配合《高数_知识点与难点》第8章使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题标回《数学考题集》同章节旁。
+覆盖：数项级数性质、正项级数五大判别法、交错级数与绝对条件收敛、幂级数收敛域与和函数、函数幂级数展开、傅里叶级数。</p>
+</blockquote>
+<h2>§1 数项级数概念与性质（S1–S15）</h2>
+<p><strong>S1.</strong>★ 级数收敛的定义。</p>
+<blockquote>
+<p><strong>部分和数列 Sₙ 的极限存在（有限）</strong>。判敛先想部分和。</p>
+</blockquote>
+<p><strong>S2.</strong>★ 收敛的必要条件与经典反例。</p>
+<blockquote>
+<p>通项 uₙ→0。<strong>反之不成立</strong>：调和级数 Σ1/n 通项→0 但发散。</p>
+</blockquote>
+<p><strong>S3.</strong>★ 增删有限项对敛散性的影响：
+A. 可能改变 B. 不改变敛散性（和可能变） C. 必发散 D. 和不变</p>
+<blockquote>
+<p><strong>B</strong>。前面有限项是常数；若收敛则和会变，发散依旧发散。</p>
+</blockquote>
+<p><strong>S4.</strong>★ 求 Σ 1/[n(n+1)]。</p>
+<blockquote>
+<p>裂项：1/[n(n+1)] = 1/n − 1/(n+1)，部分和 = 1 − 1/(n+1) → <strong>1</strong>。</p>
+</blockquote>
+<p><strong>S5.</strong>★ 求 Σ 1/[(2n−1)(2n+1)]。</p>
+<blockquote>
+<p>裂项 ½[1/(2n−1) − 1/(2n+1)] ⇒ 部分和 = ½(1 − 1/(2n+1)) → <strong>1/2</strong>。</p>
+</blockquote>
+<p><strong>S6.</strong>★ 等比级数 Σaq^{n−1} 的敛散与求和。</p>
+<blockquote>
+<p>|q|&lt;1 收敛，和 = <strong>a/(1−q)</strong>；|q|≥1 发散（q=1 时通项不趋0，q=−1 时部分和振荡）。</p>
+</blockquote>
+<p><strong>S7.</strong>★ 调和级数 Σ1/n 是否收敛？</p>
+<blockquote>
+<p><strong>发散</strong>（部分和超过 1+½+½+⋯，按 2^k 分组每组和 &gt;½）。它是"通项趋0仍发散"的招牌。</p>
+</blockquote>
+<p><strong>S8.</strong>★ p-级数 Σ1/n^p 的敛散。</p>
+<blockquote>
+<p><strong>p&gt;1 收敛，p≤1 发散</strong>。p=1 临界，p=2 与 p=1/2 是两大代表。</p>
+</blockquote>
+<p><strong>S9.</strong>★ Σ1/√n 敛散性。</p>
+<blockquote>
+<p>p=1/2&lt;1 ⇒ <strong>发散</strong>（比较 1/n 知它比调和"略好"但不够）。</p>
+</blockquote>
+<p><strong>S10.</strong>★ 求 Σ (1/2ⁿ + 1/3ⁿ)（n≥1）。</p>
+<blockquote>
+<p>两收敛级数逐项相加：1 + 1/2 = <strong>3/2</strong>。</p>
+</blockquote>
+<p><strong>S11.</strong>★ 收敛级数加括号后：
+A. 可能发散 B. 仍收敛且和不变 C. 变 D. 无法判断</p>
+<blockquote>
+<p><strong>B</strong>。括号部分和是原部分和的子列。<strong>去括号则不然</strong>（(1−1)+(1−1) 收敛，去括号发散）。</p>
+</blockquote>
+<p><strong>S12.</strong>★ 通项中出现 n! 或 qⁿ 时优先想什么判别法？</p>
+<blockquote>
+<p><strong>比值判别法</strong>（阶乘/指数增长快）；幂形式 (aₙ)ⁿ 优先<strong>根值法</strong>。</p>
+</blockquote>
+<p><strong>S13.</strong>★ 通项 uₙ 有界能否保证收敛？</p>
+<blockquote>
+<p><strong>不能</strong>——uₙ=1 有界但级数发散。必要条件是"趋 0"，有界远弱于此。</p>
+</blockquote>
+<p><strong>S14.</strong>★ 判别 Σ n/(n³+1)。</p>
+<blockquote>
+<p>~1/n²（抓主部）⇒ <strong>收敛</strong>（比较判别法）。</p>
+</blockquote>
+<p><strong>S15.</strong>★ 两个收敛级数逐项相减得到：
+A. 发散 B. 收敛 C. 不定 D. 条件收敛</p>
+<blockquote>
+<p><strong>B</strong>。线性组合保持收敛。<strong>收敛−发散=发散</strong>才是要防的坑。</p>
+</blockquote>
+<h2>§2 正项级数判别（S16–S40）</h2>
+<p><strong>S16.</strong>★ 比较判别法极限形式的内容。</p>
+<blockquote>
+<p>aₙ,bₙ&gt;0 且 lim aₙ/bₙ = c：0&lt;c&lt;+∞ ⇒ <strong>同敛散</strong>；c=0 时 b 收敛⇒a 收敛；c=∞ 时 b 发散⇒a 发散。</p>
+</blockquote>
+<p><strong>S17.</strong>★ 判别 Σ sin(1/n)。</p>
+<blockquote>
+<p>sin(1/n) ~ 1/n ⇒ <strong>发散</strong>（与调和同敛散）。</p>
+</blockquote>
+<p><strong>S18.</strong>★ 判别 Σ 1/[n√(n+1)]。</p>
+<blockquote>
+<p>~ 1/n^{3/2} ⇒ <strong>收敛</strong>（p=3/2&gt;1）。</p>
+</blockquote>
+<p><strong>S19.</strong>★★ 判别 Σ n!/nⁿ。</p>
+<blockquote>
+<p>比值：aₙ₊₁/aₙ = [（n+1)!/（n+1)^{n+1}]·[nⁿ/n!] = (n/(n+1))ⁿ → 1/e &lt; 1 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S20.</strong>★ 判别 Σ n!/10ⁿ。</p>
+<blockquote>
+<p>比值 = (n+1)/10 → +∞ ⇒ <strong>发散</strong>。</p>
+</blockquote>
+<p><strong>S21.</strong>★★ 判别 Σ (2n)!/(n!)²。</p>
+<blockquote>
+<p>比值 = (2n+2)(2n+1)/(n+1)² → 4 &gt; 1 ⇒ <strong>发散</strong>（中心二项式系数级数）。</p>
+</blockquote>
+<p><strong>S22.</strong>★★ 判别 Σ [n/(2n+1)]ⁿ。</p>
+<blockquote>
+<p>根值：aₙ^{1/n} = n/(2n+1) → 1/2 &lt; 1 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S23.</strong>★★ 判别 Σ (1+1/n)^{−n²}。</p>
+<blockquote>
+<p>根值：(1+1/n)^{−n} → 1/e &lt; 1 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S24.</strong>★★ 判别 Σ 1/(ln n)ⁿ（n≥2）。</p>
+<blockquote>
+<p>根值：1/lnn → 0 &lt; 1 ⇒ <strong>收敛</strong>（lnn 增长慢但指数位置上足够）。</p>
+</blockquote>
+<p><strong>S25.</strong>★★ 用积分判别法判 Σ 1/(n·ln²n)（n≥2）。</p>
+<blockquote>
+<p>∫₂^{+∞} dx/(x·ln²x) = [−1/lnx]₂^{+∞} = 1/ln2 有限 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S26.</strong>★ 判别 Σ 1/(n·lnn)（n≥2）。</p>
+<blockquote>
+<p>∫dx/(xlnx) = lnlnx → +∞ ⇒ <strong>发散</strong>。与 S25 成对，<strong>只差一个平方</strong>。</p>
+</blockquote>
+<p><strong>S27.</strong>★★ 比值法对 Σ1/n² 的结果说明什么？</p>
+<blockquote>
+<p>lim aₙ₊₁/aₙ = 1（失效）⇒ 比值法对 p-级数一律失效，此时<strong>换比较法</strong>。</p>
+</blockquote>
+<p><strong>S28.</strong>★★★ 判别 Σ nⁿ/(n!)²。</p>
+<blockquote>
+<p>比值 = (1+1/n)ⁿ/(n+1) → e/(n+1) → 0 &lt; 1 ⇒ <strong>收敛</strong>（(n+1)² 的压制）。</p>
+</blockquote>
+<p><strong>S29.</strong>★★ 判别 Σ [1−cos(1/n)]。</p>
+<blockquote>
+<p>1−cos(1/n) ~ 1/(2n²) ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S30.</strong>★ 判别 Σ (e^{1/n} − 1)。</p>
+<blockquote>
+<p>~ 1/n ⇒ <strong>发散</strong>。</p>
+</blockquote>
+<p><strong>S31.</strong>★★ 判别 Σ [tan(1/n)]/n。</p>
+<blockquote>
+<p>tan(1/n) ~ 1/n ⇒ 通项 ~ 1/n² ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S32.</strong>★ 下列收敛的是：Σ1/n^{1.1}、Σ1/n、Σ1/√n、Σlnn/n。
+A. 第一个 B. 第二个 C. 第三个 D. 第四个</p>
+<blockquote>
+<p><strong>A</strong>。p=1.1&gt;1。第四个 ~lnn/n ≥ 1/n 发散（比较）。</p>
+</blockquote>
+<p><strong>S33.</strong>★ 正项级数收敛的充要条件（用部分和表述）。</p>
+<blockquote>
+<p><strong>部分和数列有界</strong>。正项级数部分和单调增，有界即收敛——这是比较判别法的根基。</p>
+</blockquote>
+<p><strong>S34.</strong>★ 求 Σ [1/n − 1/(n+1)]。</p>
+<blockquote>
+<p>望远镜级数：部分和 = 1 − 1/(n+1) → <strong>1</strong>。</p>
+</blockquote>
+<p><strong>S35.</strong>★★ 判别 Σ (√(n+1) − √n)。</p>
+<blockquote>
+<p>部分和 = √(n+1) − 1 → +∞ ⇒ <strong>发散</strong>（有理化后通项 ~ 1/(2√n)，也判发散）。</p>
+</blockquote>
+<p><strong>S36.</strong>★ 判别 Σ 1/(n²−n+1)。</p>
+<blockquote>
+<p>分母 ~n² ⇒ <strong>收敛</strong>（与 Σ1/n² 比较，比值极限 1）。</p>
+</blockquote>
+<p><strong>S37.</strong>★ 判别 Σ 1/[n(n+1)(n+2)]。</p>
+<blockquote>
+<p>~1/n³ ⇒ <strong>收敛</strong>（也可裂项 telescope）。</p>
+</blockquote>
+<p><strong>S38.</strong>★★ 判别 Σ (n!)²/(2n)!。</p>
+<blockquote>
+<p>比值 = (n+1)²/[(2n+2)(2n+1)] → 1/4 &lt; 1 ⇒ <strong>收敛</strong>。</p>
+</blockquote>
+<p><strong>S39.</strong>★★ 判别 Σ 3ⁿ·n!/nⁿ。</p>
+<blockquote>
+<p>比值 = 3/(1+1/n)ⁿ → 3/e &gt; 1 ⇒ <strong>发散</strong>（3 &gt; e ≈ 2.718）。</p>
+</blockquote>
+<p><strong>S40.</strong>★★ 正项级数判别流程总结。</p>
+<blockquote>
+<p>先看通项→0？否 ⇒ 发散。是 ⇒ 试等价无穷小化简 → 与 p-级数/几何级数比较；含 n!、指数用比值；含 n 次幂用根值；含 lnn 用积分判别。</p>
+</blockquote>
+<h2>§3 交错级数与绝对、条件收敛（S41–S55）</h2>
+<p><strong>S41.</strong>★ 默写莱布尼茨判别法。</p>
+<blockquote>
+<p>交错级数 Σ(−1)ⁿ⁻¹aₙ（aₙ&gt;0）：若 <strong>aₙ 单调不增且 →0</strong>，则收敛，且余项 |Rₙ| ≤ aₙ₊₁。</p>
+</blockquote>
+<p><strong>S42.</strong>★ Σ(−1)ⁿ⁻¹/n 的敛散类型：</p>
+<blockquote>
+<p>|aₙ|=1/n 调和发散，但单调减趋0 ⇒ <strong>条件收敛</strong>。</p>
+</blockquote>
+<p><strong>S43.</strong>★ Σ(−1)ⁿ/n² 的敛散类型：</p>
+<blockquote>
+<p>Σ1/n² 收敛 ⇒ <strong>绝对收敛</strong>。</p>
+</blockquote>
+<p><strong>S44.</strong>★ Σ(−1)ⁿ(1+1/n)ⁿ 的敛散：</p>
+<blockquote>
+<p>通项 →(−1)ⁿe ≠ 0 ⇒ <strong>发散</strong>（必要条件不满足，别进莱布尼茨）。</p>
+</blockquote>
+<p><strong>S45.</strong>★ Σ(−1)ⁿ(1−1/n)ⁿ 的敛散：</p>
+<blockquote>
+<p>(1−1/n)ⁿ → 1/e ≠ 0 ⇒ <strong>发散</strong>。"−1/n"的负号骗不了极限。</p>
+</blockquote>
+<p><strong>S46.</strong>★★ 判别 Σ(−1)ⁿ sin(1/n)。</p>
+<blockquote>
+<p>绝对值级数 ~1/n 发散；sin(1/n) 单调减趋0 ⇒ <strong>条件收敛</strong>。</p>
+</blockquote>
+<p><strong>S47.</strong>★ 默写："绝对收敛 ⇒ 收敛"。</p>
+<blockquote>
+<p>对。正项级数 Σ|aₙ| 收敛则 Σaₙ 收敛（|aₙ|≥aₙ 的部分部分）。逆不成立。</p>
+</blockquote>
+<p><strong>S48.</strong>★ 条件收敛级数加绝对值后：
+A. 仍收敛 B. 必发散 C. 不定 D. 变绝对收敛</p>
+<blockquote>
+<p><strong>B</strong>。条件收敛=收敛但 Σ|aₙ| 发散，这是定义。</p>
+</blockquote>
+<p><strong>S49.</strong>★★ 讨论 p 取值时 Σ(−1)ⁿ/n^p 的敛散。</p>
+<blockquote>
+<p><strong>p&gt;1 绝对收敛；0&lt;p≤1 条件收敛；p≤0 发散</strong>（通项不趋0）。</p>
+</blockquote>
+<p><strong>S50.</strong>★★ 判别 Σ(−1)ⁿ·ln(1+1/n)。</p>
+<blockquote>
+<p>ln(1+1/n) 单调减趋0；绝对值 ~1/n 发散 ⇒ <strong>条件收敛</strong>。</p>
+</blockquote>
+<p><strong>S51.</strong>★★ 判别 Σ(−1)ⁿ·√n/(n+1)。</p>
+<blockquote>
+<p>aₙ=√n/(n+1)：递减趋0 ✓；绝对值 ~1/√n 发散 ⇒ <strong>条件收敛</strong>。</p>
+</blockquote>
+<p><strong>S52.</strong>★ 交错级数取前 n 项和 Sₙ 估计真值，误差：
+A. ≤ aₙ B. ≤ aₙ₊₁（首弃项） C. 任意大 D. 精确</p>
+<blockquote>
+<p><strong>B</strong>。莱布尼茨余项估计，数值计算常用。</p>
+</blockquote>
+<p><strong>S53.</strong>★★ 条件收敛级数能否通过重排改变和？</p>
+<blockquote>
+<p><strong>能</strong>（黎曼重排定理）：条件收敛级数可重排成任意指定和或发散；绝对收敛级数重排不变。</p>
+</blockquote>
+<p><strong>S54.</strong>★ 判别 Σ(−1)ⁿ·n/(n+1)。</p>
+<blockquote>
+<p>通项 →(−1)ⁿ ≠ 0 ⇒ <strong>发散</strong>。</p>
+</blockquote>
+<p><strong>S55.</strong>★ 绝对收敛级数与条件收敛级数逐项相加，结果是：</p>
+<blockquote>
+<p><strong>条件收敛</strong>。（若和绝对收敛，减去绝对收敛项会推出另一个绝对收敛，矛盾。）</p>
+</blockquote>
+<h2>§4 幂级数收敛域与和函数（S56–S80）</h2>
+<p><strong>S56.</strong>★ 收敛半径公式（不缺项幂级数 Σaₙxⁿ）。</p>
+<blockquote>
+<p>R = 1/lim|aₙ₊₁/aₙ|（极限为0⇒R=∞；为∞⇒R=0）。端点<strong>必须单独验证</strong>。</p>
+</blockquote>
+<p><strong>S57.</strong>★★ 求 Σ xⁿ/n 的收敛域。</p>
+<blockquote>
+<p>R=1。x=1：调和发散；x=−1：交错调和收敛。
+<strong>收敛域 (−1, 1]</strong>。</p>
+</blockquote>
+<p><strong>S58.</strong>★★ 求 Σ xⁿ/n² 的收敛域。</p>
+<blockquote>
+<p>R=1；x=±1 都收敛（p=2）⇒ <strong>[−1, 1]</strong>（处处绝对收敛）。</p>
+</blockquote>
+<p><strong>S59.</strong>★ 求 Σ xⁿ 的收敛域。</p>
+<blockquote>
+<p>几何级数 ⇒ <strong>(−1,1)</strong>，和 = 1/(1−x)。</p>
+</blockquote>
+<p><strong>S60.</strong>★ 求 Σ n!·xⁿ 的收敛半径。</p>
+<blockquote>
+<p>比值 |(n+1)x| → ∞（x≠0）⇒ <strong>R=0</strong>，只在 x=0 收敛。</p>
+</blockquote>
+<p><strong>S61.</strong>★ 求 Σ xⁿ/n! 的收敛域。</p>
+<blockquote>
+<p>R=+∞ ⇒ <strong>(−∞,+∞)</strong>，和 = eˣ。</p>
+</blockquote>
+<p><strong>S62.</strong>★★ 求 Σ xⁿ/(n·2ⁿ) 的收敛域。</p>
+<blockquote>
+<p>令 t=x/2：R 对 t 是 1 ⇒ |x|&lt;2。x=−2：Σ(−1)ⁿ/n 收敛；x=2：Σ1/n 发散。
+<strong>收敛域 [−2, 2)</strong>。</p>
+</blockquote>
+<p><strong>S63.</strong>★ 默写阿贝尔定理。</p>
+<blockquote>
+<p>幂级数在 x₀≠0 收敛 ⇒ 对一切 |x|&lt;|x₀| <strong>绝对收敛</strong>；在 x₁ 发散 ⇒ |x|&gt;|x₁| 全发散。收敛域是区间。</p>
+</blockquote>
+<p><strong>S64.</strong>★ 幂级数逐项求导/积分后，收敛半径：</p>
+<blockquote>
+<p><strong>不变</strong>（端点敛散可能改变，需重验）。</p>
+</blockquote>
+<p><strong>S65.</strong>★★★ 求 S(x)=Σ_{n≥0} xⁿ/(n+1) 的和函数（|x|&lt;1）。</p>
+<blockquote>
+<p>S = (1/x)Σ xⁿ⁺¹/(n+1) = (1/x)∫₀ˣ [Σtⁿ]dt = −ln(1−x)/x（x≠0）。
+<strong>S(x) = −ln(1−x)/x（x≠0，|x|&lt;1），S(0)=1</strong>（n=0 项）。</p>
+</blockquote>
+<p><strong>S66.</strong>★ 求 Σ n·xⁿ（|x|&lt;1）。</p>
+<blockquote>
+<p>Σxⁿ = 1/(1−x)，逐项求导：Σnxⁿ⁻¹ = 1/(1−x)² ⇒ <strong>Σnxⁿ = x/(1−x)²</strong>。</p>
+</blockquote>
+<p><strong>S67.</strong>★★ 求 Σ n²xⁿ（|x|&lt;1）。</p>
+<blockquote>
+<p>x·d/dx[x/(1−x)²] = <strong>x(1+x)/(1−x)³</strong>。</p>
+</blockquote>
+<p><strong>S68.</strong>★ Σ(−1)ⁿx^{2n}/(2n)! = ?</p>
+<blockquote>
+<p><strong>cosx</strong>（偶次项=余弦展开）。</p>
+</blockquote>
+<p><strong>S69.</strong>★ Σ(−1)ⁿx^{2n+1}/(2n+1)! = ?</p>
+<blockquote>
+<p><strong>sinx</strong>（奇次项=正弦展开）。</p>
+</blockquote>
+<p><strong>S70.</strong>★★ 求 Σ x^{2n}/(2n)（|x|&lt;1）。</p>
+<blockquote>
+<p>偶次调和：= ½[−ln(1−x) − ln(1+x)] = <strong>−½ln(1−x²)</strong>。</p>
+</blockquote>
+<p><strong>S71.</strong>★ 幂级数和函数在收敛区间内部是否连续？端点呢？</p>
+<blockquote>
+<p>内部逐项连续可导可积；<strong>端点若收敛，和函数在端点也（左/右）连续</strong>（阿贝尔第二定理）——求 S(±1) 常用它。</p>
+</blockquote>
+<p><strong>S72.</strong>★★ 求 Σ (x−1)ⁿ/n 的收敛域。</p>
+<blockquote>
+<p>|x−1|&lt;1；x=0：Σ(−1)ⁿ/n 收敛；x=2：Σ1/n 发散 ⇒ <strong>[0, 2)</strong>。</p>
+</blockquote>
+<p><strong>S73.</strong>★★ 求 Σ (2x+1)ⁿ/n 的收敛域。</p>
+<blockquote>
+<p>|2x+1|&lt;1 ⇒ −1&lt;x&lt;0。x=−1：Σ(−1)ⁿ/n 收敛；x=0：Σ1/n 发散。
+<strong>收敛域 [−1, 0)</strong>。</p>
+</blockquote>
+<p><strong>S74.</strong>★ 幂级数和函数的运算性质默写。</p>
+<blockquote>
+<p>收敛区间内可<strong>逐项求导、逐项积分任意次</strong>；收敛半径不变。</p>
+</blockquote>
+<p><strong>S75.</strong>★ 幂级数 Σ(n+1)xⁿ 的和函数。</p>
+<blockquote>
+<p>Σxⁿ⁺¹ = x/(1−x) 求导 ⇒ <strong>1/(1−x)²</strong>（|x|&lt;1）。</p>
+</blockquote>
+<p><strong>S76.</strong>★★★ 求 S(x)=Σ_{n≥1} xⁿ/[n(n+1)]（|x|&lt;1）。</p>
+<blockquote>
+<p>拆 1/[n(n+1)] = 1/n − 1/(n+1)：
+S = −ln(1−x) − (1/x)(−ln(1−x)−x) = <strong>1 + (1−x)·ln(1−x)/x</strong>（x≠0），S(0)=0。</p>
+</blockquote>
+<p><strong>S77.</strong>★ 幂级数在收敛区间内可以求导多少次？</p>
+<blockquote>
+<p><strong>任意次</strong>，收敛半径不变——幂级数和函数是"无穷光滑"的。</p>
+</blockquote>
+<p><strong>S78.</strong>★★ 求 Σ (−1)ⁿ⁻¹xⁿ/n 的和函数与它在 x=1 的值。</p>
+<blockquote>
+<p>逐项积分 1/(1+x)：<strong>S = ln(1+x)</strong>（−1&lt;x≤1）；x=1 时 = <strong>ln2</strong>（阿贝尔第二定理）。</p>
+</blockquote>
+<p><strong>S79.</strong>★ 利用幂级数求 Σ(−1)ⁿ⁻¹/n 的和。</p>
+<blockquote>
+<p>即 S78 在 x=1：<strong>ln2</strong>。"数值级数求和 = 找母函数代端点"。</p>
+</blockquote>
+<p><strong>S80.</strong>★★★ 求 Σ n(n+1)xⁿ（|x|&lt;1）。</p>
+<blockquote>
+<p>Σxⁿ⁺¹ = x²/(1−x)，二阶导 = 2/(1−x)³ ⇒ 原级数 = <strong>2x/(1−x)³</strong>。</p>
+</blockquote>
+<h2>§5 函数幂级数展开与傅里叶级数（S81–S100）</h2>
+<p><strong>S81.</strong>★ 写出 eˣ 的麦克劳林展开及收敛域。</p>
+<blockquote>
+<p><strong>eˣ = Σ xⁿ/n!</strong>，收敛域 (−∞,+∞)。</p>
+</blockquote>
+<p><strong>S82.</strong>★ 写出 sinx、cosx 的展开。</p>
+<blockquote>
+<p><strong>sinx = Σ(−1)ⁿx^{2n+1}/(2n+1)!；cosx = Σ(−1)ⁿx^{2n}/(2n)!</strong>，全域收敛。</p>
+</blockquote>
+<p><strong>S83.</strong>★ 写出 1/(1−x) 与 1/(1+x) 的展开。</p>
+<blockquote>
+<p>1/(1−x) = <strong>Σxⁿ</strong>；1/(1+x) = <strong>Σ(−1)ⁿxⁿ</strong>，均 |x|&lt;1。</p>
+</blockquote>
+<p><strong>S84.</strong>★★ 写出 ln(1+x) 的展开及收敛域。</p>
+<blockquote>
+<p>逐项积分 1/(1+x)：<strong>ln(1+x) = Σ(−1)ⁿ⁻¹xⁿ/n</strong>，收敛域 <strong>(−1,1]</strong>。</p>
+</blockquote>
+<p><strong>S85.</strong>★★ 写出 arctanx 的展开及收敛域。</p>
+<blockquote>
+<p>∫1/(1+t²)dt：<strong>arctanx = Σ(−1)ⁿx^{2n+1}/(2n+1)</strong>，收敛域 <strong>[−1,1]</strong>（端点交错收敛）。</p>
+</blockquote>
+<p><strong>S86.</strong>★ 写出 1/(1+x²) 的展开。</p>
+<blockquote>
+<p>以 x² 代 x：<strong>Σ(−1)ⁿx^{2n}</strong>，|x|&lt;1。</p>
+</blockquote>
+<p><strong>S87.</strong>★★ 将 1/x 展开为 (x−1) 的幂级数。</p>
+<blockquote>
+<p>1/x = 1/[1+(x−1)] = <strong>Σ(−1)ⁿ(x−1)ⁿ</strong>，|x−1|&lt;1（即 0&lt;x&lt;2）。</p>
+</blockquote>
+<p><strong>S88.</strong>★★ 将 eˣ 展开为 (x−1) 的幂级数。</p>
+<blockquote>
+<p>eˣ = e·e^{x−1} = <strong>e·Σ(x−1)ⁿ/n!</strong>，全域。</p>
+</blockquote>
+<p><strong>S89.</strong>★★ 将 f(x)=x/(1+x) 展开为 x 的幂级数。</p>
+<blockquote>
+<p>x/(1+x) = 1 − 1/(1+x) = <strong>Σ_{n≥1}(−1)ⁿ⁺¹xⁿ</strong>，|x|&lt;1。</p>
+</blockquote>
+<p><strong>S90.</strong>★ 函数的幂级数展开唯一吗？</p>
+<blockquote>
+<p><strong>唯一</strong>（若能展开）：系数必为泰勒系数 aₙ=f⁽ⁿ⁾(x₀)/n!。这也证明"两个展开相等⇒对应系数相等"。</p>
+</blockquote>
+<p><strong>S91.</strong>★ 默写周期 2π 的傅里叶系数公式。</p>
+<blockquote>
+<p><strong>aₙ = (1/π)∫_{−π}^{π}f(x)cosnx dx；bₙ = (1/π)∫f(x)sinnx dx；a₀/2 是平均值项</strong>。</p>
+</blockquote>
+<p><strong>S92.</strong>★★★ 求 f(x)=x² 在 (−π,π) 上的傅里叶展开，并给出 x=π 处的值。</p>
+<blockquote>
+<p>偶函数 ⇒ bₙ=0。计算得 a₀/2 = π²/3，aₙ = 4(−1)ⁿ/n²。
+<strong>x² = π²/3 + 4Σ(−1)ⁿcos(nx)/n²</strong>。
+x=π 处：π² = π²/3 + 4Σ1/n² ⇒ <strong>Σ1/n² = π²/6</strong>——傅里叶级数求数项级数和的招牌应用。</p>
+</blockquote>
+<p><strong>S93.</strong>★ 默写狄利克雷收敛定理。</p>
+<blockquote>
+<p>f 分段单调/分段光滑：傅里叶级数收敛于 <strong>[f(x₋)+f(x₊)]/2</strong>；连续点=函数值；间断点=左右极限平均。</p>
+</blockquote>
+<p><strong>S94.</strong>★ [0,π] 上的函数展开成正弦级数需要什么延拓？</p>
+<blockquote>
+<p><strong>奇延拓</strong>到 (−π,π) ⇒ 只含 sin 项；偶延拓 ⇒ 余弦级数。</p>
+</blockquote>
+<p><strong>S95.</strong>★★ 将 f(x)=x（0&lt;x&lt;π）展开为正弦级数。</p>
+<blockquote>
+<p>奇延拓（x 本身就是奇函数的自然延拓）：bₙ = (2/π)∫₀^π x·sinnx dx = 2(−1)ⁿ⁺¹/n。
+<strong>x = 2Σ(−1)ⁿ⁺¹sin(nx)/n</strong>（0&lt;x&lt;π）。</p>
+</blockquote>
+<p><strong>S96.</strong>★ 周期 2l 的傅里叶系数与 2π 情形的关系。</p>
+<blockquote>
+<p>换元 t=πx/l：<strong>aₙ=(1/l)∫_{−l}^{l}f·cos(nπx/l)dx</strong>，bₙ 同理带 sin(nπx/l)。</p>
+</blockquote>
+<p><strong>S97.</strong>★★ 利用 S92 求 Σ(−1)ⁿ⁻¹/n² 的和。</p>
+<blockquote>
+<p>x=0 代入 x² 展开的右端：0 = π²/3 + 4Σ(−1)ⁿ/n² ⇒ Σ(−1)ⁿ/n² = −π²/12。
+所以 <strong>Σ(−1)ⁿ⁻¹/n² = π²/12</strong>。</p>
+</blockquote>
+<p><strong>S98.</strong>★ 求 f(x)=x 在 (−π,π) 上的傅里叶级数。</p>
+<blockquote>
+<p>奇函数 ⇒ aₙ=0；bₙ = (2/π)∫₀^π x·sinnx dx = 2(−1)ⁿ⁺¹/n。
+<strong>x = 2Σ(−1)ⁿ⁺¹sin(nx)/n</strong>（x≠±π）。</p>
+</blockquote>
+<p><strong>S99.</strong>★★ f 定义在 (−π,π)，傅里叶级数在 x=±π 处收敛于：
+A. f(π) B. [f(π⁻)+f(−π⁺)]/2 C. 0 D. 不收敛</p>
+<blockquote>
+<p><strong>B</strong>。周期延拓下 ±π 是同一点，收敛于"周期缝合点"两侧极限的平均。</p>
+</blockquote>
+<p><strong>S100.</strong>★★ f(x)=|x| 在 (−π,π) 的傅里叶级数只含什么项？为什么？</p>
+<blockquote>
+<p>偶函数 ⇒ <strong>只含余弦项（bₙ=0）</strong>；结果 |x| = π/2 − (4/π)·Σcos((2k+1)x)/(2k+1)²。
+奇偶性直接决定 sin/cos 项的有无——先判奇偶再动笔。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：S1–S100。使用节奏：①§1–§2 两天（判别法选择流程背熟，S40 是地图）→②§3 一天（绝对/条件二分法）→③§4 两天（收敛域三步：半径+端点+单独验证；和函数就靠"逐项积分+几何级数母函数"两板斧）→④§5 一天半（七大常用展开默写；傅里叶记 S92/S93 两个主角）。错题标回《数学考题集》第8章。</p></div></body></html>

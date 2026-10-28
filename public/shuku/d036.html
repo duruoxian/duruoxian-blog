@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>离散数学精讲_图论 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>离散数学精讲 · 图论（第3/4批）</h1>
+<blockquote>
+<p>与《数据结构精讲_图》<strong>互补定位</strong>：DS册管"算法怎么跑"（DFS/Prim/Dijkstra），本册管"图有什么数学性质"（一笔画/哈密顿/平面性/着色）。408直接考算法、复试常问性质——两册合璧才是完整的图。</p>
+</blockquote>
+<hr />
+<h1>一、基本概念与度序列（可图化判定）</h1>
+<p><strong>D1 握手定理（推广）</strong>：无向图 Σd(v)=2m；有向图 Σd⁺=Σd⁻=m。
+【推论】<strong>奇度顶点个数为偶数</strong>。
+<strong>D2 度序列可图化/可简单图化（计算题主战场）</strong>：
+- <strong>可图化</strong>（允许重边环）：Σdᵢ 为偶数；
+- <strong>可简单图化</strong>（无重边无环）：Σ偶数 且 每项 ≤ n−1，再用 <strong>Havel–Hakimi 递减判定</strong>：取最大度d，删去它并让其余d个最大的各减1，递归；出现负数或不够减 → 不可。
+<strong>考题1（度序列判定）</strong> 判定序列 (5,5,3,3,2,2,1)？(4,4,3,3,2,2)？（简单图）
+【解】①n=7，最大度5≤6✓。H-H：删5，其余6个中取5个减1→(4,2,2,1,1,2)排序(4,2,2,2,1,1)；删4→5个数减1：(1,1,1,0,1)排序(1,1,1,1,0)；删1→(0,1,1,1)→(1,1,1,0)? 删1对其余1个减1：(1,1,0,0)；继续……全程无负 → <strong>可简单图化</strong>。
+②Σ=18偶✓，最大4≤5✓。删4→(3,2,2,1,1)；删3→(1,1,0,1)排序(1,1,1,0)；删1→(0,1,0)→(1,0,0)；删1→(−1,0)<strong>出现负数 → 不可简单图化</strong>。∎
+（应试技巧：小序列直接试画；判断题优先用"Σ奇偶+最大度≤n−1+H-H"三板斧。）</p>
+<hr />
+<h1>二、通路回路与连通性</h1>
+<p><strong>D3 通路/回路</strong>：顶点边交替序列；简单通路（顶点不重复）/初级通路（边不重复）。
+【定理】n阶图中，<strong>存在通路长 ≥ n ⇒ 必存在回路</strong>；最短通路必是简单通路。
+<strong>D4 连通性三度</strong>：
+- 无向：连通；<strong>点割集/割点、边割集/割边（桥）</strong>；点连通度 κ、边连通度 λ：<strong>κ ≤ λ ≤ δ</strong>（最小度）——不等式链必背；
+- 有向：强连通（互达）/单向连通/弱连通；强连通判定：<strong>存在经过每个顶点至少一次的回路</strong>。</p>
+<hr />
+<h1>三、欧拉图（一笔画·必考判定）</h1>
+<p><strong>T1 欧拉回路存在定理（无向）</strong>：G 有欧拉回路（从一点出发每边恰一次回到起点）⇔ <strong>G 连通 且 每个顶点度数均为偶数</strong>。
+<strong>T2 欧拉通路（不回起点）</strong>：⇔ 连通 且 <strong>恰有 0 个或 2 个奇度顶点</strong>（0个时是回路；2个时从一奇点出发到另一奇点结束）。
+【有向版】欧拉回路：<strong>连通（弱）+ 每点入度=出度</strong>；欧拉通路：恰一个点出度−入度=1（起点）、一个点入度−出度=1（终点）、其余平衡。
+【历史谈资】哥尼斯堡七桥问题（欧拉1736）=图论诞生：四块陆地度数3,3,3,5全是奇度 → <strong>无解</strong>。</p>
+<p><strong>考题2（一笔画判定）</strong> ①各顶点度数为 (2,2,4,4,2)：能否一笔画？②(3,3,2,2)？
+【解】①全偶连通 → <strong>有欧拉回路</strong>（任意起点一圈回来）。
+②恰两个奇度(3,3) → <strong>有欧拉通路但无回路</strong>（从一个奇度点出发到另一个结束）。∎
+【AI/工程连接】"一笔画"=中国邮递员问题/DFS遍历边的基础；欧拉判定是<strong>线性时间</strong>的，与哈密顿形成鲜明对照。</p>
+<hr />
+<h1>四、哈密顿图（环球旅行·与欧拉对照）</h1>
+<p><strong>D5 哈密顿回路</strong>：经过<strong>每个顶点恰一次</strong>的回路（对比欧拉：每条<strong>边</strong>恰一次）。
+【关键认知】哈密顿判定<strong>没有充要条件，判定问题是NP完全的</strong>——这是它与欧拉的本质区别（复试必考谈点）。
+<strong>T3 必要条件（用来判"不是"）</strong>：G有哈密顿回路 ⇒ ①对任意 V′⊂V，<strong>p(G−V′) ≤ |V′|</strong>（删k个点，连通分支数≤k）；②无割点。
+【用法】找一个V′破坏不等式 → 无哈密顿回路。
+<strong>T4 充分条件（用来判"是"，记两条）</strong>：
+- <strong>Dirac（狄拉克）</strong>：n≥3 简单图，若<strong>每个顶点 δ(G) ≥ n/2</strong> ⇒ 哈密顿图；
+- <strong>权边数版</strong>：n≥3，若 <strong>m ≥ C(n−1,2)+2</strong> ⇒ 哈密顿图。
+【注意方向】充分≠必要：满足不了Dirac也可能是哈密顿图（如Cₙ环本身δ=2）。</p>
+<p><strong>考题3（充分必要双打）</strong> ①n=6，每个顶点度数≥3：是否哈密顿？②彼得森图（3-正则，n=10）呢？
+【解】①Dirac：δ=3=n/2 ✓ → <strong>是哈密顿图</strong>。
+②彼得森图 δ=3 &lt; 10/2=5，Dirac不满足（不能下结论）；用必要条件试：删去某个3点集可使分支数=4&gt;3（已知构造）→ 违反 p(G−V′)≤|V′| → <strong>无哈密顿回路</strong>（彼得森图是经典的"非哈密顿"3-正则图）。∎</p>
+<hr />
+<h1>五、树与生成树（回扣DS）</h1>
+<p><strong>T5 树的等价定义六连</strong>（复试可任答）：①无回路连通图；②连通且 m=n−1；③无回路但加任一新边得且仅得一个回路；④连通但删任一边不连通；⑤任意两点恰一条路径；⑥无回路且每条边都是桥。
+【回扣DS】生成树存在性（连通图必有）；<strong>最小生成树↔Prim/Kruskal</strong>（DS册已演算W=11）；<strong>最优二元树↔哈夫曼树</strong>（DS册WPL=35例）；根树↔树的存储与遍历。
+<strong>D6 根树术语</strong>：r元树/满r元树；<strong>前缀码↔二叉树叶子</strong>（哈夫曼合法性）；最优树=WPL最小的满二元树。</p>
+<hr />
+<h1>六、平面图（欧拉公式是核心）</h1>
+<p><strong>T6 欧拉公式</strong>：连通平面图：<strong>n − m + r = 2</strong>（点−边+面=2）。
+【推广】p个连通分支：n−m+r=1+p。
+<strong>T7 平面图边数上界（推导要会）</strong>：简单连通平面图（n≥3）：每个面至少3条边 → 2m≥3r，代入欧拉公式消r：<strong>m ≤ 3n−6</strong>。
+【K₅不可平面】K₅：n=5, m=10 &gt; 3×5−6=9 → 违反上界 → <strong>不可平面</strong>。
+<strong>T8 度≤2的面版</strong>：若平面图每个面度数≥k → m ≤ k(n−1)/(k−2)。
+【K₃,₃不可平面】K₃,₃是二部图<strong>无奇圈</strong>→无三角形→每个面度≥4→2m≥4r，代入欧拉公式消r得 <strong>m≤2n−4</strong>。K₃,₃：m=9 &gt; 2×6−4=8 → <strong>不可平面</strong> ✓
+（经典坑：只用 m≤3n−6 判不动 K₃,₃（9≤12 不违反）——必须用"无三角形"的更强界 2n−4。）
+<strong>T9 库拉托夫斯基定理</strong>：G 平面 ⇔ <strong>不含与K₅或K₃,₃同胚（细分）的子图</strong>——平面性的充要刻画（判定用，证明超纲）。
+<strong>D7 对偶图</strong>：平面图每个面→对偶图一个点、每条边→对偶一条边；<strong>对偶图的着色=原图的面着色</strong>。</p>
+<p><strong>考题4（欧拉公式计算）</strong> 连通平面图 n=8，m=14。求面数 r，并验证边数上界。
+【解】r=2−n+m=2−8+14=<strong>8</strong>。上界验证：14 ≤ 3×8−6=18 ✓ 不矛盾（是平面图的必要条件，满足不保证平面——<strong>上界只能证"非平面"，不能证平面</strong>）。∎</p>
+<hr />
+<h1>七、图着色与匹配</h1>
+<p><strong>D8 点着色</strong>：相邻异色；<strong>色数 χ(G)</strong>=最少色数。二部图 ⇔ <strong>χ=2</strong>（无奇圈）；<strong>四色定理</strong>：平面图 χ≤4（面着色）；五色定理（χ≤5）是可证版。
+【连接】χ=2的判定=二部图判定=无奇圈（BFS染色的原理，DS双向奔赴）；考试排程/寄存器分配=着色应用（谈资）。
+<strong>D9 匹配</strong>：边互不相邻；<strong>完美匹配</strong>：覆盖所有顶点；<strong>Hall婚配定理</strong>：二部图 X到Y有饱和X的匹配 ⇔ 对任意S⊆X，|N(S)|≥|S|（"任意k个男孩认识的女孩总数≥k"）。
+【连接】增广路求最大匹配（匈牙利算法思想）=DS"找增广路换配对"——任务分配问题的理论根基。</p>
+<hr />
+<h1>八、本册必会清单</h1>
+<ol>
+<li>度序列三板斧（Σ偶、≤n−1、Havel–Hakimi递减）；</li>
+<li>κ≤λ≤δ；强连通⇔存在全顶点回路；</li>
+<li><strong>欧拉判定定理</strong>（无向/有向、回路/通路）与七桥问题；</li>
+<li>哈密顿：无充要、NP完全；必要（p(G−V′)≤|V′|）判"非"、Dirac（δ≥n/2）判"是"；</li>
+<li>树六等价定义；MST/哈夫曼的DS回扣；</li>
+<li><strong>欧拉公式 n−m+r=2</strong> 及分支推广；m≤3n−6；K₅/K₃,₃不可平面的两条推导（K₃,₃用2n−4版）；</li>
+<li>平面判定：库拉托夫斯基定理（含K₅/K₃,₃细分）；</li>
+<li>χ=2⇔二部⇔无奇圈；四色/五色；Hall定理表述与增广路连接。</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>下一批（第4/4批·系列收官）：代数结构与组合计数</strong>——群/环/域/格逐层定义（半群→独异点→群→阿贝尔群；子群陪集拉格朗日定理概念）、<strong>布尔代数（命题代数与集合代数的统一）</strong>、鸽巢原理、排列组合（含重集、错排、Catalan再现）、生成函数与递推（连接DS复杂度递推式）。说"继续"交付收官。</p>
+</blockquote></div></body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计网精讲_网络层 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机网络精讲 · 网络层（原理推导 + 计算详解）</h1>
+<blockquote>
+<p>网络层是408的"计算第二大户"：子网划分、CIDR聚合、IP分片、最长前缀匹配年年必出。本册把每类计算做成<strong>可复现的模板</strong>，原理讲透"为什么这样设计"。
+配套：《计算机网络_知识点与难点》《考题集》《易错点与陷阱清单》；Dijkstra算法过程演算见《408_综合题精讲》题4。</p>
+</blockquote>
+<hr />
+<h2>一、IPv4 协议精讲</h2>
+<p><strong>P1 首部逐字段（20B固定+0~40B可选）</strong>：
+| 字段 | 位数 | 要点 |
+|---|---|---|
+| 版本 | 4 | 4=IPv4 |
+| 首部长度 | 4 | <strong>单位4B</strong>，故首部20~60B（1111=60B） |
+| 区分服务 | 8 | |
+| 总长度 | 16 | <strong>单位1B</strong>，首部+数据 ≤65535B |
+| 标识 | 16 | 同一数据报的分片相同（重组用） |
+| 标志 | 3 | <strong>DF</strong>（=1禁止分片，需分片则丢弃+回ICMP差错）、<strong>MF</strong>（=1后面还有分片） |
+| 片偏移 | 13 | <strong>单位8B</strong>（相对原数据起点的偏移/8） |
+| TTL | 8 | 每过一路由器−1，=0丢弃并回ICMP超时（防环） |
+| 协议 | 8 | 6=TCP，17=UDP，89=OSPF，1=ICMP |
+| 首部校验和 | 16 | 只校验首部，每跳重算（TTL在变） |
+| 源/目的IP | 各32 | |</p>
+<p><strong>P2 分片（计算模板）</strong>：
+① 每片可载数据 = MTU − 20（首部），再向下取 <strong>8的倍数</strong>（除最后一片）；
+② 片偏移 = 该片数据在原数据中的起始字节 ÷ 8；MF：最后一片为0；
+③ <strong>中间路由器只分片不重组，重组只在目的主机</strong>；
+④ DF=1 且需要分片 → 丢弃并回ICMP"终点不可达（需要分片但DF置位）"。</p>
+<p><strong>考题1（分片全程演算）</strong> 一个总长度3820B的IP数据报（首部20B），经过MTU=1420B的链路。求各分片的总长度、数据长度、片偏移、MF。
+【解】数据3800B；每片数据≤1420−20=1400B（恰为8的倍数）→ 1400+1400+1000=3800 ✓
+| 分片 | 总长度 | 数据长度 | 片偏移(8B) | MF |
+|---|---|---|---|---|
+| 1 | 1420 | 1400 | 0 | 1 |
+| 2 | 1420 | 1400 | 175（1400/8） | 1 |
+| 3 | 1020 | 1000 | 350（2800/8） | 0 |
+最后一个分片的偏移=350×8=2800，加上1000=3800 ✓ 拼接自洽。∎</p>
+<p><strong>P3 IPv4地址与子网</strong>：
+- 分类地址：A(0开头,/8)、B(10,/16)、C(110,/24)、D组播、E保留；特殊：全0=本机/网络，全1=广播，127/8环回。
+- 私有地址（不出公网）：10/8、172.16/12、192.168/16。
+- <strong>子网掩码</strong>：/n → 主机位 32−n；<strong>块大小=2^{32−n}</strong>（网络地址按块对齐）；可用主机=2^{32−n}−2。
+- <strong>CIDR</strong>：消除A/B/C类别，"IP前缀+掩码长度"；<strong>路由聚合=取各网络地址的公共前缀</strong>。</p>
+<h2>二、子网划分与聚合（计算模板四件套）</h2>
+<p><strong>模板1 等分划分</strong>：/24分4个子网 → 借2位→/26，块大小64：.0/.64/.128/.192。
+<strong>模板2 VLSM（不等长）</strong>：大需求先用大块，<strong>从地址空间低端依次向下切</strong>。
+<strong>模板3 聚合</strong>：把各网络地址写成二进制，取公共前缀（掩码缩短到该长度）。
+<strong>模板4 最长前缀匹配</strong>：目的地址与多条路由都匹配时选<strong>前缀最长</strong>的（最具体的路由）；都不匹配走默认路由0.0.0.0/0。</p>
+<p><strong>考题2（VLSM划分·真题级）</strong> 单位分得 192.77.33.0/24，需求：子网A 100台主机、B 50台、C 25台、D 25台。给出划分方案。
+【解】主机数要求：100→/25（126）；50→/26（62）；25→/27（30）。
+| 子网 | 前缀 | 范围 | 可用 |
+|---|---|---|---|
+| A | 192.77.33.0/25 | .0~.127 | 126 |
+| B | 192.77.33.128/26 | .128~.191 | 62 |
+| C | 192.77.33.192/27 | .192~.223 | 30 |
+| D | 192.77.33.224/27 | .224~.255 | 30 |
+地址利用率=(126+62+30+30)/256≈97%——VLSM按需切分避免等分浪费。∎</p>
+<p><strong>考题3（CIDR聚合）</strong> 路由器R1的直连网段 202.118.1.0/24 与 202.118.2.0/24，向R2通告时可聚合为？
+【解】第三字节：1=00000001，2=00000010 → 公共前缀 000000（6位）。
+聚合=202.118.000000 00/22 即 <strong>202.118.0.0/22</strong>（覆盖 .0.0~.3.255，含两条路由）。∎
+（验证：.1.0 与 .2.0 的第22位起都是各自空间。聚合代价=路由表变小但可能引入"多覆盖"的无效地址。）</p>
+<p><strong>考题4（最长前缀匹配）</strong> 路由表：①192.168.20.0/24 → 接口E0；②192.168.0.0/16 → 接口E1；③0.0.0.0/0 → 接口E2（默认）。目的地址192.168.20.7 与 192.168.21.7 各走哪个接口？
+【解】192.168.20.7：与①(/24)、②(/16)都匹配 → 最长前缀 <strong>①E0</strong>。
+192.168.21.7：只匹配② → <strong>E1</strong>。
+（若目的为8.8.8.8 → 只匹配③默认路由。）</p>
+<h2>三、路由协议精讲</h2>
+<p><strong>R1 三协议对比（必背表）</strong>：
+| | RIP | OSPF | BGP |
+|---|---|---|---|
+| 类型 | 内部IGP | 内部IGP | 外部EGP |
+| 算法 | 距离向量 | 链路状态 | 路径向量 |
+| 度量 | 跳数（≤15，16=不可达） | 代价(带宽) | 策略/路径属性 |
+| 交换对象 | 相邻路由器，<strong>整张表</strong> | 全网洪泛<strong>链路状态通告</strong> | 相邻AS，完整路径 |
+| 封装 | <strong>UDP 520</strong> | <strong>IP直封（协议号89）</strong> | <strong>TCP 179</strong> |
+| 收敛 | 慢（坏消息传得慢） | 快 | 慢（策略优先） |
+| 规模 | 小网络 | 分区域（Area 0主干） | 互联网级 |
+【防环】RIP：最大跳数16、水平分割、毒性逆转、触发更新；OSPF天然无环（全图最短路径）。</p>
+<p><strong>R2 RIP更新演算（距离向量更新规则）</strong>：收到邻居通告的距离<strong>+1</strong>（经过该邻居），与自身表比较取小，取小则更新下一跳为该邻居。</p>
+<p><strong>考题5（RIP表更新）</strong> R1当前到网络N的距离为11（下一跳R3）。收到R2发来的距离向量中"到N距离5"。更新后？
+【解】经R2的距离=5+1=6 &lt; 11 → <strong>更新为6，下一跳R2</strong>。
+若R2通告的是16（不可达）且原下一跳恰是R2 → 置16（不可达）。∎
+（慢收敛："到N不可达"的消息与"我还经你到N"的旧消息互相抬价，跳数滚到16才停——需水平分割/毒性逆转治理。）</p>
+<p><strong>R3 OSPF要点</strong>：向<strong>全网</strong>洪泛链路状态通告LSA → 每台路由器得到全网的链路状态数据库 → 各自跑Dijkstra算最短路径树；划分区域减少洪泛与路由表规模（区域边界路由器ABR、主干区域Area 0）。</p>
+<h2>四、ICMP · ARP · DHCP · 组播</h2>
+<p><strong>I1 ICMP</strong>：差错报告（终点不可达3、超时11、参数问题12、改变路由5）+ 询问（回送请求/回答→<strong>ping</strong>、时间戳）；<strong>ICMP封装在IP中</strong>（网络层协议却"帮"着反馈差错）。
+【不发送ICMP差错报告的四种情况】对ICMP差错报文本身、对第一个分片之后的后续分片、对具有组播地址的数据报、对特殊地址（127.0.0.1、0.0.0.0）。
+<strong>I2 ARP</strong>：同一局域网内 <strong>IP→MAC</strong>。过程：查缓存→无则<strong>广播ARP请求</strong>（目的MAC=FF-FF-FF-FF-FF-FF）→目标主机<strong>单播回ARP响应</strong>→写入缓存（有生存期）。
+【要点】跨网段解析的是<strong>默认网关</strong>的MAC（不是远端主机）——因为帧只在链路层走一跳。
+<strong>I3 DHCP（应用层协议，基于UDP 67/68）</strong>：DISCOVER（广播）→OFFER→REQUEST（广播）→ACK；可跨网段由<strong>DHCP中继代理</strong>转发（单播到服务器）；分配IP+掩码+网关+DNS+租期。
+<strong>I4 IP组播</strong>：D类地址；IGMP让路由器知道本网段有哪些成员；组播路由协议在路由器间构建组播树。</p>
+<h2>五、IPv6</h2>
+<p><strong>P1 要点</strong>：128位地址；首部<strong>固定40B</strong>；<strong>取消了首部校验和</strong>（减轻路由器负担）；<strong>只允许源节点分片</strong>（路由器不分片→路径MTU发现）；取消选项字段改扩展首部；即插即用（自动配置）。
+<strong>P2 地址</strong>：冒号十六进制，<strong>零压缩</strong>（连续全零段→::，只许一次）；前缀划分（全球单播2000::/3、<strong>链路本地FE80::/10</strong>、组播FF00::/8）；::1回环。
+<strong>P3 过渡</strong>：双协议栈、隧道（IPv6包封在IPv4里穿越）、（NAT-PT已淘汰）。</p>
+<hr />
+<h2>本章考题补遗（2题）</h2>
+<p><strong>题6（TTL与traceroute原理）</strong> 主机执行 tracert 到远端服务器，简述其原理。
+【解】依次发送 TTL=1,2,3,… 的分组：第 i 个分组在第 i 跳路由器 TTL 减到0 → 路由器丢弃并<strong>回送ICMP超时</strong>报文 → 源主机由此测得第 i 跳地址与往返时间；到达终点时（TTL足够）因目的端口不可达回送<strong>ICMP终点不可达</strong> → 结束。∎</p>
+<p><strong>题7（ARP全过程）</strong> 主机A（192.168.1.10/26）首次与网关（192.168.1.1）通信，描述ARP过程；若目的改为远程服务器8.8.8.8，ARP解析的对象变吗？
+【解】A查缓存无网关MAC → 广播ARP请求"谁是192.168.1.1" → 网关单播应答自己的MAC → A缓存并把<strong>目的IP=8.8.8.8、目的MAC=网关MAC</strong>的帧发出。
+改为8.8.8.8：<strong>解析对象不变，仍是网关的MAC</strong>（IP端到端不变、MAC逐跳更换——跨网段通信的核心规律）。∎</p>
+<hr />
+<h2>本章必会清单</h2>
+<ol>
+<li>首部字段：首部长度单位4B、总长度单位1B、片偏移单位8B（"三个单位"是选择题钉子）；</li>
+<li>分片模板：每片数据=MTU−20向下取8倍数；偏移=起始字节/8；MF末片为0；重组在目的主机；</li>
+<li>子网四件套：块大小2^{32−n}、可用主机2^{32−n}−2、VLSM从低端切、聚合取公共前缀、转发走最长前缀匹配；</li>
+<li>RIP/OSPF/BGP七维度对比表（封装：UDP520/IP89/TCP179）；</li>
+<li>ICMP四种不发送差错的情况；ARP广播求/单播应/解析网关；DHCP四步+中继；</li>
+<li>IPv6：128位、40B固定首部、源分片、无校验和、零压缩、FE80::/10、双栈与隧道。</li>
+</ol>
+<hr />
+<blockquote>
+<p>下一批（收官）：<strong>传输层+应用层</strong>——TCP三次握手/四次挥手（含TIME_WAIT=2MSL）、可靠传输与滑窗、拥塞控制四算法窗口演化计算、UDP校验和伪首部；DNS递归/迭代、FTP双连接、SMTP/POP3分工、HTTP持久连接与Cookie。说"继续"交付。</p>
+</blockquote></div></body></html>

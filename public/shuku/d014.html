@@ -1,0 +1,694 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>数学_线代专项题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>01_数学</span></div><div class='main'><h1>数学 · 线代专项题集（150题带详解·分6章）</h1>
+<blockquote>
+<p>2026-10-29 夜间生成，线性代数全程题库（行列式→矩阵→向量组→方程组→特征值→二次型），配合《线代_知识点与难点》与《数学一985精讲_线代》使用。
+难度：★基础 ★★中等 ★★★难点。<strong>先做后看答案</strong>；错题把题号标到《数学考题集》同章节旁，三天后重做。
+全部自编或改编经典题型。矩阵记号：[[a,b],[c,d]] 表示两行 (a,b)、(c,d)；A* 为伴随矩阵，E 为单位阵，r(A) 为秩。</p>
+</blockquote>
+<h2>§1 行列式（X1–X25）</h2>
+<p><strong>X1.</strong>★ 求 det[[1,2],[3,4]]。</p>
+<blockquote>
+<p>= 1·4 − 2·3 = <strong>−2</strong>。二阶：主对角线积 − 副对角线积。</p>
+</blockquote>
+<p><strong>X2.</strong>★ 求 det[[2,0,0],[0,3,0],[0,0,4]]。</p>
+<blockquote>
+<p>对角阵 = 对角元之积 = <strong>24</strong>。上/下三角同理。</p>
+</blockquote>
+<p><strong>X3.</strong>★ 默写行列式三条基本性质。</p>
+<blockquote>
+<p>①某行乘 k 加到另一行，值不变；②两行互换，值变号；③某行含公因子 k，可提到外面。
+性质①是"化三角"的主力。</p>
+</blockquote>
+<p><strong>X4.</strong>★ 求 det[[1,2],[2,4]]。</p>
+<blockquote>
+<p>两行成比例 ⇒ <strong>0</strong>（行列式为 0 ⟺ 行(列)线性相关）。</p>
+</blockquote>
+<p><strong>X5.</strong>★ 求 det[[1,2,3],[4,5,6],[7,8,9]]。</p>
+<blockquote>
+<p>r3−r2 = (3,3,3)，r2−r1 = (3,3,3) ⇒ 两行相同 ⇒ <strong>0</strong>。
+等差行向量组的行列式必为零，这题是"看出来"比"算出来"快。</p>
+</blockquote>
+<p><strong>X6.</strong>★★ 求 det[[1,2,3],[0,2,3],[0,0,3]]。</p>
+<blockquote>
+<p>上三角 = 1·2·3 = <strong>6</strong>。</p>
+</blockquote>
+<p><strong>X7.</strong>★★ 求 det[[2,1,1],[1,2,1],[1,1,2]]。</p>
+<blockquote>
+<p>每行和都是 4 ⇒ 特征值 4 与 0,0（秩1修正）：det = 4·(2−1) = <strong>4</strong>。
+直接展开：2(4−1)−1(2−1)+1(1−2) = 6−1−1 = 4 ✓。</p>
+</blockquote>
+<p><strong>X8.</strong>★★ 求 det[[1,1,1],[1,2,3],[1,3,6]]。</p>
+<blockquote>
+<p>按第一行展开：1(12−9) − 1(6−3) + 1(3−2) = 3−3+1 = <strong>1</strong>。</p>
+</blockquote>
+<p><strong>X9.</strong>★★ 默写范德蒙德行列式公式。</p>
+<blockquote>
+<p>|[1 ⋯ 1; x₁ ⋯ xₙ; ⋯; x₁^{n−1} ⋯ xₙ^{n−1}]| = <strong>∏_{1≤i&lt;j≤n}(xⱼ−xᵢ)</strong>（下标大的减下标小的）。</p>
+</blockquote>
+<p><strong>X10.</strong>★★ 用克莱姆法则解 [[1,1],[2,3]]·(x,y)ᵀ = (3,8)ᵀ。</p>
+<blockquote>
+<p>D = 1；x = (3·3−1·8)/1 = <strong>1</strong>；y = (1·8−2·3)/1 = <strong>2</strong>。</p>
+</blockquote>
+<p><strong>X11.</strong>★ 默写展开定理与代数余子式。</p>
+<blockquote>
+<p>det A = Σⱼ aᵢⱼAᵢⱼ（按第 i 行展开）；<strong>Aᵢⱼ = (−1)^{i+j}Mᵢⱼ</strong>。
+关键推论：<strong>Σⱼ aᵢⱼAₖⱼ = 0（i≠k，异行展开为零）</strong>。</p>
+</blockquote>
+<p><strong>X12.</strong>★★ 已知 det[[a,b],[c,d]] = 2，求 det[[a,b],[c+2a,d+2b]]。</p>
+<blockquote>
+<p>第二行加上第一行的 2 倍，值不变 ⇒ <strong>2</strong>。</p>
+</blockquote>
+<p><strong>X13.</strong>★★ A 的特征值为 1、2、3，求 det A。</p>
+<blockquote>
+<p><strong>det A = ∏λᵢ = 6</strong>。特征值与行列式的桥，后面 X25 还要用。</p>
+</blockquote>
+<p><strong>X14.</strong>★★ |A| = 2（3 阶），求 |3A|。</p>
+<blockquote>
+<p>|kA| = kⁿ|A| = 3³·2 = <strong>54</strong>（n 是阶数，3 不是 6！）。</p>
+</blockquote>
+<p><strong>X15.</strong>★★ |A| = 2（3 阶），求 |A*|。</p>
+<blockquote>
+<p><strong>|A*| = |A|^{n−1} = 2² = 4</strong>。</p>
+</blockquote>
+<p><strong>X16.</strong>★★ |A| = 2，求 |A⁻¹|。</p>
+<blockquote>
+<p><strong>= 1/|A| = 1/2</strong>。</p>
+</blockquote>
+<p><strong>X17.</strong>★★ |A| = 2，|B| = 3，求 |AB| 与 |BA|。</p>
+<blockquote>
+<p>都 = 2·3 = <strong>6</strong>。|AB|=|A||B|，乘法次序不影响行列式（但不影响矩阵本身）。</p>
+</blockquote>
+<p><strong>X18.</strong>★★★ Dₙ 为三对角行列式（主对角全 2，上下次对角全 −1），求 Dₙ。</p>
+<blockquote>
+<p>按最后一行展开递推：Dₙ = 2Dₙ₋₁ − Dₙ₋₂。
+D₁=2，D₂=3 ⇒ 数列等差 ⇒ <strong>Dₙ = n+1</strong>。</p>
+</blockquote>
+<p><strong>X19.</strong>★★ A=[[1,2],[3,4]]（det=−2），B=[[2,0],[0,3]]（det=6）。求 det[[A,O],[O,B]]。</p>
+<blockquote>
+<p>分块对角 = |A||B| = (−2)(6) = <strong>−12</strong>。</p>
+</blockquote>
+<p><strong>X20.</strong>★★ 求 det[[1,1,1],[a,b,c],[a²,b²,c²]]。</p>
+<blockquote>
+<p>范德蒙德（X9 取 n=3）= <strong>(b−a)(c−a)(c−b)</strong>。</p>
+</blockquote>
+<p><strong>X21.</strong>★★ 求 det[[3,1,1],[1,3,1],[1,1,3]]。</p>
+<blockquote>
+<p>行和均为 5，是"行和相同"型：把第 2、3 列各加到第 1 列并提出 5，再消去第 1 列得对角 2、2，<strong>det = 5·2·2 = 20</strong>。
+直接展开验证：3(9−1)−1(3−1)+1(1−3) = 24−2−2 = 20 ✓。</p>
+</blockquote>
+<p><strong>X22.</strong>★★ 求 det[[1,2,0,0],[3,4,0,0],[0,0,5,6],[0,0,7,8]]。</p>
+<blockquote>
+<p>分块对角：det[[1,2],[3,4]]·det[[5,6],[7,8]] = (−2)(−2) = <strong>4</strong>。</p>
+</blockquote>
+<p><strong>X23.</strong>★★ A=[[1,1,1],[2,3,4],[4,9,16]]，det A=2。求 A₁₁+A₁₂+A₁₃。</p>
+<blockquote>
+<p>第一行全为 1 ⇒ 和 = det A = <strong>2</strong>（就是按第一行展开本身）。
+若第一行不是全 1，则"换成全 1"再算——余子式不动，只换 a₁ⱼ。</p>
+</blockquote>
+<p><strong>X24.</strong>★★★ 证明奇数阶反对称行列式（aᵢⱼ=−aⱼᵢ，对角为0）必为 0。</p>
+<blockquote>
+<p>det A = det(Aᵀ) = det(−A) = (−1)ⁿ det A。
+n 为奇数 ⇒ det A = −det A ⇒ <strong>det A = 0</strong>。∎</p>
+</blockquote>
+<p><strong>X25.</strong>★★★ |A| = 2（3 阶），求 |2A⁻¹ − A*|。</p>
+<blockquote>
+<p>A<em> = |A|·A⁻¹ = 2A⁻¹ ⇒ 2A⁻¹ − A</em> = <strong>O</strong> ⇒ 行列式 = <strong>0</strong>。
+<strong>A* = |A|A⁻¹ 这一个恒等式能秒杀一大批伴随矩阵题。</strong></p>
+</blockquote>
+<h2>§2 矩阵（X26–X50）</h2>
+<p><strong>X26.</strong>★ 默写转置运算律。</p>
+<blockquote>
+<p>(A+B)ᵀ=Aᵀ+Bᵀ；(kA)ᵀ=kAᵀ；(AB)ᵀ=<strong>BᵀAᵀ</strong>（顺序反）；(Aᵀ)ᵀ=A。</p>
+</blockquote>
+<p><strong>X27.</strong>★ 用 A=[[1,1],[0,1]]，B=[[1,0],[1,1]] 说明 AB≠BA。</p>
+<blockquote>
+<p>AB = [[2,1],[1,1]]，BA = [[1,1],[1,2]]。<strong>矩阵乘法不交换</strong>，一切"像数一样约分"的动作都要警惕。</p>
+</blockquote>
+<p><strong>X28.</strong>★ 举 AB=O 但 A≠O、B≠O 的例子。</p>
+<blockquote>
+<p>[[1,0],[0,0]]·[[0,0],[0,1]] = O。<strong>AB=O 推不出 A=O 或 B=O</strong>（实数世界没有的现象）。</p>
+</blockquote>
+<p><strong>X29.</strong>★★ 验证 (AB)ᵀ = BᵀAᵀ（用 X27 的 A、B）。</p>
+<blockquote>
+<p>AB = [[2,1],[1,1]] ⇒ (AB)ᵀ = [[2,1],[1,1]]。
+BᵀAᵀ = [[1,1],[0,1]]·[[1,0],[1,1]] = [[2,1],[1,1]] ✓。</p>
+</blockquote>
+<p><strong>X30.</strong>★★ 求 [[1,2],[3,5]]⁻¹。</p>
+<blockquote>
+<p>det = −1：<strong>= (1/−1)·[[5,−2],[−3,1]] = [[−5,2],[3,−1]]</strong>。
+二阶口诀：主对角互换位置不变，副对角变号，除以 det。</p>
+</blockquote>
+<p><strong>X31.</strong>★★ 默写伴随矩阵核心公式与二阶口诀。</p>
+<blockquote>
+<p><strong>AA<em> = A</em>A = |A|E</strong>（对任意方阵成立，包括不可逆）。
+二阶：[[a,b],[c,d]]<em> = [[d,−b],[−c,a]]（</em><em>主对角互换，副对角变号</em>*，不除 det）。</p>
+</blockquote>
+<p><strong>X32.</strong>★★ A = diag(1,2,3)（3 阶），求 A*。</p>
+<blockquote>
+<p>A<em> = |A|A⁻¹ = 6·diag(1, 1/2, 1/3) = </em><em>diag(6,3,2)</em>*（对角阵的伴随就是把倒数乘上总积）。</p>
+</blockquote>
+<p><strong>X33.</strong>★ 默写初等矩阵的作用规则。</p>
+<blockquote>
+<p><strong>左乘=行变换，右乘=列变换</strong>。E₁₂（交换行）的逆是它自己；倍加矩阵 Eᵢⱼ(k) 的逆是 Eᵢⱼ(−k)。</p>
+</blockquote>
+<p><strong>X34.</strong>★★ 用初等行变换求 [[1,1],[1,2]]⁻¹。</p>
+<blockquote>
+<p>[A|E] = [[1,1|1,0],[1,2|0,1]] → r2−r1 → [[1,1|1,0],[0,1|−1,1]] → r1−r2 → [[1,0|2,−1],[0,1|−1,1]]。
+<strong>逆 = [[2,−1],[−1,1]]</strong>。</p>
+</blockquote>
+<p><strong>X35.</strong>★★ 解矩阵方程 AX = B：A=[[1,2],[0,1]]，B=[[1,0],[1,1]]。</p>
+<blockquote>
+<p>X = A⁻¹B；A⁻¹ = [[1,−2],[0,1]]。
+X = [[1,−2],[0,1]]·[[1,0],[1,1]] = [[1−2, −2],[1,1]] = <strong>[[−1,−2],[1,1]]</strong>。</p>
+</blockquote>
+<p><strong>X36.</strong>★★ 默写分块对角求逆。</p>
+<blockquote>
+<p>[[A,O],[O,B]]⁻¹ = [[A⁻¹,O],[O,B⁻¹]]；[[O,A],[B,O]]⁻¹ = [[O,B⁻¹],[A⁻¹,O]]（次对角情形要换位）。</p>
+</blockquote>
+<p><strong>X37.</strong>★★ 默写秩的两条不等式。</p>
+<blockquote>
+<p><strong>r(A+B) ≤ r(A)+r(B)；r(AB) ≤ min(r(A), r(B))</strong>。
+补充（Sylvester）：r(AB) ≥ r(A)+r(B)−n（A 是 m×n，B 是 n×s）。</p>
+</blockquote>
+<p><strong>X38.</strong>★★★ 默写伴随矩阵的秩公式。</p>
+<blockquote>
+<p>r(A<em>) = </em><em>n</em><em>（若 r(A)=n）；</em><em>1</em><em>（若 r(A)=n−1）；</em><em>0</em><em>（若 r(A)≤n−2）。
+原理：AA</em>=|A|E 与伴随是"代数余子式拼的矩阵"。选择题高频结论。</p>
+</blockquote>
+<p><strong>X39.</strong>★★ A=[[1,1],[0,1]]，求 Aⁿ。</p>
+<blockquote>
+<p>归纳或二项式（N=E+F，F²=O）：<strong>Aⁿ = [[1,n],[0,1]]</strong>。</p>
+</blockquote>
+<p><strong>X40.</strong>★★ A=[[1,2],[2,4]]，求 Aⁿ。</p>
+<blockquote>
+<p>秩 1：A = αβᵀ（α=(1,2)，β=(1,2)），βᵀα = 1+4 = 5 ⇒ A² = 5A。
+<strong>Aⁿ = 5^{n−1}·A（n≥1）</strong>。秩 1 矩阵的幂是送分题，先认出"秩1"。</p>
+</blockquote>
+<p><strong>X41.</strong>★ 求 [[1,2,3],[2,4,6],[1,1,1]] 的秩。</p>
+<blockquote>
+<p>r2 = 2·r1 划去；剩 (1,2,3) 与 (1,1,1) 无关 ⇒ <strong>秩 2</strong>。</p>
+</blockquote>
+<p><strong>X42.</strong>★ 默写"方阵可逆"的等价条件（至少四条）。</p>
+<blockquote>
+<p>|A|≠0 ⟺ r(A)=n ⟺ 行向量组线性无关 ⟺ Ax=0 只有零解 ⟺ 特征值全非零 ⟺ A 的行(列)向量生成全空间。</p>
+</blockquote>
+<p><strong>X43.</strong>★★ 验证 [[E,A],[O,E]] 的逆是 [[E,−A],[O,E]]。</p>
+<blockquote>
+<p>乘积 = [[E, −A+A],[O,E]] = E ✓。<strong>分块"倍加矩阵"的逆就是把 A 变号</strong>，与初等矩阵同构。</p>
+</blockquote>
+<p><strong>X44.</strong>★★ 验证 [[cosθ,−sinθ],[sinθ,cosθ]] 是正交矩阵，并求其行列式。</p>
+<blockquote>
+<p>列向量 (cosθ,sinθ)、(−sinθ,cosθ) 各自单位且正交 ⇒ AᵀA=E ✓。
+<strong>|A| = cos²θ+sin²θ = 1</strong>（正交矩阵行列式 = ±1）。</p>
+</blockquote>
+<p><strong>X45.</strong>★★ A² = A（幂等）。证明 A+E 可逆并求其逆。</p>
+<blockquote>
+<p>(A+E)(E−A/2) = A − A²/2 + E − A/2 = A − A/2 + E − A/2 = E。∎
+<strong>逆 = E − A/2</strong>。此类"验证逆"题就是把猜想乘一遍。</p>
+</blockquote>
+<p><strong>X46.</strong>★★★ A≠E 且 A²=E。证明 |A+E| = 0。</p>
+<blockquote>
+<p>(A+E)(A−E) = A²−E = O。若 |A+E|≠0 则 A+E 可逆 ⇒ A−E=O ⇒ A=E，矛盾。∎
+反向叙述：A²=E 且 A≠E ⇒ A+E 不可逆（−1 是特征值）。</p>
+</blockquote>
+<p><strong>X47.</strong>★★ t 为何值时 [[1,2,1],[2,4,t],[1,0,1]] 的秩为 2？</p>
+<blockquote>
+<p>r(A)≥2 恒成立（r1,r3 无关）。要 r=2 需 r2 ∈ span(r1,r3)：
+(2,4,t) = a(1,2,1)+b(1,0,1)：第二分量 a=2 ⇒ 首分量 2+b=2 ⇒ b=0 ⇒ 第三分量 t=2。
+<strong>t=2 时秩 2，否则秩 3</strong>。</p>
+</blockquote>
+<p><strong>X48.</strong>★★ A 对称（Aᵀ=A）。证明 A² 也对称。</p>
+<blockquote>
+<p>(A²)ᵀ = (Aᵀ)² = A²。∎ 对称矩阵的幂、逆（若可逆）、多项式 f(A) 都对称。</p>
+</blockquote>
+<p><strong>X49.</strong>★ AX=B 有唯一解的充要条件？</p>
+<blockquote>
+<p><strong>|A|≠0</strong>（此时 X=A⁻¹B）。|A|=0 时要么无解要么无穷多解。</p>
+</blockquote>
+<p><strong>X50.</strong>★★★ A=[[1,2],[2,1]]，求 Aⁿ。</p>
+<blockquote>
+<p>特征值 3、−1，特征向量 (1,1)、(1,−1)。谱分解：
+Aⁿ = (3ⁿ/2)[[1,1],[1,1]] + ((−1)ⁿ/2)[[1,−1],[−1,1]]。
+<strong>= ½[[3ⁿ+(−1)ⁿ, 3ⁿ−(−1)ⁿ],[3ⁿ−(−1)ⁿ, 3ⁿ+(−1)ⁿ]]</strong>（n=1 验证 = A ✓）。</p>
+</blockquote>
+<h2>§3 向量组与秩（X51–X75）</h2>
+<p><strong>X51.</strong>★ 默写线性表示与方程组的等价。</p>
+<blockquote>
+<p>β 可由 α₁,…,αₛ 线性表示 ⟺ <strong>x₁α₁+⋯+xₛαₛ = β 有解</strong> ⟺ r(α₁…αₛ) = r(α₁…αₛ, β)。</p>
+</blockquote>
+<p><strong>X52.</strong>★ 默写线性相关的定义。</p>
+<blockquote>
+<p>存在<strong>不全为零</strong>的 k₁,…,kₛ 使 k₁α₁+⋯+kₛαₛ = 0。无关则只有全零解。</p>
+</blockquote>
+<p><strong>X53.</strong>★ 单个向量、两个向量的相关性怎么判？</p>
+<blockquote>
+<p>单个：α 相关 ⟺ <strong>α=0</strong>；两个：<strong>成比例</strong> ⟺ 相关。</p>
+</blockquote>
+<p><strong>X54.</strong>★ 含零向量的向量组的相关性？</p>
+<blockquote>
+<p><strong>必相关</strong>（取零向量系数 1，其余 0 即可）。</p>
+</blockquote>
+<p><strong>X55.</strong>★ 默写"部分与整体"定理。</p>
+<blockquote>
+<p><strong>部分相关 ⇒ 整体相关；整体无关 ⇒ 部分无关</strong>（逆否才是常用方向）。</p>
+</blockquote>
+<p><strong>X56.</strong>★★ 证明：n+1 个 n 维向量必线性相关。</p>
+<blockquote>
+<p>以它们为列的矩阵是 n×(n+1)，秩 ≤ n &lt; n+1 = 向量个数 ⇒ 相关。∎
+（方程个数少于未知数个数，齐次方程必有非零解。）</p>
+</blockquote>
+<p><strong>X57.</strong>★ α₁=(1,2,3)，α₂=(2,4,6)。相关性？</p>
+<blockquote>
+<p>成比例 ⇒ <strong>相关</strong>（r=1 &lt; 2）。</p>
+</blockquote>
+<p><strong>X58.</strong>★ α₁=(1,0,1)，α₂=(0,1,1)，α₃=(1,1,2)。相关性？</p>
+<blockquote>
+<p>α₃ = α₁+α₂（看得出）⇒ <strong>相关</strong>。验证：(1,0,1)+(0,1,1) = (1,1,2) ✓。</p>
+</blockquote>
+<p><strong>X59.</strong>★★ t 为何值时 α₁=(1,1,1)，α₂=(1,2,3)，α₃=(1,3,t) 线性无关？</p>
+<blockquote>
+<p>行列式 = 1(2t−9) − 1(t−3) + 1(3−2) = t−5。
+<strong>t≠5 时无关；t=5 时相关</strong>（此时 det=0）。</p>
+</blockquote>
+<p><strong>X60.</strong>★★ 求向量组 (1,2,3)，(2,4,6)，(1,1,1) 的秩与一个极大无关组。</p>
+<blockquote>
+<p>(2,4,6) = 2(1,2,3) 划去；(1,2,3) 与 (1,1,1) 无关 ⇒ <strong>秩 2，极大无关组 {(1,2,3),(1,1,1)}</strong>。</p>
+</blockquote>
+<p><strong>X61.</strong>★ 默写秩的定义。</p>
+<blockquote>
+<p>极大线性无关组所含<strong>向量个数</strong>。等价说法：最高阶非零子式的阶数。</p>
+</blockquote>
+<p><strong>X62.</strong>★★ 用 α₁=(1,1,1)，α₂=(1,2,3) 表示 β=(3,5,7)。</p>
+<blockquote>
+<p>β = aα₁+bα₂：a+b=3，a+2b=5 ⇒ b=2，a=1；第三分量 1+6=7 ✓。
+<strong>β = α₁ + 2α₂</strong>。</p>
+</blockquote>
+<p><strong>X63.</strong>★★ 秩相等的两个向量组一定等价吗？</p>
+<blockquote>
+<p><strong>不一定</strong>：{(1,0)} 与 {(0,1)} 秩都是 1，但互相表示不了。等价还需"互相可表示"。</p>
+</blockquote>
+<p><strong>X64.</strong>★ 默写三秩相等。</p>
+<blockquote>
+<p><strong>行秩 = 列秩 = r(A)</strong>。这是"用行变换求向量组秩"的合法性来源。</p>
+</blockquote>
+<p><strong>X65.</strong>★ 判断 (1,2,2) 与 (2,1,−2) 是否正交。</p>
+<blockquote>
+<p>内积 = 2+2−4 = 0 ⇒ <strong>正交</strong>。</p>
+</blockquote>
+<p><strong>X66.</strong>★★ 对 α₁=(1,1,0)，α₂=(1,0,1) 做施密特正交化。</p>
+<blockquote>
+<p>β₁ = α₁ = (1,1,0)。
+β₂ = α₂ − (α₂·β₁)/(β₁·β₁)·β₁ = (1,0,1) − (1/2)(1,1,0) = <strong>(1/2, −1/2, 1)</strong>。</p>
+</blockquote>
+<p><strong>X67.</strong>★ 把 (1,1,0) 单位化。</p>
+<blockquote>
+<p><strong>(1/√2, 1/√2, 0)</strong>。正交化+单位化=规范正交基两步走。</p>
+</blockquote>
+<p><strong>X68.</strong>★★ 判断 (1,1,0)，(1,0,1)，(0,1,1) 能否生成 R³。</p>
+<blockquote>
+<p>det[[1,1,0],[1,0,1],[0,1,1]] = 1(0·1−1·1)−1(1·1−1·0)+0(1·1−0·0) = −1−1+0 = −2 ≠ 0 ⇒ 无关 ⇒ <strong>生成全空间</strong>。</p>
+</blockquote>
+<p><strong>X69.</strong>★★ β=(2,3) 在基 α₁=(1,1)，α₂=(0,1) 下的坐标。</p>
+<blockquote>
+<p>aα₁+bα₂ = (a, a+b) = (2,3) ⇒ a=2，b=1 ⇒ <strong>坐标 (2,1)</strong>。
+过渡矩阵 P=[[1,0],[1,1]]（列=基向量），坐标 = P⁻¹β。</p>
+</blockquote>
+<p><strong>X70.</strong>★ 默写相关性判定主定理。</p>
+<blockquote>
+<p>向量组线性相关 ⟺ <strong>r &lt; 向量个数</strong>（r 为该组秩）。无关 ⟺ r = 个数。</p>
+</blockquote>
+<p><strong>X71.</strong>★★ α₁,…,αₛ 无关，α₁,…,αₛ,β 相关。证明 β 可由它们唯一线性表示。</p>
+<blockquote>
+<p>相关 ⇒ 存在 k₁…kₛ,l 不全为零：Σkᵢαᵢ + lβ = 0。若 l=0 则 α 组相关，矛盾 ⇒ l≠0 ⇒ β = −Σ(kᵢ/l)αᵢ。
+唯一性：两组表示相减得 Σcᵢαᵢ = 0 ⇒ cᵢ=0。∎</p>
+</blockquote>
+<p><strong>X72.</strong>★★ 举两个秩为 1 但不等价的向量组。</p>
+<blockquote>
+<p>{(1,0)} 与 {(0,1)}：各自极大无关组是自己，秩均为 1，但互相不能表示。∎</p>
+</blockquote>
+<p><strong>X73.</strong>★★ 求矩阵 [[1,2,3,4],[2,4,6,8],[3,5,7,9]] 的秩。</p>
+<blockquote>
+<p>r2=2r1 划去；r3−3r1 = (0,−1,−2,−3) 与 r1 无关 ⇒ <strong>秩 2</strong>。</p>
+</blockquote>
+<p><strong>X74.</strong>★★ A 是 3×4，r(A)=2；B 是 4×5，r(B)=3。r(AB) 的范围？</p>
+<blockquote>
+<p>Sylvester：r(AB) ≥ 2+3−4 = 1；上界 min(2,3)=2。
+<strong>1 ≤ r(AB) ≤ 2</strong>。</p>
+</blockquote>
+<p><strong>X75.</strong>★★★ A 的列向量为 α₁,…,αₙ。证明：Ax=0 只有零解 ⟺ α₁,…,αₙ 线性无关。</p>
+<blockquote>
+<p>Ax = x₁α₁+⋯+xₙαₙ（按列拆）。"只有零解"即组合系数全零，正是线性无关的定义。∎</p>
+</blockquote>
+<h2>§4 线性方程组（X76–X100）</h2>
+<p><strong>X76.</strong>★ 默写齐次方程组解集结构。</p>
+<blockquote>
+<p>Ax=0 的解集是<strong>子空间</strong>（解空间），维数 = <strong>n − r(A)</strong>，其基叫基础解系。</p>
+</blockquote>
+<p><strong>X77.</strong>★ 默写非齐次方程组解的结构。</p>
+<blockquote>
+<p>Ax=b 的通解 = <strong>一个特解 η + 齐次通解</strong>（基础解系的线性组合）。</p>
+</blockquote>
+<p><strong>X78.</strong>★ 解 [[1,1],[1,−1]]·(x,y)ᵀ = (3,1)ᵀ。</p>
+<blockquote>
+<p>相加：2x=4 ⇒ <strong>x=2，y=1</strong>。</p>
+</blockquote>
+<p><strong>X79.</strong>★★ 求 [[1,1,1],[1,2,3]]x=0 的通解。</p>
+<blockquote>
+<p>r=2，自由量 1 个。x₂+2x₃=0 ⇒ x₂=−2t；x₁ = −x₂−x₃ = t。
+<strong>x = t(1,−2,1)ᵀ</strong>，基础解系 ξ=(1,−2,1)ᵀ。</p>
+</blockquote>
+<p><strong>X80.</strong>★★ t 为何值时 [[1,t],[t,4]]x=0 有非零解？</p>
+<blockquote>
+<p>方阵有非零解 ⟺ det=0：4−t²=0 ⇒ <strong>t=±2</strong>。</p>
+</blockquote>
+<p><strong>X81.</strong>★★ 解 [[1,1,1],[2,3,4]]x = (6,14)ᵀ。</p>
+<blockquote>
+<p>消元：x₂+2x₃=2，x₁+x₂+x₃=6。令 x₃=t：x₂=2−2t，x₁=4+t。
+<strong>x = (4,2,0)ᵀ + t(1,−2,1)ᵀ</strong>（特解+基础解系，结构齐活）。</p>
+</blockquote>
+<p><strong>X82.</strong>★ 默写解的个数判别法。</p>
+<blockquote>
+<p>r(A) &lt; r(A|b) ⇒ <strong>无解</strong>；r(A)=r(A|b)&lt;n ⇒ <strong>无穷多解</strong>；r(A)=r(A|b)=n ⇒ <strong>唯一解</strong>。</p>
+</blockquote>
+<p><strong>X83.</strong>★★★ 讨论 λ 取值时方程组 λx₁+x₂+x₃=1，x₁+λx₂+x₃=λ，x₁+x₂+λx₃=λ² 的解。</p>
+<blockquote>
+<p>系数行列式 = (λ+2)(λ−1)²。
+λ≠1 且 λ≠−2：唯一解；λ=1：三个方程都化为 x₁+x₂+x₃=1，与右端相容 ⇒ <strong>无穷多解</strong>；
+λ=−2：r(A)=2 &lt; r(A|b)=3 ⇒ <strong>无解</strong>。</p>
+</blockquote>
+<p><strong>X84.</strong>★★ 求方程组 x₁+x₂=0 与 x₂+x₃=0 的公共解。</p>
+<blockquote>
+<p>联立：x₁=−x₂，x₃=−x₂ ⇒ <strong>t(1,−1,1)ᵀ</strong>（交的解空间一维）。</p>
+</blockquote>
+<p><strong>X85.</strong>★★ 两方程组"同解"的判别？</p>
+<blockquote>
+<p>解集相同 ⟺ r 相等且互相可导出。例：[[1,1],[1,1]] 与 [[2,2]] 同解（行等价）。</p>
+</blockquote>
+<p><strong>X86.</strong>★★ 求 [[1,1,1,1],[1,2,3,4]]x=0 的基础解系。</p>
+<blockquote>
+<p>r=2，自由量 2 个（x₃,x₄）。x₂=−2x₃−3x₄，x₁=x₃+2x₄。
+<strong>ξ₁=(1,−2,1,0)ᵀ，ξ₂=(2,−3,0,1)ᵀ</strong>。</p>
+</blockquote>
+<p><strong>X87.</strong>★ Ax=b 有解的充要条件？</p>
+<blockquote>
+<p><strong>b 是 A 的列向量的线性组合</strong> ⟺ r(A)=r(A|b)。</p>
+</blockquote>
+<p><strong>X88.</strong>★★ 最小二乘法的正规方程是什么？</p>
+<blockquote>
+<p><strong>AᵀA x = Aᵀb</strong>（A 无精确解时求"残差平方和最小"的 x；b 不在列空间，投影到列空间）。</p>
+</blockquote>
+<p><strong>X89.</strong>★★ 配平：x₁+x₂=10，x₂+x₃=8，x₁+x₃=6。求 x。</p>
+<blockquote>
+<p>三式相加：2(x₁+x₂+x₃)=24 ⇒ 总量 12。
+x₁=12−8=<strong>4</strong>，x₂=12−6=<strong>6</strong>，x₃=12−10=<strong>2</strong>。</p>
+</blockquote>
+<p><strong>X90.</strong>★ A 是 4×5，r(A)=3。Ax=0 的基础解系含几个向量？</p>
+<blockquote>
+<p>n−r = 5−3 = <strong>2 个</strong>。</p>
+</blockquote>
+<p><strong>X91.</strong>★★ 证明：Ax=b 的两个解之差是 Ax=0 的解。</p>
+<blockquote>
+<p>A(x₁−x₂) = b−b = 0。∎ <strong>非齐次解之间"做差得齐次"，"做和/倍乘都跑偏"</strong>。</p>
+</blockquote>
+<p><strong>X92.</strong>★★ r(A)=2，r(A|b)=2（A 为 3×3）。三个平面的位置关系？</p>
+<blockquote>
+<p>r 相同但 &lt;3 ⇒ <strong>无穷多解</strong>，解集是一条直线——三平面共线。</p>
+</blockquote>
+<p><strong>X93.</strong>★★★ Ax=b（b≠0）有两个不同解。证明它有无穷多解。</p>
+<blockquote>
+<p>两解之差 ξ≠0 满足 Aξ=0 ⇒ 齐次有非零解 ⇒ 基础解系非空 ⇒ 通解 = η + tξ，无穷多。∎</p>
+</blockquote>
+<p><strong>X94.</strong>★★ ξ₁,ξ₂ 是 Ax=0 的基础解系，η 是 Ax=b 的特解。判断 η+ξ₁ 是不是 Ax=b 的解。</p>
+<blockquote>
+<p>A(η+ξ₁) = b+0 = b ⇒ <strong>是</strong>。而 2η 满足 A(2η)=2b ≠ b，不是。</p>
+</blockquote>
+<p><strong>X95.</strong>★ Ax=0 与 Ax=b（b≠0）的解集有公共向量吗？</p>
+<blockquote>
+<p>无：若 x 同时是两者解，则 0 = Ax = b，矛盾。<strong>两个解集永不相交</strong>。</p>
+</blockquote>
+<p><strong>X96.</strong>★ 为什么初等行变换不改变方程组的解集？</p>
+<blockquote>
+<p>行变换是可逆的同解变形：每一步新方程都是旧方程的线性组合，反之亦然 ⇒ 解集不变。∎</p>
+</blockquote>
+<p><strong>X97.</strong>★★★ 方程组 [[1,1,0],[0,1,1],[1,t,1]]x=(1,2,3)ᵀ，讨论解的情况。</p>
+<blockquote>
+<p>r3−r1 = (0,t−1,1)。t=2 时与 r2=(0,1,1) 相同 ⇒ r(A)=2；
+增广：r3−r1=(0,2,1,2)−2r2=(0,0,−1,−2) ⇒ r(A|b)=3 ⇒ <strong>无解</strong>。
+t≠2：r(A)=3 ⇒ <strong>唯一解</strong>。</p>
+</blockquote>
+<p><strong>X98.</strong>★ 两个方程、三个未知数，r=2。解集的几何形态？</p>
+<blockquote>
+<p>解空间维数 n−r = 1 ⇒ <strong>R³ 中一条直线</strong>。</p>
+</blockquote>
+<p><strong>X99.</strong>★★★ AB=O。证明 r(A)+r(B) ≤ n（A 是 m×n，B 是 n×k）。</p>
+<blockquote>
+<p>B 的每列 β 满足 Aβ=0 ⇒ B 的列全在 N(A)（A 的零空间）里。
+r(B) ≤ dim N(A) = n − r(A) ⇒ 移项即得。∎ <strong>"AB=O"三连：B 列是齐次解、r(A)+r(B)≤n、A 的列是 (AB)=O 的行组合</strong>。</p>
+</blockquote>
+<p><strong>X100.</strong>★★★ η₁,η₂,η₃ 是 Ax=b 的解。判断 A(η₁−2η₂+η₃) 是什么。</p>
+<blockquote>
+<p>= b − 2b + b = 0 ⇒ <strong>η₁−2η₂+η₃ 是 Ax=0 的解</strong>（系数和 1−2+1=0 就掉进齐次）。</p>
+</blockquote>
+<h2>§5 特征值与特征向量（X101–X125）</h2>
+<p><strong>X101.</strong>★ 默写特征值定义与求法。</p>
+<blockquote>
+<p><strong>Ax = λx（x≠0）</strong>；(λE−A)x=0 有非零解 ⟺ det(λE−A)=0（特征方程）。</p>
+</blockquote>
+<p><strong>X102.</strong>★ 默写两条"秒算"公式。</p>
+<blockquote>
+<p><strong>Σλᵢ = tr(A)（对角元之和）；∏λᵢ = det(A)</strong>。</p>
+</blockquote>
+<p><strong>X103.</strong>★★ 求 [[1,2],[2,1]] 的特征值。</p>
+<blockquote>
+<p>det(λE−A) = (λ−1)²−4 = 0 ⇒ <strong>λ=3，−1</strong>。</p>
+</blockquote>
+<p><strong>X104.</strong>★★ 求上题矩阵的特征向量。</p>
+<blockquote>
+<p>λ=3：(A−3E)x=0 ⇒ [[−2,2],[2,−2]] ⇒ ξ₁=(1,1)ᵀ；
+λ=1：[[1−1,2],[2,1−1]] = [[0,2],[2,0]] ⇒ x₁=0 ⇒ ξ₂=(1,−1)ᵀ（对应 x₂=1）。</p>
+</blockquote>
+<p><strong>X105.</strong>★ 求 diag(1,2,3) 的特征值与特征向量。</p>
+<blockquote>
+<p><strong>λ=1,2,3</strong>；特征向量分别为 e₁,e₂,e₃（对角阵天然解耦）。</p>
+</blockquote>
+<p><strong>X106.</strong>★ 上三角矩阵的特征值是什么？</p>
+<blockquote>
+<p><strong>就是全部对角元</strong>（det(λE−A) 是对角乘积）。</p>
+</blockquote>
+<p><strong>X107.</strong>★★ 默写特征值的"家族公式"。</p>
+<blockquote>
+<p>A 的特征值 λ ⇒ <strong>A²:λ²；A⁻¹:1/λ；A*:|A|/λ；A+kE:λ+k；Aᵀ:λ</strong>（Aᵀ 与 A 同特征多项式）。</p>
+</blockquote>
+<p><strong>X108.</strong>★★ A 的特征值为 1、2。求 A²+2A+3E 的特征值。</p>
+<blockquote>
+<p>f(λ)=λ²+2λ+3：f(1)=<strong>6</strong>，f(2)=<strong>11</strong>（特征多项式代入即得）。</p>
+</blockquote>
+<p><strong>X109.</strong>★ 默写：不同特征值的特征向量的关系。</p>
+<blockquote>
+<p><strong>线性无关</strong>。这是可对角化判定的基石。</p>
+</blockquote>
+<p><strong>X110.</strong>★★ 默写可对角化的充要条件。</p>
+<blockquote>
+<p>⟺ 每个 k 重特征值的<strong>无关特征向量个数（几何重数）= k（代数重数）</strong> ⟺ 有 n 个线性无关的特征向量。
+几何重数 = n − r(λE−A)。</p>
+</blockquote>
+<p><strong>X111.</strong>★★★ 判断 [[1,1],[0,1]] 能否对角化。</p>
+<blockquote>
+<p>λ=1 是二重根。r(E−A) = r[[0,−1],[0,0]] = 1 ⇒ 几何重数 2−1=1 &lt; 2 ⇒ <strong>不可对角化</strong>。
+（它是若尔当块的原型，"缺向量"。）</p>
+</blockquote>
+<p><strong>X112.</strong>★★ 把 [[1,2],[2,1]] 对角化。</p>
+<blockquote>
+<p>特征值 3、−1；特征向量 (1,1)、(1,−1)。
+P = [[1,1],[1,−1]]，<strong>P⁻¹AP = diag(3,−1)</strong>。</p>
+</blockquote>
+<p><strong>X113.</strong>★ 默写实对称矩阵的两条核心性质。</p>
+<blockquote>
+<p>特征值<strong>全为实数</strong>；<strong>不同特征值的特征向量自动正交</strong>。这保证可用正交矩阵对角化。</p>
+</blockquote>
+<p><strong>X114.</strong>★★ A=[[1,t],[2,1]] 有特征值 3 与 −1，求 t。</p>
+<blockquote>
+<p>tr A = 2 = 3+(−1) ✓ 自动成立；det A = 1−2t = 3×(−1) = −3 ⇒ <strong>t=2</strong>。</p>
+</blockquote>
+<p><strong>X115.</strong>★★ 已知 A 的特征值 3（向量 (1,1)ᵀ）与 −1（向量 (1,−1)ᵀ），求 A。</p>
+<blockquote>
+<p>A = PDP⁻¹，P=[[1,1],[1,−1]]，P⁻¹=½[[1,1],[1,−1]]。
+A = ½[[3,−1],[3,1]]·[[1,1],[1,−1]] = <strong>[[1,2],[2,1]]</strong>。</p>
+</blockquote>
+<p><strong>X116.</strong>★★ 用对角化求 [[1,2],[2,1]]ⁿ（即 X50 的另一条路）。</p>
+<blockquote>
+<p>Aⁿ = PDⁿP⁻¹ = <strong>½[[3ⁿ+(−1)ⁿ, 3ⁿ−(−1)ⁿ],[3ⁿ−(−1)ⁿ, 3ⁿ+(−1)ⁿ]]</strong>。两法同果。</p>
+</blockquote>
+<p><strong>X117.</strong>★★ 3 阶矩阵特征值 1、2、t，且 tr(A)=3、det(A)=0。求 t。</p>
+<blockquote>
+<p>1+2+t=3 ⇒ t=0；det = 1·2·0 = 0 ✓ 一致。<strong>t=0</strong>。</p>
+</blockquote>
+<p><strong>X118.</strong>★★★ 默写相似的定义与不变量，并举"相似不变量相同却不相似"的反例。</p>
+<blockquote>
+<p>B=P⁻¹AP 称 A 相似于 B。相似 ⇒ 同特征多项式、同迹、同行列式、同秩。
+反例：E 与 [[1,1],[0,1]]：不变量全同（λ=1,1），但 E 只与 E 相似 ⇒ <strong>不相似</strong>。</p>
+</blockquote>
+<p><strong>X119.</strong>★★ 求正交矩阵 Q 使 QᵀAQ 为对角，A=[[2,1],[1,2]]。</p>
+<blockquote>
+<p>特征值 3、1；特征向量 (1,1)、(1,−1)（自动正交，单位化）。
+<strong>Q = (1/√2)[[1,1],[1,−1]]，QᵀAQ = diag(3,1)</strong>。</p>
+</blockquote>
+<p><strong>X120.</strong>★★ A=[[2,1,0],[0,2,0],[0,0,2]]。能否对角化？</p>
+<blockquote>
+<p>λ=2 三重。r(2E−A) = r[[0,−1,0],[0,0,0],[0,0,0]] = 1 ⇒ 几何重数 2 &lt; 3 ⇒ <strong>不能</strong>。</p>
+</blockquote>
+<p><strong>X121.</strong>★★ 迁移矩阵 A=[[0.9,0.2],[0.1,0.8]]，x_{k+1}=Ax_k。求长期稳态比例。</p>
+<blockquote>
+<p>特征值 1 的特征向量：[[−0.1,0.2],[0.1,−0.2]]x=0 ⇒ x=(2,1)ᵀ。
+<strong>稳态 (2/3, 1/3)</strong>：总量守恒（列和为1），长期趋向主特征向量方向。</p>
+</blockquote>
+<p><strong>X122.</strong>★★★ A²=O。证明 A 的特征值全为 0。</p>
+<blockquote>
+<p>Ax=λx ⇒ A²x = λ²x = 0，x≠0 ⇒ λ=0。∎（幂零矩阵全部特征值为 0；反之不成立。）</p>
+</blockquote>
+<p><strong>X123.</strong>★ 求 [[1,2,3],[0,4,5],[0,0,6]] 的特征值。</p>
+<blockquote>
+<p>上三角 ⇒ <strong>1、4、6</strong>（看都不用看第二三列）。</p>
+</blockquote>
+<p><strong>X124.</strong>★★ 证明：A 可逆 ⟺ 特征值全不为 0。</p>
+<blockquote>
+<p>det A = ∏λᵢ ≠ 0 ⟺ 每个 λᵢ≠0。∎</p>
+</blockquote>
+<p><strong>X125.</strong>★★★ A 的特征值为 1、2、3（3 阶）。求 det A 与 |A+E|。</p>
+<blockquote>
+<p>det A = 6；|A+E| 的特征值为 2、3、4 ⇒ <strong>= 24</strong>（多项式 f(λ)=λ+1 逐个代入再相乘）。</p>
+</blockquote>
+<h2>§6 二次型（X126–X150）</h2>
+<p><strong>X126.</strong>★ 默写二次型与对称矩阵的对应。</p>
+<blockquote>
+<p>f = xᵀAx，A <strong>对称</strong>且由 f 唯一确定（交叉项系数对半拆）。
+f = x²+4xy+y² ⇒ A = <strong>[[1,2],[2,1]]</strong>。</p>
+</blockquote>
+<p><strong>X127.</strong>★ 写出 f = 2x₁²+4x₁x₂−2x₂² 的矩阵。</p>
+<blockquote>
+<p><strong>A = [[2,2],[2,−2]]</strong>（4x₁x₂ 拆成两个 2）。</p>
+</blockquote>
+<p><strong>X128.</strong>★★ 用配方法化 f = x²+4xy+y² 为标准形。</p>
+<blockquote>
+<p>f = (x+2y)² − 4y² + y² = <strong>y₁² − 3y₂²</strong>（令 y₁=x+2y，y₂=y）。</p>
+</blockquote>
+<p><strong>X129.</strong>★ 默写惯性定理。</p>
+<blockquote>
+<p>同一二次型经任何可逆线性变换得到的规范形中，<strong>正、负平方项个数（正/负惯性指数 p、q）不变</strong>。</p>
+</blockquote>
+<p><strong>X130.</strong>★ 默写合同的判别。</p>
+<blockquote>
+<p>B=CᵀAC 称 A、B 合同。实对称矩阵合同 ⟺ <strong>正负惯性指数对应相等</strong>。</p>
+</blockquote>
+<p><strong>X131.</strong>★ 默写正定的等价条件（三条以上）。</p>
+<blockquote>
+<p>xᵀAx&gt;0（∀x≠0）⟺ <strong>特征值全正</strong> ⟺ <strong>各阶顺序主子式全正</strong> ⟺ 正惯性指数 p=n ⟺ 存在可逆 C 使 A=CᵀC。</p>
+</blockquote>
+<p><strong>X132.</strong>★★ 判断 [[2,1],[1,2]] 是否正定。</p>
+<blockquote>
+<p>顺序主子式：2&gt;0，det=3&gt;0 ⇒ <strong>正定</strong>。</p>
+</blockquote>
+<p><strong>X133.</strong>★★ 判断 [[1,2],[2,1]] 是否正定。</p>
+<blockquote>
+<p>det = 1−4 = −3 &lt; 0 ⇒ <strong>不正定</strong>（特征值 3、−1，是"不定"型）。</p>
+</blockquote>
+<p><strong>X134.</strong>★★ t 为何值时 [[1,t],[t,1]] 正定？</p>
+<blockquote>
+<p>1−t²&gt;0 ⇒ <strong>|t|&lt;1</strong>。</p>
+</blockquote>
+<p><strong>X135.</strong>★★ t 为何值时 [[2,1,0],[1,1,t],[0,t,1]] 正定？</p>
+<blockquote>
+<p>顺序主子式：2&gt;0；2−1=1&gt;0；det = 2(1−t²)−1 = 1−2t²。
+<strong>|t| &lt; 1/√2</strong>。</p>
+</blockquote>
+<p><strong>X136.</strong>★ 默写正定矩阵的必要条件。</p>
+<blockquote>
+<p>特征值全正 ⇒ <strong>对角元全正</strong>、<strong>|A|&gt;0</strong>、迹&gt;0；<strong>A⁻¹、A* 也正定</strong>。
+用途：见"对角元有负数"可直接判非正定。</p>
+</blockquote>
+<p><strong>X137.</strong>★ 默写规范形，并写出 X128 的规范形。</p>
+<blockquote>
+<p>规范形：y₁²+⋯+yₚ² − y_{p+1}²−⋯−y_{p+q}²（系数只有 ±1、0）。
+X128 的 f = y₁²−3y₂² ⇒ 规范形 <strong>z₁²−z₂²</strong>（p=q=1）。</p>
+</blockquote>
+<p><strong>X138.</strong>★★ f = x₁²+2x₁x₂+x₂² 的标准形与秩。</p>
+<blockquote>
+<p>f = (x₁+x₂)² ⇒ <strong>标准形 y₁²</strong>（p=1,q=0），r(A)=<strong>1</strong>（A=[[1,1],[1,1]]，特征值 2、0）。</p>
+</blockquote>
+<p><strong>X139.</strong>★★★ 用正交变换化 f = 2x₁²+4x₁x₂+2x₂² 为标准形。</p>
+<blockquote>
+<p>A=[[2,2],[2,2]]：特征值 4、0（秩1）。
+<strong>正交变换下标准形 = 4y₁² + 0·y₂²</strong>；注意"正交变换"和"配方法"得到的标准形系数一般不同，但 p、q 相同。</p>
+</blockquote>
+<p><strong>X140.</strong>★ f = x²+y²−z²=1 是什么曲面？</p>
+<blockquote>
+<p><strong>单叶双曲面</strong>（正惯性指数 2，负 1，常数项 1）。</p>
+</blockquote>
+<p><strong>X141.</strong>★★ 配方：f = x₁²+2x₁x₂+2x₂²+4x₂x₃+4x₃²。</p>
+<blockquote>
+<p>= (x₁+x₂)² + (x₂²+4x₂x₃+4x₃²) = <strong>(x₁+x₂)² + (x₂+2x₃)²</strong>。
+p=2，q=0，但秩 2&lt;3 ⇒ <strong>半正定</strong>（x₂=−2x₃, x₁=−x₂ 时 f=0）。</p>
+</blockquote>
+<p><strong>X142.</strong>★ 默写半正定判别并验证 [[1,1],[1,1]]。</p>
+<blockquote>
+<p>半正定 ⟺ <strong>所有主子式（不只顺序）≥ 0</strong>。
+[[1,1],[1,1]]：一阶主子式 1,1 ≥0，det=0 ⇒ <strong>半正定</strong>（特征 2、0）。</p>
+</blockquote>
+<p><strong>X143.</strong>★★★ 辨析"相似"与"合同"（实对称矩阵情形）。</p>
+<blockquote>
+<p>相似 ⇒ 同特征值；合同 ⇒ 同正负惯性指数。
+实对称矩阵<strong>相似 ⇒ 合同</strong>（正负惯性指数=特征值的正负个数）；反之不成立（λ 可差倍数）。</p>
+</blockquote>
+<p><strong>X144.</strong>★★ 用正交变换化 f = 2x₁x₂ 为标准形。</p>
+<blockquote>
+<p>A=[[0,1],[1,0]]：特征值 1、−1，特征向量 (1,1)、(1,−1)。
+<strong>标准形 y₁²−y₂²</strong>，Q=(1/√2)[[1,1],[1,−1]]。</p>
+</blockquote>
+<p><strong>X145.</strong>★★ 判断 x²+4xy+y²=c（c&gt;0）是什么曲线。</p>
+<blockquote>
+<p>正交变换（转 45°）后 f = 3u²−v²：<strong>3u²−v²=c，双曲线</strong>（p=q=1，不定型）。</p>
+</blockquote>
+<p><strong>X146.</strong>★★★ 证明：A 正定 ⇒ A* 正定。</p>
+<blockquote>
+<p>A 正定 ⇒ 特征值 λᵢ&gt;0 且 |A|&gt;0 ⇒ A<em> 的特征值 |A|/λᵢ &gt; 0；A</em> 对称。
+特征值全正的对称矩阵正定。∎</p>
+</blockquote>
+<p><strong>X147.</strong>★ 二次型的秩等于什么？</p>
+<blockquote>
+<p><strong>r(A) = 非零特征值个数 = 标准形中非零平方项个数（p+q）</strong>。</p>
+</blockquote>
+<p><strong>X148.</strong>★★ 求 f = x₁²+2x₂²+3x₃²+4x₁x₂ 的正负惯性指数。</p>
+<blockquote>
+<p>配方：f = (x₁+2x₂)² − 2x₂² + 3x₃²。
+<strong>p=2，q=1</strong>（正惯性指数 2，负惯性指数 1）。</p>
+</blockquote>
+<p><strong>X149.</strong>★★★ 证明：A 正定，B 可逆 ⇒ BABᵀ 正定。</p>
+<blockquote>
+<p>对称：(BABᵀ)ᵀ = BABᵀ ✓。
+对 x≠0：xᵀBABᵀx = (Bᵀx)ᵀA(Bᵀx) &gt; 0（Bᵀx≠0，因 B 可逆）。∎
+<strong>合同变换保持正定性</strong>——这就是正定的合同判别法来源。</p>
+</blockquote>
+<p><strong>X150.</strong>★★★ a 为何值时 f = x₁²+x₂²+x₃²+2a(x₁x₂+x₁x₃+x₂x₃) 正定？</p>
+<blockquote>
+<p>顺序主子式：1；1−a²；det = 1+2a³−3a² = (a−1)²(2a+1)。
+需 1−a²&gt;0 且 (a−1)²(2a+1)&gt;0 ⇒ <strong>−1/2 &lt; a &lt; 1</strong>。</p>
+</blockquote>
+<hr />
+<p><strong>完结</strong>：X1–X150。使用节奏：①§1–§2 两天（行列式抓"行和/范德蒙/分块"三板斧，矩阵抓 A*=|A|A⁻¹ 一个恒等式）→②§3–§4 两天半（向量组一切问题化成秩；方程组一切问题化成 r(A) 与 r(A|b)）→③§5–§6 两天半（特征值先算迹和行列式反推参数；二次型正定就背顺序主子式一条主判据+几条必要条件秒杀）。线代大题的题眼就六个：逆、秩、相关、解结构、对角化、正定——每章最后三题（★）就是历年大题的骨架。</p></div></body></html>

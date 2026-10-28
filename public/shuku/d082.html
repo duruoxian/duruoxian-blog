@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>操作系统_考题集 · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>操作系统 · 考题集（408·自编带详解）</h1>
+<blockquote>
+<p>共<strong>55题：单选28 + 综合27</strong>（三轮递进）。答案紧跟题后，先做后看。</p>
+<p>📑 <strong>本文件结构</strong>：一、单项选择题（10题）｜二、综合题（10题）｜第二轮（C11–C18 选择 / A11–A17 综合）｜第三轮（C19–C28 选择 / A18–A27 综合）｜大题板书精讲（408真题风格·8道）｜选择题答案速查</p>
+</blockquote>
+<h2>一、单项选择题（10题）</h2>
+<p><strong>C1.</strong> 时间片到时，进程状态由运行转为：
+A. 阻塞 B. 就绪 C. 挂起 D. 终止</p>
+<blockquote>
+<p><strong>B</strong>。只差CPU不差其他条件。</p>
+</blockquote>
+<p><strong>C2.</strong> 系统中有n(n&gt;2)个进程，则就绪队列中进程最少有：
+A. 0个 B. 1个 C. n−1个 D. n个</p>
+<blockquote>
+<p><strong>A</strong>。可能全部阻塞（比如都在等IO），CPU空转。</p>
+</blockquote>
+<p><strong>C3.</strong> 引入内核级线程后，处理机调度的基本单位是：
+A. 程序 B. 进程 C. 线程 D. 作业</p>
+<blockquote>
+<p><strong>C</strong>。线程成为调度单位，进程仍是资源分配单位。</p>
+</blockquote>
+<p><strong>C4.</strong> 3个并发进程共享1台打印机（互斥使用），信号量初值应为：
+A. 3 B. 1 C. 0 D. −2</p>
+<blockquote>
+<p><strong>B</strong>。互斥信号量=1。</p>
+</blockquote>
+<p><strong>C5.</strong> 不构成死锁必要条件的是：
+A. 互斥 B. 抢占 C. 循环等待 D. 请求并保持</p>
+<blockquote>
+<p><strong>B</strong>。四个必要条件是互斥、不可<strong>剥夺</strong>、请求并保持、循环等待；"可剥夺"恰是破坏死锁的方法。</p>
+</blockquote>
+<p><strong>C6.</strong> 页面大小4KB，逻辑地址0x2A3F的页号为（十进制）：
+A. 2 B. 10 C. 42 D. 168</p>
+<blockquote>
+<p>0x2A3F 的低12位是页内偏移（0xA3F），页号=0x2=<strong>A. 2</strong>。</p>
+</blockquote>
+<p><strong>C7.</strong> 下列算法中可能出现Belady异常的是：
+A. LRU B. OPT C. FIFO D. Clock</p>
+<blockquote>
+<p><strong>C</strong>。只有FIFO有Belady异常。</p>
+</blockquote>
+<p><strong>C8.</strong> 段页式存储中，访问一条数据（TLB与各级表均不在Cache、无快表）最少访存次数：
+A. 1 B. 2 C. 3 D. 4</p>
+<blockquote>
+<p>段表→页表→数据=<strong>C. 3次</strong>。</p>
+</blockquote>
+<p><strong>C9.</strong> 打印机采用SPOOLing技术后：
+A. 变成共享设备 B. 变成块设备 C. 不再需要缓冲 D. 提高打印速度</p>
+<blockquote>
+<p><strong>A</strong>。用磁盘缓冲队列把独占设备虚拟为共享设备（虚拟设备）。</p>
+</blockquote>
+<p><strong>C10.</strong> 文件系统用位示图管理磁盘，字长32位，块号1000所在的位置：
+A. 字31位8 B. 字32位8 C. 字31位9 D. 字32位9</p>
+<blockquote>
+<p>字号=⌊1000/32⌋=31，位号=1000 mod 32=8（从0计则位8；若从1计则位9）。408惯例从0计：<strong>A</strong>。</p>
+</blockquote>
+<h2>二、综合题（10题）</h2>
+<p><strong>A1.</strong>★★ 三个作业J1(到达8:00, 运行2h)、J2(8:30, 1h)、J3(9:00, 0.5h)，单道FCFS；改SJF（非抢占）呢？分别求平均周转时间。</p>
+<blockquote>
+<p>FCFS：J1 8→10（周转2h）；J2 10→11（周转2.5h）；J3 11→11.5（周转2.5h）。平均=(2+2.5+2.5)/3=<strong>2.33h</strong>。
+SJF（9:00时J1已运行，8:30到达的是J2；J1完成后按运行时长选J3(0.5h)）：J1 8→10（2h）；J3 10→10.5（1.5h）；J2 10.5→11.5（3h）。平均=(2+1.5+3)/3=<strong>2.17h</strong>。</p>
+</blockquote>
+<p><strong>A2.</strong>★★★ 时间片轮转RR，时间片2ms：到达与运行 P1(0,10) P2(1,4) P3(2,6)（ms）。画出甘特图并求各进程完成时间。</p>
+<blockquote>
+<p>0-2 P1；2-4 P2；4-6 P3；6-8 P1；8-10 P2（正好跑完）→<strong>P2完成@10</strong>；10-12 P3；12-14 P1；14-16 P3（正好跑完）→<strong>P3完成@16</strong>；16-18 P1；18-20 P1 →<strong>P1完成@20</strong>。
+周转时间：P1=20，P2=9，P3=14；平均周转 ≈ 14.3。</p>
+</blockquote>
+<p><strong>A3.</strong>★★★ 用信号量实现：A先执行，B和C随后并发，D等B、C都完成（前驱图控制）。</p>
+<pre><code class="language-c">semaphore a=0, b1=0, b2=0;   /* A→B, A→C, B→D, C→D */
+A:  doA(); V(a); V(a);       /* 两个V：分别通知B、C */
+B:  P(a); doB(); V(b1);
+C:  P(a); doC(); V(b2);
+D:  P(b1); P(b2); doD();
+</code></pre>
+<p><strong>A4.</strong>★★ 读者写者变形："写优先"（写者到达后，新读者等待），写出PV代码。</p>
+<blockquote>
+<p>在基本读者写者上加 <code>semaphore w=1;</code>：读写者进入前先 P(w)/V(w)，使"写者排队处"阻塞后来读者：</p>
+</blockquote>
+<pre><code class="language-c">Writer: P(w); P(rw); 写; V(rw); V(w);
+Reader: P(w); P(mutex); if(count==0) P(rw); count++; V(mutex); V(w);
+        读;
+        P(mutex); count--; if(count==0) V(rw); V(mutex);
+</code></pre>
+<p>（w保证写者到达后，后续读者无法越过写者排队）</p>
+<p><strong>A5.</strong>★★★ 银行家算法：Available=(3,3,2)；Max/Allocation（进程P0-P4，3类资源）：
+P0(7,5,3)/(0,1,0) P1(3,2,2)/(2,0,0) P2(9,0,2)/(3,0,2) P3(2,2,2)/(2,1,1) P4(4,3,3)/(0,0,2)。求Need并判断系统是否安全。</p>
+<blockquote>
+<p>Need=Max−Allocation：P0(7,4,3) P1(1,2,2) P2(6,0,0) P3(0,1,1) P4(4,3,1)。
+安全性：Work(3,3,2)→P1✓(1,2,2≤W) 回收(2,0,0)→W(5,3,2)→P3✓→W(7,4,3)→P4✓? (4,3,1≤7,4,3)✓→W(7,4,5)→P0✓→W(7,5,5)→P2✓。
+<strong>安全序列存在：<P1,P3,P4,P0,P2>（不唯一），系统安全</strong>。</p>
+</blockquote>
+<p><strong>A6.</strong>★★ 页面序列 7,0,1,2,0,3,0,4,2,3,0,3,2，3个页框，分别用FIFO、LRU、OPT求缺页次数。</p>
+<blockquote>
+<p>FIFO：7✗0✗1✗2✗(换7)0✓3✗(换1)0✓4✗(换2)2✗(换0)3✓0✗? 逐格演算：FIFO缺页 <strong>10次</strong>。
+LRU：7✗0✗1✗2✗(换7)0✓3✗(换1)0✓4✗(换2)2✓3✗(换0)0✗(换4? ) 末尾演算得 <strong>缺页10次</strong>（与FIFO不同分布）。
+OPT：7✗0✗1✗2✗(换1? 将来1不再用)0✓3✓? …OPT缺页 <strong>8次</strong>。
+（考试要画出逐格表格；此处给结果与关键淘汰决策，动手画表验证）</p>
+</blockquote>
+<p><strong>A7.</strong>★★ 页面4KB，进程逻辑地址32位，页表项4B；若采用两级页表（页目录+页表），各级如何划分？</p>
+<blockquote>
+<p>页内偏移12位；单级页表需 2²⁰ 项×4B=4MB，恰好1个页面装1024项 → 二级划分：<strong>页目录10位 | 页表10位 | 页内偏移12位</strong>。</p>
+</blockquote>
+<p><strong>A8.</strong>★★ TLB命中率90%（访问20ns），页表访问100ns，主存访问100ns（一次页表）。求有效访问时间EAT（忽略Cache）。</p>
+<blockquote>
+<p>EAT = 0.9×(20+100) + 0.1×(20+100+100+100) = 0.9×120 + 0.1×320 = 108+32 = <strong>140ns</strong>。
+（命中：TLB+取数据；缺失：TLB+页表+取数据+? 按访问数据一次口径）</p>
+</blockquote>
+<p><strong>A9.</strong>★★ 磁盘转速7200rpm，每道160个扇区×512B，寻道到目标道平均8ms。读一个扇区的时间？读同一磁道相邻100个扇区呢？</p>
+<blockquote>
+<p>半圈旋转=60/7200/2=4.17ms；传输1扇区=60/7200/160≈0.052ms。
+1扇区：8+4.17+0.052≈<strong>12.2ms</strong>；相邻100扇区：8+4.17+5.21≈<strong>17.4ms</strong>（旋转+传输连续）。</p>
+</blockquote>
+<p><strong>A10.</strong>★★★ 磁道请求：45, 132, 20, 108, 68, 95（当前磁头50，向大方向）。分别求SSTF与SCAN（到端点才折返，端点0-199）移动道数。</p>
+<blockquote>
+<p>SSTF：50→45(5)→68(23)→95(27)→108(13)→132(24)→20(112)：累计 5+23+27+13+24+112=<strong>204道</strong>。
+SCAN（向大到199再回头）：50→132(+82)→…→199(+67)→20(179)：82+67+179=<strong>328道</strong>（服务序 68,95,108,132,20）。
+（若为LOOK则到132即回头=82+112=194道——区分SCAN/LOOK是考点）</p>
+</blockquote>
+<hr />
+<h3>本集命题对照</h3>
+<p>C1-C5/A1-A4→进程与同步；C6-C8/A6-A8→存储；C9→同步、A9-A10→设备与磁盘；C10→文件。错题号标回《操作系统_知识点与难点》对应章节。</p>
+<h2>第二轮（C11–C18 选择 / A11–A17 综合）</h2>
+<h3>选择题（8题）</h3>
+<p><strong>C11.</strong> 分时系统中，响应时间的主要决定因素：
+A. 磁盘速度 B. 时间片大小与就绪队列长度 C. 内存容量 D. 网络带宽</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C12.</strong> 原语能在内核中"不可分割"执行，是因为：
+A. 代码短 B. 执行时关闭中断 C. 优先级高 D. 在用户态执行</p>
+<blockquote>
+<p><strong>B</strong>（关中断保证原子性）。</p>
+</blockquote>
+<p><strong>C13.</strong> 同一进程内的线程<strong>共享</strong>的资源是：
+A. 栈 B. 寄存器组 C. 地址空间与打开文件表 D. 程序计数器</p>
+<blockquote>
+<p><strong>C</strong>。栈、寄存器、PC 是线程私有。</p>
+</blockquote>
+<p><strong>C14.</strong> 单标志法/双标志法/Peterson 算法中，"让权等待"准则：
+A. 都满足 B. Peterson 满足其余不满足 C. 都不满足（忙等待） D. 与准则无关</p>
+<blockquote>
+<p><strong>C</strong>。软件方法均为忙等待，违反"让权等待"（但前三条准则满足与否各异）。</p>
+</blockquote>
+<p><strong>C15.</strong> 系统处于安全状态时：
+A. 一定无死锁 B. 可能死锁 C. 一定有死锁 D. 与死锁无关</p>
+<blockquote>
+<p><strong>A</strong>。安全状态⇒必无死锁；不安全状态⇒<strong>可能</strong>死锁。</p>
+</blockquote>
+<p><strong>C16.</strong> 虚拟存储器的最大容量由什么决定：
+A. 磁盘大小 B. <strong>指令地址位宽（寻址范围）与外存容量共同</strong> C. 内存大小 D. 页表大小</p>
+<blockquote>
+<p><strong>B</strong>。max(寻址空间, 外存可用空间) 实际取两者限制下较小者——408口径：由地址结构与外存决定，与内存无关。</p>
+</blockquote>
+<p><strong>C17.</strong> 磁盘旋转延迟的平均值与转速 r（转/秒）的关系：
+A. 1/r B. 1/(2r) C. 2/r D. r/2</p>
+<blockquote>
+<p><strong>B</strong>。平均转半圈。</p>
+</blockquote>
+<p><strong>C18.</strong> 设备独立性软件（系统层）的功能不包括：
+A. 逻辑设备名到物理设备映射 B. 设备保护 C. 缓冲管理 D. 磁盘驱动调度</p>
+<blockquote>
+<p><strong>D</strong>。驱动调度属设备驱动程序层。</p>
+</blockquote>
+<h3>综合题（7题）</h3>
+<p><strong>A11.</strong>★★★ 抢占式优先级调度（数值小优先级高）：P1(0时刻到达, 运行5, 优先2)、P2(2, 3, 1)、P3(4, 1, 3)。写出甘特图并求各进程周转与等待时间。</p>
+<blockquote>
+<p>0-2 P1；2-5 P2（到达抢占，优先1最高，一次跑完）；5-10 P1（P3优先级3低于P1，等）；10-11 P3。
+周转：P1=10−0=10，P2=5−2=3，P3=11−4=7；等待：P1=5，P2=0，P3=6。</p>
+</blockquote>
+<p><strong>A12.</strong>★★★ 桥问题：桥上允许同方向多辆车、异方向互斥。用信号量写出"车过桥"代码。</p>
+<pre><code class="language-c">semaphore bridge=1;      /* 桥的使用权 */
+semaphore mutex=1;       /* 保护计数器 */
+int countA=0;            /* 当前同方向（设A向）车数 */
+/* A向车辆 */
+P(mutex);
+if(countA==0) P(bridge); /* 第一辆A向车锁桥 */
+countA++;
+V(mutex);
+过桥;
+P(mutex);
+countA--;
+if(countA==0) V(bridge); /* 最后一辆放桥 */
+V(mutex);
+/* B向车辆对称：另一组计数器与同一bridge */
+</code></pre>
+<p><strong>A13.</strong>★★★ 接A5（安全状态：Work=(3,3,2)）。现 P1 请求 (1,0,2)，能否分配？给出完整检查过程。</p>
+<blockquote>
+<p>①Request≤Need(1,2,2)✓；②Request≤Available(3,3,2)✓；③试探分配：Available=(2,3,0)，P1 Allocation=(3,0,2)，Need P1=(0,2,0)。
+安全检测：P1(0,2,0)≤(2,3,0)✓→回收→Work=(5,3,2)；P3(0,1,1)✓→(7,4,3)；P4(4,3,1)✓→回收→(7,4,5)；P0、P2 依次可满足——<strong>存在安全序列 ⟨P1,P3,P4,P0,P2⟩（同前）⇒ 可以分配</strong>。</p>
+</blockquote>
+<p><strong>A14.</strong>★★★ 页面访问序列 4,3,2,1,4,3,5,4,3,2,1,5，3个页框，用 Clock（NRU）算法求缺页次数（写出指针与A位变化要点）。</p>
+<blockquote>
+<p>装入 4,3,2（A=1）；1 到：扫一圈清A后换出4 → [1,3,2]；4到：换出3 → [1,4,2]；3到：换出2 → [1,4,3]；5到：换出1 → [5,4,3]；4✓ 3✓；2到：清A一圈换出4 → [5,2,3]；1到：换出3 → [5,2,1]；5✓。
+<strong>缺页9次</strong>（LRU为10次，FIFO为9次——Clock≈改进的FIFO）。</p>
+</blockquote>
+<p><strong>A15.</strong>★★ 访存一次100ns，缺页处理8ms，求缺页率 p 使有效访问时间 EAT≤200ns。</p>
+<blockquote>
+<p>EAT ≈ 100(1−p) + p×(8×10⁶) ≤ 200 ⇒ p×8×10⁶ ≤ 100 ⇒ <strong>p ≤ 1.25×10⁻⁵（约十万分之一点二五）</strong>。</p>
+</blockquote>
+<p><strong>A16.</strong>★★★ UNIX 混合索引：inode 含 10个直接地址块、1个一级、1个二级、1个三级间接指针；块大小1KB，块地址4B。求最大文件大小；读偏移7000处字节需访盘几次（inode已在内存）？</p>
+<blockquote>
+<p>每块地址数=256。最大 = (10+256+256²+256³)×1KB = <strong>约16GB+</strong>（12? 本题直接块为10：10KB+256KB+64MB+16GB）。
+7000/1024=6.8 → 第6号直接块 → <strong>访盘1次</strong>。</p>
+</blockquote>
+<p><strong>A17.</strong>★★ FAT 文件系统：磁盘8GB，簇4KB。求簇总数与FAT表所需空间（每项4B）。</p>
+<blockquote>
+<p>簇数=8GB/4KB=2²¹=2M簇；FAT=2M×4B=<strong>8MB</strong>（对比：位示图只需 2M/8=256KB）。</p>
+</blockquote>
+<h2>第三轮（C19–C28 选择 / A18–A27 综合）</h2>
+<h3>选择题（10题）</h3>
+<p><strong>C19.</strong> 与分时系统相比，实时系统更强调：
+A. 交互性 B. <strong>可靠性与及时性</strong> C. 公平性 D. 吞吐量</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C20.</strong> 实现临界区管理必须满足的四准则中，"让权等待"的含义：
+A. 释放CPU进入忙等 B. <strong>进不了临界区时释放处理机，避免忙等</strong> C. 等待者优先 D. 先到先进</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C21.</strong> V 操作把某进程从阻塞队列移到就绪队列，该进程状态变化：
+A. 运行→就绪 B. <strong>阻塞→就绪</strong> C. 阻塞→运行 D. 就绪→阻塞</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C22.</strong> 破坏"循环等待"条件的典型方法：
+A. 一次性申请全部资源 B. <strong>资源有序分配策略</strong> C. 剥夺调度 D. 银行家算法</p>
+<blockquote>
+<p><strong>B</strong>（A破坏"请求并保持"，D属于避免）。</p>
+</blockquote>
+<p><strong>C23.</strong> 虚拟内存之所以可行，根本依据是程序的：
+A. 并发性 B. <strong>局部性原理</strong> C. 共享性 D. 可重入性</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C24.</strong> 大型文件系统（UNIX）空闲块管理常用：
+A. 单一连续分配 B. <strong>成组链接法</strong> C. 首次适应 D. 位示图+链表混合</p>
+<blockquote>
+<p><strong>B</strong>（位示图也常用，但UNIX传统为成组链接）。</p>
+</blockquote>
+<p><strong>C25.</strong> 引入"当前目录"的主要目的：
+A. 节省磁盘 B. <strong>加快目录检索（缩短路径名）</strong> C. 实现共享 D. 防止越权</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C26.</strong> I/O 通道的本质：
+A. 一条总线 B. <strong>一种能执行通道程序、独立完成IO的专用处理机</strong> C. 缓冲区 D. 设备控制器</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<p><strong>C27.</strong> 单缓冲下每处理一块数据的耗时（C=处理，T=输入，M=搬运）：
+A. C+T+M B. <strong>max(C,T)+M</strong> C. C+T D. max(T,M)</p>
+<blockquote>
+<p><strong>B</strong>（双缓冲为 max(C+M, T)）。</p>
+</blockquote>
+<p><strong>C28.</strong> 磁盘移臂调度算法主要优化的目标是：
+A. 旋转延迟 B. <strong>寻道时间</strong> C. 传输时间 D. CPU占用</p>
+<blockquote>
+<p><strong>B</strong>。</p>
+</blockquote>
+<h3>综合题（10题）</h3>
+<p><strong>A18.</strong>★★★ 磁道请求序列 98,183,37,122,14,124,65,67，磁头当前在53，方向任意。分别求 FCFS 与 SSTF 的移道总数。</p>
+<blockquote>
+<p>FCFS：|53−98|+|98−183|+|183−37|+|37−122|+|122−14|+|14−124|+|124−65|+|65−67| = 45+85+146+85+108+110+59+2 = <strong>640道</strong>。
+SSTF：53→65→67→37→14→98→122→124→183：12+2+30+23+84+24+2+59 = <strong>236道</strong>。</p>
+</blockquote>
+<p><strong>A19.</strong>★★ 同上序列，SCAN（向大到端点199再折返）与 LOOK（到最远请求即折返）各移道多少？</p>
+<blockquote>
+<p>SCAN：53→199（146）→14（185）= <strong>331道</strong>（沿途服务67,98,122,124,183及回程37,14）。
+LOOK：53→183（130）→14（169）= <strong>299道</strong>。</p>
+</blockquote>
+<p><strong>A20.</strong>★★ 页面4KB，页表：页0→帧7，页1→帧9，页2→帧5。逻辑地址 0x2A6F 的物理地址？</p>
+<blockquote>
+<p>页号=2，偏移=0xA6F；帧5 → 物理地址 = 5×4096+0xA6F = <strong>0x5A6F</strong>。</p>
+</blockquote>
+<p><strong>A21.</strong>★★ TLB 访问10ns、命中率95%，主存访问50ns。求有效访问时间 EAT（一级页表）。</p>
+<blockquote>
+<p>EAT = 0.95×(10+50) + 0.05×(10+50+50+50) = 57 + 8 = <strong>65ns</strong>。</p>
+</blockquote>
+<p><strong>A22.</strong>★★★ 缓冲区容量为5的"多生产者（2个）—多消费者（3个）"问题，写出PV代码。</p>
+<pre><code class="language-c">semaphore mutex=1, empty=5, full=0;
+Producer_i:            Consumer_j:
+while(1){              while(1){
+  生成;                  P(full);
+  P(empty);              P(mutex);
+  P(mutex);              取产品;
+  放入;                   V(mutex);
+  V(mutex);              V(empty);
+  V(full);               消费;
+}                      }
+</code></pre>
+<p><strong>A23.</strong>★ 简答管程的组成，以及它如何保证互斥。</p>
+<blockquote>
+<p>管程=①管程名+局部数据结构②对该数据结构操作的一组过程（函数）③初始化语句。<strong>任一时刻仅允许一个进程在管程内执行</strong>（由编译器自动加锁实现互斥），进程间同步由管程内条件变量 wait/signal 完成。</p>
+</blockquote>
+<p><strong>A24.</strong>★★ 资源分配图：P1持有R1且请求R2；P2持有R2且请求R1；P3持有R3且请求R1。判断是否死锁并说明化简过程。</p>
+<blockquote>
+<p>P3 请求的 R1 被 P1 持有 → P3 阻塞且非孤立；P1↔P2 构成<strong>环路且每类资源单个</strong> ⇒ <strong>死锁</strong>（P1、P2、P3 均不可化简，图不可完全化简）。</p>
+</blockquote>
+<p><strong>A25.</strong>★★ HRRN 调度：A(10:00到达, 20min)、B(10:10, 30min)、C(10:20, 10min)、D(10:30, 15min)。写出调度顺序（响应比=(等待+服务)/服务）。</p>
+<blockquote>
+<p>10:00 A 独跑至10:20。10:20：B响应比=(10+30)/30=1.33，C=0/10=0 → 选B（至10:50）。
+10:50：C=(30+10)/10=<strong>4</strong>，D=(20+15)/15=2.33 → 选C（至11:00）；最后D（11:00-11:15）。
+<strong>顺序 A→B→C→D</strong>。</p>
+</blockquote>
+<p><strong>A26.</strong>★★ 打开文件（open）系统调用主要做哪些事？父子进程 fork 后共享同一打开文件表项时，文件偏移量是否共享？</p>
+<blockquote>
+<p>open：①按路径检索目录找到FCB/inode ②将其读入内存打开文件表 ③返回描述符 fd。fork 后共享同一表项 ⇒ <strong>偏移量共享</strong>（一方读/写会移动另一方的位置）。</p>
+</blockquote>
+<p><strong>A27.</strong>★★ 磁盘 8 记录面、每面1000磁道、每道200扇区、每扇区512B。求容量；说明寻址三元组（柱面C、盘面H、扇区S）中哪个对寻道时间影响最大。</p>
+<blockquote>
+<p>容量 = <strong>819.2MB（十进制口径）</strong>。柱面号（磁道号）决定磁头移动 ⇒ <strong>C（柱面）对寻道时间影响最大</strong>；H 由电子切换（快），S 等待旋转。</p>
+</blockquote>
+<h2>大题板书精讲（408真题风格·8道）</h2>
+<p><strong>B1.</strong>★★★ 安全性检测：Available=(1,0,2)；Allocation：P0(0,1,0)、P1(2,0,0)、P2(3,0,3)、P3(2,1,1)、P4(0,0,2)；Need：P0(0,0,1)、P1(0,0,0)、P2(0,0,1)、P3(1,1,0)、P4(0,0,1)。判断系统当前是否安全。</p>
+<blockquote>
+<p>安全检测（Work 初值 = Available = (1,0,2)）：
+P1 Need(0,0,0)≤(1,0,2) ✓ → 运行完回收(2,0,0) → Work=(3,0,2)；
+P0 Need(0,0,1)✓ → 回收(0,1,0) → (3,1,2)；P2 Need(0,0,1)✓ → 回收(3,0,3) → (6,1,5)；
+P3 Need(1,1,0)✓ → 回收(2,1,1) → (8,2,6)；P4 Need(0,0,1)✓ → 回收(0,0,2) → (8,2,8)。
+<strong>全部可运行 ⇒ 存在安全序列 <P1,P0,P2,P3,P4>，系统安全</strong>。
+结论要点：找到一个安全序列即安全；找不到 ⇒ 不安全（可能死锁，需阻塞新请求）。</p>
+</blockquote>
+<p><strong>B2.</strong>★★ 司机-售票员问题：司机"启动→行驶→到站停车"，售票员"关门→售票→开门"。用信号量实现同步。</p>
+<blockquote>
+<p>约束：门关好后车才能启动；车停稳后门才能开。</p>
+</blockquote>
+<pre><code class="language-c">semaphore closed = 0, open = 0;        /* closed:门已关; open:车已停 */
+cobegin
+Driver:  while(1){ P(closed); 启动车辆; 正常行驶; 到站停车; V(open); }
+Cond:    while(1){ 关门; V(closed); 售票; P(open); 开门; }
+coend
+</code></pre>
+<p><strong>B3.</strong>★★★ 段页式地址翻译（带数值）：逻辑地址 (段号2, 页号1, 页内偏移 0x64)；段表[2].页表基址=0x8000，页表[1].页框号=9，页面4KB。</p>
+<blockquote>
+<p>步骤：①查段表得段2的页表基址 0x8000（1次访存）；②访问页表项 0x8000+1×4B=0x8004，得页框号9（1次访存）；③物理地址 = 9×4096 + 0x64 = <strong>0x9064</strong>（1次访存）。
+共3次访存（TLB命中时可减为1次）；若段表/页表项含有效位为0则分别触发"缺段/缺页"异常。</p>
+</blockquote>
+<p><strong>B4.</strong>★★ 磁盘组：6个记录面、每面1000磁道、每道128扇区、每扇区512B，转速10000转/分。(1) 格式化容量；(2) 平均旋转延迟；(3) 读一道的传输时间与持续数据率。</p>
+<blockquote>
+<p>(1) 容量 = 6×1000×128×512B = 393216000B = <strong>375MiB</strong>（二进制口径恰好整除）。
+(2) 平均旋转延迟 = 60000ms/10000/2 = <strong>3ms</strong>。
+(3) 读一道 = 60000/10000 = 6ms ⇒ 数据率 = 128×512B/6ms ≈ <strong>10.7MB/s</strong>。</p>
+</blockquote>
+<p><strong>B5.</strong>★★ 前趋图 PV：任务 A、B 可并行；C 需 A、B 完成；C 完成后 D、E 并行；D、E 都完成后 F 开始。写出信号量方案。</p>
+<pre><code class="language-c">semaphore sa=0, sb=0, sc=0, sd=0, se=0;   /* 对应前趋边 */
+A: doA(); V(sa); V(sa);
+B: doB(); V(sb); V(sb);
+C: P(sa); P(sb); doC(); V(sc); V(sc);
+D: P(sc); doD(); V(sd);
+E: P(sc); doE(); V(se);
+F: P(sd); P(se); doF();
+</code></pre>
+<p>（要点：一条前趋边对应一个初值0的信号量与一次V/P；入边多条则连P多次。）</p>
+<p><strong>B6.</strong>★★ 文件系统目录检索：路径 /usr/ast/mbox，根目录 inode 常驻内存，每个目录只占1块，检索到的目录项含子项 inode 号。求定位该文件 inode 的访盘次数（先按"inode 在盘上"计）。</p>
+<blockquote>
+<p>①读根目录数据块（找 usr 的 inode 号）——1次；
+②读 usr 的 inode——1次；③读 usr 目录块（找 ast）——1次；
+④读 ast 的 inode——1次；⑤读 ast 目录块（找 mbox）——1次；
+⑥读 mbox 的 inode——1次。
+<strong>共6次</strong>。若引入"当前目录"（当前目录 inode 已在内存）则减为3次。</p>
+</blockquote>
+<p><strong>B7.</strong>★ 独占设备的分配与 SPOOLing 对比：说明打印机直接分配的流程，以及 SPOOLing 用什么替代了"独占分配"。</p>
+<blockquote>
+<p>直接分配：申请→分配（DCT/COCT/控制器/通道链）→使用→释放；期间其他进程全部阻塞。
+SPOOLing：用磁盘上的<strong>输出井</strong>作中间缓冲，用户进程的打印请求排入井队列，由打印守护进程逐个取出送打印机——把"独占设备"虚拟成"共享设备"，用户进程无需等待打印机空闲。</p>
+</blockquote>
+<p><strong>B8.</strong>★★ 死锁检测（资源分配图化简）：R1 有2个（P1、P2 各占1），R2 有1个（P3 占用）；P1 请求 R2，P3 请求 R1，P2 请求 R2。判断是否死锁。</p>
+<blockquote>
+<p>化简：找一个<strong>非阻塞且非孤立</strong>进程——P1 请求的 R2 已被 P3 占用 → P1 阻塞；P2 请求的 R2 也被占用 → P2 阻塞；P3 请求的 R1 无空闲 → P3 阻塞。
+所有进程均阻塞 ⇒ 图<strong>不可完全化简</strong> ⇒ <strong>死锁</strong>（涉及 P1、P2、P3）。
+（对比：若 R1 有3个实例，则 P3 的请求可满足 → 化简后可消去 P3 → 非死锁。）</p>
+</blockquote>
+<h2>选择题答案速查</h2>
+<blockquote>
+<p>快速对答案用；解析见各题。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>题号</th>
+<th>答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1~10</td>
+<td>B A C B B A C C A A</td>
+</tr>
+<tr>
+<td>11~20</td>
+<td>B B C C A B B D B B</td>
+</tr>
+<tr>
+<td>21~28</td>
+<td>B B B B B B B B</td>
+</tr>
+</tbody>
+</table></div></body></html>

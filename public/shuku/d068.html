@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta name='robots' content='noindex'><title>408计组精讲_总线与IO · 考研书库</title><style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#232830;--sub:#6b7683;--brand:#0b3c7a;--line:#dde3ea}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1318;--card:#191f27;--ink:#dfe3e8;--sub:#96a0ab;--brand:#7fb0ee;--line:#2a333d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.8 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+h1{font-size:20px;color:var(--brand);border-bottom:3px solid var(--brand);padding-bottom:8px}
+h2{font-size:17px;border-left:5px solid var(--brand);padding-left:8px;margin-top:26px}
+h3{font-size:15.5px;border-bottom:1px solid var(--line);padding-bottom:3px}
+blockquote{background:var(--card);border-left:4px solid var(--brand);margin:8px 0;padding:8px 12px;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}
+th,td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+th{background:rgba(11,60,122,.08)}
+code{font-family:Consolas,monospace;font-size:13px;background:rgba(127,127,127,.12);padding:1px 4px;border-radius:3px}
+pre{background:var(--card);border:1px solid var(--line);padding:10px;overflow-x:auto;line-height:1.5}
+.topbar{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+.topbar a{color:var(--brand);text-decoration:none;font-size:14px}
+.topbar b{font-size:15px}
+</style></head><body><div class='topbar'><a href='./index.html'>← 书库目录</a><b>考研书库</b><span style='font-size:12px;color:var(--sub)'>02_专业课408</span></div><div class='main'><h1>408 · 计算机组成原理精讲 · 总线与输入输出系统（计算 + 屏蔽字设计）· 系列收官</h1>
+<blockquote>
+<p>计组精讲第4批（收官）。总线抓<strong>带宽计算与仲裁对比</strong>，I/O抓<strong>中断屏蔽字设计与DMA全过程</strong>——计组的最后两块计算拼图。</p>
+</blockquote>
+<hr />
+<h1>第6章 总线</h1>
+<h2>一、总线概念精讲</h2>
+<p><strong>B1 总线</strong>：连接多个部件的<strong>公共信息传输干线</strong>，分时、共享。
+【两大特性】<strong>分时</strong>（一时刻只允许一个部件发送）+<strong>共享</strong>（多部件可同时接收）。
+<strong>B2 分类</strong>：数据总线（双向）、地址总线（单向、<strong>位数=n决定寻址范围</strong>）、控制总线（对每根线单向、整体双向）；片内/系统/通信总线。
+<strong>B3 性能指标（计算核心）</strong>：
+- <strong>总线宽度</strong>：数据线根数（位）；
+- <strong>标准传输率（带宽）</strong>=总线工作频率×(宽度/8)——<strong>DDR（上下沿各传一次）要×2</strong>；
+- 时钟频率。
+【推导】带宽单位换算：32位=4B，200MHz双沿=4×10⁸次传输/s → 4B×4×10⁸=1.6GB/s。</p>
+<p><strong>考题1（DDR带宽计算）</strong> 32位数据总线，工作频率200MHz，采用DDR（时钟上升沿与下降沿各传一次数据）。求总线带宽。
+【解】带宽=4B×2×200×10⁶=<strong>1.6GB/s</strong>。∎
+（审题三看：数据线宽度、<strong>工作频率还是有效频率</strong>、是否双沿——三个数错一个全错。）</p>
+<h2>二、总线仲裁</h2>
+<p><strong>A1 集中仲裁三方式（对比表）</strong>：
+| 方式 | 机制 | 优先级 | 优缺点 |
+|---|---|---|---|
+| <strong>链式查询</strong> | BG信号<strong>串行</strong>逐设备传递，先收到者获得 | <strong>固定</strong>：离总线控制部件近者高 | 线少（3根）；对电路故障<strong>敏感</strong>；优先级不可变 |
+| 计数器定时查询 | 计数器发设备号，命中者置忙 | 可从0计（等同循环）也可从上次（循环优先） | 灵活适中；线多（log₂n+2） |
+| <strong>独立请求</strong> | 每设备独立BRi/BGi | <strong>可编程改变</strong> | <strong>速度最快</strong>；控制复杂、线最多（2n+1） |
+<strong>A2 分布式仲裁</strong>：无中央仲裁器，各设备自行比较优先号（自持仲裁）。</p>
+<h2>三、总线操作定时</h2>
+<p><strong>T1 同步定时</strong>：统一时钟定宽——快、规整；但强制同步、不能容纳速度差异大的设备。
+<strong>T2 异步定时</strong>：应答方式（握手）——<strong>不互锁、半互锁、全互锁</strong>：可靠灵活但慢（每传一次握手多轮）。
+【选择】高速设备同步、速度差异大或长距离异步。</p>
+<hr />
+<h1>第7章 输入/输出系统</h1>
+<h2>一、I/O接口与端口编址</h2>
+<p><strong>P1 接口=端口+控制逻辑</strong>：端口（可读写的寄存器）按数据/状态/控制分三类。
+<strong>P2 编址两法</strong>：
+- <strong>统一编址</strong>：端口占内存地址空间，用访存指令访问——省专用指令、但占内存空间、译码慢；
+- <strong>独立编址</strong>：端口独立空间，需<strong>专用I/O指令</strong>（特权）——不占内存、译码快、控制复杂。</p>
+<h2>二、中断系统（屏蔽字设计是精华）</h2>
+<p><strong>I1 中断请求标记</strong>：每个中断源置 INTR 触发器；<strong>可屏蔽中断INTR</strong> vs <strong>不可屏蔽NMI</strong>（紧急事件优先响应）。
+<strong>I2 中断判优</strong>：硬件排队器（链式）或软件查询。
+<strong>I3 中断处理过程（硬件/软件分工·必背）</strong>：
+- <strong>中断隐指令（硬件自动）</strong>：<strong>关中断、保存断点、引出中断服务程序</strong>（三件事全硬件）；
+- <strong>中断服务程序（软件）</strong>：<strong>保存现场和屏蔽字 → 开中断 → 服务 → 关中断 → 恢复现场和屏蔽字 → 开中断 → 中断返回</strong>。
+【要点】多重中断的精髓：<strong>服务程序"保存现场和屏蔽字"之后、开中断期间才能被更高优先级打断</strong>；单重中断全程关中断。
+<strong>I4 中断屏蔽字设计（大题模板）</strong>：
+规则：<strong>屏蔽字每位置1=屏蔽该源；每个源屏蔽"自己+处理优先级低于自己的所有源"</strong>（保证高者可打断低者、低者打不断高者）。
+【两优先级】<strong>响应优先级</strong>由硬件排队器固定（不可改）；<strong>处理优先级</strong>由屏蔽字设置（可改）——屏蔽字的全部意义=<strong>改变处理次序</strong>。</p>
+<p><strong>考题1（屏蔽字设计·408大题模板）</strong> 四设备A、B、C、D，硬件响应优先级 A&gt;B&gt;C&gt;D。现要求处理次序改为 <strong>C→A→B→D</strong>，写出各设备的屏蔽字（位序A、B、C、D）。
+【解】新处理次序：C最高，其次A、B，D最低。每个源屏蔽"自己+处理次序低于自己的源"：
+- <strong>A</strong>（第2位）：屏蔽自己+B、D（B、D比A低），不屏蔽C → <strong>1101</strong>
+- <strong>B</strong>（第3位）：屏蔽自己+D → <strong>0101</strong>
+- <strong>C</strong>（最高）：屏蔽自己+全部 → <strong>1111</strong>
+- <strong>D</strong>（最低）：只屏蔽自己 → <strong>0001</strong>
+【验证】A执行时（屏蔽字1101）：C位=0 → <strong>C可打断A</strong> ✓；B、D被屏蔽 ✓。C执行时（1111）：谁都打不断 ✓。D执行时（0001）：A、B、C均可打断 ✓。处理次序=C→A→B→D ✓。∎
+（原次序（不改屏蔽字）时各屏蔽字：A=1111，B=0111，C=0011，D=0001——<strong>对比记忆</strong>：屏蔽字=自己位起、低位全1。）</p>
+<h2>三、DMA 方式（大题区）</h2>
+<p><strong>M1 DMA组成</strong>：DMA控制器含——主存地址计数器、传送长度计数器、数据缓冲、DMA请求/响应逻辑、控制逻辑。
+<strong>M2 DMA传输三阶段</strong>：
+① <strong>预处理</strong>（CPU执行程序初始化：主存起始地址、传送字数、方向）；
+② <strong>数据传送</strong>（<strong>DMAC掌管总线</strong>，硬件完成，CPU并行执行程序——不干预数据传送）；
+③ <strong>后处理</strong>（字数计到0，DMA<strong>发中断</strong>通知CPU：校验、是否继续）。
+<strong>M3 DMA与主存争用的三种方式</strong>：
+- 停止CPU访问（最简单、并行性最差）；
+- <strong>周期挪用（周期窃取）</strong>——最常用（DMA挪一个存取周期，CPU延迟一个周期）；
+- DMA与CPU交替访问（最高效但硬件复杂）。
+<strong>M4 DMA vs 中断（对比表·必背）</strong>：
+| | 中断方式 | DMA方式 |
+|---|---|---|
+| 数据传送 | <strong>经CPU</strong>（外设↔CPU寄存器↔内存） | <strong>外设↔内存直达</strong> |
+| 响应时机 | <strong>指令周期结束</strong> | <strong>存取周期结束</strong>（总线周期级） |
+| 中断次数 | 每传一个字中断一次 | <strong>一批数据结束才中断一次</strong> |
+| 适用 | 低速设备 | 高速块设备 |
+【两大易混】①对<strong>总线使用权</strong>的竞争：DMA请求优先于CPU访存；②DMA结束<strong>仍用中断</strong>通知CPU——"DMA与中断不是对立关系"（选择题钉子）。</p>
+<h2>四、本章考题补遗（2题）</h2>
+<p><strong>题1（端口编址）</strong> 统一编址与独立编址的优缺点各两条？
+【答】统一编址：优点=访存指令即可访问I/O、指令丰富；缺点=<strong>占内存地址空间</strong>、全字长译码慢。独立编址：优点=不占内存空间、I/O指令短译码快；缺点=需<strong>专用I/O指令</strong>（特权）、控制复杂。∎</p>
+<p><strong>题2（程序查询vs中断vs DMA的CPU利用率阶梯）</strong> 从磁盘读1KB到内存：三种方式下CPU分别"忙"多久（每次寄存器操作1μs，磁盘传输率1MB/s? 简化：每字中断处理5μs）？
+【解】程序查询：CPU全程轮询等待（≈传输全程忙）；中断：1KB按2B/字=512次中断×5μs=<strong>2560μs忙</strong>；DMA：仅预处理+后处理≈<strong>10μs级</strong>。CPU负担：查询≫中断≫DMA——这就是高速设备必用DMA的原因。∎</p>
+<h2>五、本章必会清单</h2>
+<ol>
+<li>总线带宽=频率×(宽度/8)×（DDR×2）；宽度/频率/双沿三要素审题；</li>
+<li>仲裁三方式对比（链式固定+故障敏感、独立请求最快线最多）；</li>
+<li>同步vs异步定时（不互锁/半互锁/全互锁）；</li>
+<li>中断隐指令三件事（硬件）vs 服务程序六步（软件）；多重中断开中断时机；</li>
+<li><strong>屏蔽字=自己+更低处理优先级全屏蔽</strong>；响应优先级硬件固定、处理优先级屏蔽字可改；</li>
+<li>DMA三阶段、三方式（周期挪用最常用）、DMA vs 中断对比表；</li>
+<li>统一/独立编址优缺点；I/O软件四层与read()两次拷贝。</li>
+</ol>
+<hr />
+<h2>✅ 计组精讲系列收官（4册）</h2>
+<blockquote>
+<p>概述与数据运算（8页）→ 存储系统（7页）→ 指令系统与CPU（8页）→ 总线与I/O（本册）。合计<strong>约31页、21道演算/设计题、31条必会清单</strong>。</p>
+</blockquote>
+<hr />
+<h2>✅✅ 四大专业课精讲体系全部建成（最终总结）</h2>
+<table>
+<thead>
+<tr>
+<th>科目</th>
+<th>册数</th>
+<th>演算/设计题</th>
+<th>必会清单</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数学一</td>
+<td>4</td>
+<td>128</td>
+<td>54</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>4</td>
+<td>55</td>
+<td>31</td>
+</tr>
+<tr>
+<td>计算机网络</td>
+<td>4</td>
+<td>22</td>
+<td>—</td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td>4</td>
+<td>19</td>
+<td>31</td>
+</tr>
+<tr>
+<td><strong>计算机组成原理</strong></td>
+<td><strong>4</strong></td>
+<td><strong>21</strong></td>
+<td><strong>31</strong></td>
+</tr>
+<tr>
+<td><strong>总计</strong></td>
+<td><strong>20册</strong></td>
+<td><strong>245题</strong></td>
+<td><strong>147条</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>20册精讲（约150页）+ 题集/模拟/背诵/陷阱/代码题全套</strong>——408四科与数学、英语、政治的资料宇宙至此<strong>真正、完全、彻底</strong>建成。
+定义定理的严谨性、公式的推导链、算法的逐条演算——这些就是你与"背书型考生"拉开差距的地方。
+接下来唯一要做的事，写在《阶段0清单》第一行：<strong>明天早上，C语言速查40分钟，宋浩高数1.1</strong>。资料已备齐，江湖再见于录取榜。</p></div></body></html>
