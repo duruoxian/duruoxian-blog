@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>408 选择题刷题库</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1f2328;--sub:#59636e;--line:#d8dee4;--brand:#0b57d0;--ok:#1a7f37;--bad:#c62828;--okbg:#e6f4ea;--badbg:#fdecea;--hl:#eaf1fb}
+@media(prefers-color-scheme:dark){:root{--bg:#101418;--card:#1a2129;--ink:#e6e8ea;--sub:#9aa4ae;--line:#2c3540;--brand:#6ea8ff;--ok:#4caf50;--bad:#ef5350;--okbg:#12291a;--badbg:#2d1517;--hl:#1c2a3a}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding-bottom:76px}
+.wrap{max-width:680px;margin:0 auto;padding:12px}
+h1{font-size:18px;margin:8px 0 10px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.tabs button{flex:1;min-width:72px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:7px 4px;font-size:13px;cursor:pointer}
+.tabs button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.bar{display:flex;gap:6px;margin:8px 0}
+select{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--card);color:var(--ink);font-size:13px}
+.stat{font-size:12px;color:var(--sub);margin:4px 0 8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pbar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:10px}
+.pbar i{display:block;height:100%;background:var(--brand);width:0;transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.meta{font-size:12px;color:var(--sub);margin-bottom:8px;display:flex;justify-content:space-between}
+.q{white-space:pre-wrap;font-size:15.5px;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:14.5px;cursor:pointer;line-height:1.5}
+.opt:disabled{cursor:default;opacity:.92}
+.opt.good{border-color:var(--ok);background:var(--okbg)}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.opt .tag{font-weight:700;margin-right:6px;color:var(--brand)}
+.exp{display:none;margin-top:12px;border-left:4px solid var(--brand);background:var(--hl);padding:10px 12px;border-radius:0 8px 8px 0;white-space:pre-wrap;font-size:14px}
+.exp.show{display:block}
+.verdict{margin-top:10px;font-weight:700;font-size:14px}
+.verdict.good{color:var(--ok)}.verdict.bad{color:var(--bad)}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+.nav button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:11px;font-size:15px;cursor:pointer}
+.nav button.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+.empty{color:var(--sub);text-align:center;padding:40px 0}
+.foot{color:var(--sub);font-size:12px;text-align:center;margin-top:14px}
+button.link{background:none;border:none;color:var(--sub);font-size:12px;cursor:pointer;text-decoration:underline;padding:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>408 选择题刷题库 <span style="font-size:12px;color:var(--sub)">420题</span></h1>
+  <div class="tabs" id="tabs"></div>
+  <div class="bar">
+    <select id="chapter"></select>
+    <select id="mode">
+      <option value="all">全部题目</option>
+      <option value="undone">只刷未做</option>
+      <option value="wrong">只刷错题</option>
+    </select>
+  </div>
+  <div class="stat"><span id="pos"></span><span id="score"></span><button class="link" id="reset">重置本科目进度</button></div>
+  <div class="pbar"><i id="pfill"></i></div>
+  <div id="stage"></div>
+  <div class="foot">错题与进度保存在本机浏览器 · 配套《408选择题题库》PDF</div>
+</div>
+<div class="nav">
+  <button id="prev">上一题</button>
+  <button id="next" class="primary">下一题</button>
+</div>
+<script>
+let DATA=null, sid=localStorage.getItem('quiz408_sub')||'DS', pool=[], idx=0;
+const $=s=>document.querySelector(s);
+const key=k=>'quiz408_'+sid+'_'+k;
+const load=k=>{try{return JSON.parse(localStorage.getItem(key(k)))||{}}catch(e){return{}}};
+let done=load('done'), wrong=load('wrong');
+
+function initTabs(){
+  $('#tabs').innerHTML = DATA.subjects.map(s=>
+    `<button data-s="${s.id}" class="${s.id===sid?'on':''}">${s.name}</button>`).join('');
+  document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+    sid=b.dataset.s; localStorage.setItem('quiz408_sub',sid);
+    done=load('done'); wrong=load('wrong'); initTabs(); initChapters(); buildPool(); render();
+  });
+}
+function curSub(){return DATA.subjects.find(s=>s.id===sid)}
+function initChapters(){
+  const chs=[...new Set(curSub().qs.map(q=>q.ch))];
+  $('#chapter').innerHTML='<option value="">全部章节</option>'+chs.map(c=>`<option>${c}</option>`).join('');
+}
+function buildPool(){
+  const ch=$('#chapter').value, mode=$('#mode').value;
+  pool=curSub().qs.filter(q=>{
+    if(ch && q.ch!==ch) return false;
+    const id=String(q.n);
+    if(mode==='undone' && done[id]!==undefined) return false;
+    if(mode==='wrong' && !wrong[id]) return false;
+    return true;
+  });
+  idx=0;
+}
+function render(){
+  const s=curSub(), total=s.qs.length;
+  const dcnt=Object.keys(done).length, wcnt=Object.keys(wrong).length;
+  $('#pos').textContent=pool.length?`第 ${idx+1} / ${pool.length} 题（库内共 ${total} 题）`:`无题目`;
+  $('#score').textContent=`已做 ${dcnt} · 错题 ${wcnt}`;
+  $('#pfill').style.width=total?(dcnt/total*100)+'%':'0';
+  const st=$('#stage');
+  if(!pool.length){st.innerHTML='<div class="empty">该筛选下没有题目（换章节/模式试试）</div>';return;}
+  const q=pool[Math.max(0,Math.min(idx,pool.length-1))], id=String(q.n);
+  const picked=done[id];
+  const stars='★'.repeat(q.d)+'☆'.repeat(3-q.d);
+  let h=`<div class="card"><div class="meta"><span>${sid}·${q.n}｜${q.ch}</span><span>${stars}</span></div>
+  <div class="q">${esc(q.q)}</div>`;
+  q.o.forEach((o,i)=>{
+    let cls='opt';
+    if(picked!==undefined){
+      if(i===q.a) cls+=' good';
+      else if(i===picked) cls+=' bad';
+    }
+    h+=`<button class="${cls}" data-i="${i}" ${picked!==undefined?'disabled':''}><span class="tag">${'ABCD'[i]}.</span>${esc(o)}</button>`;
+  });
+  h+=`<div class="exp" id="exp">${picked!==undefined?'<b>'+verdictText(picked===q.a)+'</b>\n':''}${esc(q.exp)}</div>`;
+  if(picked!==undefined) h+=`<div class="verdict ${picked===q.a?'good':'bad'}">${verdictText(picked===q.a)}${wrong[id]?'（已在错题本，可切换"只刷错题"重做）':''}</div>`;
+  h+='</div>';
+  st.innerHTML=h;
+  if(picked!==undefined) $('#exp').classList.add('show');
+  st.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i,q));
+}
+const verdictText=ok=>ok?'✓ 回答正确':'✗ 回答错误';
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function answer(i,q){
+  const id=String(q.n);
+  done[id]=i;
+  if(i===q.a) delete wrong[id]; else wrong[id]=1;
+  localStorage.setItem(key('done'),JSON.stringify(done));
+  localStorage.setItem(key('wrong'),JSON.stringify(wrong));
+  render();
+}
+$('#chapter').onchange=()=>{buildPool();render()};
+$('#mode').onchange=()=>{buildPool();render()};
+$('#prev').onclick=()=>{if(idx>0){idx--;render()}};
+$('#next').onclick=()=>{if(idx<pool.length-1){idx++;render()}else{idx=0;render()}};
+$('#reset').onclick=()=>{
+  if(!confirm('清空本科目已做/错题记录？'))return;
+  localStorage.removeItem(key('done'));localStorage.removeItem(key('wrong'));
+  done={};wrong={};render();
+};
+fetch('data.json').then(r=>r.json()).then(d=>{
+  DATA=d;
+  if(!DATA.subjects.find(s=>s.id===sid)) sid=DATA.subjects[0].id;
+  initTabs();initChapters();buildPool();render();
+}).catch(()=>{$('#stage').innerHTML='<div class="empty">数据加载失败，请刷新重试</div>'});
+</script>
+</body>
+</html>
