@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import iconManifest from "@/data/link-icons.json";
+import linksJson from "@/data/links.json";
+import { SiteIcon } from "@/components/SiteIcon";
 
 export const metadata: Metadata = { title: "资源", description: "整理收集的软件、工具与资料" };
 
+type LinkItem = { name: string; url: string; desc: string; tag: string };
 type Resource = { title: string; desc: string; href: string; tag: string };
+
+// ★ 工具站收藏（后台 admin「工具站」可增删，图标由构建脚本自动抓取到 /links-icons/）
+const linkManifest = iconManifest as Record<string, string>;
+const linkItems = linksJson as LinkItem[];
 
 // ★ 站内工具（刷题 / 书库 / 听力）
 const tools: Resource[] = [
@@ -46,6 +54,38 @@ export default function ResourcesPage() {
   return (
     <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-2xl font-bold">资源</h1>
+
+      <h2 className="mb-3 text-lg font-semibold">工具站收藏</h2>
+      <div className="mb-8 grid gap-3 sm:grid-cols-2">
+        {linkItems.map((l) => {
+          let host = l.url;
+          try {
+            host = new URL(l.url).hostname;
+          } catch {
+            // 非法 URL 走默认无图标
+          }
+          return (
+            <a
+              key={l.url}
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-glow flex items-center gap-3 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+            >
+              <SiteIcon src={linkManifest[host]} name={l.name} />
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="truncate text-sm font-medium">{l.name}</h3>
+                  <span className="shrink-0 rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                    {l.tag}
+                  </span>
+                </div>
+                <p className="mt-0.5 truncate text-xs text-zinc-500 dark:text-zinc-400">{l.desc}</p>
+              </div>
+            </a>
+          );
+        })}
+      </div>
 
       <h2 className="mb-3 text-lg font-semibold">站内工具</h2>
       <div className="mb-8 space-y-3">

@@ -1,0 +1,16 @@
+[
+  { "name": "MDN Web Docs", "url": "https://developer.mozilla.org/zh-CN/", "desc": "Web 技术权威文档，前端问题先查这里。", "tag": "文档" },
+  { "name": "菜鸟教程", "url": "https://www.runoob.com/", "desc": "入门友好的中文教程库，语法速查利器。", "tag": "文档" },
+  { "name": "力扣 LeetCode", "url": "https://leetcode.cn/", "desc": "算法刷题主战场，找工作与练脑双修。", "tag": "刷题" },
+  { "name": "洛谷", "url": "https://www.luogu.com.cn/", "desc": "算法竞赛社区，数据结构练手好去处。", "tag": "刷题" },
+  { "name": "GitHub", "url": "https://github.com/", "desc": "全球代码仓库，没有之一。", "tag": "开发" },
+  { "name": "Can I use", "url": "https://caniuse.com/", "desc": "查浏览器兼容性，前端避坑必备。", "tag": "开发" },
+  { "name": "regex101", "url": "https://regex101.com/", "desc": "正则表达式在线调试，逐段解释含义。", "tag": "开发" },
+  { "name": "tool.lu 在线工具", "url": "https://tool.lu/", "desc": "程序员的瑞士军刀：时间戳、编码、正则一把梭。", "tag": "效率" },
+  { "name": "JSON 解析", "url": "https://www.json.cn/", "desc": "JSON 在线校验与格式化。", "tag": "效率" },
+  { "name": "TinyPNG", "url": "https://tinypng.com/", "desc": "图片无损级压缩，博客配图先压再传。", "tag": "效率" },
+  { "name": "Excalidraw", "url": "https://excalidraw.com/", "desc": "手绘风白板，画架构图和示意图最舒服。", "tag": "效率" },
+  { "name": "Carbon", "url": "https://carbon.now.sh/", "desc": "把代码变成漂亮截图，发朋友圈专用。", "tag": "效率" },
+  { "name": "DeepSeek", "url": "https://chat.deepseek.com/", "desc": "国产模型第一梯队，推理能力强。", "tag": "AI" },
+  { "name": "智谱清言", "url": "https://chatglm.cn/", "desc": "GLM 系列官方对话入口。", "tag": "AI" }
+]

@@ -6,7 +6,7 @@
     "ensure": "node scripts/ensure-deps.mjs",
     "predev": "node scripts/ensure-deps.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/ensure-deps.mjs",
+    "prebuild": "node scripts/ensure-deps.mjs && node scripts/fetch-links-icons.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

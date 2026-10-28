@@ -1,0 +1,230 @@
+<!doctype html>
+<html dir="ltr" lang="en-US" class="no-js">
+<head>
+	<meta charset="utf-8" />
+	<title>"favicon.ico" | Can I use... Support tables for HTML5, CSS3, etc</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="alternate" type="application/atom+xml" title="Can I Use updates" href="/feed">
+    <link href="//fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+	<link rel="icon" href="/img/favicon-128.png" sizes="16x16 32x32 64x64 128x128" type="image/png"/>
+	<link rel="apple-touch-icon" href="/img/favicon-128.png">
+
+	<link rel="stylesheet" href="/css/main.css?1792647723" media="all">
+		<link rel="stylesheet" data-theme="light" href="/css/theme-light.css?1792647723" media="all">
+	<link rel="stylesheet" data-theme="dark" href="/css/theme-dark.css?1792647723" media="(prefers-color-scheme: dark)">
+    <meta name="Description" content="&quot;Can I use&quot; provides up-to-date browser support tables for support of front-end web technologies on desktop and mobile web browsers.">
+	<meta name="keywords" content="web browser compatibility support html css svg html5 css3 opera chrome firefox safari internet explorer">
+	<link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Can I use"/>
+	<link rel="preconnect" href="https://ipinfo.io">
+	<link rel="preconnect" href="https://www.google-analytics.com">
+	<base href="/" />
+	<script>
+		document.write('<style>.static-only {display:none}</style>');
+	</script>
+	
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCDSGDGKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-8SCDSGDGKM');
+</script>
+
+	<script>
+(function() {
+    if (!window.customElements) {
+        var s = document.createElement('script');
+        s.src = '/legacy-handler.js';
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+}());
+</script>
+<!--[if IE]><script src="/legacy-handler.js"></script><![endif]--><script defer src="js-data/data.js?1793145848"></script><script defer src="js/bundle.js?1792647724"></script></head>
+<body class="is-home">
+		<div id="main" class="ciu-main-wrap">
+
+		<header class="ciu-page-header">
+            <nav role="navigation" id="tab-container">
+                <ul class="ciu-page-header__primary-nav">
+                    <li class="site-nav-item  js-site-nav"><a href="/" data-route="home">Home</a></li>
+                    <li class="site-nav-item  js-site-nav  site-nav-item--news"><a href="/ciu/news" data-route="news">News</a></li>
+                </ul>
+
+                <ul class="ciu-page-header__secondary-nav">
+                    <li class="site-nav-item  js-site-nav  site-nav-item--comparison"><a href="/ciu/comparison" data-route="comparison">Compare<span class="site-nav__extra-text"> browsers</span></a></li>
+ 					<li class="site-nav-item  js-site-nav  site-nav-item--last  "><a href="/ciu/about" data-route="about">About</a></li>
+                </ul>
+
+                <a class="news  js-news" data-newstime="1772668800" href="https://caniuse.com/loading-lazy-media"><span class="date">March 5, 2026 -</span> New feature: Lazy loading via attribute for video & audio</a>            </nav>
+			
+			            
+            <section class="ciu-search">
+				<div class="ciu-search__inner  js-search">
+					<a href="/" class="ciu-search__label">Can I use</a>
+					<form action="/" class="ciu-search__form">
+						<label class="ciu-search__a11y-label" for="feat_search">Search</label>
+						<input type="text" class="ciu-search__input" id="feat_search" name="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value="favicon.ico">
+						<input type="hidden" name="static" value="1">
+					</form>
+					?
+					<button class="options-toggle  js-options-toggle">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="icon">
+							<path d="M16,8.87V7L15.74,7l-1.95-.64-.52-1.25,1-2.12L13,1.67l-.25.12-1.82.93L9.66,2.2,8.87,0H7.05L7,.26,6.33,2.21l-1.25.52L3,1.73,1.67,3l.12.25.93,1.82L2.2,6.34,0,7.13V8.95L.26,9l2,.64.52,1.25L1.73,13,3,14.33l.25-.12,1.82-.93,1.26.52L7.13,16H8.95L9,15.74l.64-2,1.26-.52,2.11,1L14.33,13l-.12-.25-.93-1.82.52-1.26ZM8,10.55A2.55,2.55,0,1,1,10.55,8,2.55,2.55,0,0,1,8,10.55Z"/>
+						</svg>
+						<span>
+							Settings
+						</span>
+					</button>
+				</div>
+				
+									<div class="search-result-info  js-search-result-info">3 results found.</div>
+				            </section>
+
+        </header>
+
+		<main class="ciu-page-content  js-content" data-static-id="search">
+			
+<style>
+	.section__search-results ol {
+		margin-top: 0;
+	}
+
+	.section__search-results h3 {
+		font-size: 22px;
+	}
+
+	.section__search-results a {
+		display: block;
+		color: inherit;
+		padding: 5px;
+	}
+
+	.section__search-results a:hover {
+		background-color: #e4d9c1;
+	}
+
+	.section__search-results a:hover h3 {
+		text-decoration: underline;
+	}
+
+	.section__search-results {
+		background-color: #f2e8d5;
+		padding: 1em;
+	}
+
+	.section__search-results p {
+		color: black;
+		line-height: 1.4;
+	}
+</style>
+<section class="section__search-results  static-only  static-block">
+	<ol>
+	<li><a href="/link-icon-png"><h3>PNG favicons</h3><p>Icon used by browsers to identify a webpage or site. While all browsers support the `.ico` format, the PNG format can be preferable.</p></a></li><li><a href="/link-icon-svg"><h3>SVG favicons</h3><p>Icon used by browsers to identify a webpage or site. While all browsers support the `.ico` format, the SVG format can be preferable to more easily support higher resolutions or larger icons.</p></a></li>	</ol>
+</section>
+
+		</main>
+
+		<aside class="bottom-ad">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- Bottom leaderboard -->
+	<ins class="adsbygoogle"
+		 style="display:inline-block;width:728px;height:90px"
+		 data-ad-client="ca-pub-3347535679733957"
+		 data-ad-slot="1205929339"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+</aside>
+	
+		<footer class="ciu-footer">
+			<div class="footer__section  footer__primary">
+				<h3 class="footer__heading">Can I use...</h3>
+					<p class="site-description">Browser support tables for modern web technologies</p>
+	<p>Created &amp; maintained by <a class="external-link" href="https://front-end.social/@fyrd">@Fyrd</a>, design by <a class="external-link" href="https://mastodon.world/@lensco">@Lensco</a>.</p>
+	<p>Support data contributions by the GitHub <a class="external-link" href="https://github.com/Fyrd/caniuse/graphs/contributors">community</a>.
+	
+	<p id="usage_note">
+		Usage share statistics by <a class="external-link" href="http://gs.statcounter.com/">StatCounter GlobalStats</a> for September, 2026	</p>
+		
+	<p>Location detection provided by <a class="external-link" href="//ipinfo.io">ipinfo.io</a>.
+	</p>
+
+	<p>
+		Browser testing done via 
+		<a class="external-link" href="https://www.browserstack.com?ref=caniuse-source&caniuse_source=brand-asset&utm_source=caniuse&utm_medium=partnered&utm_campaigncode=701OW000008y9C1YAI" target="_blank">
+			<img src="/img/browserstack.svg" alt="BrowserStack" width="140" height="28" loading="lazy">
+		</a>
+	</p>
+	
+			</div>
+			
+			<div class="footer__section  footer__patreon">
+				<h3 class="footer__heading">Support via Patreon</h3>
+				
+														<p>Become a caniuse Patron to support the site and disable ads for only $1/month!</p>
+				
+					<div class="patreon-button">
+						<a href="https://www.patreon.com/join/caniuse">
+							<img src="/img/become_a_patron_button.png" width="163" height="38" alt="Become a Patron!" loading="lazy">
+						</a>
+											</div>
+											<p>
+							or <a class="external-link" href="http://www.patreon.com/oauth2/authorize?response_type=code&client_id=ayH01_if_QL-WweWwGpi-rsWKDxp_38jKmzX5WKtHEv0ssfTLjL_hu1XIPQPRuvW&redirect_uri=https%3A%2F%2Fcaniuse.com&scope=identity+identity.memberships+identity%5Bemail%5D">Log in</a>
+						</p>
+												</div>
+			
+			<div class="footer__section  footer__links">
+				<h3 class="footer__heading">Site links</h3>
+				<ol class="footer__list">
+					<li class="footer__list-item">
+						<a href="/">Home</a>
+					</li>
+					<li class="footer__list-item">
+						<a href="/ciu/index">Feature index</a>
+					</li>
+					<li class="footer__list-item">
+						<a href="/usage-table">Browser usage table</a>
+					</li>
+					<li class="footer__list-item">
+						<a href="/issue-list">Feature suggestion list</a>
+					</li>
+					<li class="footer__list-item">
+						<a href="https://github.com/fyrd/caniuse">Caniuse data on GitHub</a>
+					</li>
+				</ol>
+			</div>
+			
+			<div class="footer__section  footer__legend">
+					<section class="ciu-legend  js-legend">
+		<h2 class="ciu-legend__header">Legend</h2>
+		<ul class="ciu-legend__list">
+		    <li class="ciu-legend__item">
+    			<span class="y  ciu-legend__color">Green</span>
+				<span class="ciu-legend__symbol">✅</span>
+				= Supported
+    		</li>
+		    <li class="ciu-legend__item">
+    		    <span class="n  ciu-legend__color">Red</span>
+				<span class="ciu-legend__symbol">❌</span>
+				= Not supported
+    		</li>
+		    <li class="ciu-legend__item">
+    		    <span class="a  ciu-legend__color">Greenish yellow</span>
+				<span class="ciu-legend__symbol">◐</span>
+				= Partial support
+    		</li>
+		    <li class="ciu-legend__item">
+    		    <span class="u  ciu-legend__color">Gray</span>
+				<span class="ciu-legend__symbol">﹖</span>
+				= Support unknown
+    		</li>
+		</ul>
+	</section>
+							</div>
+		</footer>
+	</div><!-- /all -->
+</body>
+</html>
