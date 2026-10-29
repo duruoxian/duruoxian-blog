@@ -4,6 +4,7 @@ date: 2026-10-26
 description: "从 v0.1.20 到 v0.1.32：给没有 tools 协议的网页模型模拟出完整工具调用链，以及为此付出的一周——抓帧实锤智谱的增量流协议、移植 Qwen2API 的多路候选过滤、修掉流式链三层嵌套错位、根治跨会话串台，和授权卡两次消失事故。"
 category: 项目
 tags: ["AI", "Python", "Windows", "FastAPI", "opencode", "逆向", "调试"]
+series: "webai2api"
 cover: "/images/posts/webai2api/cover.svg"
 ---
 

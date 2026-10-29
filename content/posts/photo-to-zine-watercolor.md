@@ -3,7 +3,7 @@ title: "把旅行照片变成水彩明信片：我写了一个 AI 技能"
 date: 2026-10-02
 description: "一个开源 skill，把旅行照片批量转成 zine 风格的水彩卡片。双模式、人像锁定、批量流程、白色水印修复，已在 17 张真实照片上完整跑通。"
 category: "项目"
-tags: ["开源", "AI", "摄影", "水彩"]
+tags: ["开源", "AI", "摄影"]
 cover: "/images/posts/photo-to-zine-watercolor/lijiang-lake-postcard.webp"
 ---
 

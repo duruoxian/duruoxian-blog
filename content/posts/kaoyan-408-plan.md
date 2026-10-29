@@ -8,7 +8,7 @@ description: "从自命题改道全国统考 408：考试结构、时间分配�
 
 category: 生活
 
-tags: ["考研", "408", "规划"]
+tags: ["考研", "408"]
 
 cover: /images/posts/kaoyan-408-plan/cover.svg
 

@@ -4,6 +4,7 @@ date: 2026-10-19
 description: "一个 Windows 免安装的小工具：内置 WebView2 登录多个 DeepSeek / 智谱账号，对外提供 OpenAI 兼容接口；每个 API Key 可以绑定自己的账号和模型，还能看每个 Key 的用量。"
 category: "项目"
 tags: ["AI", "Python", "Windows", "FastAPI", "opencode", "开源"]
+series: "webai2api"
 cover: "/images/posts/webai2api/cover.svg"
 ---
 

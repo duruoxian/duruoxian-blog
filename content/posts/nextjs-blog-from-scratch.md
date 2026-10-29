@@ -8,7 +8,7 @@ description: "装 Node、create-next-app、理解 App Router 与静态导出，�
 
 category: 技术
 
-tags: ["Next.js", "建站", "前端"]
+tags: ["Next.js", "博客", "前端"]
 
 cover: /images/posts/nextjs-blog-from-scratch/cover.svg
 

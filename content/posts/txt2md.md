@@ -3,7 +3,7 @@ title: "txt2md：把随手记的 txt，自动变成排版好的 Markdown"
 date: 2026-09-27
 description: "一个 Windows 托盘小工具：监视你写的 txt，保存后用 AI 自动重排成排版美观的 Markdown，绿色便携、开箱即用。"
 category: "项目"
-tags: ["开源", "Python", "工具"]
+tags: ["开源", "Python"]
 cover: "/images/posts/txt2md/cover.webp"
 ---
 

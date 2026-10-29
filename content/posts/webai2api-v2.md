@@ -4,6 +4,7 @@ date: 2026-10-23
 description: "从 v0.1.7 到 v0.1.20 的完整演进：Kimi 走网页版 Connect 协议、通义千问用隐藏浏览器中继绕开阿里风控，把思考档位对齐真实产品、会话级防封、每账号出口分流，以及一套离线授权体系（Ed25519 签名 + 机器码绑定 + 防篡改）是怎么设计和被攻击验证的。"
 category: 项目
 tags: ["AI", "Python", "Windows", "FastAPI", "opencode", "逆向", "安全"]
+series: "webai2api"
 cover: "/images/posts/webai2api/cover.svg"
 ---
 

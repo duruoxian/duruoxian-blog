@@ -1,7 +1,7 @@
 ---
 title: "我给 opencode 写了个 ZCode 风格的会话选择器：ocs"
 date: 2026-10-08
-description: "单文件 Python + fzf，按项目分组、能搜聊天内容、还有可折叠的对话视图；顺手解决了终端里「鼠标想点列表又想拖选文字」的经典矛盾——不用按 Shift。已在 GitHub 开源（Windows 版敬请期待）。"
+description: "单文件 Python + fzf，按项目分组、能搜聊天内容、还有可折叠的对话视图；顺手解决了终端里「鼠标想点列表又想拖选文字」的经典矛盾——不用按 Shift。已在 GitHub 开源，Windows 版也已发布。"
 category: "项目"
 tags: ["opencode", "Python", "fzf", "终端", "开源"]
 series: "ocs"
@@ -9,7 +9,7 @@ cover: "/images/posts/opencode-ocs/cover.svg"
 ---
 
 > 项目地址：https://github.com/duruoxian/ocs （MIT，单文件 Python，零依赖）
-> **Windows 版敬请期待**——目标是一个 `ocs.ps1` 启动器 + 同一个 Python 内核。详见文末。
+> Windows 版已发布：见续篇[《ocs 跨越系统：从 Linux 到 Windows，顺带修好了预览的排版》](/posts/opencode-ocs-windows)。
 
 ## 缘起：历史会话太难找了
 
@@ -110,10 +110,10 @@ rm -f /tmp/ocs-mouse-* /tmp/ocs-ui-*
 2. 按 `→` 进对话视图，点问题看 AI 回答，`←` 回来；
 3. 要复制文字：右键一下（或按 `F8`），拖选、右键复制，再 `F8` 切回。
 
-## Windows 版敬请期待
+## Windows 版：已发布
 
-目前 ocs 是纯 Linux 的：读 `/dev/tty`、用 `termios` 查终端背景色、剪贴板走 `wl-copy`/`xclip`、临时状态文件丢在 `/tmp`，续会话时用 `os.execvp` 把进程替换掉。这些在 Windows 上要么不存在，要么行为完全不同。
+写这篇的时候，ocs 还是纯 Linux 的：读 `/dev/tty`、用 `termios` 查终端背景色、剪贴板走 `wl-copy`/`xclip`、临时状态文件丢在 `/tmp`，续会话时用 `os.execvp` 把进程替换掉。这些在 Windows 上要么不存在，要么行为完全不同。
 
-Windows 版的目标是：一个薄薄的 `ocs.ps1` 启动器（切 UTF-8、找 Python、转发参数）+ 同一个 Python 内核，让两套系统共用核心逻辑。移植的细节、踩过的坑，以及它是怎么跑起来的——**下一篇见**。
+后来这些坑全部趟完了：同一个 Python 内核现在同时跑在两套系统上，外面只套一个薄薄的 `ocs.ps1` 启动器（切 UTF-8、找 Python、转发参数）。移植的细节、踩过的坑，以及它是怎么跑起来的，见续篇——[《ocs 跨越系统：从 Linux 到 Windows，顺带修好了预览的排版》](/posts/opencode-ocs-windows)。
 
 项目在 https://github.com/duruoxian/ocs ，MIT 协议，欢迎来提 issue 或者点个 star ⭐
