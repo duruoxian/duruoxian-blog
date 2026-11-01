@@ -1,5 +1,5 @@
 ---
-title: "实验三　basic 版 U-Boot 配置与首次编译"
+title: "实验03|basic 版 U-Boot 配置与首次编译"
 date: 2026-10-04
 description: "用 fsmp1a_defconfig 配置并编译出第一版 U-Boot,烧写上板——它没能启动,复位循环成了下一关的入口。"
 category: "技术"

@@ -1,5 +1,5 @@
 ---
-title: "实验十　F-6 支持 eMMC"
+title: "实验10|F-6 支持 eMMC"
 date: 2026-10-04
 description: "给 U-Boot 加上 eMMC 支持:MMC 0/1 双设备同时识别,3.7GiB eMMC 跑通 8-bit 总线。"
 category: "技术"

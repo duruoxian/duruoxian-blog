@@ -1,5 +1,5 @@
 ---
-title: "实验十三　网络操作命令——Ubuntu 里搭 TFTP 服务器，板子第一次从网络拉文件"
+title: "实验13|网络操作命令——Ubuntu 里搭 TFTP 服务器，板子第一次从网络拉文件"
 date: 2026-11-01
 description: "Windows 侧搭 TFTP 服务器,U-Boot 里 tftpboot 拉文件:ipaddr/serverip/ethaddr 网络三件套实战。"
 category: "技术"

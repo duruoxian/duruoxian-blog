@@ -1,5 +1,5 @@
 ---
-title: "实验十二　U-Boot 命令行与环境变量操作"
+title: "实验12|U-Boot 命令行与环境变量操作"
 date: 2026-11-01
 description: "U-Boot shell 初体验:printenv/setenv/saveenv 全套环境变量操作,bootdelay 调速,掉电对照实验搞清变量到底存在哪。"
 category: "技术"

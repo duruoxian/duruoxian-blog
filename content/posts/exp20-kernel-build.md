@@ -1,5 +1,5 @@
 ---
-title: "实验二十　编译内核与设备树——第一次编出自己的 uImage 和 fsmp1a.dtb"
+title: "实验20|编译内核与设备树——第一次编出自己的 uImage 和 fsmp1a.dtb"
 date: 2026-11-01
 description: "make 编译一条龙:产出内核镜像与设备树 dtb,理解各产物的用途与加载地址。"
 category: "技术"

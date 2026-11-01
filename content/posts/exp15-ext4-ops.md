@@ -1,5 +1,5 @@
 ---
-title: "实验十五　ext4 文件系统操作命令——U-Boot 里的文件管理器"
+title: "实验15|ext4 文件系统操作命令——U-Boot 里的文件管理器"
 date: 2026-11-01
 description: "ext4ls/ext4load 上手:在 U-Boot 里直接浏览和加载 SD 卡第二分区里的文件,文件系统 Awareness 提前一步。"
 category: "技术"

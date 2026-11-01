@@ -1,5 +1,5 @@
 ---
-title: "实验二　获取 U-Boot 源码并打 ST 补丁"
+title: "实验02|获取 U-Boot 源码并打 ST 补丁"
 date: 2026-10-04
 description: "拿到 u-boot-stm32mp-2020.01 官方源码,按顺序应用 6 个 ST 板级补丁:理解补丁链如何一步步把通用 U-Boot 变成 STM32MP1 专用。"
 category: "技术"

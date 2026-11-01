@@ -1,5 +1,5 @@
 ---
-title: "实验六　F-2 修改 SD 卡驱动"
+title: "实验06|F-2 修改 SD 卡驱动"
 date: 2026-10-04
 description: "设备树里修正 SD 卡检测引脚配置:让 U-Boot 稳定识别 TF 卡,MMC 相关报错就此消失。"
 category: "技术"

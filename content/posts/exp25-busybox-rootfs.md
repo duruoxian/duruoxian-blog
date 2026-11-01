@@ -1,5 +1,5 @@
 ---
-title: "实验二十五　busybox 构建根文件系统——骨架一次成型"
+title: "实验25|busybox 构建根文件系统——骨架一次成型"
 date: 2026-11-01
 description: "用 busybox 构建最小根文件系统:编译、安装、目录骨架一次成型。"
 category: "技术"

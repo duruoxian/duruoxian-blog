@@ -1,5 +1,5 @@
 ---
-title: "实验十七　其他命令与自定义启动变量——run 一键切换启动方式，第 4 章收官"
+title: "实验17|其他命令与自定义启动变量——run 一键切换启动方式，第 4 章收官"
 date: 2026-11-01
 description: "自定义环境变量 author/testvar、编写自己的启动脚本变量:把 U-Boot 当一台小 shell 玩明白。"
 category: "技术"

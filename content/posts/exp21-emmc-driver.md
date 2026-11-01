@@ -1,5 +1,5 @@
 ---
-title: "实验二十一　移植 eMMC 驱动——让内核\"看见\"板载硬盘"
+title: "实验21|移植 eMMC 驱动——让内核\"看见\"板载硬盘"
 date: 2026-11-01
 description: "内核侧的 eMMC 支持:设备树节点与驱动配置,让 MMC 控制器在 Linux 下被正确识别。"
 category: "技术"

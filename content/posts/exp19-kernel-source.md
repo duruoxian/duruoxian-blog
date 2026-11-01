@@ -1,5 +1,5 @@
 ---
-title: "实验十九　内核源码准备与配置——装编译器、打补丁、生成 FS-MP1A 的 defconfig"
+title: "实验19|内核源码准备与配置——装编译器、打补丁、生成 FS-MP1A 的 defconfig"
 date: 2026-11-01
 description: "内核源码就位:defconfig 与 menuconfig 配置流程,内核裁剪从哪里下手。"
 category: "技术"

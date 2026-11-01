@@ -1,5 +1,5 @@
 ---
-title: "实验十四　eMMC 和 SD 卡操作命令——mmc 全家桶，顺带给 eMMC 摸底"
+title: "实验14|eMMC 和 SD 卡操作命令——mmc 全家桶，顺带给 eMMC 摸底"
 date: 2026-11-01
 description: "mmc list/dev/info/read/write 全套命令上手:不进 Linux 也能直接读写 eMMC 与 SD 卡的裸区块。"
 category: "技术"

@@ -1,5 +1,5 @@
 ---
-title: "实验十六　启动 Linux 内核命令——bootm 点火，第一章悬案揭晓"
+title: "实验16|启动 Linux 内核命令——bootm 点火，第一章悬案揭晓"
 date: 2026-11-01
 description: "bootz 引导一条龙:从 eMMC/SD 加载内核镜像与设备树,手动把 Linux 拉起来——启动链的最后一棒。"
 category: "技术"

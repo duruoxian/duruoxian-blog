@@ -1,5 +1,5 @@
 ---
-title: "实验二十六　构建 etc 与 dev 目录——给骨架装上\"灵魂\""
+title: "实验26|构建 etc 与 dev 目录——给骨架装上\"灵魂\""
 date: 2026-11-01
 description: "inittab、passwd、group 与设备节点:让 init 真正跑起来的最小配置集合。"
 category: "技术"

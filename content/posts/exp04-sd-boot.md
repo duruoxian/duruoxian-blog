@@ -1,5 +1,5 @@
 ---
-title: "实验四　SD 卡分区烧写与首次启动"
+title: "实验04|SD 卡分区烧写与首次启动"
 date: 2026-10-04
 description: "SD/TF 卡分区、dd 烧写、拨码开关启动模式:吃透 FS-MP1A 从 TF-A 到 U-Boot 的启动链路和串口输出读法。"
 category: "技术"

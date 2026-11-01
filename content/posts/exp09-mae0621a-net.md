@@ -1,5 +1,5 @@
 ---
-title: "实验九　F-5 替换网卡驱动（MAE0621A）"
+title: "实验09|F-5 替换网卡驱动（MAE0621A）"
 date: 2026-10-04
 description: "整个移植系列最硬的一仗:FS-MP1A 的 MAE0621A 网卡没有现成驱动,移植驱动补丁、调通 PHY 自协商,直到 U-Boot 里 ping 通电脑。"
 category: "技术"

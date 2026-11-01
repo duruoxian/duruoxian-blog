@@ -1,5 +1,5 @@
 ---
-title: "实验八　F-4 关闭 LTDC 显示"
+title: "实验08|F-4 关闭 LTDC 显示"
 date: 2026-10-04
 description: "关闭用不到的 LTDC LCD 控制器驱动,清掉启动日志里的显示相关报错——按板子实际情况做减法。"
 category: "技术"

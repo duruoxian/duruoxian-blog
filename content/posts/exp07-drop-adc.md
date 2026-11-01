@@ -1,5 +1,5 @@
 ---
-title: "实验七　F-3 去掉 ADC 功能"
+title: "实验07|F-3 去掉 ADC 功能"
 date: 2026-10-04
 description: "FS-MP1A 没有对应的 ADC 外接电路:menuconfig 里关掉 ADC 支持并重新编译,让 U-Boot 更干净。"
 category: "技术"
