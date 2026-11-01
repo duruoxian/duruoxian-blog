@@ -26,10 +26,12 @@ export function ArchiveList({
   items,
   series,
   total,
+  tags,
 }: {
   items: ArchiveItem[];
   series: ArchiveSeries[];
   total: number;
+  tags: { name: string; count: number }[];
 }) {
   const [cat, setCat] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
@@ -113,6 +115,25 @@ export function ArchiveList({
           </button>
         ))}
       </div>
+
+      {/* 按标签找:折叠放在筛选区,列表之前,一眼能看到 */}
+      <details className="rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl dark:border-zinc-800">
+        <summary className="cursor-pointer text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+          按标签找({tags.length} 个)
+        </summary>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {tags.map((t) => (
+            <Link
+              key={t.name}
+              href={`/tags/${encodeURIComponent(t.name)}`}
+              className="inline-flex items-center gap-1 rounded-full border border-zinc-200 px-2.5 py-0.5 text-xs transition-colors hover:border-zinc-400 dark:border-zinc-800 dark:hover:border-zinc-600"
+            >
+              {t.name}
+              <span className="text-zinc-400">{t.count}</span>
+            </Link>
+          ))}
+        </div>
+      </details>
 
       {/* 年份分组列表:默认只展开最近 LIMIT 条 */}
       {groups.length === 0 ? (
