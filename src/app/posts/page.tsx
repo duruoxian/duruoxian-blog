@@ -20,17 +20,18 @@ export default function PostsPage() {
     readingTime: p.readingTime,
   }));
 
-  // 成系列读:全部 ≥2 篇的系列,按篇数降序(与 getAllSeries 的顺序一致)
+  // 成系列读:紧凑卡只带篇数与最新一篇,全目录在 /series 对应锚点
   const series: ArchiveSeries[] = getAllSeries()
     .filter((s) => s.count >= 2)
-    .map((s) => ({
-      name: s.name,
-      posts: getPostsBySeries(s.name).map((p) => ({
-        slug: p.slug,
-        title: p.title,
-        readingTime: p.readingTime,
-      })),
-    }));
+    .map((s) => {
+      const posts = getPostsBySeries(s.name);
+      const latest = posts[posts.length - 1];
+      return {
+        name: s.name,
+        count: s.count,
+        latest: { slug: latest.slug, title: latest.title, date: latest.date },
+      };
+    });
 
   return (
     <div className="mx-auto max-w-3xl">

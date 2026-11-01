@@ -1,6 +1,6 @@
 "use client";
 
-// 归档列表:系列置顶卡 + 分类 chips 即时筛选 + 年份分组。
+// 归档列表:紧凑系列卡 + 分类 chips 即时筛选 + 年份分组(默认只展开最近 15 条)。
 // 数据由服务端序列化传入;筛选纯客户端,内容仍在静态 HTML 里(SEO 无损)。
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -16,8 +16,11 @@ export type ArchiveItem = {
 
 export type ArchiveSeries = {
   name: string;
-  posts: { slug: string; title: string; readingTime: number }[];
+  count: number;
+  latest: { slug: string; title: string; date: string };
 };
+
+const LIMIT = 15; // 默认展开的列表条数,其余收进「展开其余 N 篇」
 
 export function ArchiveList({
   items,
@@ -29,6 +32,7 @@ export function ArchiveList({
   total: number;
 }) {
   const [cat, setCat] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   // 分类 chips(带数量,按篇数倒序)
   const cats = useMemo(() => {
@@ -40,45 +44,40 @@ export function ArchiveList({
   const filtered = cat ? items.filter((it) => it.category === cat) : items;
 
   const groups = useMemo(() => {
-    const m = new Map<string, ArchiveItem[]>();
-    for (const it of filtered) {
-      const y = it.date.slice(0, 4);
+    const m = new Map<string, { post: ArchiveItem; gi: number }[]>();
+    filtered.forEach((post, gi) => {
+      const y = post.date.slice(0, 4);
       if (!m.has(y)) m.set(y, []);
-      m.get(y)!.push(it);
-    }
+      m.get(y)!.push({ post, gi });
+    });
     return [...m.entries()];
   }, [filtered]);
 
+  const overflow = filtered.length - LIMIT;
+
   return (
     <div className="space-y-8">
-      {/* 成系列读:先把最成体系的内容顶到最上面 */}
+      {/* 成系列读:紧凑卡,全目录点卡片进系列页对应锚点 */}
       {series.length > 0 && (
         <section>
-          <h2 className="mb-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">成系列读</h2>
+          <h2 className="mb-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
+            成系列读 · {series.length} 个
+          </h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {series.map((s) => (
-              <div
+              <Link
                 key={s.name}
-                className="card-glow rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl dark:border-zinc-800"
+                href={`/series#${encodeURIComponent(s.name)}`}
+                className="card-glow group rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl transition-colors hover:border-[var(--accent-1)]/40 dark:border-zinc-800"
               >
-                <div className="flex items-center justify-between">
-                  <h3 className="font-semibold">{s.name}</h3>
-                  <span className="text-xs text-zinc-400">{s.posts.length} 篇</span>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="truncate font-semibold">{s.name}</h3>
+                  <span className="shrink-0 text-xs text-zinc-400">{s.count} 篇</span>
                 </div>
-                <ol className="mt-2 space-y-1 text-sm">
-                  {s.posts.map((p, i) => (
-                    <li key={p.slug} className="flex items-baseline gap-2">
-                      <span className="text-zinc-400">{String(i + 1).padStart(2, "0")}</span>
-                      <Link
-                        href={`/posts/${p.slug}`}
-                        className="min-w-0 flex-1 truncate text-zinc-600 hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100"
-                      >
-                        {p.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+                <p className="mt-1 truncate text-sm text-zinc-500 dark:text-zinc-400">
+                  最新:{s.latest.title}
+                </p>
+              </Link>
             ))}
           </div>
         </section>
@@ -115,23 +114,23 @@ export function ArchiveList({
         ))}
       </div>
 
-      {/* 年份分组列表 */}
+      {/* 年份分组列表:默认只展开最近 LIMIT 条 */}
       {groups.length === 0 ? (
         <p className="rounded-xl border border-dashed border-zinc-300 p-8 text-center text-sm text-zinc-500 dark:border-zinc-700">
           这个分类下还没有文章。
         </p>
       ) : (
         <div className="space-y-10">
-          {groups.map(([year, posts]) => (
+          {groups.map(([year, rows]) => (
             <section key={year}>
               <h2 className="mb-3 flex items-center gap-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
                 <span className="font-mono text-base">{year}</span>
                 <span className="h-px flex-1 bg-gradient-to-r from-zinc-200 to-transparent dark:from-zinc-700" />
-                <span className="text-xs font-normal">{posts.length} 篇</span>
+                <span className="text-xs font-normal">{rows.length} 篇</span>
               </h2>
               <ul className="space-y-1">
-                {posts.map((post) => (
-                  <li key={post.slug}>
+                {rows.map(({ post, gi }) => (
+                  <li key={post.slug} hidden={!expanded && gi >= LIMIT}>
                     <Link
                       href={`/posts/${post.slug}`}
                       className="group flex items-baseline gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60"
@@ -168,6 +167,19 @@ export function ArchiveList({
               </ul>
             </section>
           ))}
+
+          {overflow > 0 && (
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                aria-expanded={expanded}
+                className="rounded-full border border-zinc-200 bg-[var(--card)] px-5 py-2 text-sm text-zinc-600 transition-colors hover:border-[var(--accent-1)]/50 hover:text-[var(--accent-1)] dark:border-zinc-800 dark:text-zinc-400"
+              >
+                {expanded ? "收起列表" : `展开其余 ${overflow} 篇`}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
