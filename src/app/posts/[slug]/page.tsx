@@ -16,6 +16,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { ImageZoom } from "@/components/ImageZoom";
 import { Giscus } from "@/components/Giscus";
 import { site } from "@/lib/site";
+import { getProjectByPost } from "@/lib/projects";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -77,6 +78,7 @@ export default async function PostPage({ params }: Params) {
   const prev = i > 0 ? all[i - 1] : null; // 更新的文章
   const next = i >= 0 && i < all.length - 1 ? all[i + 1] : null; // 更旧的文章
   const related = getRelatedPosts(post.slug, post.tags, post.category);
+  const project = getProjectByPost(post.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -126,6 +128,16 @@ export default async function PostPage({ params }: Params) {
           <h1 className="mt-2 text-3xl font-bold leading-tight">{post.title}</h1>
           {post.description && (
             <p className="mt-3 text-zinc-600 dark:text-zinc-400">{post.description}</p>
+          )}
+          {project && (
+            <Link
+              href={`/projects#${encodeURIComponent(project.name)}`}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-[var(--accent-1)]/40 px-3 py-1 text-xs text-[var(--accent-1)] transition-colors hover:bg-[var(--accent-1)]/10"
+            >
+              <span aria-hidden>📂</span>
+              相关项目 · {project.name}
+              <span aria-hidden className="text-[10px]">→</span>
+            </Link>
           )}
         </header>
 

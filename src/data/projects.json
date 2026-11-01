@@ -23,7 +23,7 @@
       { "label": "打开书库", "href": "/shuku/" },
       { "label": "单词听力", "href": "/shuku/mp3" }
     ],
-    "posts": [],
+    "posts": ["kaoyan-408-plan"],
     "featured": true
   },
   {
@@ -89,6 +89,15 @@
     "tags": ["AI", "图像", "Skill"],
     "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/photo-to-zine-watercolor" }],
     "posts": ["photo-to-zine-watercolor"]
+  },
+  {
+    "name": "鹈鹕骑车",
+    "tagline": "给 SVG 动画装上逆运动学的腿:让经典鹈鹕动图真的把腿走起来,纯浏览器演示。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["SVG", "动画", "前端"],
+    "links": [{ "label": "在线演示", "href": "/pelican-bicycle.html" }],
+    "posts": ["pelican-bicycle-svg"]
   },
   {
     "name": "本站",

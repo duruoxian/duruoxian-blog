@@ -19,3 +19,8 @@ export const projects = data as Project[];
 export function getFeaturedProjects(): Project[] {
   return projects.filter((p) => p.featured);
 }
+
+/** 反查:这篇文章属于哪个项目(用于文章页的相关项目胶囊) */
+export function getProjectByPost(slug: string): Project | null {
+  return projects.find((p) => p.posts.includes(slug)) ?? null;
+}

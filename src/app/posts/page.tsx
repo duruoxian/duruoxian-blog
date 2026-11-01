@@ -1,80 +1,51 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { getPostsGroupedByYear } from "@/lib/posts";
-import { formatDateShort } from "@/lib/format";
+import { getAllPosts, getAllSeries, getPostsBySeries } from "@/lib/posts";
+import { ArchiveList, type ArchiveItem, type ArchiveSeries } from "@/components/ArchiveList";
 
 export const metadata: Metadata = {
   title: "文章",
-  description: "全部文章归档",
+  description: "全部文章归档:按系列、分类或时间找到想读的。",
 };
 
 export default function PostsPage() {
-  const groups = getPostsGroupedByYear();
-  const total = groups.reduce((n, g) => n + g.posts.length, 0);
+  const posts = getAllPosts();
+
+  // 给归档列表的序列化数据(不把正文塞进 props)
+  const items: ArchiveItem[] = posts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    date: p.date,
+    category: p.category,
+    readingTime: p.readingTime,
+  }));
+
+  // 置顶系列:≥2 篇的成体系内容,按篇数取前 2
+  const series: ArchiveSeries[] = getAllSeries()
+    .filter((s) => s.count >= 2)
+    .slice(0, 2)
+    .map((s) => ({
+      name: s.name,
+      posts: getPostsBySeries(s.name).map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        readingTime: p.readingTime,
+      })),
+    }));
 
   return (
     <div className="mx-auto max-w-3xl">
-      <header className="mb-10">
+      <header className="mb-8">
         <h1 className="text-2xl font-bold">全部文章</h1>
         <p className="mt-1.5 text-sm text-zinc-500 dark:text-zinc-400">
-          共 {total} 篇 · 记录学习与折腾的每一步
+          共 {posts.length} 篇 · 可以按下面的系列、分类找,也可以直接{" "}
+          <a href="/search" className="text-[var(--accent-1)] hover:underline">
+            搜索
+          </a>
+          。
         </p>
       </header>
 
-      {groups.length === 0 && (
-        <p className="rounded-xl border border-dashed border-zinc-300 p-8 text-center text-sm text-zinc-500 dark:border-zinc-700">
-          还没有文章。
-        </p>
-      )}
-
-      <div className="space-y-10">
-        {groups.map((group) => (
-          <section key={group.year}>
-            <h2 className="mb-3 flex items-center gap-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
-              <span className="font-mono text-base">{group.year}</span>
-              <span className="h-px flex-1 bg-gradient-to-r from-zinc-200 to-transparent dark:from-zinc-700" />
-              <span className="text-xs font-normal">{group.posts.length} 篇</span>
-            </h2>
-            <ul className="space-y-1">
-              {group.posts.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/posts/${post.slug}`}
-                    className="group flex items-baseline gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-zinc-100/80 dark:hover:bg-zinc-800/60"
-                  >
-                    <time className="shrink-0 font-mono text-xs text-zinc-400" dateTime={post.date}>
-                      {formatDateShort(post.date)}
-                    </time>
-                    <span className="min-w-0 truncate font-medium transition-colors group-hover:text-[var(--accent-1)]">
-                      {post.title}
-                    </span>
-                    <span className="ml-auto flex shrink-0 items-center gap-2 text-xs text-zinc-400">
-                      <span className="hidden sm:inline">{post.readingTime} 分钟</span>
-                      <span className="rounded-full border border-zinc-200 px-2 py-0.5 transition-colors group-hover:border-[var(--accent-1)]/60 group-hover:text-[var(--accent-1)] dark:border-zinc-700">
-                        {post.category}
-                      </span>
-                      <svg
-                        width="13"
-                        height="13"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden
-                        className="-translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
-                      >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+      <ArchiveList items={items} series={series} total={posts.length} />
     </div>
   );
 }

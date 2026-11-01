@@ -8,7 +8,7 @@ description: "737 行 C + X11 + FreeType：常驻内存 8.7MB、二进制 38KB �
 
 category: 项目
 
-tags: ["C", "Linux", "X11", "开源"]
+tags: ["C", "Linux", "X11", "Manjaro", "开源"]
 
 cover: /images/posts/sysmonitor-c-x11/cover.svg
 

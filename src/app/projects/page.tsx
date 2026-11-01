@@ -98,7 +98,8 @@ export default function ProjectsPage() {
         {featured.map((p) => (
           <article
             key={p.name}
-            className="card-glow rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800"
+            id={p.name}
+            className="card-glow scroll-mt-24 rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800"
           >
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-semibold">{p.name}</h2>
@@ -139,7 +140,8 @@ export default function ProjectsPage() {
             {normal.map((p) => (
               <article
                 key={p.name}
-                className="card-glow flex flex-col rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800"
+                id={p.name}
+                className="card-glow flex scroll-mt-24 flex-col rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800"
               >
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="font-semibold">{p.name}</h3>
