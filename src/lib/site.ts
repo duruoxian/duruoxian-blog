@@ -18,6 +18,7 @@ export const site = {
     { label: "分类", href: "/categories" },
     { label: "标签", href: "/tags" },
     { label: "系列", href: "/series" },
+    { label: "项目", href: "/projects" },
     { label: "资源", href: "/resources" },
     { label: "刷题", href: "/quiz/" },
     { label: "关于", href: "/about" },

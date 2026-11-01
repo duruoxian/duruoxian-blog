@@ -1,0 +1,105 @@
+[
+  {
+    "name": "webai2api",
+    "tagline": "把 DeepSeek / 智谱 / Kimi / 千问 网页版反向代理成 OpenAI 兼容 API:四平台全支持工具调用,自带中文面板与离线授权。",
+    "status": "活跃维护",
+    "year": "2026",
+    "tags": ["Python", "FastAPI", "协议逆向", "离线授权"],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/duruoxian/webai2api" },
+      { "label": "下载", "href": "https://github.com/duruoxian/webai2api/releases/latest" }
+    ],
+    "posts": ["deepseek-web-to-api", "webai2api", "webai2api-v2", "webai2api-v3"],
+    "featured": true
+  },
+  {
+    "name": "考研刷题站 + 书库",
+    "tagline": "为 15 个月备考自建的在线工具:920 道选择题分章刷题(408 四科 + 数学)、错题本与进度本地保存;124 份资料手机可读书库;核心单词听力。",
+    "status": "站内服务",
+    "year": "2026",
+    "tags": ["Next.js", "考研", "408"],
+    "links": [
+      { "label": "进入刷题", "href": "/quiz/" },
+      { "label": "打开书库", "href": "/shuku/" },
+      { "label": "单词听力", "href": "/shuku/mp3" }
+    ],
+    "posts": [],
+    "featured": true
+  },
+  {
+    "name": "ocs",
+    "tagline": "Open Coding Sessions — 浏览、搜索、恢复 opencode / claude code / codex 的历史会话。单文件 Python TUI,零依赖,跨 Linux / Windows。",
+    "status": "活跃维护",
+    "year": "2026",
+    "tags": ["Python", "fzf", "TUI", "跨平台"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/ocs" }],
+    "posts": ["opencode-ocs", "opencode-ocs-windows"],
+    "featured": true
+  },
+  {
+    "name": "SysMonitor",
+    "tagline": "透明桌面系统监视器:纯 C + X11 + FreeType 手写渲染,常驻内存 8.7MB、二进制 38KB,CPU/内存/网络/磁盘/托盘双模式自愈。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["C", "X11", "Linux"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/SysMonitor" }],
+    "posts": ["sysmonitor-c-x11"]
+  },
+  {
+    "name": "校园门户 + 教务系统重写",
+    "tagline": "重庆师范大学门户与教务系统的完整重写:Vue 3 + Spring Boot 3 课程设计,含签到、毕设、大屏,使用模拟数据。",
+    "status": "课程设计",
+    "year": "2026",
+    "tags": ["Vue", "Spring Boot", "全栈"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/cqnu-jiaowu" }],
+    "posts": ["cqnu-portal-jiaowu", "cqnu-jiaowu-realtime"]
+  },
+  {
+    "name": "txt2md",
+    "tagline": "把随手写的 .txt 笔记用 AI 一键重排成排版美观的 .md:监视文件夹自动转换、托盘常驻、Windows 便携单文件。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["Python", "AI", "自动化"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/txt2md" }],
+    "posts": ["txt2md"]
+  },
+  {
+    "name": "qdbaby",
+    "tagline": "拍照打卡水印相机 H5:时间 / 日期 / 天气 / 地点水印,原图分辨率导出,纯前端单文件。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["前端", "Canvas", "H5"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/qdbaby" }],
+    "posts": ["qdbaby"]
+  },
+  {
+    "name": "grub-themes",
+    "tagline": "7 套程序化手绘 GRUB2 开机主题:赛博朋克 / 复古合成波 / 黑客帝国 / 深空星野 / 卡通熊猫 / 极简 / 终端方块,2560×1440 原生。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["GRUB", "Linux", "美化"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/grub-themes" }],
+    "posts": ["grub-themes"]
+  },
+  {
+    "name": "photo-to-zine-watercolor",
+    "tagline": "AI skill:把旅行照片批量转成极简水彩 Zine 卡片,双模式、人像锁定、水印修复。",
+    "status": "已完成",
+    "year": "2026",
+    "tags": ["AI", "图像", "Skill"],
+    "links": [{ "label": "GitHub", "href": "https://github.com/duruoxian/photo-to-zine-watercolor" }],
+    "posts": ["photo-to-zine-watercolor"]
+  },
+  {
+    "name": "本站",
+    "tagline": "这个博客本身:Next.js 16 + React 19 + Tailwind v4 静态导出,Markdown 写作,Cloudflare Pages 自动部署,自带图形化后台与刷题 / 书库子系统。",
+    "status": "持续迭代",
+    "year": "2026",
+    "tags": ["Next.js", "React", "Tailwind"],
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/duruoxian/duruoxian-blog" },
+      { "label": "建站记", "href": "/posts/nextjs-blog-from-scratch" }
+    ],
+    "posts": ["nextjs-blog-from-scratch"]
+  }
+]

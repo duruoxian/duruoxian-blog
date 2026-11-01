@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { getAllPosts, getAllTags } from "@/lib/posts";
+import { getAllPosts, getAllSeries, getPostsBySeries } from "@/lib/posts";
 import { getContributions } from "@/lib/github";
 import { site } from "@/lib/site";
+import { getFeaturedProjects } from "@/lib/projects";
 import { ProfileCard } from "@/components/ProfileCard";
 import { PostCard } from "@/components/PostCard";
-import { TagBadge } from "@/components/TagBadge";
 import { GitHubActivity } from "@/components/GitHubActivity";
 
 // 站点结构化数据，帮助搜索引擎理解这是谁的博客
@@ -19,7 +19,12 @@ const jsonLd = {
 
 export default async function Home() {
   const latest = getAllPosts().slice(0, 5);
-  const tags = getAllTags().slice(0, 24);
+  const featured = getFeaturedProjects();
+  // 首页只展示成体系的系列(≥2 篇),最多 2 个,完整列表在 /series
+  const series = getAllSeries()
+    .filter((s) => s.count >= 2)
+    .slice(0, 2);
+
   const contributions = await getContributions(site.author.githubUser);
 
   return (
@@ -56,16 +61,71 @@ export default async function Home() {
             )}
           </section>
 
-          {tags.length > 0 && (
+          {featured.length > 0 && (
             <section>
-              <h2 className="mb-3 text-lg font-bold">标签</h2>
-              <div className="flex flex-wrap gap-2">
-                {tags.map((t) => (
-                  <TagBadge key={t.name} tag={t.name} />
+              <div className="mb-4 flex items-end justify-between">
+                <h2 className="text-lg font-bold">项目精选</h2>
+                <Link href="/projects" className="text-sm text-[var(--accent-1)] hover:underline">
+                  全部项目 →
+                </Link>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-1">
+                {featured.map((p) => (
+                  <Link
+                    key={p.name}
+                    href={p.links[0]?.href ?? "/projects"}
+                    {...(p.links[0]?.href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="card-glow group rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl transition-colors hover:border-[var(--accent-1)]/40 dark:border-zinc-800"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-semibold">{p.name}</h3>
+                      <span
+                        aria-hidden
+                        className="shrink-0 text-xs text-zinc-400 transition-transform group-hover:translate-x-0.5"
+                      >
+                        →
+                      </span>
+                    </div>
+                    <p className="mt-1 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400">
+                      {p.tagline}
+                    </p>
+                  </Link>
                 ))}
               </div>
             </section>
           )}
+
+          {series.map((s) => {
+            const posts = getPostsBySeries(s.name);
+            return (
+              <section key={s.name}>
+                <div className="mb-4 flex items-end justify-between">
+                  <h2 className="text-lg font-bold">{s.name}</h2>
+                  <Link href="/series" className="text-sm text-[var(--accent-1)] hover:underline">
+                    全部系列 →
+                  </Link>
+                </div>
+                <div className="card-glow rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800">
+                  <ol className="space-y-1.5 text-sm">
+                    {posts.map((p, i) => (
+                      <li key={p.slug} className="flex items-baseline gap-2">
+                        <span className="text-zinc-400">{String(i + 1).padStart(2, "0")}</span>
+                        <Link
+                          href={`/posts/${p.slug}`}
+                          className="min-w-0 flex-1 truncate text-zinc-600 hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100"
+                        >
+                          {p.title}
+                        </Link>
+                        <span className="shrink-0 text-xs text-zinc-400">{p.readingTime} 分钟</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </section>
+            );
+          })}
         </div>
       </div>
 

@@ -10,6 +10,7 @@ export function Footer() {
         { label: "分类", href: "/categories" },
         { label: "标签", href: "/tags" },
         { label: "系列", href: "/series" },
+        { label: "项目", href: "/projects" },
       ],
     },
     {
