@@ -53,6 +53,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: post.description,
       url,
       publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
       images: post.cover ? [post.cover] : undefined,
     },
     twitter: {
@@ -83,7 +84,8 @@ export default async function PostPage({ params }: Params) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updated ?? post.date,
+    license: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
     url: `${site.url}/posts/${post.slug}`,
     author: { "@type": "Person", name: site.author.name, url: site.author.github },
     keywords: post.tags.join(", "),
@@ -112,6 +114,14 @@ export default async function PostPage({ params }: Params) {
             <span>{post.readingTime} 分钟</span>
             <span aria-hidden>·</span>
             <span>约 {post.wordCount.toLocaleString("zh-CN")} 字</span>
+            {post.updated && post.updated !== post.date && (
+              <>
+                <span aria-hidden>·</span>
+                <span>
+                  更新于 <time dateTime={post.updated}>{formatDate(post.updated)}</time>
+                </span>
+              </>
+            )}
           </div>
           <h1 className="mt-2 text-3xl font-bold leading-tight">{post.title}</h1>
           {post.description && (
@@ -156,6 +166,32 @@ export default async function PostPage({ params }: Params) {
 
         <div className="mt-8 border-t border-zinc-200 pt-6 dark:border-zinc-800">
           <ShareLink title={post.title} />
+        </div>
+
+        {/* 版权声明:固定 CC BY-NC-SA,原文链接便于转载留底 */}
+        <div className="mt-6 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 text-xs leading-relaxed text-zinc-500 backdrop-blur-xl dark:border-zinc-800 dark:text-zinc-400">
+          <p>
+            本文作者 <strong className="text-zinc-700 dark:text-zinc-200">{site.author.name}</strong>
+            ,采用{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-zinc-300 underline-offset-2 hover:text-zinc-900 dark:hover:text-zinc-100"
+            >
+              CC BY-NC-SA 4.0
+            </a>{" "}
+            许可发布:转载请保留作者与原文链接,禁止商用。
+          </p>
+          <p className="mt-1 break-all font-mono">
+            {site.url}/posts/{post.slug}
+            {post.updated && post.updated !== post.date && (
+              <>
+                {" "}
+                · 最后更新于 {formatDate(post.updated)}
+              </>
+            )}
+          </p>
         </div>
 
         <AuthorCard />

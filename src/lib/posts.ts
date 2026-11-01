@@ -9,6 +9,7 @@ export type Post = {
   slug: string;
   title: string;
   date: string; // ISO 字符串，如 2026-09-01T00:00:00.000Z
+  updated?: string; // 最后修订时间（可选，front-matter 里加 updated 字段启用）
   description: string;
   tags: string[];
   category: string;
@@ -73,6 +74,7 @@ export function getPostBySlug(slug: string): Post | null {
     slug,
     title: data.title ?? slug,
     date: normalizeDate(data.date),
+    updated: data.updated ? normalizeDate(data.updated) : undefined,
     description: data.description ?? "",
     tags: toStringArray(data.tags),
     category: data.category ?? "未分类",
