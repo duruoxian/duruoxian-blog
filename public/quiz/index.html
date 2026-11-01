@@ -16,7 +16,18 @@ h1{font-size:18px;margin:8px 0 10px}
 .tabs button{flex:1;min-width:72px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:7px 4px;font-size:13px;cursor:pointer}
 .tabs button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
 .bar{display:flex;gap:6px;margin:8px 0}
-select{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--card);color:var(--ink);font-size:13px}
+/* 自定义下拉:原生 select 弹层无法定制样式,自绘一份贴合站内风格(圆角/强调色/暗色自适应) */
+.dd{flex:1;min-width:0;position:relative}
+.dd-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;background:var(--card);color:var(--ink);font-size:13px;cursor:pointer;transition:border-color .15s}
+.dd-btn.open,.dd-btn:focus-visible{border-color:var(--brand);outline:none}
+.dd-chev{display:flex;color:var(--sub);transition:transform .18s}
+.dd-btn.open .dd-chev{transform:rotate(180deg)}
+.dd-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:40;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(15,23,42,.16);padding:6px;max-height:262px;overflow-y:auto;opacity:0;transform:translateY(-4px);transition:opacity .14s ease,transform .14s ease}
+.dd-menu.in{opacity:1;transform:none}
+.dd-item{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;border:none;background:none;color:var(--ink);border-radius:8px;padding:9px 11px;font-size:13.5px;cursor:pointer;text-align:left}
+.dd-item.act{background:var(--hl)}
+.dd-item.on{color:var(--brand);font-weight:600;background:var(--hl)}
+@media(prefers-reduced-motion:reduce){.dd-menu,.dd-chev{transition:none}}
 .stat{font-size:12px;color:var(--sub);margin:4px 0 8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .pbar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:10px}
 .pbar i{display:block;height:100%;background:var(--brand);width:0;transition:width .3s}
@@ -47,12 +58,8 @@ button.link{background:none;border:none;color:var(--sub);font-size:12px;cursor:p
   <h1>408 选择题刷题库 <span style="font-size:12px;color:var(--sub)">420题</span></h1>
   <div class="tabs" id="tabs"></div>
   <div class="bar">
-    <select id="chapter"></select>
-    <select id="mode">
-      <option value="all">全部题目</option>
-      <option value="undone">只刷未做</option>
-      <option value="wrong">只刷错题</option>
-    </select>
+    <div class="dd" id="chapter"></div>
+    <div class="dd" id="mode"></div>
   </div>
   <div class="stat"><span id="pos"></span><span id="score"></span><button class="link" id="reset">重置本科目进度</button></div>
   <div class="pbar"><i id="pfill"></i></div>
@@ -66,6 +73,74 @@ button.link{background:none;border:none;color:var(--sub);font-size:12px;cursor:p
 <script>
 let DATA=null, sid=localStorage.getItem('quiz408_sub')||'DS', pool=[], idx=0;
 const $=s=>document.querySelector(s);
+
+/* ===== 自定义下拉组件:挂到 .dd 容器上,暴露 value/setOptions,过滤逻辑照旧 ===== */
+const DDS=[];
+function makeDD(el,{options=[],value='',onChange=null,aria='选择'}){
+  let cur=value,open=false,active=-1;
+  const btn=document.createElement('button');btn.type='button';btn.className='dd-btn';
+  btn.setAttribute('aria-haspopup','listbox');btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label',aria);
+  const lab=document.createElement('span');lab.className='dd-label';
+  const chev=document.createElement('span');chev.className='dd-chev';
+  chev.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+  btn.append(lab,chev);
+  const menu=document.createElement('div');menu.className='dd-menu';menu.hidden=true;
+  menu.setAttribute('role','listbox');menu.tabIndex=-1;
+  el.append(btn,menu);
+  const find=()=>options.find(o=>o.v===cur);
+  function renderBtn(){lab.textContent=find()?find().l:''}
+  function renderMenu(){
+    menu.innerHTML='';
+    options.forEach((o,i)=>{
+      const it=document.createElement('button');it.type='button';it.setAttribute('role','option');
+      it.className='dd-item'+(o.v===cur?' on':'')+(i===active?' act':'');
+      it.innerHTML=`<span>${o.l}</span>`+(o.v===cur?'<span aria-hidden="true">✓</span>':'');
+      it.onclick=()=>{set(o.v);close();btn.focus()};
+      menu.append(it);
+    });
+  }
+  function paint(){[...menu.children].forEach((c,i)=>c.classList.toggle('act',i===active))}
+  function scrollAct(){const c=menu.children[active];c&&c.scrollIntoView({block:'nearest'})}
+  function openMenu(){
+    closeAll();open=true;active=options.findIndex(o=>o.v===cur);
+    renderMenu();menu.hidden=false;btn.classList.add('open');
+    btn.setAttribute('aria-expanded','true');
+    requestAnimationFrame(()=>menu.classList.add('in'));
+    const on=menu.querySelector('.on');on&&on.scrollIntoView({block:'nearest'});
+    menu.focus();
+  }
+  function close(){
+    if(!open)return;open=false;active=-1;
+    menu.classList.remove('in');btn.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    setTimeout(()=>{menu.hidden=true},140);
+  }
+  function set(v){
+    if(cur!==v){cur=v;renderBtn();if(open){renderMenu();paint()}onChange&&onChange()}
+  }
+  btn.onclick=e=>{e.stopPropagation();open?close():openMenu()};
+  btn.onkeydown=e=>{
+    if(e.key==='Enter'||e.key===' '||e.key==='ArrowDown'){e.preventDefault();open?close():openMenu()}
+  };
+  menu.onkeydown=e=>{
+    if(e.key==='ArrowDown'){e.preventDefault();active=(active+1)%options.length;paint();scrollAct()}
+    else if(e.key==='ArrowUp'){e.preventDefault();active=(active-1+options.length)%options.length;paint();scrollAct()}
+    else if(e.key==='Enter'){e.preventDefault();active>=0&&(set(options[active].v),close(),btn.focus())}
+    else if(e.key==='Escape'){e.preventDefault();close();btn.focus()}
+  };
+  el.setOptions=(opts,v)=>{
+    options=opts;
+    if(v!==undefined)cur=v;
+    renderBtn();
+    if(open){active=options.findIndex(o=>o.v===cur);renderMenu();paint()}
+  };
+  Object.defineProperty(el,'value',{get:()=>cur});
+  el._close=close;
+  DDS.push(el);renderBtn();
+}
+function closeAll(){DDS.forEach(d=>d._close())}
+document.addEventListener('click',closeAll);
+/* ===== 下拉组件结束 ===== */
 const key=k=>'quiz408_'+sid+'_'+k;
 const load=k=>{try{return JSON.parse(localStorage.getItem(key(k)))||{}}catch(e){return{}}};
 let done=load('done'), wrong=load('wrong');
@@ -81,7 +156,7 @@ function initTabs(){
 function curSub(){return DATA.subjects.find(s=>s.id===sid)}
 function initChapters(){
   const chs=[...new Set(curSub().qs.map(q=>q.ch))];
-  $('#chapter').innerHTML='<option value="">全部章节</option>'+chs.map(c=>`<option>${c}</option>`).join('');
+  $('#chapter').setOptions([{v:'',l:'全部章节'},...chs.map(c=>({v:c,l:c}))],'');
 }
 function buildPool(){
   const ch=$('#chapter').value, mode=$('#mode').value;
@@ -132,8 +207,11 @@ function answer(i,q){
   localStorage.setItem(key('wrong'),JSON.stringify(wrong));
   render();
 }
-$('#chapter').onchange=()=>{buildPool();render()};
-$('#mode').onchange=()=>{buildPool();render()};
+makeDD($('#mode'),{aria:'筛选题目模式',value:'all',
+  options:[{v:'all',l:'全部题目'},{v:'undone',l:'只刷未做'},{v:'wrong',l:'只刷错题'}],
+  onChange:()=>{buildPool();render()}});
+makeDD($('#chapter'),{aria:'选择章节',value:'',options:[{v:'',l:'全部章节'}],
+  onChange:()=>{buildPool();render()}});
 $('#prev').onclick=()=>{if(idx>0){idx--;render()}};
 $('#next').onclick=()=>{if(idx<pool.length-1){idx++;render()}else{idx=0;render()}};
 $('#reset').onclick=()=>{
