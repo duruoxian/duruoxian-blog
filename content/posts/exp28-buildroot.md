@@ -3,7 +3,7 @@ title: "实验28|buildroot 配置与编译——一条 menuconfig 造完整根�
 date: 2026-11-01
 description: "从手工拼装到工业流水线:buildroot 一键生成交叉工具链、内核与根文件系统的完整嵌入式系统。"
 category: "技术"
-tags: [嵌入式, 根文件系统, buildroot]
+tags: ["嵌入式", "根文件系统"]
 series: "嵌入式Linux实验·根文件系统"
 draft: false
 ---

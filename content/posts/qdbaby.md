@@ -3,7 +3,7 @@ title: "qdbaby：打开链接就能用的拍照打卡水印相机"
 date: 2026-10-06
 description: "仿「今日水印相机」的纯前端单文件 H5：给照片加时间、日期、星期、天气、地点水印，原图分辨率导出，定位自动填地址，微信里点开链接就能用。"
 category: "项目"
-tags: ["开源", "前端", "Canvas", "CSS"]
+tags: ["开源", "前端", "CSS"]
 cover: "/images/posts/qdbaby/cover.webp"
 ---
 

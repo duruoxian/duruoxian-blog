@@ -3,7 +3,7 @@ title: "实验13|网络操作命令——Ubuntu 里搭 TFTP 服务器，板子�
 date: 2026-11-01
 description: "Windows 侧搭 TFTP 服务器,U-Boot 里 tftpboot 拉文件:ipaddr/serverip/ethaddr 网络三件套实战。"
 category: "技术"
-tags: [嵌入式, U-Boot, TFTP, 网络]
+tags: ["嵌入式", "U-Boot"]
 series: "嵌入式Linux实验·U-Boot使用"
 draft: false
 ---

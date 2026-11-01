@@ -3,7 +3,7 @@ title: "实验11|trusted 版 U-Boot 移植"
 date: 2026-10-04
 description: "进入 trusted 启动链:TF-A(BL2)→ SP_MIN → U-Boot 的完整信任链移植与上板验证。"
 category: "技术"
-tags: [嵌入式, U-Boot, TF-A, ARM]
+tags: ["嵌入式", "U-Boot"]
 series: "嵌入式Linux实验·U-Boot移植"
 draft: false
 ---

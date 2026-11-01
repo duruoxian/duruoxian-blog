@@ -8,8 +8,7 @@ description: "一只骑自行车的鹈鹕：云在飘、太阳在转、车轮按
 
 category: 技术
 
-tags: ["SVG", "CSS", "动画", "前端"]
-
+tags: ["CSS", "前端"]
 cover: /images/posts/pelican-bicycle-svg/riding.webp
 
 ---

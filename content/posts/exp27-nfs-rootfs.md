@@ -3,7 +3,7 @@ title: "实验27|NFS 挂载根文件系统——改根不烧卡"
 date: 2026-11-01
 description: "告别反复烧卡:内核通过 NFS 直接挂载 PC 上的根文件系统,改文件即时生效,开发效率起飞。"
 category: "技术"
-tags: [嵌入式, 根文件系统, NFS]
+tags: ["嵌入式", "根文件系统"]
 series: "嵌入式Linux实验·根文件系统"
 draft: false
 ---

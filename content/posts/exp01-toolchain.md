@@ -3,7 +3,7 @@ title: "实验01|安装交叉编译工具链"
 date: 2026-10-04
 description: "在 Ubuntu 20.04 虚拟机里安装 ST 官方 SDK 交叉工具链 arm-ostl-linux-gnueabi,搞懂 sysroot 与 /stm32env 激活脚本——整个移植系列的地基。"
 category: "技术"
-tags: [嵌入式, Linux, 交叉编译, U-Boot]
+tags: ["嵌入式", "Linux", "U-Boot"]
 series: "嵌入式Linux实验·U-Boot移植"
 draft: false
 ---

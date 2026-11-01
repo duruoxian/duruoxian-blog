@@ -8,8 +8,7 @@ description: "一个 MCP + 两个插件 + 内置 PowerShell，三层能力从「
 
 category: 工具
 
-tags: ["AI", "MCP", "Windows", "自动化"]
-
+tags: ["AI", "Windows"]
 cover: /images/posts/opencode-windows-control/cover.svg
 
 ---

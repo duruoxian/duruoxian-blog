@@ -12,12 +12,11 @@ export const site = {
   url: "https://duruoxian-blog.pages.dev",
 
   // 顶部导航
+  // 分类/标签/系列不再各占一格:它们全部并入「文章」页(系列置顶卡+分类筛选+标签云),
+  // 页面本身仍在(/categories /tags /series,footer 有入口),只是不让导航背 9 个词。
   nav: [
     { label: "首页", href: "/" },
     { label: "文章", href: "/posts" },
-    { label: "分类", href: "/categories" },
-    { label: "标签", href: "/tags" },
-    { label: "系列", href: "/series" },
     { label: "项目", href: "/projects" },
     { label: "资源", href: "/resources" },
     { label: "刷题", href: "/quiz/" },

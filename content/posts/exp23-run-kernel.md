@@ -3,7 +3,7 @@ title: "实验23|运行内核——自己编的内核第一次点火，并走进
 date: 2026-11-01
 description: "内核真正跑起来:逐段解读串口启动日志,从 Starting kernel 到挂载根文件系统前的最后一课。"
 category: "技术"
-tags: [嵌入式, Linux内核, 串口调试]
+tags: ["嵌入式", "Linux内核"]
 series: "嵌入式Linux实验·内核移植"
 draft: false
 ---

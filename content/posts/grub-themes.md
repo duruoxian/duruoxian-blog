@@ -3,7 +3,7 @@ title: "给 GRUB 换新衣：手绘 7 套开机主题"
 date: 2026-10-06
 description: "从赛博朋克到卡通熊猫：用 Pillow 一笔一笔程序化画出 7 套 2560×1440 的 GRUB2 开机主题，附一键安装脚本和生成器。"
 category: "项目"
-tags: ["Linux", "GRUB", "Manjaro", "美化", "开源"]
+tags: ["Linux", "Manjaro", "开源"]
 cover: "/images/posts/grub-themes/panda.webp"
 ---
 
