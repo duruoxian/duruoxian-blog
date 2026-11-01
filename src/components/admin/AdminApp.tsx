@@ -8,6 +8,7 @@ import Link from "next/link";
 import { PostEditor } from "./PostEditor";
 import { SettingsEditor } from "./SettingsEditor";
 import { LinksEditor } from "./LinksEditor";
+import { FriendsEditor } from "./FriendsEditor";
 import { ghostBtn, inputClass, panelClass, primaryBtn } from "./ui";
 import { site } from "@/lib/site";
 import {
@@ -29,7 +30,8 @@ type View =
   | { kind: "list" }
   | { kind: "edit"; entry: Entry; isNew: boolean }
   | { kind: "settings" }
-  | { kind: "links" };
+  | { kind: "links" }
+  | { kind: "friends" };
 
 function newPost(): PostMeta {
   return {
@@ -226,6 +228,14 @@ export function AdminApp() {
               <button
                 type="button"
                 className={ghostBtn}
+                onClick={() => setView({ kind: "friends" })}
+                disabled={busy}
+              >
+                友链
+              </button>
+              <button
+                type="button"
+                className={ghostBtn}
                 onClick={() => setView({ kind: "settings" })}
                 disabled={busy}
               >
@@ -363,6 +373,27 @@ export function AdminApp() {
           <div className={panelClass}>
             <h2 className="mb-5 text-lg font-semibold">工具站收藏</h2>
             <LinksEditor
+              onDone={(message) => {
+                setNotice(message);
+                setView({ kind: "list" });
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {view.kind === "friends" && (
+        <div className="view-in">
+          <button
+            type="button"
+            className="mb-5 text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-200"
+            onClick={() => setView({ kind: "list" })}
+          >
+            ← 返回列表
+          </button>
+          <div className={panelClass}>
+            <h2 className="mb-5 text-lg font-semibold">友链管理</h2>
+            <FriendsEditor
               onDone={(message) => {
                 setNotice(message);
                 setView({ kind: "list" });

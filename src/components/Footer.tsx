@@ -13,14 +13,17 @@ export function Footer() {
         { label: "项目", href: "/projects" },
       ],
     },
-    {
-      title: "更多",
-      links: [
-        { label: "资源收藏", href: "/resources" },
-        { label: "关于我", href: "/about" },
-        { label: "搜索", href: "/search" },
-      ],
-    },
+      {
+        title: "更多",
+        links: [
+          { label: "资源收藏", href: "/resources" },
+          { label: "友链", href: "/links" },
+          { label: "想法", href: "/notes" },
+          { label: "装备与工具", href: "/uses" },
+          { label: "关于我", href: "/about" },
+          { label: "搜索", href: "/search" },
+        ],
+      },
   ];
 
   return (

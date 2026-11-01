@@ -3,6 +3,8 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://giscus.app https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://giscus.app; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://giscus.app https://static.cloudflareinsights.com https://cloudflareinsights.com https://api.github.com; media-src 'self' https://github.com https://objects.githubusercontent.com; frame-src https://giscus.app; object-src 'none'; base-uri 'self'; form-action 'self'
 
 # 带 hash 的构建产物：内容变了文件名就变，可以缓存一年
 /_next/static/*

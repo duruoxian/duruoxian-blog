@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllPosts, getAllSeries, getPostsBySeries } from "@/lib/posts";
+import { getNotes } from "@/lib/notes";
 import { getContributions } from "@/lib/github";
 import { site } from "@/lib/site";
 import { getFeaturedProjects } from "@/lib/projects";
@@ -26,6 +27,7 @@ export default async function Home() {
     .slice(0, 2);
 
   const contributions = await getContributions(site.author.githubUser);
+  const notes = getNotes().slice(0, 3);
 
   return (
     <div className="space-y-8">
@@ -126,6 +128,34 @@ export default async function Home() {
               </section>
             );
           })}
+
+          {notes.length > 0 && (
+            <section>
+              <div className="mb-4 flex items-end justify-between">
+                <h2 className="text-lg font-bold">想法</h2>
+                <Link href="/notes" className="text-sm text-[var(--accent-1)] hover:underline">
+                  全部想法 →
+                </Link>
+              </div>
+              <div className="card-glow rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800">
+                <ul className="space-y-2.5 text-sm">
+                  {notes.map((n) => (
+                    <li key={n.slug} className="flex items-baseline gap-3">
+                      <time
+                        dateTime={n.date}
+                        className="shrink-0 font-mono text-xs text-zinc-400"
+                      >
+                        {n.date.slice(5, 10).replace("-", "/")}
+                      </time>
+                      <p className="min-w-0 flex-1 truncate text-zinc-600 dark:text-zinc-400">
+                        {n.content}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
         </div>
       </div>
 
