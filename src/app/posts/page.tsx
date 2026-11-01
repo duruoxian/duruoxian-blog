@@ -20,10 +20,9 @@ export default function PostsPage() {
     readingTime: p.readingTime,
   }));
 
-  // 置顶系列:≥2 篇的成体系内容,按篇数取前 2
+  // 成系列读:全部 ≥2 篇的系列,按篇数降序(与 getAllSeries 的顺序一致)
   const series: ArchiveSeries[] = getAllSeries()
     .filter((s) => s.count >= 2)
-    .slice(0, 2)
     .map((s) => ({
       name: s.name,
       posts: getPostsBySeries(s.name).map((p) => ({

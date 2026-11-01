@@ -99,7 +99,8 @@ export function getAllPosts(): Post[] {
   const posts = getPostSlugs()
     .map((slug) => getPostBySlug(slug))
     .filter((p): p is Post => p !== null && !p.draft)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    // 日期相同时按 slug 兜底(实验系列同日发布,保证 01→28 顺序稳定)
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug < b.slug ? -1 : 1));
 
   if (CACHE_ENABLED) cachedPosts = posts;
   return posts;
@@ -131,7 +132,8 @@ export function getPostsBySeries(series: string): Post[] {
   // 系列内部按时间正序，方便按教程顺序阅读
   return getAllPosts()
     .filter((p) => p.series === series)
-    .sort((a, b) => (a.date < b.date ? -1 : 1));
+    // 系列内按时间正序;同日期按 slug 兜底,防止并列日期时顺序抖动
+    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.slug < b.slug ? -1 : 1));
 }
 
 export type CountItem = { name: string; count: number };
