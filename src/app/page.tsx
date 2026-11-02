@@ -32,12 +32,13 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="grid gap-8 lg:grid-cols-[300px_minmax(0,1fr)]">
-        <aside className="lg:sticky lg:top-20 lg:self-start">
+      {/* 列宽必须 minmax(0,1fr):否则 truncate/nowrap 内容会把 auto 列撑到 615px,手机上整页横向溢出 */}
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[300px_minmax(0,1fr)]">
+        <aside className="min-w-0 lg:sticky lg:top-20 lg:self-start">
           <ProfileCard />
         </aside>
 
-        <div className="space-y-8">
+        <div className="min-w-0 space-y-8">
           <section>
             <div className="mb-4 flex items-end justify-between">
               <h2 className="text-lg font-bold">最新文章</h2>
@@ -106,7 +107,7 @@ export default async function Home() {
               <div className="card-glow rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl dark:border-zinc-800">
                 <ul className="space-y-2.5 text-sm">
                   {notes.map((n) => (
-                    <li key={n.slug} className="flex items-baseline gap-3">
+                    <li key={n.slug} className="flex min-w-0 items-baseline gap-3">
                       <time
                         dateTime={n.date}
                         className="shrink-0 font-mono text-xs text-zinc-400"

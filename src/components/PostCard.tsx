@@ -34,11 +34,19 @@ export function PostCard({ post, compact = false }: { post: Post; compact?: bool
     <p className="mt-2 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400">{post.description}</p>
   );
 
+  // 卡片上最多 3 个标签,其余折成 +N:否则 6 个药丸换两三行,列表被撑得很高
+  const shownTags = post.tags.slice(0, 3);
+  const restCount = post.tags.length - shownTags.length;
   const tags = post.tags.length > 0 && (
-    <div className="mt-3 flex flex-wrap gap-2">
-      {post.tags.map((tag) => (
+    <div className="mt-3 flex flex-wrap items-center gap-2">
+      {shownTags.map((tag) => (
         <TagBadge key={tag} tag={tag} />
       ))}
+      {restCount > 0 && (
+        <span className="text-xs text-zinc-400" title={post.tags.slice(3).join("、")}>
+          +{restCount}
+        </span>
+      )}
     </div>
   );
 

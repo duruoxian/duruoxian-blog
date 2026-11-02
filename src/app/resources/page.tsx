@@ -76,7 +76,7 @@ export default function ResourcesPage() {
 
       
 <h2 className="mb-3 text-lg font-semibold">工具站收藏</h2>
-      <div className="mb-8 grid gap-3 sm:grid-cols-2">
+      <div className="mb-8 grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
         {linkItems.map((l) => {
           let host = l.url;
           try {

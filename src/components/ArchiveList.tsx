@@ -65,15 +65,16 @@ export function ArchiveList({
           <h2 className="mb-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
             成系列读 · {series.length} 个
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          {/* 列宽锁 minmax(0,1fr):truncate 的 nowrap 文本不能撑开 auto 列(否则手机横向溢出) */}
+          <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
             {series.map((s) => (
               <Link
                 key={s.name}
                 href={`/series#${encodeURIComponent(s.name)}`}
-                className="card-glow group rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl transition-colors hover:border-[var(--accent-1)]/40 dark:border-zinc-800"
+                className="card-glow group min-w-0 rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl transition-colors hover:border-[var(--accent-1)]/40 dark:border-zinc-800"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <h3 className="truncate font-semibold">{s.name}</h3>
+                  <h3 className="min-w-0 truncate font-semibold">{s.name}</h3>
                   <span className="shrink-0 text-xs text-zinc-400">{s.count} 篇</span>
                 </div>
                 <p className="mt-1 truncate text-sm text-zinc-500 dark:text-zinc-400">
