@@ -5,6 +5,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
+import "katex/dist/katex.min.css";
 import { putBinaryFile } from "@/lib/admin/github";
 import { fileToUploadBlob } from "@/lib/imageConvert";
 import { parsePost, splitFrontMatter, type PostMeta } from "@/lib/admin/content";
@@ -34,11 +35,34 @@ export function PostEditor({
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   const slugError =
     isNew && !/^[a-z0-9][a-z0-9-]*$/.test(meta.slug) ? "只能用小写字母、数字和短横线" : null;
 
   const html = useMemo(() => (preview ? String(marked.parse(meta.body)) : ""), [preview, meta.body]);
+
+  // 预览里的公式：正文含 $ 时才懒加载 KaTeX auto-render（纯增强，没有公式永不加载）。
+  // 与前台一致的定界符；pre/code 默认跳过，shell 里的 $ 不受影响。
+  const hasMath = preview && meta.body.includes("$");
+  useEffect(() => {
+    if (!hasMath || !previewRef.current) return;
+    let cancelled = false;
+    void (async () => {
+      const { default: renderMathInElement } = await import("katex/contrib/auto-render");
+      if (cancelled || !previewRef.current) return;
+      renderMathInElement(previewRef.current, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+        ],
+        throwOnError: false,
+      });
+    })().catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [hasMath, html]);
 
   function patch(part: Partial<PostMeta>) {
     setMeta((m) => ({ ...m, ...part }));
@@ -303,6 +327,7 @@ export function PostEditor({
         </div>
         {preview ? (
           <div
+            ref={previewRef}
             className="article-content prose prose-zinc max-w-none min-h-80 p-5 dark:prose-invert"
             // 内容是用户自己写的 Markdown，只在自己浏览器里预览
             dangerouslySetInnerHTML={{ __html: html }}

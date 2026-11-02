@@ -8,6 +8,7 @@ import { Toc } from "@/components/Toc";
 import { TagBadge } from "@/components/TagBadge";
 import { SeriesNav } from "@/components/SeriesNav";
 import { CodeCopy } from "@/components/CodeCopy";
+import { Mermaid } from "@/components/Mermaid";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { ShareLink } from "@/components/ShareLink";
 import { PostList } from "@/components/PostList";
@@ -17,6 +18,7 @@ import { ImageZoom } from "@/components/ImageZoom";
 import { Giscus } from "@/components/Giscus";
 import { site } from "@/lib/site";
 import { getProjectByPost } from "@/lib/projects";
+import "katex/dist/katex.min.css";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -164,6 +166,7 @@ export default async function PostPage({ params }: Params) {
           dangerouslySetInnerHTML={{ __html: html }}
         />
         <CodeCopy />
+        <Mermaid />
         <ImageZoom />
 
         {post.tags.length > 0 && (

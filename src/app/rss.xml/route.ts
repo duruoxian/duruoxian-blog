@@ -25,7 +25,8 @@ export async function GET() {
       const url = `${site.url}/posts/${post.slug}`;
       // 全文输出：把正文渲染成 HTML 并把站内相对链接/图片补成绝对地址，
       // 这样订阅器（Feedly、Inoreader 等）里可以直接读完整文章。
-      const { html } = await renderMarkdown(post.content);
+      // 公式走 text 模式：订阅器不加载 KaTeX 的 CSS，渲染版会变成双份乱码标记。
+      const { html } = await renderMarkdown(post.content, { math: "text" });
       const full = html.replace(/(src|href)="\/(?!\/)/g, `$1="${site.url}/`);
       return `    <item>
       <title>${escapeXml(post.title)}</title>

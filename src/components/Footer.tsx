@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { SiteDays } from "@/components/SiteDays";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -116,7 +117,10 @@ export function Footer() {
           <p>
             © {site.since}–{year} {site.author.name} · 保留所有权利
           </p>
-          <p>由 Next.js 构建 · 托管于 Cloudflare Pages</p>
+          <p>
+            由 Next.js 构建 · 托管于 Cloudflare Pages
+            <SiteDays />
+          </p>
         </div>
       </div>
     </footer>

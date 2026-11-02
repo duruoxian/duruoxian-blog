@@ -1,7 +1,9 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import remarkRehype from "remark-rehype";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
@@ -24,6 +26,7 @@ function nodeText(node: MdNode): string {
 type HastNode = {
   type?: string;
   tagName?: string;
+  value?: string;
   properties?: Record<string, unknown>;
   children?: HastNode[];
 };
@@ -57,21 +60,81 @@ function rehypeLazyImages() {
   return (tree: HastNode) => walk(tree);
 }
 
+function hastText(node?: HastNode): string {
+  if (typeof node?.value === "string") return node.value;
+  return (node?.children ?? []).map(hastText).join("");
+}
+
+// math:"text" 模式（RSS 用）：不走 KaTeX。remark-rehype 对 math 节点的默认输出
+// 就是 `<code class="language-math math-inline/display">LaTeX 源码</code>`，
+// 订阅器里显示干净的源码文本，故这里什么都不做。
+function rehypeMathPassthrough() {
+  return () => {};
+}
+
+// mermaid 代码块 → 占位结构，客户端组件 Mermaid.tsx 挂载后渲染成 SVG。
+// 源码存进 .mermaid-src（hidden），渲染失败时可回退为普通代码块展示；
+// 放在 rehype-highlight 之前，避免高亮器去碰 mermaid 语法。
+function rehypeMermaidBlocks() {
+  const walk = (node: HastNode) => {
+    const children = node.children ?? [];
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
+      walk(child);
+      if (child.tagName !== "pre") continue;
+      const code = child.children?.find((c) => c.tagName === "code");
+      const cls = Array.isArray(code?.properties?.className)
+        ? (code?.properties?.className as string[])
+        : [];
+      if (!cls.includes("language-mermaid")) continue;
+      children[i] = {
+        type: "element",
+        tagName: "div",
+        properties: { className: ["mermaid-block"] },
+        children: [
+          {
+            type: "element",
+            tagName: "div",
+            properties: { className: ["mermaid-fallback"] },
+            children: [{ type: "text", value: "图表渲染中…" }],
+          },
+          {
+            type: "element",
+            tagName: "div",
+            properties: { className: ["mermaid-src"], hidden: true },
+            children: [{ type: "text", value: hastText(code) }],
+          },
+        ],
+      };
+    }
+  };
+  return (tree: HastNode) => walk(tree);
+}
+
 /**
  * Markdown -> HTML，并顺带生成目录(TOC)。
  * - remark-gfm：支持表格、任务列表、删除线等 GitHub 扩展语法
+ * - remark-math + rehype-katex：数学公式（$行内$ 与 $$块级$$；math:"text" 时保留 LaTeX 源码，给 RSS 用）
+ * - rehypeMermaidBlocks：mermaid 代码块交给客户端渲染
  * - rehype-slug / rehype-autolink-headings：给标题加 id 和锚点链接
  * - rehype-highlight：代码高亮（highlight.js）
  * - rehypeExternalLinks：站外链接新窗口打开并加 ↗ 标记
  */
 export async function renderMarkdown(
-  markdown: string
+  markdown: string,
+  opts: { math?: "katex" | "text" } = {}
 ): Promise<{ html: string; toc: TocItem[] }> {
   const html = String(
     await unified()
       .use(remarkParse)
       .use(remarkGfm)
+      .use(remarkMath)
       .use(remarkRehype)
+      .use(rehypeMermaidBlocks)
+      .use(opts.math === "text" ? rehypeMathPassthrough : rehypeKatex, {
+        throwOnError: false,
+        strict: false,
+      })
       .use(rehypeExternalLinks)
       .use(rehypeLazyImages)
       .use(rehypeSlug)

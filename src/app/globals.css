@@ -668,3 +668,36 @@ html:not([data-theme]) .theme-icon-system {
 .hljs-strong {
   font-weight: 700;
 }
+
+/* ---- 数学公式（KaTeX）与 mermaid 图表 ---- */
+/* 长公式在手机上横向滚动，绝不允许把页面撑出横向溢出（历史教训） */
+.article-content .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+.article-content .katex {
+  font-size: 1.05em;
+}
+
+/* mermaid 块：占位文案 + 渲染后的 SVG 居中，宽图横向滚动 */
+.article-content .mermaid-block {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  text-align: center;
+}
+.article-content .mermaid-block svg {
+  max-width: 100%;
+  height: auto;
+}
+.article-content .mermaid-fallback {
+  color: var(--color-zinc-400, #a1a1aa);
+  font-size: 0.875rem;
+  padding: 1rem 0;
+}
+.dark .article-content .mermaid-fallback {
+  color: var(--color-zinc-500, #71717a);
+}
+.article-content .mermaid-error {
+  text-align: left;
+}
