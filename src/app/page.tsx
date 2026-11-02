@@ -68,7 +68,7 @@ export default async function Home() {
                   全部项目 →
                 </Link>
               </div>
-              <div className="grid gap-3 sm:grid-cols-1">
+              <div className="grid gap-4 sm:grid-cols-1">
                 {featured.map((p) => (
                   <Link
                     key={p.name}

@@ -115,7 +115,7 @@ export function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-zinc-200/70 pt-5 text-xs sm:flex-row dark:border-zinc-800/70">
           <p>
-            © {site.since}–{year} {site.author.name} · 保留所有权利
+            © {site.since === year ? site.since : `${site.since}–${year}`} {site.author.name} · 保留所有权利
           </p>
           <p>
             由 Next.js 构建 · 托管于 Cloudflare Pages

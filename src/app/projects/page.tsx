@@ -135,7 +135,7 @@ export default function ProjectsPage() {
       {/* 其余项目:双列小卡片(手机上单列) */}
       {normal.length > 0 && (
         <section className="mt-8">
-          <h2 className="mb-4 text-lg font-bold">更多项目</h2>
+          <h2 className="section-title mb-4 text-lg font-bold">更多项目</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {normal.map((p) => (
               <article

@@ -55,17 +55,17 @@ export default function ResourcesPage() {
     <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-2xl font-bold">资源</h1>
 
-      <h2 className="mb-3 text-lg font-semibold">站内工具</h2>
+      <h2 className="section-title mb-3 text-lg font-bold">站内工具</h2>
       <div className="mb-8 space-y-3">
         {tools.map((r) => (
           <a
             key={r.href}
             href={r.href}
-            className="block rounded-xl border border-blue-200 bg-blue-50/60 p-5 transition-colors hover:border-blue-400 dark:border-blue-900 dark:bg-blue-950/40 dark:hover:border-blue-700"
+            className="card-glow block rounded-xl border border-zinc-200 bg-[var(--card)] p-5 backdrop-blur-xl transition-colors hover:border-[var(--accent-1)]/40 dark:border-zinc-800"
           >
             <div className="flex items-center justify-between gap-3">
               <h2 className="font-medium">{r.title}</h2>
-              <span className="shrink-0 rounded-full border border-blue-300 px-2.5 py-0.5 text-xs text-blue-600 dark:border-blue-800 dark:text-blue-400">
+              <span className="shrink-0 rounded-full border border-[var(--accent-1)]/30 px-2.5 py-0.5 text-xs text-[var(--accent-1)]">
                 {r.tag}
               </span>
             </div>
@@ -75,7 +75,7 @@ export default function ResourcesPage() {
       </div>
 
       
-<h2 className="mb-3 text-lg font-semibold">工具站收藏</h2>
+<h2 className="section-title mb-3 text-lg font-bold">工具站收藏</h2>
       <div className="mb-8 grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
         {linkItems.map((l) => {
           let host = l.url;
@@ -107,7 +107,7 @@ export default function ResourcesPage() {
         })}
       </div>
 
-      <h2 className="mb-3 text-lg font-semibold">外部资源</h2>
+      <h2 className="section-title mb-3 text-lg font-bold">外部资源</h2>
       <div className="space-y-3">
         {resources.map((r) => (
           <a
