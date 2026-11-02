@@ -9,6 +9,7 @@ import { PostEditor } from "./PostEditor";
 import { SettingsEditor } from "./SettingsEditor";
 import { LinksEditor } from "./LinksEditor";
 import { FriendsEditor } from "./FriendsEditor";
+import { NotesEditor } from "./NotesEditor";
 import { ghostBtn, inputClass, panelClass, primaryBtn } from "./ui";
 import { site } from "@/lib/site";
 import {
@@ -31,7 +32,8 @@ type View =
   | { kind: "edit"; entry: Entry; isNew: boolean }
   | { kind: "settings" }
   | { kind: "links" }
-  | { kind: "friends" };
+  | { kind: "friends" }
+  | { kind: "notes" };
 
 function newPost(): PostMeta {
   return {
@@ -148,18 +150,24 @@ export function AdminApp() {
     setError(null);
     try {
       const exists = Boolean(sha);
+      // 编辑已有文章时自动盖修订时间戳(新文章不需要);文章页会显示「更新于」
+      const pad = (n: number) => String(n).padStart(2, "0");
+      const today = `${new Date().getFullYear()}-${pad(new Date().getMonth() + 1)}-${pad(new Date().getDate())}`;
+      const finalMeta = exists ? { ...meta, extra: { ...meta.extra, updated: today } } : meta;
       const newSha = await putFile(
-        `content/posts/${meta.slug}.md`,
-        serializePost(meta),
-        `${exists ? "后台更新文章" : "后台新建文章"}：${meta.title}`,
+        `content/posts/${finalMeta.slug}.md`,
+        serializePost(finalMeta),
+        `${exists ? "后台更新文章" : "后台新建文章"}：${finalMeta.title}`,
         sha,
       );
       setNotice(exists ? "文章已更新，约 2 分钟后上线" : "文章已发布，约 2 分钟后上线");
       setEditorDirty(false);
       // 保存接口直接返回新 sha，就地更新列表，不再整单重新拉取
-      const others = (entriesRef.current ?? []).filter((e) => e.meta.slug !== meta.slug);
+      const others = (entriesRef.current ?? []).filter((e) => e.meta.slug !== finalMeta.slug);
       applyEntries(
-        [...others, { meta, sha: newSha }].sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1)),
+        [...others, { meta: finalMeta, sha: newSha }].sort((a, b) =>
+          a.meta.date < b.meta.date ? 1 : -1,
+        ),
       );
       setView({ kind: "list" });
     } catch (err) {
@@ -232,6 +240,14 @@ export function AdminApp() {
                 disabled={busy}
               >
                 友链
+              </button>
+              <button
+                type="button"
+                className={ghostBtn}
+                onClick={() => setView({ kind: "notes" })}
+                disabled={busy}
+              >
+                想法
               </button>
               <button
                 type="button"
@@ -397,6 +413,26 @@ export function AdminApp() {
               onDone={(message) => {
                 setNotice(message);
                 setView({ kind: "list" });
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {view.kind === "notes" && (
+        <div className="view-in">
+          <button
+            type="button"
+            className="mb-5 text-sm text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-200"
+            onClick={() => setView({ kind: "list" })}
+          >
+            ← 返回列表
+          </button>
+          <div className={panelClass}>
+            <h2 className="mb-5 text-lg font-semibold">想法速记</h2>
+            <NotesEditor
+              onDone={(message) => {
+                setNotice(message);
               }}
             />
           </div>

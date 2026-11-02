@@ -62,7 +62,7 @@ export function ArchiveList({
       {/* 成系列读:紧凑卡,全目录点卡片进系列页对应锚点 */}
       {series.length > 0 && (
         <section>
-          <h2 className="mb-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
+          <h2 className="section-title mb-3 text-sm font-semibold text-zinc-400 dark:text-zinc-500">
             成系列读 · {series.length} 个
           </h2>
           {/* 列宽锁 minmax(0,1fr):truncate 的 nowrap 文本不能撑开 auto 列(否则手机横向溢出) */}
@@ -119,7 +119,7 @@ export function ArchiveList({
 
       {/* 按标签找:折叠放在筛选区,列表之前,一眼能看到 */}
       <details className="rounded-xl border border-zinc-200 bg-[var(--card)] p-4 backdrop-blur-xl dark:border-zinc-800">
-        <summary className="cursor-pointer text-sm font-semibold text-zinc-500 dark:text-zinc-400">
+        <summary className="section-title cursor-pointer text-sm font-semibold text-zinc-500 dark:text-zinc-400">
           按标签找({tags.length} 个)
         </summary>
         <div className="mt-3 flex flex-wrap gap-2">

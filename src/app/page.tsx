@@ -41,7 +41,7 @@ export default async function Home() {
         <div className="min-w-0 space-y-8">
           <section>
             <div className="mb-4 flex items-end justify-between">
-              <h2 className="text-lg font-bold">最新文章</h2>
+              <h2 className="section-title text-lg font-bold">最新文章</h2>
               <Link href="/posts" className="text-sm text-[var(--accent-1)] hover:underline">
                 全部文章 →
               </Link>
@@ -63,7 +63,7 @@ export default async function Home() {
           {featured.length > 0 && (
             <section>
               <div className="mb-4 flex items-end justify-between">
-                <h2 className="text-lg font-bold">项目精选</h2>
+                <h2 className="section-title text-lg font-bold">项目精选</h2>
                 <Link href="/projects" className="text-sm text-[var(--accent-1)] hover:underline">
                   全部项目 →
                 </Link>
@@ -99,7 +99,7 @@ export default async function Home() {
           {notes.length > 0 && (
             <section>
               <div className="mb-4 flex items-end justify-between">
-                <h2 className="text-lg font-bold">想法</h2>
+                <h2 className="section-title text-lg font-bold">想法</h2>
                 <Link href="/notes" className="text-sm text-[var(--accent-1)] hover:underline">
                   全部想法 →
                 </Link>
